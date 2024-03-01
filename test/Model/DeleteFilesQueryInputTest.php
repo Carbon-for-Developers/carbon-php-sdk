@@ -97,4 +97,13 @@ class DeleteFilesQueryInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "send_webhook"
+     */
+    public function testPropertySendWebhook()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

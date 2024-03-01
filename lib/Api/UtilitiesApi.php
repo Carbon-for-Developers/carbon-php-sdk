@@ -1270,7 +1270,7 @@ class UtilitiesApi extends \Carbon\CustomApi
 
         $url,
         $tags = SENTINEL_VALUE,
-        $max_pages_to_scrape = 100,
+        $max_pages_to_scrape = SENTINEL_VALUE,
         $chunk_size = 1500,
         $chunk_overlap = 20,
         $skip_embedding_generation = false,
@@ -1280,6 +1280,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $html_tags_to_skip = SENTINEL_VALUE,
         $css_classes_to_skip = SENTINEL_VALUE,
         $css_selectors_to_skip = SENTINEL_VALUE,
+        $embedding_model = SENTINEL_VALUE,
         string $contentType = self::contentTypes['scrapeSitemap'][0]
     )
     {
@@ -1296,6 +1297,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "html_tags_to_skip", $html_tags_to_skip);
         $this->setRequestBodyProperty($_body, "css_classes_to_skip", $css_classes_to_skip);
         $this->setRequestBodyProperty($_body, "css_selectors_to_skip", $css_selectors_to_skip);
+        $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $sitemap_scrape_request = $_body;
 
         list($response) = $this->scrapeSitemapWithHttpInfo($sitemap_scrape_request, $contentType);
@@ -1455,7 +1457,7 @@ class UtilitiesApi extends \Carbon\CustomApi
 
         $url,
         $tags = SENTINEL_VALUE,
-        $max_pages_to_scrape = 100,
+        $max_pages_to_scrape = SENTINEL_VALUE,
         $chunk_size = 1500,
         $chunk_overlap = 20,
         $skip_embedding_generation = false,
@@ -1465,6 +1467,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $html_tags_to_skip = SENTINEL_VALUE,
         $css_classes_to_skip = SENTINEL_VALUE,
         $css_selectors_to_skip = SENTINEL_VALUE,
+        $embedding_model = SENTINEL_VALUE,
         string $contentType = self::contentTypes['scrapeSitemap'][0]
     )
     {
@@ -1481,6 +1484,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "html_tags_to_skip", $html_tags_to_skip);
         $this->setRequestBodyProperty($_body, "css_classes_to_skip", $css_classes_to_skip);
         $this->setRequestBodyProperty($_body, "css_selectors_to_skip", $css_selectors_to_skip);
+        $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $sitemap_scrape_request = $_body;
 
         return $this->scrapeSitemapAsyncWithHttpInfo($sitemap_scrape_request, $contentType)

@@ -57,7 +57,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
-        'max_items_per_chunk' => 'int'
+        'max_items_per_chunk' => 'int',
+        'set_page_as_boundary' => 'bool'
     ];
 
     /**
@@ -76,7 +77,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => null,
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
-        'max_items_per_chunk' => null
+        'max_items_per_chunk' => null,
+        'set_page_as_boundary' => null
     ];
 
     /**
@@ -93,7 +95,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'embedding_model' => false,
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
-		'max_items_per_chunk' => true
+		'max_items_per_chunk' => true,
+		'set_page_as_boundary' => false
     ];
 
     /**
@@ -190,7 +193,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
-        'max_items_per_chunk' => 'max_items_per_chunk'
+        'max_items_per_chunk' => 'max_items_per_chunk',
+        'set_page_as_boundary' => 'set_page_as_boundary'
     ];
 
     /**
@@ -207,7 +211,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
-        'max_items_per_chunk' => 'setMaxItemsPerChunk'
+        'max_items_per_chunk' => 'setMaxItemsPerChunk',
+        'set_page_as_boundary' => 'setSetPageAsBoundary'
     ];
 
     /**
@@ -224,7 +229,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
-        'max_items_per_chunk' => 'getMaxItemsPerChunk'
+        'max_items_per_chunk' => 'getMaxItemsPerChunk',
+        'set_page_as_boundary' => 'getSetPageAsBoundary'
     ];
 
     /**
@@ -293,6 +299,7 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
+        $this->setIfExists('set_page_as_boundary', $data ?? [], false);
     }
 
     /**
@@ -646,6 +653,35 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['max_items_per_chunk'] = $max_items_per_chunk;
+
+        return $this;
+    }
+
+    /**
+     * Gets set_page_as_boundary
+     *
+     * @return bool|null
+     */
+    public function getSetPageAsBoundary()
+    {
+        return $this->container['set_page_as_boundary'];
+    }
+
+    /**
+     * Sets set_page_as_boundary
+     *
+     * @param bool|null $set_page_as_boundary set_page_as_boundary
+     *
+     * @return self
+     */
+    public function setSetPageAsBoundary($set_page_as_boundary)
+    {
+
+        if (is_null($set_page_as_boundary)) {
+            throw new \InvalidArgumentException('non-nullable set_page_as_boundary cannot be null');
+        }
+
+        $this->container['set_page_as_boundary'] = $set_page_as_boundary;
 
         return $this;
     }

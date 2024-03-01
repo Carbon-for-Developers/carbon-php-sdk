@@ -41,20 +41,25 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.files.uploadText`](#carbonfilesuploadtext)
   * [`carbon.health.check`](#carbonhealthcheck)
   * [`carbon.integrations.connectFreshdesk`](#carbonintegrationsconnectfreshdesk)
+  * [`carbon.integrations.connectGitbook`](#carbonintegrationsconnectgitbook)
   * [`carbon.integrations.createAwsIamUser`](#carbonintegrationscreateawsiamuser)
   * [`carbon.integrations.getOauthUrl`](#carbonintegrationsgetoauthurl)
   * [`carbon.integrations.listConfluencePages`](#carbonintegrationslistconfluencepages)
   * [`carbon.integrations.listDataSourceItems`](#carbonintegrationslistdatasourceitems)
   * [`carbon.integrations.listFolders`](#carbonintegrationslistfolders)
+  * [`carbon.integrations.listGitbookSpaces`](#carbonintegrationslistgitbookspaces)
   * [`carbon.integrations.listLabels`](#carbonintegrationslistlabels)
+  * [`carbon.integrations.listOutlookCategories`](#carbonintegrationslistoutlookcategories)
   * [`carbon.integrations.syncConfluence`](#carbonintegrationssyncconfluence)
   * [`carbon.integrations.syncDataSourceItems`](#carbonintegrationssyncdatasourceitems)
   * [`carbon.integrations.syncFiles`](#carbonintegrationssyncfiles)
+  * [`carbon.integrations.syncGitbook`](#carbonintegrationssyncgitbook)
   * [`carbon.integrations.syncGmail`](#carbonintegrationssyncgmail)
   * [`carbon.integrations.syncOutlook`](#carbonintegrationssyncoutlook)
   * [`carbon.integrations.syncRssFeed`](#carbonintegrationssyncrssfeed)
   * [`carbon.integrations.syncS3Files`](#carbonintegrationssyncs3files)
   * [`carbon.organizations.get`](#carbonorganizationsget)
+  * [`carbon.users.delete`](#carbonusersdelete)
   * [`carbon.users.get`](#carbonusersget)
   * [`carbon.users.toggleUserFeatures`](#carbonuserstoggleuserfeatures)
   * [`carbon.utilities.fetchUrls`](#carbonutilitiesfetchurls)
@@ -684,7 +689,8 @@ $result = $carbon->files->deleteMany(
     sync_statuses: [
         "string_example"
     ], 
-    delete_non_synced_only: False
+    delete_non_synced_only: False, 
+    send_webhook: False
 );
 ```
 
@@ -695,6 +701,8 @@ $result = $carbon->files->deleteMany(
 ##### sync_statuses: []<a id="sync_statuses-"></a>
 
 ##### delete_non_synced_only: `bool`<a id="delete_non_synced_only-bool"></a>
+
+##### send_webhook: `bool`<a id="send_webhook-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1270,6 +1278,43 @@ $result = $carbon->integrations->connectFreshdesk(
 ---
 
 
+### `carbon.integrations.connectGitbook`<a id="carbonintegrationsconnectgitbook"></a>
+
+You will need an access token to connect your Gitbook account. Note that the permissions will be defined by the user 
+generating access token so make sure you have the permission to access spaces you will be syncing. 
+Refer this article for more details https://developer.gitbook.com/gitbook-api/authentication. Additionally, you
+need to specify the name of organization you will be syncing data from.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->connectGitbook(
+    organization: "string_example", 
+    access_token: "string_example"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### organization: `string`<a id="organization-string"></a>
+
+##### access_token: `string`<a id="access_token-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**GenericSuccessResponse**](./lib/Model/GenericSuccessResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/gitbook` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `carbon.integrations.createAwsIamUser`<a id="carbonintegrationscreateawsiamuser"></a>
 
 Create a new IAM user with permissions to:
@@ -1332,7 +1377,10 @@ $result = $carbon->integrations->getOauthUrl(
     confluence_subdomain: "string_example", 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    max_items_per_chunk: 1
+    max_items_per_chunk: 1, 
+    salesforce_domain: "string_example", 
+    sync_files_on_connection: False, 
+    set_page_as_boundary: False
 );
 ```
 
@@ -1365,6 +1413,12 @@ $result = $carbon->integrations->getOauthUrl(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
+
+##### salesforce_domain: `string`<a id="salesforce_domain-string"></a>
+
+##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
+
+##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1486,6 +1540,37 @@ $result = $carbon->integrations->listFolders();
 ---
 
 
+### `carbon.integrations.listGitbookSpaces`<a id="carbonintegrationslistgitbookspaces"></a>
+
+After connecting your Gitbook account, you can use this endpoint to list all of your spaces under current organization.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->listGitbookSpaces(
+    data_source_id: 1
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/gitbook/spaces` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `carbon.integrations.listLabels`<a id="carbonintegrationslistlabels"></a>
 
 After connecting your Gmail account, you can use this endpoint to list all of your labels. User created labels
@@ -1506,6 +1591,32 @@ $result = $carbon->integrations->listLabels();
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/integrations/gmail/user_labels` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.integrations.listOutlookCategories`<a id="carbonintegrationslistoutlookcategories"></a>
+
+After connecting your Outlook account, you can use this endpoint to list all of your categories on outlook. We currently
+support listing up to 250 categories.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->listOutlookCategories();
+```
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/outlook/user_categories` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1535,7 +1646,8 @@ $result = $carbon->integrations->syncConfluence(
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    max_items_per_chunk: 1
+    max_items_per_chunk: 1, 
+    set_page_as_boundary: False
 );
 ```
 
@@ -1560,6 +1672,8 @@ $result = $carbon->integrations->syncConfluence(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
+
+##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1626,7 +1740,8 @@ $result = $carbon->integrations->syncFiles(
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    max_items_per_chunk: 1
+    max_items_per_chunk: 1, 
+    set_page_as_boundary: False
 );
 ```
 
@@ -1652,6 +1767,8 @@ $result = $carbon->integrations->syncFiles(
 
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
 
+##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1660,6 +1777,64 @@ $result = $carbon->integrations->syncFiles(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/integrations/files/sync` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.integrations.syncGitbook`<a id="carbonintegrationssyncgitbook"></a>
+
+You can sync upto 20 Gitbook spaces at a time using this endpoint. Additional parameters below can be used to associate 
+data with the synced pages or modify the sync behavior.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->syncGitbook(
+    space_ids: [
+        "string_example"
+    ], 
+    data_source_id: 1, 
+    tags: [], 
+    chunk_size: 1500, 
+    chunk_overlap: 20, 
+    skip_embedding_generation: False, 
+    embedding_model: "OPENAI", 
+    generate_sparse_vectors: False, 
+    prepend_filename_to_chunks: False
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### space_ids: `string`[]<a id="space_ids-string"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### tags: `object`<a id="tags-object"></a>
+
+##### chunk_size: `int`<a id="chunk_size-int"></a>
+
+##### chunk_overlap: `int`<a id="chunk_overlap-int"></a>
+
+##### skip_embedding_generation: `bool`<a id="skip_embedding_generation-bool"></a>
+
+##### embedding_model:<a id="embedding_model"></a>
+
+##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
+
+##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/gitbook/sync` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1955,7 +2130,8 @@ $result = $carbon->integrations->syncS3Files(
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    max_items_per_chunk: 1
+    max_items_per_chunk: 1, 
+    set_page_as_boundary: False
 );
 ```
 
@@ -1978,6 +2154,8 @@ $result = $carbon->integrations->syncS3Files(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
+
+##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2012,6 +2190,39 @@ $result = $carbon->organizations->get();
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/organization` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.users.delete`<a id="carbonusersdelete"></a>
+
+Delete Users
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->users->delete(
+    customer_ids: [
+        "string_example"
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### customer_ids: `string`[]<a id="customer_ids-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**GenericSuccessResponse**](./lib/Model/GenericSuccessResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/delete_users` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2217,7 +2428,7 @@ $result = $carbon->utilities->scrapeSitemap(
     tags: [
         "key": "string_example",
     ], 
-    max_pages_to_scrape: 100, 
+    max_pages_to_scrape: 1, 
     chunk_size: 1500, 
     chunk_overlap: 20, 
     skip_embedding_generation: False, 
@@ -2226,7 +2437,8 @@ $result = $carbon->utilities->scrapeSitemap(
     prepend_filename_to_chunks: False, 
     html_tags_to_skip: [], 
     css_classes_to_skip: [], 
-    css_selectors_to_skip: []
+    css_selectors_to_skip: [], 
+    embedding_model: "OPENAI"
 );
 ```
 
@@ -2255,6 +2467,8 @@ $result = $carbon->utilities->scrapeSitemap(
 ##### css_classes_to_skip: `string`[]<a id="css_classes_to_skip-string"></a>
 
 ##### css_selectors_to_skip: `string`[]<a id="css_selectors_to_skip-string"></a>
+
+##### embedding_model:<a id="embedding_model"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2300,6 +2514,7 @@ $result = $carbon->utilities->scrapeWeb(
             "html_tags_to_skip" => [],
             "css_classes_to_skip" => [],
             "css_selectors_to_skip" => [],
+            "embedding_model" => "OPENAI",
         ]
     ],
 );

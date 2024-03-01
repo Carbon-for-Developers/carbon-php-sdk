@@ -90,6 +90,10 @@ class DataSourceTypeNullable
 
     public const FRESHDESK = 'FRESHDESK';
 
+    public const GITBOOK = 'GITBOOK';
+
+    public const SALESFORCE = 'SALESFORCE';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -151,6 +155,8 @@ class DataSourceTypeNullable
             self::WEB_SCRAPE,
             self::RSS_FEED,
             self::FRESHDESK,
+            self::GITBOOK,
+            self::SALESFORCE,
             self::JPG,
             self::PNG,
             self::MP3,

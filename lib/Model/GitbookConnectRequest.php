@@ -1,6 +1,6 @@
 <?php
 /**
- * DeleteFilesQueryInput
+ * GitbookConnectRequest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * DeleteFilesQueryInput Class Doc Comment
+ * GitbookConnectRequest Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'DeleteFilesQueryInput';
+    protected static $openAPIModelName = 'GitbookConnectRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'file_ids' => 'int[]',
-        'sync_statuses' => '\Carbon\Model\ExternalFileSyncStatuses[]',
-        'delete_non_synced_only' => 'bool',
-        'send_webhook' => 'bool'
+        'organization' => 'string',
+        'access_token' => 'string'
     ];
 
     /**
@@ -63,10 +61,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'file_ids' => null,
-        'sync_statuses' => null,
-        'delete_non_synced_only' => null,
-        'send_webhook' => null
+        'organization' => null,
+        'access_token' => null
     ];
 
     /**
@@ -75,10 +71,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'file_ids' => true,
-		'sync_statuses' => true,
-		'delete_non_synced_only' => false,
-		'send_webhook' => false
+        'organization' => false,
+		'access_token' => false
     ];
 
     /**
@@ -167,10 +161,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'file_ids' => 'file_ids',
-        'sync_statuses' => 'sync_statuses',
-        'delete_non_synced_only' => 'delete_non_synced_only',
-        'send_webhook' => 'send_webhook'
+        'organization' => 'organization',
+        'access_token' => 'access_token'
     ];
 
     /**
@@ -179,10 +171,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'file_ids' => 'setFileIds',
-        'sync_statuses' => 'setSyncStatuses',
-        'delete_non_synced_only' => 'setDeleteNonSyncedOnly',
-        'send_webhook' => 'setSendWebhook'
+        'organization' => 'setOrganization',
+        'access_token' => 'setAccessToken'
     ];
 
     /**
@@ -191,10 +181,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'file_ids' => 'getFileIds',
-        'sync_statuses' => 'getSyncStatuses',
-        'delete_non_synced_only' => 'getDeleteNonSyncedOnly',
-        'send_webhook' => 'getSendWebhook'
+        'organization' => 'getOrganization',
+        'access_token' => 'getAccessToken'
     ];
 
     /**
@@ -254,10 +242,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('file_ids', $data ?? [], null);
-        $this->setIfExists('sync_statuses', $data ?? [], null);
-        $this->setIfExists('delete_non_synced_only', $data ?? [], false);
-        $this->setIfExists('send_webhook', $data ?? [], false);
+        $this->setIfExists('organization', $data ?? [], null);
+        $this->setIfExists('access_token', $data ?? [], null);
     }
 
     /**
@@ -287,6 +273,12 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
+        if ($this->container['organization'] === null) {
+            $invalidProperties[] = "'organization' can't be null";
+        }
+        if ($this->container['access_token'] === null) {
+            $invalidProperties[] = "'access_token' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -303,131 +295,59 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets file_ids
+     * Gets organization
      *
-     * @return int[]|null
+     * @return string
      */
-    public function getFileIds()
+    public function getOrganization()
     {
-        return $this->container['file_ids'];
+        return $this->container['organization'];
     }
 
     /**
-     * Sets file_ids
+     * Sets organization
      *
-     * @param int[]|null $file_ids file_ids
+     * @param string $organization organization
      *
      * @return self
      */
-    public function setFileIds($file_ids)
+    public function setOrganization($organization)
     {
 
-        if (is_null($file_ids)) {
-            array_push($this->openAPINullablesSetToNull, 'file_ids');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('file_ids', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($organization)) {
+            throw new \InvalidArgumentException('non-nullable organization cannot be null');
         }
 
-        $this->container['file_ids'] = $file_ids;
+        $this->container['organization'] = $organization;
 
         return $this;
     }
 
     /**
-     * Gets sync_statuses
+     * Gets access_token
      *
-     * @return \Carbon\Model\ExternalFileSyncStatuses[]|null
+     * @return string
      */
-    public function getSyncStatuses()
+    public function getAccessToken()
     {
-        return $this->container['sync_statuses'];
+        return $this->container['access_token'];
     }
 
     /**
-     * Sets sync_statuses
+     * Sets access_token
      *
-     * @param \Carbon\Model\ExternalFileSyncStatuses[]|null $sync_statuses sync_statuses
+     * @param string $access_token access_token
      *
      * @return self
      */
-    public function setSyncStatuses($sync_statuses)
+    public function setAccessToken($access_token)
     {
 
-        if (is_null($sync_statuses)) {
-            array_push($this->openAPINullablesSetToNull, 'sync_statuses');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('sync_statuses', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($access_token)) {
+            throw new \InvalidArgumentException('non-nullable access_token cannot be null');
         }
 
-        $this->container['sync_statuses'] = $sync_statuses;
-
-        return $this;
-    }
-
-    /**
-     * Gets delete_non_synced_only
-     *
-     * @return bool|null
-     */
-    public function getDeleteNonSyncedOnly()
-    {
-        return $this->container['delete_non_synced_only'];
-    }
-
-    /**
-     * Sets delete_non_synced_only
-     *
-     * @param bool|null $delete_non_synced_only delete_non_synced_only
-     *
-     * @return self
-     */
-    public function setDeleteNonSyncedOnly($delete_non_synced_only)
-    {
-
-        if (is_null($delete_non_synced_only)) {
-            throw new \InvalidArgumentException('non-nullable delete_non_synced_only cannot be null');
-        }
-
-        $this->container['delete_non_synced_only'] = $delete_non_synced_only;
-
-        return $this;
-    }
-
-    /**
-     * Gets send_webhook
-     *
-     * @return bool|null
-     */
-    public function getSendWebhook()
-    {
-        return $this->container['send_webhook'];
-    }
-
-    /**
-     * Sets send_webhook
-     *
-     * @param bool|null $send_webhook send_webhook
-     *
-     * @return self
-     */
-    public function setSendWebhook($send_webhook)
-    {
-
-        if (is_null($send_webhook)) {
-            throw new \InvalidArgumentException('non-nullable send_webhook cannot be null');
-        }
-
-        $this->container['send_webhook'] = $send_webhook;
+        $this->container['access_token'] = $access_token;
 
         return $this;
     }

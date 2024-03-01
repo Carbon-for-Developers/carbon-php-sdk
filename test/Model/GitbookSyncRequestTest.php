@@ -1,6 +1,6 @@
 <?php
 /**
- * OAuthURLRequestTest
+ * GitbookSyncRequestTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * OAuthURLRequestTest Class Doc Comment
+ * GitbookSyncRequestTest Class Doc Comment
  *
  * @category    Class
- * @description OAuthURLRequest
+ * @description GitbookSyncRequest
  * @package     Carbon
  */
-class OAuthURLRequestTest extends TestCase
+class GitbookSyncRequestTest extends TestCase
 {
 
     /**
@@ -63,9 +63,9 @@ class OAuthURLRequestTest extends TestCase
     }
 
     /**
-     * Test "OAuthURLRequest"
+     * Test "GitbookSyncRequest"
      */
-    public function testOAuthURLRequest()
+    public function testGitbookSyncRequest()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -81,18 +81,18 @@ class OAuthURLRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "scope"
+     * Test attribute "space_ids"
      */
-    public function testPropertyScope()
+    public function testPropertySpaceIds()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "service"
+     * Test attribute "data_source_id"
      */
-    public function testPropertyService()
+    public function testPropertyDataSourceId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -135,42 +135,6 @@ class OAuthURLRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "zendesk_subdomain"
-     */
-    public function testPropertyZendeskSubdomain()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "microsoft_tenant"
-     */
-    public function testPropertyMicrosoftTenant()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "sharepoint_site_name"
-     */
-    public function testPropertySharepointSiteName()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "confluence_subdomain"
-     */
-    public function testPropertyConfluenceSubdomain()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "generate_sparse_vectors"
      */
     public function testPropertyGenerateSparseVectors()
@@ -183,42 +147,6 @@ class OAuthURLRequestTest extends TestCase
      * Test attribute "prepend_filename_to_chunks"
      */
     public function testPropertyPrependFilenameToChunks()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "max_items_per_chunk"
-     */
-    public function testPropertyMaxItemsPerChunk()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "salesforce_domain"
-     */
-    public function testPropertySalesforceDomain()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "sync_files_on_connection"
-     */
-    public function testPropertySyncFilesOnConnection()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "set_page_as_boundary"
-     */
-    public function testPropertySetPageAsBoundary()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

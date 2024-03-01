@@ -1,6 +1,6 @@
 <?php
 /**
- * OAuthURLRequest
+ * GitbookSyncRequest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * OAuthURLRequest Class Doc Comment
+ * GitbookSyncRequest Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class GitbookSyncRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OAuthURLRequest';
+    protected static $openAPIModelName = 'GitbookSyncRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,23 +49,15 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'tags' => 'mixed',
-        'scope' => 'string',
-        'service' => '\Carbon\Model\DataSourceType',
+        'tags' => 'object',
+        'space_ids' => 'string[]',
+        'data_source_id' => 'int',
         'chunk_size' => 'int',
         'chunk_overlap' => 'int',
         'skip_embedding_generation' => 'bool',
-        'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
-        'zendesk_subdomain' => 'string',
-        'microsoft_tenant' => 'string',
-        'sharepoint_site_name' => 'string',
-        'confluence_subdomain' => 'string',
+        'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'generate_sparse_vectors' => 'bool',
-        'prepend_filename_to_chunks' => 'bool',
-        'max_items_per_chunk' => 'int',
-        'salesforce_domain' => 'string',
-        'sync_files_on_connection' => 'bool',
-        'set_page_as_boundary' => 'bool'
+        'prepend_filename_to_chunks' => 'bool'
     ];
 
     /**
@@ -77,22 +69,14 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'tags' => null,
-        'scope' => null,
-        'service' => null,
+        'space_ids' => null,
+        'data_source_id' => null,
         'chunk_size' => null,
         'chunk_overlap' => null,
         'skip_embedding_generation' => null,
         'embedding_model' => null,
-        'zendesk_subdomain' => null,
-        'microsoft_tenant' => null,
-        'sharepoint_site_name' => null,
-        'confluence_subdomain' => null,
         'generate_sparse_vectors' => null,
-        'prepend_filename_to_chunks' => null,
-        'max_items_per_chunk' => null,
-        'salesforce_domain' => null,
-        'sync_files_on_connection' => null,
-        'set_page_as_boundary' => null
+        'prepend_filename_to_chunks' => null
     ];
 
     /**
@@ -102,22 +86,14 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'tags' => true,
-		'scope' => true,
-		'service' => false,
+		'space_ids' => false,
+		'data_source_id' => false,
 		'chunk_size' => true,
 		'chunk_overlap' => true,
 		'skip_embedding_generation' => true,
-		'embedding_model' => true,
-		'zendesk_subdomain' => true,
-		'microsoft_tenant' => true,
-		'sharepoint_site_name' => true,
-		'confluence_subdomain' => true,
+		'embedding_model' => false,
 		'generate_sparse_vectors' => true,
-		'prepend_filename_to_chunks' => true,
-		'max_items_per_chunk' => true,
-		'salesforce_domain' => true,
-		'sync_files_on_connection' => true,
-		'set_page_as_boundary' => false
+		'prepend_filename_to_chunks' => true
     ];
 
     /**
@@ -207,22 +183,14 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'tags' => 'tags',
-        'scope' => 'scope',
-        'service' => 'service',
+        'space_ids' => 'space_ids',
+        'data_source_id' => 'data_source_id',
         'chunk_size' => 'chunk_size',
         'chunk_overlap' => 'chunk_overlap',
         'skip_embedding_generation' => 'skip_embedding_generation',
         'embedding_model' => 'embedding_model',
-        'zendesk_subdomain' => 'zendesk_subdomain',
-        'microsoft_tenant' => 'microsoft_tenant',
-        'sharepoint_site_name' => 'sharepoint_site_name',
-        'confluence_subdomain' => 'confluence_subdomain',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
-        'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
-        'max_items_per_chunk' => 'max_items_per_chunk',
-        'salesforce_domain' => 'salesforce_domain',
-        'sync_files_on_connection' => 'sync_files_on_connection',
-        'set_page_as_boundary' => 'set_page_as_boundary'
+        'prepend_filename_to_chunks' => 'prepend_filename_to_chunks'
     ];
 
     /**
@@ -232,22 +200,14 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'tags' => 'setTags',
-        'scope' => 'setScope',
-        'service' => 'setService',
+        'space_ids' => 'setSpaceIds',
+        'data_source_id' => 'setDataSourceId',
         'chunk_size' => 'setChunkSize',
         'chunk_overlap' => 'setChunkOverlap',
         'skip_embedding_generation' => 'setSkipEmbeddingGeneration',
         'embedding_model' => 'setEmbeddingModel',
-        'zendesk_subdomain' => 'setZendeskSubdomain',
-        'microsoft_tenant' => 'setMicrosoftTenant',
-        'sharepoint_site_name' => 'setSharepointSiteName',
-        'confluence_subdomain' => 'setConfluenceSubdomain',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
-        'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
-        'max_items_per_chunk' => 'setMaxItemsPerChunk',
-        'salesforce_domain' => 'setSalesforceDomain',
-        'sync_files_on_connection' => 'setSyncFilesOnConnection',
-        'set_page_as_boundary' => 'setSetPageAsBoundary'
+        'prepend_filename_to_chunks' => 'setPrependFilenameToChunks'
     ];
 
     /**
@@ -257,22 +217,14 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'tags' => 'getTags',
-        'scope' => 'getScope',
-        'service' => 'getService',
+        'space_ids' => 'getSpaceIds',
+        'data_source_id' => 'getDataSourceId',
         'chunk_size' => 'getChunkSize',
         'chunk_overlap' => 'getChunkOverlap',
         'skip_embedding_generation' => 'getSkipEmbeddingGeneration',
         'embedding_model' => 'getEmbeddingModel',
-        'zendesk_subdomain' => 'getZendeskSubdomain',
-        'microsoft_tenant' => 'getMicrosoftTenant',
-        'sharepoint_site_name' => 'getSharepointSiteName',
-        'confluence_subdomain' => 'getConfluenceSubdomain',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
-        'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
-        'max_items_per_chunk' => 'getMaxItemsPerChunk',
-        'salesforce_domain' => 'getSalesforceDomain',
-        'sync_files_on_connection' => 'getSyncFilesOnConnection',
-        'set_page_as_boundary' => 'getSetPageAsBoundary'
+        'prepend_filename_to_chunks' => 'getPrependFilenameToChunks'
     ];
 
     /**
@@ -333,22 +285,14 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('tags', $data ?? [], null);
-        $this->setIfExists('scope', $data ?? [], null);
-        $this->setIfExists('service', $data ?? [], null);
+        $this->setIfExists('space_ids', $data ?? [], null);
+        $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('chunk_size', $data ?? [], 1500);
         $this->setIfExists('chunk_overlap', $data ?? [], 20);
         $this->setIfExists('skip_embedding_generation', $data ?? [], false);
         $this->setIfExists('embedding_model', $data ?? [], null);
-        $this->setIfExists('zendesk_subdomain', $data ?? [], null);
-        $this->setIfExists('microsoft_tenant', $data ?? [], null);
-        $this->setIfExists('sharepoint_site_name', $data ?? [], null);
-        $this->setIfExists('confluence_subdomain', $data ?? [], null);
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
-        $this->setIfExists('max_items_per_chunk', $data ?? [], null);
-        $this->setIfExists('salesforce_domain', $data ?? [], null);
-        $this->setIfExists('sync_files_on_connection', $data ?? [], false);
-        $this->setIfExists('set_page_as_boundary', $data ?? [], false);
     }
 
     /**
@@ -378,8 +322,15 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['service'] === null) {
-            $invalidProperties[] = "'service' can't be null";
+        if ($this->container['space_ids'] === null) {
+            $invalidProperties[] = "'space_ids' can't be null";
+        }
+        if ((count($this->container['space_ids']) > 20)) {
+            $invalidProperties[] = "invalid value for 'space_ids', number of items must be less than or equal to 20.";
+        }
+
+        if ($this->container['data_source_id'] === null) {
+            $invalidProperties[] = "'data_source_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -399,7 +350,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets tags
      *
-     * @return mixed|null
+     * @return object|null
      */
     public function getTags()
     {
@@ -409,7 +360,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tags
      *
-     * @param mixed|null $tags tags
+     * @param object|null $tags tags
      *
      * @return self
      */
@@ -433,66 +384,63 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets scope
+     * Gets space_ids
      *
-     * @return string|null
+     * @return string[]
      */
-    public function getScope()
+    public function getSpaceIds()
     {
-        return $this->container['scope'];
+        return $this->container['space_ids'];
     }
 
     /**
-     * Sets scope
+     * Sets space_ids
      *
-     * @param string|null $scope scope
+     * @param string[] $space_ids space_ids
      *
      * @return self
      */
-    public function setScope($scope)
+    public function setSpaceIds($space_ids)
     {
 
-        if (is_null($scope)) {
-            array_push($this->openAPINullablesSetToNull, 'scope');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('scope', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if ((count($space_ids) > 20)) {
+            throw new \InvalidArgumentException('invalid value for $space_ids when calling GitbookSyncRequest., number of items must be less than or equal to 20.');
         }
 
-        $this->container['scope'] = $scope;
+        if (is_null($space_ids)) {
+            throw new \InvalidArgumentException('non-nullable space_ids cannot be null');
+        }
+
+        $this->container['space_ids'] = $space_ids;
 
         return $this;
     }
 
     /**
-     * Gets service
+     * Gets data_source_id
      *
-     * @return \Carbon\Model\DataSourceType
+     * @return int
      */
-    public function getService()
+    public function getDataSourceId()
     {
-        return $this->container['service'];
+        return $this->container['data_source_id'];
     }
 
     /**
-     * Sets service
+     * Sets data_source_id
      *
-     * @param \Carbon\Model\DataSourceType $service service
+     * @param int $data_source_id data_source_id
      *
      * @return self
      */
-    public function setService($service)
+    public function setDataSourceId($data_source_id)
     {
 
-        if (is_null($service)) {
-            throw new \InvalidArgumentException('non-nullable service cannot be null');
+        if (is_null($data_source_id)) {
+            throw new \InvalidArgumentException('non-nullable data_source_id cannot be null');
         }
 
-        $this->container['service'] = $service;
+        $this->container['data_source_id'] = $data_source_id;
 
         return $this;
     }
@@ -608,7 +556,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets embedding_model
      *
-     * @return \Carbon\Model\EmbeddingGeneratorsNullable|null
+     * @return \Carbon\Model\EmbeddingGenerators|null
      */
     public function getEmbeddingModel()
     {
@@ -618,7 +566,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets embedding_model
      *
-     * @param \Carbon\Model\EmbeddingGeneratorsNullable|null $embedding_model embedding_model
+     * @param \Carbon\Model\EmbeddingGenerators|null $embedding_model embedding_model
      *
      * @return self
      */
@@ -626,161 +574,10 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($embedding_model)) {
-            array_push($this->openAPINullablesSetToNull, 'embedding_model');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('embedding_model', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable embedding_model cannot be null');
         }
 
         $this->container['embedding_model'] = $embedding_model;
-
-        return $this;
-    }
-
-    /**
-     * Gets zendesk_subdomain
-     *
-     * @return string|null
-     */
-    public function getZendeskSubdomain()
-    {
-        return $this->container['zendesk_subdomain'];
-    }
-
-    /**
-     * Sets zendesk_subdomain
-     *
-     * @param string|null $zendesk_subdomain zendesk_subdomain
-     *
-     * @return self
-     */
-    public function setZendeskSubdomain($zendesk_subdomain)
-    {
-
-        if (is_null($zendesk_subdomain)) {
-            array_push($this->openAPINullablesSetToNull, 'zendesk_subdomain');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('zendesk_subdomain', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['zendesk_subdomain'] = $zendesk_subdomain;
-
-        return $this;
-    }
-
-    /**
-     * Gets microsoft_tenant
-     *
-     * @return string|null
-     */
-    public function getMicrosoftTenant()
-    {
-        return $this->container['microsoft_tenant'];
-    }
-
-    /**
-     * Sets microsoft_tenant
-     *
-     * @param string|null $microsoft_tenant microsoft_tenant
-     *
-     * @return self
-     */
-    public function setMicrosoftTenant($microsoft_tenant)
-    {
-
-        if (is_null($microsoft_tenant)) {
-            array_push($this->openAPINullablesSetToNull, 'microsoft_tenant');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('microsoft_tenant', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['microsoft_tenant'] = $microsoft_tenant;
-
-        return $this;
-    }
-
-    /**
-     * Gets sharepoint_site_name
-     *
-     * @return string|null
-     */
-    public function getSharepointSiteName()
-    {
-        return $this->container['sharepoint_site_name'];
-    }
-
-    /**
-     * Sets sharepoint_site_name
-     *
-     * @param string|null $sharepoint_site_name sharepoint_site_name
-     *
-     * @return self
-     */
-    public function setSharepointSiteName($sharepoint_site_name)
-    {
-
-        if (is_null($sharepoint_site_name)) {
-            array_push($this->openAPINullablesSetToNull, 'sharepoint_site_name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('sharepoint_site_name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['sharepoint_site_name'] = $sharepoint_site_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets confluence_subdomain
-     *
-     * @return string|null
-     */
-    public function getConfluenceSubdomain()
-    {
-        return $this->container['confluence_subdomain'];
-    }
-
-    /**
-     * Sets confluence_subdomain
-     *
-     * @param string|null $confluence_subdomain confluence_subdomain
-     *
-     * @return self
-     */
-    public function setConfluenceSubdomain($confluence_subdomain)
-    {
-
-        if (is_null($confluence_subdomain)) {
-            array_push($this->openAPINullablesSetToNull, 'confluence_subdomain');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('confluence_subdomain', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['confluence_subdomain'] = $confluence_subdomain;
 
         return $this;
     }
@@ -853,143 +650,6 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['prepend_filename_to_chunks'] = $prepend_filename_to_chunks;
-
-        return $this;
-    }
-
-    /**
-     * Gets max_items_per_chunk
-     *
-     * @return int|null
-     */
-    public function getMaxItemsPerChunk()
-    {
-        return $this->container['max_items_per_chunk'];
-    }
-
-    /**
-     * Sets max_items_per_chunk
-     *
-     * @param int|null $max_items_per_chunk max_items_per_chunk
-     *
-     * @return self
-     */
-    public function setMaxItemsPerChunk($max_items_per_chunk)
-    {
-
-        if (is_null($max_items_per_chunk)) {
-            array_push($this->openAPINullablesSetToNull, 'max_items_per_chunk');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('max_items_per_chunk', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['max_items_per_chunk'] = $max_items_per_chunk;
-
-        return $this;
-    }
-
-    /**
-     * Gets salesforce_domain
-     *
-     * @return string|null
-     */
-    public function getSalesforceDomain()
-    {
-        return $this->container['salesforce_domain'];
-    }
-
-    /**
-     * Sets salesforce_domain
-     *
-     * @param string|null $salesforce_domain salesforce_domain
-     *
-     * @return self
-     */
-    public function setSalesforceDomain($salesforce_domain)
-    {
-
-        if (is_null($salesforce_domain)) {
-            array_push($this->openAPINullablesSetToNull, 'salesforce_domain');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('salesforce_domain', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['salesforce_domain'] = $salesforce_domain;
-
-        return $this;
-    }
-
-    /**
-     * Gets sync_files_on_connection
-     *
-     * @return bool|null
-     */
-    public function getSyncFilesOnConnection()
-    {
-        return $this->container['sync_files_on_connection'];
-    }
-
-    /**
-     * Sets sync_files_on_connection
-     *
-     * @param bool|null $sync_files_on_connection sync_files_on_connection
-     *
-     * @return self
-     */
-    public function setSyncFilesOnConnection($sync_files_on_connection)
-    {
-
-        if (is_null($sync_files_on_connection)) {
-            array_push($this->openAPINullablesSetToNull, 'sync_files_on_connection');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('sync_files_on_connection', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['sync_files_on_connection'] = $sync_files_on_connection;
-
-        return $this;
-    }
-
-    /**
-     * Gets set_page_as_boundary
-     *
-     * @return bool|null
-     */
-    public function getSetPageAsBoundary()
-    {
-        return $this->container['set_page_as_boundary'];
-    }
-
-    /**
-     * Sets set_page_as_boundary
-     *
-     * @param bool|null $set_page_as_boundary set_page_as_boundary
-     *
-     * @return self
-     */
-    public function setSetPageAsBoundary($set_page_as_boundary)
-    {
-
-        if (is_null($set_page_as_boundary)) {
-            throw new \InvalidArgumentException('non-nullable set_page_as_boundary cannot be null');
-        }
-
-        $this->container['set_page_as_boundary'] = $set_page_as_boundary;
 
         return $this;
     }

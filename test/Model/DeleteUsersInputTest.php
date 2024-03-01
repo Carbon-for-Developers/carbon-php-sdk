@@ -1,6 +1,7 @@
 <?php
 /**
- * UsersApiTest
+ * DeleteUsersInputTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -19,18 +20,22 @@
  */
 
 
-namespace Carbon\Test\Api;
+namespace Carbon\Test\Model;
 
-use \Carbon\Configuration;
-use \Carbon\ApiException;
-use \Carbon\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class UsersApiTest extends TestCase
+/**
+ * DeleteUsersInputTest Class Doc Comment
+ *
+ * @category    Class
+ * @description DeleteUsersInput
+ * @package     Carbon
+ */
+class DeleteUsersInputTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -58,36 +63,18 @@ class UsersApiTest extends TestCase
     }
 
     /**
-     * Test case for delete
-     *
-     * Delete Users.
-     *
+     * Test "DeleteUsersInput"
      */
-    public function testDelete()
+    public function testDeleteUsersInput()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for get
-     *
-     * User Endpoint.
-     *
+     * Test attribute "customer_ids"
      */
-    public function testGet()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for toggleUserFeatures
-     *
-     * Toggle User Features.
-     *
-     */
-    public function testToggleUserFeatures()
+    public function testPropertyCustomerIds()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

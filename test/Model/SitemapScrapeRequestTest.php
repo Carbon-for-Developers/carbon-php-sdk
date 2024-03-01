@@ -178,4 +178,13 @@ class SitemapScrapeRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "embedding_model"
+     */
+    public function testPropertyEmbeddingModel()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

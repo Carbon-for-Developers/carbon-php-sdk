@@ -61,7 +61,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'bool',
         'html_tags_to_skip' => 'string[]',
         'css_classes_to_skip' => 'string[]',
-        'css_selectors_to_skip' => 'string[]'
+        'css_selectors_to_skip' => 'string[]',
+        'embedding_model' => '\Carbon\Model\EmbeddingGenerators'
     ];
 
     /**
@@ -84,7 +85,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => null,
         'html_tags_to_skip' => null,
         'css_classes_to_skip' => null,
-        'css_selectors_to_skip' => null
+        'css_selectors_to_skip' => null,
+        'embedding_model' => null
     ];
 
     /**
@@ -105,7 +107,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'prepend_filename_to_chunks' => true,
 		'html_tags_to_skip' => true,
 		'css_classes_to_skip' => true,
-		'css_selectors_to_skip' => true
+		'css_selectors_to_skip' => true,
+		'embedding_model' => false
     ];
 
     /**
@@ -206,7 +209,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
         'html_tags_to_skip' => 'html_tags_to_skip',
         'css_classes_to_skip' => 'css_classes_to_skip',
-        'css_selectors_to_skip' => 'css_selectors_to_skip'
+        'css_selectors_to_skip' => 'css_selectors_to_skip',
+        'embedding_model' => 'embedding_model'
     ];
 
     /**
@@ -227,7 +231,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
         'html_tags_to_skip' => 'setHtmlTagsToSkip',
         'css_classes_to_skip' => 'setCssClassesToSkip',
-        'css_selectors_to_skip' => 'setCssSelectorsToSkip'
+        'css_selectors_to_skip' => 'setCssSelectorsToSkip',
+        'embedding_model' => 'setEmbeddingModel'
     ];
 
     /**
@@ -248,7 +253,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
         'html_tags_to_skip' => 'getHtmlTagsToSkip',
         'css_classes_to_skip' => 'getCssClassesToSkip',
-        'css_selectors_to_skip' => 'getCssSelectorsToSkip'
+        'css_selectors_to_skip' => 'getCssSelectorsToSkip',
+        'embedding_model' => 'getEmbeddingModel'
     ];
 
     /**
@@ -321,6 +327,7 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('html_tags_to_skip', $data ?? [], null);
         $this->setIfExists('css_classes_to_skip', $data ?? [], null);
         $this->setIfExists('css_selectors_to_skip', $data ?? [], null);
+        $this->setIfExists('embedding_model', $data ?? [], null);
     }
 
     /**
@@ -825,6 +832,35 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['css_selectors_to_skip'] = $css_selectors_to_skip;
+
+        return $this;
+    }
+
+    /**
+     * Gets embedding_model
+     *
+     * @return \Carbon\Model\EmbeddingGenerators|null
+     */
+    public function getEmbeddingModel()
+    {
+        return $this->container['embedding_model'];
+    }
+
+    /**
+     * Sets embedding_model
+     *
+     * @param \Carbon\Model\EmbeddingGenerators|null $embedding_model embedding_model
+     *
+     * @return self
+     */
+    public function setEmbeddingModel($embedding_model)
+    {
+
+        if (is_null($embedding_model)) {
+            throw new \InvalidArgumentException('non-nullable embedding_model cannot be null');
+        }
+
+        $this->container['embedding_model'] = $embedding_model;
 
         return $this;
     }

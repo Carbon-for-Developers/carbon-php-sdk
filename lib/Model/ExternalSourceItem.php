@@ -63,6 +63,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'organization_user_file_to_sync_id' => 'int',
         'parent_external_id' => 'string',
         'item_type' => 'string',
+        'root_external_id' => 'string',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -89,6 +90,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'organization_user_file_to_sync_id' => null,
         'parent_external_id' => null,
         'item_type' => null,
+        'root_external_id' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -113,6 +115,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
 		'organization_user_file_to_sync_id' => true,
 		'parent_external_id' => true,
 		'item_type' => true,
+		'root_external_id' => true,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -217,6 +220,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'organization_user_file_to_sync_id' => 'organization_user_file_to_sync_id',
         'parent_external_id' => 'parent_external_id',
         'item_type' => 'item_type',
+        'root_external_id' => 'root_external_id',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -241,6 +245,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'organization_user_file_to_sync_id' => 'setOrganizationUserFileToSyncId',
         'parent_external_id' => 'setParentExternalId',
         'item_type' => 'setItemType',
+        'root_external_id' => 'setRootExternalId',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -265,6 +270,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'organization_user_file_to_sync_id' => 'getOrganizationUserFileToSyncId',
         'parent_external_id' => 'getParentExternalId',
         'item_type' => 'getItemType',
+        'root_external_id' => 'getRootExternalId',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -340,6 +346,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('organization_user_file_to_sync_id', $data ?? [], null);
         $this->setIfExists('parent_external_id', $data ?? [], null);
         $this->setIfExists('item_type', $data ?? [], null);
+        $this->setIfExists('root_external_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -412,6 +419,9 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         }
         if ($this->container['item_type'] === null) {
             $invalidProperties[] = "'item_type' can't be null";
+        }
+        if ($this->container['root_external_id'] === null) {
+            $invalidProperties[] = "'root_external_id' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -871,6 +881,42 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['item_type'] = $item_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets root_external_id
+     *
+     * @return string
+     */
+    public function getRootExternalId()
+    {
+        return $this->container['root_external_id'];
+    }
+
+    /**
+     * Sets root_external_id
+     *
+     * @param string $root_external_id root_external_id
+     *
+     * @return self
+     */
+    public function setRootExternalId($root_external_id)
+    {
+
+        if (is_null($root_external_id)) {
+            array_push($this->openAPINullablesSetToNull, 'root_external_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('root_external_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['root_external_id'] = $root_external_id;
 
         return $this;
     }

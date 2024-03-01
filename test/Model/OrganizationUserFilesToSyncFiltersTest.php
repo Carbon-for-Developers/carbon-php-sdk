@@ -160,4 +160,13 @@ class OrganizationUserFilesToSyncFiltersTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "root_files_only"
+     */
+    public function testPropertyRootFilesOnly()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

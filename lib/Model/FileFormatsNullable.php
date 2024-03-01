@@ -88,6 +88,10 @@ class FileFormatsNullable
 
     public const WEB_SCRAPE = 'WEB_SCRAPE';
 
+    public const GITBOOK = 'GITBOOK';
+
+    public const SALESFORCE = 'SALESFORCE';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -148,6 +152,8 @@ class FileFormatsNullable
             self::ZENDESK,
             self::FRESHDESK,
             self::WEB_SCRAPE,
+            self::GITBOOK,
+            self::SALESFORCE,
             self::JPG,
             self::PNG,
             self::MP3,

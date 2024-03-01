@@ -162,6 +162,24 @@ class OrganizationResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "period_ends_at"
+     */
+    public function testPropertyPeriodEndsAt()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "cancel_at_period_end"
+     */
+    public function testPropertyCancelAtPeriodEnd()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

@@ -70,6 +70,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for connectGitbook
+     *
+     * Gitbook Connect.
+     *
+     */
+    public function testConnectGitbook()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createAwsIamUser
      *
      * S3 Auth.
@@ -130,12 +142,36 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for listGitbookSpaces
+     *
+     * Gitbook Spaces.
+     *
+     */
+    public function testListGitbookSpaces()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listLabels
      *
      * Gmail Labels.
      *
      */
     public function testListLabels()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listOutlookCategories
+     *
+     * Outlook Categories.
+     *
+     */
+    public function testListOutlookCategories()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -172,6 +208,18 @@ class IntegrationsApiTest extends TestCase
      *
      */
     public function testSyncFiles()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for syncGitbook
+     *
+     * Gitbook Sync.
+     *
+     */
+    public function testSyncGitbook()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

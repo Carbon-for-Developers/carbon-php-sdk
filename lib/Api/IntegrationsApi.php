@@ -64,6 +64,9 @@ class IntegrationsApi extends \Carbon\CustomApi
         'connectFreshdesk' => [
             'application/json',
         ],
+        'connectGitbook' => [
+            'application/json',
+        ],
         'createAwsIamUser' => [
             'application/json',
         ],
@@ -79,7 +82,13 @@ class IntegrationsApi extends \Carbon\CustomApi
         'listFolders' => [
             'application/json',
         ],
+        'listGitbookSpaces' => [
+            'application/json',
+        ],
         'listLabels' => [
+            'application/json',
+        ],
+        'listOutlookCategories' => [
             'application/json',
         ],
         'syncConfluence' => [
@@ -89,6 +98,9 @@ class IntegrationsApi extends \Carbon\CustomApi
             'application/json',
         ],
         'syncFiles' => [
+            'application/json',
+        ],
+        'syncGitbook' => [
             'application/json',
         ],
         'syncGmail' => [
@@ -574,6 +586,378 @@ class IntegrationsApi extends \Carbon\CustomApi
     }
 
     /**
+     * Operation connectGitbook
+     *
+     * Gitbook Connect
+     *
+     * @param  \Carbon\Model\GitbookConnectRequest $gitbook_connect_request gitbook_connect_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectGitbook'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError
+     */
+    public function connectGitbook(
+
+        $organization,
+        $access_token,
+        string $contentType = self::contentTypes['connectGitbook'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "organization", $organization);
+        $this->setRequestBodyProperty($_body, "access_token", $access_token);
+        $gitbook_connect_request = $_body;
+
+        list($response) = $this->connectGitbookWithHttpInfo($gitbook_connect_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation connectGitbookWithHttpInfo
+     *
+     * Gitbook Connect
+     *
+     * @param  \Carbon\Model\GitbookConnectRequest $gitbook_connect_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectGitbook'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function connectGitbookWithHttpInfo($gitbook_connect_request, string $contentType = self::contentTypes['connectGitbook'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->connectGitbookRequest($gitbook_connect_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->connectGitbookWithHttpInfo(
+                        $gitbook_connect_request,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Carbon\Model\GenericSuccessResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\GenericSuccessResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\GenericSuccessResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Carbon\Model\GenericSuccessResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\GenericSuccessResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation connectGitbookAsync
+     *
+     * Gitbook Connect
+     *
+     * @param  \Carbon\Model\GitbookConnectRequest $gitbook_connect_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectGitbook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectGitbookAsync(
+
+        $organization,
+        $access_token,
+        string $contentType = self::contentTypes['connectGitbook'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "organization", $organization);
+        $this->setRequestBodyProperty($_body, "access_token", $access_token);
+        $gitbook_connect_request = $_body;
+
+        return $this->connectGitbookAsyncWithHttpInfo($gitbook_connect_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation connectGitbookAsyncWithHttpInfo
+     *
+     * Gitbook Connect
+     *
+     * @param  \Carbon\Model\GitbookConnectRequest $gitbook_connect_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectGitbook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectGitbookAsyncWithHttpInfo($gitbook_connect_request, string $contentType = self::contentTypes['connectGitbook'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = '\Carbon\Model\GenericSuccessResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->connectGitbookRequest($gitbook_connect_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'connectGitbook'
+     *
+     * @param  \Carbon\Model\GitbookConnectRequest $gitbook_connect_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectGitbook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function connectGitbookRequest($gitbook_connect_request, string $contentType = self::contentTypes['connectGitbook'][0])
+    {
+
+        if ($gitbook_connect_request !== SENTINEL_VALUE) {
+            if (!($gitbook_connect_request instanceof \Carbon\Model\GitbookConnectRequest)) {
+                if (!is_array($gitbook_connect_request))
+                    throw new \InvalidArgumentException('"gitbook_connect_request" must be associative array or an instance of \Carbon\Model\GitbookConnectRequest IntegrationsApi.connectGitbook.');
+                else
+                    $gitbook_connect_request = new \Carbon\Model\GitbookConnectRequest($gitbook_connect_request);
+            }
+        }
+        // verify the required parameter 'gitbook_connect_request' is set
+        if ($gitbook_connect_request === SENTINEL_VALUE || (is_array($gitbook_connect_request) && count($gitbook_connect_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter gitbook_connect_request when calling connectGitbook'
+            );
+        }
+
+
+        $resourcePath = '/integrations/gitbook';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($gitbook_connect_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($gitbook_connect_request));
+            } else {
+                $httpBody = $gitbook_connect_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
      * Operation createAwsIamUser
      *
      * S3 Auth
@@ -973,6 +1357,9 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $salesforce_domain = SENTINEL_VALUE,
+        $sync_files_on_connection = false,
+        $set_page_as_boundary = false,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -991,6 +1378,9 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
+        $this->setRequestBodyProperty($_body, "salesforce_domain", $salesforce_domain);
+        $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
+        $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $o_auth_url_request = $_body;
 
         list($response) = $this->getOauthUrlWithHttpInfo($o_auth_url_request, $contentType);
@@ -1162,6 +1552,9 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $salesforce_domain = SENTINEL_VALUE,
+        $sync_files_on_connection = false,
+        $set_page_as_boundary = false,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -1180,6 +1573,9 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
+        $this->setRequestBodyProperty($_body, "salesforce_domain", $salesforce_domain);
+        $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
+        $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $o_auth_url_request = $_body;
 
         return $this->getOauthUrlAsyncWithHttpInfo($o_auth_url_request, $contentType)
@@ -2449,6 +2845,364 @@ class IntegrationsApi extends \Carbon\CustomApi
     }
 
     /**
+     * Operation listGitbookSpaces
+     *
+     * Gitbook Spaces
+     *
+     * @param  int $data_source_id data_source_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGitbookSpaces'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return object|\Carbon\Model\HTTPValidationError
+     */
+    public function listGitbookSpaces(
+        $data_source_id,
+
+        string $contentType = self::contentTypes['listGitbookSpaces'][0]
+    )
+    {
+
+        list($response) = $this->listGitbookSpacesWithHttpInfo($data_source_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listGitbookSpacesWithHttpInfo
+     *
+     * Gitbook Spaces
+     *
+     * @param  int $data_source_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGitbookSpaces'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listGitbookSpacesWithHttpInfo($data_source_id, string $contentType = self::contentTypes['listGitbookSpaces'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listGitbookSpacesRequest($data_source_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->listGitbookSpacesWithHttpInfo(
+                        $data_source_id,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('object' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listGitbookSpacesAsync
+     *
+     * Gitbook Spaces
+     *
+     * @param  int $data_source_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGitbookSpaces'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listGitbookSpacesAsync(
+        $data_source_id,
+
+        string $contentType = self::contentTypes['listGitbookSpaces'][0]
+    )
+    {
+
+        return $this->listGitbookSpacesAsyncWithHttpInfo($data_source_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listGitbookSpacesAsyncWithHttpInfo
+     *
+     * Gitbook Spaces
+     *
+     * @param  int $data_source_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGitbookSpaces'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listGitbookSpacesAsyncWithHttpInfo($data_source_id, string $contentType = self::contentTypes['listGitbookSpaces'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = 'object';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listGitbookSpacesRequest($data_source_id, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listGitbookSpaces'
+     *
+     * @param  int $data_source_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGitbookSpaces'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listGitbookSpacesRequest($data_source_id, string $contentType = self::contentTypes['listGitbookSpaces'][0])
+    {
+
+        // verify the required parameter 'data_source_id' is set
+        if ($data_source_id === SENTINEL_VALUE || (is_array($data_source_id) && count($data_source_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter data_source_id when calling listGitbookSpaces'
+            );
+        }
+
+
+        $resourcePath = '/integrations/gitbook/spaces';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($data_source_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $data_source_id,
+                'data_source_id', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
      * Operation listLabels
      *
      * Gmail Labels
@@ -2784,6 +3538,341 @@ class IntegrationsApi extends \Carbon\CustomApi
     }
 
     /**
+     * Operation listOutlookCategories
+     *
+     * Outlook Categories
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return object|\Carbon\Model\HTTPValidationError
+     */
+    public function listOutlookCategories(
+
+
+        string $contentType = self::contentTypes['listOutlookCategories'][0]
+    )
+    {
+
+        list($response) = $this->listOutlookCategoriesWithHttpInfo($contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listOutlookCategoriesWithHttpInfo
+     *
+     * Outlook Categories
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listOutlookCategoriesWithHttpInfo(string $contentType = self::contentTypes['listOutlookCategories'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listOutlookCategoriesRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->listOutlookCategoriesWithHttpInfo(
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('object' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listOutlookCategoriesAsync
+     *
+     * Outlook Categories
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listOutlookCategoriesAsync(
+
+
+        string $contentType = self::contentTypes['listOutlookCategories'][0]
+    )
+    {
+
+        return $this->listOutlookCategoriesAsyncWithHttpInfo($contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listOutlookCategoriesAsyncWithHttpInfo
+     *
+     * Outlook Categories
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listOutlookCategoriesAsyncWithHttpInfo(string $contentType = self::contentTypes['listOutlookCategories'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = 'object';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listOutlookCategoriesRequest($contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listOutlookCategories'
+     *
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listOutlookCategoriesRequest(string $contentType = self::contentTypes['listOutlookCategories'][0])
+    {
+
+
+
+        $resourcePath = '/integrations/outlook/user_categories';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
      * Operation syncConfluence
      *
      * Confluence Sync
@@ -2807,6 +3896,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $set_page_as_boundary = false,
         string $contentType = self::contentTypes['syncConfluence'][0]
     )
     {
@@ -2821,6 +3911,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
+        $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $sync_files_request = $_body;
 
         list($response) = $this->syncConfluenceWithHttpInfo($sync_files_request, $contentType);
@@ -2988,6 +4079,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $set_page_as_boundary = false,
         string $contentType = self::contentTypes['syncConfluence'][0]
     )
     {
@@ -3002,6 +4094,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
+        $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $sync_files_request = $_body;
 
         return $this->syncConfluenceAsyncWithHttpInfo($sync_files_request, $contentType)
@@ -3579,6 +4672,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $set_page_as_boundary = false,
         string $contentType = self::contentTypes['syncFiles'][0]
     )
     {
@@ -3593,6 +4687,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
+        $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $sync_files_request = $_body;
 
         list($response) = $this->syncFilesWithHttpInfo($sync_files_request, $contentType);
@@ -3760,6 +4855,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $set_page_as_boundary = false,
         string $contentType = self::contentTypes['syncFiles'][0]
     )
     {
@@ -3774,6 +4870,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
+        $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $sync_files_request = $_body;
 
         return $this->syncFilesAsyncWithHttpInfo($sync_files_request, $contentType)
@@ -3891,6 +4988,406 @@ class IntegrationsApi extends \Carbon\CustomApi
                 $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($sync_files_request));
             } else {
                 $httpBody = $sync_files_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation syncGitbook
+     *
+     * Gitbook Sync
+     *
+     * @param  \Carbon\Model\GitbookSyncRequest $gitbook_sync_request gitbook_sync_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitbook'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return object|\Carbon\Model\HTTPValidationError
+     */
+    public function syncGitbook(
+
+        $space_ids,
+        $data_source_id,
+        $tags = SENTINEL_VALUE,
+        $chunk_size = 1500,
+        $chunk_overlap = 20,
+        $skip_embedding_generation = false,
+        $embedding_model = SENTINEL_VALUE,
+        $generate_sparse_vectors = false,
+        $prepend_filename_to_chunks = false,
+        string $contentType = self::contentTypes['syncGitbook'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "tags", $tags);
+        $this->setRequestBodyProperty($_body, "space_ids", $space_ids);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
+        $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
+        $this->setRequestBodyProperty($_body, "skip_embedding_generation", $skip_embedding_generation);
+        $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
+        $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $gitbook_sync_request = $_body;
+
+        list($response) = $this->syncGitbookWithHttpInfo($gitbook_sync_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation syncGitbookWithHttpInfo
+     *
+     * Gitbook Sync
+     *
+     * @param  \Carbon\Model\GitbookSyncRequest $gitbook_sync_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitbook'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function syncGitbookWithHttpInfo($gitbook_sync_request, string $contentType = self::contentTypes['syncGitbook'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->syncGitbookRequest($gitbook_sync_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->syncGitbookWithHttpInfo(
+                        $gitbook_sync_request,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('object' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation syncGitbookAsync
+     *
+     * Gitbook Sync
+     *
+     * @param  \Carbon\Model\GitbookSyncRequest $gitbook_sync_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitbook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function syncGitbookAsync(
+
+        $space_ids,
+        $data_source_id,
+        $tags = SENTINEL_VALUE,
+        $chunk_size = 1500,
+        $chunk_overlap = 20,
+        $skip_embedding_generation = false,
+        $embedding_model = SENTINEL_VALUE,
+        $generate_sparse_vectors = false,
+        $prepend_filename_to_chunks = false,
+        string $contentType = self::contentTypes['syncGitbook'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "tags", $tags);
+        $this->setRequestBodyProperty($_body, "space_ids", $space_ids);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
+        $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
+        $this->setRequestBodyProperty($_body, "skip_embedding_generation", $skip_embedding_generation);
+        $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
+        $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $gitbook_sync_request = $_body;
+
+        return $this->syncGitbookAsyncWithHttpInfo($gitbook_sync_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation syncGitbookAsyncWithHttpInfo
+     *
+     * Gitbook Sync
+     *
+     * @param  \Carbon\Model\GitbookSyncRequest $gitbook_sync_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitbook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function syncGitbookAsyncWithHttpInfo($gitbook_sync_request, string $contentType = self::contentTypes['syncGitbook'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = 'object';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->syncGitbookRequest($gitbook_sync_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'syncGitbook'
+     *
+     * @param  \Carbon\Model\GitbookSyncRequest $gitbook_sync_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitbook'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function syncGitbookRequest($gitbook_sync_request, string $contentType = self::contentTypes['syncGitbook'][0])
+    {
+
+        if ($gitbook_sync_request !== SENTINEL_VALUE) {
+            if (!($gitbook_sync_request instanceof \Carbon\Model\GitbookSyncRequest)) {
+                if (!is_array($gitbook_sync_request))
+                    throw new \InvalidArgumentException('"gitbook_sync_request" must be associative array or an instance of \Carbon\Model\GitbookSyncRequest IntegrationsApi.syncGitbook.');
+                else
+                    $gitbook_sync_request = new \Carbon\Model\GitbookSyncRequest($gitbook_sync_request);
+            }
+        }
+        // verify the required parameter 'gitbook_sync_request' is set
+        if ($gitbook_sync_request === SENTINEL_VALUE || (is_array($gitbook_sync_request) && count($gitbook_sync_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter gitbook_sync_request when calling syncGitbook'
+            );
+        }
+
+
+        $resourcePath = '/integrations/gitbook/sync';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($gitbook_sync_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($gitbook_sync_request));
+            } else {
+                $httpBody = $gitbook_sync_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -5174,6 +6671,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $set_page_as_boundary = false,
         string $contentType = self::contentTypes['syncS3Files'][0]
     )
     {
@@ -5187,6 +6685,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
+        $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $s3_file_sync_input = $_body;
 
         list($response) = $this->syncS3FilesWithHttpInfo($s3_file_sync_input, $contentType);
@@ -5353,6 +6852,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $set_page_as_boundary = false,
         string $contentType = self::contentTypes['syncS3Files'][0]
     )
     {
@@ -5366,6 +6866,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
+        $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $s3_file_sync_input = $_body;
 
         return $this->syncS3FilesAsyncWithHttpInfo($s3_file_sync_input, $contentType)

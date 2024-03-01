@@ -367,6 +367,10 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         if ($this->container['k'] === null) {
             $invalidProperties[] = "'k' can't be null";
         }
+        if (($this->container['k'] < 1)) {
+            $invalidProperties[] = "invalid value for 'k', must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -507,6 +511,11 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function setK($k)
     {
+
+        if (($k < 1)) {
+            throw new \InvalidArgumentException('invalid value for $k when calling GetEmbeddingDocumentsBody., must be bigger than or equal to 1.');
+        }
+
 
         if (is_null($k)) {
             throw new \InvalidArgumentException('non-nullable k cannot be null');

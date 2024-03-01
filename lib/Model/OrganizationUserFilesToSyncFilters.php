@@ -58,7 +58,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'sync_statuses' => '\Carbon\Model\ExternalFileSyncStatuses[]',
         'parent_file_ids' => 'int[]',
         'organization_user_data_source_id' => 'int[]',
-        'embedding_generators' => '\Carbon\Model\EmbeddingGenerators[]'
+        'embedding_generators' => '\Carbon\Model\EmbeddingGenerators[]',
+        'root_files_only' => 'bool'
     ];
 
     /**
@@ -78,7 +79,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'sync_statuses' => null,
         'parent_file_ids' => null,
         'organization_user_data_source_id' => null,
-        'embedding_generators' => null
+        'embedding_generators' => null,
+        'root_files_only' => null
     ];
 
     /**
@@ -96,7 +98,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
 		'sync_statuses' => true,
 		'parent_file_ids' => true,
 		'organization_user_data_source_id' => true,
-		'embedding_generators' => true
+		'embedding_generators' => true,
+		'root_files_only' => true
     ];
 
     /**
@@ -194,7 +197,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'sync_statuses' => 'sync_statuses',
         'parent_file_ids' => 'parent_file_ids',
         'organization_user_data_source_id' => 'organization_user_data_source_id',
-        'embedding_generators' => 'embedding_generators'
+        'embedding_generators' => 'embedding_generators',
+        'root_files_only' => 'root_files_only'
     ];
 
     /**
@@ -212,7 +216,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'sync_statuses' => 'setSyncStatuses',
         'parent_file_ids' => 'setParentFileIds',
         'organization_user_data_source_id' => 'setOrganizationUserDataSourceId',
-        'embedding_generators' => 'setEmbeddingGenerators'
+        'embedding_generators' => 'setEmbeddingGenerators',
+        'root_files_only' => 'setRootFilesOnly'
     ];
 
     /**
@@ -230,7 +235,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'sync_statuses' => 'getSyncStatuses',
         'parent_file_ids' => 'getParentFileIds',
         'organization_user_data_source_id' => 'getOrganizationUserDataSourceId',
-        'embedding_generators' => 'getEmbeddingGenerators'
+        'embedding_generators' => 'getEmbeddingGenerators',
+        'root_files_only' => 'getRootFilesOnly'
     ];
 
     /**
@@ -300,6 +306,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         $this->setIfExists('parent_file_ids', $data ?? [], null);
         $this->setIfExists('organization_user_data_source_id', $data ?? [], null);
         $this->setIfExists('embedding_generators', $data ?? [], null);
+        $this->setIfExists('root_files_only', $data ?? [], null);
     }
 
     /**
@@ -700,6 +707,42 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         }
 
         $this->container['embedding_generators'] = $embedding_generators;
+
+        return $this;
+    }
+
+    /**
+     * Gets root_files_only
+     *
+     * @return bool|null
+     */
+    public function getRootFilesOnly()
+    {
+        return $this->container['root_files_only'];
+    }
+
+    /**
+     * Sets root_files_only
+     *
+     * @param bool|null $root_files_only root_files_only
+     *
+     * @return self
+     */
+    public function setRootFilesOnly($root_files_only)
+    {
+
+        if (is_null($root_files_only)) {
+            array_push($this->openAPINullablesSetToNull, 'root_files_only');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('root_files_only', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['root_files_only'] = $root_files_only;
 
         return $this;
     }

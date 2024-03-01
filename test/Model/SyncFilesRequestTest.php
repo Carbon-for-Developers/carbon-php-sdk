@@ -160,4 +160,13 @@ class SyncFilesRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "set_page_as_boundary"
+     */
+    public function testPropertySetPageAsBoundary()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

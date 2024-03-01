@@ -198,6 +198,15 @@ class ExternalSourceItemTest extends TestCase
     }
 
     /**
+     * Test attribute "root_external_id"
+     */
+    public function testPropertyRootExternalId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

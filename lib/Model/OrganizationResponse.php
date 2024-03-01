@@ -59,6 +59,8 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_characters' => 'object',
         'aggregate_num_tokens' => 'object',
         'aggregate_num_embeddings' => 'object',
+        'period_ends_at' => '\DateTime',
+        'cancel_at_period_end' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -81,6 +83,8 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_characters' => null,
         'aggregate_num_tokens' => null,
         'aggregate_num_embeddings' => null,
+        'period_ends_at' => 'date-time',
+        'cancel_at_period_end' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -101,6 +105,8 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
 		'aggregate_num_characters' => false,
 		'aggregate_num_tokens' => false,
 		'aggregate_num_embeddings' => false,
+		'period_ends_at' => true,
+		'cancel_at_period_end' => true,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -201,6 +207,8 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_characters' => 'aggregate_num_characters',
         'aggregate_num_tokens' => 'aggregate_num_tokens',
         'aggregate_num_embeddings' => 'aggregate_num_embeddings',
+        'period_ends_at' => 'period_ends_at',
+        'cancel_at_period_end' => 'cancel_at_period_end',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -221,6 +229,8 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_characters' => 'setAggregateNumCharacters',
         'aggregate_num_tokens' => 'setAggregateNumTokens',
         'aggregate_num_embeddings' => 'setAggregateNumEmbeddings',
+        'period_ends_at' => 'setPeriodEndsAt',
+        'cancel_at_period_end' => 'setCancelAtPeriodEnd',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -241,6 +251,8 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_characters' => 'getAggregateNumCharacters',
         'aggregate_num_tokens' => 'getAggregateNumTokens',
         'aggregate_num_embeddings' => 'getAggregateNumEmbeddings',
+        'period_ends_at' => 'getPeriodEndsAt',
+        'cancel_at_period_end' => 'getCancelAtPeriodEnd',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -312,6 +324,8 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('aggregate_num_characters', $data ?? [], null);
         $this->setIfExists('aggregate_num_tokens', $data ?? [], null);
         $this->setIfExists('aggregate_num_embeddings', $data ?? [], null);
+        $this->setIfExists('period_ends_at', $data ?? [], null);
+        $this->setIfExists('cancel_at_period_end', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -372,6 +386,12 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
         if ($this->container['aggregate_num_embeddings'] === null) {
             $invalidProperties[] = "'aggregate_num_embeddings' can't be null";
+        }
+        if ($this->container['period_ends_at'] === null) {
+            $invalidProperties[] = "'period_ends_at' can't be null";
+        }
+        if ($this->container['cancel_at_period_end'] === null) {
+            $invalidProperties[] = "'cancel_at_period_end' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -701,6 +721,78 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['aggregate_num_embeddings'] = $aggregate_num_embeddings;
+
+        return $this;
+    }
+
+    /**
+     * Gets period_ends_at
+     *
+     * @return \DateTime
+     */
+    public function getPeriodEndsAt()
+    {
+        return $this->container['period_ends_at'];
+    }
+
+    /**
+     * Sets period_ends_at
+     *
+     * @param \DateTime $period_ends_at period_ends_at
+     *
+     * @return self
+     */
+    public function setPeriodEndsAt($period_ends_at)
+    {
+
+        if (is_null($period_ends_at)) {
+            array_push($this->openAPINullablesSetToNull, 'period_ends_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('period_ends_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['period_ends_at'] = $period_ends_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets cancel_at_period_end
+     *
+     * @return bool
+     */
+    public function getCancelAtPeriodEnd()
+    {
+        return $this->container['cancel_at_period_end'];
+    }
+
+    /**
+     * Sets cancel_at_period_end
+     *
+     * @param bool $cancel_at_period_end cancel_at_period_end
+     *
+     * @return self
+     */
+    public function setCancelAtPeriodEnd($cancel_at_period_end)
+    {
+
+        if (is_null($cancel_at_period_end)) {
+            array_push($this->openAPINullablesSetToNull, 'cancel_at_period_end');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cancel_at_period_end', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['cancel_at_period_end'] = $cancel_at_period_end;
 
         return $this;
     }
