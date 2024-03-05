@@ -57,7 +57,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'skip_embedding_generation' => 'bool',
         'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
         'generate_sparse_vectors' => 'bool',
-        'prepend_filename_to_chunks' => 'bool'
+        'prepend_filename_to_chunks' => 'bool',
+        'sync_files_on_connection' => 'bool'
     ];
 
     /**
@@ -76,7 +77,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'skip_embedding_generation' => null,
         'embedding_model' => null,
         'generate_sparse_vectors' => null,
-        'prepend_filename_to_chunks' => null
+        'prepend_filename_to_chunks' => null,
+        'sync_files_on_connection' => null
     ];
 
     /**
@@ -93,7 +95,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
 		'skip_embedding_generation' => true,
 		'embedding_model' => true,
 		'generate_sparse_vectors' => true,
-		'prepend_filename_to_chunks' => true
+		'prepend_filename_to_chunks' => true,
+		'sync_files_on_connection' => true
     ];
 
     /**
@@ -190,7 +193,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'skip_embedding_generation' => 'skip_embedding_generation',
         'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
-        'prepend_filename_to_chunks' => 'prepend_filename_to_chunks'
+        'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
+        'sync_files_on_connection' => 'sync_files_on_connection'
     ];
 
     /**
@@ -207,7 +211,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'skip_embedding_generation' => 'setSkipEmbeddingGeneration',
         'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
-        'prepend_filename_to_chunks' => 'setPrependFilenameToChunks'
+        'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
+        'sync_files_on_connection' => 'setSyncFilesOnConnection'
     ];
 
     /**
@@ -224,7 +229,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'skip_embedding_generation' => 'getSkipEmbeddingGeneration',
         'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
-        'prepend_filename_to_chunks' => 'getPrependFilenameToChunks'
+        'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
+        'sync_files_on_connection' => 'getSyncFilesOnConnection'
     ];
 
     /**
@@ -293,6 +299,7 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
+        $this->setIfExists('sync_files_on_connection', $data ?? [], true);
     }
 
     /**
@@ -649,6 +656,42 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         }
 
         $this->container['prepend_filename_to_chunks'] = $prepend_filename_to_chunks;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_files_on_connection
+     *
+     * @return bool|null
+     */
+    public function getSyncFilesOnConnection()
+    {
+        return $this->container['sync_files_on_connection'];
+    }
+
+    /**
+     * Sets sync_files_on_connection
+     *
+     * @param bool|null $sync_files_on_connection sync_files_on_connection
+     *
+     * @return self
+     */
+    public function setSyncFilesOnConnection($sync_files_on_connection)
+    {
+
+        if (is_null($sync_files_on_connection)) {
+            array_push($this->openAPINullablesSetToNull, 'sync_files_on_connection');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sync_files_on_connection', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['sync_files_on_connection'] = $sync_files_on_connection;
 
         return $this;
     }

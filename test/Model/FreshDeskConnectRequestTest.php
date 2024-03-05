@@ -151,4 +151,13 @@ class FreshDeskConnectRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "sync_files_on_connection"
+     */
+    public function testPropertySyncFilesOnConnection()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

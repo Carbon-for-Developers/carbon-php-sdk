@@ -49,8 +49,16 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
+        'tags' => 'object',
         'organization' => 'string',
-        'access_token' => 'string'
+        'access_token' => 'string',
+        'chunk_size' => 'int',
+        'chunk_overlap' => 'int',
+        'skip_embedding_generation' => 'bool',
+        'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
+        'generate_sparse_vectors' => 'bool',
+        'prepend_filename_to_chunks' => 'bool',
+        'sync_files_on_connection' => 'bool'
     ];
 
     /**
@@ -61,8 +69,16 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'tags' => null,
         'organization' => null,
-        'access_token' => null
+        'access_token' => null,
+        'chunk_size' => null,
+        'chunk_overlap' => null,
+        'skip_embedding_generation' => null,
+        'embedding_model' => null,
+        'generate_sparse_vectors' => null,
+        'prepend_filename_to_chunks' => null,
+        'sync_files_on_connection' => null
     ];
 
     /**
@@ -71,8 +87,16 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'organization' => false,
-		'access_token' => false
+        'tags' => true,
+		'organization' => false,
+		'access_token' => false,
+		'chunk_size' => true,
+		'chunk_overlap' => true,
+		'skip_embedding_generation' => true,
+		'embedding_model' => false,
+		'generate_sparse_vectors' => true,
+		'prepend_filename_to_chunks' => true,
+		'sync_files_on_connection' => true
     ];
 
     /**
@@ -161,8 +185,16 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
+        'tags' => 'tags',
         'organization' => 'organization',
-        'access_token' => 'access_token'
+        'access_token' => 'access_token',
+        'chunk_size' => 'chunk_size',
+        'chunk_overlap' => 'chunk_overlap',
+        'skip_embedding_generation' => 'skip_embedding_generation',
+        'embedding_model' => 'embedding_model',
+        'generate_sparse_vectors' => 'generate_sparse_vectors',
+        'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
+        'sync_files_on_connection' => 'sync_files_on_connection'
     ];
 
     /**
@@ -171,8 +203,16 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
+        'tags' => 'setTags',
         'organization' => 'setOrganization',
-        'access_token' => 'setAccessToken'
+        'access_token' => 'setAccessToken',
+        'chunk_size' => 'setChunkSize',
+        'chunk_overlap' => 'setChunkOverlap',
+        'skip_embedding_generation' => 'setSkipEmbeddingGeneration',
+        'embedding_model' => 'setEmbeddingModel',
+        'generate_sparse_vectors' => 'setGenerateSparseVectors',
+        'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
+        'sync_files_on_connection' => 'setSyncFilesOnConnection'
     ];
 
     /**
@@ -181,8 +221,16 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
+        'tags' => 'getTags',
         'organization' => 'getOrganization',
-        'access_token' => 'getAccessToken'
+        'access_token' => 'getAccessToken',
+        'chunk_size' => 'getChunkSize',
+        'chunk_overlap' => 'getChunkOverlap',
+        'skip_embedding_generation' => 'getSkipEmbeddingGeneration',
+        'embedding_model' => 'getEmbeddingModel',
+        'generate_sparse_vectors' => 'getGenerateSparseVectors',
+        'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
+        'sync_files_on_connection' => 'getSyncFilesOnConnection'
     ];
 
     /**
@@ -242,8 +290,16 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('organization', $data ?? [], null);
         $this->setIfExists('access_token', $data ?? [], null);
+        $this->setIfExists('chunk_size', $data ?? [], 1500);
+        $this->setIfExists('chunk_overlap', $data ?? [], 20);
+        $this->setIfExists('skip_embedding_generation', $data ?? [], false);
+        $this->setIfExists('embedding_model', $data ?? [], null);
+        $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
+        $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
+        $this->setIfExists('sync_files_on_connection', $data ?? [], true);
     }
 
     /**
@@ -293,6 +349,42 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets tags
+     *
+     * @return object|null
+     */
+    public function getTags()
+    {
+        return $this->container['tags'];
+    }
+
+    /**
+     * Sets tags
+     *
+     * @param object|null $tags tags
+     *
+     * @return self
+     */
+    public function setTags($tags)
+    {
+
+        if (is_null($tags)) {
+            array_push($this->openAPINullablesSetToNull, 'tags');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tags', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['tags'] = $tags;
+
+        return $this;
+    }
 
     /**
      * Gets organization
@@ -348,6 +440,251 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         }
 
         $this->container['access_token'] = $access_token;
+
+        return $this;
+    }
+
+    /**
+     * Gets chunk_size
+     *
+     * @return int|null
+     */
+    public function getChunkSize()
+    {
+        return $this->container['chunk_size'];
+    }
+
+    /**
+     * Sets chunk_size
+     *
+     * @param int|null $chunk_size chunk_size
+     *
+     * @return self
+     */
+    public function setChunkSize($chunk_size)
+    {
+
+        if (is_null($chunk_size)) {
+            array_push($this->openAPINullablesSetToNull, 'chunk_size');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('chunk_size', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['chunk_size'] = $chunk_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets chunk_overlap
+     *
+     * @return int|null
+     */
+    public function getChunkOverlap()
+    {
+        return $this->container['chunk_overlap'];
+    }
+
+    /**
+     * Sets chunk_overlap
+     *
+     * @param int|null $chunk_overlap chunk_overlap
+     *
+     * @return self
+     */
+    public function setChunkOverlap($chunk_overlap)
+    {
+
+        if (is_null($chunk_overlap)) {
+            array_push($this->openAPINullablesSetToNull, 'chunk_overlap');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('chunk_overlap', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['chunk_overlap'] = $chunk_overlap;
+
+        return $this;
+    }
+
+    /**
+     * Gets skip_embedding_generation
+     *
+     * @return bool|null
+     */
+    public function getSkipEmbeddingGeneration()
+    {
+        return $this->container['skip_embedding_generation'];
+    }
+
+    /**
+     * Sets skip_embedding_generation
+     *
+     * @param bool|null $skip_embedding_generation skip_embedding_generation
+     *
+     * @return self
+     */
+    public function setSkipEmbeddingGeneration($skip_embedding_generation)
+    {
+
+        if (is_null($skip_embedding_generation)) {
+            array_push($this->openAPINullablesSetToNull, 'skip_embedding_generation');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('skip_embedding_generation', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['skip_embedding_generation'] = $skip_embedding_generation;
+
+        return $this;
+    }
+
+    /**
+     * Gets embedding_model
+     *
+     * @return \Carbon\Model\EmbeddingGenerators|null
+     */
+    public function getEmbeddingModel()
+    {
+        return $this->container['embedding_model'];
+    }
+
+    /**
+     * Sets embedding_model
+     *
+     * @param \Carbon\Model\EmbeddingGenerators|null $embedding_model embedding_model
+     *
+     * @return self
+     */
+    public function setEmbeddingModel($embedding_model)
+    {
+
+        if (is_null($embedding_model)) {
+            throw new \InvalidArgumentException('non-nullable embedding_model cannot be null');
+        }
+
+        $this->container['embedding_model'] = $embedding_model;
+
+        return $this;
+    }
+
+    /**
+     * Gets generate_sparse_vectors
+     *
+     * @return bool|null
+     */
+    public function getGenerateSparseVectors()
+    {
+        return $this->container['generate_sparse_vectors'];
+    }
+
+    /**
+     * Sets generate_sparse_vectors
+     *
+     * @param bool|null $generate_sparse_vectors generate_sparse_vectors
+     *
+     * @return self
+     */
+    public function setGenerateSparseVectors($generate_sparse_vectors)
+    {
+
+        if (is_null($generate_sparse_vectors)) {
+            array_push($this->openAPINullablesSetToNull, 'generate_sparse_vectors');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('generate_sparse_vectors', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['generate_sparse_vectors'] = $generate_sparse_vectors;
+
+        return $this;
+    }
+
+    /**
+     * Gets prepend_filename_to_chunks
+     *
+     * @return bool|null
+     */
+    public function getPrependFilenameToChunks()
+    {
+        return $this->container['prepend_filename_to_chunks'];
+    }
+
+    /**
+     * Sets prepend_filename_to_chunks
+     *
+     * @param bool|null $prepend_filename_to_chunks prepend_filename_to_chunks
+     *
+     * @return self
+     */
+    public function setPrependFilenameToChunks($prepend_filename_to_chunks)
+    {
+
+        if (is_null($prepend_filename_to_chunks)) {
+            array_push($this->openAPINullablesSetToNull, 'prepend_filename_to_chunks');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('prepend_filename_to_chunks', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['prepend_filename_to_chunks'] = $prepend_filename_to_chunks;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_files_on_connection
+     *
+     * @return bool|null
+     */
+    public function getSyncFilesOnConnection()
+    {
+        return $this->container['sync_files_on_connection'];
+    }
+
+    /**
+     * Sets sync_files_on_connection
+     *
+     * @param bool|null $sync_files_on_connection sync_files_on_connection
+     *
+     * @return self
+     */
+    public function setSyncFilesOnConnection($sync_files_on_connection)
+    {
+
+        if (is_null($sync_files_on_connection)) {
+            array_push($this->openAPINullablesSetToNull, 'sync_files_on_connection');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sync_files_on_connection', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['sync_files_on_connection'] = $sync_files_on_connection;
 
         return $this;
     }

@@ -208,6 +208,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
+        $sync_files_on_connection = true,
         string $contentType = self::contentTypes['connectFreshdesk'][0]
     )
     {
@@ -221,6 +222,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
         $fresh_desk_connect_request = $_body;
 
         list($response) = $this->connectFreshdeskWithHttpInfo($fresh_desk_connect_request, $contentType);
@@ -387,6 +389,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
+        $sync_files_on_connection = true,
         string $contentType = self::contentTypes['connectFreshdesk'][0]
     )
     {
@@ -400,6 +403,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
         $fresh_desk_connect_request = $_body;
 
         return $this->connectFreshdeskAsyncWithHttpInfo($fresh_desk_connect_request, $contentType)
@@ -601,12 +605,28 @@ class IntegrationsApi extends \Carbon\CustomApi
 
         $organization,
         $access_token,
+        $tags = SENTINEL_VALUE,
+        $chunk_size = 1500,
+        $chunk_overlap = 20,
+        $skip_embedding_generation = false,
+        $embedding_model = SENTINEL_VALUE,
+        $generate_sparse_vectors = false,
+        $prepend_filename_to_chunks = false,
+        $sync_files_on_connection = true,
         string $contentType = self::contentTypes['connectGitbook'][0]
     )
     {
         $_body = [];
+        $this->setRequestBodyProperty($_body, "tags", $tags);
         $this->setRequestBodyProperty($_body, "organization", $organization);
         $this->setRequestBodyProperty($_body, "access_token", $access_token);
+        $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
+        $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
+        $this->setRequestBodyProperty($_body, "skip_embedding_generation", $skip_embedding_generation);
+        $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
+        $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
         $gitbook_connect_request = $_body;
 
         list($response) = $this->connectGitbookWithHttpInfo($gitbook_connect_request, $contentType);
@@ -766,12 +786,28 @@ class IntegrationsApi extends \Carbon\CustomApi
 
         $organization,
         $access_token,
+        $tags = SENTINEL_VALUE,
+        $chunk_size = 1500,
+        $chunk_overlap = 20,
+        $skip_embedding_generation = false,
+        $embedding_model = SENTINEL_VALUE,
+        $generate_sparse_vectors = false,
+        $prepend_filename_to_chunks = false,
+        $sync_files_on_connection = true,
         string $contentType = self::contentTypes['connectGitbook'][0]
     )
     {
         $_body = [];
+        $this->setRequestBodyProperty($_body, "tags", $tags);
         $this->setRequestBodyProperty($_body, "organization", $organization);
         $this->setRequestBodyProperty($_body, "access_token", $access_token);
+        $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
+        $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
+        $this->setRequestBodyProperty($_body, "skip_embedding_generation", $skip_embedding_generation);
+        $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
+        $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
         $gitbook_connect_request = $_body;
 
         return $this->connectGitbookAsyncWithHttpInfo($gitbook_connect_request, $contentType)
@@ -1358,7 +1394,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $salesforce_domain = SENTINEL_VALUE,
-        $sync_files_on_connection = false,
+        $sync_files_on_connection = true,
         $set_page_as_boundary = false,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
@@ -1553,7 +1589,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $salesforce_domain = SENTINEL_VALUE,
-        $sync_files_on_connection = false,
+        $sync_files_on_connection = true,
         $set_page_as_boundary = false,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )

@@ -72,6 +72,15 @@ class GitbookConnectRequestTest extends TestCase
     }
 
     /**
+     * Test attribute "tags"
+     */
+    public function testPropertyTags()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "organization"
      */
     public function testPropertyOrganization()
@@ -84,6 +93,69 @@ class GitbookConnectRequestTest extends TestCase
      * Test attribute "access_token"
      */
     public function testPropertyAccessToken()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "chunk_size"
+     */
+    public function testPropertyChunkSize()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "chunk_overlap"
+     */
+    public function testPropertyChunkOverlap()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "skip_embedding_generation"
+     */
+    public function testPropertySkipEmbeddingGeneration()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "embedding_model"
+     */
+    public function testPropertyEmbeddingModel()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "generate_sparse_vectors"
+     */
+    public function testPropertyGenerateSparseVectors()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "prepend_filename_to_chunks"
+     */
+    public function testPropertyPrependFilenameToChunks()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "sync_files_on_connection"
+     */
+    public function testPropertySyncFilesOnConnection()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

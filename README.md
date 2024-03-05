@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.1-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.2-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -93,7 +93,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.1"
+    "konfig/carbon-php-sdk": "0.1.2"
   }
 }
 ```
@@ -1240,7 +1240,8 @@ $result = $carbon->integrations->connectFreshdesk(
     skip_embedding_generation: False, 
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
-    prepend_filename_to_chunks: False
+    prepend_filename_to_chunks: False, 
+    sync_files_on_connection: True
 );
 ```
 
@@ -1263,6 +1264,8 @@ $result = $carbon->integrations->connectFreshdesk(
 ##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
 
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1291,7 +1294,15 @@ need to specify the name of organization you will be syncing data from.
 ```php
 $result = $carbon->integrations->connectGitbook(
     organization: "string_example", 
-    access_token: "string_example"
+    access_token: "string_example", 
+    tags: [], 
+    chunk_size: 1500, 
+    chunk_overlap: 20, 
+    skip_embedding_generation: False, 
+    embedding_model: "OPENAI", 
+    generate_sparse_vectors: False, 
+    prepend_filename_to_chunks: False, 
+    sync_files_on_connection: True
 );
 ```
 
@@ -1300,6 +1311,22 @@ $result = $carbon->integrations->connectGitbook(
 ##### organization: `string`<a id="organization-string"></a>
 
 ##### access_token: `string`<a id="access_token-string"></a>
+
+##### tags: `object`<a id="tags-object"></a>
+
+##### chunk_size: `int`<a id="chunk_size-int"></a>
+
+##### chunk_overlap: `int`<a id="chunk_overlap-int"></a>
+
+##### skip_embedding_generation: `bool`<a id="skip_embedding_generation-bool"></a>
+
+##### embedding_model:<a id="embedding_model"></a>
+
+##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
+
+##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1379,7 +1406,7 @@ $result = $carbon->integrations->getOauthUrl(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     salesforce_domain: "string_example", 
-    sync_files_on_connection: False, 
+    sync_files_on_connection: True, 
     set_page_as_boundary: False
 );
 ```
