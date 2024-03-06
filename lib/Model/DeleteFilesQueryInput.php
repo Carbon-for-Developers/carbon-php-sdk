@@ -52,7 +52,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
         'file_ids' => 'int[]',
         'sync_statuses' => '\Carbon\Model\ExternalFileSyncStatuses[]',
         'delete_non_synced_only' => 'bool',
-        'send_webhook' => 'bool'
+        'send_webhook' => 'bool',
+        'delete_child_files' => 'bool'
     ];
 
     /**
@@ -66,7 +67,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
         'file_ids' => null,
         'sync_statuses' => null,
         'delete_non_synced_only' => null,
-        'send_webhook' => null
+        'send_webhook' => null,
+        'delete_child_files' => null
     ];
 
     /**
@@ -78,7 +80,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
         'file_ids' => true,
 		'sync_statuses' => true,
 		'delete_non_synced_only' => false,
-		'send_webhook' => false
+		'send_webhook' => false,
+		'delete_child_files' => false
     ];
 
     /**
@@ -170,7 +173,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
         'file_ids' => 'file_ids',
         'sync_statuses' => 'sync_statuses',
         'delete_non_synced_only' => 'delete_non_synced_only',
-        'send_webhook' => 'send_webhook'
+        'send_webhook' => 'send_webhook',
+        'delete_child_files' => 'delete_child_files'
     ];
 
     /**
@@ -182,7 +186,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
         'file_ids' => 'setFileIds',
         'sync_statuses' => 'setSyncStatuses',
         'delete_non_synced_only' => 'setDeleteNonSyncedOnly',
-        'send_webhook' => 'setSendWebhook'
+        'send_webhook' => 'setSendWebhook',
+        'delete_child_files' => 'setDeleteChildFiles'
     ];
 
     /**
@@ -194,7 +199,8 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
         'file_ids' => 'getFileIds',
         'sync_statuses' => 'getSyncStatuses',
         'delete_non_synced_only' => 'getDeleteNonSyncedOnly',
-        'send_webhook' => 'getSendWebhook'
+        'send_webhook' => 'getSendWebhook',
+        'delete_child_files' => 'getDeleteChildFiles'
     ];
 
     /**
@@ -258,6 +264,7 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('sync_statuses', $data ?? [], null);
         $this->setIfExists('delete_non_synced_only', $data ?? [], false);
         $this->setIfExists('send_webhook', $data ?? [], false);
+        $this->setIfExists('delete_child_files', $data ?? [], false);
     }
 
     /**
@@ -428,6 +435,35 @@ class DeleteFilesQueryInput implements ModelInterface, ArrayAccess, \JsonSeriali
         }
 
         $this->container['send_webhook'] = $send_webhook;
+
+        return $this;
+    }
+
+    /**
+     * Gets delete_child_files
+     *
+     * @return bool|null
+     */
+    public function getDeleteChildFiles()
+    {
+        return $this->container['delete_child_files'];
+    }
+
+    /**
+     * Sets delete_child_files
+     *
+     * @param bool|null $delete_child_files delete_child_files
+     *
+     * @return self
+     */
+    public function setDeleteChildFiles($delete_child_files)
+    {
+
+        if (is_null($delete_child_files)) {
+            throw new \InvalidArgumentException('non-nullable delete_child_files cannot be null');
+        }
+
+        $this->container['delete_child_files'] = $delete_child_files;
 
         return $this;
     }

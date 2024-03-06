@@ -690,7 +690,8 @@ $result = $carbon->files->deleteMany(
         "string_example"
     ], 
     delete_non_synced_only: False, 
-    send_webhook: False
+    send_webhook: False, 
+    delete_child_files: False
 );
 ```
 
@@ -703,6 +704,8 @@ $result = $carbon->files->deleteMany(
 ##### delete_non_synced_only: `bool`<a id="delete_non_synced_only-bool"></a>
 
 ##### send_webhook: `bool`<a id="send_webhook-bool"></a>
+
+##### delete_child_files: `bool`<a id="delete_child_files-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>

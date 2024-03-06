@@ -106,4 +106,13 @@ class DeleteFilesQueryInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "delete_child_files"
+     */
+    public function testPropertyDeleteChildFiles()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

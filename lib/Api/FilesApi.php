@@ -550,6 +550,7 @@ class FilesApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError
+     * @deprecated
      */
     public function delete(
         $file_id,
@@ -573,6 +574,7 @@ class FilesApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function deleteWithHttpInfo($file_id, string $contentType = self::contentTypes['delete'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -710,6 +712,7 @@ class FilesApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function deleteAsync(
         $file_id,
@@ -736,6 +739,7 @@ class FilesApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function deleteAsyncWithHttpInfo($file_id, string $contentType = self::contentTypes['delete'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -789,6 +793,7 @@ class FilesApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function deleteRequest($file_id, string $contentType = self::contentTypes['delete'][0])
     {
@@ -1284,6 +1289,7 @@ class FilesApi extends \Carbon\CustomApi
         $sync_statuses = SENTINEL_VALUE,
         $delete_non_synced_only = false,
         $send_webhook = false,
+        $delete_child_files = false,
         string $contentType = self::contentTypes['deleteMany'][0]
     )
     {
@@ -1292,6 +1298,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "sync_statuses", $sync_statuses);
         $this->setRequestBodyProperty($_body, "delete_non_synced_only", $delete_non_synced_only);
         $this->setRequestBodyProperty($_body, "send_webhook", $send_webhook);
+        $this->setRequestBodyProperty($_body, "delete_child_files", $delete_child_files);
         $delete_files_query_input = $_body;
 
         list($response) = $this->deleteManyWithHttpInfo($delete_files_query_input, $contentType);
@@ -1453,6 +1460,7 @@ class FilesApi extends \Carbon\CustomApi
         $sync_statuses = SENTINEL_VALUE,
         $delete_non_synced_only = false,
         $send_webhook = false,
+        $delete_child_files = false,
         string $contentType = self::contentTypes['deleteMany'][0]
     )
     {
@@ -1461,6 +1469,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "sync_statuses", $sync_statuses);
         $this->setRequestBodyProperty($_body, "delete_non_synced_only", $delete_non_synced_only);
         $this->setRequestBodyProperty($_body, "send_webhook", $send_webhook);
+        $this->setRequestBodyProperty($_body, "delete_child_files", $delete_child_files);
         $delete_files_query_input = $_body;
 
         return $this->deleteManyAsyncWithHttpInfo($delete_files_query_input, $contentType)
