@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.2-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.3-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -93,7 +93,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.2"
+    "konfig/carbon-php-sdk": "0.1.3"
   }
 }
 ```
@@ -1682,7 +1682,7 @@ $result = $carbon->integrations->syncConfluence(
 
 ##### data_source_id: `int`<a id="data_source_id-int"></a>
 
-##### ids: `string`[]<a id="ids-string"></a>
+##### ids: [`IdsProperty`](./lib/Model/IdsProperty.php)<a id="ids-idspropertylibmodelidspropertyphp"></a>
 
 ##### tags: `object`<a id="tags-object"></a>
 
@@ -1749,7 +1749,10 @@ $result = $carbon->integrations->syncDataSourceItems(
 
 ### `carbon.integrations.syncFiles`<a id="carbonintegrationssyncfiles"></a>
 
-Sync Files
+After listing files and folders via /integrations/items/sync and integrations/items/list, use the selected items' external ids 
+as the ids in this endpoint to sync them into Carbon. Sharepoint items take an additional parameter root_id, which identifies
+the drive the file or folder is in and is stored in root_external_id. That additional paramter is optional and excluding it will
+tell the sync to assume the item is stored in the default Documents drive.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1776,7 +1779,7 @@ $result = $carbon->integrations->syncFiles(
 
 ##### data_source_id: `int`<a id="data_source_id-int"></a>
 
-##### ids: `string`[]<a id="ids-string"></a>
+##### ids: [`IdsProperty`](./lib/Model/IdsProperty.php)<a id="ids-idspropertylibmodelidspropertyphp"></a>
 
 ##### tags: `object`<a id="tags-object"></a>
 

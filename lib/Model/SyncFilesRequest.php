@@ -51,7 +51,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'tags' => 'object',
         'data_source_id' => 'int',
-        'ids' => 'string[]',
+        'ids' => '\Carbon\Model\IdsProperty',
         'chunk_size' => 'int',
         'chunk_overlap' => 'int',
         'skip_embedding_generation' => 'bool',
@@ -425,7 +425,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets ids
      *
-     * @return string[]
+     * @return \Carbon\Model\IdsProperty
      */
     public function getIds()
     {
@@ -435,7 +435,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ids
      *
-     * @param string[] $ids ids
+     * @param \Carbon\Model\IdsProperty $ids ids
      *
      * @return self
      */
