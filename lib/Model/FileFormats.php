@@ -56,8 +56,6 @@ class FileFormats
 
     public const NOTION = 'NOTION';
 
-    public const GOOGLE_DRIVE = 'GOOGLE_DRIVE';
-
     public const GOOGLE_DOCS = 'GOOGLE_DOCS';
 
     public const GOOGLE_SHEETS = 'GOOGLE_SHEETS';
@@ -66,12 +64,6 @@ class FileFormats
 
     public const INTERCOM = 'INTERCOM';
 
-    public const DROPBOX = 'DROPBOX';
-
-    public const ONEDRIVE = 'ONEDRIVE';
-
-    public const SHAREPOINT = 'SHAREPOINT';
-
     public const CONFLUENCE = 'CONFLUENCE';
 
     public const RSS_FEED = 'RSS_FEED';
@@ -79,8 +71,6 @@ class FileFormats
     public const GMAIL = 'GMAIL';
 
     public const OUTLOOK = 'OUTLOOK';
-
-    public const BOX = 'BOX';
 
     public const ZENDESK = 'ZENDESK';
 
@@ -136,19 +126,14 @@ class FileFormats
             self::RTF,
             self::JSON,
             self::NOTION,
-            self::GOOGLE_DRIVE,
             self::GOOGLE_DOCS,
             self::GOOGLE_SHEETS,
             self::GOOGLE_SLIDES,
             self::INTERCOM,
-            self::DROPBOX,
-            self::ONEDRIVE,
-            self::SHAREPOINT,
             self::CONFLUENCE,
             self::RSS_FEED,
             self::GMAIL,
             self::OUTLOOK,
-            self::BOX,
             self::ZENDESK,
             self::FRESHDESK,
             self::WEB_SCRAPE,
