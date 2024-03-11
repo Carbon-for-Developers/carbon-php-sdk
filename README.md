@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.4-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.5-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -93,7 +93,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.4"
+    "konfig/carbon-php-sdk": "0.1.5"
   }
 }
 ```
@@ -528,14 +528,13 @@ $result = $carbon->embeddings->uploadChunksAndEmbeddings(
                 [
                     "chunk_number" => 1,
                     "chunk" => "chunk_example",
-                    "embedding" => [
-                        3.14
-                    ],
                 ]
             ],
         ]
     ], 
-    overwrite_existing: False
+    overwrite_existing: False, 
+    chunks_only: False, 
+    custom_credentials: []
 );
 ```
 
@@ -546,6 +545,10 @@ $result = $carbon->embeddings->uploadChunksAndEmbeddings(
 ##### chunks_and_embeddings: [`SingleChunksAndEmbeddingsUploadInput`](./lib/Model/SingleChunksAndEmbeddingsUploadInput.php)[]<a id="chunks_and_embeddings-singlechunksandembeddingsuploadinputlibmodelsinglechunksandembeddingsuploadinputphp"></a>
 
 ##### overwrite_existing: `bool`<a id="overwrite_existing-bool"></a>
+
+##### chunks_only: `bool`<a id="chunks_only-bool"></a>
+
+##### custom_credentials: `object`<a id="custom_credentials-object"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -949,7 +952,8 @@ Resync File
 $result = $carbon->files->resync(
     file_id: 1, 
     chunk_size: 1, 
-    chunk_overlap: 1
+    chunk_overlap: 1, 
+    force_embedding_generation: False
 );
 ```
 
@@ -960,6 +964,8 @@ $result = $carbon->files->resync(
 ##### chunk_size: `int`<a id="chunk_size-int"></a>
 
 ##### chunk_overlap: `int`<a id="chunk_overlap-int"></a>
+
+##### force_embedding_generation: `bool`<a id="force_embedding_generation-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1387,7 +1393,10 @@ $result = $carbon->integrations->createAwsIamUser(
 
 ### `carbon.integrations.getOauthUrl`<a id="carbonintegrationsgetoauthurl"></a>
 
-Get Oauth Url
+This endpoint can be used to generate the following URLs
+- An OAuth URL for OAuth based connectors
+- A file syncing URL which skips the OAuth flow if the user already has a valid access token and takes them to the
+success state.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1410,7 +1419,9 @@ $result = $carbon->integrations->getOauthUrl(
     max_items_per_chunk: 1, 
     salesforce_domain: "string_example", 
     sync_files_on_connection: True, 
-    set_page_as_boundary: False
+    set_page_as_boundary: False, 
+    data_source_id: 1, 
+    connecting_new_account: False
 );
 ```
 
@@ -1448,12 +1459,22 @@ $result = $carbon->integrations->getOauthUrl(
 
 ##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
 
+Used to specify whether Carbon should attempt to sync all your files automatically when authorization         is complete. This is only supported for a subset of connectors and will be ignored for the rest. Supported         connectors: Intercom, Zendesk, Gitbook, Confluence, Salesforce, Freshdesk
+
 ##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+Used to specify a data source to sync from if you have multiple connected. It can be skipped if          you only have one data source of that type connected or are connecting a new account.
+
+##### connecting_new_account: `bool`<a id="connecting_new_account-bool"></a>
+
+Used to connect a new data source. If not specified, we will attempt to create a sync URL         for an existing data source based on type and ID.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-**object**
+[**OuthURLResponse**](./lib/Model/OuthURLResponse.php)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1553,8 +1574,14 @@ both system folders like "inbox" and user created folders.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```php
-$result = $carbon->integrations->listFolders();
+$result = $carbon->integrations->listFolders(
+    data_source_id: 1
+);
 ```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1610,8 +1637,14 @@ will have the type "user" and Gmail's default labels will have the type "system"
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```php
-$result = $carbon->integrations->listLabels();
+$result = $carbon->integrations->listLabels(
+    data_source_id: 1
+);
 ```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1636,8 +1669,14 @@ support listing up to 250 categories.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```php
-$result = $carbon->integrations->listOutlookCategories();
+$result = $carbon->integrations->listOutlookCategories(
+    data_source_id: 1
+);
 ```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1939,7 +1978,8 @@ $result = $carbon->integrations->syncGmail(
     skip_embedding_generation: False, 
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
-    prepend_filename_to_chunks: False
+    prepend_filename_to_chunks: False, 
+    data_source_id: 1
 );
 ```
 
@@ -1960,6 +2000,8 @@ $result = $carbon->integrations->syncGmail(
 ##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
 
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2051,7 +2093,8 @@ $result = $carbon->integrations->syncOutlook(
     skip_embedding_generation: False, 
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
-    prepend_filename_to_chunks: False
+    prepend_filename_to_chunks: False, 
+    data_source_id: 1
 );
 ```
 
@@ -2074,6 +2117,8 @@ $result = $carbon->integrations->syncOutlook(
 ##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
 
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2164,7 +2209,8 @@ $result = $carbon->integrations->syncS3Files(
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
-    set_page_as_boundary: False
+    set_page_as_boundary: False, 
+    data_source_id: 1
 );
 ```
 
@@ -2189,6 +2235,8 @@ $result = $carbon->integrations->syncS3Files(
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
 
 ##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>

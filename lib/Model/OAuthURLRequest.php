@@ -65,7 +65,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'int',
         'salesforce_domain' => 'string',
         'sync_files_on_connection' => 'bool',
-        'set_page_as_boundary' => 'bool'
+        'set_page_as_boundary' => 'bool',
+        'data_source_id' => 'int',
+        'connecting_new_account' => 'bool'
     ];
 
     /**
@@ -92,7 +94,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => null,
         'salesforce_domain' => null,
         'sync_files_on_connection' => null,
-        'set_page_as_boundary' => null
+        'set_page_as_boundary' => null,
+        'data_source_id' => null,
+        'connecting_new_account' => null
     ];
 
     /**
@@ -117,7 +121,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'max_items_per_chunk' => true,
 		'salesforce_domain' => true,
 		'sync_files_on_connection' => true,
-		'set_page_as_boundary' => false
+		'set_page_as_boundary' => false,
+		'data_source_id' => true,
+		'connecting_new_account' => true
     ];
 
     /**
@@ -222,7 +228,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'max_items_per_chunk',
         'salesforce_domain' => 'salesforce_domain',
         'sync_files_on_connection' => 'sync_files_on_connection',
-        'set_page_as_boundary' => 'set_page_as_boundary'
+        'set_page_as_boundary' => 'set_page_as_boundary',
+        'data_source_id' => 'data_source_id',
+        'connecting_new_account' => 'connecting_new_account'
     ];
 
     /**
@@ -247,7 +255,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'setMaxItemsPerChunk',
         'salesforce_domain' => 'setSalesforceDomain',
         'sync_files_on_connection' => 'setSyncFilesOnConnection',
-        'set_page_as_boundary' => 'setSetPageAsBoundary'
+        'set_page_as_boundary' => 'setSetPageAsBoundary',
+        'data_source_id' => 'setDataSourceId',
+        'connecting_new_account' => 'setConnectingNewAccount'
     ];
 
     /**
@@ -272,7 +282,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'getMaxItemsPerChunk',
         'salesforce_domain' => 'getSalesforceDomain',
         'sync_files_on_connection' => 'getSyncFilesOnConnection',
-        'set_page_as_boundary' => 'getSetPageAsBoundary'
+        'set_page_as_boundary' => 'getSetPageAsBoundary',
+        'data_source_id' => 'getDataSourceId',
+        'connecting_new_account' => 'getConnectingNewAccount'
     ];
 
     /**
@@ -349,6 +361,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('salesforce_domain', $data ?? [], null);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
+        $this->setIfExists('data_source_id', $data ?? [], null);
+        $this->setIfExists('connecting_new_account', $data ?? [], false);
     }
 
     /**
@@ -942,7 +956,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets sync_files_on_connection
      *
-     * @param bool|null $sync_files_on_connection sync_files_on_connection
+     * @param bool|null $sync_files_on_connection Used to specify whether Carbon should attempt to sync all your files automatically when authorization         is complete. This is only supported for a subset of connectors and will be ignored for the rest. Supported         connectors: Intercom, Zendesk, Gitbook, Confluence, Salesforce, Freshdesk
      *
      * @return self
      */
@@ -990,6 +1004,78 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['set_page_as_boundary'] = $set_page_as_boundary;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_source_id
+     *
+     * @return int|null
+     */
+    public function getDataSourceId()
+    {
+        return $this->container['data_source_id'];
+    }
+
+    /**
+     * Sets data_source_id
+     *
+     * @param int|null $data_source_id Used to specify a data source to sync from if you have multiple connected. It can be skipped if          you only have one data source of that type connected or are connecting a new account.
+     *
+     * @return self
+     */
+    public function setDataSourceId($data_source_id)
+    {
+
+        if (is_null($data_source_id)) {
+            array_push($this->openAPINullablesSetToNull, 'data_source_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('data_source_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['data_source_id'] = $data_source_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets connecting_new_account
+     *
+     * @return bool|null
+     */
+    public function getConnectingNewAccount()
+    {
+        return $this->container['connecting_new_account'];
+    }
+
+    /**
+     * Sets connecting_new_account
+     *
+     * @param bool|null $connecting_new_account Used to connect a new data source. If not specified, we will attempt to create a sync URL         for an existing data source based on type and ID.
+     *
+     * @return self
+     */
+    public function setConnectingNewAccount($connecting_new_account)
+    {
+
+        if (is_null($connecting_new_account)) {
+            array_push($this->openAPINullablesSetToNull, 'connecting_new_account');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('connecting_new_account', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['connecting_new_account'] = $connecting_new_account;
 
         return $this;
     }

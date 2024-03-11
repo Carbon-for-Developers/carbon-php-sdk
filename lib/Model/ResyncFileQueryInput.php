@@ -51,7 +51,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $openAPITypes = [
         'file_id' => 'int',
         'chunk_size' => 'int',
-        'chunk_overlap' => 'int'
+        'chunk_overlap' => 'int',
+        'force_embedding_generation' => 'bool'
     ];
 
     /**
@@ -64,7 +65,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $openAPIFormats = [
         'file_id' => null,
         'chunk_size' => null,
-        'chunk_overlap' => null
+        'chunk_overlap' => null,
+        'force_embedding_generation' => null
     ];
 
     /**
@@ -75,7 +77,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static array $openAPINullables = [
         'file_id' => false,
 		'chunk_size' => true,
-		'chunk_overlap' => true
+		'chunk_overlap' => true,
+		'force_embedding_generation' => false
     ];
 
     /**
@@ -166,7 +169,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $attributeMap = [
         'file_id' => 'file_id',
         'chunk_size' => 'chunk_size',
-        'chunk_overlap' => 'chunk_overlap'
+        'chunk_overlap' => 'chunk_overlap',
+        'force_embedding_generation' => 'force_embedding_generation'
     ];
 
     /**
@@ -177,7 +181,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $setters = [
         'file_id' => 'setFileId',
         'chunk_size' => 'setChunkSize',
-        'chunk_overlap' => 'setChunkOverlap'
+        'chunk_overlap' => 'setChunkOverlap',
+        'force_embedding_generation' => 'setForceEmbeddingGeneration'
     ];
 
     /**
@@ -188,7 +193,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $getters = [
         'file_id' => 'getFileId',
         'chunk_size' => 'getChunkSize',
-        'chunk_overlap' => 'getChunkOverlap'
+        'chunk_overlap' => 'getChunkOverlap',
+        'force_embedding_generation' => 'getForceEmbeddingGeneration'
     ];
 
     /**
@@ -251,6 +257,7 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('file_id', $data ?? [], null);
         $this->setIfExists('chunk_size', $data ?? [], null);
         $this->setIfExists('chunk_overlap', $data ?? [], null);
+        $this->setIfExists('force_embedding_generation', $data ?? [], false);
     }
 
     /**
@@ -395,6 +402,35 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['chunk_overlap'] = $chunk_overlap;
+
+        return $this;
+    }
+
+    /**
+     * Gets force_embedding_generation
+     *
+     * @return bool|null
+     */
+    public function getForceEmbeddingGeneration()
+    {
+        return $this->container['force_embedding_generation'];
+    }
+
+    /**
+     * Sets force_embedding_generation
+     *
+     * @param bool|null $force_embedding_generation force_embedding_generation
+     *
+     * @return self
+     */
+    public function setForceEmbeddingGeneration($force_embedding_generation)
+    {
+
+        if (is_null($force_embedding_generation)) {
+            throw new \InvalidArgumentException('non-nullable force_embedding_generation cannot be null');
+        }
+
+        $this->container['force_embedding_generation'] = $force_embedding_generation;
 
         return $this;
     }

@@ -223,4 +223,22 @@ class OAuthURLRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "data_source_id"
+     */
+    public function testPropertyDataSourceId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "connecting_new_account"
+     */
+    public function testPropertyConnectingNewAccount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

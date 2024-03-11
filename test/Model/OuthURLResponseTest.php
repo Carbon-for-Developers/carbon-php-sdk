@@ -1,6 +1,6 @@
 <?php
 /**
- * ResyncFileQueryInputTest
+ * OuthURLResponseTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ResyncFileQueryInputTest Class Doc Comment
+ * OuthURLResponseTest Class Doc Comment
  *
  * @category    Class
- * @description ResyncFileQueryInput
+ * @description OuthURLResponse
  * @package     Carbon
  */
-class ResyncFileQueryInputTest extends TestCase
+class OuthURLResponseTest extends TestCase
 {
 
     /**
@@ -63,45 +63,18 @@ class ResyncFileQueryInputTest extends TestCase
     }
 
     /**
-     * Test "ResyncFileQueryInput"
+     * Test "OuthURLResponse"
      */
-    public function testResyncFileQueryInput()
+    public function testOuthURLResponse()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "file_id"
+     * Test attribute "oauth_url"
      */
-    public function testPropertyFileId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "chunk_size"
-     */
-    public function testPropertyChunkSize()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "chunk_overlap"
-     */
-    public function testPropertyChunkOverlap()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "force_embedding_generation"
-     */
-    public function testPropertyForceEmbeddingGeneration()
+    public function testPropertyOauthUrl()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

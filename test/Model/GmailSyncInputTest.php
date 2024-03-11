@@ -142,4 +142,13 @@ class GmailSyncInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "data_source_id"
+     */
+    public function testPropertyDataSourceId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

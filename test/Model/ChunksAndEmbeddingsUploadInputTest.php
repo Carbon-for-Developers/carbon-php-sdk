@@ -97,4 +97,22 @@ class ChunksAndEmbeddingsUploadInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "chunks_only"
+     */
+    public function testPropertyChunksOnly()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "custom_credentials"
+     */
+    public function testPropertyCustomCredentials()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

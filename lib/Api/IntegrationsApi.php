@@ -1375,7 +1375,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return object|\Carbon\Model\HTTPValidationError
+     * @return \Carbon\Model\OuthURLResponse|\Carbon\Model\HTTPValidationError
      */
     public function getOauthUrl(
 
@@ -1396,6 +1396,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $salesforce_domain = SENTINEL_VALUE,
         $sync_files_on_connection = true,
         $set_page_as_boundary = false,
+        $data_source_id = SENTINEL_VALUE,
+        $connecting_new_account = false,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -1417,6 +1419,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "salesforce_domain", $salesforce_domain);
         $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "connecting_new_account", $connecting_new_account);
         $o_auth_url_request = $_body;
 
         list($response) = $this->getOauthUrlWithHttpInfo($o_auth_url_request, $contentType);
@@ -1433,7 +1437,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Carbon\Model\OuthURLResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getOauthUrlWithHttpInfo($o_auth_url_request, string $contentType = self::contentTypes['getOauthUrl'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -1491,17 +1495,17 @@ class IntegrationsApi extends \Carbon\CustomApi
 
             switch($statusCode) {
                 case 200:
-                    if ('object' === '\SplFileObject') {
+                    if ('\Carbon\Model\OuthURLResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
+                        if ('\Carbon\Model\OuthURLResponse' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'object', []),
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\OuthURLResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1522,7 +1526,7 @@ class IntegrationsApi extends \Carbon\CustomApi
                     ];
             }
 
-            $returnType = 'object';
+            $returnType = '\Carbon\Model\OuthURLResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1543,7 +1547,7 @@ class IntegrationsApi extends \Carbon\CustomApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\Carbon\Model\OuthURLResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1591,6 +1595,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $salesforce_domain = SENTINEL_VALUE,
         $sync_files_on_connection = true,
         $set_page_as_boundary = false,
+        $data_source_id = SENTINEL_VALUE,
+        $connecting_new_account = false,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -1612,6 +1618,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "salesforce_domain", $salesforce_domain);
         $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "connecting_new_account", $connecting_new_account);
         $o_auth_url_request = $_body;
 
         return $this->getOauthUrlAsyncWithHttpInfo($o_auth_url_request, $contentType)
@@ -1635,7 +1643,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      */
     public function getOauthUrlAsyncWithHttpInfo($o_auth_url_request, string $contentType = self::contentTypes['getOauthUrl'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
-        $returnType = 'object';
+        $returnType = '\Carbon\Model\OuthURLResponse';
         ["request" => $request, "serializedBody" => $serializedBody] = $this->getOauthUrlRequest($o_auth_url_request, $contentType);
 
         // Customization hook
@@ -2550,6 +2558,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Folders
      *
+     * @param  int $data_source_id data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFolders'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
@@ -2557,13 +2566,13 @@ class IntegrationsApi extends \Carbon\CustomApi
      * @return object|\Carbon\Model\HTTPValidationError
      */
     public function listFolders(
-
+        $data_source_id = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['listFolders'][0]
     )
     {
 
-        list($response) = $this->listFoldersWithHttpInfo($contentType);
+        list($response) = $this->listFoldersWithHttpInfo($data_source_id, $contentType);
         return $response;
     }
 
@@ -2572,15 +2581,16 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Folders
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFolders'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listFoldersWithHttpInfo(string $contentType = self::contentTypes['listFolders'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function listFoldersWithHttpInfo($data_source_id = null, string $contentType = self::contentTypes['listFolders'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listFoldersRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listFoldersRequest($data_source_id, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -2596,6 +2606,7 @@ class IntegrationsApi extends \Carbon\CustomApi
                     $requestOptions->shouldRetryOAuth()
                 ) {
                     return $this->listFoldersWithHttpInfo(
+                        $data_source_id,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -2708,19 +2719,20 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Folders
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFolders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listFoldersAsync(
-
+        $data_source_id = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['listFolders'][0]
     )
     {
 
-        return $this->listFoldersAsyncWithHttpInfo($contentType)
+        return $this->listFoldersAsyncWithHttpInfo($data_source_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2733,15 +2745,16 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Folders
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFolders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listFoldersAsyncWithHttpInfo(string $contentType = self::contentTypes['listFolders'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function listFoldersAsyncWithHttpInfo($data_source_id = null, string $contentType = self::contentTypes['listFolders'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
         $returnType = 'object';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listFoldersRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listFoldersRequest($data_source_id, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -2785,12 +2798,13 @@ class IntegrationsApi extends \Carbon\CustomApi
     /**
      * Create request for operation 'listFolders'
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFolders'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listFoldersRequest(string $contentType = self::contentTypes['listFolders'][0])
+    public function listFoldersRequest($data_source_id = SENTINEL_VALUE, string $contentType = self::contentTypes['listFolders'][0])
     {
 
 
@@ -2802,6 +2816,17 @@ class IntegrationsApi extends \Carbon\CustomApi
         $httpBody = '';
         $multipart = false;
 
+        if ($data_source_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $data_source_id,
+                'data_source_id', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
 
 
 
@@ -3243,6 +3268,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gmail Labels
      *
+     * @param  int $data_source_id data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLabels'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
@@ -3250,13 +3276,13 @@ class IntegrationsApi extends \Carbon\CustomApi
      * @return object|\Carbon\Model\HTTPValidationError
      */
     public function listLabels(
-
+        $data_source_id = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['listLabels'][0]
     )
     {
 
-        list($response) = $this->listLabelsWithHttpInfo($contentType);
+        list($response) = $this->listLabelsWithHttpInfo($data_source_id, $contentType);
         return $response;
     }
 
@@ -3265,15 +3291,16 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gmail Labels
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLabels'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listLabelsWithHttpInfo(string $contentType = self::contentTypes['listLabels'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function listLabelsWithHttpInfo($data_source_id = null, string $contentType = self::contentTypes['listLabels'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listLabelsRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listLabelsRequest($data_source_id, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -3289,6 +3316,7 @@ class IntegrationsApi extends \Carbon\CustomApi
                     $requestOptions->shouldRetryOAuth()
                 ) {
                     return $this->listLabelsWithHttpInfo(
+                        $data_source_id,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -3401,19 +3429,20 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gmail Labels
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLabels'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listLabelsAsync(
-
+        $data_source_id = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['listLabels'][0]
     )
     {
 
-        return $this->listLabelsAsyncWithHttpInfo($contentType)
+        return $this->listLabelsAsyncWithHttpInfo($data_source_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3426,15 +3455,16 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gmail Labels
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLabels'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listLabelsAsyncWithHttpInfo(string $contentType = self::contentTypes['listLabels'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function listLabelsAsyncWithHttpInfo($data_source_id = null, string $contentType = self::contentTypes['listLabels'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
         $returnType = 'object';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listLabelsRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listLabelsRequest($data_source_id, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -3478,12 +3508,13 @@ class IntegrationsApi extends \Carbon\CustomApi
     /**
      * Create request for operation 'listLabels'
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLabels'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listLabelsRequest(string $contentType = self::contentTypes['listLabels'][0])
+    public function listLabelsRequest($data_source_id = SENTINEL_VALUE, string $contentType = self::contentTypes['listLabels'][0])
     {
 
 
@@ -3495,6 +3526,17 @@ class IntegrationsApi extends \Carbon\CustomApi
         $httpBody = '';
         $multipart = false;
 
+        if ($data_source_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $data_source_id,
+                'data_source_id', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
 
 
 
@@ -3578,6 +3620,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Categories
      *
+     * @param  int $data_source_id data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
@@ -3585,13 +3628,13 @@ class IntegrationsApi extends \Carbon\CustomApi
      * @return object|\Carbon\Model\HTTPValidationError
      */
     public function listOutlookCategories(
-
+        $data_source_id = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['listOutlookCategories'][0]
     )
     {
 
-        list($response) = $this->listOutlookCategoriesWithHttpInfo($contentType);
+        list($response) = $this->listOutlookCategoriesWithHttpInfo($data_source_id, $contentType);
         return $response;
     }
 
@@ -3600,15 +3643,16 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Categories
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listOutlookCategoriesWithHttpInfo(string $contentType = self::contentTypes['listOutlookCategories'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function listOutlookCategoriesWithHttpInfo($data_source_id = null, string $contentType = self::contentTypes['listOutlookCategories'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listOutlookCategoriesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listOutlookCategoriesRequest($data_source_id, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -3624,6 +3668,7 @@ class IntegrationsApi extends \Carbon\CustomApi
                     $requestOptions->shouldRetryOAuth()
                 ) {
                     return $this->listOutlookCategoriesWithHttpInfo(
+                        $data_source_id,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -3736,19 +3781,20 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Categories
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listOutlookCategoriesAsync(
-
+        $data_source_id = SENTINEL_VALUE,
 
         string $contentType = self::contentTypes['listOutlookCategories'][0]
     )
     {
 
-        return $this->listOutlookCategoriesAsyncWithHttpInfo($contentType)
+        return $this->listOutlookCategoriesAsyncWithHttpInfo($data_source_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3761,15 +3807,16 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Categories
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listOutlookCategoriesAsyncWithHttpInfo(string $contentType = self::contentTypes['listOutlookCategories'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function listOutlookCategoriesAsyncWithHttpInfo($data_source_id = null, string $contentType = self::contentTypes['listOutlookCategories'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
         $returnType = 'object';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listOutlookCategoriesRequest($contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listOutlookCategoriesRequest($data_source_id, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -3813,12 +3860,13 @@ class IntegrationsApi extends \Carbon\CustomApi
     /**
      * Create request for operation 'listOutlookCategories'
      *
+     * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listOutlookCategoriesRequest(string $contentType = self::contentTypes['listOutlookCategories'][0])
+    public function listOutlookCategoriesRequest($data_source_id = SENTINEL_VALUE, string $contentType = self::contentTypes['listOutlookCategories'][0])
     {
 
 
@@ -3830,6 +3878,17 @@ class IntegrationsApi extends \Carbon\CustomApi
         $httpBody = '';
         $multipart = false;
 
+        if ($data_source_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $data_source_id,
+                'data_source_id', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
 
 
 
@@ -5514,6 +5573,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
+        $data_source_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncGmail'][0]
     )
     {
@@ -5526,6 +5586,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $gmail_sync_input = $_body;
 
         list($response) = $this->syncGmailWithHttpInfo($gmail_sync_input, $contentType);
@@ -5691,6 +5752,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
+        $data_source_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncGmail'][0]
     )
     {
@@ -5703,6 +5765,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $gmail_sync_input = $_body;
 
         return $this->syncGmailAsyncWithHttpInfo($gmail_sync_input, $contentType)
@@ -5911,6 +5974,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
+        $data_source_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncOutlook'][0]
     )
     {
@@ -5924,6 +5988,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $outlook_sync_input = $_body;
 
         list($response) = $this->syncOutlookWithHttpInfo($outlook_sync_input, $contentType);
@@ -6090,6 +6155,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
+        $data_source_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncOutlook'][0]
     )
     {
@@ -6103,6 +6169,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $outlook_sync_input = $_body;
 
         return $this->syncOutlookAsyncWithHttpInfo($outlook_sync_input, $contentType)
@@ -6708,6 +6775,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
+        $data_source_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncS3Files'][0]
     )
     {
@@ -6722,6 +6790,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $s3_file_sync_input = $_body;
 
         list($response) = $this->syncS3FilesWithHttpInfo($s3_file_sync_input, $contentType);
@@ -6889,6 +6958,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
+        $data_source_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncS3Files'][0]
     )
     {
@@ -6903,6 +6973,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $s3_file_sync_input = $_body;
 
         return $this->syncS3FilesAsyncWithHttpInfo($s3_file_sync_input, $contentType)

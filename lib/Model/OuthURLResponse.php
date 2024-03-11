@@ -1,6 +1,6 @@
 <?php
 /**
- * ChunksAndEmbeddingsUploadInput
+ * OuthURLResponse
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * ChunksAndEmbeddingsUploadInput Class Doc Comment
+ * OuthURLResponse Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class OuthURLResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ChunksAndEmbeddingsUploadInput';
+    protected static $openAPIModelName = 'OuthURLResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,11 +49,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
-        'chunks_and_embeddings' => '\Carbon\Model\SingleChunksAndEmbeddingsUploadInput[]',
-        'overwrite_existing' => 'bool',
-        'chunks_only' => 'bool',
-        'custom_credentials' => 'object'
+        'oauth_url' => 'string'
     ];
 
     /**
@@ -64,11 +60,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'embedding_model' => null,
-        'chunks_and_embeddings' => null,
-        'overwrite_existing' => null,
-        'chunks_only' => null,
-        'custom_credentials' => null
+        'oauth_url' => null
     ];
 
     /**
@@ -77,11 +69,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'embedding_model' => false,
-		'chunks_and_embeddings' => false,
-		'overwrite_existing' => false,
-		'chunks_only' => false,
-		'custom_credentials' => false
+        'oauth_url' => false
     ];
 
     /**
@@ -170,11 +158,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
-        'embedding_model' => 'embedding_model',
-        'chunks_and_embeddings' => 'chunks_and_embeddings',
-        'overwrite_existing' => 'overwrite_existing',
-        'chunks_only' => 'chunks_only',
-        'custom_credentials' => 'custom_credentials'
+        'oauth_url' => 'oauth_url'
     ];
 
     /**
@@ -183,11 +167,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
-        'embedding_model' => 'setEmbeddingModel',
-        'chunks_and_embeddings' => 'setChunksAndEmbeddings',
-        'overwrite_existing' => 'setOverwriteExisting',
-        'chunks_only' => 'setChunksOnly',
-        'custom_credentials' => 'setCustomCredentials'
+        'oauth_url' => 'setOauthUrl'
     ];
 
     /**
@@ -196,11 +176,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
-        'embedding_model' => 'getEmbeddingModel',
-        'chunks_and_embeddings' => 'getChunksAndEmbeddings',
-        'overwrite_existing' => 'getOverwriteExisting',
-        'chunks_only' => 'getChunksOnly',
-        'custom_credentials' => 'getCustomCredentials'
+        'oauth_url' => 'getOauthUrl'
     ];
 
     /**
@@ -260,11 +236,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('embedding_model', $data ?? [], null);
-        $this->setIfExists('chunks_and_embeddings', $data ?? [], null);
-        $this->setIfExists('overwrite_existing', $data ?? [], false);
-        $this->setIfExists('chunks_only', $data ?? [], false);
-        $this->setIfExists('custom_credentials', $data ?? [], null);
+        $this->setIfExists('oauth_url', $data ?? [], null);
     }
 
     /**
@@ -294,11 +266,8 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
     {
         $invalidProperties = [];
 
-        if ($this->container['embedding_model'] === null) {
-            $invalidProperties[] = "'embedding_model' can't be null";
-        }
-        if ($this->container['chunks_and_embeddings'] === null) {
-            $invalidProperties[] = "'chunks_and_embeddings' can't be null";
+        if ($this->container['oauth_url'] === null) {
+            $invalidProperties[] = "'oauth_url' can't be null";
         }
         return $invalidProperties;
     }
@@ -316,146 +285,30 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
 
 
     /**
-     * Gets embedding_model
+     * Gets oauth_url
      *
-     * @return \Carbon\Model\EmbeddingGenerators
+     * @return string
      */
-    public function getEmbeddingModel()
+    public function getOauthUrl()
     {
-        return $this->container['embedding_model'];
+        return $this->container['oauth_url'];
     }
 
     /**
-     * Sets embedding_model
+     * Sets oauth_url
      *
-     * @param \Carbon\Model\EmbeddingGenerators $embedding_model embedding_model
+     * @param string $oauth_url oauth_url
      *
      * @return self
      */
-    public function setEmbeddingModel($embedding_model)
+    public function setOauthUrl($oauth_url)
     {
 
-        if (is_null($embedding_model)) {
-            throw new \InvalidArgumentException('non-nullable embedding_model cannot be null');
+        if (is_null($oauth_url)) {
+            throw new \InvalidArgumentException('non-nullable oauth_url cannot be null');
         }
 
-        $this->container['embedding_model'] = $embedding_model;
-
-        return $this;
-    }
-
-    /**
-     * Gets chunks_and_embeddings
-     *
-     * @return \Carbon\Model\SingleChunksAndEmbeddingsUploadInput[]
-     */
-    public function getChunksAndEmbeddings()
-    {
-        return $this->container['chunks_and_embeddings'];
-    }
-
-    /**
-     * Sets chunks_and_embeddings
-     *
-     * @param \Carbon\Model\SingleChunksAndEmbeddingsUploadInput[] $chunks_and_embeddings chunks_and_embeddings
-     *
-     * @return self
-     */
-    public function setChunksAndEmbeddings($chunks_and_embeddings)
-    {
-
-        if (is_null($chunks_and_embeddings)) {
-            throw new \InvalidArgumentException('non-nullable chunks_and_embeddings cannot be null');
-        }
-
-        $this->container['chunks_and_embeddings'] = $chunks_and_embeddings;
-
-        return $this;
-    }
-
-    /**
-     * Gets overwrite_existing
-     *
-     * @return bool|null
-     */
-    public function getOverwriteExisting()
-    {
-        return $this->container['overwrite_existing'];
-    }
-
-    /**
-     * Sets overwrite_existing
-     *
-     * @param bool|null $overwrite_existing overwrite_existing
-     *
-     * @return self
-     */
-    public function setOverwriteExisting($overwrite_existing)
-    {
-
-        if (is_null($overwrite_existing)) {
-            throw new \InvalidArgumentException('non-nullable overwrite_existing cannot be null');
-        }
-
-        $this->container['overwrite_existing'] = $overwrite_existing;
-
-        return $this;
-    }
-
-    /**
-     * Gets chunks_only
-     *
-     * @return bool|null
-     */
-    public function getChunksOnly()
-    {
-        return $this->container['chunks_only'];
-    }
-
-    /**
-     * Sets chunks_only
-     *
-     * @param bool|null $chunks_only chunks_only
-     *
-     * @return self
-     */
-    public function setChunksOnly($chunks_only)
-    {
-
-        if (is_null($chunks_only)) {
-            throw new \InvalidArgumentException('non-nullable chunks_only cannot be null');
-        }
-
-        $this->container['chunks_only'] = $chunks_only;
-
-        return $this;
-    }
-
-    /**
-     * Gets custom_credentials
-     *
-     * @return object|null
-     */
-    public function getCustomCredentials()
-    {
-        return $this->container['custom_credentials'];
-    }
-
-    /**
-     * Sets custom_credentials
-     *
-     * @param object|null $custom_credentials custom_credentials
-     *
-     * @return self
-     */
-    public function setCustomCredentials($custom_credentials)
-    {
-
-        if (is_null($custom_credentials)) {
-            throw new \InvalidArgumentException('non-nullable custom_credentials cannot be null');
-        }
-
-        $this->container['custom_credentials'] = $custom_credentials;
+        $this->container['oauth_url'] = $oauth_url;
 
         return $this;
     }

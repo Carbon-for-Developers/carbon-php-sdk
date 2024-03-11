@@ -961,6 +961,8 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $embedding_model,
         $chunks_and_embeddings,
         $overwrite_existing = false,
+        $chunks_only = false,
+        $custom_credentials = SENTINEL_VALUE,
         string $contentType = self::contentTypes['uploadChunksAndEmbeddings'][0]
     )
     {
@@ -968,6 +970,8 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "chunks_and_embeddings", $chunks_and_embeddings);
         $this->setRequestBodyProperty($_body, "overwrite_existing", $overwrite_existing);
+        $this->setRequestBodyProperty($_body, "chunks_only", $chunks_only);
+        $this->setRequestBodyProperty($_body, "custom_credentials", $custom_credentials);
         $chunks_and_embeddings_upload_input = $_body;
 
         list($response) = $this->uploadChunksAndEmbeddingsWithHttpInfo($chunks_and_embeddings_upload_input, $contentType);
@@ -1128,6 +1132,8 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $embedding_model,
         $chunks_and_embeddings,
         $overwrite_existing = false,
+        $chunks_only = false,
+        $custom_credentials = SENTINEL_VALUE,
         string $contentType = self::contentTypes['uploadChunksAndEmbeddings'][0]
     )
     {
@@ -1135,6 +1141,8 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "chunks_and_embeddings", $chunks_and_embeddings);
         $this->setRequestBodyProperty($_body, "overwrite_existing", $overwrite_existing);
+        $this->setRequestBodyProperty($_body, "chunks_only", $chunks_only);
+        $this->setRequestBodyProperty($_body, "custom_credentials", $custom_credentials);
         $chunks_and_embeddings_upload_input = $_body;
 
         return $this->uploadChunksAndEmbeddingsAsyncWithHttpInfo($chunks_and_embeddings_upload_input, $contentType)

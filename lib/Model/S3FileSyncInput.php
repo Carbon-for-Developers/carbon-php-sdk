@@ -58,7 +58,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
         'max_items_per_chunk' => 'int',
-        'set_page_as_boundary' => 'bool'
+        'set_page_as_boundary' => 'bool',
+        'data_source_id' => 'int'
     ];
 
     /**
@@ -78,7 +79,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
         'max_items_per_chunk' => null,
-        'set_page_as_boundary' => null
+        'set_page_as_boundary' => null,
+        'data_source_id' => null
     ];
 
     /**
@@ -96,7 +98,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
 		'max_items_per_chunk' => true,
-		'set_page_as_boundary' => false
+		'set_page_as_boundary' => false,
+		'data_source_id' => true
     ];
 
     /**
@@ -194,7 +197,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
         'max_items_per_chunk' => 'max_items_per_chunk',
-        'set_page_as_boundary' => 'set_page_as_boundary'
+        'set_page_as_boundary' => 'set_page_as_boundary',
+        'data_source_id' => 'data_source_id'
     ];
 
     /**
@@ -212,7 +216,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
         'max_items_per_chunk' => 'setMaxItemsPerChunk',
-        'set_page_as_boundary' => 'setSetPageAsBoundary'
+        'set_page_as_boundary' => 'setSetPageAsBoundary',
+        'data_source_id' => 'setDataSourceId'
     ];
 
     /**
@@ -230,7 +235,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
         'max_items_per_chunk' => 'getMaxItemsPerChunk',
-        'set_page_as_boundary' => 'getSetPageAsBoundary'
+        'set_page_as_boundary' => 'getSetPageAsBoundary',
+        'data_source_id' => 'getDataSourceId'
     ];
 
     /**
@@ -300,6 +306,7 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
+        $this->setIfExists('data_source_id', $data ?? [], null);
     }
 
     /**
@@ -682,6 +689,42 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['set_page_as_boundary'] = $set_page_as_boundary;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_source_id
+     *
+     * @return int|null
+     */
+    public function getDataSourceId()
+    {
+        return $this->container['data_source_id'];
+    }
+
+    /**
+     * Sets data_source_id
+     *
+     * @param int|null $data_source_id data_source_id
+     *
+     * @return self
+     */
+    public function setDataSourceId($data_source_id)
+    {
+
+        if (is_null($data_source_id)) {
+            array_push($this->openAPINullablesSetToNull, 'data_source_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('data_source_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['data_source_id'] = $data_source_id;
 
         return $this;
     }

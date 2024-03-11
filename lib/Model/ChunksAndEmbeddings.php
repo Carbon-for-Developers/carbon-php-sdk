@@ -75,7 +75,7 @@ class ChunksAndEmbeddings implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static array $openAPINullables = [
         'chunk_number' => true,
 		'chunk' => false,
-		'embedding' => false
+		'embedding' => true
     ];
 
     /**
@@ -286,9 +286,6 @@ class ChunksAndEmbeddings implements ModelInterface, ArrayAccess, \JsonSerializa
         if ($this->container['chunk'] === null) {
             $invalidProperties[] = "'chunk' can't be null";
         }
-        if ($this->container['embedding'] === null) {
-            $invalidProperties[] = "'embedding' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -372,7 +369,7 @@ class ChunksAndEmbeddings implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets embedding
      *
-     * @return float[]
+     * @return float[]|null
      */
     public function getEmbedding()
     {
@@ -382,7 +379,7 @@ class ChunksAndEmbeddings implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets embedding
      *
-     * @param float[] $embedding embedding
+     * @param float[]|null $embedding embedding
      *
      * @return self
      */
@@ -390,7 +387,14 @@ class ChunksAndEmbeddings implements ModelInterface, ArrayAccess, \JsonSerializa
     {
 
         if (is_null($embedding)) {
-            throw new \InvalidArgumentException('non-nullable embedding cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'embedding');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('embedding', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['embedding'] = $embedding;

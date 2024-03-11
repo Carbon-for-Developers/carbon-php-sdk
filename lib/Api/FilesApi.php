@@ -3181,6 +3181,7 @@ class FilesApi extends \Carbon\CustomApi
         $file_id,
         $chunk_size = SENTINEL_VALUE,
         $chunk_overlap = SENTINEL_VALUE,
+        $force_embedding_generation = false,
         string $contentType = self::contentTypes['resync'][0]
     )
     {
@@ -3188,6 +3189,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "file_id", $file_id);
         $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
         $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
+        $this->setRequestBodyProperty($_body, "force_embedding_generation", $force_embedding_generation);
         $resync_file_query_input = $_body;
 
         list($response) = $this->resyncWithHttpInfo($resync_file_query_input, $contentType);
@@ -3348,6 +3350,7 @@ class FilesApi extends \Carbon\CustomApi
         $file_id,
         $chunk_size = SENTINEL_VALUE,
         $chunk_overlap = SENTINEL_VALUE,
+        $force_embedding_generation = false,
         string $contentType = self::contentTypes['resync'][0]
     )
     {
@@ -3355,6 +3358,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "file_id", $file_id);
         $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
         $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
+        $this->setRequestBodyProperty($_body, "force_embedding_generation", $force_embedding_generation);
         $resync_file_query_input = $_body;
 
         return $this->resyncAsyncWithHttpInfo($resync_file_query_input, $contentType)
