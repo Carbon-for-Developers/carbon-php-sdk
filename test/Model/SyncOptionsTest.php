@@ -1,6 +1,6 @@
 <?php
 /**
- * OrganizationUserDataSourceAPITest
+ * SyncOptionsTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * OrganizationUserDataSourceAPITest Class Doc Comment
+ * SyncOptionsTest Class Doc Comment
  *
  * @category    Class
- * @description OrganizationUserDataSourceAPI
+ * @description SyncOptions
  * @package     Carbon
  */
-class OrganizationUserDataSourceAPITest extends TestCase
+class SyncOptionsTest extends TestCase
 {
 
     /**
@@ -63,135 +63,99 @@ class OrganizationUserDataSourceAPITest extends TestCase
     }
 
     /**
-     * Test "OrganizationUserDataSourceAPI"
+     * Test "SyncOptions"
      */
-    public function testOrganizationUserDataSourceAPI()
+    public function testSyncOptions()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "tags"
      */
-    public function testPropertyId()
+    public function testPropertyTags()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "data_source_external_id"
+     * Test attribute "chunk_size"
      */
-    public function testPropertyDataSourceExternalId()
+    public function testPropertyChunkSize()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "data_source_type"
+     * Test attribute "chunk_overlap"
      */
-    public function testPropertyDataSourceType()
+    public function testPropertyChunkOverlap()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "token"
+     * Test attribute "skip_embedding_generation"
      */
-    public function testPropertyToken()
+    public function testPropertySkipEmbeddingGeneration()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sync_status"
+     * Test attribute "embedding_model"
      */
-    public function testPropertySyncStatus()
+    public function testPropertyEmbeddingModel()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "source_items_synced_at"
+     * Test attribute "generate_sparse_vectors"
      */
-    public function testPropertySourceItemsSyncedAt()
+    public function testPropertyGenerateSparseVectors()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "organization_user_id"
+     * Test attribute "prepend_filename_to_chunks"
      */
-    public function testPropertyOrganizationUserId()
+    public function testPropertyPrependFilenameToChunks()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "organization_id"
+     * Test attribute "max_items_per_chunk"
      */
-    public function testPropertyOrganizationId()
+    public function testPropertyMaxItemsPerChunk()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "organization_supplied_user_id"
+     * Test attribute "sync_files_on_connection"
      */
-    public function testPropertyOrganizationSuppliedUserId()
+    public function testPropertySyncFilesOnConnection()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "revoked_access"
+     * Test attribute "set_page_as_boundary"
      */
-    public function testPropertyRevokedAccess()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "last_synced_at"
-     */
-    public function testPropertyLastSyncedAt()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "last_sync_action"
-     */
-    public function testPropertyLastSyncAction()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "created_at"
-     */
-    public function testPropertyCreatedAt()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "updated_at"
-     */
-    public function testPropertyUpdatedAt()
+    public function testPropertySetPageAsBoundary()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

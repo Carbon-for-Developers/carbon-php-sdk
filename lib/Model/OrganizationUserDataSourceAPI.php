@@ -52,6 +52,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'id' => 'int',
         'data_source_external_id' => 'string',
         'data_source_type' => '\Carbon\Model\DataSourceType',
+        'token' => 'object',
         'sync_status' => '\Carbon\Model\DataSourceSyncStatuses',
         'source_items_synced_at' => '\DateTime',
         'organization_user_id' => 'int',
@@ -75,6 +76,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'id' => null,
         'data_source_external_id' => null,
         'data_source_type' => null,
+        'token' => null,
         'sync_status' => null,
         'source_items_synced_at' => 'date-time',
         'organization_user_id' => null,
@@ -96,6 +98,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'id' => false,
 		'data_source_external_id' => true,
 		'data_source_type' => false,
+		'token' => true,
 		'sync_status' => false,
 		'source_items_synced_at' => true,
 		'organization_user_id' => false,
@@ -197,6 +200,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'id' => 'id',
         'data_source_external_id' => 'data_source_external_id',
         'data_source_type' => 'data_source_type',
+        'token' => 'token',
         'sync_status' => 'sync_status',
         'source_items_synced_at' => 'source_items_synced_at',
         'organization_user_id' => 'organization_user_id',
@@ -218,6 +222,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'id' => 'setId',
         'data_source_external_id' => 'setDataSourceExternalId',
         'data_source_type' => 'setDataSourceType',
+        'token' => 'setToken',
         'sync_status' => 'setSyncStatus',
         'source_items_synced_at' => 'setSourceItemsSyncedAt',
         'organization_user_id' => 'setOrganizationUserId',
@@ -239,6 +244,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'id' => 'getId',
         'data_source_external_id' => 'getDataSourceExternalId',
         'data_source_type' => 'getDataSourceType',
+        'token' => 'getToken',
         'sync_status' => 'getSyncStatus',
         'source_items_synced_at' => 'getSourceItemsSyncedAt',
         'organization_user_id' => 'getOrganizationUserId',
@@ -311,6 +317,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('data_source_external_id', $data ?? [], null);
         $this->setIfExists('data_source_type', $data ?? [], null);
+        $this->setIfExists('token', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
         $this->setIfExists('source_items_synced_at', $data ?? [], null);
         $this->setIfExists('organization_user_id', $data ?? [], null);
@@ -358,6 +365,9 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         }
         if ($this->container['data_source_type'] === null) {
             $invalidProperties[] = "'data_source_type' can't be null";
+        }
+        if ($this->container['token'] === null) {
+            $invalidProperties[] = "'token' can't be null";
         }
         if ($this->container['sync_status'] === null) {
             $invalidProperties[] = "'sync_status' can't be null";
@@ -494,6 +504,42 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         }
 
         $this->container['data_source_type'] = $data_source_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets token
+     *
+     * @return object
+     */
+    public function getToken()
+    {
+        return $this->container['token'];
+    }
+
+    /**
+     * Sets token
+     *
+     * @param object $token token
+     *
+     * @return self
+     */
+    public function setToken($token)
+    {
+
+        if (is_null($token)) {
+            array_push($this->openAPINullablesSetToNull, 'token');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('token', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['token'] = $token;
 
         return $this;
     }

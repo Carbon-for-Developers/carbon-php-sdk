@@ -1,6 +1,6 @@
 <?php
 /**
- * SitemapScrapeRequest
+ * SyncOptions
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * SitemapScrapeRequest Class Doc Comment
+ * SyncOptions Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SitemapScrapeRequest';
+    protected static $openAPIModelName = 'SyncOptions';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,19 +49,16 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'tags' => 'array<string,\Carbon\Model\Tags1>',
-        'url' => 'string',
-        'max_pages_to_scrape' => 'int',
+        'tags' => 'mixed',
         'chunk_size' => 'int',
         'chunk_overlap' => 'int',
         'skip_embedding_generation' => 'bool',
-        'enable_auto_sync' => 'bool',
+        'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
-        'html_tags_to_skip' => 'string[]',
-        'css_classes_to_skip' => 'string[]',
-        'css_selectors_to_skip' => 'string[]',
-        'embedding_model' => '\Carbon\Model\EmbeddingGenerators'
+        'max_items_per_chunk' => 'int',
+        'sync_files_on_connection' => 'bool',
+        'set_page_as_boundary' => 'bool'
     ];
 
     /**
@@ -73,18 +70,15 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static $openAPIFormats = [
         'tags' => null,
-        'url' => null,
-        'max_pages_to_scrape' => null,
         'chunk_size' => null,
         'chunk_overlap' => null,
         'skip_embedding_generation' => null,
-        'enable_auto_sync' => null,
+        'embedding_model' => null,
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
-        'html_tags_to_skip' => null,
-        'css_classes_to_skip' => null,
-        'css_selectors_to_skip' => null,
-        'embedding_model' => null
+        'max_items_per_chunk' => null,
+        'sync_files_on_connection' => null,
+        'set_page_as_boundary' => null
     ];
 
     /**
@@ -94,18 +88,15 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static array $openAPINullables = [
         'tags' => true,
-		'url' => false,
-		'max_pages_to_scrape' => true,
 		'chunk_size' => true,
 		'chunk_overlap' => true,
 		'skip_embedding_generation' => true,
-		'enable_auto_sync' => true,
+		'embedding_model' => true,
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
-		'html_tags_to_skip' => true,
-		'css_classes_to_skip' => true,
-		'css_selectors_to_skip' => true,
-		'embedding_model' => false
+		'max_items_per_chunk' => true,
+		'sync_files_on_connection' => true,
+		'set_page_as_boundary' => false
     ];
 
     /**
@@ -195,18 +186,15 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $attributeMap = [
         'tags' => 'tags',
-        'url' => 'url',
-        'max_pages_to_scrape' => 'max_pages_to_scrape',
         'chunk_size' => 'chunk_size',
         'chunk_overlap' => 'chunk_overlap',
         'skip_embedding_generation' => 'skip_embedding_generation',
-        'enable_auto_sync' => 'enable_auto_sync',
+        'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
-        'html_tags_to_skip' => 'html_tags_to_skip',
-        'css_classes_to_skip' => 'css_classes_to_skip',
-        'css_selectors_to_skip' => 'css_selectors_to_skip',
-        'embedding_model' => 'embedding_model'
+        'max_items_per_chunk' => 'max_items_per_chunk',
+        'sync_files_on_connection' => 'sync_files_on_connection',
+        'set_page_as_boundary' => 'set_page_as_boundary'
     ];
 
     /**
@@ -216,18 +204,15 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $setters = [
         'tags' => 'setTags',
-        'url' => 'setUrl',
-        'max_pages_to_scrape' => 'setMaxPagesToScrape',
         'chunk_size' => 'setChunkSize',
         'chunk_overlap' => 'setChunkOverlap',
         'skip_embedding_generation' => 'setSkipEmbeddingGeneration',
-        'enable_auto_sync' => 'setEnableAutoSync',
+        'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
-        'html_tags_to_skip' => 'setHtmlTagsToSkip',
-        'css_classes_to_skip' => 'setCssClassesToSkip',
-        'css_selectors_to_skip' => 'setCssSelectorsToSkip',
-        'embedding_model' => 'setEmbeddingModel'
+        'max_items_per_chunk' => 'setMaxItemsPerChunk',
+        'sync_files_on_connection' => 'setSyncFilesOnConnection',
+        'set_page_as_boundary' => 'setSetPageAsBoundary'
     ];
 
     /**
@@ -237,18 +222,15 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $getters = [
         'tags' => 'getTags',
-        'url' => 'getUrl',
-        'max_pages_to_scrape' => 'getMaxPagesToScrape',
         'chunk_size' => 'getChunkSize',
         'chunk_overlap' => 'getChunkOverlap',
         'skip_embedding_generation' => 'getSkipEmbeddingGeneration',
-        'enable_auto_sync' => 'getEnableAutoSync',
+        'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
-        'html_tags_to_skip' => 'getHtmlTagsToSkip',
-        'css_classes_to_skip' => 'getCssClassesToSkip',
-        'css_selectors_to_skip' => 'getCssSelectorsToSkip',
-        'embedding_model' => 'getEmbeddingModel'
+        'max_items_per_chunk' => 'getMaxItemsPerChunk',
+        'sync_files_on_connection' => 'getSyncFilesOnConnection',
+        'set_page_as_boundary' => 'getSetPageAsBoundary'
     ];
 
     /**
@@ -309,18 +291,15 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     public function __construct(array $data = null)
     {
         $this->setIfExists('tags', $data ?? [], null);
-        $this->setIfExists('url', $data ?? [], null);
-        $this->setIfExists('max_pages_to_scrape', $data ?? [], null);
         $this->setIfExists('chunk_size', $data ?? [], 1500);
         $this->setIfExists('chunk_overlap', $data ?? [], 20);
         $this->setIfExists('skip_embedding_generation', $data ?? [], false);
-        $this->setIfExists('enable_auto_sync', $data ?? [], false);
+        $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
-        $this->setIfExists('html_tags_to_skip', $data ?? [], null);
-        $this->setIfExists('css_classes_to_skip', $data ?? [], null);
-        $this->setIfExists('css_selectors_to_skip', $data ?? [], null);
-        $this->setIfExists('embedding_model', $data ?? [], null);
+        $this->setIfExists('max_items_per_chunk', $data ?? [], null);
+        $this->setIfExists('sync_files_on_connection', $data ?? [], true);
+        $this->setIfExists('set_page_as_boundary', $data ?? [], false);
     }
 
     /**
@@ -350,13 +329,6 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        if ($this->container['url'] === null) {
-            $invalidProperties[] = "'url' can't be null";
-        }
-        if (!is_null($this->container['max_pages_to_scrape']) && ($this->container['max_pages_to_scrape'] < 1)) {
-            $invalidProperties[] = "invalid value for 'max_pages_to_scrape', must be bigger than or equal to 1.";
-        }
-
         return $invalidProperties;
     }
 
@@ -375,7 +347,7 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets tags
      *
-     * @return array<string,\Carbon\Model\Tags1>|null
+     * @return mixed|null
      */
     public function getTags()
     {
@@ -385,7 +357,7 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets tags
      *
-     * @param array<string,\Carbon\Model\Tags1>|null $tags tags
+     * @param mixed|null $tags tags
      *
      * @return self
      */
@@ -404,76 +376,6 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['tags'] = $tags;
-
-        return $this;
-    }
-
-    /**
-     * Gets url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->container['url'];
-    }
-
-    /**
-     * Sets url
-     *
-     * @param string $url url
-     *
-     * @return self
-     */
-    public function setUrl($url)
-    {
-
-        if (is_null($url)) {
-            throw new \InvalidArgumentException('non-nullable url cannot be null');
-        }
-
-        $this->container['url'] = $url;
-
-        return $this;
-    }
-
-    /**
-     * Gets max_pages_to_scrape
-     *
-     * @return int|null
-     */
-    public function getMaxPagesToScrape()
-    {
-        return $this->container['max_pages_to_scrape'];
-    }
-
-    /**
-     * Sets max_pages_to_scrape
-     *
-     * @param int|null $max_pages_to_scrape max_pages_to_scrape
-     *
-     * @return self
-     */
-    public function setMaxPagesToScrape($max_pages_to_scrape)
-    {
-
-        if (!is_null($max_pages_to_scrape) && ($max_pages_to_scrape < 1)) {
-            throw new \InvalidArgumentException('invalid value for $max_pages_to_scrape when calling SitemapScrapeRequest., must be bigger than or equal to 1.');
-        }
-
-
-        if (is_null($max_pages_to_scrape)) {
-            array_push($this->openAPINullablesSetToNull, 'max_pages_to_scrape');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('max_pages_to_scrape', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['max_pages_to_scrape'] = $max_pages_to_scrape;
 
         return $this;
     }
@@ -587,37 +489,37 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     }
 
     /**
-     * Gets enable_auto_sync
+     * Gets embedding_model
      *
-     * @return bool|null
+     * @return \Carbon\Model\EmbeddingGeneratorsNullable|null
      */
-    public function getEnableAutoSync()
+    public function getEmbeddingModel()
     {
-        return $this->container['enable_auto_sync'];
+        return $this->container['embedding_model'];
     }
 
     /**
-     * Sets enable_auto_sync
+     * Sets embedding_model
      *
-     * @param bool|null $enable_auto_sync enable_auto_sync
+     * @param \Carbon\Model\EmbeddingGeneratorsNullable|null $embedding_model embedding_model
      *
      * @return self
      */
-    public function setEnableAutoSync($enable_auto_sync)
+    public function setEmbeddingModel($embedding_model)
     {
 
-        if (is_null($enable_auto_sync)) {
-            array_push($this->openAPINullablesSetToNull, 'enable_auto_sync');
+        if (is_null($embedding_model)) {
+            array_push($this->openAPINullablesSetToNull, 'embedding_model');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('enable_auto_sync', $nullablesSetToNull);
+            $index = array_search('embedding_model', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['enable_auto_sync'] = $enable_auto_sync;
+        $this->container['embedding_model'] = $embedding_model;
 
         return $this;
     }
@@ -695,138 +597,102 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     }
 
     /**
-     * Gets html_tags_to_skip
+     * Gets max_items_per_chunk
      *
-     * @return string[]|null
+     * @return int|null
      */
-    public function getHtmlTagsToSkip()
+    public function getMaxItemsPerChunk()
     {
-        return $this->container['html_tags_to_skip'];
+        return $this->container['max_items_per_chunk'];
     }
 
     /**
-     * Sets html_tags_to_skip
+     * Sets max_items_per_chunk
      *
-     * @param string[]|null $html_tags_to_skip html_tags_to_skip
+     * @param int|null $max_items_per_chunk max_items_per_chunk
      *
      * @return self
      */
-    public function setHtmlTagsToSkip($html_tags_to_skip)
+    public function setMaxItemsPerChunk($max_items_per_chunk)
     {
 
-        if (is_null($html_tags_to_skip)) {
-            array_push($this->openAPINullablesSetToNull, 'html_tags_to_skip');
+        if (is_null($max_items_per_chunk)) {
+            array_push($this->openAPINullablesSetToNull, 'max_items_per_chunk');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('html_tags_to_skip', $nullablesSetToNull);
+            $index = array_search('max_items_per_chunk', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['html_tags_to_skip'] = $html_tags_to_skip;
+        $this->container['max_items_per_chunk'] = $max_items_per_chunk;
 
         return $this;
     }
 
     /**
-     * Gets css_classes_to_skip
+     * Gets sync_files_on_connection
      *
-     * @return string[]|null
+     * @return bool|null
      */
-    public function getCssClassesToSkip()
+    public function getSyncFilesOnConnection()
     {
-        return $this->container['css_classes_to_skip'];
+        return $this->container['sync_files_on_connection'];
     }
 
     /**
-     * Sets css_classes_to_skip
+     * Sets sync_files_on_connection
      *
-     * @param string[]|null $css_classes_to_skip css_classes_to_skip
+     * @param bool|null $sync_files_on_connection Used to specify whether Carbon should attempt to sync all your files automatically when authorization         is complete. This is only supported for a subset of connectors and will be ignored for the rest. Supported         connectors: Intercom, Zendesk, Gitbook, Confluence, Salesforce, Freshdesk
      *
      * @return self
      */
-    public function setCssClassesToSkip($css_classes_to_skip)
+    public function setSyncFilesOnConnection($sync_files_on_connection)
     {
 
-        if (is_null($css_classes_to_skip)) {
-            array_push($this->openAPINullablesSetToNull, 'css_classes_to_skip');
+        if (is_null($sync_files_on_connection)) {
+            array_push($this->openAPINullablesSetToNull, 'sync_files_on_connection');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('css_classes_to_skip', $nullablesSetToNull);
+            $index = array_search('sync_files_on_connection', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['css_classes_to_skip'] = $css_classes_to_skip;
+        $this->container['sync_files_on_connection'] = $sync_files_on_connection;
 
         return $this;
     }
 
     /**
-     * Gets css_selectors_to_skip
+     * Gets set_page_as_boundary
      *
-     * @return string[]|null
+     * @return bool|null
      */
-    public function getCssSelectorsToSkip()
+    public function getSetPageAsBoundary()
     {
-        return $this->container['css_selectors_to_skip'];
+        return $this->container['set_page_as_boundary'];
     }
 
     /**
-     * Sets css_selectors_to_skip
+     * Sets set_page_as_boundary
      *
-     * @param string[]|null $css_selectors_to_skip css_selectors_to_skip
+     * @param bool|null $set_page_as_boundary set_page_as_boundary
      *
      * @return self
      */
-    public function setCssSelectorsToSkip($css_selectors_to_skip)
+    public function setSetPageAsBoundary($set_page_as_boundary)
     {
 
-        if (is_null($css_selectors_to_skip)) {
-            array_push($this->openAPINullablesSetToNull, 'css_selectors_to_skip');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('css_selectors_to_skip', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($set_page_as_boundary)) {
+            throw new \InvalidArgumentException('non-nullable set_page_as_boundary cannot be null');
         }
 
-        $this->container['css_selectors_to_skip'] = $css_selectors_to_skip;
-
-        return $this;
-    }
-
-    /**
-     * Gets embedding_model
-     *
-     * @return \Carbon\Model\EmbeddingGenerators|null
-     */
-    public function getEmbeddingModel()
-    {
-        return $this->container['embedding_model'];
-    }
-
-    /**
-     * Sets embedding_model
-     *
-     * @param \Carbon\Model\EmbeddingGenerators|null $embedding_model embedding_model
-     *
-     * @return self
-     */
-    public function setEmbeddingModel($embedding_model)
-    {
-
-        if (is_null($embedding_model)) {
-            throw new \InvalidArgumentException('non-nullable embedding_model cannot be null');
-        }
-
-        $this->container['embedding_model'] = $embedding_model;
+        $this->container['set_page_as_boundary'] = $set_page_as_boundary;
 
         return $this;
     }

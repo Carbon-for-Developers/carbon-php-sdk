@@ -360,6 +360,14 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['url'] === null) {
             $invalidProperties[] = "'url' can't be null";
         }
+        if (!is_null($this->container['recursion_depth']) && ($this->container['recursion_depth'] < 0)) {
+            $invalidProperties[] = "invalid value for 'recursion_depth', must be bigger than or equal to 0.";
+        }
+
+        if (!is_null($this->container['max_pages_to_scrape']) && ($this->container['max_pages_to_scrape'] < 1)) {
+            $invalidProperties[] = "invalid value for 'max_pages_to_scrape', must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -460,6 +468,11 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setRecursionDepth($recursion_depth)
     {
 
+        if (!is_null($recursion_depth) && ($recursion_depth < 0)) {
+            throw new \InvalidArgumentException('invalid value for $recursion_depth when calling WebscrapeRequest., must be bigger than or equal to 0.');
+        }
+
+
         if (is_null($recursion_depth)) {
             array_push($this->openAPINullablesSetToNull, 'recursion_depth');
         } else {
@@ -495,6 +508,11 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setMaxPagesToScrape($max_pages_to_scrape)
     {
+
+        if (!is_null($max_pages_to_scrape) && ($max_pages_to_scrape < 1)) {
+            throw new \InvalidArgumentException('invalid value for $max_pages_to_scrape when calling WebscrapeRequest., must be bigger than or equal to 1.');
+        }
+
 
         if (is_null($max_pages_to_scrape)) {
             array_push($this->openAPINullablesSetToNull, 'max_pages_to_scrape');

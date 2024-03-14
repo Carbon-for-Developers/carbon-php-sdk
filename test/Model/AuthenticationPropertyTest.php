@@ -1,6 +1,6 @@
 <?php
 /**
- * OrganizationUserDataSourceAPITest
+ * AuthenticationPropertyTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * OrganizationUserDataSourceAPITest Class Doc Comment
+ * AuthenticationPropertyTest Class Doc Comment
  *
  * @category    Class
- * @description OrganizationUserDataSourceAPI
+ * @description AuthenticationProperty
  * @package     Carbon
  */
-class OrganizationUserDataSourceAPITest extends TestCase
+class AuthenticationPropertyTest extends TestCase
 {
 
     /**
@@ -63,135 +63,144 @@ class OrganizationUserDataSourceAPITest extends TestCase
     }
 
     /**
-     * Test "OrganizationUserDataSourceAPI"
+     * Test "AuthenticationProperty"
      */
-    public function testOrganizationUserDataSourceAPI()
+    public function testAuthenticationProperty()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "source"
      */
-    public function testPropertyId()
+    public function testPropertySource()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "data_source_external_id"
+     * Test attribute "access_token"
      */
-    public function testPropertyDataSourceExternalId()
+    public function testPropertyAccessToken()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "data_source_type"
+     * Test attribute "refresh_token"
      */
-    public function testPropertyDataSourceType()
+    public function testPropertyRefreshToken()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "token"
+     * Test attribute "workspace_id"
      */
-    public function testPropertyToken()
+    public function testPropertyWorkspaceId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sync_status"
+     * Test attribute "tenant_name"
      */
-    public function testPropertySyncStatus()
+    public function testPropertyTenantName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "source_items_synced_at"
+     * Test attribute "site_name"
      */
-    public function testPropertySourceItemsSyncedAt()
+    public function testPropertySiteName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "organization_user_id"
+     * Test attribute "subdomain"
      */
-    public function testPropertyOrganizationUserId()
+    public function testPropertySubdomain()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "organization_id"
+     * Test attribute "access_token_secret"
      */
-    public function testPropertyOrganizationId()
+    public function testPropertyAccessTokenSecret()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "organization_supplied_user_id"
+     * Test attribute "username"
      */
-    public function testPropertyOrganizationSuppliedUserId()
+    public function testPropertyUsername()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "revoked_access"
+     * Test attribute "zotero_id"
      */
-    public function testPropertyRevokedAccess()
+    public function testPropertyZoteroId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "last_synced_at"
+     * Test attribute "organization_name"
      */
-    public function testPropertyLastSyncedAt()
+    public function testPropertyOrganizationName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "last_sync_action"
+     * Test attribute "domain"
      */
-    public function testPropertyLastSyncAction()
+    public function testPropertyDomain()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "created_at"
+     * Test attribute "api_key"
      */
-    public function testPropertyCreatedAt()
+    public function testPropertyApiKey()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "updated_at"
+     * Test attribute "access_key"
      */
-    public function testPropertyUpdatedAt()
+    public function testPropertyAccessKey()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "access_key_secret"
+     */
+    public function testPropertyAccessKeySecret()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

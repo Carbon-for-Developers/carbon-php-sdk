@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.5-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.6-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -40,6 +40,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.files.uploadFromUrl`](#carbonfilesuploadfromurl)
   * [`carbon.files.uploadText`](#carbonfilesuploadtext)
   * [`carbon.health.check`](#carbonhealthcheck)
+  * [`carbon.integrations.connectDataSource`](#carbonintegrationsconnectdatasource)
   * [`carbon.integrations.connectFreshdesk`](#carbonintegrationsconnectfreshdesk)
   * [`carbon.integrations.connectGitbook`](#carbonintegrationsconnectgitbook)
   * [`carbon.integrations.createAwsIamUser`](#carbonintegrationscreateawsiamuser)
@@ -93,7 +94,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.5"
+    "konfig/carbon-php-sdk": "0.1.6"
   }
 }
 ```
@@ -1222,6 +1223,52 @@ $result = $carbon->health->check();
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/health` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.integrations.connectDataSource`<a id="carbonintegrationsconnectdatasource"></a>
+
+Connect Data Source
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->connectDataSource(
+    authentication: [
+        "source" => "GOOGLE_DRIVE",
+        "access_token" => "access_token_example",
+    ], 
+    sync_options: [
+        "chunk_size" => 1500,
+        "chunk_overlap" => 20,
+        "skip_embedding_generation" => False,
+        "embedding_model" => "OPENAI",
+        "generate_sparse_vectors" => False,
+        "prepend_filename_to_chunks" => False,
+        "sync_files_on_connection" => True,
+        "set_page_as_boundary" => False,
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authentication: [`AuthenticationProperty`](./lib/Model/AuthenticationProperty.php)<a id="authentication-authenticationpropertylibmodelauthenticationpropertyphp"></a>
+
+##### sync_options: [`SyncOptions`](./lib/Model/SyncOptions.php)<a id="sync_options-syncoptionslibmodelsyncoptionsphp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**ConnectDataSourceResponse**](./lib/Model/ConnectDataSourceResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/connect` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

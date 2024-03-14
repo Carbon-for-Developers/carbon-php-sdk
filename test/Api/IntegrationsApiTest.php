@@ -58,6 +58,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for connectDataSource
+     *
+     * Connect Data Source.
+     *
+     */
+    public function testConnectDataSource()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for connectFreshdesk
      *
      * Freshdesk Connect.
