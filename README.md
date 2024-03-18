@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.6-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.7-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -94,7 +94,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.6"
+    "konfig/carbon-php-sdk": "0.1.7"
   }
 }
 ```
@@ -1066,7 +1066,7 @@ Whether or not to prepend the file's name to chunks.
 
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
 
-Number of objects per chunk. For json files only.
+Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1128,6 +1128,8 @@ $result = $carbon->files->uploadFromUrl(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
+
+Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1502,6 +1504,8 @@ $result = $carbon->integrations->getOauthUrl(
 
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
 
+Number of objects per chunk. For csv, tsv, xlsx, and json files only.
+
 ##### salesforce_domain: `string`<a id="salesforce_domain-string"></a>
 
 ##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
@@ -1789,6 +1793,8 @@ $result = $carbon->integrations->syncConfluence(
 
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
 
+Number of objects per chunk. For csv, tsv, xlsx, and json files only.
+
 ##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
 
 
@@ -1885,6 +1891,8 @@ $result = $carbon->integrations->syncFiles(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
+
+Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 ##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
 
@@ -2280,6 +2288,8 @@ $result = $carbon->integrations->syncS3Files(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
+
+Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 ##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
 

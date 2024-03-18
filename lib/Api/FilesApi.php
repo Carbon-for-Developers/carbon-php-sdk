@@ -3559,7 +3559,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
-     * @param  int $max_items_per_chunk Number of objects per chunk. For json files only. (optional)
+     * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
@@ -3604,7 +3604,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
-     * @param  int $max_items_per_chunk Number of objects per chunk. For json files only. (optional)
+     * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
@@ -3762,7 +3762,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
-     * @param  int $max_items_per_chunk Number of objects per chunk. For json files only. (optional)
+     * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3810,7 +3810,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
-     * @param  int $max_items_per_chunk Number of objects per chunk. For json files only. (optional)
+     * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3873,7 +3873,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
-     * @param  int $max_items_per_chunk Number of objects per chunk. For json files only. (optional)
+     * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

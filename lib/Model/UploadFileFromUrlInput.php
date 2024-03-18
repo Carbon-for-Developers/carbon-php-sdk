@@ -678,7 +678,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets max_items_per_chunk
      *
-     * @param int|null $max_items_per_chunk max_items_per_chunk
+     * @param int|null $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only.
      *
      * @return self
      */
