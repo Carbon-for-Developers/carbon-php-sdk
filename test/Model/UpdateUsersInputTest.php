@@ -1,6 +1,7 @@
 <?php
 /**
- * UsersApiTest
+ * UpdateUsersInputTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -19,18 +20,22 @@
  */
 
 
-namespace Carbon\Test\Api;
+namespace Carbon\Test\Model;
 
-use \Carbon\Configuration;
-use \Carbon\ApiException;
-use \Carbon\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class UsersApiTest extends TestCase
+/**
+ * UpdateUsersInputTest Class Doc Comment
+ *
+ * @category    Class
+ * @description UpdateUsersInput
+ * @package     Carbon
+ */
+class UpdateUsersInputTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -58,48 +63,27 @@ class UsersApiTest extends TestCase
     }
 
     /**
-     * Test case for delete
-     *
-     * Delete Users.
-     *
+     * Test "UpdateUsersInput"
      */
-    public function testDelete()
+    public function testUpdateUsersInput()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for get
-     *
-     * User Endpoint.
-     *
+     * Test attribute "customer_ids"
      */
-    public function testGet()
+    public function testPropertyCustomerIds()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for toggleUserFeatures
-     *
-     * Toggle User Features.
-     *
+     * Test attribute "auto_sync_enabled_sources"
      */
-    public function testToggleUserFeatures()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for updateUsers
-     *
-     * Update Users.
-     *
-     */
-    public function testUpdateUsers()
+    public function testPropertyAutoSyncEnabledSources()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

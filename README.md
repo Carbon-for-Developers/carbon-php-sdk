@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.7-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.8-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -63,6 +63,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.users.delete`](#carbonusersdelete)
   * [`carbon.users.get`](#carbonusersget)
   * [`carbon.users.toggleUserFeatures`](#carbonuserstoggleuserfeatures)
+  * [`carbon.users.updateUsers`](#carbonusersupdateusers)
   * [`carbon.utilities.fetchUrls`](#carbonutilitiesfetchurls)
   * [`carbon.utilities.fetchYoutubeTranscripts`](#carbonutilitiesfetchyoutubetranscripts)
   * [`carbon.utilities.processSitemap`](#carbonutilitiesprocesssitemap)
@@ -94,7 +95,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.7"
+    "konfig/carbon-php-sdk": "0.1.8"
   }
 }
 ```
@@ -1024,7 +1025,8 @@ $result = $carbon->files->upload(
     use_ocr: False, 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    max_items_per_chunk: 1
+    max_items_per_chunk: 1, 
+    parse_pdf_tables_with_ocr: False
 );
 ```
 
@@ -1068,6 +1070,10 @@ Whether or not to prepend the file's name to chunks.
 
 Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
+##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
+
+Whether to use rich table parsing when `use_ocr` is enabled.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1101,7 +1107,8 @@ $result = $carbon->files->uploadFromUrl(
     generate_sparse_vectors: False, 
     use_textract: False, 
     prepend_filename_to_chunks: False, 
-    max_items_per_chunk: 1
+    max_items_per_chunk: 1, 
+    parse_pdf_tables_with_ocr: False
 );
 ```
 
@@ -1130,6 +1137,8 @@ $result = $carbon->files->uploadFromUrl(
 ##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
 
 Number of objects per chunk. For csv, tsv, xlsx, and json files only.
+
+##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2426,6 +2435,46 @@ $result = $carbon->users->toggleUserFeatures(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/modify_user_configuration` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.users.updateUsers`<a id="carbonusersupdateusers"></a>
+
+Update Users
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->users->updateUsers(
+    customer_ids: [
+        "string_example"
+    ], 
+    auto_sync_enabled_sources: [
+        "string_example"
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### customer_ids: `string`[]<a id="customer_ids-string"></a>
+
+List of organization supplied user IDs
+
+##### auto_sync_enabled_sources: [`AutoSyncEnabledSourcesProperty`](./lib/Model/AutoSyncEnabledSourcesProperty.php)<a id="auto_sync_enabled_sources-autosyncenabledsourcespropertylibmodelautosyncenabledsourcespropertyphp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**GenericSuccessResponse**](./lib/Model/GenericSuccessResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/update_users` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

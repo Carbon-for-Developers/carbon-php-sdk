@@ -169,4 +169,13 @@ class UploadFileFromUrlInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "parse_pdf_tables_with_ocr"
+     */
+    public function testPropertyParsePdfTablesWithOcr()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

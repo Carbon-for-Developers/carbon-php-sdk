@@ -59,7 +59,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'generate_sparse_vectors' => 'bool',
         'use_textract' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
-        'max_items_per_chunk' => 'int'
+        'max_items_per_chunk' => 'int',
+        'parse_pdf_tables_with_ocr' => 'bool'
     ];
 
     /**
@@ -80,7 +81,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'generate_sparse_vectors' => null,
         'use_textract' => null,
         'prepend_filename_to_chunks' => null,
-        'max_items_per_chunk' => null
+        'max_items_per_chunk' => null,
+        'parse_pdf_tables_with_ocr' => null
     ];
 
     /**
@@ -99,7 +101,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
 		'generate_sparse_vectors' => false,
 		'use_textract' => false,
 		'prepend_filename_to_chunks' => false,
-		'max_items_per_chunk' => true
+		'max_items_per_chunk' => true,
+		'parse_pdf_tables_with_ocr' => false
     ];
 
     /**
@@ -198,7 +201,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'use_textract' => 'use_textract',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
-        'max_items_per_chunk' => 'max_items_per_chunk'
+        'max_items_per_chunk' => 'max_items_per_chunk',
+        'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr'
     ];
 
     /**
@@ -217,7 +221,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'use_textract' => 'setUseTextract',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
-        'max_items_per_chunk' => 'setMaxItemsPerChunk'
+        'max_items_per_chunk' => 'setMaxItemsPerChunk',
+        'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr'
     ];
 
     /**
@@ -236,7 +241,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'use_textract' => 'getUseTextract',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
-        'max_items_per_chunk' => 'getMaxItemsPerChunk'
+        'max_items_per_chunk' => 'getMaxItemsPerChunk',
+        'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr'
     ];
 
     /**
@@ -307,6 +313,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('use_textract', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
+        $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
     }
 
     /**
@@ -697,6 +704,35 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['max_items_per_chunk'] = $max_items_per_chunk;
+
+        return $this;
+    }
+
+    /**
+     * Gets parse_pdf_tables_with_ocr
+     *
+     * @return bool|null
+     */
+    public function getParsePdfTablesWithOcr()
+    {
+        return $this->container['parse_pdf_tables_with_ocr'];
+    }
+
+    /**
+     * Sets parse_pdf_tables_with_ocr
+     *
+     * @param bool|null $parse_pdf_tables_with_ocr parse_pdf_tables_with_ocr
+     *
+     * @return self
+     */
+    public function setParsePdfTablesWithOcr($parse_pdf_tables_with_ocr)
+    {
+
+        if (is_null($parse_pdf_tables_with_ocr)) {
+            throw new \InvalidArgumentException('non-nullable parse_pdf_tables_with_ocr cannot be null');
+        }
+
+        $this->container['parse_pdf_tables_with_ocr'] = $parse_pdf_tables_with_ocr;
 
         return $this;
     }

@@ -3560,6 +3560,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
      * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
+     * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
@@ -3578,6 +3579,7 @@ class FilesApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['upload'][0]
     )
     {
@@ -3585,7 +3587,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "file", $file);
         $body_create_upload_file_uploadfile_post = $_body;
 
-        list($response) = $this->uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $contentType);
+        list($response) = $this->uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $contentType);
         return $response;
     }
 
@@ -3605,15 +3607,16 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
      * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
+     * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carbon\Model\UserFile|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -3640,6 +3643,7 @@ class FilesApi extends \Carbon\CustomApi
                         $generate_sparse_vectors,
                         $prepend_filename_to_chunks,
                         $max_items_per_chunk,
+                        $parse_pdf_tables_with_ocr,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -3763,6 +3767,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
      * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
+     * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3780,6 +3785,7 @@ class FilesApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['upload'][0]
     )
     {
@@ -3787,7 +3793,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "file", $file);
         $body_create_upload_file_uploadfile_post = $_body;
 
-        return $this->uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $contentType)
+        return $this->uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3811,15 +3817,16 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
      * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
+     * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
         $returnType = '\Carbon\Model\UserFile';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -3874,12 +3881,13 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
      * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
+     * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size = SENTINEL_VALUE, $chunk_overlap = SENTINEL_VALUE, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = SENTINEL_VALUE, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = SENTINEL_VALUE, string $contentType = self::contentTypes['upload'][0])
+    public function uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size = SENTINEL_VALUE, $chunk_overlap = SENTINEL_VALUE, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = SENTINEL_VALUE, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = SENTINEL_VALUE, $parse_pdf_tables_with_ocr = false, string $contentType = self::contentTypes['upload'][0])
     {
 
         // verify the required parameter 'file' is set
@@ -4010,6 +4018,17 @@ class FilesApi extends \Carbon\CustomApi
                 false // required
             ) ?? []);
         }
+        if ($parse_pdf_tables_with_ocr !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $parse_pdf_tables_with_ocr,
+                'parse_pdf_tables_with_ocr', // param base name
+                'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
 
 
 
@@ -4132,6 +4151,7 @@ class FilesApi extends \Carbon\CustomApi
         $use_textract = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['uploadFromUrl'][0]
     )
     {
@@ -4147,6 +4167,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "use_textract", $use_textract);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
+        $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $upload_file_from_url_input = $_body;
 
         list($response) = $this->uploadFromUrlWithHttpInfo($upload_file_from_url_input, $contentType);
@@ -4315,6 +4336,7 @@ class FilesApi extends \Carbon\CustomApi
         $use_textract = false,
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['uploadFromUrl'][0]
     )
     {
@@ -4330,6 +4352,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "use_textract", $use_textract);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
+        $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $upload_file_from_url_input = $_body;
 
         return $this->uploadFromUrlAsyncWithHttpInfo($upload_file_from_url_input, $contentType)
