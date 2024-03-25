@@ -469,7 +469,7 @@ class UsersApi extends \Carbon\CustomApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
         if ($apiKey !== null) {
             $headers['authorization'] = $apiKey;
         }
@@ -827,7 +827,7 @@ class UsersApi extends \Carbon\CustomApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
         if ($apiKey !== null) {
             $headers['authorization'] = $apiKey;
         }
@@ -1561,7 +1561,7 @@ class UsersApi extends \Carbon\CustomApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
         if ($apiKey !== null) {
             $headers['authorization'] = $apiKey;
         }

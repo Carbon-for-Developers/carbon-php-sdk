@@ -143,7 +143,7 @@ class OrganizationsApi extends \Carbon\CustomApi
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Carbon\Model\OrganizationResponse|\Carbon\Model\HTTPValidationError
+     * @return \Carbon\Model\OrganizationResponse
      */
     public function get(
 
@@ -165,7 +165,7 @@ class OrganizationsApi extends \Carbon\CustomApi
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Carbon\Model\OrganizationResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Carbon\Model\OrganizationResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getWithHttpInfo(string $contentType = self::contentTypes['get'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -236,21 +236,6 @@ class OrganizationsApi extends \Carbon\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 422:
-                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Carbon\Model\OrganizationResponse';
@@ -275,14 +260,6 @@ class OrganizationsApi extends \Carbon\CustomApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Carbon\Model\OrganizationResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Carbon\Model\HTTPValidationError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -427,7 +404,7 @@ class OrganizationsApi extends \Carbon\CustomApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
         if ($apiKey !== null) {
             $headers['authorization'] = $apiKey;
         }
