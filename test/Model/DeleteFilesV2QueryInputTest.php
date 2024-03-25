@@ -1,6 +1,6 @@
 <?php
 /**
- * SourcePropertyTest
+ * DeleteFilesV2QueryInputTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SourcePropertyTest Class Doc Comment
+ * DeleteFilesV2QueryInputTest Class Doc Comment
  *
  * @category    Class
- * @description The source of the file. If a list is provided, the query will return files from any of the sources in the list.
+ * @description DeleteFilesV2QueryInput
  * @package     Carbon
  */
-class SourcePropertyTest extends TestCase
+class DeleteFilesV2QueryInputTest extends TestCase
 {
 
     /**
@@ -63,9 +63,27 @@ class SourcePropertyTest extends TestCase
     }
 
     /**
-     * Test "SourceProperty"
+     * Test "DeleteFilesV2QueryInput"
      */
-    public function testSourceProperty()
+    public function testDeleteFilesV2QueryInput()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "filters"
+     */
+    public function testPropertyFilters()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "send_webhook"
+     */
+    public function testPropertySendWebhook()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

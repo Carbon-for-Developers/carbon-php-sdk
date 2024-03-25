@@ -59,7 +59,9 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'parent_file_ids' => 'int[]',
         'organization_user_data_source_id' => 'int[]',
         'embedding_generators' => '\Carbon\Model\EmbeddingGenerators[]',
-        'root_files_only' => 'bool'
+        'root_files_only' => 'bool',
+        'include_all_children' => 'bool',
+        'non_synced_only' => 'bool'
     ];
 
     /**
@@ -80,7 +82,9 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'parent_file_ids' => null,
         'organization_user_data_source_id' => null,
         'embedding_generators' => null,
-        'root_files_only' => null
+        'root_files_only' => null,
+        'include_all_children' => null,
+        'non_synced_only' => null
     ];
 
     /**
@@ -99,7 +103,9 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
 		'parent_file_ids' => true,
 		'organization_user_data_source_id' => true,
 		'embedding_generators' => true,
-		'root_files_only' => true
+		'root_files_only' => true,
+		'include_all_children' => false,
+		'non_synced_only' => false
     ];
 
     /**
@@ -198,7 +204,9 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'parent_file_ids' => 'parent_file_ids',
         'organization_user_data_source_id' => 'organization_user_data_source_id',
         'embedding_generators' => 'embedding_generators',
-        'root_files_only' => 'root_files_only'
+        'root_files_only' => 'root_files_only',
+        'include_all_children' => 'include_all_children',
+        'non_synced_only' => 'non_synced_only'
     ];
 
     /**
@@ -217,7 +225,9 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'parent_file_ids' => 'setParentFileIds',
         'organization_user_data_source_id' => 'setOrganizationUserDataSourceId',
         'embedding_generators' => 'setEmbeddingGenerators',
-        'root_files_only' => 'setRootFilesOnly'
+        'root_files_only' => 'setRootFilesOnly',
+        'include_all_children' => 'setIncludeAllChildren',
+        'non_synced_only' => 'setNonSyncedOnly'
     ];
 
     /**
@@ -236,7 +246,9 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'parent_file_ids' => 'getParentFileIds',
         'organization_user_data_source_id' => 'getOrganizationUserDataSourceId',
         'embedding_generators' => 'getEmbeddingGenerators',
-        'root_files_only' => 'getRootFilesOnly'
+        'root_files_only' => 'getRootFilesOnly',
+        'include_all_children' => 'getIncludeAllChildren',
+        'non_synced_only' => 'getNonSyncedOnly'
     ];
 
     /**
@@ -307,6 +319,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         $this->setIfExists('organization_user_data_source_id', $data ?? [], null);
         $this->setIfExists('embedding_generators', $data ?? [], null);
         $this->setIfExists('root_files_only', $data ?? [], null);
+        $this->setIfExists('include_all_children', $data ?? [], false);
+        $this->setIfExists('non_synced_only', $data ?? [], false);
     }
 
     /**
@@ -355,6 +369,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
      * Gets tags
      *
      * @return array<string,\Carbon\Model\Tags1>|null
+     * @deprecated
      */
     public function getTags()
     {
@@ -367,6 +382,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
      * @param array<string,\Carbon\Model\Tags1>|null $tags tags
      *
      * @return self
+     * @deprecated
      */
     public function setTags($tags)
     {
@@ -436,7 +452,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name The name of the file. The query will return files with names that contain this string.
      *
      * @return self
      */
@@ -472,7 +488,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     /**
      * Sets tags_v2
      *
-     * @param object|null $tags_v2 tags_v2
+     * @param object|null $tags_v2 Tags to filter by. Supports logical AND and OR operations. Input should be like below:         {             \"OR\": [                 {                 \"key\": \"subject\",                 \"value\": \"holy-bible\",                 \"negate\": false                 },                 {                     \"key\": \"person-of-interest\",                     \"value\": \"jesus christ\",                     \"negate\": false                 },                 {                     \"key\": \"genre\",                     \"value\": \"fiction\",                     \"negate\": true                 }                 {                     \"AND\": [                         {                             \"key\": \"subject\",                             \"value\": \"tao-te-ching\",                             \"negate\": true                         },                         {                             \"key\": \"author\",                             \"value\": \"lao-tzu\",                             \"negate\": false                         }                     ]                 }             ]         }         For a single filter, the filter block can be placed within either an \"AND\" or \"OR\" block.
      *
      * @return self
      */
@@ -508,7 +524,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     /**
      * Sets ids
      *
-     * @param int[]|null $ids ids
+     * @param int[]|null $ids The IDs of the files. The query will return files with these IDs.
      *
      * @return self
      */
@@ -544,7 +560,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     /**
      * Sets external_file_ids
      *
-     * @param string[]|null $external_file_ids external_file_ids
+     * @param string[]|null $external_file_ids The external file IDs of the files. The query will return files with these external file IDs.
      *
      * @return self
      */
@@ -580,7 +596,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     /**
      * Sets sync_statuses
      *
-     * @param \Carbon\Model\ExternalFileSyncStatuses[]|null $sync_statuses sync_statuses
+     * @param \Carbon\Model\ExternalFileSyncStatuses[]|null $sync_statuses The sync statuses of the files. The query will return files with these sync statuses.
      *
      * @return self
      */
@@ -607,6 +623,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
      * Gets parent_file_ids
      *
      * @return int[]|null
+     * @deprecated
      */
     public function getParentFileIds()
     {
@@ -619,6 +636,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
      * @param int[]|null $parent_file_ids parent_file_ids
      *
      * @return self
+     * @deprecated
      */
     public function setParentFileIds($parent_file_ids)
     {
@@ -652,7 +670,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     /**
      * Sets organization_user_data_source_id
      *
-     * @param int[]|null $organization_user_data_source_id organization_user_data_source_id
+     * @param int[]|null $organization_user_data_source_id The organization user data source IDs of the files. The query will return files with these organization user data source IDs.
      *
      * @return self
      */
@@ -688,7 +706,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     /**
      * Sets embedding_generators
      *
-     * @param \Carbon\Model\EmbeddingGenerators[]|null $embedding_generators embedding_generators
+     * @param \Carbon\Model\EmbeddingGenerators[]|null $embedding_generators The embedding generators of the files. The query will return files with these embedding generators.
      *
      * @return self
      */
@@ -724,7 +742,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     /**
      * Sets root_files_only
      *
-     * @param bool|null $root_files_only root_files_only
+     * @param bool|null $root_files_only If true, the query will return only root files. Cannot be true if parent_file_ids or include_all_children is specified.
      *
      * @return self
      */
@@ -743,6 +761,64 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         }
 
         $this->container['root_files_only'] = $root_files_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets include_all_children
+     *
+     * @return bool|null
+     */
+    public function getIncludeAllChildren()
+    {
+        return $this->container['include_all_children'];
+    }
+
+    /**
+     * Sets include_all_children
+     *
+     * @param bool|null $include_all_children If true, the query will return all descendents of the specified parent_file_ids.
+     *
+     * @return self
+     */
+    public function setIncludeAllChildren($include_all_children)
+    {
+
+        if (is_null($include_all_children)) {
+            throw new \InvalidArgumentException('non-nullable include_all_children cannot be null');
+        }
+
+        $this->container['include_all_children'] = $include_all_children;
+
+        return $this;
+    }
+
+    /**
+     * Gets non_synced_only
+     *
+     * @return bool|null
+     */
+    public function getNonSyncedOnly()
+    {
+        return $this->container['non_synced_only'];
+    }
+
+    /**
+     * Sets non_synced_only
+     *
+     * @param bool|null $non_synced_only If true, the query will return only files that have not been synced yet.
+     *
+     * @return self
+     */
+    public function setNonSyncedOnly($non_synced_only)
+    {
+
+        if (is_null($non_synced_only)) {
+            throw new \InvalidArgumentException('non-nullable non_synced_only cannot be null');
+        }
+
+        $this->container['non_synced_only'] = $non_synced_only;
 
         return $this;
     }

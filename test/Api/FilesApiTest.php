@@ -106,6 +106,18 @@ class FilesApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteV2
+     *
+     * Delete Files V2 Endpoint.
+     *
+     */
+    public function testDeleteV2()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getParsedFile
      *
      * Parsed File.

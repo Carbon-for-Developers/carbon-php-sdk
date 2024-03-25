@@ -44,6 +44,8 @@ class OrganizationUserFilesToSyncOrderByTypes
 
     public const FILE_SIZE = 'file_size';
 
+    public const ID = 'id';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -55,7 +57,8 @@ class OrganizationUserFilesToSyncOrderByTypes
             self::UPDATED_AT,
             self::NAME,
             self::LAST_SYNC,
-            self::FILE_SIZE
+            self::FILE_SIZE,
+            self::ID
         ];
     }
 }

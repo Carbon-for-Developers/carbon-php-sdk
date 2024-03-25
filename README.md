@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.9-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.10-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -31,6 +31,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.files.delete`](#carbonfilesdelete)
   * [`carbon.files.deleteFileTags`](#carbonfilesdeletefiletags)
   * [`carbon.files.deleteMany`](#carbonfilesdeletemany)
+  * [`carbon.files.deleteV2`](#carbonfilesdeletev2)
   * [`carbon.files.getParsedFile`](#carbonfilesgetparsedfile)
   * [`carbon.files.getRawFile`](#carbonfilesgetrawfile)
   * [`carbon.files.queryUserFiles`](#carbonfilesqueryuserfiles)
@@ -95,7 +96,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.9"
+    "konfig/carbon-php-sdk": "0.1.10"
   }
 }
 ```
@@ -726,6 +727,43 @@ $result = $carbon->files->deleteMany(
 ---
 
 
+### `carbon.files.deleteV2`<a id="carbonfilesdeletev2"></a>
+
+Delete Files V2 Endpoint
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->files->deleteV2(
+    filters: [
+        "include_all_children" => False,
+        "non_synced_only" => False,
+    ], 
+    send_webhook: False
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### filters: [`OrganizationUserFilesToSyncFilters`](./lib/Model/OrganizationUserFilesToSyncFilters.php)<a id="filters-organizationuserfilestosyncfilterslibmodelorganizationuserfilestosyncfiltersphp"></a>
+
+##### send_webhook: `bool`<a id="send_webhook-bool"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**GenericSuccessResponse**](./lib/Model/GenericSuccessResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/delete_files_v2` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `carbon.files.getParsedFile`<a id="carbonfilesgetparsedfile"></a>
 
 This route is deprecated. Use `/user_files_v2` instead.
@@ -853,6 +891,8 @@ $result = $carbon->files->queryUserFiles(
     order_by: "created_at", 
     order_dir: "desc", 
     filters: [
+        "include_all_children" => False,
+        "non_synced_only" => False,
     ], 
     include_raw_file: True, 
     include_parsed_text_file: True, 
@@ -906,6 +946,8 @@ $result = $carbon->files->queryUserFilesDeprecated(
     order_by: "created_at", 
     order_dir: "desc", 
     filters: [
+        "include_all_children" => False,
+        "non_synced_only" => False,
     ], 
     include_raw_file: True, 
     include_parsed_text_file: True, 

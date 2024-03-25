@@ -1,6 +1,6 @@
 <?php
 /**
- * SourceProperty
+ * DeleteFilesV2QueryInput
  *
  * PHP version 7.4
  *
@@ -26,14 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * SourceProperty Class Doc Comment
+ * DeleteFilesV2QueryInput Class Doc Comment
  *
  * @category Class
- * @description The source of the file. If a list is provided, the query will return files from any of the sources in the list.
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class SourceProperty implements ModelInterface, ArrayAccess, \JsonSerializable
+class DeleteFilesV2QueryInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +41,7 @@ class SourceProperty implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Source_Property';
+    protected static $openAPIModelName = 'DeleteFilesV2QueryInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,7 +49,8 @@ class SourceProperty implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        
+        'filters' => '\Carbon\Model\OrganizationUserFilesToSyncFilters',
+        'send_webhook' => 'bool'
     ];
 
     /**
@@ -61,7 +61,8 @@ class SourceProperty implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        
+        'filters' => null,
+        'send_webhook' => null
     ];
 
     /**
@@ -70,7 +71,8 @@ class SourceProperty implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        
+        'filters' => false,
+		'send_webhook' => false
     ];
 
     /**
@@ -159,7 +161,8 @@ class SourceProperty implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        
+        'filters' => 'filters',
+        'send_webhook' => 'send_webhook'
     ];
 
     /**
@@ -168,7 +171,8 @@ class SourceProperty implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        
+        'filters' => 'setFilters',
+        'send_webhook' => 'setSendWebhook'
     ];
 
     /**
@@ -177,7 +181,8 @@ class SourceProperty implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        
+        'filters' => 'getFilters',
+        'send_webhook' => 'getSendWebhook'
     ];
 
     /**
@@ -237,6 +242,8 @@ class SourceProperty implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('filters', $data ?? [], null);
+        $this->setIfExists('send_webhook', $data ?? [], false);
     }
 
     /**
@@ -280,6 +287,64 @@ class SourceProperty implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets filters
+     *
+     * @return \Carbon\Model\OrganizationUserFilesToSyncFilters|null
+     */
+    public function getFilters()
+    {
+        return $this->container['filters'];
+    }
+
+    /**
+     * Sets filters
+     *
+     * @param \Carbon\Model\OrganizationUserFilesToSyncFilters|null $filters filters
+     *
+     * @return self
+     */
+    public function setFilters($filters)
+    {
+
+        if (is_null($filters)) {
+            throw new \InvalidArgumentException('non-nullable filters cannot be null');
+        }
+
+        $this->container['filters'] = $filters;
+
+        return $this;
+    }
+
+    /**
+     * Gets send_webhook
+     *
+     * @return bool|null
+     */
+    public function getSendWebhook()
+    {
+        return $this->container['send_webhook'];
+    }
+
+    /**
+     * Sets send_webhook
+     *
+     * @param bool|null $send_webhook send_webhook
+     *
+     * @return self
+     */
+    public function setSendWebhook($send_webhook)
+    {
+
+        if (is_null($send_webhook)) {
+            throw new \InvalidArgumentException('non-nullable send_webhook cannot be null');
+        }
+
+        $this->container['send_webhook'] = $send_webhook;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *

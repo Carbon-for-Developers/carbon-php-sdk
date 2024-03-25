@@ -169,4 +169,22 @@ class OrganizationUserFilesToSyncFiltersTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "include_all_children"
+     */
+    public function testPropertyIncludeAllChildren()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "non_synced_only"
+     */
+    public function testPropertyNonSyncedOnly()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

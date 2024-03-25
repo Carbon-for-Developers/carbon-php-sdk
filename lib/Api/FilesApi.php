@@ -73,6 +73,9 @@ class FilesApi extends \Carbon\CustomApi
         'deleteMany' => [
             'application/json',
         ],
+        'deleteV2' => [
+            'application/json',
+        ],
         'getParsedFile' => [
             'application/json',
         ],
@@ -1282,6 +1285,7 @@ class FilesApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError
+     * @deprecated
      */
     public function deleteMany(
 
@@ -1316,6 +1320,7 @@ class FilesApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function deleteManyWithHttpInfo($delete_files_query_input, string $contentType = self::contentTypes['deleteMany'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -1453,6 +1458,7 @@ class FilesApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function deleteManyAsync(
 
@@ -1490,6 +1496,7 @@ class FilesApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function deleteManyAsyncWithHttpInfo($delete_files_query_input, string $contentType = self::contentTypes['deleteMany'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -1543,6 +1550,7 @@ class FilesApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function deleteManyRequest($delete_files_query_input, string $contentType = self::contentTypes['deleteMany'][0])
     {
@@ -1587,6 +1595,378 @@ class FilesApi extends \Carbon\CustomApi
                 $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($delete_files_query_input));
             } else {
                 $httpBody = $delete_files_query_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation deleteV2
+     *
+     * Delete Files V2 Endpoint
+     *
+     * @param  \Carbon\Model\DeleteFilesV2QueryInput $delete_files_v2_query_input delete_files_v2_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteV2'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError
+     */
+    public function deleteV2(
+
+        $filters = SENTINEL_VALUE,
+        $send_webhook = false,
+        string $contentType = self::contentTypes['deleteV2'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "filters", $filters);
+        $this->setRequestBodyProperty($_body, "send_webhook", $send_webhook);
+        $delete_files_v2_query_input = $_body;
+
+        list($response) = $this->deleteV2WithHttpInfo($delete_files_v2_query_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation deleteV2WithHttpInfo
+     *
+     * Delete Files V2 Endpoint
+     *
+     * @param  \Carbon\Model\DeleteFilesV2QueryInput $delete_files_v2_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteV2'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteV2WithHttpInfo($delete_files_v2_query_input, string $contentType = self::contentTypes['deleteV2'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deleteV2Request($delete_files_v2_query_input, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->deleteV2WithHttpInfo(
+                        $delete_files_v2_query_input,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Carbon\Model\GenericSuccessResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\GenericSuccessResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\GenericSuccessResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Carbon\Model\GenericSuccessResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\GenericSuccessResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteV2Async
+     *
+     * Delete Files V2 Endpoint
+     *
+     * @param  \Carbon\Model\DeleteFilesV2QueryInput $delete_files_v2_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteV2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteV2Async(
+
+        $filters = SENTINEL_VALUE,
+        $send_webhook = false,
+        string $contentType = self::contentTypes['deleteV2'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "filters", $filters);
+        $this->setRequestBodyProperty($_body, "send_webhook", $send_webhook);
+        $delete_files_v2_query_input = $_body;
+
+        return $this->deleteV2AsyncWithHttpInfo($delete_files_v2_query_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteV2AsyncWithHttpInfo
+     *
+     * Delete Files V2 Endpoint
+     *
+     * @param  \Carbon\Model\DeleteFilesV2QueryInput $delete_files_v2_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteV2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteV2AsyncWithHttpInfo($delete_files_v2_query_input, string $contentType = self::contentTypes['deleteV2'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = '\Carbon\Model\GenericSuccessResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->deleteV2Request($delete_files_v2_query_input, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteV2'
+     *
+     * @param  \Carbon\Model\DeleteFilesV2QueryInput $delete_files_v2_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteV2'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteV2Request($delete_files_v2_query_input, string $contentType = self::contentTypes['deleteV2'][0])
+    {
+
+        if ($delete_files_v2_query_input !== SENTINEL_VALUE) {
+            if (!($delete_files_v2_query_input instanceof \Carbon\Model\DeleteFilesV2QueryInput)) {
+                if (!is_array($delete_files_v2_query_input))
+                    throw new \InvalidArgumentException('"delete_files_v2_query_input" must be associative array or an instance of \Carbon\Model\DeleteFilesV2QueryInput FilesApi.deleteV2.');
+                else
+                    $delete_files_v2_query_input = new \Carbon\Model\DeleteFilesV2QueryInput($delete_files_v2_query_input);
+            }
+        }
+        // verify the required parameter 'delete_files_v2_query_input' is set
+        if ($delete_files_v2_query_input === SENTINEL_VALUE || (is_array($delete_files_v2_query_input) && count($delete_files_v2_query_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter delete_files_v2_query_input when calling deleteV2'
+            );
+        }
+
+
+        $resourcePath = '/delete_files_v2';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($delete_files_v2_query_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($delete_files_v2_query_input));
+            } else {
+                $httpBody = $delete_files_v2_query_input;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
