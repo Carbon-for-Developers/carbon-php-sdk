@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.10-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.11-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -96,7 +96,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.10"
+    "konfig/carbon-php-sdk": "0.1.11"
   }
 }
 ```
@@ -1638,6 +1638,8 @@ List Data Source Items
 $result = $carbon->integrations->listDataSourceItems(
     data_source_id: 1, 
     parent_id: "string_example", 
+    filters: [
+    ], 
     pagination: [
         "limit" => 10,
         "offset" => 0,
@@ -1650,6 +1652,8 @@ $result = $carbon->integrations->listDataSourceItems(
 ##### data_source_id: `int`<a id="data_source_id-int"></a>
 
 ##### parent_id: `string`<a id="parent_id-string"></a>
+
+##### filters: [`ListItemsFiltersNullable`](./lib/Model/ListItemsFiltersNullable.php)<a id="filters-listitemsfiltersnullablelibmodellistitemsfiltersnullablephp"></a>
 
 ##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDataSourceItemsRequest
+ * ListItemsFilters
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * ListDataSourceItemsRequest Class Doc Comment
+ * ListItemsFilters Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListItemsFilters implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ListDataSourceItemsRequest';
+    protected static $openAPIModelName = 'ListItemsFilters';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,10 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data_source_id' => 'int',
-        'parent_id' => 'string',
-        'filters' => '\Carbon\Model\ListItemsFiltersNullable',
-        'pagination' => '\Carbon\Model\Pagination'
+        'external_ids' => 'string[]',
+        'ids' => 'int[]',
+        'name' => 'string',
+        'root_files_only' => 'bool'
     ];
 
     /**
@@ -63,10 +63,10 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'data_source_id' => null,
-        'parent_id' => null,
-        'filters' => null,
-        'pagination' => null
+        'external_ids' => null,
+        'ids' => null,
+        'name' => null,
+        'root_files_only' => null
     ];
 
     /**
@@ -75,10 +75,10 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'data_source_id' => false,
-		'parent_id' => true,
-		'filters' => true,
-		'pagination' => false
+        'external_ids' => true,
+		'ids' => true,
+		'name' => true,
+		'root_files_only' => true
     ];
 
     /**
@@ -167,10 +167,10 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'data_source_id' => 'data_source_id',
-        'parent_id' => 'parent_id',
-        'filters' => 'filters',
-        'pagination' => 'pagination'
+        'external_ids' => 'external_ids',
+        'ids' => 'ids',
+        'name' => 'name',
+        'root_files_only' => 'root_files_only'
     ];
 
     /**
@@ -179,10 +179,10 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'data_source_id' => 'setDataSourceId',
-        'parent_id' => 'setParentId',
-        'filters' => 'setFilters',
-        'pagination' => 'setPagination'
+        'external_ids' => 'setExternalIds',
+        'ids' => 'setIds',
+        'name' => 'setName',
+        'root_files_only' => 'setRootFilesOnly'
     ];
 
     /**
@@ -191,10 +191,10 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'data_source_id' => 'getDataSourceId',
-        'parent_id' => 'getParentId',
-        'filters' => 'getFilters',
-        'pagination' => 'getPagination'
+        'external_ids' => 'getExternalIds',
+        'ids' => 'getIds',
+        'name' => 'getName',
+        'root_files_only' => 'getRootFilesOnly'
     ];
 
     /**
@@ -254,10 +254,10 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('data_source_id', $data ?? [], null);
-        $this->setIfExists('parent_id', $data ?? [], null);
-        $this->setIfExists('filters', $data ?? [], null);
-        $this->setIfExists('pagination', $data ?? [], null);
+        $this->setIfExists('external_ids', $data ?? [], null);
+        $this->setIfExists('ids', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('root_files_only', $data ?? [], null);
     }
 
     /**
@@ -287,9 +287,6 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
     {
         $invalidProperties = [];
 
-        if ($this->container['data_source_id'] === null) {
-            $invalidProperties[] = "'data_source_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -306,131 +303,145 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets data_source_id
+     * Gets external_ids
      *
-     * @return int
+     * @return string[]|null
      */
-    public function getDataSourceId()
+    public function getExternalIds()
     {
-        return $this->container['data_source_id'];
+        return $this->container['external_ids'];
     }
 
     /**
-     * Sets data_source_id
+     * Sets external_ids
      *
-     * @param int $data_source_id data_source_id
+     * @param string[]|null $external_ids external_ids
      *
      * @return self
      */
-    public function setDataSourceId($data_source_id)
+    public function setExternalIds($external_ids)
     {
 
-        if (is_null($data_source_id)) {
-            throw new \InvalidArgumentException('non-nullable data_source_id cannot be null');
+        if (is_null($external_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'external_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('external_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['data_source_id'] = $data_source_id;
+        $this->container['external_ids'] = $external_ids;
 
         return $this;
     }
 
     /**
-     * Gets parent_id
+     * Gets ids
+     *
+     * @return int[]|null
+     */
+    public function getIds()
+    {
+        return $this->container['ids'];
+    }
+
+    /**
+     * Sets ids
+     *
+     * @param int[]|null $ids ids
+     *
+     * @return self
+     */
+    public function setIds($ids)
+    {
+
+        if (is_null($ids)) {
+            array_push($this->openAPINullablesSetToNull, 'ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['ids'] = $ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
      *
      * @return string|null
      */
-    public function getParentId()
+    public function getName()
     {
-        return $this->container['parent_id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets parent_id
+     * Sets name
      *
-     * @param string|null $parent_id parent_id
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setParentId($parent_id)
+    public function setName($name)
     {
 
-        if (is_null($parent_id)) {
-            array_push($this->openAPINullablesSetToNull, 'parent_id');
+        if (is_null($name)) {
+            array_push($this->openAPINullablesSetToNull, 'name');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('parent_id', $nullablesSetToNull);
+            $index = array_search('name', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['parent_id'] = $parent_id;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets filters
+     * Gets root_files_only
      *
-     * @return \Carbon\Model\ListItemsFiltersNullable|null
+     * @return bool|null
      */
-    public function getFilters()
+    public function getRootFilesOnly()
     {
-        return $this->container['filters'];
+        return $this->container['root_files_only'];
     }
 
     /**
-     * Sets filters
+     * Sets root_files_only
      *
-     * @param \Carbon\Model\ListItemsFiltersNullable|null $filters filters
+     * @param bool|null $root_files_only root_files_only
      *
      * @return self
      */
-    public function setFilters($filters)
+    public function setRootFilesOnly($root_files_only)
     {
 
-        if (is_null($filters)) {
-            array_push($this->openAPINullablesSetToNull, 'filters');
+        if (is_null($root_files_only)) {
+            array_push($this->openAPINullablesSetToNull, 'root_files_only');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('filters', $nullablesSetToNull);
+            $index = array_search('root_files_only', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['filters'] = $filters;
-
-        return $this;
-    }
-
-    /**
-     * Gets pagination
-     *
-     * @return \Carbon\Model\Pagination|null
-     */
-    public function getPagination()
-    {
-        return $this->container['pagination'];
-    }
-
-    /**
-     * Sets pagination
-     *
-     * @param \Carbon\Model\Pagination|null $pagination pagination
-     *
-     * @return self
-     */
-    public function setPagination($pagination)
-    {
-
-        if (is_null($pagination)) {
-            throw new \InvalidArgumentException('non-nullable pagination cannot be null');
-        }
-
-        $this->container['pagination'] = $pagination;
+        $this->container['root_files_only'] = $root_files_only;
 
         return $this;
     }

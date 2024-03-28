@@ -64,6 +64,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'parent_external_id' => 'string',
         'item_type' => 'string',
         'root_external_id' => 'string',
+        'external_url' => 'string',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -91,6 +92,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'parent_external_id' => null,
         'item_type' => null,
         'root_external_id' => null,
+        'external_url' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -116,6 +118,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
 		'parent_external_id' => true,
 		'item_type' => true,
 		'root_external_id' => true,
+		'external_url' => true,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -221,6 +224,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'parent_external_id' => 'parent_external_id',
         'item_type' => 'item_type',
         'root_external_id' => 'root_external_id',
+        'external_url' => 'external_url',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -246,6 +250,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'parent_external_id' => 'setParentExternalId',
         'item_type' => 'setItemType',
         'root_external_id' => 'setRootExternalId',
+        'external_url' => 'setExternalUrl',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -271,6 +276,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'parent_external_id' => 'getParentExternalId',
         'item_type' => 'getItemType',
         'root_external_id' => 'getRootExternalId',
+        'external_url' => 'getExternalUrl',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -347,6 +353,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('parent_external_id', $data ?? [], null);
         $this->setIfExists('item_type', $data ?? [], null);
         $this->setIfExists('root_external_id', $data ?? [], null);
+        $this->setIfExists('external_url', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -422,6 +429,9 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         }
         if ($this->container['root_external_id'] === null) {
             $invalidProperties[] = "'root_external_id' can't be null";
+        }
+        if ($this->container['external_url'] === null) {
+            $invalidProperties[] = "'external_url' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -917,6 +927,42 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['root_external_id'] = $root_external_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets external_url
+     *
+     * @return string
+     */
+    public function getExternalUrl()
+    {
+        return $this->container['external_url'];
+    }
+
+    /**
+     * Sets external_url
+     *
+     * @param string $external_url external_url
+     *
+     * @return self
+     */
+    public function setExternalUrl($external_url)
+    {
+
+        if (is_null($external_url)) {
+            array_push($this->openAPINullablesSetToNull, 'external_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('external_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['external_url'] = $external_url;
 
         return $this;
     }

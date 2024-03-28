@@ -2568,6 +2568,7 @@ class IntegrationsApi extends \Carbon\CustomApi
 
         $data_source_id,
         $parent_id = SENTINEL_VALUE,
+        $filters = SENTINEL_VALUE,
         $pagination = SENTINEL_VALUE,
         string $contentType = self::contentTypes['listDataSourceItems'][0]
     )
@@ -2575,6 +2576,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $_body = [];
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "parent_id", $parent_id);
+        $this->setRequestBodyProperty($_body, "filters", $filters);
         $this->setRequestBodyProperty($_body, "pagination", $pagination);
         $list_data_source_items_request = $_body;
 
@@ -2735,6 +2737,7 @@ class IntegrationsApi extends \Carbon\CustomApi
 
         $data_source_id,
         $parent_id = SENTINEL_VALUE,
+        $filters = SENTINEL_VALUE,
         $pagination = SENTINEL_VALUE,
         string $contentType = self::contentTypes['listDataSourceItems'][0]
     )
@@ -2742,6 +2745,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $_body = [];
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "parent_id", $parent_id);
+        $this->setRequestBodyProperty($_body, "filters", $filters);
         $this->setRequestBodyProperty($_body, "pagination", $pagination);
         $list_data_source_items_request = $_body;
 

@@ -207,6 +207,15 @@ class ExternalSourceItemTest extends TestCase
     }
 
     /**
+     * Test attribute "external_url"
+     */
+    public function testPropertyExternalUrl()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

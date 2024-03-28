@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDataSourceItemsRequestTest
+ * ListItemsFiltersTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ListDataSourceItemsRequestTest Class Doc Comment
+ * ListItemsFiltersTest Class Doc Comment
  *
  * @category    Class
- * @description ListDataSourceItemsRequest
+ * @description ListItemsFilters
  * @package     Carbon
  */
-class ListDataSourceItemsRequestTest extends TestCase
+class ListItemsFiltersTest extends TestCase
 {
 
     /**
@@ -63,45 +63,45 @@ class ListDataSourceItemsRequestTest extends TestCase
     }
 
     /**
-     * Test "ListDataSourceItemsRequest"
+     * Test "ListItemsFilters"
      */
-    public function testListDataSourceItemsRequest()
+    public function testListItemsFilters()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "data_source_id"
+     * Test attribute "external_ids"
      */
-    public function testPropertyDataSourceId()
+    public function testPropertyExternalIds()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "parent_id"
+     * Test attribute "ids"
      */
-    public function testPropertyParentId()
+    public function testPropertyIds()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "filters"
+     * Test attribute "name"
      */
-    public function testPropertyFilters()
+    public function testPropertyName()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "pagination"
+     * Test attribute "root_files_only"
      */
-    public function testPropertyPagination()
+    public function testPropertyRootFilesOnly()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
