@@ -75,6 +75,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'bool',
         'source_created_at' => '\DateTime',
         'generate_sparse_vectors' => 'bool',
+        'request_id' => 'string',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -113,6 +114,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => null,
         'source_created_at' => 'date-time',
         'generate_sparse_vectors' => null,
+        'request_id' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -149,6 +151,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
 		'skip_embedding_generation' => false,
 		'source_created_at' => true,
 		'generate_sparse_vectors' => true,
+		'request_id' => true,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -265,6 +268,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'skip_embedding_generation',
         'source_created_at' => 'source_created_at',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
+        'request_id' => 'request_id',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -301,6 +305,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'setSkipEmbeddingGeneration',
         'source_created_at' => 'setSourceCreatedAt',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
+        'request_id' => 'setRequestId',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -337,6 +342,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'getSkipEmbeddingGeneration',
         'source_created_at' => 'getSourceCreatedAt',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
+        'request_id' => 'getRequestId',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -424,6 +430,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('skip_embedding_generation', $data ?? [], null);
         $this->setIfExists('source_created_at', $data ?? [], null);
         $this->setIfExists('generate_sparse_vectors', $data ?? [], null);
+        $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -532,6 +539,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['generate_sparse_vectors'] === null) {
             $invalidProperties[] = "'generate_sparse_vectors' can't be null";
+        }
+        if ($this->container['request_id'] === null) {
+            $invalidProperties[] = "'request_id' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -1437,6 +1447,42 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['generate_sparse_vectors'] = $generate_sparse_vectors;
+
+        return $this;
+    }
+
+    /**
+     * Gets request_id
+     *
+     * @return string
+     */
+    public function getRequestId()
+    {
+        return $this->container['request_id'];
+    }
+
+    /**
+     * Sets request_id
+     *
+     * @param string $request_id request_id
+     *
+     * @return self
+     */
+    public function setRequestId($request_id)
+    {
+
+        if (is_null($request_id)) {
+            array_push($this->openAPINullablesSetToNull, 'request_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['request_id'] = $request_id;
 
         return $this;
     }

@@ -187,4 +187,13 @@ class OrganizationUserFilesToSyncFiltersTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "request_ids"
+     */
+    public function testPropertyRequestIds()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

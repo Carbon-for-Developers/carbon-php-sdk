@@ -142,4 +142,13 @@ class RSSFeedInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "request_id"
+     */
+    public function testPropertyRequestId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

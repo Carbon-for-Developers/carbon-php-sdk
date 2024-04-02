@@ -61,7 +61,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'embedding_generators' => '\Carbon\Model\EmbeddingGenerators[]',
         'root_files_only' => 'bool',
         'include_all_children' => 'bool',
-        'non_synced_only' => 'bool'
+        'non_synced_only' => 'bool',
+        'request_ids' => 'string[]'
     ];
 
     /**
@@ -84,7 +85,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'embedding_generators' => null,
         'root_files_only' => null,
         'include_all_children' => null,
-        'non_synced_only' => null
+        'non_synced_only' => null,
+        'request_ids' => null
     ];
 
     /**
@@ -105,7 +107,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
 		'embedding_generators' => true,
 		'root_files_only' => true,
 		'include_all_children' => false,
-		'non_synced_only' => false
+		'non_synced_only' => false,
+		'request_ids' => true
     ];
 
     /**
@@ -206,7 +209,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'embedding_generators' => 'embedding_generators',
         'root_files_only' => 'root_files_only',
         'include_all_children' => 'include_all_children',
-        'non_synced_only' => 'non_synced_only'
+        'non_synced_only' => 'non_synced_only',
+        'request_ids' => 'request_ids'
     ];
 
     /**
@@ -227,7 +231,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'embedding_generators' => 'setEmbeddingGenerators',
         'root_files_only' => 'setRootFilesOnly',
         'include_all_children' => 'setIncludeAllChildren',
-        'non_synced_only' => 'setNonSyncedOnly'
+        'non_synced_only' => 'setNonSyncedOnly',
+        'request_ids' => 'setRequestIds'
     ];
 
     /**
@@ -248,7 +253,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'embedding_generators' => 'getEmbeddingGenerators',
         'root_files_only' => 'getRootFilesOnly',
         'include_all_children' => 'getIncludeAllChildren',
-        'non_synced_only' => 'getNonSyncedOnly'
+        'non_synced_only' => 'getNonSyncedOnly',
+        'request_ids' => 'getRequestIds'
     ];
 
     /**
@@ -321,6 +327,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         $this->setIfExists('root_files_only', $data ?? [], null);
         $this->setIfExists('include_all_children', $data ?? [], false);
         $this->setIfExists('non_synced_only', $data ?? [], false);
+        $this->setIfExists('request_ids', $data ?? [], null);
     }
 
     /**
@@ -349,6 +356,10 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['request_ids']) && (count($this->container['request_ids']) > 100)) {
+            $invalidProperties[] = "invalid value for 'request_ids', number of items must be less than or equal to 100.";
+        }
 
         return $invalidProperties;
     }
@@ -819,6 +830,46 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         }
 
         $this->container['non_synced_only'] = $non_synced_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets request_ids
+     *
+     * @return string[]|null
+     */
+    public function getRequestIds()
+    {
+        return $this->container['request_ids'];
+    }
+
+    /**
+     * Sets request_ids
+     *
+     * @param string[]|null $request_ids Filter by request ID(s) which were used to sync the files
+     *
+     * @return self
+     */
+    public function setRequestIds($request_ids)
+    {
+
+        if (!is_null($request_ids) && (count($request_ids) > 100)) {
+            throw new \InvalidArgumentException('invalid value for $request_ids when calling OrganizationUserFilesToSyncFilters., number of items must be less than or equal to 100.');
+        }
+
+        if (is_null($request_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'request_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['request_ids'] = $request_ids;
 
         return $this;
     }

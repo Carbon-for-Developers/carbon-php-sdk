@@ -1350,7 +1350,8 @@ $result = $carbon->integrations->connectFreshdesk(
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    sync_files_on_connection: True
+    sync_files_on_connection: True, 
+    request_id: "string_example"
 );
 ```
 
@@ -1375,6 +1376,8 @@ $result = $carbon->integrations->connectFreshdesk(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1411,7 +1414,8 @@ $result = $carbon->integrations->connectGitbook(
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    sync_files_on_connection: True
+    sync_files_on_connection: True, 
+    request_id: "string_example"
 );
 ```
 
@@ -1436,6 +1440,8 @@ $result = $carbon->integrations->connectGitbook(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1521,7 +1527,8 @@ $result = $carbon->integrations->getOauthUrl(
     sync_files_on_connection: True, 
     set_page_as_boundary: False, 
     data_source_id: 1, 
-    connecting_new_account: False
+    connecting_new_account: False, 
+    request_id: "string_example"
 );
 ```
 
@@ -1572,6 +1579,10 @@ Used to specify a data source to sync from if you have multiple connected. It ca
 ##### connecting_new_account: `bool`<a id="connecting_new_account-bool"></a>
 
 Used to connect a new data source. If not specified, we will attempt to create a sync URL         for an existing data source based on type and ID.
+
+##### request_id: `string`<a id="request_id-string"></a>
+
+This request id will be added to all files that get synced using the generated OAuth URL
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1822,7 +1833,8 @@ $result = $carbon->integrations->syncConfluence(
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
-    set_page_as_boundary: False
+    set_page_as_boundary: False, 
+    request_id: "string_example"
 );
 ```
 
@@ -1851,6 +1863,8 @@ $result = $carbon->integrations->syncConfluence(
 Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 ##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1921,7 +1935,8 @@ $result = $carbon->integrations->syncFiles(
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
-    set_page_as_boundary: False
+    set_page_as_boundary: False, 
+    request_id: "string_example"
 );
 ```
 
@@ -1950,6 +1965,8 @@ $result = $carbon->integrations->syncFiles(
 Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 ##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1985,7 +2002,8 @@ $result = $carbon->integrations->syncGitbook(
     skip_embedding_generation: False, 
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
-    prepend_filename_to_chunks: False
+    prepend_filename_to_chunks: False, 
+    request_id: "string_example"
 );
 ```
 
@@ -2008,6 +2026,8 @@ $result = $carbon->integrations->syncGitbook(
 ##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
 
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2089,7 +2109,8 @@ $result = $carbon->integrations->syncGmail(
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    data_source_id: 1
+    data_source_id: 1, 
+    request_id: "string_example"
 );
 ```
 
@@ -2112,6 +2133,8 @@ $result = $carbon->integrations->syncGmail(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2204,7 +2227,8 @@ $result = $carbon->integrations->syncOutlook(
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    data_source_id: 1
+    data_source_id: 1, 
+    request_id: "string_example"
 );
 ```
 
@@ -2229,6 +2253,8 @@ $result = $carbon->integrations->syncOutlook(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2260,7 +2286,8 @@ $result = $carbon->integrations->syncRssFeed(
     skip_embedding_generation: False, 
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
-    prepend_filename_to_chunks: False
+    prepend_filename_to_chunks: False, 
+    request_id: "string_example"
 );
 ```
 
@@ -2281,6 +2308,8 @@ $result = $carbon->integrations->syncRssFeed(
 ##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
 
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2320,7 +2349,8 @@ $result = $carbon->integrations->syncS3Files(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    data_source_id: 1
+    data_source_id: 1, 
+    request_id: "string_example"
 );
 ```
 
@@ -2349,6 +2379,8 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 ##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
 
 ##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>

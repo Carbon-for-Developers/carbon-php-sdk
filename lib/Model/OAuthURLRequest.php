@@ -67,7 +67,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_files_on_connection' => 'bool',
         'set_page_as_boundary' => 'bool',
         'data_source_id' => 'int',
-        'connecting_new_account' => 'bool'
+        'connecting_new_account' => 'bool',
+        'request_id' => 'string'
     ];
 
     /**
@@ -96,7 +97,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_files_on_connection' => null,
         'set_page_as_boundary' => null,
         'data_source_id' => null,
-        'connecting_new_account' => null
+        'connecting_new_account' => null,
+        'request_id' => null
     ];
 
     /**
@@ -123,7 +125,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'sync_files_on_connection' => true,
 		'set_page_as_boundary' => false,
 		'data_source_id' => true,
-		'connecting_new_account' => true
+		'connecting_new_account' => true,
+		'request_id' => true
     ];
 
     /**
@@ -230,7 +233,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_files_on_connection' => 'sync_files_on_connection',
         'set_page_as_boundary' => 'set_page_as_boundary',
         'data_source_id' => 'data_source_id',
-        'connecting_new_account' => 'connecting_new_account'
+        'connecting_new_account' => 'connecting_new_account',
+        'request_id' => 'request_id'
     ];
 
     /**
@@ -257,7 +261,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_files_on_connection' => 'setSyncFilesOnConnection',
         'set_page_as_boundary' => 'setSetPageAsBoundary',
         'data_source_id' => 'setDataSourceId',
-        'connecting_new_account' => 'setConnectingNewAccount'
+        'connecting_new_account' => 'setConnectingNewAccount',
+        'request_id' => 'setRequestId'
     ];
 
     /**
@@ -284,7 +289,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_files_on_connection' => 'getSyncFilesOnConnection',
         'set_page_as_boundary' => 'getSetPageAsBoundary',
         'data_source_id' => 'getDataSourceId',
-        'connecting_new_account' => 'getConnectingNewAccount'
+        'connecting_new_account' => 'getConnectingNewAccount',
+        'request_id' => 'getRequestId'
     ];
 
     /**
@@ -363,6 +369,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('connecting_new_account', $data ?? [], false);
+        $this->setIfExists('request_id', $data ?? [], null);
     }
 
     /**
@@ -1076,6 +1083,42 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['connecting_new_account'] = $connecting_new_account;
+
+        return $this;
+    }
+
+    /**
+     * Gets request_id
+     *
+     * @return string|null
+     */
+    public function getRequestId()
+    {
+        return $this->container['request_id'];
+    }
+
+    /**
+     * Sets request_id
+     *
+     * @param string|null $request_id This request id will be added to all files that get synced using the generated OAuth URL
+     *
+     * @return self
+     */
+    public function setRequestId($request_id)
+    {
+
+        if (is_null($request_id)) {
+            array_push($this->openAPINullablesSetToNull, 'request_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['request_id'] = $request_id;
 
         return $this;
     }

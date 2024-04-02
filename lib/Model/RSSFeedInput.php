@@ -56,7 +56,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'bool',
         'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'generate_sparse_vectors' => 'bool',
-        'prepend_filename_to_chunks' => 'bool'
+        'prepend_filename_to_chunks' => 'bool',
+        'request_id' => 'string'
     ];
 
     /**
@@ -74,7 +75,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => null,
         'embedding_model' => null,
         'generate_sparse_vectors' => null,
-        'prepend_filename_to_chunks' => null
+        'prepend_filename_to_chunks' => null,
+        'request_id' => null
     ];
 
     /**
@@ -90,7 +92,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'skip_embedding_generation' => true,
 		'embedding_model' => false,
 		'generate_sparse_vectors' => true,
-		'prepend_filename_to_chunks' => true
+		'prepend_filename_to_chunks' => true,
+		'request_id' => true
     ];
 
     /**
@@ -186,7 +189,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'skip_embedding_generation',
         'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
-        'prepend_filename_to_chunks' => 'prepend_filename_to_chunks'
+        'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
+        'request_id' => 'request_id'
     ];
 
     /**
@@ -202,7 +206,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'setSkipEmbeddingGeneration',
         'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
-        'prepend_filename_to_chunks' => 'setPrependFilenameToChunks'
+        'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
+        'request_id' => 'setRequestId'
     ];
 
     /**
@@ -218,7 +223,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'getSkipEmbeddingGeneration',
         'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
-        'prepend_filename_to_chunks' => 'getPrependFilenameToChunks'
+        'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
+        'request_id' => 'getRequestId'
     ];
 
     /**
@@ -286,6 +292,7 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
+        $this->setIfExists('request_id', $data ?? [], null);
     }
 
     /**
@@ -603,6 +610,42 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['prepend_filename_to_chunks'] = $prepend_filename_to_chunks;
+
+        return $this;
+    }
+
+    /**
+     * Gets request_id
+     *
+     * @return string|null
+     */
+    public function getRequestId()
+    {
+        return $this->container['request_id'];
+    }
+
+    /**
+     * Sets request_id
+     *
+     * @param string|null $request_id request_id
+     *
+     * @return self
+     */
+    public function setRequestId($request_id)
+    {
+
+        if (is_null($request_id)) {
+            array_push($this->openAPINullablesSetToNull, 'request_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['request_id'] = $request_id;
 
         return $this;
     }

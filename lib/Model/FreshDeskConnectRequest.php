@@ -58,7 +58,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
-        'sync_files_on_connection' => 'bool'
+        'sync_files_on_connection' => 'bool',
+        'request_id' => 'string'
     ];
 
     /**
@@ -78,7 +79,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'embedding_model' => null,
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
-        'sync_files_on_connection' => null
+        'sync_files_on_connection' => null,
+        'request_id' => null
     ];
 
     /**
@@ -96,7 +98,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
 		'embedding_model' => true,
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
-		'sync_files_on_connection' => true
+		'sync_files_on_connection' => true,
+		'request_id' => true
     ];
 
     /**
@@ -194,7 +197,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
-        'sync_files_on_connection' => 'sync_files_on_connection'
+        'sync_files_on_connection' => 'sync_files_on_connection',
+        'request_id' => 'request_id'
     ];
 
     /**
@@ -212,7 +216,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
-        'sync_files_on_connection' => 'setSyncFilesOnConnection'
+        'sync_files_on_connection' => 'setSyncFilesOnConnection',
+        'request_id' => 'setRequestId'
     ];
 
     /**
@@ -230,7 +235,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
-        'sync_files_on_connection' => 'getSyncFilesOnConnection'
+        'sync_files_on_connection' => 'getSyncFilesOnConnection',
+        'request_id' => 'getRequestId'
     ];
 
     /**
@@ -300,6 +306,7 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
+        $this->setIfExists('request_id', $data ?? [], null);
     }
 
     /**
@@ -692,6 +699,42 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         }
 
         $this->container['sync_files_on_connection'] = $sync_files_on_connection;
+
+        return $this;
+    }
+
+    /**
+     * Gets request_id
+     *
+     * @return string|null
+     */
+    public function getRequestId()
+    {
+        return $this->container['request_id'];
+    }
+
+    /**
+     * Sets request_id
+     *
+     * @param string|null $request_id request_id
+     *
+     * @return self
+     */
+    public function setRequestId($request_id)
+    {
+
+        if (is_null($request_id)) {
+            array_push($this->openAPINullablesSetToNull, 'request_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['request_id'] = $request_id;
 
         return $this;
     }

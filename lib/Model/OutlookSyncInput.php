@@ -58,7 +58,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
-        'data_source_id' => 'int'
+        'data_source_id' => 'int',
+        'request_id' => 'string'
     ];
 
     /**
@@ -78,7 +79,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => null,
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
-        'data_source_id' => null
+        'data_source_id' => null,
+        'request_id' => null
     ];
 
     /**
@@ -96,7 +98,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'embedding_model' => false,
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
-		'data_source_id' => true
+		'data_source_id' => true,
+		'request_id' => true
     ];
 
     /**
@@ -194,7 +197,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
-        'data_source_id' => 'data_source_id'
+        'data_source_id' => 'data_source_id',
+        'request_id' => 'request_id'
     ];
 
     /**
@@ -212,7 +216,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
-        'data_source_id' => 'setDataSourceId'
+        'data_source_id' => 'setDataSourceId',
+        'request_id' => 'setRequestId'
     ];
 
     /**
@@ -230,7 +235,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
-        'data_source_id' => 'getDataSourceId'
+        'data_source_id' => 'getDataSourceId',
+        'request_id' => 'getRequestId'
     ];
 
     /**
@@ -300,6 +306,7 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
+        $this->setIfExists('request_id', $data ?? [], null);
     }
 
     /**
@@ -689,6 +696,42 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['data_source_id'] = $data_source_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets request_id
+     *
+     * @return string|null
+     */
+    public function getRequestId()
+    {
+        return $this->container['request_id'];
+    }
+
+    /**
+     * Sets request_id
+     *
+     * @param string|null $request_id request_id
+     *
+     * @return self
+     */
+    public function setRequestId($request_id)
+    {
+
+        if (is_null($request_id)) {
+            array_push($this->openAPINullablesSetToNull, 'request_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['request_id'] = $request_id;
 
         return $this;
     }

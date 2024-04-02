@@ -584,6 +584,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $sync_files_on_connection = true,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectFreshdesk'][0]
     )
     {
@@ -598,6 +599,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $fresh_desk_connect_request = $_body;
 
         list($response) = $this->connectFreshdeskWithHttpInfo($fresh_desk_connect_request, $contentType);
@@ -765,6 +767,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $sync_files_on_connection = true,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectFreshdesk'][0]
     )
     {
@@ -779,6 +782,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $fresh_desk_connect_request = $_body;
 
         return $this->connectFreshdeskAsyncWithHttpInfo($fresh_desk_connect_request, $contentType)
@@ -988,6 +992,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $sync_files_on_connection = true,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectGitbook'][0]
     )
     {
@@ -1002,6 +1007,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $gitbook_connect_request = $_body;
 
         list($response) = $this->connectGitbookWithHttpInfo($gitbook_connect_request, $contentType);
@@ -1169,6 +1175,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $sync_files_on_connection = true,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectGitbook'][0]
     )
     {
@@ -1183,6 +1190,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $gitbook_connect_request = $_body;
 
         return $this->connectGitbookAsyncWithHttpInfo($gitbook_connect_request, $contentType)
@@ -1773,6 +1781,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -1796,6 +1805,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "connecting_new_account", $connecting_new_account);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $o_auth_url_request = $_body;
 
         list($response) = $this->getOauthUrlWithHttpInfo($o_auth_url_request, $contentType);
@@ -1972,6 +1982,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -1995,6 +2006,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "connecting_new_account", $connecting_new_account);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $o_auth_url_request = $_body;
 
         return $this->getOauthUrlAsyncWithHttpInfo($o_auth_url_request, $contentType)
@@ -4371,6 +4383,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncConfluence'][0]
     )
     {
@@ -4386,6 +4399,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $sync_files_request = $_body;
 
         list($response) = $this->syncConfluenceWithHttpInfo($sync_files_request, $contentType);
@@ -4554,6 +4568,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncConfluence'][0]
     )
     {
@@ -4569,6 +4584,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $sync_files_request = $_body;
 
         return $this->syncConfluenceAsyncWithHttpInfo($sync_files_request, $contentType)
@@ -5147,6 +5163,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncFiles'][0]
     )
     {
@@ -5162,6 +5179,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $sync_files_request = $_body;
 
         list($response) = $this->syncFilesWithHttpInfo($sync_files_request, $contentType);
@@ -5330,6 +5348,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncFiles'][0]
     )
     {
@@ -5345,6 +5364,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $sync_files_request = $_body;
 
         return $this->syncFilesAsyncWithHttpInfo($sync_files_request, $contentType)
@@ -5553,6 +5573,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncGitbook'][0]
     )
     {
@@ -5566,6 +5587,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $gitbook_sync_request = $_body;
 
         list($response) = $this->syncGitbookWithHttpInfo($gitbook_sync_request, $contentType);
@@ -5732,6 +5754,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncGitbook'][0]
     )
     {
@@ -5745,6 +5768,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $gitbook_sync_request = $_body;
 
         return $this->syncGitbookAsyncWithHttpInfo($gitbook_sync_request, $contentType)
@@ -5953,6 +5977,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $data_source_id = SENTINEL_VALUE,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncGmail'][0]
     )
     {
@@ -5966,6 +5991,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $gmail_sync_input = $_body;
 
         list($response) = $this->syncGmailWithHttpInfo($gmail_sync_input, $contentType);
@@ -6132,6 +6158,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $data_source_id = SENTINEL_VALUE,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncGmail'][0]
     )
     {
@@ -6145,6 +6172,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $gmail_sync_input = $_body;
 
         return $this->syncGmailAsyncWithHttpInfo($gmail_sync_input, $contentType)
@@ -6354,6 +6382,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $data_source_id = SENTINEL_VALUE,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncOutlook'][0]
     )
     {
@@ -6368,6 +6397,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $outlook_sync_input = $_body;
 
         list($response) = $this->syncOutlookWithHttpInfo($outlook_sync_input, $contentType);
@@ -6535,6 +6565,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $data_source_id = SENTINEL_VALUE,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncOutlook'][0]
     )
     {
@@ -6549,6 +6580,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $outlook_sync_input = $_body;
 
         return $this->syncOutlookAsyncWithHttpInfo($outlook_sync_input, $contentType)
@@ -6756,6 +6788,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncRssFeed'][0]
     )
     {
@@ -6768,6 +6801,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $rss_feed_input = $_body;
 
         list($response) = $this->syncRssFeedWithHttpInfo($rss_feed_input, $contentType);
@@ -6933,6 +6967,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncRssFeed'][0]
     )
     {
@@ -6945,6 +6980,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $rss_feed_input = $_body;
 
         return $this->syncRssFeedAsyncWithHttpInfo($rss_feed_input, $contentType)
@@ -7155,6 +7191,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncS3Files'][0]
     )
     {
@@ -7170,6 +7207,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $s3_file_sync_input = $_body;
 
         list($response) = $this->syncS3FilesWithHttpInfo($s3_file_sync_input, $contentType);
@@ -7338,6 +7376,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
+        $request_id = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncS3Files'][0]
     )
     {
@@ -7353,6 +7392,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $s3_file_sync_input = $_body;
 
         return $this->syncS3FilesAsyncWithHttpInfo($s3_file_sync_input, $contentType)

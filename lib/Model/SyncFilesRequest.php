@@ -59,7 +59,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
         'max_items_per_chunk' => 'int',
-        'set_page_as_boundary' => 'bool'
+        'set_page_as_boundary' => 'bool',
+        'request_id' => 'string'
     ];
 
     /**
@@ -80,7 +81,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
         'max_items_per_chunk' => null,
-        'set_page_as_boundary' => null
+        'set_page_as_boundary' => null,
+        'request_id' => null
     ];
 
     /**
@@ -99,7 +101,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
 		'max_items_per_chunk' => true,
-		'set_page_as_boundary' => false
+		'set_page_as_boundary' => false,
+		'request_id' => true
     ];
 
     /**
@@ -198,7 +201,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
         'max_items_per_chunk' => 'max_items_per_chunk',
-        'set_page_as_boundary' => 'set_page_as_boundary'
+        'set_page_as_boundary' => 'set_page_as_boundary',
+        'request_id' => 'request_id'
     ];
 
     /**
@@ -217,7 +221,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
         'max_items_per_chunk' => 'setMaxItemsPerChunk',
-        'set_page_as_boundary' => 'setSetPageAsBoundary'
+        'set_page_as_boundary' => 'setSetPageAsBoundary',
+        'request_id' => 'setRequestId'
     ];
 
     /**
@@ -236,7 +241,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
         'max_items_per_chunk' => 'getMaxItemsPerChunk',
-        'set_page_as_boundary' => 'getSetPageAsBoundary'
+        'set_page_as_boundary' => 'getSetPageAsBoundary',
+        'request_id' => 'getRequestId'
     ];
 
     /**
@@ -307,6 +313,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
+        $this->setIfExists('request_id', $data ?? [], null);
     }
 
     /**
@@ -728,6 +735,42 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['set_page_as_boundary'] = $set_page_as_boundary;
+
+        return $this;
+    }
+
+    /**
+     * Gets request_id
+     *
+     * @return string|null
+     */
+    public function getRequestId()
+    {
+        return $this->container['request_id'];
+    }
+
+    /**
+     * Sets request_id
+     *
+     * @param string|null $request_id request_id
+     *
+     * @return self
+     */
+    public function setRequestId($request_id)
+    {
+
+        if (is_null($request_id)) {
+            array_push($this->openAPINullablesSetToNull, 'request_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['request_id'] = $request_id;
 
         return $this;
     }

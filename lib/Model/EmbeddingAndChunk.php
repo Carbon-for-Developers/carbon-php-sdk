@@ -52,7 +52,8 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
         'user_file_id' => 'int',
         'chunk_index' => 'int',
         'source_content' => 'string',
-        'embedding' => 'float[]'
+        'embedding' => 'float[]',
+        'content_metadata' => 'object'
     ];
 
     /**
@@ -66,7 +67,8 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
         'user_file_id' => null,
         'chunk_index' => null,
         'source_content' => null,
-        'embedding' => null
+        'embedding' => null,
+        'content_metadata' => null
     ];
 
     /**
@@ -78,7 +80,8 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
         'user_file_id' => false,
 		'chunk_index' => true,
 		'source_content' => false,
-		'embedding' => true
+		'embedding' => true,
+		'content_metadata' => true
     ];
 
     /**
@@ -170,7 +173,8 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
         'user_file_id' => 'user_file_id',
         'chunk_index' => 'chunk_index',
         'source_content' => 'source_content',
-        'embedding' => 'embedding'
+        'embedding' => 'embedding',
+        'content_metadata' => 'content_metadata'
     ];
 
     /**
@@ -182,7 +186,8 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
         'user_file_id' => 'setUserFileId',
         'chunk_index' => 'setChunkIndex',
         'source_content' => 'setSourceContent',
-        'embedding' => 'setEmbedding'
+        'embedding' => 'setEmbedding',
+        'content_metadata' => 'setContentMetadata'
     ];
 
     /**
@@ -194,7 +199,8 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
         'user_file_id' => 'getUserFileId',
         'chunk_index' => 'getChunkIndex',
         'source_content' => 'getSourceContent',
-        'embedding' => 'getEmbedding'
+        'embedding' => 'getEmbedding',
+        'content_metadata' => 'getContentMetadata'
     ];
 
     /**
@@ -258,6 +264,7 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('chunk_index', $data ?? [], null);
         $this->setIfExists('source_content', $data ?? [], null);
         $this->setIfExists('embedding', $data ?? [], null);
+        $this->setIfExists('content_metadata', $data ?? [], null);
     }
 
     /**
@@ -298,6 +305,9 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
         if ($this->container['embedding'] === null) {
             $invalidProperties[] = "'embedding' can't be null";
+        }
+        if ($this->container['content_metadata'] === null) {
+            $invalidProperties[] = "'content_metadata' can't be null";
         }
         return $invalidProperties;
     }
@@ -440,6 +450,42 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['embedding'] = $embedding;
+
+        return $this;
+    }
+
+    /**
+     * Gets content_metadata
+     *
+     * @return object
+     */
+    public function getContentMetadata()
+    {
+        return $this->container['content_metadata'];
+    }
+
+    /**
+     * Sets content_metadata
+     *
+     * @param object $content_metadata content_metadata
+     *
+     * @return self
+     */
+    public function setContentMetadata($content_metadata)
+    {
+
+        if (is_null($content_metadata)) {
+            array_push($this->openAPINullablesSetToNull, 'content_metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('content_metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['content_metadata'] = $content_metadata;
 
         return $this;
     }

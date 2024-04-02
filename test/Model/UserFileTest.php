@@ -306,6 +306,15 @@ class UserFileTest extends TestCase
     }
 
     /**
+     * Test attribute "request_id"
+     */
+    public function testPropertyRequestId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

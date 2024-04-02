@@ -106,4 +106,13 @@ class EmbeddingAndChunkTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "content_metadata"
+     */
+    public function testPropertyContentMetadata()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }
