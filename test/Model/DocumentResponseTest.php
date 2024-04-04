@@ -169,4 +169,13 @@ class DocumentResponseTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "chunk_index"
+     */
+    public function testPropertyChunkIndex()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

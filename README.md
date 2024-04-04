@@ -1528,7 +1528,9 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "string_example"
+    request_id: "string_example", 
+    use_ocr: False, 
+    parse_pdf_tables_with_ocr: False
 );
 ```
 
@@ -1583,6 +1585,12 @@ Used to connect a new data source. If not specified, we will attempt to create a
 ##### request_id: `string`<a id="request_id-string"></a>
 
 This request id will be added to all files that get synced using the generated OAuth URL
+
+##### use_ocr: `bool`<a id="use_ocr-bool"></a>
+
+Enable OCR for files that support it. Supported formats: pdf
+
+##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1834,7 +1842,9 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "string_example"
+    request_id: "string_example", 
+    use_ocr: False, 
+    parse_pdf_tables_with_ocr: False
 );
 ```
 
@@ -1865,6 +1875,10 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 ##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
 
 ##### request_id: `string`<a id="request_id-string"></a>
+
+##### use_ocr: `bool`<a id="use_ocr-bool"></a>
+
+##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1936,7 +1950,9 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "string_example"
+    request_id: "string_example", 
+    use_ocr: False, 
+    parse_pdf_tables_with_ocr: False
 );
 ```
 
@@ -1967,6 +1983,10 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 ##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
 
 ##### request_id: `string`<a id="request_id-string"></a>
+
+##### use_ocr: `bool`<a id="use_ocr-bool"></a>
+
+##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2350,7 +2370,9 @@ $result = $carbon->integrations->syncS3Files(
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
     data_source_id: 1, 
-    request_id: "string_example"
+    request_id: "string_example", 
+    use_ocr: False, 
+    parse_pdf_tables_with_ocr: False
 );
 ```
 
@@ -2381,6 +2403,10 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 ##### data_source_id: `int`<a id="data_source_id-int"></a>
 
 ##### request_id: `string`<a id="request_id-string"></a>
+
+##### use_ocr: `bool`<a id="use_ocr-bool"></a>
+
+##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>

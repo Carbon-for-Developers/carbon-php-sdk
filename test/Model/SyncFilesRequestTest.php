@@ -178,4 +178,22 @@ class SyncFilesRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "use_ocr"
+     */
+    public function testPropertyUseOcr()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "parse_pdf_tables_with_ocr"
+     */
+    public function testPropertyParsePdfTablesWithOcr()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

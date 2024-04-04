@@ -1782,6 +1782,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
         $request_id = SENTINEL_VALUE,
+        $use_ocr = false,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -1806,6 +1808,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "connecting_new_account", $connecting_new_account);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "use_ocr", $use_ocr);
+        $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $o_auth_url_request = $_body;
 
         list($response) = $this->getOauthUrlWithHttpInfo($o_auth_url_request, $contentType);
@@ -1983,6 +1987,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
         $request_id = SENTINEL_VALUE,
+        $use_ocr = false,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -2007,6 +2013,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "connecting_new_account", $connecting_new_account);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "use_ocr", $use_ocr);
+        $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $o_auth_url_request = $_body;
 
         return $this->getOauthUrlAsyncWithHttpInfo($o_auth_url_request, $contentType)
@@ -4384,6 +4392,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
         $request_id = SENTINEL_VALUE,
+        $use_ocr = false,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncConfluence'][0]
     )
     {
@@ -4400,6 +4410,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "use_ocr", $use_ocr);
+        $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $sync_files_request = $_body;
 
         list($response) = $this->syncConfluenceWithHttpInfo($sync_files_request, $contentType);
@@ -4569,6 +4581,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
         $request_id = SENTINEL_VALUE,
+        $use_ocr = false,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncConfluence'][0]
     )
     {
@@ -4585,6 +4599,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "use_ocr", $use_ocr);
+        $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $sync_files_request = $_body;
 
         return $this->syncConfluenceAsyncWithHttpInfo($sync_files_request, $contentType)
@@ -5164,6 +5180,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
         $request_id = SENTINEL_VALUE,
+        $use_ocr = false,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncFiles'][0]
     )
     {
@@ -5180,6 +5198,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "use_ocr", $use_ocr);
+        $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $sync_files_request = $_body;
 
         list($response) = $this->syncFilesWithHttpInfo($sync_files_request, $contentType);
@@ -5349,6 +5369,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
         $request_id = SENTINEL_VALUE,
+        $use_ocr = false,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncFiles'][0]
     )
     {
@@ -5365,6 +5387,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "use_ocr", $use_ocr);
+        $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $sync_files_request = $_body;
 
         return $this->syncFilesAsyncWithHttpInfo($sync_files_request, $contentType)
@@ -7192,6 +7216,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $request_id = SENTINEL_VALUE,
+        $use_ocr = false,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncS3Files'][0]
     )
     {
@@ -7208,6 +7234,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "use_ocr", $use_ocr);
+        $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $s3_file_sync_input = $_body;
 
         list($response) = $this->syncS3FilesWithHttpInfo($s3_file_sync_input, $contentType);
@@ -7377,6 +7405,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $request_id = SENTINEL_VALUE,
+        $use_ocr = false,
+        $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncS3Files'][0]
     )
     {
@@ -7393,6 +7423,8 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "set_page_as_boundary", $set_page_as_boundary);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "use_ocr", $use_ocr);
+        $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $s3_file_sync_input = $_body;
 
         return $this->syncS3FilesAsyncWithHttpInfo($s3_file_sync_input, $contentType)

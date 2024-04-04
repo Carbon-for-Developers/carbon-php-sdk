@@ -61,6 +61,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'revoked_access' => 'bool',
         'last_synced_at' => '\DateTime',
         'last_sync_action' => '\Carbon\Model\DataSourceLastSyncActions',
+        'enable_auto_sync' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -85,6 +86,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'revoked_access' => null,
         'last_synced_at' => 'date-time',
         'last_sync_action' => null,
+        'enable_auto_sync' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -107,6 +109,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
 		'revoked_access' => false,
 		'last_synced_at' => false,
 		'last_sync_action' => false,
+		'enable_auto_sync' => true,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -209,6 +212,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'revoked_access' => 'revoked_access',
         'last_synced_at' => 'last_synced_at',
         'last_sync_action' => 'last_sync_action',
+        'enable_auto_sync' => 'enable_auto_sync',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -231,6 +235,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'revoked_access' => 'setRevokedAccess',
         'last_synced_at' => 'setLastSyncedAt',
         'last_sync_action' => 'setLastSyncAction',
+        'enable_auto_sync' => 'setEnableAutoSync',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -253,6 +258,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'revoked_access' => 'getRevokedAccess',
         'last_synced_at' => 'getLastSyncedAt',
         'last_sync_action' => 'getLastSyncAction',
+        'enable_auto_sync' => 'getEnableAutoSync',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -326,6 +332,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('revoked_access', $data ?? [], null);
         $this->setIfExists('last_synced_at', $data ?? [], null);
         $this->setIfExists('last_sync_action', $data ?? [], null);
+        $this->setIfExists('enable_auto_sync', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -392,6 +399,9 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         }
         if ($this->container['last_sync_action'] === null) {
             $invalidProperties[] = "'last_sync_action' can't be null";
+        }
+        if ($this->container['enable_auto_sync'] === null) {
+            $invalidProperties[] = "'enable_auto_sync' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -779,6 +789,42 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         }
 
         $this->container['last_sync_action'] = $last_sync_action;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_auto_sync
+     *
+     * @return bool
+     */
+    public function getEnableAutoSync()
+    {
+        return $this->container['enable_auto_sync'];
+    }
+
+    /**
+     * Sets enable_auto_sync
+     *
+     * @param bool $enable_auto_sync enable_auto_sync
+     *
+     * @return self
+     */
+    public function setEnableAutoSync($enable_auto_sync)
+    {
+
+        if (is_null($enable_auto_sync)) {
+            array_push($this->openAPINullablesSetToNull, 'enable_auto_sync');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('enable_auto_sync', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['enable_auto_sync'] = $enable_auto_sync;
 
         return $this;
     }

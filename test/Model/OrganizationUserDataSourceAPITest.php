@@ -180,6 +180,15 @@ class OrganizationUserDataSourceAPITest extends TestCase
     }
 
     /**
+     * Test attribute "enable_auto_sync"
+     */
+    public function testPropertyEnableAutoSync()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

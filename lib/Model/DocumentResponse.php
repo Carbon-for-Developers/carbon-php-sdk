@@ -59,7 +59,8 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'vector' => 'float[]',
         'score' => 'float',
         'rank' => '\Carbon\Model\RankProperty',
-        'content_metadata' => 'object'
+        'content_metadata' => 'object',
+        'chunk_index' => 'int'
     ];
 
     /**
@@ -80,7 +81,8 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'vector' => null,
         'score' => null,
         'rank' => null,
-        'content_metadata' => null
+        'content_metadata' => null,
+        'chunk_index' => null
     ];
 
     /**
@@ -99,7 +101,8 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 		'vector' => true,
 		'score' => true,
 		'rank' => true,
-		'content_metadata' => true
+		'content_metadata' => true,
+		'chunk_index' => true
     ];
 
     /**
@@ -198,7 +201,8 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'vector' => 'vector',
         'score' => 'score',
         'rank' => 'rank',
-        'content_metadata' => 'content_metadata'
+        'content_metadata' => 'content_metadata',
+        'chunk_index' => 'chunk_index'
     ];
 
     /**
@@ -217,7 +221,8 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'vector' => 'setVector',
         'score' => 'setScore',
         'rank' => 'setRank',
-        'content_metadata' => 'setContentMetadata'
+        'content_metadata' => 'setContentMetadata',
+        'chunk_index' => 'setChunkIndex'
     ];
 
     /**
@@ -236,7 +241,8 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'vector' => 'getVector',
         'score' => 'getScore',
         'rank' => 'getRank',
-        'content_metadata' => 'getContentMetadata'
+        'content_metadata' => 'getContentMetadata',
+        'chunk_index' => 'getChunkIndex'
     ];
 
     /**
@@ -307,6 +313,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('score', $data ?? [], null);
         $this->setIfExists('rank', $data ?? [], null);
         $this->setIfExists('content_metadata', $data ?? [], null);
+        $this->setIfExists('chunk_index', $data ?? [], null);
     }
 
     /**
@@ -368,6 +375,9 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['content_metadata'] === null) {
             $invalidProperties[] = "'content_metadata' can't be null";
+        }
+        if ($this->container['chunk_index'] === null) {
+            $invalidProperties[] = "'chunk_index' can't be null";
         }
         return $invalidProperties;
     }
@@ -762,6 +772,42 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['content_metadata'] = $content_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets chunk_index
+     *
+     * @return int
+     */
+    public function getChunkIndex()
+    {
+        return $this->container['chunk_index'];
+    }
+
+    /**
+     * Sets chunk_index
+     *
+     * @param int $chunk_index chunk_index
+     *
+     * @return self
+     */
+    public function setChunkIndex($chunk_index)
+    {
+
+        if (is_null($chunk_index)) {
+            array_push($this->openAPINullablesSetToNull, 'chunk_index');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('chunk_index', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['chunk_index'] = $chunk_index;
 
         return $this;
     }

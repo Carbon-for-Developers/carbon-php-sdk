@@ -60,7 +60,9 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'int',
         'set_page_as_boundary' => 'bool',
         'data_source_id' => 'int',
-        'request_id' => 'string'
+        'request_id' => 'string',
+        'use_ocr' => 'bool',
+        'parse_pdf_tables_with_ocr' => 'bool'
     ];
 
     /**
@@ -82,7 +84,9 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => null,
         'set_page_as_boundary' => null,
         'data_source_id' => null,
-        'request_id' => null
+        'request_id' => null,
+        'use_ocr' => null,
+        'parse_pdf_tables_with_ocr' => null
     ];
 
     /**
@@ -102,7 +106,9 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'max_items_per_chunk' => true,
 		'set_page_as_boundary' => false,
 		'data_source_id' => true,
-		'request_id' => true
+		'request_id' => true,
+		'use_ocr' => true,
+		'parse_pdf_tables_with_ocr' => true
     ];
 
     /**
@@ -202,7 +208,9 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'max_items_per_chunk',
         'set_page_as_boundary' => 'set_page_as_boundary',
         'data_source_id' => 'data_source_id',
-        'request_id' => 'request_id'
+        'request_id' => 'request_id',
+        'use_ocr' => 'use_ocr',
+        'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr'
     ];
 
     /**
@@ -222,7 +230,9 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'setMaxItemsPerChunk',
         'set_page_as_boundary' => 'setSetPageAsBoundary',
         'data_source_id' => 'setDataSourceId',
-        'request_id' => 'setRequestId'
+        'request_id' => 'setRequestId',
+        'use_ocr' => 'setUseOcr',
+        'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr'
     ];
 
     /**
@@ -242,7 +252,9 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'getMaxItemsPerChunk',
         'set_page_as_boundary' => 'getSetPageAsBoundary',
         'data_source_id' => 'getDataSourceId',
-        'request_id' => 'getRequestId'
+        'request_id' => 'getRequestId',
+        'use_ocr' => 'getUseOcr',
+        'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr'
     ];
 
     /**
@@ -314,6 +326,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('request_id', $data ?? [], null);
+        $this->setIfExists('use_ocr', $data ?? [], false);
+        $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
     }
 
     /**
@@ -768,6 +782,78 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['request_id'] = $request_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_ocr
+     *
+     * @return bool|null
+     */
+    public function getUseOcr()
+    {
+        return $this->container['use_ocr'];
+    }
+
+    /**
+     * Sets use_ocr
+     *
+     * @param bool|null $use_ocr use_ocr
+     *
+     * @return self
+     */
+    public function setUseOcr($use_ocr)
+    {
+
+        if (is_null($use_ocr)) {
+            array_push($this->openAPINullablesSetToNull, 'use_ocr');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('use_ocr', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['use_ocr'] = $use_ocr;
+
+        return $this;
+    }
+
+    /**
+     * Gets parse_pdf_tables_with_ocr
+     *
+     * @return bool|null
+     */
+    public function getParsePdfTablesWithOcr()
+    {
+        return $this->container['parse_pdf_tables_with_ocr'];
+    }
+
+    /**
+     * Sets parse_pdf_tables_with_ocr
+     *
+     * @param bool|null $parse_pdf_tables_with_ocr parse_pdf_tables_with_ocr
+     *
+     * @return self
+     */
+    public function setParsePdfTablesWithOcr($parse_pdf_tables_with_ocr)
+    {
+
+        if (is_null($parse_pdf_tables_with_ocr)) {
+            array_push($this->openAPINullablesSetToNull, 'parse_pdf_tables_with_ocr');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('parse_pdf_tables_with_ocr', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['parse_pdf_tables_with_ocr'] = $parse_pdf_tables_with_ocr;
 
         return $this;
     }
