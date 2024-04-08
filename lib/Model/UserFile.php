@@ -66,6 +66,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'chunk_size' => 'int',
         'chunk_overlap' => 'int',
         'chunk_properties' => '\Carbon\Model\ChunkPropertiesNullable',
+        'ocr_properties' => 'object',
         'name' => 'string',
         'parent_id' => 'int',
         'enable_auto_sync' => 'bool',
@@ -105,6 +106,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'chunk_size' => null,
         'chunk_overlap' => null,
         'chunk_properties' => null,
+        'ocr_properties' => null,
         'name' => null,
         'parent_id' => null,
         'enable_auto_sync' => null,
@@ -142,6 +144,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
 		'chunk_size' => true,
 		'chunk_overlap' => true,
 		'chunk_properties' => true,
+		'ocr_properties' => false,
 		'name' => true,
 		'parent_id' => true,
 		'enable_auto_sync' => true,
@@ -259,6 +262,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'chunk_size' => 'chunk_size',
         'chunk_overlap' => 'chunk_overlap',
         'chunk_properties' => 'chunk_properties',
+        'ocr_properties' => 'ocr_properties',
         'name' => 'name',
         'parent_id' => 'parent_id',
         'enable_auto_sync' => 'enable_auto_sync',
@@ -296,6 +300,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'chunk_size' => 'setChunkSize',
         'chunk_overlap' => 'setChunkOverlap',
         'chunk_properties' => 'setChunkProperties',
+        'ocr_properties' => 'setOcrProperties',
         'name' => 'setName',
         'parent_id' => 'setParentId',
         'enable_auto_sync' => 'setEnableAutoSync',
@@ -333,6 +338,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'chunk_size' => 'getChunkSize',
         'chunk_overlap' => 'getChunkOverlap',
         'chunk_properties' => 'getChunkProperties',
+        'ocr_properties' => 'getOcrProperties',
         'name' => 'getName',
         'parent_id' => 'getParentId',
         'enable_auto_sync' => 'getEnableAutoSync',
@@ -421,6 +427,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('chunk_size', $data ?? [], null);
         $this->setIfExists('chunk_overlap', $data ?? [], null);
         $this->setIfExists('chunk_properties', $data ?? [], null);
+        $this->setIfExists('ocr_properties', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('parent_id', $data ?? [], null);
         $this->setIfExists('enable_auto_sync', $data ?? [], null);
@@ -512,6 +519,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['chunk_properties'] === null) {
             $invalidProperties[] = "'chunk_properties' can't be null";
+        }
+        if ($this->container['ocr_properties'] === null) {
+            $invalidProperties[] = "'ocr_properties' can't be null";
         }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
@@ -1130,6 +1140,35 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['chunk_properties'] = $chunk_properties;
+
+        return $this;
+    }
+
+    /**
+     * Gets ocr_properties
+     *
+     * @return object
+     */
+    public function getOcrProperties()
+    {
+        return $this->container['ocr_properties'];
+    }
+
+    /**
+     * Sets ocr_properties
+     *
+     * @param object $ocr_properties ocr_properties
+     *
+     * @return self
+     */
+    public function setOcrProperties($ocr_properties)
+    {
+
+        if (is_null($ocr_properties)) {
+            throw new \InvalidArgumentException('non-nullable ocr_properties cannot be null');
+        }
+
+        $this->container['ocr_properties'] = $ocr_properties;
 
         return $this;
     }

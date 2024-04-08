@@ -225,6 +225,15 @@ class UserFileTest extends TestCase
     }
 
     /**
+     * Test attribute "ocr_properties"
+     */
+    public function testPropertyOcrProperties()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "name"
      */
     public function testPropertyName()
