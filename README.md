@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.14-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.15-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -96,7 +96,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.14"
+    "konfig/carbon-php-sdk": "0.1.15"
   }
 }
 ```
