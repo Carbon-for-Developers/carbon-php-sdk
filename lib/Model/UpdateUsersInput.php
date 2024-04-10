@@ -50,7 +50,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'customer_ids' => 'string[]',
-        'auto_sync_enabled_sources' => '\Carbon\Model\AutoSyncEnabledSourcesProperty'
+        'auto_sync_enabled_sources' => '\Carbon\Model\AutoSyncEnabledSourcesProperty',
+        'file_upload_limit' => 'int'
     ];
 
     /**
@@ -62,7 +63,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'customer_ids' => null,
-        'auto_sync_enabled_sources' => null
+        'auto_sync_enabled_sources' => null,
+        'file_upload_limit' => null
     ];
 
     /**
@@ -72,7 +74,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'customer_ids' => false,
-		'auto_sync_enabled_sources' => true
+		'auto_sync_enabled_sources' => true,
+		'file_upload_limit' => true
     ];
 
     /**
@@ -162,7 +165,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'customer_ids' => 'customer_ids',
-        'auto_sync_enabled_sources' => 'auto_sync_enabled_sources'
+        'auto_sync_enabled_sources' => 'auto_sync_enabled_sources',
+        'file_upload_limit' => 'file_upload_limit'
     ];
 
     /**
@@ -172,7 +176,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'customer_ids' => 'setCustomerIds',
-        'auto_sync_enabled_sources' => 'setAutoSyncEnabledSources'
+        'auto_sync_enabled_sources' => 'setAutoSyncEnabledSources',
+        'file_upload_limit' => 'setFileUploadLimit'
     ];
 
     /**
@@ -182,7 +187,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'customer_ids' => 'getCustomerIds',
-        'auto_sync_enabled_sources' => 'getAutoSyncEnabledSources'
+        'auto_sync_enabled_sources' => 'getAutoSyncEnabledSources',
+        'file_upload_limit' => 'getFileUploadLimit'
     ];
 
     /**
@@ -244,6 +250,7 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('customer_ids', $data ?? [], null);
         $this->setIfExists('auto_sync_enabled_sources', $data ?? [], null);
+        $this->setIfExists('file_upload_limit', $data ?? [], null);
     }
 
     /**
@@ -360,6 +367,42 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['auto_sync_enabled_sources'] = $auto_sync_enabled_sources;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_upload_limit
+     *
+     * @return int|null
+     */
+    public function getFileUploadLimit()
+    {
+        return $this->container['file_upload_limit'];
+    }
+
+    /**
+     * Sets file_upload_limit
+     *
+     * @param int|null $file_upload_limit Custom file upload limit for the user. If set, then the user will not be allowed to          upload more files than this limit
+     *
+     * @return self
+     */
+    public function setFileUploadLimit($file_upload_limit)
+    {
+
+        if (is_null($file_upload_limit)) {
+            array_push($this->openAPINullablesSetToNull, 'file_upload_limit');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_upload_limit', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_upload_limit'] = $file_upload_limit;
 
         return $this;
     }

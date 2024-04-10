@@ -67,6 +67,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'chunk_overlap' => 'int',
         'chunk_properties' => '\Carbon\Model\ChunkPropertiesNullable',
         'ocr_properties' => 'object',
+        'ocr_job_started_at' => '\DateTime',
         'name' => 'string',
         'parent_id' => 'int',
         'enable_auto_sync' => 'bool',
@@ -107,6 +108,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'chunk_overlap' => null,
         'chunk_properties' => null,
         'ocr_properties' => null,
+        'ocr_job_started_at' => 'date-time',
         'name' => null,
         'parent_id' => null,
         'enable_auto_sync' => null,
@@ -145,6 +147,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
 		'chunk_overlap' => true,
 		'chunk_properties' => true,
 		'ocr_properties' => false,
+		'ocr_job_started_at' => true,
 		'name' => true,
 		'parent_id' => true,
 		'enable_auto_sync' => true,
@@ -263,6 +266,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'chunk_overlap' => 'chunk_overlap',
         'chunk_properties' => 'chunk_properties',
         'ocr_properties' => 'ocr_properties',
+        'ocr_job_started_at' => 'ocr_job_started_at',
         'name' => 'name',
         'parent_id' => 'parent_id',
         'enable_auto_sync' => 'enable_auto_sync',
@@ -301,6 +305,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'chunk_overlap' => 'setChunkOverlap',
         'chunk_properties' => 'setChunkProperties',
         'ocr_properties' => 'setOcrProperties',
+        'ocr_job_started_at' => 'setOcrJobStartedAt',
         'name' => 'setName',
         'parent_id' => 'setParentId',
         'enable_auto_sync' => 'setEnableAutoSync',
@@ -339,6 +344,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'chunk_overlap' => 'getChunkOverlap',
         'chunk_properties' => 'getChunkProperties',
         'ocr_properties' => 'getOcrProperties',
+        'ocr_job_started_at' => 'getOcrJobStartedAt',
         'name' => 'getName',
         'parent_id' => 'getParentId',
         'enable_auto_sync' => 'getEnableAutoSync',
@@ -428,6 +434,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('chunk_overlap', $data ?? [], null);
         $this->setIfExists('chunk_properties', $data ?? [], null);
         $this->setIfExists('ocr_properties', $data ?? [], null);
+        $this->setIfExists('ocr_job_started_at', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('parent_id', $data ?? [], null);
         $this->setIfExists('enable_auto_sync', $data ?? [], null);
@@ -522,6 +529,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['ocr_properties'] === null) {
             $invalidProperties[] = "'ocr_properties' can't be null";
+        }
+        if ($this->container['ocr_job_started_at'] === null) {
+            $invalidProperties[] = "'ocr_job_started_at' can't be null";
         }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
@@ -1169,6 +1179,42 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['ocr_properties'] = $ocr_properties;
+
+        return $this;
+    }
+
+    /**
+     * Gets ocr_job_started_at
+     *
+     * @return \DateTime
+     */
+    public function getOcrJobStartedAt()
+    {
+        return $this->container['ocr_job_started_at'];
+    }
+
+    /**
+     * Sets ocr_job_started_at
+     *
+     * @param \DateTime $ocr_job_started_at ocr_job_started_at
+     *
+     * @return self
+     */
+    public function setOcrJobStartedAt($ocr_job_started_at)
+    {
+
+        if (is_null($ocr_job_started_at)) {
+            array_push($this->openAPINullablesSetToNull, 'ocr_job_started_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ocr_job_started_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['ocr_job_started_at'] = $ocr_job_started_at;
 
         return $this;
     }

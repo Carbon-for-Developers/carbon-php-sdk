@@ -234,6 +234,15 @@ class UserFileTest extends TestCase
     }
 
     /**
+     * Test attribute "ocr_job_started_at"
+     */
+    public function testPropertyOcrJobStartedAt()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "name"
      */
     public function testPropertyName()

@@ -59,7 +59,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
         'data_source_id' => 'int',
-        'request_id' => 'string'
+        'request_id' => 'string',
+        'sync_attachments' => 'bool'
     ];
 
     /**
@@ -80,7 +81,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
         'data_source_id' => null,
-        'request_id' => null
+        'request_id' => null,
+        'sync_attachments' => null
     ];
 
     /**
@@ -99,7 +101,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
 		'data_source_id' => true,
-		'request_id' => true
+		'request_id' => true,
+		'sync_attachments' => true
     ];
 
     /**
@@ -198,7 +201,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
         'data_source_id' => 'data_source_id',
-        'request_id' => 'request_id'
+        'request_id' => 'request_id',
+        'sync_attachments' => 'sync_attachments'
     ];
 
     /**
@@ -217,7 +221,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
         'data_source_id' => 'setDataSourceId',
-        'request_id' => 'setRequestId'
+        'request_id' => 'setRequestId',
+        'sync_attachments' => 'setSyncAttachments'
     ];
 
     /**
@@ -236,7 +241,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
         'data_source_id' => 'getDataSourceId',
-        'request_id' => 'getRequestId'
+        'request_id' => 'getRequestId',
+        'sync_attachments' => 'getSyncAttachments'
     ];
 
     /**
@@ -307,6 +313,7 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('request_id', $data ?? [], null);
+        $this->setIfExists('sync_attachments', $data ?? [], false);
     }
 
     /**
@@ -732,6 +739,42 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['request_id'] = $request_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_attachments
+     *
+     * @return bool|null
+     */
+    public function getSyncAttachments()
+    {
+        return $this->container['sync_attachments'];
+    }
+
+    /**
+     * Sets sync_attachments
+     *
+     * @param bool|null $sync_attachments sync_attachments
+     *
+     * @return self
+     */
+    public function setSyncAttachments($sync_attachments)
+    {
+
+        if (is_null($sync_attachments)) {
+            array_push($this->openAPINullablesSetToNull, 'sync_attachments');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sync_attachments', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['sync_attachments'] = $sync_attachments;
 
         return $this;
     }

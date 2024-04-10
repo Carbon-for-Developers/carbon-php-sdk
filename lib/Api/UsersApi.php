@@ -870,6 +870,7 @@ class UsersApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError
+     * @deprecated
      */
     public function toggleUserFeatures(
 
@@ -898,6 +899,7 @@ class UsersApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function toggleUserFeaturesWithHttpInfo($modify_user_configuration_input, string $contentType = self::contentTypes['toggleUserFeatures'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -1035,6 +1037,7 @@ class UsersApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function toggleUserFeaturesAsync(
 
@@ -1066,6 +1069,7 @@ class UsersApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function toggleUserFeaturesAsyncWithHttpInfo($modify_user_configuration_input, string $contentType = self::contentTypes['toggleUserFeatures'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -1119,6 +1123,7 @@ class UsersApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function toggleUserFeaturesRequest($modify_user_configuration_input, string $contentType = self::contentTypes['toggleUserFeatures'][0])
     {
@@ -1247,12 +1252,14 @@ class UsersApi extends \Carbon\CustomApi
 
         $customer_ids,
         $auto_sync_enabled_sources = SENTINEL_VALUE,
+        $file_upload_limit = SENTINEL_VALUE,
         string $contentType = self::contentTypes['updateUsers'][0]
     )
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "customer_ids", $customer_ids);
         $this->setRequestBodyProperty($_body, "auto_sync_enabled_sources", $auto_sync_enabled_sources);
+        $this->setRequestBodyProperty($_body, "file_upload_limit", $file_upload_limit);
         $update_users_input = $_body;
 
         list($response) = $this->updateUsersWithHttpInfo($update_users_input, $contentType);
@@ -1412,12 +1419,14 @@ class UsersApi extends \Carbon\CustomApi
 
         $customer_ids,
         $auto_sync_enabled_sources = SENTINEL_VALUE,
+        $file_upload_limit = SENTINEL_VALUE,
         string $contentType = self::contentTypes['updateUsers'][0]
     )
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "customer_ids", $customer_ids);
         $this->setRequestBodyProperty($_body, "auto_sync_enabled_sources", $auto_sync_enabled_sources);
+        $this->setRequestBodyProperty($_body, "file_upload_limit", $file_upload_limit);
         $update_users_input = $_body;
 
         return $this->updateUsersAsyncWithHttpInfo($update_users_input, $contentType)

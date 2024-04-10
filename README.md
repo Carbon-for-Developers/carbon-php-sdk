@@ -2130,7 +2130,8 @@ $result = $carbon->integrations->syncGmail(
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
     data_source_id: 1, 
-    request_id: "string_example"
+    request_id: "string_example", 
+    sync_attachments: False
 );
 ```
 
@@ -2155,6 +2156,8 @@ $result = $carbon->integrations->syncGmail(
 ##### data_source_id: `int`<a id="data_source_id-int"></a>
 
 ##### request_id: `string`<a id="request_id-string"></a>
+
+##### sync_attachments: `bool`<a id="sync_attachments-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2248,7 +2251,8 @@ $result = $carbon->integrations->syncOutlook(
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
     data_source_id: 1, 
-    request_id: "string_example"
+    request_id: "string_example", 
+    sync_attachments: False
 );
 ```
 
@@ -2275,6 +2279,8 @@ $result = $carbon->integrations->syncOutlook(
 ##### data_source_id: `int`<a id="data_source_id-int"></a>
 
 ##### request_id: `string`<a id="request_id-string"></a>
+
+##### sync_attachments: `bool`<a id="sync_attachments-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2559,7 +2565,8 @@ $result = $carbon->users->updateUsers(
     ], 
     auto_sync_enabled_sources: [
         "string_example"
-    ]
+    ], 
+    file_upload_limit: 1
 );
 ```
 
@@ -2570,6 +2577,10 @@ $result = $carbon->users->updateUsers(
 List of organization supplied user IDs
 
 ##### auto_sync_enabled_sources: [`AutoSyncEnabledSourcesProperty`](./lib/Model/AutoSyncEnabledSourcesProperty.php)<a id="auto_sync_enabled_sources-autosyncenabledsourcespropertylibmodelautosyncenabledsourcespropertyphp"></a>
+
+##### file_upload_limit: `int`<a id="file_upload_limit-int"></a>
+
+Custom file upload limit for the user. If set, then the user will not be allowed to          upload more files than this limit
 
 
 #### 🔄 Return<a id="🔄-return"></a>

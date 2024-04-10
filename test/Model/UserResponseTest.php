@@ -169,4 +169,13 @@ class UserResponseTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "custom_limits"
+     */
+    public function testPropertyCustomLimits()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

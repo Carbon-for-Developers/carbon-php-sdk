@@ -88,4 +88,13 @@ class UpdateUsersInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "file_upload_limit"
+     */
+    public function testPropertyFileUploadLimit()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

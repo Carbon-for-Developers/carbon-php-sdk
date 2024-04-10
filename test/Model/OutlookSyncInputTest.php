@@ -169,4 +169,13 @@ class OutlookSyncInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "sync_attachments"
+     */
+    public function testPropertySyncAttachments()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

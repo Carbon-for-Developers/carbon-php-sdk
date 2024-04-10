@@ -6002,6 +6002,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $data_source_id = SENTINEL_VALUE,
         $request_id = SENTINEL_VALUE,
+        $sync_attachments = false,
         string $contentType = self::contentTypes['syncGmail'][0]
     )
     {
@@ -6016,6 +6017,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "sync_attachments", $sync_attachments);
         $gmail_sync_input = $_body;
 
         list($response) = $this->syncGmailWithHttpInfo($gmail_sync_input, $contentType);
@@ -6183,6 +6185,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $data_source_id = SENTINEL_VALUE,
         $request_id = SENTINEL_VALUE,
+        $sync_attachments = false,
         string $contentType = self::contentTypes['syncGmail'][0]
     )
     {
@@ -6197,6 +6200,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "sync_attachments", $sync_attachments);
         $gmail_sync_input = $_body;
 
         return $this->syncGmailAsyncWithHttpInfo($gmail_sync_input, $contentType)
@@ -6407,6 +6411,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $data_source_id = SENTINEL_VALUE,
         $request_id = SENTINEL_VALUE,
+        $sync_attachments = false,
         string $contentType = self::contentTypes['syncOutlook'][0]
     )
     {
@@ -6422,6 +6427,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "sync_attachments", $sync_attachments);
         $outlook_sync_input = $_body;
 
         list($response) = $this->syncOutlookWithHttpInfo($outlook_sync_input, $contentType);
@@ -6590,6 +6596,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $data_source_id = SENTINEL_VALUE,
         $request_id = SENTINEL_VALUE,
+        $sync_attachments = false,
         string $contentType = self::contentTypes['syncOutlook'][0]
     )
     {
@@ -6605,6 +6612,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "sync_attachments", $sync_attachments);
         $outlook_sync_input = $_body;
 
         return $this->syncOutlookAsyncWithHttpInfo($outlook_sync_input, $contentType)

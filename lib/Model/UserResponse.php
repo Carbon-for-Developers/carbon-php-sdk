@@ -59,7 +59,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_characters_synced' => 'int',
         'num_tokens_synced' => 'int',
         'unique_file_tags' => 'object[]',
-        'enabled_features' => 'object'
+        'enabled_features' => 'object',
+        'custom_limits' => 'object'
     ];
 
     /**
@@ -80,7 +81,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_characters_synced' => null,
         'num_tokens_synced' => null,
         'unique_file_tags' => null,
-        'enabled_features' => null
+        'enabled_features' => null,
+        'custom_limits' => null
     ];
 
     /**
@@ -99,7 +101,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 		'num_characters_synced' => false,
 		'num_tokens_synced' => false,
 		'unique_file_tags' => false,
-		'enabled_features' => true
+		'enabled_features' => true,
+		'custom_limits' => false
     ];
 
     /**
@@ -198,7 +201,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_characters_synced' => 'num_characters_synced',
         'num_tokens_synced' => 'num_tokens_synced',
         'unique_file_tags' => 'unique_file_tags',
-        'enabled_features' => 'enabled_features'
+        'enabled_features' => 'enabled_features',
+        'custom_limits' => 'custom_limits'
     ];
 
     /**
@@ -217,7 +221,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_characters_synced' => 'setNumCharactersSynced',
         'num_tokens_synced' => 'setNumTokensSynced',
         'unique_file_tags' => 'setUniqueFileTags',
-        'enabled_features' => 'setEnabledFeatures'
+        'enabled_features' => 'setEnabledFeatures',
+        'custom_limits' => 'setCustomLimits'
     ];
 
     /**
@@ -236,7 +241,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_characters_synced' => 'getNumCharactersSynced',
         'num_tokens_synced' => 'getNumTokensSynced',
         'unique_file_tags' => 'getUniqueFileTags',
-        'enabled_features' => 'getEnabledFeatures'
+        'enabled_features' => 'getEnabledFeatures',
+        'custom_limits' => 'getCustomLimits'
     ];
 
     /**
@@ -307,6 +313,7 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('num_tokens_synced', $data ?? [], null);
         $this->setIfExists('unique_file_tags', $data ?? [], null);
         $this->setIfExists('enabled_features', $data ?? [], null);
+        $this->setIfExists('custom_limits', $data ?? [], null);
     }
 
     /**
@@ -368,6 +375,9 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['enabled_features'] === null) {
             $invalidProperties[] = "'enabled_features' can't be null";
+        }
+        if ($this->container['custom_limits'] === null) {
+            $invalidProperties[] = "'custom_limits' can't be null";
         }
         return $invalidProperties;
     }
@@ -713,6 +723,35 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['enabled_features'] = $enabled_features;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom_limits
+     *
+     * @return object
+     */
+    public function getCustomLimits()
+    {
+        return $this->container['custom_limits'];
+    }
+
+    /**
+     * Sets custom_limits
+     *
+     * @param object $custom_limits custom_limits
+     *
+     * @return self
+     */
+    public function setCustomLimits($custom_limits)
+    {
+
+        if (is_null($custom_limits)) {
+            throw new \InvalidArgumentException('non-nullable custom_limits cannot be null');
+        }
+
+        $this->container['custom_limits'] = $custom_limits;
 
         return $this;
     }
