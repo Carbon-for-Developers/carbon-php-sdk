@@ -70,7 +70,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'connecting_new_account' => 'bool',
         'request_id' => 'string',
         'use_ocr' => 'bool',
-        'parse_pdf_tables_with_ocr' => 'bool'
+        'parse_pdf_tables_with_ocr' => 'bool',
+        'enable_file_picker' => 'bool'
     ];
 
     /**
@@ -102,7 +103,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'connecting_new_account' => null,
         'request_id' => null,
         'use_ocr' => null,
-        'parse_pdf_tables_with_ocr' => null
+        'parse_pdf_tables_with_ocr' => null,
+        'enable_file_picker' => null
     ];
 
     /**
@@ -132,7 +134,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'connecting_new_account' => true,
 		'request_id' => true,
 		'use_ocr' => true,
-		'parse_pdf_tables_with_ocr' => true
+		'parse_pdf_tables_with_ocr' => true,
+		'enable_file_picker' => false
     ];
 
     /**
@@ -242,7 +245,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'connecting_new_account' => 'connecting_new_account',
         'request_id' => 'request_id',
         'use_ocr' => 'use_ocr',
-        'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr'
+        'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
+        'enable_file_picker' => 'enable_file_picker'
     ];
 
     /**
@@ -272,7 +276,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'connecting_new_account' => 'setConnectingNewAccount',
         'request_id' => 'setRequestId',
         'use_ocr' => 'setUseOcr',
-        'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr'
+        'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
+        'enable_file_picker' => 'setEnableFilePicker'
     ];
 
     /**
@@ -302,7 +307,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'connecting_new_account' => 'getConnectingNewAccount',
         'request_id' => 'getRequestId',
         'use_ocr' => 'getUseOcr',
-        'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr'
+        'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
+        'enable_file_picker' => 'getEnableFilePicker'
     ];
 
     /**
@@ -384,6 +390,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
+        $this->setIfExists('enable_file_picker', $data ?? [], true);
     }
 
     /**
@@ -1205,6 +1212,35 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['parse_pdf_tables_with_ocr'] = $parse_pdf_tables_with_ocr;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_file_picker
+     *
+     * @return bool|null
+     */
+    public function getEnableFilePicker()
+    {
+        return $this->container['enable_file_picker'];
+    }
+
+    /**
+     * Sets enable_file_picker
+     *
+     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: DROPBOX, BOX, GOOGLE_DRIVE, SHAREPOINT, ONEDRIVE
+     *
+     * @return self
+     */
+    public function setEnableFilePicker($enable_file_picker)
+    {
+
+        if (is_null($enable_file_picker)) {
+            throw new \InvalidArgumentException('non-nullable enable_file_picker cannot be null');
+        }
+
+        $this->container['enable_file_picker'] = $enable_file_picker;
 
         return $this;
     }

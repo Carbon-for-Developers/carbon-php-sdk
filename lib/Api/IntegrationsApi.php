@@ -1784,6 +1784,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $request_id = SENTINEL_VALUE,
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
+        $enable_file_picker = true,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -1810,6 +1811,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "use_ocr", $use_ocr);
         $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
+        $this->setRequestBodyProperty($_body, "enable_file_picker", $enable_file_picker);
         $o_auth_url_request = $_body;
 
         list($response) = $this->getOauthUrlWithHttpInfo($o_auth_url_request, $contentType);
@@ -1989,6 +1991,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $request_id = SENTINEL_VALUE,
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
+        $enable_file_picker = true,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -2015,6 +2018,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "use_ocr", $use_ocr);
         $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
+        $this->setRequestBodyProperty($_body, "enable_file_picker", $enable_file_picker);
         $o_auth_url_request = $_body;
 
         return $this->getOauthUrlAsyncWithHttpInfo($o_auth_url_request, $contentType)

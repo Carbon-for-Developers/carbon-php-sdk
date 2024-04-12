@@ -98,6 +98,8 @@ class DataSourceTypeNullable
 
     public const PNG = 'PNG';
 
+    public const JPEG = 'JPEG';
+
     public const MP3 = 'MP3';
 
     public const MP4 = 'MP4';
@@ -159,6 +161,7 @@ class DataSourceTypeNullable
             self::SALESFORCE,
             self::JPG,
             self::PNG,
+            self::JPEG,
             self::MP3,
             self::MP4,
             self::MP2,

@@ -268,4 +268,13 @@ class OAuthURLRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "enable_file_picker"
+     */
+    public function testPropertyEnableFilePicker()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

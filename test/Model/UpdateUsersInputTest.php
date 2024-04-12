@@ -90,9 +90,18 @@ class UpdateUsersInputTest extends TestCase
     }
 
     /**
-     * Test attribute "file_upload_limit"
+     * Test attribute "max_files"
      */
-    public function testPropertyFileUploadLimit()
+    public function testPropertyMaxFiles()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "max_files_per_upload"
+     */
+    public function testPropertyMaxFilesPerUpload()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

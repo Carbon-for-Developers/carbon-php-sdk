@@ -58,7 +58,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'bool',
         'max_items_per_chunk' => 'int',
         'sync_files_on_connection' => 'bool',
-        'set_page_as_boundary' => 'bool'
+        'set_page_as_boundary' => 'bool',
+        'enable_file_picker' => 'bool'
     ];
 
     /**
@@ -78,7 +79,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => null,
         'max_items_per_chunk' => null,
         'sync_files_on_connection' => null,
-        'set_page_as_boundary' => null
+        'set_page_as_boundary' => null,
+        'enable_file_picker' => null
     ];
 
     /**
@@ -96,7 +98,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
 		'prepend_filename_to_chunks' => true,
 		'max_items_per_chunk' => true,
 		'sync_files_on_connection' => true,
-		'set_page_as_boundary' => false
+		'set_page_as_boundary' => false,
+		'enable_file_picker' => false
     ];
 
     /**
@@ -194,7 +197,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
         'max_items_per_chunk' => 'max_items_per_chunk',
         'sync_files_on_connection' => 'sync_files_on_connection',
-        'set_page_as_boundary' => 'set_page_as_boundary'
+        'set_page_as_boundary' => 'set_page_as_boundary',
+        'enable_file_picker' => 'enable_file_picker'
     ];
 
     /**
@@ -212,7 +216,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
         'max_items_per_chunk' => 'setMaxItemsPerChunk',
         'sync_files_on_connection' => 'setSyncFilesOnConnection',
-        'set_page_as_boundary' => 'setSetPageAsBoundary'
+        'set_page_as_boundary' => 'setSetPageAsBoundary',
+        'enable_file_picker' => 'setEnableFilePicker'
     ];
 
     /**
@@ -230,7 +235,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
         'max_items_per_chunk' => 'getMaxItemsPerChunk',
         'sync_files_on_connection' => 'getSyncFilesOnConnection',
-        'set_page_as_boundary' => 'getSetPageAsBoundary'
+        'set_page_as_boundary' => 'getSetPageAsBoundary',
+        'enable_file_picker' => 'getEnableFilePicker'
     ];
 
     /**
@@ -300,6 +306,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
+        $this->setIfExists('enable_file_picker', $data ?? [], true);
     }
 
     /**
@@ -693,6 +700,35 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['set_page_as_boundary'] = $set_page_as_boundary;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_file_picker
+     *
+     * @return bool|null
+     */
+    public function getEnableFilePicker()
+    {
+        return $this->container['enable_file_picker'];
+    }
+
+    /**
+     * Sets enable_file_picker
+     *
+     * @param bool|null $enable_file_picker enable_file_picker
+     *
+     * @return self
+     */
+    public function setEnableFilePicker($enable_file_picker)
+    {
+
+        if (is_null($enable_file_picker)) {
+            throw new \InvalidArgumentException('non-nullable enable_file_picker cannot be null');
+        }
+
+        $this->container['enable_file_picker'] = $enable_file_picker;
 
         return $this;
     }

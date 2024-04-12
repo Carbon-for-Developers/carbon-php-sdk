@@ -1304,6 +1304,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
+        "enable_file_picker" => True,
     ]
 );
 ```
@@ -1530,7 +1531,8 @@ $result = $carbon->integrations->getOauthUrl(
     connecting_new_account: False, 
     request_id: "string_example", 
     use_ocr: False, 
-    parse_pdf_tables_with_ocr: False
+    parse_pdf_tables_with_ocr: False, 
+    enable_file_picker: True
 );
 ```
 
@@ -1591,6 +1593,10 @@ This request id will be added to all files that get synced using the generated O
 Enable OCR for files that support it. Supported formats: pdf
 
 ##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
+
+##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
+
+Enable integration's file picker for sources that support it. Supported sources: DROPBOX, BOX, GOOGLE_DRIVE, SHAREPOINT, ONEDRIVE
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2566,7 +2572,8 @@ $result = $carbon->users->updateUsers(
     auto_sync_enabled_sources: [
         "string_example"
     ], 
-    file_upload_limit: 1
+    max_files: -1, 
+    max_files_per_upload: -1
 );
 ```
 
@@ -2578,9 +2585,13 @@ List of organization supplied user IDs
 
 ##### auto_sync_enabled_sources: [`AutoSyncEnabledSourcesProperty`](./lib/Model/AutoSyncEnabledSourcesProperty.php)<a id="auto_sync_enabled_sources-autosyncenabledsourcespropertylibmodelautosyncenabledsourcespropertyphp"></a>
 
-##### file_upload_limit: `int`<a id="file_upload_limit-int"></a>
+##### max_files: `int`<a id="max_files-int"></a>
 
-Custom file upload limit for the user. If set, then the user will not be allowed to          upload more files than this limit
+Custom file upload limit for the user over *all* user's files across all uploads.          If set, then the user will not be allowed to upload more files than this limit. If not set, or if set to -1,         then the user will have no limit.
+
+##### max_files_per_upload: `int`<a id="max_files_per_upload-int"></a>
+
+Custom file upload limit for the user across a single upload.         If set, then the user will not be allowed to upload more files than this limit in a single upload. If not set,         or if set to -1, then the user will have no limit.
 
 
 #### 🔄 Return<a id="🔄-return"></a>

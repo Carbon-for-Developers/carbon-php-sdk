@@ -51,7 +51,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'customer_ids' => 'string[]',
         'auto_sync_enabled_sources' => '\Carbon\Model\AutoSyncEnabledSourcesProperty',
-        'file_upload_limit' => 'int'
+        'max_files' => 'int',
+        'max_files_per_upload' => 'int'
     ];
 
     /**
@@ -64,7 +65,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'customer_ids' => null,
         'auto_sync_enabled_sources' => null,
-        'file_upload_limit' => null
+        'max_files' => null,
+        'max_files_per_upload' => null
     ];
 
     /**
@@ -75,7 +77,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'customer_ids' => false,
 		'auto_sync_enabled_sources' => true,
-		'file_upload_limit' => true
+		'max_files' => true,
+		'max_files_per_upload' => true
     ];
 
     /**
@@ -166,7 +169,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'customer_ids' => 'customer_ids',
         'auto_sync_enabled_sources' => 'auto_sync_enabled_sources',
-        'file_upload_limit' => 'file_upload_limit'
+        'max_files' => 'max_files',
+        'max_files_per_upload' => 'max_files_per_upload'
     ];
 
     /**
@@ -177,7 +181,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'customer_ids' => 'setCustomerIds',
         'auto_sync_enabled_sources' => 'setAutoSyncEnabledSources',
-        'file_upload_limit' => 'setFileUploadLimit'
+        'max_files' => 'setMaxFiles',
+        'max_files_per_upload' => 'setMaxFilesPerUpload'
     ];
 
     /**
@@ -188,7 +193,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'customer_ids' => 'getCustomerIds',
         'auto_sync_enabled_sources' => 'getAutoSyncEnabledSources',
-        'file_upload_limit' => 'getFileUploadLimit'
+        'max_files' => 'getMaxFiles',
+        'max_files_per_upload' => 'getMaxFilesPerUpload'
     ];
 
     /**
@@ -250,7 +256,8 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('customer_ids', $data ?? [], null);
         $this->setIfExists('auto_sync_enabled_sources', $data ?? [], null);
-        $this->setIfExists('file_upload_limit', $data ?? [], null);
+        $this->setIfExists('max_files', $data ?? [], null);
+        $this->setIfExists('max_files_per_upload', $data ?? [], null);
     }
 
     /**
@@ -285,6 +292,14 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ((count($this->container['customer_ids']) > 100)) {
             $invalidProperties[] = "invalid value for 'customer_ids', number of items must be less than or equal to 100.";
+        }
+
+        if (!is_null($this->container['max_files']) && ($this->container['max_files'] < -1)) {
+            $invalidProperties[] = "invalid value for 'max_files', must be bigger than or equal to -1.";
+        }
+
+        if (!is_null($this->container['max_files_per_upload']) && ($this->container['max_files_per_upload'] < -1)) {
+            $invalidProperties[] = "invalid value for 'max_files_per_upload', must be bigger than or equal to -1.";
         }
 
         return $invalidProperties;
@@ -372,37 +387,83 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets file_upload_limit
+     * Gets max_files
      *
      * @return int|null
      */
-    public function getFileUploadLimit()
+    public function getMaxFiles()
     {
-        return $this->container['file_upload_limit'];
+        return $this->container['max_files'];
     }
 
     /**
-     * Sets file_upload_limit
+     * Sets max_files
      *
-     * @param int|null $file_upload_limit Custom file upload limit for the user. If set, then the user will not be allowed to          upload more files than this limit
+     * @param int|null $max_files Custom file upload limit for the user over *all* user's files across all uploads.          If set, then the user will not be allowed to upload more files than this limit. If not set, or if set to -1,         then the user will have no limit.
      *
      * @return self
      */
-    public function setFileUploadLimit($file_upload_limit)
+    public function setMaxFiles($max_files)
     {
 
-        if (is_null($file_upload_limit)) {
-            array_push($this->openAPINullablesSetToNull, 'file_upload_limit');
+        if (!is_null($max_files) && ($max_files < -1)) {
+            throw new \InvalidArgumentException('invalid value for $max_files when calling UpdateUsersInput., must be bigger than or equal to -1.');
+        }
+
+
+        if (is_null($max_files)) {
+            array_push($this->openAPINullablesSetToNull, 'max_files');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('file_upload_limit', $nullablesSetToNull);
+            $index = array_search('max_files', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['file_upload_limit'] = $file_upload_limit;
+        $this->container['max_files'] = $max_files;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_files_per_upload
+     *
+     * @return int|null
+     */
+    public function getMaxFilesPerUpload()
+    {
+        return $this->container['max_files_per_upload'];
+    }
+
+    /**
+     * Sets max_files_per_upload
+     *
+     * @param int|null $max_files_per_upload Custom file upload limit for the user across a single upload.         If set, then the user will not be allowed to upload more files than this limit in a single upload. If not set,         or if set to -1, then the user will have no limit.
+     *
+     * @return self
+     */
+    public function setMaxFilesPerUpload($max_files_per_upload)
+    {
+
+        if (!is_null($max_files_per_upload) && ($max_files_per_upload < -1)) {
+            throw new \InvalidArgumentException('invalid value for $max_files_per_upload when calling UpdateUsersInput., must be bigger than or equal to -1.');
+        }
+
+
+        if (is_null($max_files_per_upload)) {
+            array_push($this->openAPINullablesSetToNull, 'max_files_per_upload');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_files_per_upload', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['max_files_per_upload'] = $max_files_per_upload;
 
         return $this;
     }
