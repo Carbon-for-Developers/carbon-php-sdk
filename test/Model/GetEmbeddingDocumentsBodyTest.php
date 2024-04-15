@@ -126,6 +126,15 @@ class GetEmbeddingDocumentsBodyTest extends TestCase
     }
 
     /**
+     * Test attribute "include_all_children"
+     */
+    public function testPropertyIncludeAllChildren()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "tags_v2"
      */
     public function testPropertyTagsV2()

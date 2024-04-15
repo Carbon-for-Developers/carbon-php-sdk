@@ -55,6 +55,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'k' => 'int',
         'file_ids' => 'int[]',
         'parent_file_ids' => 'int[]',
+        'include_all_children' => 'bool',
         'tags_v2' => 'object',
         'include_tags' => 'bool',
         'include_vectors' => 'bool',
@@ -79,6 +80,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'k' => null,
         'file_ids' => null,
         'parent_file_ids' => null,
+        'include_all_children' => null,
         'tags_v2' => null,
         'include_tags' => null,
         'include_vectors' => null,
@@ -101,6 +103,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
 		'k' => false,
 		'file_ids' => true,
 		'parent_file_ids' => true,
+		'include_all_children' => false,
 		'tags_v2' => true,
 		'include_tags' => true,
 		'include_vectors' => true,
@@ -203,6 +206,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'k' => 'k',
         'file_ids' => 'file_ids',
         'parent_file_ids' => 'parent_file_ids',
+        'include_all_children' => 'include_all_children',
         'tags_v2' => 'tags_v2',
         'include_tags' => 'include_tags',
         'include_vectors' => 'include_vectors',
@@ -225,6 +229,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'k' => 'setK',
         'file_ids' => 'setFileIds',
         'parent_file_ids' => 'setParentFileIds',
+        'include_all_children' => 'setIncludeAllChildren',
         'tags_v2' => 'setTagsV2',
         'include_tags' => 'setIncludeTags',
         'include_vectors' => 'setIncludeVectors',
@@ -247,6 +252,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'k' => 'getK',
         'file_ids' => 'getFileIds',
         'parent_file_ids' => 'getParentFileIds',
+        'include_all_children' => 'getIncludeAllChildren',
         'tags_v2' => 'getTagsV2',
         'include_tags' => 'getIncludeTags',
         'include_vectors' => 'getIncludeVectors',
@@ -320,6 +326,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('k', $data ?? [], null);
         $this->setIfExists('file_ids', $data ?? [], null);
         $this->setIfExists('parent_file_ids', $data ?? [], null);
+        $this->setIfExists('include_all_children', $data ?? [], false);
         $this->setIfExists('tags_v2', $data ?? [], null);
         $this->setIfExists('include_tags', $data ?? [], null);
         $this->setIfExists('include_vectors', $data ?? [], null);
@@ -566,6 +573,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
      * Gets parent_file_ids
      *
      * @return int[]|null
+     * @deprecated
      */
     public function getParentFileIds()
     {
@@ -578,6 +586,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
      * @param int[]|null $parent_file_ids Optional list of parent file IDs to limit the search to. A parent file describes a file to which         another file belongs (e.g. a folder)
      *
      * @return self
+     * @deprecated
      */
     public function setParentFileIds($parent_file_ids)
     {
@@ -594,6 +603,35 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         }
 
         $this->container['parent_file_ids'] = $parent_file_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets include_all_children
+     *
+     * @return bool|null
+     */
+    public function getIncludeAllChildren()
+    {
+        return $this->container['include_all_children'];
+    }
+
+    /**
+     * Sets include_all_children
+     *
+     * @param bool|null $include_all_children Flag to control whether or not to include all children of filtered files in the embedding search.
+     *
+     * @return self
+     */
+    public function setIncludeAllChildren($include_all_children)
+    {
+
+        if (is_null($include_all_children)) {
+            throw new \InvalidArgumentException('non-nullable include_all_children cannot be null');
+        }
+
+        $this->container['include_all_children'] = $include_all_children;
 
         return $this;
     }

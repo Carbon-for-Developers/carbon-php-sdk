@@ -160,6 +160,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $query_vector = SENTINEL_VALUE,
         $file_ids = SENTINEL_VALUE,
         $parent_file_ids = SENTINEL_VALUE,
+        $include_all_children = false,
         $tags_v2 = SENTINEL_VALUE,
         $include_tags = SENTINEL_VALUE,
         $include_vectors = SENTINEL_VALUE,
@@ -178,6 +179,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "k", $k);
         $this->setRequestBodyProperty($_body, "file_ids", $file_ids);
         $this->setRequestBodyProperty($_body, "parent_file_ids", $parent_file_ids);
+        $this->setRequestBodyProperty($_body, "include_all_children", $include_all_children);
         $this->setRequestBodyProperty($_body, "tags_v2", $tags_v2);
         $this->setRequestBodyProperty($_body, "include_tags", $include_tags);
         $this->setRequestBodyProperty($_body, "include_vectors", $include_vectors);
@@ -349,6 +351,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $query_vector = SENTINEL_VALUE,
         $file_ids = SENTINEL_VALUE,
         $parent_file_ids = SENTINEL_VALUE,
+        $include_all_children = false,
         $tags_v2 = SENTINEL_VALUE,
         $include_tags = SENTINEL_VALUE,
         $include_vectors = SENTINEL_VALUE,
@@ -367,6 +370,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "k", $k);
         $this->setRequestBodyProperty($_body, "file_ids", $file_ids);
         $this->setRequestBodyProperty($_body, "parent_file_ids", $parent_file_ids);
+        $this->setRequestBodyProperty($_body, "include_all_children", $include_all_children);
         $this->setRequestBodyProperty($_body, "tags_v2", $tags_v2);
         $this->setRequestBodyProperty($_body, "include_tags", $include_tags);
         $this->setRequestBodyProperty($_body, "include_vectors", $include_vectors);

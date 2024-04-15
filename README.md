@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.16-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.17-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -96,7 +96,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.16"
+    "konfig/carbon-php-sdk": "0.1.17"
   }
 }
 ```
@@ -384,6 +384,7 @@ $result = $carbon->embeddings->getDocuments(
     parent_file_ids: [
         1
     ], 
+    include_all_children: False, 
     tags_v2: [
     ], 
     include_tags: True, 
@@ -424,6 +425,10 @@ Optional list of file IDs to limit the search to
 ##### parent_file_ids: `int`[]<a id="parent_file_ids-int"></a>
 
 Optional list of parent file IDs to limit the search to. A parent file describes a file to which         another file belongs (e.g. a folder)
+
+##### include_all_children: `bool`<a id="include_all_children-bool"></a>
+
+Flag to control whether or not to include all children of filtered files in the embedding search.
 
 ##### tags_v2: `object`<a id="tags_v2-object"></a>
 
@@ -1596,7 +1601,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: DROPBOX, BOX, GOOGLE_DRIVE, SHAREPOINT, ONEDRIVE
+Enable integration's file picker for sources that support it. Supported sources: GOOGLE_DRIVE, ONEDRIVE, BOX, SHAREPOINT, DROPBOX
 
 
 #### 🔄 Return<a id="🔄-return"></a>
