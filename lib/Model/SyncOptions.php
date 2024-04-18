@@ -59,6 +59,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'int',
         'sync_files_on_connection' => 'bool',
         'set_page_as_boundary' => 'bool',
+        'request_id' => 'string',
         'enable_file_picker' => 'bool'
     ];
 
@@ -80,6 +81,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => null,
         'sync_files_on_connection' => null,
         'set_page_as_boundary' => null,
+        'request_id' => null,
         'enable_file_picker' => null
     ];
 
@@ -99,6 +101,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
 		'max_items_per_chunk' => true,
 		'sync_files_on_connection' => true,
 		'set_page_as_boundary' => false,
+		'request_id' => true,
 		'enable_file_picker' => false
     ];
 
@@ -198,6 +201,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'max_items_per_chunk',
         'sync_files_on_connection' => 'sync_files_on_connection',
         'set_page_as_boundary' => 'set_page_as_boundary',
+        'request_id' => 'request_id',
         'enable_file_picker' => 'enable_file_picker'
     ];
 
@@ -217,6 +221,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'setMaxItemsPerChunk',
         'sync_files_on_connection' => 'setSyncFilesOnConnection',
         'set_page_as_boundary' => 'setSetPageAsBoundary',
+        'request_id' => 'setRequestId',
         'enable_file_picker' => 'setEnableFilePicker'
     ];
 
@@ -236,6 +241,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_items_per_chunk' => 'getMaxItemsPerChunk',
         'sync_files_on_connection' => 'getSyncFilesOnConnection',
         'set_page_as_boundary' => 'getSetPageAsBoundary',
+        'request_id' => 'getRequestId',
         'enable_file_picker' => 'getEnableFilePicker'
     ];
 
@@ -306,6 +312,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
+        $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('enable_file_picker', $data ?? [], true);
     }
 
@@ -700,6 +707,42 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['set_page_as_boundary'] = $set_page_as_boundary;
+
+        return $this;
+    }
+
+    /**
+     * Gets request_id
+     *
+     * @return string|null
+     */
+    public function getRequestId()
+    {
+        return $this->container['request_id'];
+    }
+
+    /**
+     * Sets request_id
+     *
+     * @param string|null $request_id request_id
+     *
+     * @return self
+     */
+    public function setRequestId($request_id)
+    {
+
+        if (is_null($request_id)) {
+            array_push($this->openAPINullablesSetToNull, 'request_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['request_id'] = $request_id;
 
         return $this;
     }
