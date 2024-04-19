@@ -205,4 +205,13 @@ class OrganizationUserDataSourceAPITest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "files_synced_at"
+     */
+    public function testPropertyFilesSyncedAt()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

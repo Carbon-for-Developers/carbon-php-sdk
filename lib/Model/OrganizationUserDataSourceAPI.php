@@ -63,7 +63,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'last_sync_action' => '\Carbon\Model\DataSourceLastSyncActions',
         'enable_auto_sync' => 'bool',
         'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'updated_at' => '\DateTime',
+        'files_synced_at' => '\DateTime'
     ];
 
     /**
@@ -88,7 +89,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'last_sync_action' => null,
         'enable_auto_sync' => null,
         'created_at' => 'date-time',
-        'updated_at' => 'date-time'
+        'updated_at' => 'date-time',
+        'files_synced_at' => 'date-time'
     ];
 
     /**
@@ -111,7 +113,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
 		'last_sync_action' => false,
 		'enable_auto_sync' => true,
 		'created_at' => false,
-		'updated_at' => false
+		'updated_at' => false,
+		'files_synced_at' => false
     ];
 
     /**
@@ -214,7 +217,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'last_sync_action' => 'last_sync_action',
         'enable_auto_sync' => 'enable_auto_sync',
         'created_at' => 'created_at',
-        'updated_at' => 'updated_at'
+        'updated_at' => 'updated_at',
+        'files_synced_at' => 'files_synced_at'
     ];
 
     /**
@@ -237,7 +241,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'last_sync_action' => 'setLastSyncAction',
         'enable_auto_sync' => 'setEnableAutoSync',
         'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'updated_at' => 'setUpdatedAt',
+        'files_synced_at' => 'setFilesSyncedAt'
     ];
 
     /**
@@ -260,7 +265,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'last_sync_action' => 'getLastSyncAction',
         'enable_auto_sync' => 'getEnableAutoSync',
         'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'updated_at' => 'getUpdatedAt',
+        'files_synced_at' => 'getFilesSyncedAt'
     ];
 
     /**
@@ -335,6 +341,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('enable_auto_sync', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('files_synced_at', $data ?? [], null);
     }
 
     /**
@@ -408,6 +415,9 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         }
         if ($this->container['updated_at'] === null) {
             $invalidProperties[] = "'updated_at' can't be null";
+        }
+        if ($this->container['files_synced_at'] === null) {
+            $invalidProperties[] = "'files_synced_at' can't be null";
         }
         return $invalidProperties;
     }
@@ -883,6 +893,35 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         }
 
         $this->container['updated_at'] = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets files_synced_at
+     *
+     * @return \DateTime
+     */
+    public function getFilesSyncedAt()
+    {
+        return $this->container['files_synced_at'];
+    }
+
+    /**
+     * Sets files_synced_at
+     *
+     * @param \DateTime $files_synced_at files_synced_at
+     *
+     * @return self
+     */
+    public function setFilesSyncedAt($files_synced_at)
+    {
+
+        if (is_null($files_synced_at)) {
+            throw new \InvalidArgumentException('non-nullable files_synced_at cannot be null');
+        }
+
+        $this->container['files_synced_at'] = $files_synced_at;
 
         return $this;
     }
