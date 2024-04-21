@@ -82,6 +82,8 @@ class FileFormats
 
     public const SALESFORCE = 'SALESFORCE';
 
+    public const GITHUB = 'GITHUB';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -139,6 +141,7 @@ class FileFormats
             self::WEB_SCRAPE,
             self::GITBOOK,
             self::SALESFORCE,
+            self::GITHUB,
             self::JPG,
             self::PNG,
             self::MP3,

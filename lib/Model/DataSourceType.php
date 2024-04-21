@@ -94,6 +94,8 @@ class DataSourceType
 
     public const SALESFORCE = 'SALESFORCE';
 
+    public const GITHUB = 'GITHUB';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -159,6 +161,7 @@ class DataSourceType
             self::FRESHDESK,
             self::GITBOOK,
             self::SALESFORCE,
+            self::GITHUB,
             self::JPG,
             self::PNG,
             self::JPEG,

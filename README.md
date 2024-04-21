@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.19-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.20-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -55,6 +55,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.integrations.syncConfluence`](#carbonintegrationssyncconfluence)
   * [`carbon.integrations.syncDataSourceItems`](#carbonintegrationssyncdatasourceitems)
   * [`carbon.integrations.syncFiles`](#carbonintegrationssyncfiles)
+  * [`carbon.integrations.syncGitHub`](#carbonintegrationssyncgithub)
   * [`carbon.integrations.syncGitbook`](#carbonintegrationssyncgitbook)
   * [`carbon.integrations.syncGmail`](#carbonintegrationssyncgmail)
   * [`carbon.integrations.syncOutlook`](#carbonintegrationssyncoutlook)
@@ -96,7 +97,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.19"
+    "konfig/carbon-php-sdk": "0.1.20"
   }
 }
 ```
@@ -1601,7 +1602,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: DROPBOX, GOOGLE_DRIVE, BOX, ONEDRIVE, SHAREPOINT
+Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, BOX, GOOGLE_DRIVE, ONEDRIVE, DROPBOX
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2007,6 +2008,42 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/integrations/files/sync` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.integrations.syncGitHub`<a id="carbonintegrationssyncgithub"></a>
+
+Refer this article to obtain an access token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens.
+Make sure that your access token has the permission to read content from your desired repos. Note that if your access token
+expires you will need to manually update it through this endpoint.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->syncGitHub(
+    username: "string_example", 
+    access_token: "string_example"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### username: `string`<a id="username-string"></a>
+
+##### access_token: `string`<a id="access_token-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**GenericSuccessResponse**](./lib/Model/GenericSuccessResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/github` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

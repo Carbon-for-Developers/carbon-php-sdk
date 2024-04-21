@@ -226,6 +226,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for syncGitHub
+     *
+     * Github Connect.
+     *
+     */
+    public function testSyncGitHub()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for syncGitbook
      *
      * Gitbook Sync.

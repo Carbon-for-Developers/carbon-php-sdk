@@ -114,7 +114,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
 		'enable_auto_sync' => true,
 		'created_at' => false,
 		'updated_at' => false,
-		'files_synced_at' => false
+		'files_synced_at' => true
     ];
 
     /**
@@ -918,7 +918,14 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
     {
 
         if (is_null($files_synced_at)) {
-            throw new \InvalidArgumentException('non-nullable files_synced_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'files_synced_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('files_synced_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['files_synced_at'] = $files_synced_at;
