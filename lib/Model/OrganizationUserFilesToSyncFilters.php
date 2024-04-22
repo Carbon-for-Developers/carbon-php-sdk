@@ -62,7 +62,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'root_files_only' => 'bool',
         'include_all_children' => 'bool',
         'non_synced_only' => 'bool',
-        'request_ids' => 'string[]'
+        'request_ids' => 'string[]',
+        'sync_error_message' => 'string'
     ];
 
     /**
@@ -86,7 +87,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'root_files_only' => null,
         'include_all_children' => null,
         'non_synced_only' => null,
-        'request_ids' => null
+        'request_ids' => null,
+        'sync_error_message' => null
     ];
 
     /**
@@ -108,7 +110,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
 		'root_files_only' => true,
 		'include_all_children' => false,
 		'non_synced_only' => false,
-		'request_ids' => true
+		'request_ids' => true,
+		'sync_error_message' => true
     ];
 
     /**
@@ -210,7 +213,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'root_files_only' => 'root_files_only',
         'include_all_children' => 'include_all_children',
         'non_synced_only' => 'non_synced_only',
-        'request_ids' => 'request_ids'
+        'request_ids' => 'request_ids',
+        'sync_error_message' => 'sync_error_message'
     ];
 
     /**
@@ -232,7 +236,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'root_files_only' => 'setRootFilesOnly',
         'include_all_children' => 'setIncludeAllChildren',
         'non_synced_only' => 'setNonSyncedOnly',
-        'request_ids' => 'setRequestIds'
+        'request_ids' => 'setRequestIds',
+        'sync_error_message' => 'setSyncErrorMessage'
     ];
 
     /**
@@ -254,7 +259,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'root_files_only' => 'getRootFilesOnly',
         'include_all_children' => 'getIncludeAllChildren',
         'non_synced_only' => 'getNonSyncedOnly',
-        'request_ids' => 'getRequestIds'
+        'request_ids' => 'getRequestIds',
+        'sync_error_message' => 'getSyncErrorMessage'
     ];
 
     /**
@@ -328,6 +334,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         $this->setIfExists('include_all_children', $data ?? [], false);
         $this->setIfExists('non_synced_only', $data ?? [], false);
         $this->setIfExists('request_ids', $data ?? [], null);
+        $this->setIfExists('sync_error_message', $data ?? [], null);
     }
 
     /**
@@ -870,6 +877,42 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         }
 
         $this->container['request_ids'] = $request_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_error_message
+     *
+     * @return string|null
+     */
+    public function getSyncErrorMessage()
+    {
+        return $this->container['sync_error_message'];
+    }
+
+    /**
+     * Sets sync_error_message
+     *
+     * @param string|null $sync_error_message The error message of the file. The query will return files with error messages that contain this string. To search for files with no error message, use an empty string.
+     *
+     * @return self
+     */
+    public function setSyncErrorMessage($sync_error_message)
+    {
+
+        if (is_null($sync_error_message)) {
+            array_push($this->openAPINullablesSetToNull, 'sync_error_message');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sync_error_message', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['sync_error_message'] = $sync_error_message;
 
         return $this;
     }

@@ -1602,7 +1602,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, BOX, GOOGLE_DRIVE, ONEDRIVE, DROPBOX
+Enable integration's file picker for sources that support it. Supported sources: ONEDRIVE, DROPBOX, BOX, GOOGLE_DRIVE, SHAREPOINT
 
 
 #### 🔄 Return<a id="🔄-return"></a>

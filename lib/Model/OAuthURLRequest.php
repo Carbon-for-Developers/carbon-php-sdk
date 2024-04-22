@@ -1229,7 +1229,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets enable_file_picker
      *
-     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, BOX, GOOGLE_DRIVE, ONEDRIVE, DROPBOX
+     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: ONEDRIVE, DROPBOX, BOX, GOOGLE_DRIVE, SHAREPOINT
      *
      * @return self
      */

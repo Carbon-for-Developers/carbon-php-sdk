@@ -196,4 +196,13 @@ class OrganizationUserFilesToSyncFiltersTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "sync_error_message"
+     */
+    public function testPropertySyncErrorMessage()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }
