@@ -106,7 +106,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'prepend_filename_to_chunks' => true,
 		'max_items_per_chunk' => true,
 		'set_page_as_boundary' => false,
-		'request_id' => true,
+		'request_id' => false,
 		'use_ocr' => true,
 		'parse_pdf_tables_with_ocr' => true
     ];
@@ -325,7 +325,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], null);
+        $this->setIfExists('request_id', $data ?? [], '74c95466-42b2-4213-ae36-bfafbaecfcf5');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
     }
@@ -774,14 +774,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($request_id)) {
-            array_push($this->openAPINullablesSetToNull, 'request_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('request_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable request_id cannot be null');
         }
 
         $this->container['request_id'] = $request_id;

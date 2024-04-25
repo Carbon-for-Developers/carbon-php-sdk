@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.21-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.22-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -97,7 +97,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.21"
+    "konfig/carbon-php-sdk": "0.1.22"
   }
 }
 ```
@@ -1310,6 +1310,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
+        "request_id" => "e8fddc9a-4810-48b2-b1b5-b1ec0159625a",
         "enable_file_picker" => True,
     ]
 );
@@ -1535,7 +1536,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "string_example", 
+    request_id: "76343a7e-0175-49f8-957c-e1133ae388ac", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True
@@ -1602,7 +1603,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: ONEDRIVE, DROPBOX, BOX, GOOGLE_DRIVE, SHAREPOINT
+Enable integration's file picker for sources that support it. Supported sources: DROPBOX, BOX, ONEDRIVE, GOOGLE_DRIVE, SHAREPOINT
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1854,7 +1855,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "string_example", 
+    request_id: "74c95466-42b2-4213-ae36-bfafbaecfcf5", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False
 );
@@ -1962,7 +1963,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "string_example", 
+    request_id: "74c95466-42b2-4213-ae36-bfafbaecfcf5", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False
 );

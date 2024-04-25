@@ -1784,7 +1784,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = SENTINEL_VALUE,
+        $request_id = '76343a7e-0175-49f8-957c-e1133ae388ac',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -1991,7 +1991,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = SENTINEL_VALUE,
+        $request_id = '76343a7e-0175-49f8-957c-e1133ae388ac',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -4398,7 +4398,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = SENTINEL_VALUE,
+        $request_id = '74c95466-42b2-4213-ae36-bfafbaecfcf5',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncConfluence'][0]
@@ -4587,7 +4587,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = SENTINEL_VALUE,
+        $request_id = '74c95466-42b2-4213-ae36-bfafbaecfcf5',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncConfluence'][0]
@@ -5186,7 +5186,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = SENTINEL_VALUE,
+        $request_id = '74c95466-42b2-4213-ae36-bfafbaecfcf5',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncFiles'][0]
@@ -5375,7 +5375,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = SENTINEL_VALUE,
+        $request_id = '74c95466-42b2-4213-ae36-bfafbaecfcf5',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncFiles'][0]

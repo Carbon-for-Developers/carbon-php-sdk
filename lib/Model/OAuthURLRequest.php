@@ -132,7 +132,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'set_page_as_boundary' => false,
 		'data_source_id' => true,
 		'connecting_new_account' => true,
-		'request_id' => true,
+		'request_id' => false,
 		'use_ocr' => true,
 		'parse_pdf_tables_with_ocr' => true,
 		'enable_file_picker' => false
@@ -387,7 +387,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('connecting_new_account', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], null);
+        $this->setIfExists('request_id', $data ?? [], '76343a7e-0175-49f8-957c-e1133ae388ac');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('enable_file_picker', $data ?? [], true);
@@ -1129,14 +1129,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($request_id)) {
-            array_push($this->openAPINullablesSetToNull, 'request_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('request_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable request_id cannot be null');
         }
 
         $this->container['request_id'] = $request_id;
@@ -1229,7 +1222,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets enable_file_picker
      *
-     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: ONEDRIVE, DROPBOX, BOX, GOOGLE_DRIVE, SHAREPOINT
+     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: DROPBOX, BOX, ONEDRIVE, GOOGLE_DRIVE, SHAREPOINT
      *
      * @return self
      */
