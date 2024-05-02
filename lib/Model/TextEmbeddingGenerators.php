@@ -50,6 +50,18 @@ class TextEmbeddingGenerators
 
     public const OPENAI_ADA_SMALL_1536 = 'OPENAI_ADA_SMALL_1536';
 
+    public const AZURE_ADA_LARGE_256 = 'AZURE_ADA_LARGE_256';
+
+    public const AZURE_ADA_LARGE_1024 = 'AZURE_ADA_LARGE_1024';
+
+    public const AZURE_ADA_LARGE_3072 = 'AZURE_ADA_LARGE_3072';
+
+    public const AZURE_ADA_SMALL_512 = 'AZURE_ADA_SMALL_512';
+
+    public const AZURE_ADA_SMALL_1536 = 'AZURE_ADA_SMALL_1536';
+
+    public const SOLAR_1_MINI = 'SOLAR_1_MINI';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -64,7 +76,13 @@ class TextEmbeddingGenerators
             self::OPENAI_ADA_LARGE_1024,
             self::OPENAI_ADA_LARGE_3072,
             self::OPENAI_ADA_SMALL_512,
-            self::OPENAI_ADA_SMALL_1536
+            self::OPENAI_ADA_SMALL_1536,
+            self::AZURE_ADA_LARGE_256,
+            self::AZURE_ADA_LARGE_1024,
+            self::AZURE_ADA_LARGE_3072,
+            self::AZURE_ADA_SMALL_512,
+            self::AZURE_ADA_SMALL_1536,
+            self::SOLAR_1_MINI
         ];
     }
 }

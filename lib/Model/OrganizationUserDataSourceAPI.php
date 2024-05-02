@@ -64,7 +64,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'enable_auto_sync' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
-        'files_synced_at' => '\DateTime'
+        'files_synced_at' => '\DateTime',
+        'data_source_metadata' => 'object'
     ];
 
     /**
@@ -90,7 +91,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'enable_auto_sync' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
-        'files_synced_at' => 'date-time'
+        'files_synced_at' => 'date-time',
+        'data_source_metadata' => null
     ];
 
     /**
@@ -114,7 +116,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
 		'enable_auto_sync' => true,
 		'created_at' => false,
 		'updated_at' => false,
-		'files_synced_at' => true
+		'files_synced_at' => true,
+		'data_source_metadata' => false
     ];
 
     /**
@@ -218,7 +221,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'enable_auto_sync' => 'enable_auto_sync',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at',
-        'files_synced_at' => 'files_synced_at'
+        'files_synced_at' => 'files_synced_at',
+        'data_source_metadata' => 'data_source_metadata'
     ];
 
     /**
@@ -242,7 +246,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'enable_auto_sync' => 'setEnableAutoSync',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
-        'files_synced_at' => 'setFilesSyncedAt'
+        'files_synced_at' => 'setFilesSyncedAt',
+        'data_source_metadata' => 'setDataSourceMetadata'
     ];
 
     /**
@@ -266,7 +271,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         'enable_auto_sync' => 'getEnableAutoSync',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
-        'files_synced_at' => 'getFilesSyncedAt'
+        'files_synced_at' => 'getFilesSyncedAt',
+        'data_source_metadata' => 'getDataSourceMetadata'
     ];
 
     /**
@@ -342,6 +348,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('files_synced_at', $data ?? [], null);
+        $this->setIfExists('data_source_metadata', $data ?? [], null);
     }
 
     /**
@@ -418,6 +425,9 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         }
         if ($this->container['files_synced_at'] === null) {
             $invalidProperties[] = "'files_synced_at' can't be null";
+        }
+        if ($this->container['data_source_metadata'] === null) {
+            $invalidProperties[] = "'data_source_metadata' can't be null";
         }
         return $invalidProperties;
     }
@@ -929,6 +939,35 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         }
 
         $this->container['files_synced_at'] = $files_synced_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_source_metadata
+     *
+     * @return object
+     */
+    public function getDataSourceMetadata()
+    {
+        return $this->container['data_source_metadata'];
+    }
+
+    /**
+     * Sets data_source_metadata
+     *
+     * @param object $data_source_metadata data_source_metadata
+     *
+     * @return self
+     */
+    public function setDataSourceMetadata($data_source_metadata)
+    {
+
+        if (is_null($data_source_metadata)) {
+            throw new \InvalidArgumentException('non-nullable data_source_metadata cannot be null');
+        }
+
+        $this->container['data_source_metadata'] = $data_source_metadata;
 
         return $this;
     }

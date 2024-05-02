@@ -214,4 +214,13 @@ class OrganizationUserDataSourceAPITest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "data_source_metadata"
+     */
+    public function testPropertyDataSourceMetadata()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

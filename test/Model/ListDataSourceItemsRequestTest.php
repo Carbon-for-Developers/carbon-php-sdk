@@ -106,4 +106,22 @@ class ListDataSourceItemsRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "order_by"
+     */
+    public function testPropertyOrderBy()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "order_dir"
+     */
+    public function testPropertyOrderDir()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

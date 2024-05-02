@@ -71,7 +71,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'string',
         'use_ocr' => 'bool',
         'parse_pdf_tables_with_ocr' => 'bool',
-        'enable_file_picker' => 'bool'
+        'enable_file_picker' => 'bool',
+        'sync_source_items' => 'bool'
     ];
 
     /**
@@ -104,7 +105,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => null,
         'use_ocr' => null,
         'parse_pdf_tables_with_ocr' => null,
-        'enable_file_picker' => null
+        'enable_file_picker' => null,
+        'sync_source_items' => null
     ];
 
     /**
@@ -135,7 +137,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'request_id' => false,
 		'use_ocr' => true,
 		'parse_pdf_tables_with_ocr' => true,
-		'enable_file_picker' => false
+		'enable_file_picker' => false,
+		'sync_source_items' => false
     ];
 
     /**
@@ -246,7 +249,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'request_id',
         'use_ocr' => 'use_ocr',
         'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
-        'enable_file_picker' => 'enable_file_picker'
+        'enable_file_picker' => 'enable_file_picker',
+        'sync_source_items' => 'sync_source_items'
     ];
 
     /**
@@ -277,7 +281,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'setRequestId',
         'use_ocr' => 'setUseOcr',
         'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
-        'enable_file_picker' => 'setEnableFilePicker'
+        'enable_file_picker' => 'setEnableFilePicker',
+        'sync_source_items' => 'setSyncSourceItems'
     ];
 
     /**
@@ -308,7 +313,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'getRequestId',
         'use_ocr' => 'getUseOcr',
         'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
-        'enable_file_picker' => 'getEnableFilePicker'
+        'enable_file_picker' => 'getEnableFilePicker',
+        'sync_source_items' => 'getSyncSourceItems'
     ];
 
     /**
@@ -387,10 +393,11 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('connecting_new_account', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], '76343a7e-0175-49f8-957c-e1133ae388ac');
+        $this->setIfExists('request_id', $data ?? [], 'ae840422-78ad-45c5-a0bd-019c2b2e8443');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('enable_file_picker', $data ?? [], true);
+        $this->setIfExists('sync_source_items', $data ?? [], true);
     }
 
     /**
@@ -1222,7 +1229,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets enable_file_picker
      *
-     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: DROPBOX, BOX, ONEDRIVE, GOOGLE_DRIVE, SHAREPOINT
+     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: GOOGLE_DRIVE, BOX, ONEDRIVE, DROPBOX, SHAREPOINT
      *
      * @return self
      */
@@ -1234,6 +1241,35 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['enable_file_picker'] = $enable_file_picker;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_source_items
+     *
+     * @return bool|null
+     */
+    public function getSyncSourceItems()
+    {
+        return $this->container['sync_source_items'];
+    }
+
+    /**
+     * Sets sync_source_items
+     *
+     * @param bool|null $sync_source_items Enabling this flag will fetch all available content from the source to be listed via list items endpoint
+     *
+     * @return self
+     */
+    public function setSyncSourceItems($sync_source_items)
+    {
+
+        if (is_null($sync_source_items)) {
+            throw new \InvalidArgumentException('non-nullable sync_source_items cannot be null');
+        }
+
+        $this->container['sync_source_items'] = $sync_source_items;
 
         return $this;
     }

@@ -169,4 +169,13 @@ class GitbookConnectRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "sync_source_items"
+     */
+    public function testPropertySyncSourceItems()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

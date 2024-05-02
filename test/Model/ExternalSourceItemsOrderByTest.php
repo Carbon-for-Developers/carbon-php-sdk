@@ -1,6 +1,6 @@
 <?php
 /**
- * GithubConnectRequestTest
+ * ExternalSourceItemsOrderByTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * GithubConnectRequestTest Class Doc Comment
+ * ExternalSourceItemsOrderByTest Class Doc Comment
  *
  * @category    Class
- * @description GithubConnectRequest
+ * @description ExternalSourceItemsOrderBy
  * @package     Carbon
  */
-class GithubConnectRequestTest extends TestCase
+class ExternalSourceItemsOrderByTest extends TestCase
 {
 
     /**
@@ -63,36 +63,9 @@ class GithubConnectRequestTest extends TestCase
     }
 
     /**
-     * Test "GithubConnectRequest"
+     * Test "ExternalSourceItemsOrderBy"
      */
-    public function testGithubConnectRequest()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "username"
-     */
-    public function testPropertyUsername()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "access_token"
-     */
-    public function testPropertyAccessToken()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "sync_source_items"
-     */
-    public function testPropertySyncSourceItems()
+    public function testExternalSourceItemsOrderBy()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

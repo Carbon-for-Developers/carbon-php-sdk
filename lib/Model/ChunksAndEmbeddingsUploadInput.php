@@ -53,7 +53,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
         'chunks_and_embeddings' => '\Carbon\Model\SingleChunksAndEmbeddingsUploadInput[]',
         'overwrite_existing' => 'bool',
         'chunks_only' => 'bool',
-        'custom_credentials' => 'object'
+        'custom_credentials' => 'array<string,object>'
     ];
 
     /**
@@ -434,7 +434,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets custom_credentials
      *
-     * @return object|null
+     * @return array<string,object>|null
      */
     public function getCustomCredentials()
     {
@@ -444,7 +444,7 @@ class ChunksAndEmbeddingsUploadInput implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets custom_credentials
      *
-     * @param object|null $custom_credentials custom_credentials
+     * @param array<string,object>|null $custom_credentials custom_credentials
      *
      * @return self
      */

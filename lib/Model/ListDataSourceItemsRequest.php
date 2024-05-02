@@ -52,7 +52,9 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
         'data_source_id' => 'int',
         'parent_id' => 'string',
         'filters' => '\Carbon\Model\ListItemsFiltersNullable',
-        'pagination' => '\Carbon\Model\Pagination'
+        'pagination' => '\Carbon\Model\Pagination',
+        'order_by' => '\Carbon\Model\ExternalSourceItemsOrderBy',
+        'order_dir' => '\Carbon\Model\OrderDirV2'
     ];
 
     /**
@@ -66,7 +68,9 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
         'data_source_id' => null,
         'parent_id' => null,
         'filters' => null,
-        'pagination' => null
+        'pagination' => null,
+        'order_by' => null,
+        'order_dir' => null
     ];
 
     /**
@@ -78,7 +82,9 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
         'data_source_id' => false,
 		'parent_id' => true,
 		'filters' => true,
-		'pagination' => false
+		'pagination' => false,
+		'order_by' => false,
+		'order_dir' => false
     ];
 
     /**
@@ -170,7 +176,9 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
         'data_source_id' => 'data_source_id',
         'parent_id' => 'parent_id',
         'filters' => 'filters',
-        'pagination' => 'pagination'
+        'pagination' => 'pagination',
+        'order_by' => 'order_by',
+        'order_dir' => 'order_dir'
     ];
 
     /**
@@ -182,7 +190,9 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
         'data_source_id' => 'setDataSourceId',
         'parent_id' => 'setParentId',
         'filters' => 'setFilters',
-        'pagination' => 'setPagination'
+        'pagination' => 'setPagination',
+        'order_by' => 'setOrderBy',
+        'order_dir' => 'setOrderDir'
     ];
 
     /**
@@ -194,7 +204,9 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
         'data_source_id' => 'getDataSourceId',
         'parent_id' => 'getParentId',
         'filters' => 'getFilters',
-        'pagination' => 'getPagination'
+        'pagination' => 'getPagination',
+        'order_by' => 'getOrderBy',
+        'order_dir' => 'getOrderDir'
     ];
 
     /**
@@ -258,6 +270,8 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('parent_id', $data ?? [], null);
         $this->setIfExists('filters', $data ?? [], null);
         $this->setIfExists('pagination', $data ?? [], null);
+        $this->setIfExists('order_by', $data ?? [], null);
+        $this->setIfExists('order_dir', $data ?? [], null);
     }
 
     /**
@@ -431,6 +445,64 @@ class ListDataSourceItemsRequest implements ModelInterface, ArrayAccess, \JsonSe
         }
 
         $this->container['pagination'] = $pagination;
+
+        return $this;
+    }
+
+    /**
+     * Gets order_by
+     *
+     * @return \Carbon\Model\ExternalSourceItemsOrderBy|null
+     */
+    public function getOrderBy()
+    {
+        return $this->container['order_by'];
+    }
+
+    /**
+     * Sets order_by
+     *
+     * @param \Carbon\Model\ExternalSourceItemsOrderBy|null $order_by order_by
+     *
+     * @return self
+     */
+    public function setOrderBy($order_by)
+    {
+
+        if (is_null($order_by)) {
+            throw new \InvalidArgumentException('non-nullable order_by cannot be null');
+        }
+
+        $this->container['order_by'] = $order_by;
+
+        return $this;
+    }
+
+    /**
+     * Gets order_dir
+     *
+     * @return \Carbon\Model\OrderDirV2|null
+     */
+    public function getOrderDir()
+    {
+        return $this->container['order_dir'];
+    }
+
+    /**
+     * Sets order_dir
+     *
+     * @param \Carbon\Model\OrderDirV2|null $order_dir order_dir
+     *
+     * @return self
+     */
+    public function setOrderDir($order_dir)
+    {
+
+        if (is_null($order_dir)) {
+            throw new \InvalidArgumentException('non-nullable order_dir cannot be null');
+        }
+
+        $this->container['order_dir'] = $order_dir;
 
         return $this;
     }

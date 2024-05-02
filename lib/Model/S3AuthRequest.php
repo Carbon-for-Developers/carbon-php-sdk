@@ -50,7 +50,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'access_key' => 'string',
-        'access_key_secret' => 'string'
+        'access_key_secret' => 'string',
+        'sync_source_items' => 'bool'
     ];
 
     /**
@@ -62,7 +63,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'access_key' => null,
-        'access_key_secret' => null
+        'access_key_secret' => null,
+        'sync_source_items' => null
     ];
 
     /**
@@ -72,7 +74,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'access_key' => false,
-		'access_key_secret' => false
+		'access_key_secret' => false,
+		'sync_source_items' => false
     ];
 
     /**
@@ -162,7 +165,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'access_key' => 'access_key',
-        'access_key_secret' => 'access_key_secret'
+        'access_key_secret' => 'access_key_secret',
+        'sync_source_items' => 'sync_source_items'
     ];
 
     /**
@@ -172,7 +176,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'access_key' => 'setAccessKey',
-        'access_key_secret' => 'setAccessKeySecret'
+        'access_key_secret' => 'setAccessKeySecret',
+        'sync_source_items' => 'setSyncSourceItems'
     ];
 
     /**
@@ -182,7 +187,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'access_key' => 'getAccessKey',
-        'access_key_secret' => 'getAccessKeySecret'
+        'access_key_secret' => 'getAccessKeySecret',
+        'sync_source_items' => 'getSyncSourceItems'
     ];
 
     /**
@@ -244,6 +250,7 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('access_key', $data ?? [], null);
         $this->setIfExists('access_key_secret', $data ?? [], null);
+        $this->setIfExists('sync_source_items', $data ?? [], true);
     }
 
     /**
@@ -348,6 +355,35 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['access_key_secret'] = $access_key_secret;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_source_items
+     *
+     * @return bool|null
+     */
+    public function getSyncSourceItems()
+    {
+        return $this->container['sync_source_items'];
+    }
+
+    /**
+     * Sets sync_source_items
+     *
+     * @param bool|null $sync_source_items Enabling this flag will fetch all available content from the source to be listed via list items endpoint
+     *
+     * @return self
+     */
+    public function setSyncSourceItems($sync_source_items)
+    {
+
+        if (is_null($sync_source_items)) {
+            throw new \InvalidArgumentException('non-nullable sync_source_items cannot be null');
+        }
+
+        $this->container['sync_source_items'] = $sync_source_items;
 
         return $this;
     }

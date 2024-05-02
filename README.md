@@ -52,6 +52,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.integrations.listGitbookSpaces`](#carbonintegrationslistgitbookspaces)
   * [`carbon.integrations.listLabels`](#carbonintegrationslistlabels)
   * [`carbon.integrations.listOutlookCategories`](#carbonintegrationslistoutlookcategories)
+  * [`carbon.integrations.listRepos`](#carbonintegrationslistrepos)
   * [`carbon.integrations.syncConfluence`](#carbonintegrationssyncconfluence)
   * [`carbon.integrations.syncDataSourceItems`](#carbonintegrationssyncdatasourceitems)
   * [`carbon.integrations.syncFiles`](#carbonintegrationssyncfiles)
@@ -59,6 +60,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.integrations.syncGitbook`](#carbonintegrationssyncgitbook)
   * [`carbon.integrations.syncGmail`](#carbonintegrationssyncgmail)
   * [`carbon.integrations.syncOutlook`](#carbonintegrationssyncoutlook)
+  * [`carbon.integrations.syncRepos`](#carbonintegrationssyncrepos)
   * [`carbon.integrations.syncRssFeed`](#carbonintegrationssyncrssfeed)
   * [`carbon.integrations.syncS3Files`](#carbonintegrationssyncs3files)
   * [`carbon.organizations.get`](#carbonorganizationsget)
@@ -543,7 +545,9 @@ $result = $carbon->embeddings->uploadChunksAndEmbeddings(
     ], 
     overwrite_existing: False, 
     chunks_only: False, 
-    custom_credentials: []
+    custom_credentials: [
+        "key": [],
+    ]
 );
 ```
 
@@ -557,7 +561,7 @@ $result = $carbon->embeddings->uploadChunksAndEmbeddings(
 
 ##### chunks_only: `bool`<a id="chunks_only-bool"></a>
 
-##### custom_credentials: `object`<a id="custom_credentials-object"></a>
+##### custom_credentials: `array<string,object>`<a id="custom_credentials-array"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1310,8 +1314,9 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "e8fddc9a-4810-48b2-b1b5-b1ec0159625a",
+        "request_id" => "7f46547c-7585-4463-bdd5-a1f8cde14b89",
         "enable_file_picker" => True,
+        "sync_source_items" => True,
     ]
 );
 ```
@@ -1359,7 +1364,8 @@ $result = $carbon->integrations->connectFreshdesk(
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
     sync_files_on_connection: True, 
-    request_id: "string_example"
+    request_id: "string_example", 
+    sync_source_items: True
 );
 ```
 
@@ -1386,6 +1392,10 @@ $result = $carbon->integrations->connectFreshdesk(
 ##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
 
 ##### request_id: `string`<a id="request_id-string"></a>
+
+##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
+
+Enabling this flag will fetch all available content from the source to be listed via list items endpoint
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1423,7 +1433,8 @@ $result = $carbon->integrations->connectGitbook(
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
     sync_files_on_connection: True, 
-    request_id: "string_example"
+    request_id: "string_example", 
+    sync_source_items: True
 );
 ```
 
@@ -1450,6 +1461,10 @@ $result = $carbon->integrations->connectGitbook(
 ##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
 
 ##### request_id: `string`<a id="request_id-string"></a>
+
+##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
+
+Enabling this flag will fetch all available content from the source to be listed via list items endpoint
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1481,7 +1496,8 @@ Once created, generate an access key for this user and share the credentials wit
 ```php
 $result = $carbon->integrations->createAwsIamUser(
     access_key: "string_example", 
-    access_key_secret: "string_example"
+    access_key_secret: "string_example", 
+    sync_source_items: True
 );
 ```
 
@@ -1490,6 +1506,10 @@ $result = $carbon->integrations->createAwsIamUser(
 ##### access_key: `string`<a id="access_key-string"></a>
 
 ##### access_key_secret: `string`<a id="access_key_secret-string"></a>
+
+##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
+
+Enabling this flag will fetch all available content from the source to be listed via list items endpoint
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1536,10 +1556,11 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "76343a7e-0175-49f8-957c-e1133ae388ac", 
+    request_id: "ae840422-78ad-45c5-a0bd-019c2b2e8443", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
-    enable_file_picker: True
+    enable_file_picker: True, 
+    sync_source_items: True
 );
 ```
 
@@ -1603,7 +1624,11 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: DROPBOX, BOX, ONEDRIVE, GOOGLE_DRIVE, SHAREPOINT
+Enable integration's file picker for sources that support it. Supported sources: GOOGLE_DRIVE, BOX, ONEDRIVE, DROPBOX, SHAREPOINT
+
+##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
+
+Enabling this flag will fetch all available content from the source to be listed via list items endpoint
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1675,7 +1700,9 @@ $result = $carbon->integrations->listDataSourceItems(
     pagination: [
         "limit" => 10,
         "offset" => 0,
-    ]
+    ], 
+    order_by: "name", 
+    order_dir: "asc"
 );
 ```
 
@@ -1688,6 +1715,10 @@ $result = $carbon->integrations->listDataSourceItems(
 ##### filters: [`ListItemsFiltersNullable`](./lib/Model/ListItemsFiltersNullable.php)<a id="filters-listitemsfiltersnullablelibmodellistitemsfiltersnullablephp"></a>
 
 ##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+##### order_dir:<a id="order_dir"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1830,6 +1861,44 @@ $result = $carbon->integrations->listOutlookCategories(
 ---
 
 
+### `carbon.integrations.listRepos`<a id="carbonintegrationslistrepos"></a>
+
+Once you have connected your GitHub account, you can use this endpoint to list the 
+    repositories your account has access to. You can use a data source ID or username to fetch from a specific account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->listRepos(
+    per_page: 30, 
+    page: 1, 
+    data_source_id: 1
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### per_page: `int`<a id="per_page-int"></a>
+
+##### page: `int`<a id="page-int"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/github/repos` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `carbon.integrations.syncConfluence`<a id="carbonintegrationssyncconfluence"></a>
 
 After listing pages in a user's Confluence account, the set of selected page `ids` and the
@@ -1855,7 +1924,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "74c95466-42b2-4213-ae36-bfafbaecfcf5", 
+    request_id: "2da50864-4700-4b70-8098-ddcafcc3267d", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False
 );
@@ -1963,7 +2032,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "74c95466-42b2-4213-ae36-bfafbaecfcf5", 
+    request_id: "2da50864-4700-4b70-8098-ddcafcc3267d", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False
 );
@@ -2027,7 +2096,8 @@ expires you will need to manually update it through this endpoint.
 ```php
 $result = $carbon->integrations->syncGitHub(
     username: "string_example", 
-    access_token: "string_example"
+    access_token: "string_example", 
+    sync_source_items: False
 );
 ```
 
@@ -2036,6 +2106,10 @@ $result = $carbon->integrations->syncGitHub(
 ##### username: `string`<a id="username-string"></a>
 
 ##### access_token: `string`<a id="access_token-string"></a>
+
+##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
+
+Enabling this flag will fetch all available content from the source to be listed via list items endpoint
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2339,6 +2413,44 @@ $result = $carbon->integrations->syncOutlook(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/integrations/outlook/sync` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.integrations.syncRepos`<a id="carbonintegrationssyncrepos"></a>
+
+You can retreive repos your token has access to using /integrations/github/repos and sync their content. 
+You can also pass full name of any public repository (username/repo-name). This will store the repo content with 
+carbon which can be accessed through /integrations/items/list endpoint. Maximum of 25 repositories are accepted per request.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->syncRepos(
+    repos: [
+        "string_example"
+    ], 
+    data_source_id: 1
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### repos: `string`[]<a id="repos-string"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/github/sync_repos` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

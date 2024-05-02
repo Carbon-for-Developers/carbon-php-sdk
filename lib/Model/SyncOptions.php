@@ -60,7 +60,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_files_on_connection' => 'bool',
         'set_page_as_boundary' => 'bool',
         'request_id' => 'string',
-        'enable_file_picker' => 'bool'
+        'enable_file_picker' => 'bool',
+        'sync_source_items' => 'bool'
     ];
 
     /**
@@ -82,7 +83,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_files_on_connection' => null,
         'set_page_as_boundary' => null,
         'request_id' => null,
-        'enable_file_picker' => null
+        'enable_file_picker' => null,
+        'sync_source_items' => null
     ];
 
     /**
@@ -102,7 +104,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
 		'sync_files_on_connection' => true,
 		'set_page_as_boundary' => false,
 		'request_id' => false,
-		'enable_file_picker' => false
+		'enable_file_picker' => false,
+		'sync_source_items' => false
     ];
 
     /**
@@ -202,7 +205,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_files_on_connection' => 'sync_files_on_connection',
         'set_page_as_boundary' => 'set_page_as_boundary',
         'request_id' => 'request_id',
-        'enable_file_picker' => 'enable_file_picker'
+        'enable_file_picker' => 'enable_file_picker',
+        'sync_source_items' => 'sync_source_items'
     ];
 
     /**
@@ -222,7 +226,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_files_on_connection' => 'setSyncFilesOnConnection',
         'set_page_as_boundary' => 'setSetPageAsBoundary',
         'request_id' => 'setRequestId',
-        'enable_file_picker' => 'setEnableFilePicker'
+        'enable_file_picker' => 'setEnableFilePicker',
+        'sync_source_items' => 'setSyncSourceItems'
     ];
 
     /**
@@ -242,7 +247,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_files_on_connection' => 'getSyncFilesOnConnection',
         'set_page_as_boundary' => 'getSetPageAsBoundary',
         'request_id' => 'getRequestId',
-        'enable_file_picker' => 'getEnableFilePicker'
+        'enable_file_picker' => 'getEnableFilePicker',
+        'sync_source_items' => 'getSyncSourceItems'
     ];
 
     /**
@@ -312,8 +318,9 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], 'e8fddc9a-4810-48b2-b1b5-b1ec0159625a');
+        $this->setIfExists('request_id', $data ?? [], '7f46547c-7585-4463-bdd5-a1f8cde14b89');
         $this->setIfExists('enable_file_picker', $data ?? [], true);
+        $this->setIfExists('sync_source_items', $data ?? [], true);
     }
 
     /**
@@ -765,6 +772,35 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['enable_file_picker'] = $enable_file_picker;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_source_items
+     *
+     * @return bool|null
+     */
+    public function getSyncSourceItems()
+    {
+        return $this->container['sync_source_items'];
+    }
+
+    /**
+     * Sets sync_source_items
+     *
+     * @param bool|null $sync_source_items Enabling this flag will fetch all available content from the source to be listed via list items endpoint
+     *
+     * @return self
+     */
+    public function setSyncSourceItems($sync_source_items)
+    {
+
+        if (is_null($sync_source_items)) {
+            throw new \InvalidArgumentException('non-nullable sync_source_items cannot be null');
+        }
+
+        $this->container['sync_source_items'] = $sync_source_items;
 
         return $this;
     }

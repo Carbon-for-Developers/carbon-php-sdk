@@ -190,6 +190,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for listRepos
+     *
+     * Github List Repos.
+     *
+     */
+    public function testListRepos()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for syncConfluence
      *
      * Confluence Sync.
@@ -268,6 +280,18 @@ class IntegrationsApiTest extends TestCase
      *
      */
     public function testSyncOutlook()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for syncRepos
+     *
+     * Github Sync Repos.
+     *
+     */
+    public function testSyncRepos()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

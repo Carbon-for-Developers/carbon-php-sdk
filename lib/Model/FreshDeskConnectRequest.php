@@ -59,7 +59,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
         'sync_files_on_connection' => 'bool',
-        'request_id' => 'string'
+        'request_id' => 'string',
+        'sync_source_items' => 'bool'
     ];
 
     /**
@@ -80,7 +81,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
         'sync_files_on_connection' => null,
-        'request_id' => null
+        'request_id' => null,
+        'sync_source_items' => null
     ];
 
     /**
@@ -99,7 +101,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
 		'sync_files_on_connection' => true,
-		'request_id' => true
+		'request_id' => true,
+		'sync_source_items' => false
     ];
 
     /**
@@ -198,7 +201,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
         'sync_files_on_connection' => 'sync_files_on_connection',
-        'request_id' => 'request_id'
+        'request_id' => 'request_id',
+        'sync_source_items' => 'sync_source_items'
     ];
 
     /**
@@ -217,7 +221,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
         'sync_files_on_connection' => 'setSyncFilesOnConnection',
-        'request_id' => 'setRequestId'
+        'request_id' => 'setRequestId',
+        'sync_source_items' => 'setSyncSourceItems'
     ];
 
     /**
@@ -236,7 +241,8 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
         'sync_files_on_connection' => 'getSyncFilesOnConnection',
-        'request_id' => 'getRequestId'
+        'request_id' => 'getRequestId',
+        'sync_source_items' => 'getSyncSourceItems'
     ];
 
     /**
@@ -307,6 +313,7 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('request_id', $data ?? [], null);
+        $this->setIfExists('sync_source_items', $data ?? [], true);
     }
 
     /**
@@ -735,6 +742,35 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         }
 
         $this->container['request_id'] = $request_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_source_items
+     *
+     * @return bool|null
+     */
+    public function getSyncSourceItems()
+    {
+        return $this->container['sync_source_items'];
+    }
+
+    /**
+     * Sets sync_source_items
+     *
+     * @param bool|null $sync_source_items Enabling this flag will fetch all available content from the source to be listed via list items endpoint
+     *
+     * @return self
+     */
+    public function setSyncSourceItems($sync_source_items)
+    {
+
+        if (is_null($sync_source_items)) {
+            throw new \InvalidArgumentException('non-nullable sync_source_items cannot be null');
+        }
+
+        $this->container['sync_source_items'] = $sync_source_items;
 
         return $this;
     }

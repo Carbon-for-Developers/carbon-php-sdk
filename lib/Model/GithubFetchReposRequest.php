@@ -1,6 +1,6 @@
 <?php
 /**
- * GithubConnectRequest
+ * GithubFetchReposRequest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * GithubConnectRequest Class Doc Comment
+ * GithubFetchReposRequest Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class GithubFetchReposRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'GithubConnectRequest';
+    protected static $openAPIModelName = 'GithubFetchReposRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,9 +49,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'username' => 'string',
-        'access_token' => 'string',
-        'sync_source_items' => 'bool'
+        'repos' => 'string[]',
+        'data_source_id' => 'int'
     ];
 
     /**
@@ -62,9 +61,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'username' => null,
-        'access_token' => null,
-        'sync_source_items' => null
+        'repos' => null,
+        'data_source_id' => null
     ];
 
     /**
@@ -73,9 +71,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'username' => false,
-		'access_token' => false,
-		'sync_source_items' => false
+        'repos' => false,
+		'data_source_id' => true
     ];
 
     /**
@@ -164,9 +161,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'username' => 'username',
-        'access_token' => 'access_token',
-        'sync_source_items' => 'sync_source_items'
+        'repos' => 'repos',
+        'data_source_id' => 'data_source_id'
     ];
 
     /**
@@ -175,9 +171,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'username' => 'setUsername',
-        'access_token' => 'setAccessToken',
-        'sync_source_items' => 'setSyncSourceItems'
+        'repos' => 'setRepos',
+        'data_source_id' => 'setDataSourceId'
     ];
 
     /**
@@ -186,9 +181,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'username' => 'getUsername',
-        'access_token' => 'getAccessToken',
-        'sync_source_items' => 'getSyncSourceItems'
+        'repos' => 'getRepos',
+        'data_source_id' => 'getDataSourceId'
     ];
 
     /**
@@ -248,9 +242,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('username', $data ?? [], null);
-        $this->setIfExists('access_token', $data ?? [], null);
-        $this->setIfExists('sync_source_items', $data ?? [], false);
+        $this->setIfExists('repos', $data ?? [], null);
+        $this->setIfExists('data_source_id', $data ?? [], null);
     }
 
     /**
@@ -280,12 +273,17 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        if ($this->container['username'] === null) {
-            $invalidProperties[] = "'username' can't be null";
+        if ($this->container['repos'] === null) {
+            $invalidProperties[] = "'repos' can't be null";
         }
-        if ($this->container['access_token'] === null) {
-            $invalidProperties[] = "'access_token' can't be null";
+        if ((count($this->container['repos']) > 25)) {
+            $invalidProperties[] = "invalid value for 'repos', number of items must be less than or equal to 25.";
         }
+
+        if ((count($this->container['repos']) < 1)) {
+            $invalidProperties[] = "invalid value for 'repos', number of items must be greater than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -302,88 +300,73 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets username
+     * Gets repos
      *
-     * @return string
+     * @return string[]
      */
-    public function getUsername()
+    public function getRepos()
     {
-        return $this->container['username'];
+        return $this->container['repos'];
     }
 
     /**
-     * Sets username
+     * Sets repos
      *
-     * @param string $username username
+     * @param string[] $repos repos
      *
      * @return self
      */
-    public function setUsername($username)
+    public function setRepos($repos)
     {
 
-        if (is_null($username)) {
-            throw new \InvalidArgumentException('non-nullable username cannot be null');
+        if ((count($repos) > 25)) {
+            throw new \InvalidArgumentException('invalid value for $repos when calling GithubFetchReposRequest., number of items must be less than or equal to 25.');
+        }
+        if ((count($repos) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $repos when calling GithubFetchReposRequest., number of items must be greater than or equal to 1.');
         }
 
-        $this->container['username'] = $username;
+        if (is_null($repos)) {
+            throw new \InvalidArgumentException('non-nullable repos cannot be null');
+        }
+
+        $this->container['repos'] = $repos;
 
         return $this;
     }
 
     /**
-     * Gets access_token
+     * Gets data_source_id
      *
-     * @return string
+     * @return int|null
      */
-    public function getAccessToken()
+    public function getDataSourceId()
     {
-        return $this->container['access_token'];
+        return $this->container['data_source_id'];
     }
 
     /**
-     * Sets access_token
+     * Sets data_source_id
      *
-     * @param string $access_token access_token
+     * @param int|null $data_source_id data_source_id
      *
      * @return self
      */
-    public function setAccessToken($access_token)
+    public function setDataSourceId($data_source_id)
     {
 
-        if (is_null($access_token)) {
-            throw new \InvalidArgumentException('non-nullable access_token cannot be null');
+        if (is_null($data_source_id)) {
+            array_push($this->openAPINullablesSetToNull, 'data_source_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('data_source_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['access_token'] = $access_token;
-
-        return $this;
-    }
-
-    /**
-     * Gets sync_source_items
-     *
-     * @return bool|null
-     */
-    public function getSyncSourceItems()
-    {
-        return $this->container['sync_source_items'];
-    }
-
-    /**
-     * Sets sync_source_items
-     *
-     * @param bool|null $sync_source_items Enabling this flag will fetch all available content from the source to be listed via list items endpoint
-     *
-     * @return self
-     */
-    public function setSyncSourceItems($sync_source_items)
-    {
-
-        if (is_null($sync_source_items)) {
-            throw new \InvalidArgumentException('non-nullable sync_source_items cannot be null');
-        }
-
-        $this->container['sync_source_items'] = $sync_source_items;
+        $this->container['data_source_id'] = $data_source_id;
 
         return $this;
     }

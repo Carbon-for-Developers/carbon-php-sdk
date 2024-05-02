@@ -62,6 +62,8 @@ class EmbeddingGenerators
 
     public const OPENAI_ADA_SMALL_1536 = 'OPENAI_ADA_SMALL_1536';
 
+    public const SOLAR_1_MINI = 'SOLAR_1_MINI';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -82,7 +84,8 @@ class EmbeddingGenerators
             self::OPENAI_ADA_LARGE_1024,
             self::OPENAI_ADA_LARGE_3072,
             self::OPENAI_ADA_SMALL_512,
-            self::OPENAI_ADA_SMALL_1536
+            self::OPENAI_ADA_SMALL_1536,
+            self::SOLAR_1_MINI
         ];
     }
 }
