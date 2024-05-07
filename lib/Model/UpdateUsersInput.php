@@ -49,10 +49,10 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'customer_ids' => 'string[]',
         'auto_sync_enabled_sources' => '\Carbon\Model\AutoSyncEnabledSourcesProperty',
         'max_files' => 'int',
-        'max_files_per_upload' => 'int'
+        'max_files_per_upload' => 'int',
+        'customer_ids' => 'string[]'
     ];
 
     /**
@@ -63,10 +63,10 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'customer_ids' => null,
         'auto_sync_enabled_sources' => null,
         'max_files' => null,
-        'max_files_per_upload' => null
+        'max_files_per_upload' => null,
+        'customer_ids' => null
     ];
 
     /**
@@ -75,10 +75,10 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'customer_ids' => false,
-		'auto_sync_enabled_sources' => true,
+        'auto_sync_enabled_sources' => true,
 		'max_files' => true,
-		'max_files_per_upload' => true
+		'max_files_per_upload' => true,
+		'customer_ids' => false
     ];
 
     /**
@@ -167,10 +167,10 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'customer_ids' => 'customer_ids',
         'auto_sync_enabled_sources' => 'auto_sync_enabled_sources',
         'max_files' => 'max_files',
-        'max_files_per_upload' => 'max_files_per_upload'
+        'max_files_per_upload' => 'max_files_per_upload',
+        'customer_ids' => 'customer_ids'
     ];
 
     /**
@@ -179,10 +179,10 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'customer_ids' => 'setCustomerIds',
         'auto_sync_enabled_sources' => 'setAutoSyncEnabledSources',
         'max_files' => 'setMaxFiles',
-        'max_files_per_upload' => 'setMaxFilesPerUpload'
+        'max_files_per_upload' => 'setMaxFilesPerUpload',
+        'customer_ids' => 'setCustomerIds'
     ];
 
     /**
@@ -191,10 +191,10 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'customer_ids' => 'getCustomerIds',
         'auto_sync_enabled_sources' => 'getAutoSyncEnabledSources',
         'max_files' => 'getMaxFiles',
-        'max_files_per_upload' => 'getMaxFilesPerUpload'
+        'max_files_per_upload' => 'getMaxFilesPerUpload',
+        'customer_ids' => 'getCustomerIds'
     ];
 
     /**
@@ -254,10 +254,10 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('customer_ids', $data ?? [], null);
         $this->setIfExists('auto_sync_enabled_sources', $data ?? [], null);
         $this->setIfExists('max_files', $data ?? [], null);
         $this->setIfExists('max_files_per_upload', $data ?? [], null);
+        $this->setIfExists('customer_ids', $data ?? [], null);
     }
 
     /**
@@ -287,19 +287,19 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['customer_ids'] === null) {
-            $invalidProperties[] = "'customer_ids' can't be null";
-        }
-        if ((count($this->container['customer_ids']) > 100)) {
-            $invalidProperties[] = "invalid value for 'customer_ids', number of items must be less than or equal to 100.";
-        }
-
         if (!is_null($this->container['max_files']) && ($this->container['max_files'] < -1)) {
             $invalidProperties[] = "invalid value for 'max_files', must be bigger than or equal to -1.";
         }
 
         if (!is_null($this->container['max_files_per_upload']) && ($this->container['max_files_per_upload'] < -1)) {
             $invalidProperties[] = "invalid value for 'max_files_per_upload', must be bigger than or equal to -1.";
+        }
+
+        if ($this->container['customer_ids'] === null) {
+            $invalidProperties[] = "'customer_ids' can't be null";
+        }
+        if ((count($this->container['customer_ids']) > 100)) {
+            $invalidProperties[] = "invalid value for 'customer_ids', number of items must be less than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -316,39 +316,6 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets customer_ids
-     *
-     * @return string[]
-     */
-    public function getCustomerIds()
-    {
-        return $this->container['customer_ids'];
-    }
-
-    /**
-     * Sets customer_ids
-     *
-     * @param string[] $customer_ids List of organization supplied user IDs
-     *
-     * @return self
-     */
-    public function setCustomerIds($customer_ids)
-    {
-
-        if ((count($customer_ids) > 100)) {
-            throw new \InvalidArgumentException('invalid value for $customer_ids when calling UpdateUsersInput., number of items must be less than or equal to 100.');
-        }
-
-        if (is_null($customer_ids)) {
-            throw new \InvalidArgumentException('non-nullable customer_ids cannot be null');
-        }
-
-        $this->container['customer_ids'] = $customer_ids;
-
-        return $this;
-    }
 
     /**
      * Gets auto_sync_enabled_sources
@@ -464,6 +431,39 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['max_files_per_upload'] = $max_files_per_upload;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_ids
+     *
+     * @return string[]
+     */
+    public function getCustomerIds()
+    {
+        return $this->container['customer_ids'];
+    }
+
+    /**
+     * Sets customer_ids
+     *
+     * @param string[] $customer_ids List of organization supplied user IDs
+     *
+     * @return self
+     */
+    public function setCustomerIds($customer_ids)
+    {
+
+        if ((count($customer_ids) > 100)) {
+            throw new \InvalidArgumentException('invalid value for $customer_ids when calling UpdateUsersInput., number of items must be less than or equal to 100.');
+        }
+
+        if (is_null($customer_ids)) {
+            throw new \InvalidArgumentException('non-nullable customer_ids cannot be null');
+        }
+
+        $this->container['customer_ids'] = $customer_ids;
 
         return $this;
     }

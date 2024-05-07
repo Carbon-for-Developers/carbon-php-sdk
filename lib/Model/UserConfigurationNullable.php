@@ -1,6 +1,6 @@
 <?php
 /**
- * FileStatisticsNullable
+ * UserConfigurationNullable
  *
  * PHP version 7.4
  *
@@ -26,13 +26,14 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * FileStatisticsNullable Class Doc Comment
+ * UserConfigurationNullable Class Doc Comment
  *
  * @category Class
+ * @description Used to set organization level defaults for user settings. These settings will apply to all users under         the organization that don&#39;t have them defined.
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerializable
+class UserConfigurationNullable implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +42,7 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FileStatisticsNullable';
+    protected static $openAPIModelName = 'UserConfigurationNullable';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,12 +50,9 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'file_format' => '\Carbon\Model\FileFormatsNullable',
-        'file_size' => 'int',
-        'num_characters' => 'int',
-        'num_tokens' => 'int',
-        'num_embeddings' => 'int',
-        'mime_type' => 'string'
+        'auto_sync_enabled_sources' => '\Carbon\Model\AutoSyncEnabledSourcesProperty',
+        'max_files' => 'int',
+        'max_files_per_upload' => 'int'
     ];
 
     /**
@@ -65,12 +63,9 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'file_format' => null,
-        'file_size' => null,
-        'num_characters' => null,
-        'num_tokens' => null,
-        'num_embeddings' => null,
-        'mime_type' => null
+        'auto_sync_enabled_sources' => null,
+        'max_files' => null,
+        'max_files_per_upload' => null
     ];
 
     /**
@@ -79,12 +74,9 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'file_format' => true,
-		'file_size' => true,
-		'num_characters' => true,
-		'num_tokens' => true,
-		'num_embeddings' => true,
-		'mime_type' => true
+        'auto_sync_enabled_sources' => true,
+		'max_files' => true,
+		'max_files_per_upload' => true
     ];
 
     /**
@@ -173,12 +165,9 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'file_format' => 'file_format',
-        'file_size' => 'file_size',
-        'num_characters' => 'num_characters',
-        'num_tokens' => 'num_tokens',
-        'num_embeddings' => 'num_embeddings',
-        'mime_type' => 'mime_type'
+        'auto_sync_enabled_sources' => 'auto_sync_enabled_sources',
+        'max_files' => 'max_files',
+        'max_files_per_upload' => 'max_files_per_upload'
     ];
 
     /**
@@ -187,12 +176,9 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'file_format' => 'setFileFormat',
-        'file_size' => 'setFileSize',
-        'num_characters' => 'setNumCharacters',
-        'num_tokens' => 'setNumTokens',
-        'num_embeddings' => 'setNumEmbeddings',
-        'mime_type' => 'setMimeType'
+        'auto_sync_enabled_sources' => 'setAutoSyncEnabledSources',
+        'max_files' => 'setMaxFiles',
+        'max_files_per_upload' => 'setMaxFilesPerUpload'
     ];
 
     /**
@@ -201,12 +187,9 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'file_format' => 'getFileFormat',
-        'file_size' => 'getFileSize',
-        'num_characters' => 'getNumCharacters',
-        'num_tokens' => 'getNumTokens',
-        'num_embeddings' => 'getNumEmbeddings',
-        'mime_type' => 'getMimeType'
+        'auto_sync_enabled_sources' => 'getAutoSyncEnabledSources',
+        'max_files' => 'getMaxFiles',
+        'max_files_per_upload' => 'getMaxFilesPerUpload'
     ];
 
     /**
@@ -266,12 +249,9 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('file_format', $data ?? [], null);
-        $this->setIfExists('file_size', $data ?? [], null);
-        $this->setIfExists('num_characters', $data ?? [], null);
-        $this->setIfExists('num_tokens', $data ?? [], null);
-        $this->setIfExists('num_embeddings', $data ?? [], null);
-        $this->setIfExists('mime_type', $data ?? [], null);
+        $this->setIfExists('auto_sync_enabled_sources', $data ?? [], null);
+        $this->setIfExists('max_files', $data ?? [], null);
+        $this->setIfExists('max_files_per_upload', $data ?? [], null);
     }
 
     /**
@@ -301,24 +281,14 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['file_format'] === null) {
-            $invalidProperties[] = "'file_format' can't be null";
+        if (!is_null($this->container['max_files']) && ($this->container['max_files'] < -1)) {
+            $invalidProperties[] = "invalid value for 'max_files', must be bigger than or equal to -1.";
         }
-        if ($this->container['file_size'] === null) {
-            $invalidProperties[] = "'file_size' can't be null";
+
+        if (!is_null($this->container['max_files_per_upload']) && ($this->container['max_files_per_upload'] < -1)) {
+            $invalidProperties[] = "invalid value for 'max_files_per_upload', must be bigger than or equal to -1.";
         }
-        if ($this->container['num_characters'] === null) {
-            $invalidProperties[] = "'num_characters' can't be null";
-        }
-        if ($this->container['num_tokens'] === null) {
-            $invalidProperties[] = "'num_tokens' can't be null";
-        }
-        if ($this->container['num_embeddings'] === null) {
-            $invalidProperties[] = "'num_embeddings' can't be null";
-        }
-        if ($this->container['mime_type'] === null) {
-            $invalidProperties[] = "'mime_type' can't be null";
-        }
+
         return $invalidProperties;
     }
 
@@ -335,217 +305,119 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets file_format
+     * Gets auto_sync_enabled_sources
      *
-     * @return \Carbon\Model\FileFormatsNullable
+     * @return \Carbon\Model\AutoSyncEnabledSourcesProperty|null
      */
-    public function getFileFormat()
+    public function getAutoSyncEnabledSources()
     {
-        return $this->container['file_format'];
+        return $this->container['auto_sync_enabled_sources'];
     }
 
     /**
-     * Sets file_format
+     * Sets auto_sync_enabled_sources
      *
-     * @param \Carbon\Model\FileFormatsNullable $file_format file_format
+     * @param \Carbon\Model\AutoSyncEnabledSourcesProperty|null $auto_sync_enabled_sources auto_sync_enabled_sources
      *
      * @return self
      */
-    public function setFileFormat($file_format)
+    public function setAutoSyncEnabledSources($auto_sync_enabled_sources)
     {
 
-        if (is_null($file_format)) {
-            array_push($this->openAPINullablesSetToNull, 'file_format');
+        if (is_null($auto_sync_enabled_sources)) {
+            array_push($this->openAPINullablesSetToNull, 'auto_sync_enabled_sources');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('file_format', $nullablesSetToNull);
+            $index = array_search('auto_sync_enabled_sources', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['file_format'] = $file_format;
+        $this->container['auto_sync_enabled_sources'] = $auto_sync_enabled_sources;
 
         return $this;
     }
 
     /**
-     * Gets file_size
+     * Gets max_files
      *
-     * @return int
+     * @return int|null
      */
-    public function getFileSize()
+    public function getMaxFiles()
     {
-        return $this->container['file_size'];
+        return $this->container['max_files'];
     }
 
     /**
-     * Sets file_size
+     * Sets max_files
      *
-     * @param int $file_size file_size
+     * @param int|null $max_files Custom file upload limit for the user over *all* user's files across all uploads.          If set, then the user will not be allowed to upload more files than this limit. If not set, or if set to -1,         then the user will have no limit.
      *
      * @return self
      */
-    public function setFileSize($file_size)
+    public function setMaxFiles($max_files)
     {
 
-        if (is_null($file_size)) {
-            array_push($this->openAPINullablesSetToNull, 'file_size');
+        if (!is_null($max_files) && ($max_files < -1)) {
+            throw new \InvalidArgumentException('invalid value for $max_files when calling UserConfigurationNullable., must be bigger than or equal to -1.');
+        }
+
+
+        if (is_null($max_files)) {
+            array_push($this->openAPINullablesSetToNull, 'max_files');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('file_size', $nullablesSetToNull);
+            $index = array_search('max_files', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['file_size'] = $file_size;
+        $this->container['max_files'] = $max_files;
 
         return $this;
     }
 
     /**
-     * Gets num_characters
+     * Gets max_files_per_upload
      *
-     * @return int
+     * @return int|null
      */
-    public function getNumCharacters()
+    public function getMaxFilesPerUpload()
     {
-        return $this->container['num_characters'];
+        return $this->container['max_files_per_upload'];
     }
 
     /**
-     * Sets num_characters
+     * Sets max_files_per_upload
      *
-     * @param int $num_characters num_characters
+     * @param int|null $max_files_per_upload Custom file upload limit for the user across a single upload.         If set, then the user will not be allowed to upload more files than this limit in a single upload. If not set,         or if set to -1, then the user will have no limit.
      *
      * @return self
      */
-    public function setNumCharacters($num_characters)
+    public function setMaxFilesPerUpload($max_files_per_upload)
     {
 
-        if (is_null($num_characters)) {
-            array_push($this->openAPINullablesSetToNull, 'num_characters');
+        if (!is_null($max_files_per_upload) && ($max_files_per_upload < -1)) {
+            throw new \InvalidArgumentException('invalid value for $max_files_per_upload when calling UserConfigurationNullable., must be bigger than or equal to -1.');
+        }
+
+
+        if (is_null($max_files_per_upload)) {
+            array_push($this->openAPINullablesSetToNull, 'max_files_per_upload');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('num_characters', $nullablesSetToNull);
+            $index = array_search('max_files_per_upload', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['num_characters'] = $num_characters;
-
-        return $this;
-    }
-
-    /**
-     * Gets num_tokens
-     *
-     * @return int
-     */
-    public function getNumTokens()
-    {
-        return $this->container['num_tokens'];
-    }
-
-    /**
-     * Sets num_tokens
-     *
-     * @param int $num_tokens num_tokens
-     *
-     * @return self
-     */
-    public function setNumTokens($num_tokens)
-    {
-
-        if (is_null($num_tokens)) {
-            array_push($this->openAPINullablesSetToNull, 'num_tokens');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('num_tokens', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['num_tokens'] = $num_tokens;
-
-        return $this;
-    }
-
-    /**
-     * Gets num_embeddings
-     *
-     * @return int
-     */
-    public function getNumEmbeddings()
-    {
-        return $this->container['num_embeddings'];
-    }
-
-    /**
-     * Sets num_embeddings
-     *
-     * @param int $num_embeddings num_embeddings
-     *
-     * @return self
-     */
-    public function setNumEmbeddings($num_embeddings)
-    {
-
-        if (is_null($num_embeddings)) {
-            array_push($this->openAPINullablesSetToNull, 'num_embeddings');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('num_embeddings', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['num_embeddings'] = $num_embeddings;
-
-        return $this;
-    }
-
-    /**
-     * Gets mime_type
-     *
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->container['mime_type'];
-    }
-
-    /**
-     * Sets mime_type
-     *
-     * @param string $mime_type mime_type
-     *
-     * @return self
-     */
-    public function setMimeType($mime_type)
-    {
-
-        if (is_null($mime_type)) {
-            array_push($this->openAPINullablesSetToNull, 'mime_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('mime_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['mime_type'] = $mime_type;
+        $this->container['max_files_per_upload'] = $max_files_per_upload;
 
         return $this;
     }

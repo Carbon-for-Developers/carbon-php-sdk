@@ -53,7 +53,8 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
         'file_size' => 'int',
         'num_characters' => 'int',
         'num_tokens' => 'int',
-        'num_embeddings' => 'int'
+        'num_embeddings' => 'int',
+        'mime_type' => 'string'
     ];
 
     /**
@@ -68,7 +69,8 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
         'file_size' => null,
         'num_characters' => null,
         'num_tokens' => null,
-        'num_embeddings' => null
+        'num_embeddings' => null,
+        'mime_type' => null
     ];
 
     /**
@@ -81,7 +83,8 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
 		'file_size' => true,
 		'num_characters' => true,
 		'num_tokens' => true,
-		'num_embeddings' => true
+		'num_embeddings' => true,
+		'mime_type' => true
     ];
 
     /**
@@ -174,7 +177,8 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
         'file_size' => 'file_size',
         'num_characters' => 'num_characters',
         'num_tokens' => 'num_tokens',
-        'num_embeddings' => 'num_embeddings'
+        'num_embeddings' => 'num_embeddings',
+        'mime_type' => 'mime_type'
     ];
 
     /**
@@ -187,7 +191,8 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
         'file_size' => 'setFileSize',
         'num_characters' => 'setNumCharacters',
         'num_tokens' => 'setNumTokens',
-        'num_embeddings' => 'setNumEmbeddings'
+        'num_embeddings' => 'setNumEmbeddings',
+        'mime_type' => 'setMimeType'
     ];
 
     /**
@@ -200,7 +205,8 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
         'file_size' => 'getFileSize',
         'num_characters' => 'getNumCharacters',
         'num_tokens' => 'getNumTokens',
-        'num_embeddings' => 'getNumEmbeddings'
+        'num_embeddings' => 'getNumEmbeddings',
+        'mime_type' => 'getMimeType'
     ];
 
     /**
@@ -265,6 +271,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('num_characters', $data ?? [], null);
         $this->setIfExists('num_tokens', $data ?? [], null);
         $this->setIfExists('num_embeddings', $data ?? [], null);
+        $this->setIfExists('mime_type', $data ?? [], null);
     }
 
     /**
@@ -308,6 +315,9 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['num_embeddings'] === null) {
             $invalidProperties[] = "'num_embeddings' can't be null";
+        }
+        if ($this->container['mime_type'] === null) {
+            $invalidProperties[] = "'mime_type' can't be null";
         }
         return $invalidProperties;
     }
@@ -500,6 +510,42 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['num_embeddings'] = $num_embeddings;
+
+        return $this;
+    }
+
+    /**
+     * Gets mime_type
+     *
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->container['mime_type'];
+    }
+
+    /**
+     * Sets mime_type
+     *
+     * @param string $mime_type mime_type
+     *
+     * @return self
+     */
+    public function setMimeType($mime_type)
+    {
+
+        if (is_null($mime_type)) {
+            array_push($this->openAPINullablesSetToNull, 'mime_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('mime_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['mime_type'] = $mime_type;
 
         return $this;
     }

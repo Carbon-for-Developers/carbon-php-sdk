@@ -180,6 +180,15 @@ class OrganizationResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "global_user_config"
+     */
+    public function testPropertyGlobalUserConfig()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

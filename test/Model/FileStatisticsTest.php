@@ -115,4 +115,13 @@ class FileStatisticsTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "mime_type"
+     */
+    public function testPropertyMimeType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

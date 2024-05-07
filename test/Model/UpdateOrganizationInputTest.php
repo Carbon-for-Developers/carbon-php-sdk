@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateUsersInputTest
+ * UpdateOrganizationInputTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UpdateUsersInputTest Class Doc Comment
+ * UpdateOrganizationInputTest Class Doc Comment
  *
  * @category    Class
- * @description UpdateUsersInput
+ * @description UpdateOrganizationInput
  * @package     Carbon
  */
-class UpdateUsersInputTest extends TestCase
+class UpdateOrganizationInputTest extends TestCase
 {
 
     /**
@@ -63,45 +63,18 @@ class UpdateUsersInputTest extends TestCase
     }
 
     /**
-     * Test "UpdateUsersInput"
+     * Test "UpdateOrganizationInput"
      */
-    public function testUpdateUsersInput()
+    public function testUpdateOrganizationInput()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "auto_sync_enabled_sources"
+     * Test attribute "global_user_config"
      */
-    public function testPropertyAutoSyncEnabledSources()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "max_files"
-     */
-    public function testPropertyMaxFiles()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "max_files_per_upload"
-     */
-    public function testPropertyMaxFilesPerUpload()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "customer_ids"
-     */
-    public function testPropertyCustomerIds()
+    public function testPropertyGlobalUserConfig()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

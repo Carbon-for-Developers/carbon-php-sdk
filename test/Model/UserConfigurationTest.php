@@ -1,6 +1,6 @@
 <?php
 /**
- * FileStatisticsNullableTest
+ * UserConfigurationTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * FileStatisticsNullableTest Class Doc Comment
+ * UserConfigurationTest Class Doc Comment
  *
  * @category    Class
- * @description FileStatisticsNullable
+ * @description UserConfiguration
  * @package     Carbon
  */
-class FileStatisticsNullableTest extends TestCase
+class UserConfigurationTest extends TestCase
 {
 
     /**
@@ -63,63 +63,36 @@ class FileStatisticsNullableTest extends TestCase
     }
 
     /**
-     * Test "FileStatisticsNullable"
+     * Test "UserConfiguration"
      */
-    public function testFileStatisticsNullable()
+    public function testUserConfiguration()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "file_format"
+     * Test attribute "auto_sync_enabled_sources"
      */
-    public function testPropertyFileFormat()
+    public function testPropertyAutoSyncEnabledSources()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "file_size"
+     * Test attribute "max_files"
      */
-    public function testPropertyFileSize()
+    public function testPropertyMaxFiles()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "num_characters"
+     * Test attribute "max_files_per_upload"
      */
-    public function testPropertyNumCharacters()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "num_tokens"
-     */
-    public function testPropertyNumTokens()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "num_embeddings"
-     */
-    public function testPropertyNumEmbeddings()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "mime_type"
-     */
-    public function testPropertyMimeType()
+    public function testPropertyMaxFilesPerUpload()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

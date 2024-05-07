@@ -61,6 +61,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_embeddings' => 'object',
         'period_ends_at' => '\DateTime',
         'cancel_at_period_end' => 'bool',
+        'global_user_config' => 'object',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -85,6 +86,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_embeddings' => null,
         'period_ends_at' => 'date-time',
         'cancel_at_period_end' => null,
+        'global_user_config' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -107,6 +109,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
 		'aggregate_num_embeddings' => false,
 		'period_ends_at' => true,
 		'cancel_at_period_end' => true,
+		'global_user_config' => false,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -209,6 +212,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_embeddings' => 'aggregate_num_embeddings',
         'period_ends_at' => 'period_ends_at',
         'cancel_at_period_end' => 'cancel_at_period_end',
+        'global_user_config' => 'global_user_config',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -231,6 +235,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_embeddings' => 'setAggregateNumEmbeddings',
         'period_ends_at' => 'setPeriodEndsAt',
         'cancel_at_period_end' => 'setCancelAtPeriodEnd',
+        'global_user_config' => 'setGlobalUserConfig',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -253,6 +258,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_embeddings' => 'getAggregateNumEmbeddings',
         'period_ends_at' => 'getPeriodEndsAt',
         'cancel_at_period_end' => 'getCancelAtPeriodEnd',
+        'global_user_config' => 'getGlobalUserConfig',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -326,6 +332,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('aggregate_num_embeddings', $data ?? [], null);
         $this->setIfExists('period_ends_at', $data ?? [], null);
         $this->setIfExists('cancel_at_period_end', $data ?? [], null);
+        $this->setIfExists('global_user_config', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -392,6 +399,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
         if ($this->container['cancel_at_period_end'] === null) {
             $invalidProperties[] = "'cancel_at_period_end' can't be null";
+        }
+        if ($this->container['global_user_config'] === null) {
+            $invalidProperties[] = "'global_user_config' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -793,6 +803,35 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['cancel_at_period_end'] = $cancel_at_period_end;
+
+        return $this;
+    }
+
+    /**
+     * Gets global_user_config
+     *
+     * @return object
+     */
+    public function getGlobalUserConfig()
+    {
+        return $this->container['global_user_config'];
+    }
+
+    /**
+     * Sets global_user_config
+     *
+     * @param object $global_user_config global_user_config
+     *
+     * @return self
+     */
+    public function setGlobalUserConfig($global_user_config)
+    {
+
+        if (is_null($global_user_config)) {
+            throw new \InvalidArgumentException('non-nullable global_user_config cannot be null');
+        }
+
+        $this->container['global_user_config'] = $global_user_config;
 
         return $this;
     }

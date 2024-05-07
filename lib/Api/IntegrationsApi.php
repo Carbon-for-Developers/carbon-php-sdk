@@ -1802,7 +1802,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = 'ae840422-78ad-45c5-a0bd-019c2b2e8443',
+        $request_id = '1975f217-47e4-4867-8acd-5bdb2858049b',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -2011,7 +2011,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = 'ae840422-78ad-45c5-a0bd-019c2b2e8443',
+        $request_id = '1975f217-47e4-4867-8acd-5bdb2858049b',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -4818,7 +4818,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '2da50864-4700-4b70-8098-ddcafcc3267d',
+        $request_id = 'a7c990f4-5923-47b5-a9f8-6ef5416fe5c3',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncConfluence'][0]
@@ -5007,7 +5007,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '2da50864-4700-4b70-8098-ddcafcc3267d',
+        $request_id = 'a7c990f4-5923-47b5-a9f8-6ef5416fe5c3',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncConfluence'][0]
@@ -5606,7 +5606,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '2da50864-4700-4b70-8098-ddcafcc3267d',
+        $request_id = 'a7c990f4-5923-47b5-a9f8-6ef5416fe5c3',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncFiles'][0]
@@ -5795,7 +5795,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '2da50864-4700-4b70-8098-ddcafcc3267d',
+        $request_id = 'a7c990f4-5923-47b5-a9f8-6ef5416fe5c3',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         string $contentType = self::contentTypes['syncFiles'][0]

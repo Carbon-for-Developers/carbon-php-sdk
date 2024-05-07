@@ -1258,10 +1258,10 @@ class UsersApi extends \Carbon\CustomApi
     )
     {
         $_body = [];
-        $this->setRequestBodyProperty($_body, "customer_ids", $customer_ids);
         $this->setRequestBodyProperty($_body, "auto_sync_enabled_sources", $auto_sync_enabled_sources);
         $this->setRequestBodyProperty($_body, "max_files", $max_files);
         $this->setRequestBodyProperty($_body, "max_files_per_upload", $max_files_per_upload);
+        $this->setRequestBodyProperty($_body, "customer_ids", $customer_ids);
         $update_users_input = $_body;
 
         list($response) = $this->updateUsersWithHttpInfo($update_users_input, $contentType);
@@ -1427,10 +1427,10 @@ class UsersApi extends \Carbon\CustomApi
     )
     {
         $_body = [];
-        $this->setRequestBodyProperty($_body, "customer_ids", $customer_ids);
         $this->setRequestBodyProperty($_body, "auto_sync_enabled_sources", $auto_sync_enabled_sources);
         $this->setRequestBodyProperty($_body, "max_files", $max_files);
         $this->setRequestBodyProperty($_body, "max_files_per_upload", $max_files_per_upload);
+        $this->setRequestBodyProperty($_body, "customer_ids", $customer_ids);
         $update_users_input = $_body;
 
         return $this->updateUsersAsyncWithHttpInfo($update_users_input, $contentType)

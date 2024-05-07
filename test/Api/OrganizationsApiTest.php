@@ -68,4 +68,16 @@ class OrganizationsApiTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for update
+     *
+     * Update Organization.
+     *
+     */
+    public function testUpdate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

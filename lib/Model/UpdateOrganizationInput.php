@@ -1,6 +1,6 @@
 <?php
 /**
- * FileStatisticsNullable
+ * UpdateOrganizationInput
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * FileStatisticsNullable Class Doc Comment
+ * UpdateOrganizationInput Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FileStatisticsNullable';
+    protected static $openAPIModelName = 'UpdateOrganizationInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,12 +49,7 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'file_format' => '\Carbon\Model\FileFormatsNullable',
-        'file_size' => 'int',
-        'num_characters' => 'int',
-        'num_tokens' => 'int',
-        'num_embeddings' => 'int',
-        'mime_type' => 'string'
+        'global_user_config' => '\Carbon\Model\UserConfigurationNullable'
     ];
 
     /**
@@ -65,12 +60,7 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'file_format' => null,
-        'file_size' => null,
-        'num_characters' => null,
-        'num_tokens' => null,
-        'num_embeddings' => null,
-        'mime_type' => null
+        'global_user_config' => null
     ];
 
     /**
@@ -79,12 +69,7 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'file_format' => true,
-		'file_size' => true,
-		'num_characters' => true,
-		'num_tokens' => true,
-		'num_embeddings' => true,
-		'mime_type' => true
+        'global_user_config' => true
     ];
 
     /**
@@ -173,12 +158,7 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'file_format' => 'file_format',
-        'file_size' => 'file_size',
-        'num_characters' => 'num_characters',
-        'num_tokens' => 'num_tokens',
-        'num_embeddings' => 'num_embeddings',
-        'mime_type' => 'mime_type'
+        'global_user_config' => 'global_user_config'
     ];
 
     /**
@@ -187,12 +167,7 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'file_format' => 'setFileFormat',
-        'file_size' => 'setFileSize',
-        'num_characters' => 'setNumCharacters',
-        'num_tokens' => 'setNumTokens',
-        'num_embeddings' => 'setNumEmbeddings',
-        'mime_type' => 'setMimeType'
+        'global_user_config' => 'setGlobalUserConfig'
     ];
 
     /**
@@ -201,12 +176,7 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'file_format' => 'getFileFormat',
-        'file_size' => 'getFileSize',
-        'num_characters' => 'getNumCharacters',
-        'num_tokens' => 'getNumTokens',
-        'num_embeddings' => 'getNumEmbeddings',
-        'mime_type' => 'getMimeType'
+        'global_user_config' => 'getGlobalUserConfig'
     ];
 
     /**
@@ -266,12 +236,7 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('file_format', $data ?? [], null);
-        $this->setIfExists('file_size', $data ?? [], null);
-        $this->setIfExists('num_characters', $data ?? [], null);
-        $this->setIfExists('num_tokens', $data ?? [], null);
-        $this->setIfExists('num_embeddings', $data ?? [], null);
-        $this->setIfExists('mime_type', $data ?? [], null);
+        $this->setIfExists('global_user_config', $data ?? [], null);
     }
 
     /**
@@ -301,24 +266,6 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['file_format'] === null) {
-            $invalidProperties[] = "'file_format' can't be null";
-        }
-        if ($this->container['file_size'] === null) {
-            $invalidProperties[] = "'file_size' can't be null";
-        }
-        if ($this->container['num_characters'] === null) {
-            $invalidProperties[] = "'num_characters' can't be null";
-        }
-        if ($this->container['num_tokens'] === null) {
-            $invalidProperties[] = "'num_tokens' can't be null";
-        }
-        if ($this->container['num_embeddings'] === null) {
-            $invalidProperties[] = "'num_embeddings' can't be null";
-        }
-        if ($this->container['mime_type'] === null) {
-            $invalidProperties[] = "'mime_type' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -335,217 +282,37 @@ class FileStatisticsNullable implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets file_format
+     * Gets global_user_config
      *
-     * @return \Carbon\Model\FileFormatsNullable
+     * @return \Carbon\Model\UserConfigurationNullable|null
      */
-    public function getFileFormat()
+    public function getGlobalUserConfig()
     {
-        return $this->container['file_format'];
+        return $this->container['global_user_config'];
     }
 
     /**
-     * Sets file_format
+     * Sets global_user_config
      *
-     * @param \Carbon\Model\FileFormatsNullable $file_format file_format
+     * @param \Carbon\Model\UserConfigurationNullable|null $global_user_config global_user_config
      *
      * @return self
      */
-    public function setFileFormat($file_format)
+    public function setGlobalUserConfig($global_user_config)
     {
 
-        if (is_null($file_format)) {
-            array_push($this->openAPINullablesSetToNull, 'file_format');
+        if (is_null($global_user_config)) {
+            array_push($this->openAPINullablesSetToNull, 'global_user_config');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('file_format', $nullablesSetToNull);
+            $index = array_search('global_user_config', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['file_format'] = $file_format;
-
-        return $this;
-    }
-
-    /**
-     * Gets file_size
-     *
-     * @return int
-     */
-    public function getFileSize()
-    {
-        return $this->container['file_size'];
-    }
-
-    /**
-     * Sets file_size
-     *
-     * @param int $file_size file_size
-     *
-     * @return self
-     */
-    public function setFileSize($file_size)
-    {
-
-        if (is_null($file_size)) {
-            array_push($this->openAPINullablesSetToNull, 'file_size');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('file_size', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['file_size'] = $file_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets num_characters
-     *
-     * @return int
-     */
-    public function getNumCharacters()
-    {
-        return $this->container['num_characters'];
-    }
-
-    /**
-     * Sets num_characters
-     *
-     * @param int $num_characters num_characters
-     *
-     * @return self
-     */
-    public function setNumCharacters($num_characters)
-    {
-
-        if (is_null($num_characters)) {
-            array_push($this->openAPINullablesSetToNull, 'num_characters');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('num_characters', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['num_characters'] = $num_characters;
-
-        return $this;
-    }
-
-    /**
-     * Gets num_tokens
-     *
-     * @return int
-     */
-    public function getNumTokens()
-    {
-        return $this->container['num_tokens'];
-    }
-
-    /**
-     * Sets num_tokens
-     *
-     * @param int $num_tokens num_tokens
-     *
-     * @return self
-     */
-    public function setNumTokens($num_tokens)
-    {
-
-        if (is_null($num_tokens)) {
-            array_push($this->openAPINullablesSetToNull, 'num_tokens');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('num_tokens', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['num_tokens'] = $num_tokens;
-
-        return $this;
-    }
-
-    /**
-     * Gets num_embeddings
-     *
-     * @return int
-     */
-    public function getNumEmbeddings()
-    {
-        return $this->container['num_embeddings'];
-    }
-
-    /**
-     * Sets num_embeddings
-     *
-     * @param int $num_embeddings num_embeddings
-     *
-     * @return self
-     */
-    public function setNumEmbeddings($num_embeddings)
-    {
-
-        if (is_null($num_embeddings)) {
-            array_push($this->openAPINullablesSetToNull, 'num_embeddings');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('num_embeddings', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['num_embeddings'] = $num_embeddings;
-
-        return $this;
-    }
-
-    /**
-     * Gets mime_type
-     *
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->container['mime_type'];
-    }
-
-    /**
-     * Sets mime_type
-     *
-     * @param string $mime_type mime_type
-     *
-     * @return self
-     */
-    public function setMimeType($mime_type)
-    {
-
-        if (is_null($mime_type)) {
-            array_push($this->openAPINullablesSetToNull, 'mime_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('mime_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['mime_type'] = $mime_type;
+        $this->container['global_user_config'] = $global_user_config;
 
         return $this;
     }

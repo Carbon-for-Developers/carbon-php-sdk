@@ -64,6 +64,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.integrations.syncRssFeed`](#carbonintegrationssyncrssfeed)
   * [`carbon.integrations.syncS3Files`](#carbonintegrationssyncs3files)
   * [`carbon.organizations.get`](#carbonorganizationsget)
+  * [`carbon.organizations.update`](#carbonorganizationsupdate)
   * [`carbon.users.delete`](#carbonusersdelete)
   * [`carbon.users.get`](#carbonusersget)
   * [`carbon.users.toggleUserFeatures`](#carbonuserstoggleuserfeatures)
@@ -1314,7 +1315,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "7f46547c-7585-4463-bdd5-a1f8cde14b89",
+        "request_id" => "18492fc0-bd2f-48d4-a035-8d12f762cc76",
         "enable_file_picker" => True,
         "sync_source_items" => True,
     ]
@@ -1556,7 +1557,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "ae840422-78ad-45c5-a0bd-019c2b2e8443", 
+    request_id: "1975f217-47e4-4867-8acd-5bdb2858049b", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1624,7 +1625,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: GOOGLE_DRIVE, BOX, ONEDRIVE, DROPBOX, SHAREPOINT
+Enable integration's file picker for sources that support it. Supported sources: BOX, SHAREPOINT, ONEDRIVE, DROPBOX, GOOGLE_DRIVE
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -1924,7 +1925,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "2da50864-4700-4b70-8098-ddcafcc3267d", 
+    request_id: "a7c990f4-5923-47b5-a9f8-6ef5416fe5c3", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False
 );
@@ -2032,7 +2033,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "2da50864-4700-4b70-8098-ddcafcc3267d", 
+    request_id: "a7c990f4-5923-47b5-a9f8-6ef5416fe5c3", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False
 );
@@ -2608,6 +2609,38 @@ $result = $carbon->organizations->get();
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/organization` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.organizations.update`<a id="carbonorganizationsupdate"></a>
+
+Update Organization
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->organizations->update(
+    global_user_config: [
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### global_user_config: [`UserConfigurationNullable`](./lib/Model/UserConfigurationNullable.php)<a id="global_user_config-userconfigurationnullablelibmodeluserconfigurationnullablephp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**GenericSuccessResponse**](./lib/Model/GenericSuccessResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/organization/update` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
