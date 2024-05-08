@@ -1315,7 +1315,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "18492fc0-bd2f-48d4-a035-8d12f762cc76",
+        "request_id" => "875454df-996d-4d26-83e0-756af9628ed0",
         "enable_file_picker" => True,
         "sync_source_items" => True,
     ]
@@ -1557,7 +1557,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "1975f217-47e4-4867-8acd-5bdb2858049b", 
+    request_id: "fc8dfd30-8e4c-4f40-acc5-f05b3cc961d2", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1625,7 +1625,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: BOX, SHAREPOINT, ONEDRIVE, DROPBOX, GOOGLE_DRIVE
+Enable integration's file picker for sources that support it. Supported sources: GOOGLE_DRIVE, ONEDRIVE, SHAREPOINT, DROPBOX, BOX
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -1925,7 +1925,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "a7c990f4-5923-47b5-a9f8-6ef5416fe5c3", 
+    request_id: "2446df66-66dd-4ea3-b248-a416d886e087", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False
 );
@@ -2033,7 +2033,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "a7c990f4-5923-47b5-a9f8-6ef5416fe5c3", 
+    request_id: "2446df66-66dd-4ea3-b248-a416d886e087", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False
 );

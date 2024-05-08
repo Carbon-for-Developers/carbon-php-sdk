@@ -63,7 +63,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'include_all_children' => 'bool',
         'non_synced_only' => 'bool',
         'request_ids' => 'string[]',
-        'sync_error_message' => 'string'
+        'sync_error_message' => 'string',
+        'include_containers' => 'bool'
     ];
 
     /**
@@ -88,7 +89,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'include_all_children' => null,
         'non_synced_only' => null,
         'request_ids' => null,
-        'sync_error_message' => null
+        'sync_error_message' => null,
+        'include_containers' => null
     ];
 
     /**
@@ -111,7 +113,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
 		'include_all_children' => false,
 		'non_synced_only' => false,
 		'request_ids' => true,
-		'sync_error_message' => true
+		'sync_error_message' => true,
+		'include_containers' => true
     ];
 
     /**
@@ -214,7 +217,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'include_all_children' => 'include_all_children',
         'non_synced_only' => 'non_synced_only',
         'request_ids' => 'request_ids',
-        'sync_error_message' => 'sync_error_message'
+        'sync_error_message' => 'sync_error_message',
+        'include_containers' => 'include_containers'
     ];
 
     /**
@@ -237,7 +241,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'include_all_children' => 'setIncludeAllChildren',
         'non_synced_only' => 'setNonSyncedOnly',
         'request_ids' => 'setRequestIds',
-        'sync_error_message' => 'setSyncErrorMessage'
+        'sync_error_message' => 'setSyncErrorMessage',
+        'include_containers' => 'setIncludeContainers'
     ];
 
     /**
@@ -260,7 +265,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'include_all_children' => 'getIncludeAllChildren',
         'non_synced_only' => 'getNonSyncedOnly',
         'request_ids' => 'getRequestIds',
-        'sync_error_message' => 'getSyncErrorMessage'
+        'sync_error_message' => 'getSyncErrorMessage',
+        'include_containers' => 'getIncludeContainers'
     ];
 
     /**
@@ -335,6 +341,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         $this->setIfExists('non_synced_only', $data ?? [], false);
         $this->setIfExists('request_ids', $data ?? [], null);
         $this->setIfExists('sync_error_message', $data ?? [], null);
+        $this->setIfExists('include_containers', $data ?? [], null);
     }
 
     /**
@@ -913,6 +920,42 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         }
 
         $this->container['sync_error_message'] = $sync_error_message;
+
+        return $this;
+    }
+
+    /**
+     * Gets include_containers
+     *
+     * @return bool|null
+     */
+    public function getIncludeContainers()
+    {
+        return $this->container['include_containers'];
+    }
+
+    /**
+     * Sets include_containers
+     *
+     * @param bool|null $include_containers If true, the query will return containers in the response. Containers are files that group other files together and have no content themselves. Default behavior is to include containers.
+     *
+     * @return self
+     */
+    public function setIncludeContainers($include_containers)
+    {
+
+        if (is_null($include_containers)) {
+            array_push($this->openAPINullablesSetToNull, 'include_containers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('include_containers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['include_containers'] = $include_containers;
 
         return $this;
     }

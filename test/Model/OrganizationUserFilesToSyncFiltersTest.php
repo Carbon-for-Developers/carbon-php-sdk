@@ -205,4 +205,13 @@ class OrganizationUserFilesToSyncFiltersTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "include_containers"
+     */
+    public function testPropertyIncludeContainers()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }
