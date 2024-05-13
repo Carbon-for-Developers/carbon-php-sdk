@@ -625,6 +625,7 @@ $result = $carbon->files->createUserFileTags(
 
 
 ### `carbon.files.delete`<a id="carbonfilesdelete"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Delete File Endpoint
 
@@ -692,6 +693,7 @@ $result = $carbon->files->deleteFileTags(
 
 
 ### `carbon.files.deleteMany`<a id="carbonfilesdeletemany"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Delete Files Endpoint
 
@@ -776,6 +778,7 @@ $result = $carbon->files->deleteV2(
 
 
 ### `carbon.files.getParsedFile`<a id="carbonfilesgetparsedfile"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 This route is deprecated. Use `/user_files_v2` instead.
 
@@ -807,6 +810,7 @@ $result = $carbon->files->getParsedFile(
 
 
 ### `carbon.files.getRawFile`<a id="carbonfilesgetrawfile"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 This route is deprecated. Use `/user_files_v2` instead.
 
@@ -942,6 +946,7 @@ $result = $carbon->files->queryUserFiles(
 
 
 ### `carbon.files.queryUserFilesDeprecated`<a id="carbonfilesqueryuserfilesdeprecated"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 This route is deprecated. Use `/user_files_v2` instead.
 
@@ -2734,6 +2739,7 @@ $result = $carbon->users->get(
 
 
 ### `carbon.users.toggleUserFeatures`<a id="carbonuserstoggleuserfeatures"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Toggle User Features
 
