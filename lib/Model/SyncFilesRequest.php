@@ -62,7 +62,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'set_page_as_boundary' => 'bool',
         'request_id' => 'string',
         'use_ocr' => 'bool',
-        'parse_pdf_tables_with_ocr' => 'bool'
+        'parse_pdf_tables_with_ocr' => 'bool',
+        'incremental_sync' => 'bool'
     ];
 
     /**
@@ -86,7 +87,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'set_page_as_boundary' => null,
         'request_id' => null,
         'use_ocr' => null,
-        'parse_pdf_tables_with_ocr' => null
+        'parse_pdf_tables_with_ocr' => null,
+        'incremental_sync' => null
     ];
 
     /**
@@ -108,7 +110,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'set_page_as_boundary' => false,
 		'request_id' => false,
 		'use_ocr' => true,
-		'parse_pdf_tables_with_ocr' => true
+		'parse_pdf_tables_with_ocr' => true,
+		'incremental_sync' => false
     ];
 
     /**
@@ -210,7 +213,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'set_page_as_boundary' => 'set_page_as_boundary',
         'request_id' => 'request_id',
         'use_ocr' => 'use_ocr',
-        'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr'
+        'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
+        'incremental_sync' => 'incremental_sync'
     ];
 
     /**
@@ -232,7 +236,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'set_page_as_boundary' => 'setSetPageAsBoundary',
         'request_id' => 'setRequestId',
         'use_ocr' => 'setUseOcr',
-        'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr'
+        'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
+        'incremental_sync' => 'setIncrementalSync'
     ];
 
     /**
@@ -254,7 +259,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'set_page_as_boundary' => 'getSetPageAsBoundary',
         'request_id' => 'getRequestId',
         'use_ocr' => 'getUseOcr',
-        'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr'
+        'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
+        'incremental_sync' => 'getIncrementalSync'
     ];
 
     /**
@@ -325,9 +331,10 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], '2446df66-66dd-4ea3-b248-a416d886e087');
+        $this->setIfExists('request_id', $data ?? [], 'a5c6b913-12ce-4ae5-af61-694dd5c400fc');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
+        $this->setIfExists('incremental_sync', $data ?? [], false);
     }
 
     /**
@@ -850,6 +857,35 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['parse_pdf_tables_with_ocr'] = $parse_pdf_tables_with_ocr;
+
+        return $this;
+    }
+
+    /**
+     * Gets incremental_sync
+     *
+     * @return bool|null
+     */
+    public function getIncrementalSync()
+    {
+        return $this->container['incremental_sync'];
+    }
+
+    /**
+     * Sets incremental_sync
+     *
+     * @param bool|null $incremental_sync Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX. It will be ignored for other data sources.
+     *
+     * @return self
+     */
+    public function setIncrementalSync($incremental_sync)
+    {
+
+        if (is_null($incremental_sync)) {
+            throw new \InvalidArgumentException('non-nullable incremental_sync cannot be null');
+        }
+
+        $this->container['incremental_sync'] = $incremental_sync;
 
         return $this;
     }

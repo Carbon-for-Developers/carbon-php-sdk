@@ -61,7 +61,9 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'set_page_as_boundary' => 'bool',
         'request_id' => 'string',
         'enable_file_picker' => 'bool',
-        'sync_source_items' => 'bool'
+        'sync_source_items' => 'bool',
+        'incremental_sync' => 'bool',
+        'file_sync_config' => '\Carbon\Model\HelpdeskFileSyncConfigNullable'
     ];
 
     /**
@@ -84,7 +86,9 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'set_page_as_boundary' => null,
         'request_id' => null,
         'enable_file_picker' => null,
-        'sync_source_items' => null
+        'sync_source_items' => null,
+        'incremental_sync' => null,
+        'file_sync_config' => null
     ];
 
     /**
@@ -105,7 +109,9 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
 		'set_page_as_boundary' => false,
 		'request_id' => false,
 		'enable_file_picker' => false,
-		'sync_source_items' => false
+		'sync_source_items' => false,
+		'incremental_sync' => false,
+		'file_sync_config' => true
     ];
 
     /**
@@ -206,7 +212,9 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'set_page_as_boundary' => 'set_page_as_boundary',
         'request_id' => 'request_id',
         'enable_file_picker' => 'enable_file_picker',
-        'sync_source_items' => 'sync_source_items'
+        'sync_source_items' => 'sync_source_items',
+        'incremental_sync' => 'incremental_sync',
+        'file_sync_config' => 'file_sync_config'
     ];
 
     /**
@@ -227,7 +235,9 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'set_page_as_boundary' => 'setSetPageAsBoundary',
         'request_id' => 'setRequestId',
         'enable_file_picker' => 'setEnableFilePicker',
-        'sync_source_items' => 'setSyncSourceItems'
+        'sync_source_items' => 'setSyncSourceItems',
+        'incremental_sync' => 'setIncrementalSync',
+        'file_sync_config' => 'setFileSyncConfig'
     ];
 
     /**
@@ -248,7 +258,9 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'set_page_as_boundary' => 'getSetPageAsBoundary',
         'request_id' => 'getRequestId',
         'enable_file_picker' => 'getEnableFilePicker',
-        'sync_source_items' => 'getSyncSourceItems'
+        'sync_source_items' => 'getSyncSourceItems',
+        'incremental_sync' => 'getIncrementalSync',
+        'file_sync_config' => 'getFileSyncConfig'
     ];
 
     /**
@@ -318,9 +330,11 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], '875454df-996d-4d26-83e0-756af9628ed0');
+        $this->setIfExists('request_id', $data ?? [], 'b9a72b38-115a-4dd6-bad9-00185ae2333b');
         $this->setIfExists('enable_file_picker', $data ?? [], true);
         $this->setIfExists('sync_source_items', $data ?? [], true);
+        $this->setIfExists('incremental_sync', $data ?? [], false);
+        $this->setIfExists('file_sync_config', $data ?? [], null);
     }
 
     /**
@@ -801,6 +815,71 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['sync_source_items'] = $sync_source_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets incremental_sync
+     *
+     * @return bool|null
+     */
+    public function getIncrementalSync()
+    {
+        return $this->container['incremental_sync'];
+    }
+
+    /**
+     * Sets incremental_sync
+     *
+     * @param bool|null $incremental_sync Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX. It will be ignored for other data sources.
+     *
+     * @return self
+     */
+    public function setIncrementalSync($incremental_sync)
+    {
+
+        if (is_null($incremental_sync)) {
+            throw new \InvalidArgumentException('non-nullable incremental_sync cannot be null');
+        }
+
+        $this->container['incremental_sync'] = $incremental_sync;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_sync_config
+     *
+     * @return \Carbon\Model\HelpdeskFileSyncConfigNullable|null
+     */
+    public function getFileSyncConfig()
+    {
+        return $this->container['file_sync_config'];
+    }
+
+    /**
+     * Sets file_sync_config
+     *
+     * @param \Carbon\Model\HelpdeskFileSyncConfigNullable|null $file_sync_config file_sync_config
+     *
+     * @return self
+     */
+    public function setFileSyncConfig($file_sync_config)
+    {
+
+        if (is_null($file_sync_config)) {
+            array_push($this->openAPINullablesSetToNull, 'file_sync_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_sync_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_sync_config'] = $file_sync_config;
 
         return $this;
     }

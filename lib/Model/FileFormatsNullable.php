@@ -88,6 +88,8 @@ class FileFormatsNullable
 
     public const PNG = 'PNG';
 
+    public const MPEG = 'MPEG';
+
     public const MP3 = 'MP3';
 
     public const MP4 = 'MP4';
@@ -144,6 +146,7 @@ class FileFormatsNullable
             self::GITHUB,
             self::JPG,
             self::PNG,
+            self::MPEG,
             self::MP3,
             self::MP4,
             self::MP2,

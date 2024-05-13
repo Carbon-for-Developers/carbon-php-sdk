@@ -521,21 +521,6 @@ class EmbeddingsApi extends \Carbon\CustomApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
-        if ($apiKey !== null) {
-            $headers['authorization'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
-        if ($apiKey !== null) {
-            $headers['authorization'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
-        if ($apiKey !== null) {
-            $headers['customer-id'] = $apiKey;
-        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {

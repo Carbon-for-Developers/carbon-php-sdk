@@ -72,7 +72,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'use_ocr' => 'bool',
         'parse_pdf_tables_with_ocr' => 'bool',
         'enable_file_picker' => 'bool',
-        'sync_source_items' => 'bool'
+        'sync_source_items' => 'bool',
+        'incremental_sync' => 'bool',
+        'file_sync_config' => '\Carbon\Model\HelpdeskFileSyncConfigNullable'
     ];
 
     /**
@@ -106,7 +108,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'use_ocr' => null,
         'parse_pdf_tables_with_ocr' => null,
         'enable_file_picker' => null,
-        'sync_source_items' => null
+        'sync_source_items' => null,
+        'incremental_sync' => null,
+        'file_sync_config' => null
     ];
 
     /**
@@ -138,7 +142,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'use_ocr' => true,
 		'parse_pdf_tables_with_ocr' => true,
 		'enable_file_picker' => false,
-		'sync_source_items' => false
+		'sync_source_items' => false,
+		'incremental_sync' => false,
+		'file_sync_config' => true
     ];
 
     /**
@@ -250,7 +256,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'use_ocr' => 'use_ocr',
         'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
         'enable_file_picker' => 'enable_file_picker',
-        'sync_source_items' => 'sync_source_items'
+        'sync_source_items' => 'sync_source_items',
+        'incremental_sync' => 'incremental_sync',
+        'file_sync_config' => 'file_sync_config'
     ];
 
     /**
@@ -282,7 +290,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'use_ocr' => 'setUseOcr',
         'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
         'enable_file_picker' => 'setEnableFilePicker',
-        'sync_source_items' => 'setSyncSourceItems'
+        'sync_source_items' => 'setSyncSourceItems',
+        'incremental_sync' => 'setIncrementalSync',
+        'file_sync_config' => 'setFileSyncConfig'
     ];
 
     /**
@@ -314,7 +324,9 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'use_ocr' => 'getUseOcr',
         'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
         'enable_file_picker' => 'getEnableFilePicker',
-        'sync_source_items' => 'getSyncSourceItems'
+        'sync_source_items' => 'getSyncSourceItems',
+        'incremental_sync' => 'getIncrementalSync',
+        'file_sync_config' => 'getFileSyncConfig'
     ];
 
     /**
@@ -393,11 +405,13 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('connecting_new_account', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], 'fc8dfd30-8e4c-4f40-acc5-f05b3cc961d2');
+        $this->setIfExists('request_id', $data ?? [], '444e3f13-e490-4cc0-9cba-48957104083d');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('enable_file_picker', $data ?? [], true);
         $this->setIfExists('sync_source_items', $data ?? [], true);
+        $this->setIfExists('incremental_sync', $data ?? [], false);
+        $this->setIfExists('file_sync_config', $data ?? [], null);
     }
 
     /**
@@ -1229,7 +1243,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets enable_file_picker
      *
-     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: GOOGLE_DRIVE, ONEDRIVE, SHAREPOINT, DROPBOX, BOX
+     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: BOX, SHAREPOINT, GOOGLE_DRIVE, DROPBOX, ONEDRIVE
      *
      * @return self
      */
@@ -1270,6 +1284,71 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['sync_source_items'] = $sync_source_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets incremental_sync
+     *
+     * @return bool|null
+     */
+    public function getIncrementalSync()
+    {
+        return $this->container['incremental_sync'];
+    }
+
+    /**
+     * Sets incremental_sync
+     *
+     * @param bool|null $incremental_sync Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX. It will be ignored for other data sources.
+     *
+     * @return self
+     */
+    public function setIncrementalSync($incremental_sync)
+    {
+
+        if (is_null($incremental_sync)) {
+            throw new \InvalidArgumentException('non-nullable incremental_sync cannot be null');
+        }
+
+        $this->container['incremental_sync'] = $incremental_sync;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_sync_config
+     *
+     * @return \Carbon\Model\HelpdeskFileSyncConfigNullable|null
+     */
+    public function getFileSyncConfig()
+    {
+        return $this->container['file_sync_config'];
+    }
+
+    /**
+     * Sets file_sync_config
+     *
+     * @param \Carbon\Model\HelpdeskFileSyncConfigNullable|null $file_sync_config file_sync_config
+     *
+     * @return self
+     */
+    public function setFileSyncConfig($file_sync_config)
+    {
+
+        if (is_null($file_sync_config)) {
+            array_push($this->openAPINullablesSetToNull, 'file_sync_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_sync_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_sync_config'] = $file_sync_config;
 
         return $this;
     }
