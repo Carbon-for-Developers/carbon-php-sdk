@@ -63,7 +63,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'string',
         'use_ocr' => 'bool',
         'parse_pdf_tables_with_ocr' => 'bool',
-        'incremental_sync' => 'bool'
+        'incremental_sync' => 'bool',
+        'file_sync_config' => '\Carbon\Model\HelpdeskGlobalFileSyncConfigNullable'
     ];
 
     /**
@@ -88,7 +89,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => null,
         'use_ocr' => null,
         'parse_pdf_tables_with_ocr' => null,
-        'incremental_sync' => null
+        'incremental_sync' => null,
+        'file_sync_config' => null
     ];
 
     /**
@@ -111,7 +113,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'request_id' => false,
 		'use_ocr' => true,
 		'parse_pdf_tables_with_ocr' => true,
-		'incremental_sync' => false
+		'incremental_sync' => false,
+		'file_sync_config' => true
     ];
 
     /**
@@ -214,7 +217,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'request_id',
         'use_ocr' => 'use_ocr',
         'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
-        'incremental_sync' => 'incremental_sync'
+        'incremental_sync' => 'incremental_sync',
+        'file_sync_config' => 'file_sync_config'
     ];
 
     /**
@@ -237,7 +241,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'setRequestId',
         'use_ocr' => 'setUseOcr',
         'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
-        'incremental_sync' => 'setIncrementalSync'
+        'incremental_sync' => 'setIncrementalSync',
+        'file_sync_config' => 'setFileSyncConfig'
     ];
 
     /**
@@ -260,7 +265,8 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'getRequestId',
         'use_ocr' => 'getUseOcr',
         'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
-        'incremental_sync' => 'getIncrementalSync'
+        'incremental_sync' => 'getIncrementalSync',
+        'file_sync_config' => 'getFileSyncConfig'
     ];
 
     /**
@@ -331,10 +337,11 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], 'a5c6b913-12ce-4ae5-af61-694dd5c400fc');
+        $this->setIfExists('request_id', $data ?? [], '952c7efa-d4fe-43bf-a86c-4f5dad9fc003');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('incremental_sync', $data ?? [], false);
+        $this->setIfExists('file_sync_config', $data ?? [], null);
     }
 
     /**
@@ -886,6 +893,42 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['incremental_sync'] = $incremental_sync;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_sync_config
+     *
+     * @return \Carbon\Model\HelpdeskGlobalFileSyncConfigNullable|null
+     */
+    public function getFileSyncConfig()
+    {
+        return $this->container['file_sync_config'];
+    }
+
+    /**
+     * Sets file_sync_config
+     *
+     * @param \Carbon\Model\HelpdeskGlobalFileSyncConfigNullable|null $file_sync_config file_sync_config
+     *
+     * @return self
+     */
+    public function setFileSyncConfig($file_sync_config)
+    {
+
+        if (is_null($file_sync_config)) {
+            array_push($this->openAPINullablesSetToNull, 'file_sync_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_sync_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_sync_config'] = $file_sync_config;
 
         return $this;
     }

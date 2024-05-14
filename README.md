@@ -1320,7 +1320,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "b9a72b38-115a-4dd6-bad9-00185ae2333b",
+        "request_id" => "30d4247e-9dcf-41e3-98a7-61ef4a78adad",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1563,7 +1563,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "444e3f13-e490-4cc0-9cba-48957104083d", 
+    request_id: "e33ac7f9-11d1-4a94-8855-016e4d6c07ff", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1636,7 +1636,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: BOX, SHAREPOINT, GOOGLE_DRIVE, DROPBOX, ONEDRIVE
+Enable integration's file picker for sources that support it. Supported sources: DROPBOX, ONEDRIVE, SHAREPOINT, BOX, GOOGLE_DRIVE
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -1942,10 +1942,13 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "a5c6b913-12ce-4ae5-af61-694dd5c400fc", 
+    request_id: "952c7efa-d4fe-43bf-a86c-4f5dad9fc003", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
-    incremental_sync: False
+    incremental_sync: False, 
+    file_sync_config: [
+        "sync_attachments" => False,
+    ]
 );
 ```
 
@@ -1984,6 +1987,8 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 ##### incremental_sync: `bool`<a id="incremental_sync-bool"></a>
 
 Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX. It will be ignored for other data sources.
+
+##### file_sync_config: [`HelpdeskGlobalFileSyncConfigNullable`](./lib/Model/HelpdeskGlobalFileSyncConfigNullable.php)<a id="file_sync_config-helpdeskglobalfilesyncconfignullablelibmodelhelpdeskglobalfilesyncconfignullablephp"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2055,10 +2060,13 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "a5c6b913-12ce-4ae5-af61-694dd5c400fc", 
+    request_id: "952c7efa-d4fe-43bf-a86c-4f5dad9fc003", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
-    incremental_sync: False
+    incremental_sync: False, 
+    file_sync_config: [
+        "sync_attachments" => False,
+    ]
 );
 ```
 
@@ -2097,6 +2105,8 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 ##### incremental_sync: `bool`<a id="incremental_sync-bool"></a>
 
 Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX. It will be ignored for other data sources.
+
+##### file_sync_config: [`HelpdeskGlobalFileSyncConfigNullable`](./lib/Model/HelpdeskGlobalFileSyncConfigNullable.php)<a id="file_sync_config-helpdeskglobalfilesyncconfignullablelibmodelhelpdeskglobalfilesyncconfignullablephp"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
