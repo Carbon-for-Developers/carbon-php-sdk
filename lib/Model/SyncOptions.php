@@ -330,7 +330,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], '30d4247e-9dcf-41e3-98a7-61ef4a78adad');
+        $this->setIfExists('request_id', $data ?? [], 'a1705efc-e82e-40b3-afa0-1a1f2768df88');
         $this->setIfExists('enable_file_picker', $data ?? [], true);
         $this->setIfExists('sync_source_items', $data ?? [], true);
         $this->setIfExists('incremental_sync', $data ?? [], false);

@@ -52,6 +52,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'tags' => 'array<string,\Carbon\Model\Tags>',
         'content' => 'string',
         'file_id' => 'int',
+        'parent_file_id' => 'int',
         'source' => 'string',
         'source_url' => 'string',
         'source_type' => '\Carbon\Model\DataSourceTypeNullable',
@@ -74,6 +75,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'tags' => null,
         'content' => null,
         'file_id' => null,
+        'parent_file_id' => null,
         'source' => null,
         'source_url' => null,
         'source_type' => null,
@@ -94,6 +96,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'tags' => true,
 		'content' => false,
 		'file_id' => false,
+		'parent_file_id' => true,
 		'source' => true,
 		'source_url' => true,
 		'source_type' => true,
@@ -194,6 +197,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'tags' => 'tags',
         'content' => 'content',
         'file_id' => 'file_id',
+        'parent_file_id' => 'parent_file_id',
         'source' => 'source',
         'source_url' => 'source_url',
         'source_type' => 'source_type',
@@ -214,6 +218,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'tags' => 'setTags',
         'content' => 'setContent',
         'file_id' => 'setFileId',
+        'parent_file_id' => 'setParentFileId',
         'source' => 'setSource',
         'source_url' => 'setSourceUrl',
         'source_type' => 'setSourceType',
@@ -234,6 +239,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'tags' => 'getTags',
         'content' => 'getContent',
         'file_id' => 'getFileId',
+        'parent_file_id' => 'getParentFileId',
         'source' => 'getSource',
         'source_url' => 'getSourceUrl',
         'source_type' => 'getSourceType',
@@ -305,6 +311,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('content', $data ?? [], null);
         $this->setIfExists('file_id', $data ?? [], null);
+        $this->setIfExists('parent_file_id', $data ?? [], null);
         $this->setIfExists('source', $data ?? [], null);
         $this->setIfExists('source_url', $data ?? [], null);
         $this->setIfExists('source_type', $data ?? [], null);
@@ -351,6 +358,9 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['file_id'] === null) {
             $invalidProperties[] = "'file_id' can't be null";
+        }
+        if ($this->container['parent_file_id'] === null) {
+            $invalidProperties[] = "'parent_file_id' can't be null";
         }
         if ($this->container['source'] === null) {
             $invalidProperties[] = "'source' can't be null";
@@ -484,6 +494,42 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['file_id'] = $file_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets parent_file_id
+     *
+     * @return int
+     */
+    public function getParentFileId()
+    {
+        return $this->container['parent_file_id'];
+    }
+
+    /**
+     * Sets parent_file_id
+     *
+     * @param int $parent_file_id parent_file_id
+     *
+     * @return self
+     */
+    public function setParentFileId($parent_file_id)
+    {
+
+        if (is_null($parent_file_id)) {
+            array_push($this->openAPINullablesSetToNull, 'parent_file_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('parent_file_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['parent_file_id'] = $parent_file_id;
 
         return $this;
     }
