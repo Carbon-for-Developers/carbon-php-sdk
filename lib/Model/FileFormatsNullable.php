@@ -54,6 +54,8 @@ class FileFormatsNullable
 
     public const JSON = 'JSON';
 
+    public const HTML = 'HTML';
+
     public const NOTION = 'NOTION';
 
     public const GOOGLE_DOCS = 'GOOGLE_DOCS';
@@ -129,6 +131,7 @@ class FileFormatsNullable
             self::MD,
             self::RTF,
             self::JSON,
+            self::HTML,
             self::NOTION,
             self::GOOGLE_DOCS,
             self::GOOGLE_SHEETS,

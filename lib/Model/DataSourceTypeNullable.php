@@ -82,6 +82,8 @@ class DataSourceTypeNullable
 
     public const JSON = 'JSON';
 
+    public const HTML = 'HTML';
+
     public const RAW_TEXT = 'RAW_TEXT';
 
     public const WEB_SCRAPE = 'WEB_SCRAPE';
@@ -155,6 +157,7 @@ class DataSourceTypeNullable
             self::MD,
             self::RTF,
             self::JSON,
+            self::HTML,
             self::RAW_TEXT,
             self::WEB_SCRAPE,
             self::RSS_FEED,

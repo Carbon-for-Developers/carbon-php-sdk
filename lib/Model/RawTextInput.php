@@ -318,6 +318,10 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['contents'] === null) {
             $invalidProperties[] = "'contents' can't be null";
         }
+        if ((mb_strlen($this->container['contents']) < 5)) {
+            $invalidProperties[] = "invalid value for 'contents', the character length must be bigger than or equal to 5.";
+        }
+
         return $invalidProperties;
     }
 
@@ -352,6 +356,11 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setContents($contents)
     {
+
+        if ((mb_strlen($contents) < 5)) {
+            throw new \InvalidArgumentException('invalid length for $contents when calling RawTextInput., must be bigger than or equal to 5.');
+        }
+
 
         if (is_null($contents)) {
             throw new \InvalidArgumentException('non-nullable contents cannot be null');

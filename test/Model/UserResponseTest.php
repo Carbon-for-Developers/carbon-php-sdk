@@ -178,4 +178,13 @@ class UserResponseTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "auto_sync_enabled_sources"
+     */
+    public function testPropertyAutoSyncEnabledSources()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

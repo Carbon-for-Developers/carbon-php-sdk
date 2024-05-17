@@ -60,7 +60,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_tokens_synced' => 'int',
         'unique_file_tags' => 'object[]',
         'enabled_features' => 'object',
-        'custom_limits' => 'object'
+        'custom_limits' => 'object',
+        'auto_sync_enabled_sources' => 'mixed[]'
     ];
 
     /**
@@ -82,7 +83,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_tokens_synced' => null,
         'unique_file_tags' => null,
         'enabled_features' => null,
-        'custom_limits' => null
+        'custom_limits' => null,
+        'auto_sync_enabled_sources' => null
     ];
 
     /**
@@ -102,7 +104,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 		'num_tokens_synced' => false,
 		'unique_file_tags' => false,
 		'enabled_features' => true,
-		'custom_limits' => false
+		'custom_limits' => false,
+		'auto_sync_enabled_sources' => false
     ];
 
     /**
@@ -202,7 +205,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_tokens_synced' => 'num_tokens_synced',
         'unique_file_tags' => 'unique_file_tags',
         'enabled_features' => 'enabled_features',
-        'custom_limits' => 'custom_limits'
+        'custom_limits' => 'custom_limits',
+        'auto_sync_enabled_sources' => 'auto_sync_enabled_sources'
     ];
 
     /**
@@ -222,7 +226,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_tokens_synced' => 'setNumTokensSynced',
         'unique_file_tags' => 'setUniqueFileTags',
         'enabled_features' => 'setEnabledFeatures',
-        'custom_limits' => 'setCustomLimits'
+        'custom_limits' => 'setCustomLimits',
+        'auto_sync_enabled_sources' => 'setAutoSyncEnabledSources'
     ];
 
     /**
@@ -242,7 +247,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_tokens_synced' => 'getNumTokensSynced',
         'unique_file_tags' => 'getUniqueFileTags',
         'enabled_features' => 'getEnabledFeatures',
-        'custom_limits' => 'getCustomLimits'
+        'custom_limits' => 'getCustomLimits',
+        'auto_sync_enabled_sources' => 'getAutoSyncEnabledSources'
     ];
 
     /**
@@ -314,6 +320,7 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('unique_file_tags', $data ?? [], null);
         $this->setIfExists('enabled_features', $data ?? [], null);
         $this->setIfExists('custom_limits', $data ?? [], null);
+        $this->setIfExists('auto_sync_enabled_sources', $data ?? [], null);
     }
 
     /**
@@ -378,6 +385,9 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['custom_limits'] === null) {
             $invalidProperties[] = "'custom_limits' can't be null";
+        }
+        if ($this->container['auto_sync_enabled_sources'] === null) {
+            $invalidProperties[] = "'auto_sync_enabled_sources' can't be null";
         }
         return $invalidProperties;
     }
@@ -752,6 +762,35 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['custom_limits'] = $custom_limits;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_sync_enabled_sources
+     *
+     * @return mixed[]
+     */
+    public function getAutoSyncEnabledSources()
+    {
+        return $this->container['auto_sync_enabled_sources'];
+    }
+
+    /**
+     * Sets auto_sync_enabled_sources
+     *
+     * @param mixed[] $auto_sync_enabled_sources auto_sync_enabled_sources
+     *
+     * @return self
+     */
+    public function setAutoSyncEnabledSources($auto_sync_enabled_sources)
+    {
+
+        if (is_null($auto_sync_enabled_sources)) {
+            throw new \InvalidArgumentException('non-nullable auto_sync_enabled_sources cannot be null');
+        }
+
+        $this->container['auto_sync_enabled_sources'] = $auto_sync_enabled_sources;
 
         return $this;
     }
