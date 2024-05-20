@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.30-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.31-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -100,7 +100,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.30"
+    "konfig/carbon-php-sdk": "0.1.31"
   }
 }
 ```
@@ -1084,7 +1084,8 @@ $result = $carbon->files->upload(
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
-    parse_pdf_tables_with_ocr: False
+    parse_pdf_tables_with_ocr: False, 
+    detect_audio_language: False
 );
 ```
 
@@ -1132,6 +1133,10 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 Whether to use rich table parsing when `use_ocr` is enabled.
 
+##### detect_audio_language: `bool`<a id="detect_audio_language-bool"></a>
+
+Whether to automatically detect the language of the uploaded audio file.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1166,7 +1171,8 @@ $result = $carbon->files->uploadFromUrl(
     use_textract: False, 
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
-    parse_pdf_tables_with_ocr: False
+    parse_pdf_tables_with_ocr: False, 
+    detect_audio_language: False
 );
 ```
 
@@ -1197,6 +1203,8 @@ $result = $carbon->files->uploadFromUrl(
 Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 ##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
+
+##### detect_audio_language: `bool`<a id="detect_audio_language-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1320,7 +1328,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "b194468b-b547-46b9-98d6-e45c491bb8d0",
+        "request_id" => "b360dae1-b5fd-4803-a53a-1691e3c32558",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1569,7 +1577,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "fd8991d4-05d6-4fdd-92bf-9dccb96d5b92", 
+    request_id: "26453c8f-69ab-4eb3-bc25-0ca995b118a0", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1642,7 +1650,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: ONEDRIVE, SHAREPOINT, DROPBOX, BOX, GOOGLE_DRIVE
+Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, DROPBOX, BOX, ONEDRIVE, GOOGLE_DRIVE
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -1948,7 +1956,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "fdb7ec68-6f04-49d2-adb3-fc5ae9f30a14", 
+    request_id: "3d0330f2-f2e4-482b-9ca7-91d3a1bbbd18", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2066,7 +2074,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "fdb7ec68-6f04-49d2-adb3-fc5ae9f30a14", 
+    request_id: "3d0330f2-f2e4-482b-9ca7-91d3a1bbbd18", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 

@@ -60,7 +60,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'use_textract' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
         'max_items_per_chunk' => 'int',
-        'parse_pdf_tables_with_ocr' => 'bool'
+        'parse_pdf_tables_with_ocr' => 'bool',
+        'detect_audio_language' => 'bool'
     ];
 
     /**
@@ -82,7 +83,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'use_textract' => null,
         'prepend_filename_to_chunks' => null,
         'max_items_per_chunk' => null,
-        'parse_pdf_tables_with_ocr' => null
+        'parse_pdf_tables_with_ocr' => null,
+        'detect_audio_language' => null
     ];
 
     /**
@@ -102,7 +104,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
 		'use_textract' => false,
 		'prepend_filename_to_chunks' => false,
 		'max_items_per_chunk' => true,
-		'parse_pdf_tables_with_ocr' => false
+		'parse_pdf_tables_with_ocr' => false,
+		'detect_audio_language' => false
     ];
 
     /**
@@ -202,7 +205,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'use_textract' => 'use_textract',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
         'max_items_per_chunk' => 'max_items_per_chunk',
-        'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr'
+        'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
+        'detect_audio_language' => 'detect_audio_language'
     ];
 
     /**
@@ -222,7 +226,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'use_textract' => 'setUseTextract',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
         'max_items_per_chunk' => 'setMaxItemsPerChunk',
-        'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr'
+        'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
+        'detect_audio_language' => 'setDetectAudioLanguage'
     ];
 
     /**
@@ -242,7 +247,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'use_textract' => 'getUseTextract',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
         'max_items_per_chunk' => 'getMaxItemsPerChunk',
-        'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr'
+        'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
+        'detect_audio_language' => 'getDetectAudioLanguage'
     ];
 
     /**
@@ -314,6 +320,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
+        $this->setIfExists('detect_audio_language', $data ?? [], false);
     }
 
     /**
@@ -733,6 +740,35 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['parse_pdf_tables_with_ocr'] = $parse_pdf_tables_with_ocr;
+
+        return $this;
+    }
+
+    /**
+     * Gets detect_audio_language
+     *
+     * @return bool|null
+     */
+    public function getDetectAudioLanguage()
+    {
+        return $this->container['detect_audio_language'];
+    }
+
+    /**
+     * Sets detect_audio_language
+     *
+     * @param bool|null $detect_audio_language detect_audio_language
+     *
+     * @return self
+     */
+    public function setDetectAudioLanguage($detect_audio_language)
+    {
+
+        if (is_null($detect_audio_language)) {
+            throw new \InvalidArgumentException('non-nullable detect_audio_language cannot be null');
+        }
+
+        $this->container['detect_audio_language'] = $detect_audio_language;
 
         return $this;
     }

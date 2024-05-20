@@ -178,4 +178,13 @@ class UploadFileFromUrlInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "detect_audio_language"
+     */
+    public function testPropertyDetectAudioLanguage()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

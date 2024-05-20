@@ -324,6 +324,15 @@ class UserFileTest extends TestCase
     }
 
     /**
+     * Test attribute "audio_properties"
+     */
+    public function testPropertyAudioProperties()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "request_id"
      */
     public function testPropertyRequestId()
