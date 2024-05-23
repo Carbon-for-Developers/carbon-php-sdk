@@ -178,4 +178,13 @@ class OutlookSyncInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "incremental_sync"
+     */
+    public function testPropertyIncrementalSync()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

@@ -60,7 +60,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'bool',
         'data_source_id' => 'int',
         'request_id' => 'string',
-        'sync_attachments' => 'bool'
+        'sync_attachments' => 'bool',
+        'incremental_sync' => 'bool'
     ];
 
     /**
@@ -82,7 +83,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => null,
         'data_source_id' => null,
         'request_id' => null,
-        'sync_attachments' => null
+        'sync_attachments' => null,
+        'incremental_sync' => null
     ];
 
     /**
@@ -102,7 +104,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'prepend_filename_to_chunks' => true,
 		'data_source_id' => true,
 		'request_id' => true,
-		'sync_attachments' => true
+		'sync_attachments' => true,
+		'incremental_sync' => false
     ];
 
     /**
@@ -202,7 +205,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
         'data_source_id' => 'data_source_id',
         'request_id' => 'request_id',
-        'sync_attachments' => 'sync_attachments'
+        'sync_attachments' => 'sync_attachments',
+        'incremental_sync' => 'incremental_sync'
     ];
 
     /**
@@ -222,7 +226,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
         'data_source_id' => 'setDataSourceId',
         'request_id' => 'setRequestId',
-        'sync_attachments' => 'setSyncAttachments'
+        'sync_attachments' => 'setSyncAttachments',
+        'incremental_sync' => 'setIncrementalSync'
     ];
 
     /**
@@ -242,7 +247,8 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
         'data_source_id' => 'getDataSourceId',
         'request_id' => 'getRequestId',
-        'sync_attachments' => 'getSyncAttachments'
+        'sync_attachments' => 'getSyncAttachments',
+        'incremental_sync' => 'getIncrementalSync'
     ];
 
     /**
@@ -314,6 +320,7 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('sync_attachments', $data ?? [], false);
+        $this->setIfExists('incremental_sync', $data ?? [], false);
     }
 
     /**
@@ -775,6 +782,35 @@ class OutlookSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['sync_attachments'] = $sync_attachments;
+
+        return $this;
+    }
+
+    /**
+     * Gets incremental_sync
+     *
+     * @return bool|null
+     */
+    public function getIncrementalSync()
+    {
+        return $this->container['incremental_sync'];
+    }
+
+    /**
+     * Sets incremental_sync
+     *
+     * @param bool|null $incremental_sync incremental_sync
+     *
+     * @return self
+     */
+    public function setIncrementalSync($incremental_sync)
+    {
+
+        if (is_null($incremental_sync)) {
+            throw new \InvalidArgumentException('non-nullable incremental_sync cannot be null');
+        }
+
+        $this->container['incremental_sync'] = $incremental_sync;
 
         return $this;
     }

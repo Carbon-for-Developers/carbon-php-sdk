@@ -1806,7 +1806,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = '26453c8f-69ab-4eb3-bc25-0ca995b118a0',
+        $request_id = 'a0b57844-5937-42ef-a161-2515fc4f16df',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -2019,7 +2019,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = '26453c8f-69ab-4eb3-bc25-0ca995b118a0',
+        $request_id = 'a0b57844-5937-42ef-a161-2515fc4f16df',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -4830,7 +4830,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '3d0330f2-f2e4-482b-9ca7-91d3a1bbbd18',
+        $request_id = '5cb51bcc-08e9-4e31-9784-0005b5390cb6',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -5023,7 +5023,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '3d0330f2-f2e4-482b-9ca7-91d3a1bbbd18',
+        $request_id = '5cb51bcc-08e9-4e31-9784-0005b5390cb6',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -5626,7 +5626,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '3d0330f2-f2e4-482b-9ca7-91d3a1bbbd18',
+        $request_id = '5cb51bcc-08e9-4e31-9784-0005b5390cb6',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -5819,7 +5819,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '3d0330f2-f2e4-482b-9ca7-91d3a1bbbd18',
+        $request_id = '5cb51bcc-08e9-4e31-9784-0005b5390cb6',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -6834,6 +6834,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $data_source_id = SENTINEL_VALUE,
         $request_id = SENTINEL_VALUE,
         $sync_attachments = false,
+        $incremental_sync = false,
         string $contentType = self::contentTypes['syncGmail'][0]
     )
     {
@@ -6849,6 +6850,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_attachments", $sync_attachments);
+        $this->setRequestBodyProperty($_body, "incremental_sync", $incremental_sync);
         $gmail_sync_input = $_body;
 
         list($response) = $this->syncGmailWithHttpInfo($gmail_sync_input, $contentType);
@@ -7017,6 +7019,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $data_source_id = SENTINEL_VALUE,
         $request_id = SENTINEL_VALUE,
         $sync_attachments = false,
+        $incremental_sync = false,
         string $contentType = self::contentTypes['syncGmail'][0]
     )
     {
@@ -7032,6 +7035,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_attachments", $sync_attachments);
+        $this->setRequestBodyProperty($_body, "incremental_sync", $incremental_sync);
         $gmail_sync_input = $_body;
 
         return $this->syncGmailAsyncWithHttpInfo($gmail_sync_input, $contentType)
@@ -7243,6 +7247,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $data_source_id = SENTINEL_VALUE,
         $request_id = SENTINEL_VALUE,
         $sync_attachments = false,
+        $incremental_sync = false,
         string $contentType = self::contentTypes['syncOutlook'][0]
     )
     {
@@ -7259,6 +7264,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_attachments", $sync_attachments);
+        $this->setRequestBodyProperty($_body, "incremental_sync", $incremental_sync);
         $outlook_sync_input = $_body;
 
         list($response) = $this->syncOutlookWithHttpInfo($outlook_sync_input, $contentType);
@@ -7428,6 +7434,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $data_source_id = SENTINEL_VALUE,
         $request_id = SENTINEL_VALUE,
         $sync_attachments = false,
+        $incremental_sync = false,
         string $contentType = self::contentTypes['syncOutlook'][0]
     )
     {
@@ -7444,6 +7451,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_attachments", $sync_attachments);
+        $this->setRequestBodyProperty($_body, "incremental_sync", $incremental_sync);
         $outlook_sync_input = $_body;
 
         return $this->syncOutlookAsyncWithHttpInfo($outlook_sync_input, $contentType)

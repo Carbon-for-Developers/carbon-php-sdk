@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.31-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.1.32-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -100,7 +100,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.31"
+    "konfig/carbon-php-sdk": "0.1.32"
   }
 }
 ```
@@ -1328,7 +1328,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "b360dae1-b5fd-4803-a53a-1691e3c32558",
+        "request_id" => "ca195b1c-0656-4db7-96fc-211554e9827b",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1577,7 +1577,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "26453c8f-69ab-4eb3-bc25-0ca995b118a0", 
+    request_id: "a0b57844-5937-42ef-a161-2515fc4f16df", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1650,7 +1650,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, DROPBOX, BOX, ONEDRIVE, GOOGLE_DRIVE
+Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, DROPBOX, BOX, GOOGLE_DRIVE, ONEDRIVE
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -1956,7 +1956,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "3d0330f2-f2e4-482b-9ca7-91d3a1bbbd18", 
+    request_id: "5cb51bcc-08e9-4e31-9784-0005b5390cb6", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2074,7 +2074,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "3d0330f2-f2e4-482b-9ca7-91d3a1bbbd18", 
+    request_id: "5cb51bcc-08e9-4e31-9784-0005b5390cb6", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2306,7 +2306,8 @@ $result = $carbon->integrations->syncGmail(
     prepend_filename_to_chunks: False, 
     data_source_id: 1, 
     request_id: "string_example", 
-    sync_attachments: False
+    sync_attachments: False, 
+    incremental_sync: False
 );
 ```
 
@@ -2333,6 +2334,8 @@ $result = $carbon->integrations->syncGmail(
 ##### request_id: `string`<a id="request_id-string"></a>
 
 ##### sync_attachments: `bool`<a id="sync_attachments-bool"></a>
+
+##### incremental_sync: `bool`<a id="incremental_sync-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2427,7 +2430,8 @@ $result = $carbon->integrations->syncOutlook(
     prepend_filename_to_chunks: False, 
     data_source_id: 1, 
     request_id: "string_example", 
-    sync_attachments: False
+    sync_attachments: False, 
+    incremental_sync: False
 );
 ```
 
@@ -2456,6 +2460,8 @@ $result = $carbon->integrations->syncOutlook(
 ##### request_id: `string`<a id="request_id-string"></a>
 
 ##### sync_attachments: `bool`<a id="sync_attachments-bool"></a>
+
+##### incremental_sync: `bool`<a id="incremental_sync-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
