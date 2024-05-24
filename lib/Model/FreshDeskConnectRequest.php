@@ -61,7 +61,7 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
         'sync_files_on_connection' => 'bool',
         'request_id' => 'string',
         'sync_source_items' => 'bool',
-        'file_sync_config' => '\Carbon\Model\HelpdeskFileSyncConfigNullable'
+        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable'
     ];
 
     /**
@@ -785,7 +785,7 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets file_sync_config
      *
-     * @return \Carbon\Model\HelpdeskFileSyncConfigNullable|null
+     * @return \Carbon\Model\FileSyncConfigNullable|null
      */
     public function getFileSyncConfig()
     {
@@ -795,7 +795,7 @@ class FreshDeskConnectRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets file_sync_config
      *
-     * @param \Carbon\Model\HelpdeskFileSyncConfigNullable|null $file_sync_config file_sync_config
+     * @param \Carbon\Model\FileSyncConfigNullable|null $file_sync_config file_sync_config
      *
      * @return self
      */

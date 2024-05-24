@@ -64,7 +64,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'use_ocr' => 'bool',
         'parse_pdf_tables_with_ocr' => 'bool',
         'incremental_sync' => 'bool',
-        'file_sync_config' => '\Carbon\Model\HelpdeskGlobalFileSyncConfigNullable'
+        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable'
     ];
 
     /**
@@ -337,7 +337,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], '5cb51bcc-08e9-4e31-9784-0005b5390cb6');
+        $this->setIfExists('request_id', $data ?? [], '27036d05-9737-4197-b0c6-e9fb9f60f976');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('incremental_sync', $data ?? [], false);
@@ -900,7 +900,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets file_sync_config
      *
-     * @return \Carbon\Model\HelpdeskGlobalFileSyncConfigNullable|null
+     * @return \Carbon\Model\FileSyncConfigNullable|null
      */
     public function getFileSyncConfig()
     {
@@ -910,7 +910,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets file_sync_config
      *
-     * @param \Carbon\Model\HelpdeskGlobalFileSyncConfigNullable|null $file_sync_config file_sync_config
+     * @param \Carbon\Model\FileSyncConfigNullable|null $file_sync_config file_sync_config
      *
      * @return self
      */

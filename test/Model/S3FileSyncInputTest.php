@@ -196,4 +196,13 @@ class S3FileSyncInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "file_sync_config"
+     */
+    public function testPropertyFileSyncConfig()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

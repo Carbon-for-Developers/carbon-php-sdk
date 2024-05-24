@@ -126,6 +126,8 @@ class DataSourceType
 
     public const WEBM = 'WEBM';
 
+    public const MPEG = 'MPEG';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -178,7 +180,8 @@ class DataSourceType
             self::M4_A,
             self::OGG,
             self::OPUS,
-            self::WEBM
+            self::WEBM,
+            self::MPEG
         ];
     }
 }

@@ -88,4 +88,13 @@ class FetchURLsResponseTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "error_message"
+     */
+    public function testPropertyErrorMessage()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

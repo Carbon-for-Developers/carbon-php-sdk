@@ -62,7 +62,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'data_source_id' => 'int',
         'request_id' => 'string',
         'use_ocr' => 'bool',
-        'parse_pdf_tables_with_ocr' => 'bool'
+        'parse_pdf_tables_with_ocr' => 'bool',
+        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable'
     ];
 
     /**
@@ -86,7 +87,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'data_source_id' => null,
         'request_id' => null,
         'use_ocr' => null,
-        'parse_pdf_tables_with_ocr' => null
+        'parse_pdf_tables_with_ocr' => null,
+        'file_sync_config' => null
     ];
 
     /**
@@ -108,7 +110,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'data_source_id' => true,
 		'request_id' => true,
 		'use_ocr' => true,
-		'parse_pdf_tables_with_ocr' => true
+		'parse_pdf_tables_with_ocr' => true,
+		'file_sync_config' => true
     ];
 
     /**
@@ -210,7 +213,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'data_source_id' => 'data_source_id',
         'request_id' => 'request_id',
         'use_ocr' => 'use_ocr',
-        'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr'
+        'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
+        'file_sync_config' => 'file_sync_config'
     ];
 
     /**
@@ -232,7 +236,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'data_source_id' => 'setDataSourceId',
         'request_id' => 'setRequestId',
         'use_ocr' => 'setUseOcr',
-        'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr'
+        'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
+        'file_sync_config' => 'setFileSyncConfig'
     ];
 
     /**
@@ -254,7 +259,8 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'data_source_id' => 'getDataSourceId',
         'request_id' => 'getRequestId',
         'use_ocr' => 'getUseOcr',
-        'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr'
+        'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
+        'file_sync_config' => 'getFileSyncConfig'
     ];
 
     /**
@@ -328,6 +334,7 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
+        $this->setIfExists('file_sync_config', $data ?? [], null);
     }
 
     /**
@@ -854,6 +861,42 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['parse_pdf_tables_with_ocr'] = $parse_pdf_tables_with_ocr;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_sync_config
+     *
+     * @return \Carbon\Model\FileSyncConfigNullable|null
+     */
+    public function getFileSyncConfig()
+    {
+        return $this->container['file_sync_config'];
+    }
+
+    /**
+     * Sets file_sync_config
+     *
+     * @param \Carbon\Model\FileSyncConfigNullable|null $file_sync_config file_sync_config
+     *
+     * @return self
+     */
+    public function setFileSyncConfig($file_sync_config)
+    {
+
+        if (is_null($file_sync_config)) {
+            array_push($this->openAPINullablesSetToNull, 'file_sync_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_sync_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_sync_config'] = $file_sync_config;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * HelpdeskGlobalFileSyncConfig
+ * FileSyncConfigNullable
  *
  * PHP version 7.4
  *
@@ -26,13 +26,14 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * HelpdeskGlobalFileSyncConfig Class Doc Comment
+ * FileSyncConfigNullable Class Doc Comment
  *
  * @category Class
+ * @description Used to configure file syncing for certain connectors when sync_files_on_connection is set to true
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
+class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +42,7 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'HelpdeskGlobalFileSyncConfig';
+    protected static $openAPIModelName = 'FileSyncConfigNullable';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,7 +50,9 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'sync_attachments' => 'bool'
+        'auto_synced_source_types' => '\Carbon\Model\HelpdeskFileTypes[]',
+        'sync_attachments' => 'bool',
+        'detect_audio_language' => 'bool'
     ];
 
     /**
@@ -60,7 +63,9 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'sync_attachments' => null
+        'auto_synced_source_types' => null,
+        'sync_attachments' => null,
+        'detect_audio_language' => null
     ];
 
     /**
@@ -69,7 +74,9 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'sync_attachments' => false
+        'auto_synced_source_types' => false,
+		'sync_attachments' => false,
+		'detect_audio_language' => false
     ];
 
     /**
@@ -158,7 +165,9 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'sync_attachments' => 'sync_attachments'
+        'auto_synced_source_types' => 'auto_synced_source_types',
+        'sync_attachments' => 'sync_attachments',
+        'detect_audio_language' => 'detect_audio_language'
     ];
 
     /**
@@ -167,7 +176,9 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'sync_attachments' => 'setSyncAttachments'
+        'auto_synced_source_types' => 'setAutoSyncedSourceTypes',
+        'sync_attachments' => 'setSyncAttachments',
+        'detect_audio_language' => 'setDetectAudioLanguage'
     ];
 
     /**
@@ -176,7 +187,9 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'sync_attachments' => 'getSyncAttachments'
+        'auto_synced_source_types' => 'getAutoSyncedSourceTypes',
+        'sync_attachments' => 'getSyncAttachments',
+        'detect_audio_language' => 'getDetectAudioLanguage'
     ];
 
     /**
@@ -236,7 +249,9 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('auto_synced_source_types', $data ?? [], null);
         $this->setIfExists('sync_attachments', $data ?? [], false);
+        $this->setIfExists('detect_audio_language', $data ?? [], false);
     }
 
     /**
@@ -282,6 +297,35 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
 
 
     /**
+     * Gets auto_synced_source_types
+     *
+     * @return \Carbon\Model\HelpdeskFileTypes[]|null
+     */
+    public function getAutoSyncedSourceTypes()
+    {
+        return $this->container['auto_synced_source_types'];
+    }
+
+    /**
+     * Sets auto_synced_source_types
+     *
+     * @param \Carbon\Model\HelpdeskFileTypes[]|null $auto_synced_source_types File types to automatically sync when the data source connects. Only a subset of file types can be          controlled. If not supported, then they will always be synced
+     *
+     * @return self
+     */
+    public function setAutoSyncedSourceTypes($auto_synced_source_types)
+    {
+
+        if (is_null($auto_synced_source_types)) {
+            throw new \InvalidArgumentException('non-nullable auto_synced_source_types cannot be null');
+        }
+
+        $this->container['auto_synced_source_types'] = $auto_synced_source_types;
+
+        return $this;
+    }
+
+    /**
      * Gets sync_attachments
      *
      * @return bool|null
@@ -294,7 +338,7 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets sync_attachments
      *
-     * @param bool|null $sync_attachments sync_attachments
+     * @param bool|null $sync_attachments Automatically sync attachments from files where supported. Currently applies to Helpdesk Tickets
      *
      * @return self
      */
@@ -306,6 +350,35 @@ class HelpdeskGlobalFileSyncConfig implements ModelInterface, ArrayAccess, \Json
         }
 
         $this->container['sync_attachments'] = $sync_attachments;
+
+        return $this;
+    }
+
+    /**
+     * Gets detect_audio_language
+     *
+     * @return bool|null
+     */
+    public function getDetectAudioLanguage()
+    {
+        return $this->container['detect_audio_language'];
+    }
+
+    /**
+     * Sets detect_audio_language
+     *
+     * @param bool|null $detect_audio_language Detect audio language before transcription for audio files
+     *
+     * @return self
+     */
+    public function setDetectAudioLanguage($detect_audio_language)
+    {
+
+        if (is_null($detect_audio_language)) {
+            throw new \InvalidArgumentException('non-nullable detect_audio_language cannot be null');
+        }
+
+        $this->container['detect_audio_language'] = $detect_audio_language;
 
         return $this;
     }

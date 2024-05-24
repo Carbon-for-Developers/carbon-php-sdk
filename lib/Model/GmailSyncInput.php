@@ -60,6 +60,7 @@ class GmailSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'data_source_id' => 'int',
         'request_id' => 'string',
         'sync_attachments' => 'bool',
+        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable',
         'incremental_sync' => 'bool'
     ];
 
@@ -82,6 +83,7 @@ class GmailSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'data_source_id' => null,
         'request_id' => null,
         'sync_attachments' => null,
+        'file_sync_config' => null,
         'incremental_sync' => null
     ];
 
@@ -102,6 +104,7 @@ class GmailSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'data_source_id' => true,
 		'request_id' => true,
 		'sync_attachments' => true,
+		'file_sync_config' => true,
 		'incremental_sync' => false
     ];
 
@@ -202,6 +205,7 @@ class GmailSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'data_source_id' => 'data_source_id',
         'request_id' => 'request_id',
         'sync_attachments' => 'sync_attachments',
+        'file_sync_config' => 'file_sync_config',
         'incremental_sync' => 'incremental_sync'
     ];
 
@@ -222,6 +226,7 @@ class GmailSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'data_source_id' => 'setDataSourceId',
         'request_id' => 'setRequestId',
         'sync_attachments' => 'setSyncAttachments',
+        'file_sync_config' => 'setFileSyncConfig',
         'incremental_sync' => 'setIncrementalSync'
     ];
 
@@ -242,6 +247,7 @@ class GmailSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'data_source_id' => 'getDataSourceId',
         'request_id' => 'getRequestId',
         'sync_attachments' => 'getSyncAttachments',
+        'file_sync_config' => 'getFileSyncConfig',
         'incremental_sync' => 'getIncrementalSync'
     ];
 
@@ -313,6 +319,7 @@ class GmailSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('sync_attachments', $data ?? [], false);
+        $this->setIfExists('file_sync_config', $data ?? [], null);
         $this->setIfExists('incremental_sync', $data ?? [], false);
     }
 
@@ -739,6 +746,42 @@ class GmailSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['sync_attachments'] = $sync_attachments;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_sync_config
+     *
+     * @return \Carbon\Model\FileSyncConfigNullable|null
+     */
+    public function getFileSyncConfig()
+    {
+        return $this->container['file_sync_config'];
+    }
+
+    /**
+     * Sets file_sync_config
+     *
+     * @param \Carbon\Model\FileSyncConfigNullable|null $file_sync_config file_sync_config
+     *
+     * @return self
+     */
+    public function setFileSyncConfig($file_sync_config)
+    {
+
+        if (is_null($file_sync_config)) {
+            array_push($this->openAPINullablesSetToNull, 'file_sync_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_sync_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_sync_config'] = $file_sync_config;
 
         return $this;
     }

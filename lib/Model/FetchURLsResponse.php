@@ -50,7 +50,8 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static $openAPITypes = [
         'urls' => 'string[]',
-        'html_content' => 'string'
+        'html_content' => 'string',
+        'error_message' => 'string'
     ];
 
     /**
@@ -62,7 +63,8 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static $openAPIFormats = [
         'urls' => null,
-        'html_content' => null
+        'html_content' => null,
+        'error_message' => null
     ];
 
     /**
@@ -72,7 +74,8 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static array $openAPINullables = [
         'urls' => false,
-		'html_content' => false
+		'html_content' => false,
+		'error_message' => true
     ];
 
     /**
@@ -162,7 +165,8 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $attributeMap = [
         'urls' => 'urls',
-        'html_content' => 'html_content'
+        'html_content' => 'html_content',
+        'error_message' => 'error_message'
     ];
 
     /**
@@ -172,7 +176,8 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $setters = [
         'urls' => 'setUrls',
-        'html_content' => 'setHtmlContent'
+        'html_content' => 'setHtmlContent',
+        'error_message' => 'setErrorMessage'
     ];
 
     /**
@@ -182,7 +187,8 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $getters = [
         'urls' => 'getUrls',
-        'html_content' => 'getHtmlContent'
+        'html_content' => 'getHtmlContent',
+        'error_message' => 'getErrorMessage'
     ];
 
     /**
@@ -244,6 +250,7 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         $this->setIfExists('urls', $data ?? [], null);
         $this->setIfExists('html_content', $data ?? [], null);
+        $this->setIfExists('error_message', $data ?? [], null);
     }
 
     /**
@@ -278,6 +285,9 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
         if ($this->container['html_content'] === null) {
             $invalidProperties[] = "'html_content' can't be null";
+        }
+        if ($this->container['error_message'] === null) {
+            $invalidProperties[] = "'error_message' can't be null";
         }
         return $invalidProperties;
     }
@@ -348,6 +358,42 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['html_content'] = $html_content;
+
+        return $this;
+    }
+
+    /**
+     * Gets error_message
+     *
+     * @return string
+     */
+    public function getErrorMessage()
+    {
+        return $this->container['error_message'];
+    }
+
+    /**
+     * Sets error_message
+     *
+     * @param string $error_message error_message
+     *
+     * @return self
+     */
+    public function setErrorMessage($error_message)
+    {
+
+        if (is_null($error_message)) {
+            array_push($this->openAPINullablesSetToNull, 'error_message');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('error_message', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['error_message'] = $error_message;
 
         return $this;
     }

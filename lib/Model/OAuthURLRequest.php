@@ -74,7 +74,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'enable_file_picker' => 'bool',
         'sync_source_items' => 'bool',
         'incremental_sync' => 'bool',
-        'file_sync_config' => '\Carbon\Model\HelpdeskFileSyncConfigNullable'
+        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable'
     ];
 
     /**
@@ -405,7 +405,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('connecting_new_account', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], 'a0b57844-5937-42ef-a161-2515fc4f16df');
+        $this->setIfExists('request_id', $data ?? [], 'eb3e536e-fa3e-4f8e-9a22-25f70393e759');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('enable_file_picker', $data ?? [], true);
@@ -1243,7 +1243,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets enable_file_picker
      *
-     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, DROPBOX, BOX, GOOGLE_DRIVE, ONEDRIVE
+     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: ONEDRIVE, GOOGLE_DRIVE, DROPBOX, SHAREPOINT, BOX
      *
      * @return self
      */
@@ -1320,7 +1320,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets file_sync_config
      *
-     * @return \Carbon\Model\HelpdeskFileSyncConfigNullable|null
+     * @return \Carbon\Model\FileSyncConfigNullable|null
      */
     public function getFileSyncConfig()
     {
@@ -1330,7 +1330,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets file_sync_config
      *
-     * @param \Carbon\Model\HelpdeskFileSyncConfigNullable|null $file_sync_config file_sync_config
+     * @param \Carbon\Model\FileSyncConfigNullable|null $file_sync_config file_sync_config
      *
      * @return self
      */

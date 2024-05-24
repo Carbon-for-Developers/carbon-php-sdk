@@ -63,7 +63,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'enable_file_picker' => 'bool',
         'sync_source_items' => 'bool',
         'incremental_sync' => 'bool',
-        'file_sync_config' => '\Carbon\Model\HelpdeskFileSyncConfigNullable'
+        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable'
     ];
 
     /**
@@ -330,7 +330,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], 'ca195b1c-0656-4db7-96fc-211554e9827b');
+        $this->setIfExists('request_id', $data ?? [], '18ef9025-4c76-443c-a115-ba77b17afd8b');
         $this->setIfExists('enable_file_picker', $data ?? [], true);
         $this->setIfExists('sync_source_items', $data ?? [], true);
         $this->setIfExists('incremental_sync', $data ?? [], false);
@@ -851,7 +851,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets file_sync_config
      *
-     * @return \Carbon\Model\HelpdeskFileSyncConfigNullable|null
+     * @return \Carbon\Model\FileSyncConfigNullable|null
      */
     public function getFileSyncConfig()
     {
@@ -861,7 +861,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets file_sync_config
      *
-     * @param \Carbon\Model\HelpdeskFileSyncConfigNullable|null $file_sync_config file_sync_config
+     * @param \Carbon\Model\FileSyncConfigNullable|null $file_sync_config file_sync_config
      *
      * @return self
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * HelpdeskGlobalFileSyncConfigNullableTest
+ * FileSyncConfigNullableTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * HelpdeskGlobalFileSyncConfigNullableTest Class Doc Comment
+ * FileSyncConfigNullableTest Class Doc Comment
  *
  * @category    Class
- * @description Used to configure file syncing for certain connectors, for example including attachments
+ * @description Used to configure file syncing for certain connectors when sync_files_on_connection is set to true
  * @package     Carbon
  */
-class HelpdeskGlobalFileSyncConfigNullableTest extends TestCase
+class FileSyncConfigNullableTest extends TestCase
 {
 
     /**
@@ -63,9 +63,18 @@ class HelpdeskGlobalFileSyncConfigNullableTest extends TestCase
     }
 
     /**
-     * Test "HelpdeskGlobalFileSyncConfigNullable"
+     * Test "FileSyncConfigNullable"
      */
-    public function testHelpdeskGlobalFileSyncConfigNullable()
+    public function testFileSyncConfigNullable()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "auto_synced_source_types"
+     */
+    public function testPropertyAutoSyncedSourceTypes()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -75,6 +84,15 @@ class HelpdeskGlobalFileSyncConfigNullableTest extends TestCase
      * Test attribute "sync_attachments"
      */
     public function testPropertySyncAttachments()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "detect_audio_language"
+     */
+    public function testPropertyDetectAudioLanguage()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

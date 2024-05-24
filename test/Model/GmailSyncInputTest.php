@@ -171,6 +171,15 @@ class GmailSyncInputTest extends TestCase
     }
 
     /**
+     * Test attribute "file_sync_config"
+     */
+    public function testPropertyFileSyncConfig()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "incremental_sync"
      */
     public function testPropertyIncrementalSync()

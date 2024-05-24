@@ -77,8 +77,8 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'bool',
         'source_created_at' => '\DateTime',
         'generate_sparse_vectors' => 'bool',
-        'audio_properties' => 'object',
         'request_id' => 'string',
+        'sync_properties' => 'object',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -119,8 +119,8 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => null,
         'source_created_at' => 'date-time',
         'generate_sparse_vectors' => null,
-        'audio_properties' => null,
         'request_id' => null,
+        'sync_properties' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -159,8 +159,8 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
 		'skip_embedding_generation' => false,
 		'source_created_at' => true,
 		'generate_sparse_vectors' => true,
-		'audio_properties' => true,
 		'request_id' => true,
+		'sync_properties' => false,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -279,8 +279,8 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'skip_embedding_generation',
         'source_created_at' => 'source_created_at',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
-        'audio_properties' => 'audio_properties',
         'request_id' => 'request_id',
+        'sync_properties' => 'sync_properties',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -319,8 +319,8 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'setSkipEmbeddingGeneration',
         'source_created_at' => 'setSourceCreatedAt',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
-        'audio_properties' => 'setAudioProperties',
         'request_id' => 'setRequestId',
+        'sync_properties' => 'setSyncProperties',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -359,8 +359,8 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'getSkipEmbeddingGeneration',
         'source_created_at' => 'getSourceCreatedAt',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
-        'audio_properties' => 'getAudioProperties',
         'request_id' => 'getRequestId',
+        'sync_properties' => 'getSyncProperties',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -450,8 +450,8 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('skip_embedding_generation', $data ?? [], null);
         $this->setIfExists('source_created_at', $data ?? [], null);
         $this->setIfExists('generate_sparse_vectors', $data ?? [], null);
-        $this->setIfExists('audio_properties', $data ?? [], null);
         $this->setIfExists('request_id', $data ?? [], null);
+        $this->setIfExists('sync_properties', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -567,11 +567,11 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['generate_sparse_vectors'] === null) {
             $invalidProperties[] = "'generate_sparse_vectors' can't be null";
         }
-        if ($this->container['audio_properties'] === null) {
-            $invalidProperties[] = "'audio_properties' can't be null";
-        }
         if ($this->container['request_id'] === null) {
             $invalidProperties[] = "'request_id' can't be null";
+        }
+        if ($this->container['sync_properties'] === null) {
+            $invalidProperties[] = "'sync_properties' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -1547,42 +1547,6 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets audio_properties
-     *
-     * @return object
-     */
-    public function getAudioProperties()
-    {
-        return $this->container['audio_properties'];
-    }
-
-    /**
-     * Sets audio_properties
-     *
-     * @param object $audio_properties audio_properties
-     *
-     * @return self
-     */
-    public function setAudioProperties($audio_properties)
-    {
-
-        if (is_null($audio_properties)) {
-            array_push($this->openAPINullablesSetToNull, 'audio_properties');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('audio_properties', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['audio_properties'] = $audio_properties;
-
-        return $this;
-    }
-
-    /**
      * Gets request_id
      *
      * @return string
@@ -1614,6 +1578,35 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['request_id'] = $request_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_properties
+     *
+     * @return object
+     */
+    public function getSyncProperties()
+    {
+        return $this->container['sync_properties'];
+    }
+
+    /**
+     * Sets sync_properties
+     *
+     * @param object $sync_properties sync_properties
+     *
+     * @return self
+     */
+    public function setSyncProperties($sync_properties)
+    {
+
+        if (is_null($sync_properties)) {
+            throw new \InvalidArgumentException('non-nullable sync_properties cannot be null');
+        }
+
+        $this->container['sync_properties'] = $sync_properties;
 
         return $this;
     }

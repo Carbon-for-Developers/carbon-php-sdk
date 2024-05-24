@@ -1,6 +1,6 @@
 <?php
 /**
- * HelpdeskFileSyncConfigTest
+ * FileSyncConfigTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * HelpdeskFileSyncConfigTest Class Doc Comment
+ * FileSyncConfigTest Class Doc Comment
  *
  * @category    Class
- * @description HelpdeskFileSyncConfig
+ * @description FileSyncConfig
  * @package     Carbon
  */
-class HelpdeskFileSyncConfigTest extends TestCase
+class FileSyncConfigTest extends TestCase
 {
 
     /**
@@ -63,18 +63,18 @@ class HelpdeskFileSyncConfigTest extends TestCase
     }
 
     /**
-     * Test "HelpdeskFileSyncConfig"
+     * Test "FileSyncConfig"
      */
-    public function testHelpdeskFileSyncConfig()
+    public function testFileSyncConfig()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "file_types"
+     * Test attribute "auto_synced_source_types"
      */
-    public function testPropertyFileTypes()
+    public function testPropertyAutoSyncedSourceTypes()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -84,6 +84,15 @@ class HelpdeskFileSyncConfigTest extends TestCase
      * Test attribute "sync_attachments"
      */
     public function testPropertySyncAttachments()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "detect_audio_language"
+     */
+    public function testPropertyDetectAudioLanguage()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
