@@ -162,6 +162,33 @@ class OrganizationResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "aggregate_num_files_by_source"
+     */
+    public function testPropertyAggregateNumFilesBySource()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "aggregate_num_files_by_file_format"
+     */
+    public function testPropertyAggregateNumFilesByFileFormat()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "file_statistics_aggregated_at"
+     */
+    public function testPropertyFileStatisticsAggregatedAt()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "period_ends_at"
      */
     public function testPropertyPeriodEndsAt()

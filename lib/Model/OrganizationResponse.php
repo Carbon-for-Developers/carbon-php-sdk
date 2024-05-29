@@ -59,6 +59,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_characters' => 'object',
         'aggregate_num_tokens' => 'object',
         'aggregate_num_embeddings' => 'object',
+        'aggregate_num_files_by_source' => 'object',
+        'aggregate_num_files_by_file_format' => 'object',
+        'file_statistics_aggregated_at' => '\DateTime',
         'period_ends_at' => '\DateTime',
         'cancel_at_period_end' => 'bool',
         'global_user_config' => 'object',
@@ -84,6 +87,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_characters' => null,
         'aggregate_num_tokens' => null,
         'aggregate_num_embeddings' => null,
+        'aggregate_num_files_by_source' => null,
+        'aggregate_num_files_by_file_format' => null,
+        'file_statistics_aggregated_at' => 'date-time',
         'period_ends_at' => 'date-time',
         'cancel_at_period_end' => null,
         'global_user_config' => null,
@@ -107,6 +113,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
 		'aggregate_num_characters' => false,
 		'aggregate_num_tokens' => false,
 		'aggregate_num_embeddings' => false,
+		'aggregate_num_files_by_source' => false,
+		'aggregate_num_files_by_file_format' => false,
+		'file_statistics_aggregated_at' => true,
 		'period_ends_at' => true,
 		'cancel_at_period_end' => true,
 		'global_user_config' => false,
@@ -210,6 +219,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_characters' => 'aggregate_num_characters',
         'aggregate_num_tokens' => 'aggregate_num_tokens',
         'aggregate_num_embeddings' => 'aggregate_num_embeddings',
+        'aggregate_num_files_by_source' => 'aggregate_num_files_by_source',
+        'aggregate_num_files_by_file_format' => 'aggregate_num_files_by_file_format',
+        'file_statistics_aggregated_at' => 'file_statistics_aggregated_at',
         'period_ends_at' => 'period_ends_at',
         'cancel_at_period_end' => 'cancel_at_period_end',
         'global_user_config' => 'global_user_config',
@@ -233,6 +245,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_characters' => 'setAggregateNumCharacters',
         'aggregate_num_tokens' => 'setAggregateNumTokens',
         'aggregate_num_embeddings' => 'setAggregateNumEmbeddings',
+        'aggregate_num_files_by_source' => 'setAggregateNumFilesBySource',
+        'aggregate_num_files_by_file_format' => 'setAggregateNumFilesByFileFormat',
+        'file_statistics_aggregated_at' => 'setFileStatisticsAggregatedAt',
         'period_ends_at' => 'setPeriodEndsAt',
         'cancel_at_period_end' => 'setCancelAtPeriodEnd',
         'global_user_config' => 'setGlobalUserConfig',
@@ -256,6 +271,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'aggregate_num_characters' => 'getAggregateNumCharacters',
         'aggregate_num_tokens' => 'getAggregateNumTokens',
         'aggregate_num_embeddings' => 'getAggregateNumEmbeddings',
+        'aggregate_num_files_by_source' => 'getAggregateNumFilesBySource',
+        'aggregate_num_files_by_file_format' => 'getAggregateNumFilesByFileFormat',
+        'file_statistics_aggregated_at' => 'getFileStatisticsAggregatedAt',
         'period_ends_at' => 'getPeriodEndsAt',
         'cancel_at_period_end' => 'getCancelAtPeriodEnd',
         'global_user_config' => 'getGlobalUserConfig',
@@ -330,6 +348,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('aggregate_num_characters', $data ?? [], null);
         $this->setIfExists('aggregate_num_tokens', $data ?? [], null);
         $this->setIfExists('aggregate_num_embeddings', $data ?? [], null);
+        $this->setIfExists('aggregate_num_files_by_source', $data ?? [], null);
+        $this->setIfExists('aggregate_num_files_by_file_format', $data ?? [], null);
+        $this->setIfExists('file_statistics_aggregated_at', $data ?? [], null);
         $this->setIfExists('period_ends_at', $data ?? [], null);
         $this->setIfExists('cancel_at_period_end', $data ?? [], null);
         $this->setIfExists('global_user_config', $data ?? [], null);
@@ -393,6 +414,15 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
         if ($this->container['aggregate_num_embeddings'] === null) {
             $invalidProperties[] = "'aggregate_num_embeddings' can't be null";
+        }
+        if ($this->container['aggregate_num_files_by_source'] === null) {
+            $invalidProperties[] = "'aggregate_num_files_by_source' can't be null";
+        }
+        if ($this->container['aggregate_num_files_by_file_format'] === null) {
+            $invalidProperties[] = "'aggregate_num_files_by_file_format' can't be null";
+        }
+        if ($this->container['file_statistics_aggregated_at'] === null) {
+            $invalidProperties[] = "'file_statistics_aggregated_at' can't be null";
         }
         if ($this->container['period_ends_at'] === null) {
             $invalidProperties[] = "'period_ends_at' can't be null";
@@ -731,6 +761,100 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['aggregate_num_embeddings'] = $aggregate_num_embeddings;
+
+        return $this;
+    }
+
+    /**
+     * Gets aggregate_num_files_by_source
+     *
+     * @return object
+     */
+    public function getAggregateNumFilesBySource()
+    {
+        return $this->container['aggregate_num_files_by_source'];
+    }
+
+    /**
+     * Sets aggregate_num_files_by_source
+     *
+     * @param object $aggregate_num_files_by_source aggregate_num_files_by_source
+     *
+     * @return self
+     */
+    public function setAggregateNumFilesBySource($aggregate_num_files_by_source)
+    {
+
+        if (is_null($aggregate_num_files_by_source)) {
+            throw new \InvalidArgumentException('non-nullable aggregate_num_files_by_source cannot be null');
+        }
+
+        $this->container['aggregate_num_files_by_source'] = $aggregate_num_files_by_source;
+
+        return $this;
+    }
+
+    /**
+     * Gets aggregate_num_files_by_file_format
+     *
+     * @return object
+     */
+    public function getAggregateNumFilesByFileFormat()
+    {
+        return $this->container['aggregate_num_files_by_file_format'];
+    }
+
+    /**
+     * Sets aggregate_num_files_by_file_format
+     *
+     * @param object $aggregate_num_files_by_file_format aggregate_num_files_by_file_format
+     *
+     * @return self
+     */
+    public function setAggregateNumFilesByFileFormat($aggregate_num_files_by_file_format)
+    {
+
+        if (is_null($aggregate_num_files_by_file_format)) {
+            throw new \InvalidArgumentException('non-nullable aggregate_num_files_by_file_format cannot be null');
+        }
+
+        $this->container['aggregate_num_files_by_file_format'] = $aggregate_num_files_by_file_format;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_statistics_aggregated_at
+     *
+     * @return \DateTime
+     */
+    public function getFileStatisticsAggregatedAt()
+    {
+        return $this->container['file_statistics_aggregated_at'];
+    }
+
+    /**
+     * Sets file_statistics_aggregated_at
+     *
+     * @param \DateTime $file_statistics_aggregated_at file_statistics_aggregated_at
+     *
+     * @return self
+     */
+    public function setFileStatisticsAggregatedAt($file_statistics_aggregated_at)
+    {
+
+        if (is_null($file_statistics_aggregated_at)) {
+            array_push($this->openAPINullablesSetToNull, 'file_statistics_aggregated_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_statistics_aggregated_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_statistics_aggregated_at'] = $file_statistics_aggregated_at;
 
         return $this;
     }

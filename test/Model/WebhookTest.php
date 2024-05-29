@@ -108,6 +108,24 @@ class WebhookTest extends TestCase
     }
 
     /**
+     * Test attribute "status"
+     */
+    public function testPropertyStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "status_reason"
+     */
+    public function testPropertyStatusReason()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

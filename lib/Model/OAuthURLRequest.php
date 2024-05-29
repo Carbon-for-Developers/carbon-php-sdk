@@ -405,7 +405,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('connecting_new_account', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], 'eb3e536e-fa3e-4f8e-9a22-25f70393e759');
+        $this->setIfExists('request_id', $data ?? [], '273420dd-e05c-463f-a3cf-0ff28029639e');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('enable_file_picker', $data ?? [], true);
@@ -1243,7 +1243,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets enable_file_picker
      *
-     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: ONEDRIVE, GOOGLE_DRIVE, DROPBOX, SHAREPOINT, BOX
+     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, DROPBOX, GOOGLE_DRIVE, BOX, ONEDRIVE
      *
      * @return self
      */

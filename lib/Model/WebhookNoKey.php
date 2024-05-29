@@ -52,6 +52,8 @@ class WebhookNoKey implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'organization_id' => 'int',
         'url' => 'string',
+        'status' => '\Carbon\Model\WebhookStatus',
+        'status_reason' => 'string',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -67,6 +69,8 @@ class WebhookNoKey implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'organization_id' => null,
         'url' => null,
+        'status' => null,
+        'status_reason' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -80,6 +84,8 @@ class WebhookNoKey implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
 		'organization_id' => false,
 		'url' => false,
+		'status' => false,
+		'status_reason' => true,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -173,6 +179,8 @@ class WebhookNoKey implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'organization_id' => 'organization_id',
         'url' => 'url',
+        'status' => 'status',
+        'status_reason' => 'status_reason',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -186,6 +194,8 @@ class WebhookNoKey implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'organization_id' => 'setOrganizationId',
         'url' => 'setUrl',
+        'status' => 'setStatus',
+        'status_reason' => 'setStatusReason',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -199,6 +209,8 @@ class WebhookNoKey implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'organization_id' => 'getOrganizationId',
         'url' => 'getUrl',
+        'status' => 'getStatus',
+        'status_reason' => 'getStatusReason',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -263,6 +275,8 @@ class WebhookNoKey implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('status_reason', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -302,6 +316,12 @@ class WebhookNoKey implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['url'] === null) {
             $invalidProperties[] = "'url' can't be null";
+        }
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
+        }
+        if ($this->container['status_reason'] === null) {
+            $invalidProperties[] = "'status_reason' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -407,6 +427,71 @@ class WebhookNoKey implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['url'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return \Carbon\Model\WebhookStatus
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param \Carbon\Model\WebhookStatus $status status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets status_reason
+     *
+     * @return string
+     */
+    public function getStatusReason()
+    {
+        return $this->container['status_reason'];
+    }
+
+    /**
+     * Sets status_reason
+     *
+     * @param string $status_reason status_reason
+     *
+     * @return self
+     */
+    public function setStatusReason($status_reason)
+    {
+
+        if (is_null($status_reason)) {
+            array_push($this->openAPINullablesSetToNull, 'status_reason');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status_reason', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['status_reason'] = $status_reason;
 
         return $this;
     }

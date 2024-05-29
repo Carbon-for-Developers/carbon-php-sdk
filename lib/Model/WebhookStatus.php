@@ -1,6 +1,6 @@
 <?php
 /**
- * FileContentTypes
+ * WebhookStatus
  *
  * PHP version 7.4
  *
@@ -24,23 +24,19 @@ namespace Carbon\Model;
 use \Carbon\ObjectSerializer;
 
 /**
- * FileContentTypes Class Doc Comment
+ * WebhookStatus Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  */
-class FileContentTypes
+class WebhookStatus
 {
     /**
      * Possible values of this enum
      */
-    public const TEXT = 'TEXT';
+    public const ACTIVE = 'ACTIVE';
 
-    public const IMAGE = 'IMAGE';
-
-    public const AUDIO = 'AUDIO';
-
-    public const VIDEO = 'VIDEO';
+    public const FLAGGED = 'FLAGGED';
 
     /**
      * Gets allowable values of the enum
@@ -49,10 +45,8 @@ class FileContentTypes
     public static function getAllowableEnumValues()
     {
         return [
-            self::TEXT,
-            self::IMAGE,
-            self::AUDIO,
-            self::VIDEO
+            self::ACTIVE,
+            self::FLAGGED
         ];
     }
 }

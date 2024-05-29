@@ -39,6 +39,10 @@ class FileContentTypesNullable
 
     public const IMAGE = 'IMAGE';
 
+    public const AUDIO = 'AUDIO';
+
+    public const VIDEO = 'VIDEO';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -47,7 +51,9 @@ class FileContentTypesNullable
     {
         return [
             self::TEXT,
-            self::IMAGE
+            self::IMAGE,
+            self::AUDIO,
+            self::VIDEO
         ];
     }
 }

@@ -53,6 +53,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'organization_id' => 'int',
         'url' => 'string',
         'signing_key' => 'string',
+        'status' => '\Carbon\Model\WebhookStatus',
+        'status_reason' => 'string',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -69,6 +71,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'organization_id' => null,
         'url' => null,
         'signing_key' => null,
+        'status' => null,
+        'status_reason' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -83,6 +87,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
 		'organization_id' => false,
 		'url' => false,
 		'signing_key' => false,
+		'status' => false,
+		'status_reason' => true,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -177,6 +183,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'organization_id' => 'organization_id',
         'url' => 'url',
         'signing_key' => 'signing_key',
+        'status' => 'status',
+        'status_reason' => 'status_reason',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -191,6 +199,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'organization_id' => 'setOrganizationId',
         'url' => 'setUrl',
         'signing_key' => 'setSigningKey',
+        'status' => 'setStatus',
+        'status_reason' => 'setStatusReason',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -205,6 +215,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         'organization_id' => 'getOrganizationId',
         'url' => 'getUrl',
         'signing_key' => 'getSigningKey',
+        'status' => 'getStatus',
+        'status_reason' => 'getStatusReason',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -270,6 +282,8 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('organization_id', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('signing_key', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('status_reason', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -312,6 +326,12 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['signing_key'] === null) {
             $invalidProperties[] = "'signing_key' can't be null";
+        }
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
+        }
+        if ($this->container['status_reason'] === null) {
+            $invalidProperties[] = "'status_reason' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -446,6 +466,71 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['signing_key'] = $signing_key;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return \Carbon\Model\WebhookStatus
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param \Carbon\Model\WebhookStatus $status status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+
+        $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets status_reason
+     *
+     * @return string
+     */
+    public function getStatusReason()
+    {
+        return $this->container['status_reason'];
+    }
+
+    /**
+     * Sets status_reason
+     *
+     * @param string $status_reason status_reason
+     *
+     * @return self
+     */
+    public function setStatusReason($status_reason)
+    {
+
+        if (is_null($status_reason)) {
+            array_push($this->openAPINullablesSetToNull, 'status_reason');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status_reason', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['status_reason'] = $status_reason;
 
         return $this;
     }

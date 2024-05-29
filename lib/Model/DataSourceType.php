@@ -106,8 +106,6 @@ class DataSourceType
 
     public const MP3 = 'MP3';
 
-    public const MP4 = 'MP4';
-
     public const MP2 = 'MP2';
 
     public const AAC = 'AAC';
@@ -124,9 +122,23 @@ class DataSourceType
 
     public const OPUS = 'OPUS';
 
-    public const WEBM = 'WEBM';
-
     public const MPEG = 'MPEG';
+
+    public const MPG = 'MPG';
+
+    public const MP4 = 'MP4';
+
+    public const WMV = 'WMV';
+
+    public const AVI = 'AVI';
+
+    public const MOV = 'MOV';
+
+    public const MKV = 'MKV';
+
+    public const FLV = 'FLV';
+
+    public const WEBM = 'WEBM';
 
     /**
      * Gets allowable values of the enum
@@ -171,7 +183,6 @@ class DataSourceType
             self::PNG,
             self::JPEG,
             self::MP3,
-            self::MP4,
             self::MP2,
             self::AAC,
             self::WAV,
@@ -180,8 +191,15 @@ class DataSourceType
             self::M4_A,
             self::OGG,
             self::OPUS,
-            self::WEBM,
-            self::MPEG
+            self::MPEG,
+            self::MPG,
+            self::MP4,
+            self::WMV,
+            self::AVI,
+            self::MOV,
+            self::MKV,
+            self::FLV,
+            self::WEBM
         ];
     }
 }

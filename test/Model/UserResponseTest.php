@@ -153,6 +153,60 @@ class UserResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "aggregate_file_size"
+     */
+    public function testPropertyAggregateFileSize()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "aggregate_num_characters"
+     */
+    public function testPropertyAggregateNumCharacters()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "aggregate_num_tokens"
+     */
+    public function testPropertyAggregateNumTokens()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "aggregate_num_embeddings"
+     */
+    public function testPropertyAggregateNumEmbeddings()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "aggregate_num_files_by_source"
+     */
+    public function testPropertyAggregateNumFilesBySource()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "aggregate_num_files_by_file_format"
+     */
+    public function testPropertyAggregateNumFilesByFileFormat()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "unique_file_tags"
      */
     public function testPropertyUniqueFileTags()

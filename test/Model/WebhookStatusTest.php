@@ -1,6 +1,7 @@
 <?php
 /**
- * OrganizationsApiTest
+ * WebhookStatusTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -19,18 +20,22 @@
  */
 
 
-namespace Carbon\Test\Api;
+namespace Carbon\Test\Model;
 
-use \Carbon\Configuration;
-use \Carbon\ApiException;
-use \Carbon\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class OrganizationsApiTest extends TestCase
+/**
+ * WebhookStatusTest Class Doc Comment
+ *
+ * @category    Class
+ * @description WebhookStatus
+ * @package     Carbon
+ */
+class WebhookStatusTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -58,36 +63,9 @@ class OrganizationsApiTest extends TestCase
     }
 
     /**
-     * Test case for get
-     *
-     * Get Organization.
-     *
+     * Test "WebhookStatus"
      */
-    public function testGet()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for update
-     *
-     * Update Organization.
-     *
-     */
-    public function testUpdate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for updateStats
-     *
-     * Update Organization Statistics.
-     *
-     */
-    public function testUpdateStats()
+    public function testWebhookStatus()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

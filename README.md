@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.1.33-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.0-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -65,6 +65,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.integrations.syncS3Files`](#carbonintegrationssyncs3files)
   * [`carbon.organizations.get`](#carbonorganizationsget)
   * [`carbon.organizations.update`](#carbonorganizationsupdate)
+  * [`carbon.organizations.updateStats`](#carbonorganizationsupdatestats)
   * [`carbon.users.delete`](#carbonusersdelete)
   * [`carbon.users.get`](#carbonusersget)
   * [`carbon.users.toggleUserFeatures`](#carbonuserstoggleuserfeatures)
@@ -100,7 +101,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.1.33"
+    "konfig/carbon-php-sdk": "0.2.0"
   }
 }
 ```
@@ -1085,7 +1086,8 @@ $result = $carbon->files->upload(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     parse_pdf_tables_with_ocr: False, 
-    detect_audio_language: False
+    detect_audio_language: False, 
+    media_type: "TEXT"
 );
 ```
 
@@ -1136,6 +1138,10 @@ Whether to use rich table parsing when `use_ocr` is enabled.
 ##### detect_audio_language: `bool`<a id="detect_audio_language-bool"></a>
 
 Whether to automatically detect the language of the uploaded audio file.
+
+##### media_type:<a id="media_type"></a>
+
+The media type of the file. If not provided, it will be inferred from the file extension.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1328,7 +1334,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "18ef9025-4c76-443c-a115-ba77b17afd8b",
+        "request_id" => "f5552316-5da3-46e6-ad9f-2f94e30d02cd",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1578,7 +1584,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "eb3e536e-fa3e-4f8e-9a22-25f70393e759", 
+    request_id: "273420dd-e05c-463f-a3cf-0ff28029639e", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1652,7 +1658,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: ONEDRIVE, GOOGLE_DRIVE, DROPBOX, SHAREPOINT, BOX
+Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, DROPBOX, GOOGLE_DRIVE, BOX, ONEDRIVE
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -1958,7 +1964,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "27036d05-9737-4197-b0c6-e9fb9f60f976", 
+    request_id: "2782cb96-1bf6-452c-a8d9-60c2378fd079", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2078,7 +2084,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "27036d05-9737-4197-b0c6-e9fb9f60f976", 
+    request_id: "2782cb96-1bf6-452c-a8d9-60c2378fd079", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2725,6 +2731,34 @@ $result = $carbon->organizations->update(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/organization/update` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.organizations.updateStats`<a id="carbonorganizationsupdatestats"></a>
+
+Use this endpoint to reaggregate the statistics for an organization, for example aggregate_file_size. The reaggregation
+process is asyncronous so a webhook will be sent with the event type being FILE_STATISTICS_AGGREGATED to notify when the
+process is complee. After this aggregation is complete, the updated statistics can be retrieved using the /organization
+endpoint. The response of /organization willalso contain a timestamp of the last time the statistics were reaggregated.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->organizations->updateStats();
+```
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**GenericSuccessResponse**](./lib/Model/GenericSuccessResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/organization/statistics` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

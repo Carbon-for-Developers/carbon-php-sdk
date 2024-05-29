@@ -58,6 +58,12 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_files_synced' => 'int',
         'num_characters_synced' => 'int',
         'num_tokens_synced' => 'int',
+        'aggregate_file_size' => 'object',
+        'aggregate_num_characters' => 'object',
+        'aggregate_num_tokens' => 'object',
+        'aggregate_num_embeddings' => 'object',
+        'aggregate_num_files_by_source' => 'object',
+        'aggregate_num_files_by_file_format' => 'object',
         'unique_file_tags' => 'object[]',
         'enabled_features' => 'object',
         'custom_limits' => 'object',
@@ -81,6 +87,12 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_files_synced' => null,
         'num_characters_synced' => null,
         'num_tokens_synced' => null,
+        'aggregate_file_size' => null,
+        'aggregate_num_characters' => null,
+        'aggregate_num_tokens' => null,
+        'aggregate_num_embeddings' => null,
+        'aggregate_num_files_by_source' => null,
+        'aggregate_num_files_by_file_format' => null,
         'unique_file_tags' => null,
         'enabled_features' => null,
         'custom_limits' => null,
@@ -102,6 +114,12 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 		'num_files_synced' => false,
 		'num_characters_synced' => false,
 		'num_tokens_synced' => false,
+		'aggregate_file_size' => false,
+		'aggregate_num_characters' => false,
+		'aggregate_num_tokens' => false,
+		'aggregate_num_embeddings' => false,
+		'aggregate_num_files_by_source' => false,
+		'aggregate_num_files_by_file_format' => false,
 		'unique_file_tags' => false,
 		'enabled_features' => true,
 		'custom_limits' => false,
@@ -203,6 +221,12 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_files_synced' => 'num_files_synced',
         'num_characters_synced' => 'num_characters_synced',
         'num_tokens_synced' => 'num_tokens_synced',
+        'aggregate_file_size' => 'aggregate_file_size',
+        'aggregate_num_characters' => 'aggregate_num_characters',
+        'aggregate_num_tokens' => 'aggregate_num_tokens',
+        'aggregate_num_embeddings' => 'aggregate_num_embeddings',
+        'aggregate_num_files_by_source' => 'aggregate_num_files_by_source',
+        'aggregate_num_files_by_file_format' => 'aggregate_num_files_by_file_format',
         'unique_file_tags' => 'unique_file_tags',
         'enabled_features' => 'enabled_features',
         'custom_limits' => 'custom_limits',
@@ -224,6 +248,12 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_files_synced' => 'setNumFilesSynced',
         'num_characters_synced' => 'setNumCharactersSynced',
         'num_tokens_synced' => 'setNumTokensSynced',
+        'aggregate_file_size' => 'setAggregateFileSize',
+        'aggregate_num_characters' => 'setAggregateNumCharacters',
+        'aggregate_num_tokens' => 'setAggregateNumTokens',
+        'aggregate_num_embeddings' => 'setAggregateNumEmbeddings',
+        'aggregate_num_files_by_source' => 'setAggregateNumFilesBySource',
+        'aggregate_num_files_by_file_format' => 'setAggregateNumFilesByFileFormat',
         'unique_file_tags' => 'setUniqueFileTags',
         'enabled_features' => 'setEnabledFeatures',
         'custom_limits' => 'setCustomLimits',
@@ -245,6 +275,12 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'num_files_synced' => 'getNumFilesSynced',
         'num_characters_synced' => 'getNumCharactersSynced',
         'num_tokens_synced' => 'getNumTokensSynced',
+        'aggregate_file_size' => 'getAggregateFileSize',
+        'aggregate_num_characters' => 'getAggregateNumCharacters',
+        'aggregate_num_tokens' => 'getAggregateNumTokens',
+        'aggregate_num_embeddings' => 'getAggregateNumEmbeddings',
+        'aggregate_num_files_by_source' => 'getAggregateNumFilesBySource',
+        'aggregate_num_files_by_file_format' => 'getAggregateNumFilesByFileFormat',
         'unique_file_tags' => 'getUniqueFileTags',
         'enabled_features' => 'getEnabledFeatures',
         'custom_limits' => 'getCustomLimits',
@@ -317,6 +353,12 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('num_files_synced', $data ?? [], null);
         $this->setIfExists('num_characters_synced', $data ?? [], null);
         $this->setIfExists('num_tokens_synced', $data ?? [], null);
+        $this->setIfExists('aggregate_file_size', $data ?? [], null);
+        $this->setIfExists('aggregate_num_characters', $data ?? [], null);
+        $this->setIfExists('aggregate_num_tokens', $data ?? [], null);
+        $this->setIfExists('aggregate_num_embeddings', $data ?? [], null);
+        $this->setIfExists('aggregate_num_files_by_source', $data ?? [], null);
+        $this->setIfExists('aggregate_num_files_by_file_format', $data ?? [], null);
         $this->setIfExists('unique_file_tags', $data ?? [], null);
         $this->setIfExists('enabled_features', $data ?? [], null);
         $this->setIfExists('custom_limits', $data ?? [], null);
@@ -376,6 +418,24 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['num_tokens_synced'] === null) {
             $invalidProperties[] = "'num_tokens_synced' can't be null";
+        }
+        if ($this->container['aggregate_file_size'] === null) {
+            $invalidProperties[] = "'aggregate_file_size' can't be null";
+        }
+        if ($this->container['aggregate_num_characters'] === null) {
+            $invalidProperties[] = "'aggregate_num_characters' can't be null";
+        }
+        if ($this->container['aggregate_num_tokens'] === null) {
+            $invalidProperties[] = "'aggregate_num_tokens' can't be null";
+        }
+        if ($this->container['aggregate_num_embeddings'] === null) {
+            $invalidProperties[] = "'aggregate_num_embeddings' can't be null";
+        }
+        if ($this->container['aggregate_num_files_by_source'] === null) {
+            $invalidProperties[] = "'aggregate_num_files_by_source' can't be null";
+        }
+        if ($this->container['aggregate_num_files_by_file_format'] === null) {
+            $invalidProperties[] = "'aggregate_num_files_by_file_format' can't be null";
         }
         if ($this->container['unique_file_tags'] === null) {
             $invalidProperties[] = "'unique_file_tags' can't be null";
@@ -668,6 +728,180 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['num_tokens_synced'] = $num_tokens_synced;
+
+        return $this;
+    }
+
+    /**
+     * Gets aggregate_file_size
+     *
+     * @return object
+     */
+    public function getAggregateFileSize()
+    {
+        return $this->container['aggregate_file_size'];
+    }
+
+    /**
+     * Sets aggregate_file_size
+     *
+     * @param object $aggregate_file_size aggregate_file_size
+     *
+     * @return self
+     */
+    public function setAggregateFileSize($aggregate_file_size)
+    {
+
+        if (is_null($aggregate_file_size)) {
+            throw new \InvalidArgumentException('non-nullable aggregate_file_size cannot be null');
+        }
+
+        $this->container['aggregate_file_size'] = $aggregate_file_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets aggregate_num_characters
+     *
+     * @return object
+     */
+    public function getAggregateNumCharacters()
+    {
+        return $this->container['aggregate_num_characters'];
+    }
+
+    /**
+     * Sets aggregate_num_characters
+     *
+     * @param object $aggregate_num_characters aggregate_num_characters
+     *
+     * @return self
+     */
+    public function setAggregateNumCharacters($aggregate_num_characters)
+    {
+
+        if (is_null($aggregate_num_characters)) {
+            throw new \InvalidArgumentException('non-nullable aggregate_num_characters cannot be null');
+        }
+
+        $this->container['aggregate_num_characters'] = $aggregate_num_characters;
+
+        return $this;
+    }
+
+    /**
+     * Gets aggregate_num_tokens
+     *
+     * @return object
+     */
+    public function getAggregateNumTokens()
+    {
+        return $this->container['aggregate_num_tokens'];
+    }
+
+    /**
+     * Sets aggregate_num_tokens
+     *
+     * @param object $aggregate_num_tokens aggregate_num_tokens
+     *
+     * @return self
+     */
+    public function setAggregateNumTokens($aggregate_num_tokens)
+    {
+
+        if (is_null($aggregate_num_tokens)) {
+            throw new \InvalidArgumentException('non-nullable aggregate_num_tokens cannot be null');
+        }
+
+        $this->container['aggregate_num_tokens'] = $aggregate_num_tokens;
+
+        return $this;
+    }
+
+    /**
+     * Gets aggregate_num_embeddings
+     *
+     * @return object
+     */
+    public function getAggregateNumEmbeddings()
+    {
+        return $this->container['aggregate_num_embeddings'];
+    }
+
+    /**
+     * Sets aggregate_num_embeddings
+     *
+     * @param object $aggregate_num_embeddings aggregate_num_embeddings
+     *
+     * @return self
+     */
+    public function setAggregateNumEmbeddings($aggregate_num_embeddings)
+    {
+
+        if (is_null($aggregate_num_embeddings)) {
+            throw new \InvalidArgumentException('non-nullable aggregate_num_embeddings cannot be null');
+        }
+
+        $this->container['aggregate_num_embeddings'] = $aggregate_num_embeddings;
+
+        return $this;
+    }
+
+    /**
+     * Gets aggregate_num_files_by_source
+     *
+     * @return object
+     */
+    public function getAggregateNumFilesBySource()
+    {
+        return $this->container['aggregate_num_files_by_source'];
+    }
+
+    /**
+     * Sets aggregate_num_files_by_source
+     *
+     * @param object $aggregate_num_files_by_source aggregate_num_files_by_source
+     *
+     * @return self
+     */
+    public function setAggregateNumFilesBySource($aggregate_num_files_by_source)
+    {
+
+        if (is_null($aggregate_num_files_by_source)) {
+            throw new \InvalidArgumentException('non-nullable aggregate_num_files_by_source cannot be null');
+        }
+
+        $this->container['aggregate_num_files_by_source'] = $aggregate_num_files_by_source;
+
+        return $this;
+    }
+
+    /**
+     * Gets aggregate_num_files_by_file_format
+     *
+     * @return object
+     */
+    public function getAggregateNumFilesByFileFormat()
+    {
+        return $this->container['aggregate_num_files_by_file_format'];
+    }
+
+    /**
+     * Sets aggregate_num_files_by_file_format
+     *
+     * @param object $aggregate_num_files_by_file_format aggregate_num_files_by_file_format
+     *
+     * @return self
+     */
+    public function setAggregateNumFilesByFileFormat($aggregate_num_files_by_file_format)
+    {
+
+        if (is_null($aggregate_num_files_by_file_format)) {
+            throw new \InvalidArgumentException('non-nullable aggregate_num_files_by_file_format cannot be null');
+        }
+
+        $this->container['aggregate_num_files_by_file_format'] = $aggregate_num_files_by_file_format;
 
         return $this;
     }
