@@ -3935,7 +3935,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  int $chunk_overlap Chunk overlap in tiktoken tokens to be used when processing file. (optional)
      * @param  bool $skip_embedding_generation Flag to control whether or not embeddings should be generated and stored             when processing file. (optional, default to false)
      * @param  bool $set_page_as_boundary Flag to control whether or not to set the a page&#39;s worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information. (optional, default to false)
-     * @param  TextEmbeddingGenerators $embedding_model Embedding model that will be used to embed file chunks. (optional)
+     * @param  EmbeddingModel $embedding_model Embedding model that will be used to embed file chunks. (optional)
      * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
@@ -3986,7 +3986,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  int $chunk_overlap Chunk overlap in tiktoken tokens to be used when processing file. (optional)
      * @param  bool $skip_embedding_generation Flag to control whether or not embeddings should be generated and stored             when processing file. (optional, default to false)
      * @param  bool $set_page_as_boundary Flag to control whether or not to set the a page&#39;s worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information. (optional, default to false)
-     * @param  TextEmbeddingGenerators $embedding_model Embedding model that will be used to embed file chunks. (optional)
+     * @param  EmbeddingModel $embedding_model Embedding model that will be used to embed file chunks. (optional)
      * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
@@ -4150,7 +4150,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  int $chunk_overlap Chunk overlap in tiktoken tokens to be used when processing file. (optional)
      * @param  bool $skip_embedding_generation Flag to control whether or not embeddings should be generated and stored             when processing file. (optional, default to false)
      * @param  bool $set_page_as_boundary Flag to control whether or not to set the a page&#39;s worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information. (optional, default to false)
-     * @param  TextEmbeddingGenerators $embedding_model Embedding model that will be used to embed file chunks. (optional)
+     * @param  EmbeddingModel $embedding_model Embedding model that will be used to embed file chunks. (optional)
      * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
@@ -4204,7 +4204,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  int $chunk_overlap Chunk overlap in tiktoken tokens to be used when processing file. (optional)
      * @param  bool $skip_embedding_generation Flag to control whether or not embeddings should be generated and stored             when processing file. (optional, default to false)
      * @param  bool $set_page_as_boundary Flag to control whether or not to set the a page&#39;s worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information. (optional, default to false)
-     * @param  TextEmbeddingGenerators $embedding_model Embedding model that will be used to embed file chunks. (optional)
+     * @param  EmbeddingModel $embedding_model Embedding model that will be used to embed file chunks. (optional)
      * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
@@ -4270,7 +4270,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  int $chunk_overlap Chunk overlap in tiktoken tokens to be used when processing file. (optional)
      * @param  bool $skip_embedding_generation Flag to control whether or not embeddings should be generated and stored             when processing file. (optional, default to false)
      * @param  bool $set_page_as_boundary Flag to control whether or not to set the a page&#39;s worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information. (optional, default to false)
-     * @param  TextEmbeddingGenerators $embedding_model Embedding model that will be used to embed file chunks. (optional)
+     * @param  EmbeddingModel $embedding_model Embedding model that will be used to embed file chunks. (optional)
      * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
@@ -4305,6 +4305,14 @@ class FilesApi extends \Carbon\CustomApi
             throw new \InvalidArgumentException(
                 'Missing the required parameter body_create_upload_file_uploadfile_post when calling upload'
             );
+        }
+        if ($embedding_model !== SENTINEL_VALUE) {
+            if (!($embedding_model instanceof EmbeddingModel)) {
+                if (!is_array($embedding_model))
+                    throw new \InvalidArgumentException('"embedding_model" must be associative array or an instance of EmbeddingModel FilesApi.upload.');
+                else
+                    $embedding_model = new EmbeddingModel($embedding_model);
+            }
         }
 
 
@@ -4364,7 +4372,7 @@ class FilesApi extends \Carbon\CustomApi
             $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
                 $embedding_model,
                 'embedding_model', // param base name
-                'TextEmbeddingGenerators', // openApiType
+                'AnyOfTextEmbeddingGeneratorsString', // openApiType
                 'form', // style
                 true, // explode
                 false // required

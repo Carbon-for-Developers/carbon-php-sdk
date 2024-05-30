@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.2.0-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.1-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -101,7 +101,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.2.0"
+    "konfig/carbon-php-sdk": "0.2.1"
   }
 }
 ```
@@ -1080,7 +1080,7 @@ $result = $carbon->files->upload(
     chunk_overlap: 1, 
     skip_embedding_generation: False, 
     set_page_as_boundary: False, 
-    embedding_model: "OPENAI", 
+    embedding_model: "string_example", 
     use_ocr: False, 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
@@ -1111,7 +1111,7 @@ Flag to control whether or not embeddings should be generated and stored        
 
 Flag to control whether or not to set the a page's worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information.
 
-##### embedding_model:<a id="embedding_model"></a>
+##### embedding_model: [``](./lib/Model/.php)<a id="embedding_model-libmodelphp"></a>
 
 Embedding model that will be used to embed file chunks.
 
@@ -1334,7 +1334,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "f5552316-5da3-46e6-ad9f-2f94e30d02cd",
+        "request_id" => "fceb0182-329c-4e45-953b-885c747cf4a3",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1584,7 +1584,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "273420dd-e05c-463f-a3cf-0ff28029639e", 
+    request_id: "ce1b1ec8-be64-491c-9159-c40f85fa0073", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1658,7 +1658,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, DROPBOX, GOOGLE_DRIVE, BOX, ONEDRIVE
+Enable integration's file picker for sources that support it. Supported sources: DROPBOX, SHAREPOINT, ONEDRIVE, BOX, GOOGLE_DRIVE
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -1964,7 +1964,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "2782cb96-1bf6-452c-a8d9-60c2378fd079", 
+    request_id: "9fe9190e-384f-4baa-a416-d51ed93d1be7", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2084,7 +2084,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "2782cb96-1bf6-452c-a8d9-60c2378fd079", 
+    request_id: "9fe9190e-384f-4baa-a416-d51ed93d1be7", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
