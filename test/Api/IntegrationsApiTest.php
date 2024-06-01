@@ -58,6 +58,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for cancel
+     *
+     * Cancel Data Source Items Sync.
+     *
+     */
+    public function testCancel()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for connectDataSource
      *
      * Connect Data Source.

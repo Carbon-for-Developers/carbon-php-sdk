@@ -28,7 +28,7 @@ use PHPUnit\Framework\TestCase;
  * FileContentTypesNullableTest Class Doc Comment
  *
  * @category    Class
- * @description Used to filter the kind of files (e.g. &#x60;TEXT&#x60; or &#x60;IMAGE&#x60;) over which to perform the search. Also         plays a role in determining what embedding model is used to embed the query. If &#x60;IMAGE&#x60; is chosen as the media type,         then the embedding model used will be an embedding model that is not text-only, *regardless* of what value is passed         for &#x60;embedding_model&#x60;.
+ * @description FileContentTypesNullable
  * @package     Carbon
  */
 class FileContentTypesNullableTest extends TestCase

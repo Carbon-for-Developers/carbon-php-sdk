@@ -187,4 +187,13 @@ class UploadFileFromUrlInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "media_type"
+     */
+    public function testPropertyMediaType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

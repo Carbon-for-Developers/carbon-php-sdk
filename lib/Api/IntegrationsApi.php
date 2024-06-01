@@ -61,6 +61,9 @@ class IntegrationsApi extends \Carbon\CustomApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
+        'cancel' => [
+            'application/json',
+        ],
         'connectDataSource' => [
             'application/json',
         ],
@@ -195,6 +198,374 @@ class IntegrationsApi extends \Carbon\CustomApi
         // user did not pass in a value for this parameter
         if ($value === SENTINEL_VALUE) return;
         $body[$property] = $value;
+    }
+
+    /**
+     * Operation cancel
+     *
+     * Cancel Data Source Items Sync
+     *
+     * @param  \Carbon\Model\SyncDirectoryRequest $sync_directory_request sync_directory_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancel'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Carbon\Model\OrganizationUserDataSourceAPI|\Carbon\Model\HTTPValidationError
+     */
+    public function cancel(
+
+        $data_source_id,
+        string $contentType = self::contentTypes['cancel'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $sync_directory_request = $_body;
+
+        list($response) = $this->cancelWithHttpInfo($sync_directory_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation cancelWithHttpInfo
+     *
+     * Cancel Data Source Items Sync
+     *
+     * @param  \Carbon\Model\SyncDirectoryRequest $sync_directory_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancel'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Carbon\Model\OrganizationUserDataSourceAPI|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function cancelWithHttpInfo($sync_directory_request, string $contentType = self::contentTypes['cancel'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->cancelRequest($sync_directory_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->cancelWithHttpInfo(
+                        $sync_directory_request,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Carbon\Model\OrganizationUserDataSourceAPI' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\OrganizationUserDataSourceAPI' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\OrganizationUserDataSourceAPI', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Carbon\Model\OrganizationUserDataSourceAPI';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\OrganizationUserDataSourceAPI',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation cancelAsync
+     *
+     * Cancel Data Source Items Sync
+     *
+     * @param  \Carbon\Model\SyncDirectoryRequest $sync_directory_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancel'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function cancelAsync(
+
+        $data_source_id,
+        string $contentType = self::contentTypes['cancel'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $sync_directory_request = $_body;
+
+        return $this->cancelAsyncWithHttpInfo($sync_directory_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation cancelAsyncWithHttpInfo
+     *
+     * Cancel Data Source Items Sync
+     *
+     * @param  \Carbon\Model\SyncDirectoryRequest $sync_directory_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancel'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function cancelAsyncWithHttpInfo($sync_directory_request, string $contentType = self::contentTypes['cancel'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = '\Carbon\Model\OrganizationUserDataSourceAPI';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->cancelRequest($sync_directory_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'cancel'
+     *
+     * @param  \Carbon\Model\SyncDirectoryRequest $sync_directory_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancel'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function cancelRequest($sync_directory_request, string $contentType = self::contentTypes['cancel'][0])
+    {
+
+        if ($sync_directory_request !== SENTINEL_VALUE) {
+            if (!($sync_directory_request instanceof \Carbon\Model\SyncDirectoryRequest)) {
+                if (!is_array($sync_directory_request))
+                    throw new \InvalidArgumentException('"sync_directory_request" must be associative array or an instance of \Carbon\Model\SyncDirectoryRequest IntegrationsApi.cancel.');
+                else
+                    $sync_directory_request = new \Carbon\Model\SyncDirectoryRequest($sync_directory_request);
+            }
+        }
+        // verify the required parameter 'sync_directory_request' is set
+        if ($sync_directory_request === SENTINEL_VALUE || (is_array($sync_directory_request) && count($sync_directory_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter sync_directory_request when calling cancel'
+            );
+        }
+
+
+        $resourcePath = '/integrations/items/sync/cancel';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($sync_directory_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($sync_directory_request));
+            } else {
+                $httpBody = $sync_directory_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -1806,7 +2177,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = 'ce1b1ec8-be64-491c-9159-c40f85fa0073',
+        $request_id = '2e662fad-1193-4482-a2d7-ec7b821a9d2b',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -2019,7 +2390,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = 'ce1b1ec8-be64-491c-9159-c40f85fa0073',
+        $request_id = '2e662fad-1193-4482-a2d7-ec7b821a9d2b',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -4830,7 +5201,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '9fe9190e-384f-4baa-a416-d51ed93d1be7',
+        $request_id = 'dd2130b5-0f9f-4f3a-b450-f3fa458763ae',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -5023,7 +5394,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '9fe9190e-384f-4baa-a416-d51ed93d1be7',
+        $request_id = 'dd2130b5-0f9f-4f3a-b450-f3fa458763ae',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -5626,7 +5997,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '9fe9190e-384f-4baa-a416-d51ed93d1be7',
+        $request_id = 'dd2130b5-0f9f-4f3a-b450-f3fa458763ae',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -5819,7 +6190,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '9fe9190e-384f-4baa-a416-d51ed93d1be7',
+        $request_id = 'dd2130b5-0f9f-4f3a-b450-f3fa458763ae',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,

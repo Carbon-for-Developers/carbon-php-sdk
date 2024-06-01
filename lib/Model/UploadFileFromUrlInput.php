@@ -61,7 +61,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'prepend_filename_to_chunks' => 'bool',
         'max_items_per_chunk' => 'int',
         'parse_pdf_tables_with_ocr' => 'bool',
-        'detect_audio_language' => 'bool'
+        'detect_audio_language' => 'bool',
+        'media_type' => '\Carbon\Model\FileContentTypesNullable'
     ];
 
     /**
@@ -84,7 +85,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'prepend_filename_to_chunks' => null,
         'max_items_per_chunk' => null,
         'parse_pdf_tables_with_ocr' => null,
-        'detect_audio_language' => null
+        'detect_audio_language' => null,
+        'media_type' => null
     ];
 
     /**
@@ -105,7 +107,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
 		'prepend_filename_to_chunks' => false,
 		'max_items_per_chunk' => true,
 		'parse_pdf_tables_with_ocr' => false,
-		'detect_audio_language' => false
+		'detect_audio_language' => false,
+		'media_type' => true
     ];
 
     /**
@@ -206,7 +209,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
         'max_items_per_chunk' => 'max_items_per_chunk',
         'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
-        'detect_audio_language' => 'detect_audio_language'
+        'detect_audio_language' => 'detect_audio_language',
+        'media_type' => 'media_type'
     ];
 
     /**
@@ -227,7 +231,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
         'max_items_per_chunk' => 'setMaxItemsPerChunk',
         'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
-        'detect_audio_language' => 'setDetectAudioLanguage'
+        'detect_audio_language' => 'setDetectAudioLanguage',
+        'media_type' => 'setMediaType'
     ];
 
     /**
@@ -248,7 +253,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
         'max_items_per_chunk' => 'getMaxItemsPerChunk',
         'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
-        'detect_audio_language' => 'getDetectAudioLanguage'
+        'detect_audio_language' => 'getDetectAudioLanguage',
+        'media_type' => 'getMediaType'
     ];
 
     /**
@@ -321,6 +327,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('detect_audio_language', $data ?? [], false);
+        $this->setIfExists('media_type', $data ?? [], null);
     }
 
     /**
@@ -769,6 +776,42 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['detect_audio_language'] = $detect_audio_language;
+
+        return $this;
+    }
+
+    /**
+     * Gets media_type
+     *
+     * @return \Carbon\Model\FileContentTypesNullable|null
+     */
+    public function getMediaType()
+    {
+        return $this->container['media_type'];
+    }
+
+    /**
+     * Sets media_type
+     *
+     * @param \Carbon\Model\FileContentTypesNullable|null $media_type media_type
+     *
+     * @return self
+     */
+    public function setMediaType($media_type)
+    {
+
+        if (is_null($media_type)) {
+            array_push($this->openAPINullablesSetToNull, 'media_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('media_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['media_type'] = $media_type;
 
         return $this;
     }

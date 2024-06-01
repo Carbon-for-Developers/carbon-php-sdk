@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.2.1-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.2-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -41,6 +41,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.files.uploadFromUrl`](#carbonfilesuploadfromurl)
   * [`carbon.files.uploadText`](#carbonfilesuploadtext)
   * [`carbon.health.check`](#carbonhealthcheck)
+  * [`carbon.integrations.cancel`](#carbonintegrationscancel)
   * [`carbon.integrations.connectDataSource`](#carbonintegrationsconnectdatasource)
   * [`carbon.integrations.connectFreshdesk`](#carbonintegrationsconnectfreshdesk)
   * [`carbon.integrations.connectGitbook`](#carbonintegrationsconnectgitbook)
@@ -101,7 +102,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.2.1"
+    "konfig/carbon-php-sdk": "0.2.2"
   }
 }
 ```
@@ -1178,7 +1179,8 @@ $result = $carbon->files->uploadFromUrl(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     parse_pdf_tables_with_ocr: False, 
-    detect_audio_language: False
+    detect_audio_language: False, 
+    media_type: "TEXT"
 );
 ```
 
@@ -1211,6 +1213,8 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 ##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
 
 ##### detect_audio_language: `bool`<a id="detect_audio_language-bool"></a>
+
+##### media_type:<a id="media_type"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1312,6 +1316,37 @@ $result = $carbon->health->check();
 ---
 
 
+### `carbon.integrations.cancel`<a id="carbonintegrationscancel"></a>
+
+Cancel Data Source Items Sync
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->cancel(
+    data_source_id: 1
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**OrganizationUserDataSourceAPI**](./lib/Model/OrganizationUserDataSourceAPI.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/items/sync/cancel` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `carbon.integrations.connectDataSource`<a id="carbonintegrationsconnectdatasource"></a>
 
 Connect Data Source
@@ -1334,7 +1369,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "fceb0182-329c-4e45-953b-885c747cf4a3",
+        "request_id" => "368135ce-5cca-4fb5-a19d-42b9a409af35",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1584,7 +1619,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "ce1b1ec8-be64-491c-9159-c40f85fa0073", 
+    request_id: "2e662fad-1193-4482-a2d7-ec7b821a9d2b", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1658,7 +1693,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: DROPBOX, SHAREPOINT, ONEDRIVE, BOX, GOOGLE_DRIVE
+Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, BOX, ONEDRIVE, GOOGLE_DRIVE, DROPBOX
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -1964,7 +1999,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "9fe9190e-384f-4baa-a416-d51ed93d1be7", 
+    request_id: "dd2130b5-0f9f-4f3a-b450-f3fa458763ae", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2084,7 +2119,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "9fe9190e-384f-4baa-a416-d51ed93d1be7", 
+    request_id: "dd2130b5-0f9f-4f3a-b450-f3fa458763ae", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 

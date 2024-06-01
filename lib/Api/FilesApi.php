@@ -4579,6 +4579,7 @@ class FilesApi extends \Carbon\CustomApi
         $max_items_per_chunk = SENTINEL_VALUE,
         $parse_pdf_tables_with_ocr = false,
         $detect_audio_language = false,
+        $media_type = SENTINEL_VALUE,
         string $contentType = self::contentTypes['uploadFromUrl'][0]
     )
     {
@@ -4596,6 +4597,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $this->setRequestBodyProperty($_body, "detect_audio_language", $detect_audio_language);
+        $this->setRequestBodyProperty($_body, "media_type", $media_type);
         $upload_file_from_url_input = $_body;
 
         list($response) = $this->uploadFromUrlWithHttpInfo($upload_file_from_url_input, $contentType);
@@ -4766,6 +4768,7 @@ class FilesApi extends \Carbon\CustomApi
         $max_items_per_chunk = SENTINEL_VALUE,
         $parse_pdf_tables_with_ocr = false,
         $detect_audio_language = false,
+        $media_type = SENTINEL_VALUE,
         string $contentType = self::contentTypes['uploadFromUrl'][0]
     )
     {
@@ -4783,6 +4786,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "max_items_per_chunk", $max_items_per_chunk);
         $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $this->setRequestBodyProperty($_body, "detect_audio_language", $detect_audio_language);
+        $this->setRequestBodyProperty($_body, "media_type", $media_type);
         $upload_file_from_url_input = $_body;
 
         return $this->uploadFromUrlAsyncWithHttpInfo($upload_file_from_url_input, $contentType)
