@@ -61,7 +61,9 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'html_tags_to_skip' => 'string[]',
         'css_classes_to_skip' => 'string[]',
         'css_selectors_to_skip' => 'string[]',
-        'embedding_model' => '\Carbon\Model\EmbeddingGenerators'
+        'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
+        'url_paths_to_include' => 'string[]',
+        'url_paths_to_exclude' => 'string[]'
     ];
 
     /**
@@ -84,7 +86,9 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'html_tags_to_skip' => null,
         'css_classes_to_skip' => null,
         'css_selectors_to_skip' => null,
-        'embedding_model' => null
+        'embedding_model' => null,
+        'url_paths_to_include' => null,
+        'url_paths_to_exclude' => null
     ];
 
     /**
@@ -105,7 +109,9 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 		'html_tags_to_skip' => true,
 		'css_classes_to_skip' => true,
 		'css_selectors_to_skip' => true,
-		'embedding_model' => false
+		'embedding_model' => false,
+		'url_paths_to_include' => true,
+		'url_paths_to_exclude' => true
     ];
 
     /**
@@ -206,7 +212,9 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'html_tags_to_skip' => 'html_tags_to_skip',
         'css_classes_to_skip' => 'css_classes_to_skip',
         'css_selectors_to_skip' => 'css_selectors_to_skip',
-        'embedding_model' => 'embedding_model'
+        'embedding_model' => 'embedding_model',
+        'url_paths_to_include' => 'url_paths_to_include',
+        'url_paths_to_exclude' => 'url_paths_to_exclude'
     ];
 
     /**
@@ -227,7 +235,9 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'html_tags_to_skip' => 'setHtmlTagsToSkip',
         'css_classes_to_skip' => 'setCssClassesToSkip',
         'css_selectors_to_skip' => 'setCssSelectorsToSkip',
-        'embedding_model' => 'setEmbeddingModel'
+        'embedding_model' => 'setEmbeddingModel',
+        'url_paths_to_include' => 'setUrlPathsToInclude',
+        'url_paths_to_exclude' => 'setUrlPathsToExclude'
     ];
 
     /**
@@ -248,7 +258,9 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'html_tags_to_skip' => 'getHtmlTagsToSkip',
         'css_classes_to_skip' => 'getCssClassesToSkip',
         'css_selectors_to_skip' => 'getCssSelectorsToSkip',
-        'embedding_model' => 'getEmbeddingModel'
+        'embedding_model' => 'getEmbeddingModel',
+        'url_paths_to_include' => 'getUrlPathsToInclude',
+        'url_paths_to_exclude' => 'getUrlPathsToExclude'
     ];
 
     /**
@@ -321,6 +333,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('css_classes_to_skip', $data ?? [], null);
         $this->setIfExists('css_selectors_to_skip', $data ?? [], null);
         $this->setIfExists('embedding_model', $data ?? [], null);
+        $this->setIfExists('url_paths_to_include', $data ?? [], null);
+        $this->setIfExists('url_paths_to_exclude', $data ?? [], null);
     }
 
     /**
@@ -355,6 +369,14 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         }
         if (!is_null($this->container['max_pages_to_scrape']) && ($this->container['max_pages_to_scrape'] < 1)) {
             $invalidProperties[] = "invalid value for 'max_pages_to_scrape', must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['url_paths_to_include']) && (count($this->container['url_paths_to_include']) > 10)) {
+            $invalidProperties[] = "invalid value for 'url_paths_to_include', number of items must be less than or equal to 10.";
+        }
+
+        if (!is_null($this->container['url_paths_to_exclude']) && (count($this->container['url_paths_to_exclude']) > 10)) {
+            $invalidProperties[] = "invalid value for 'url_paths_to_exclude', number of items must be less than or equal to 10.";
         }
 
         return $invalidProperties;
@@ -827,6 +849,86 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['embedding_model'] = $embedding_model;
+
+        return $this;
+    }
+
+    /**
+     * Gets url_paths_to_include
+     *
+     * @return string[]|null
+     */
+    public function getUrlPathsToInclude()
+    {
+        return $this->container['url_paths_to_include'];
+    }
+
+    /**
+     * Sets url_paths_to_include
+     *
+     * @param string[]|null $url_paths_to_include URL subpaths or directories that you want to include. For example if you want to only include         URLs that start with /questions in stackoverflow.com, you will add /questions/ in this input
+     *
+     * @return self
+     */
+    public function setUrlPathsToInclude($url_paths_to_include)
+    {
+
+        if (!is_null($url_paths_to_include) && (count($url_paths_to_include) > 10)) {
+            throw new \InvalidArgumentException('invalid value for $url_paths_to_include when calling SitemapScrapeRequest., number of items must be less than or equal to 10.');
+        }
+
+        if (is_null($url_paths_to_include)) {
+            array_push($this->openAPINullablesSetToNull, 'url_paths_to_include');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('url_paths_to_include', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['url_paths_to_include'] = $url_paths_to_include;
+
+        return $this;
+    }
+
+    /**
+     * Gets url_paths_to_exclude
+     *
+     * @return string[]|null
+     */
+    public function getUrlPathsToExclude()
+    {
+        return $this->container['url_paths_to_exclude'];
+    }
+
+    /**
+     * Sets url_paths_to_exclude
+     *
+     * @param string[]|null $url_paths_to_exclude URL subpaths or directories that you want to exclude. For example if you want to exclude         URLs that start with /questions in stackoverflow.com, you will add /questions/ in this input
+     *
+     * @return self
+     */
+    public function setUrlPathsToExclude($url_paths_to_exclude)
+    {
+
+        if (!is_null($url_paths_to_exclude) && (count($url_paths_to_exclude) > 10)) {
+            throw new \InvalidArgumentException('invalid value for $url_paths_to_exclude when calling SitemapScrapeRequest., number of items must be less than or equal to 10.');
+        }
+
+        if (is_null($url_paths_to_exclude)) {
+            array_push($this->openAPINullablesSetToNull, 'url_paths_to_exclude');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('url_paths_to_exclude', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['url_paths_to_exclude'] = $url_paths_to_exclude;
 
         return $this;
     }

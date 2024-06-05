@@ -196,4 +196,13 @@ class WebscrapeRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "url_paths_to_include"
+     */
+    public function testPropertyUrlPathsToInclude()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

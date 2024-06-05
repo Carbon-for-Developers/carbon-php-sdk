@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.2.2-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.3-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -102,7 +102,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.2.2"
+    "konfig/carbon-php-sdk": "0.2.3"
   }
 }
 ```
@@ -1369,7 +1369,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "368135ce-5cca-4fb5-a19d-42b9a409af35",
+        "request_id" => "652297b9-0f55-46d8-869d-13a36e89e5da",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1619,7 +1619,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "2e662fad-1193-4482-a2d7-ec7b821a9d2b", 
+    request_id: "71f214fa-2155-41cb-9336-9b3070e86897", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1693,7 +1693,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, BOX, ONEDRIVE, GOOGLE_DRIVE, DROPBOX
+Enable integration's file picker for sources that support it. Supported sources: DROPBOX, GOOGLE_DRIVE, SHAREPOINT, ONEDRIVE, BOX
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -1999,7 +1999,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "dd2130b5-0f9f-4f3a-b450-f3fa458763ae", 
+    request_id: "6136b467-242e-49df-9478-d3e0cfdde299", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2119,7 +2119,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "dd2130b5-0f9f-4f3a-b450-f3fa458763ae", 
+    request_id: "6136b467-242e-49df-9478-d3e0cfdde299", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -3093,7 +3093,9 @@ $result = $carbon->utilities->scrapeSitemap(
     html_tags_to_skip: [], 
     css_classes_to_skip: [], 
     css_selectors_to_skip: [], 
-    embedding_model: "OPENAI"
+    embedding_model: "OPENAI", 
+    url_paths_to_include: [], 
+    url_paths_to_exclude: []
 );
 ```
 
@@ -3124,6 +3126,14 @@ $result = $carbon->utilities->scrapeSitemap(
 ##### css_selectors_to_skip: `string`[]<a id="css_selectors_to_skip-string"></a>
 
 ##### embedding_model:<a id="embedding_model"></a>
+
+##### url_paths_to_include: `string`[]<a id="url_paths_to_include-string"></a>
+
+URL subpaths or directories that you want to include. For example if you want to only include         URLs that start with /questions in stackoverflow.com, you will add /questions/ in this input
+
+##### url_paths_to_exclude: `string`[]<a id="url_paths_to_exclude-string"></a>
+
+URL subpaths or directories that you want to exclude. For example if you want to exclude         URLs that start with /questions in stackoverflow.com, you will add /questions/ in this input
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -3170,6 +3180,7 @@ $result = $carbon->utilities->scrapeWeb(
             "css_classes_to_skip" => [],
             "css_selectors_to_skip" => [],
             "embedding_model" => "OPENAI",
+            "url_paths_to_include" => [],
         ]
     ],
 );

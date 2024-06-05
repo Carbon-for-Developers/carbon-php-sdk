@@ -1281,6 +1281,8 @@ class UtilitiesApi extends \Carbon\CustomApi
         $css_classes_to_skip = SENTINEL_VALUE,
         $css_selectors_to_skip = SENTINEL_VALUE,
         $embedding_model = SENTINEL_VALUE,
+        $url_paths_to_include = SENTINEL_VALUE,
+        $url_paths_to_exclude = SENTINEL_VALUE,
         string $contentType = self::contentTypes['scrapeSitemap'][0]
     )
     {
@@ -1298,6 +1300,8 @@ class UtilitiesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "css_classes_to_skip", $css_classes_to_skip);
         $this->setRequestBodyProperty($_body, "css_selectors_to_skip", $css_selectors_to_skip);
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "url_paths_to_include", $url_paths_to_include);
+        $this->setRequestBodyProperty($_body, "url_paths_to_exclude", $url_paths_to_exclude);
         $sitemap_scrape_request = $_body;
 
         list($response) = $this->scrapeSitemapWithHttpInfo($sitemap_scrape_request, $contentType);
@@ -1468,6 +1472,8 @@ class UtilitiesApi extends \Carbon\CustomApi
         $css_classes_to_skip = SENTINEL_VALUE,
         $css_selectors_to_skip = SENTINEL_VALUE,
         $embedding_model = SENTINEL_VALUE,
+        $url_paths_to_include = SENTINEL_VALUE,
+        $url_paths_to_exclude = SENTINEL_VALUE,
         string $contentType = self::contentTypes['scrapeSitemap'][0]
     )
     {
@@ -1485,6 +1491,8 @@ class UtilitiesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "css_classes_to_skip", $css_classes_to_skip);
         $this->setRequestBodyProperty($_body, "css_selectors_to_skip", $css_selectors_to_skip);
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "url_paths_to_include", $url_paths_to_include);
+        $this->setRequestBodyProperty($_body, "url_paths_to_exclude", $url_paths_to_exclude);
         $sitemap_scrape_request = $_body;
 
         return $this->scrapeSitemapAsyncWithHttpInfo($sitemap_scrape_request, $contentType)
