@@ -3943,6 +3943,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  bool $detect_audio_language Whether to automatically detect the language of the uploaded audio file. (optional, default to false)
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
+     * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
@@ -3964,6 +3965,7 @@ class FilesApi extends \Carbon\CustomApi
         $parse_pdf_tables_with_ocr = false,
         $detect_audio_language = false,
         $media_type = SENTINEL_VALUE,
+        $split_rows = false,
         string $contentType = self::contentTypes['upload'][0]
     )
     {
@@ -3971,7 +3973,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "file", $file);
         $body_create_upload_file_uploadfile_post = $_body;
 
-        list($response) = $this->uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $media_type, $contentType);
+        list($response) = $this->uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $media_type, $split_rows, $contentType);
         return $response;
     }
 
@@ -3994,15 +3996,16 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  bool $detect_audio_language Whether to automatically detect the language of the uploaded audio file. (optional, default to false)
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
+     * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carbon\Model\UserFile|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $media_type = null, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $media_type = null, $split_rows = false, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $media_type, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $media_type, $split_rows, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -4032,6 +4035,7 @@ class FilesApi extends \Carbon\CustomApi
                         $parse_pdf_tables_with_ocr,
                         $detect_audio_language,
                         $media_type,
+                        $split_rows,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -4158,6 +4162,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  bool $detect_audio_language Whether to automatically detect the language of the uploaded audio file. (optional, default to false)
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
+     * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4178,6 +4183,7 @@ class FilesApi extends \Carbon\CustomApi
         $parse_pdf_tables_with_ocr = false,
         $detect_audio_language = false,
         $media_type = SENTINEL_VALUE,
+        $split_rows = false,
         string $contentType = self::contentTypes['upload'][0]
     )
     {
@@ -4185,7 +4191,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "file", $file);
         $body_create_upload_file_uploadfile_post = $_body;
 
-        return $this->uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $media_type, $contentType)
+        return $this->uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $media_type, $split_rows, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4212,15 +4218,16 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  bool $detect_audio_language Whether to automatically detect the language of the uploaded audio file. (optional, default to false)
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
+     * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $media_type = null, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $media_type = null, $split_rows = false, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
         $returnType = '\Carbon\Model\UserFile';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $media_type, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $media_type, $split_rows, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -4278,12 +4285,13 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  bool $detect_audio_language Whether to automatically detect the language of the uploaded audio file. (optional, default to false)
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
+     * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size = SENTINEL_VALUE, $chunk_overlap = SENTINEL_VALUE, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = SENTINEL_VALUE, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = SENTINEL_VALUE, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $media_type = SENTINEL_VALUE, string $contentType = self::contentTypes['upload'][0])
+    public function uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size = SENTINEL_VALUE, $chunk_overlap = SENTINEL_VALUE, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = SENTINEL_VALUE, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = SENTINEL_VALUE, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $media_type = SENTINEL_VALUE, $split_rows = false, string $contentType = self::contentTypes['upload'][0])
     {
 
         // verify the required parameter 'file' is set
@@ -4455,6 +4463,17 @@ class FilesApi extends \Carbon\CustomApi
                 false // required
             ) ?? []);
         }
+        if ($split_rows !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $split_rows,
+                'split_rows', // param base name
+                'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
 
 
 
@@ -4580,6 +4599,7 @@ class FilesApi extends \Carbon\CustomApi
         $parse_pdf_tables_with_ocr = false,
         $detect_audio_language = false,
         $media_type = SENTINEL_VALUE,
+        $split_rows = false,
         string $contentType = self::contentTypes['uploadFromUrl'][0]
     )
     {
@@ -4598,6 +4618,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $this->setRequestBodyProperty($_body, "detect_audio_language", $detect_audio_language);
         $this->setRequestBodyProperty($_body, "media_type", $media_type);
+        $this->setRequestBodyProperty($_body, "split_rows", $split_rows);
         $upload_file_from_url_input = $_body;
 
         list($response) = $this->uploadFromUrlWithHttpInfo($upload_file_from_url_input, $contentType);
@@ -4769,6 +4790,7 @@ class FilesApi extends \Carbon\CustomApi
         $parse_pdf_tables_with_ocr = false,
         $detect_audio_language = false,
         $media_type = SENTINEL_VALUE,
+        $split_rows = false,
         string $contentType = self::contentTypes['uploadFromUrl'][0]
     )
     {
@@ -4787,6 +4809,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $this->setRequestBodyProperty($_body, "detect_audio_language", $detect_audio_language);
         $this->setRequestBodyProperty($_body, "media_type", $media_type);
+        $this->setRequestBodyProperty($_body, "split_rows", $split_rows);
         $upload_file_from_url_input = $_body;
 
         return $this->uploadFromUrlAsyncWithHttpInfo($upload_file_from_url_input, $contentType)

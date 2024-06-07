@@ -62,7 +62,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'max_items_per_chunk' => 'int',
         'parse_pdf_tables_with_ocr' => 'bool',
         'detect_audio_language' => 'bool',
-        'media_type' => '\Carbon\Model\FileContentTypesNullable'
+        'media_type' => '\Carbon\Model\FileContentTypesNullable',
+        'split_rows' => 'bool'
     ];
 
     /**
@@ -86,7 +87,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'max_items_per_chunk' => null,
         'parse_pdf_tables_with_ocr' => null,
         'detect_audio_language' => null,
-        'media_type' => null
+        'media_type' => null,
+        'split_rows' => null
     ];
 
     /**
@@ -108,7 +110,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
 		'max_items_per_chunk' => true,
 		'parse_pdf_tables_with_ocr' => false,
 		'detect_audio_language' => false,
-		'media_type' => true
+		'media_type' => true,
+		'split_rows' => false
     ];
 
     /**
@@ -210,7 +213,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'max_items_per_chunk' => 'max_items_per_chunk',
         'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
         'detect_audio_language' => 'detect_audio_language',
-        'media_type' => 'media_type'
+        'media_type' => 'media_type',
+        'split_rows' => 'split_rows'
     ];
 
     /**
@@ -232,7 +236,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'max_items_per_chunk' => 'setMaxItemsPerChunk',
         'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
         'detect_audio_language' => 'setDetectAudioLanguage',
-        'media_type' => 'setMediaType'
+        'media_type' => 'setMediaType',
+        'split_rows' => 'setSplitRows'
     ];
 
     /**
@@ -254,7 +259,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'max_items_per_chunk' => 'getMaxItemsPerChunk',
         'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
         'detect_audio_language' => 'getDetectAudioLanguage',
-        'media_type' => 'getMediaType'
+        'media_type' => 'getMediaType',
+        'split_rows' => 'getSplitRows'
     ];
 
     /**
@@ -328,6 +334,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('detect_audio_language', $data ?? [], false);
         $this->setIfExists('media_type', $data ?? [], null);
+        $this->setIfExists('split_rows', $data ?? [], false);
     }
 
     /**
@@ -812,6 +819,35 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['media_type'] = $media_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets split_rows
+     *
+     * @return bool|null
+     */
+    public function getSplitRows()
+    {
+        return $this->container['split_rows'];
+    }
+
+    /**
+     * Sets split_rows
+     *
+     * @param bool|null $split_rows split_rows
+     *
+     * @return self
+     */
+    public function setSplitRows($split_rows)
+    {
+
+        if (is_null($split_rows)) {
+            throw new \InvalidArgumentException('non-nullable split_rows cannot be null');
+        }
+
+        $this->container['split_rows'] = $split_rows;
 
         return $this;
     }
