@@ -216,6 +216,15 @@ class OrganizationResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "file_sync_usage"
+     */
+    public function testPropertyFileSyncUsage()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

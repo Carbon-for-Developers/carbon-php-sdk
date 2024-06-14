@@ -65,6 +65,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'period_ends_at' => '\DateTime',
         'cancel_at_period_end' => 'bool',
         'global_user_config' => 'object',
+        'file_sync_usage' => 'object',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -93,6 +94,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'period_ends_at' => 'date-time',
         'cancel_at_period_end' => null,
         'global_user_config' => null,
+        'file_sync_usage' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -119,6 +121,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
 		'period_ends_at' => true,
 		'cancel_at_period_end' => true,
 		'global_user_config' => false,
+		'file_sync_usage' => false,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -225,6 +228,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'period_ends_at' => 'period_ends_at',
         'cancel_at_period_end' => 'cancel_at_period_end',
         'global_user_config' => 'global_user_config',
+        'file_sync_usage' => 'file_sync_usage',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -251,6 +255,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'period_ends_at' => 'setPeriodEndsAt',
         'cancel_at_period_end' => 'setCancelAtPeriodEnd',
         'global_user_config' => 'setGlobalUserConfig',
+        'file_sync_usage' => 'setFileSyncUsage',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -277,6 +282,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'period_ends_at' => 'getPeriodEndsAt',
         'cancel_at_period_end' => 'getCancelAtPeriodEnd',
         'global_user_config' => 'getGlobalUserConfig',
+        'file_sync_usage' => 'getFileSyncUsage',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -354,6 +360,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('period_ends_at', $data ?? [], null);
         $this->setIfExists('cancel_at_period_end', $data ?? [], null);
         $this->setIfExists('global_user_config', $data ?? [], null);
+        $this->setIfExists('file_sync_usage', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -432,6 +439,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
         if ($this->container['global_user_config'] === null) {
             $invalidProperties[] = "'global_user_config' can't be null";
+        }
+        if ($this->container['file_sync_usage'] === null) {
+            $invalidProperties[] = "'file_sync_usage' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -956,6 +966,35 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['global_user_config'] = $global_user_config;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_sync_usage
+     *
+     * @return object
+     */
+    public function getFileSyncUsage()
+    {
+        return $this->container['file_sync_usage'];
+    }
+
+    /**
+     * Sets file_sync_usage
+     *
+     * @param object $file_sync_usage file_sync_usage
+     *
+     * @return self
+     */
+    public function setFileSyncUsage($file_sync_usage)
+    {
+
+        if (is_null($file_sync_usage)) {
+            throw new \InvalidArgumentException('non-nullable file_sync_usage cannot be null');
+        }
+
+        $this->container['file_sync_usage'] = $file_sync_usage;
 
         return $this;
     }

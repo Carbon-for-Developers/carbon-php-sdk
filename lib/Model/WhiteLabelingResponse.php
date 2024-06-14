@@ -50,7 +50,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPITypes = [
         'remove_branding' => 'bool',
-        'integrations' => 'object'
+        'integrations' => 'object',
+        'custom_limits' => 'object'
     ];
 
     /**
@@ -62,7 +63,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPIFormats = [
         'remove_branding' => null,
-        'integrations' => null
+        'integrations' => null,
+        'custom_limits' => null
     ];
 
     /**
@@ -72,7 +74,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static array $openAPINullables = [
         'remove_branding' => false,
-		'integrations' => false
+		'integrations' => false,
+		'custom_limits' => false
     ];
 
     /**
@@ -162,7 +165,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $attributeMap = [
         'remove_branding' => 'remove_branding',
-        'integrations' => 'integrations'
+        'integrations' => 'integrations',
+        'custom_limits' => 'custom_limits'
     ];
 
     /**
@@ -172,7 +176,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $setters = [
         'remove_branding' => 'setRemoveBranding',
-        'integrations' => 'setIntegrations'
+        'integrations' => 'setIntegrations',
+        'custom_limits' => 'setCustomLimits'
     ];
 
     /**
@@ -182,7 +187,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $getters = [
         'remove_branding' => 'getRemoveBranding',
-        'integrations' => 'getIntegrations'
+        'integrations' => 'getIntegrations',
+        'custom_limits' => 'getCustomLimits'
     ];
 
     /**
@@ -244,6 +250,7 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $this->setIfExists('remove_branding', $data ?? [], null);
         $this->setIfExists('integrations', $data ?? [], null);
+        $this->setIfExists('custom_limits', $data ?? [], null);
     }
 
     /**
@@ -278,6 +285,9 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
         }
         if ($this->container['integrations'] === null) {
             $invalidProperties[] = "'integrations' can't be null";
+        }
+        if ($this->container['custom_limits'] === null) {
+            $invalidProperties[] = "'custom_limits' can't be null";
         }
         return $invalidProperties;
     }
@@ -348,6 +358,35 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
         }
 
         $this->container['integrations'] = $integrations;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom_limits
+     *
+     * @return object
+     */
+    public function getCustomLimits()
+    {
+        return $this->container['custom_limits'];
+    }
+
+    /**
+     * Sets custom_limits
+     *
+     * @param object $custom_limits custom_limits
+     *
+     * @return self
+     */
+    public function setCustomLimits($custom_limits)
+    {
+
+        if (is_null($custom_limits)) {
+            throw new \InvalidArgumentException('non-nullable custom_limits cannot be null');
+        }
+
+        $this->container['custom_limits'] = $custom_limits;
 
         return $this;
     }
