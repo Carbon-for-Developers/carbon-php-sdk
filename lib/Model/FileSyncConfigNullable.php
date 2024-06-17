@@ -52,7 +52,8 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $openAPITypes = [
         'auto_synced_source_types' => '\Carbon\Model\HelpdeskFileTypes[]',
         'sync_attachments' => 'bool',
-        'detect_audio_language' => 'bool'
+        'detect_audio_language' => 'bool',
+        'split_rows' => 'bool'
     ];
 
     /**
@@ -65,7 +66,8 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $openAPIFormats = [
         'auto_synced_source_types' => null,
         'sync_attachments' => null,
-        'detect_audio_language' => null
+        'detect_audio_language' => null,
+        'split_rows' => null
     ];
 
     /**
@@ -76,7 +78,8 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
     protected static array $openAPINullables = [
         'auto_synced_source_types' => false,
 		'sync_attachments' => false,
-		'detect_audio_language' => false
+		'detect_audio_language' => false,
+		'split_rows' => false
     ];
 
     /**
@@ -167,7 +170,8 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $attributeMap = [
         'auto_synced_source_types' => 'auto_synced_source_types',
         'sync_attachments' => 'sync_attachments',
-        'detect_audio_language' => 'detect_audio_language'
+        'detect_audio_language' => 'detect_audio_language',
+        'split_rows' => 'split_rows'
     ];
 
     /**
@@ -178,7 +182,8 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $setters = [
         'auto_synced_source_types' => 'setAutoSyncedSourceTypes',
         'sync_attachments' => 'setSyncAttachments',
-        'detect_audio_language' => 'setDetectAudioLanguage'
+        'detect_audio_language' => 'setDetectAudioLanguage',
+        'split_rows' => 'setSplitRows'
     ];
 
     /**
@@ -189,7 +194,8 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $getters = [
         'auto_synced_source_types' => 'getAutoSyncedSourceTypes',
         'sync_attachments' => 'getSyncAttachments',
-        'detect_audio_language' => 'getDetectAudioLanguage'
+        'detect_audio_language' => 'getDetectAudioLanguage',
+        'split_rows' => 'getSplitRows'
     ];
 
     /**
@@ -252,6 +258,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('auto_synced_source_types', $data ?? [], null);
         $this->setIfExists('sync_attachments', $data ?? [], false);
         $this->setIfExists('detect_audio_language', $data ?? [], false);
+        $this->setIfExists('split_rows', $data ?? [], false);
     }
 
     /**
@@ -379,6 +386,35 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['detect_audio_language'] = $detect_audio_language;
+
+        return $this;
+    }
+
+    /**
+     * Gets split_rows
+     *
+     * @return bool|null
+     */
+    public function getSplitRows()
+    {
+        return $this->container['split_rows'];
+    }
+
+    /**
+     * Sets split_rows
+     *
+     * @param bool|null $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files.
+     *
+     * @return self
+     */
+    public function setSplitRows($split_rows)
+    {
+
+        if (is_null($split_rows)) {
+            throw new \InvalidArgumentException('non-nullable split_rows cannot be null');
+        }
+
+        $this->container['split_rows'] = $split_rows;
 
         return $this;
     }

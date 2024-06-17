@@ -97,4 +97,13 @@ class FileSyncConfigTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "split_rows"
+     */
+    public function testPropertySplitRows()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

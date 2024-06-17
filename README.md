@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.2.5-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.6-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -102,7 +102,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.2.5"
+    "konfig/carbon-php-sdk": "0.2.6"
   }
 }
 ```
@@ -1377,7 +1377,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "3faff6b4-cf31-42c5-b652-a4115dfbc64f",
+        "request_id" => "701c68d4-27fe-4bd5-8f73-100577f7eaa5",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1434,6 +1434,7 @@ $result = $carbon->integrations->connectFreshdesk(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "split_rows" => False,
     ]
 );
 ```
@@ -1627,7 +1628,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "f3bc66ce-11ad-480a-97d3-8564f86ea2e4", 
+    request_id: "f8e2cd13-d01d-4ebe-a42c-2a03626c37c0", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1637,6 +1638,7 @@ $result = $carbon->integrations->getOauthUrl(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "split_rows" => False,
     ]
 );
 ```
@@ -1701,7 +1703,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: BOX, ONEDRIVE, DROPBOX, GOOGLE_DRIVE, SHAREPOINT
+Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, ONEDRIVE, GOOGLE_DRIVE, DROPBOX, BOX
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -2007,7 +2009,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "6ae9a1d5-64b6-4ec2-ab39-8869a383e3cf", 
+    request_id: "7233a302-6276-4747-af1f-9b1d1e1ed6f8", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2015,6 +2017,7 @@ $result = $carbon->integrations->syncConfluence(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "split_rows" => False,
     ]
 );
 ```
@@ -2127,7 +2130,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "6ae9a1d5-64b6-4ec2-ab39-8869a383e3cf", 
+    request_id: "7233a302-6276-4747-af1f-9b1d1e1ed6f8", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2135,6 +2138,7 @@ $result = $carbon->integrations->syncFiles(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "split_rows" => False,
     ]
 );
 ```
@@ -2366,6 +2370,7 @@ $result = $carbon->integrations->syncGmail(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "split_rows" => False,
     ], 
     incremental_sync: False
 );
@@ -2497,6 +2502,7 @@ $result = $carbon->integrations->syncOutlook(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "split_rows" => False,
     ], 
     incremental_sync: False
 );
@@ -2671,6 +2677,7 @@ $result = $carbon->integrations->syncS3Files(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "split_rows" => False,
     ]
 );
 ```
