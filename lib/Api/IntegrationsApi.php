@@ -82,6 +82,9 @@ class IntegrationsApi extends \Carbon\CustomApi
         'listConfluencePages' => [
             'application/json',
         ],
+        'listConversations' => [
+            'application/json',
+        ],
         'listDataSourceItems' => [
             'application/json',
         ],
@@ -128,6 +131,9 @@ class IntegrationsApi extends \Carbon\CustomApi
             'application/json',
         ],
         'syncS3Files' => [
+            'application/json',
+        ],
+        'syncSlack' => [
             'application/json',
         ],
     ];
@@ -2177,7 +2183,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = 'f8e2cd13-d01d-4ebe-a42c-2a03626c37c0',
+        $request_id = '229bd6e7-4931-4900-8f58-0e4071e45b25',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -2390,7 +2396,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = 'f8e2cd13-d01d-4ebe-a42c-2a03626c37c0',
+        $request_id = '229bd6e7-4931-4900-8f58-0e4071e45b25',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -2969,6 +2975,423 @@ class IntegrationsApi extends \Carbon\CustomApi
         );
 
         $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation listConversations
+     *
+     * Slack List Conversations
+     *
+     * @param  string $types types (optional, default to 'public_channel')
+     * @param  string $cursor cursor (optional)
+     * @param  int $data_source_id data_source_id (optional)
+     * @param  bool $exclude_archived exclude_archived (optional, default to true)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConversations'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return object|\Carbon\Model\HTTPValidationError
+     */
+    public function listConversations(
+        $types = 'public_channel',
+        $cursor = SENTINEL_VALUE,
+        $data_source_id = SENTINEL_VALUE,
+        $exclude_archived = true,
+
+        string $contentType = self::contentTypes['listConversations'][0]
+    )
+    {
+
+        list($response) = $this->listConversationsWithHttpInfo($types, $cursor, $data_source_id, $exclude_archived, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listConversationsWithHttpInfo
+     *
+     * Slack List Conversations
+     *
+     * @param  string $types (optional, default to 'public_channel')
+     * @param  string $cursor (optional)
+     * @param  int $data_source_id (optional)
+     * @param  bool $exclude_archived (optional, default to true)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConversations'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listConversationsWithHttpInfo($types = 'public_channel', $cursor = null, $data_source_id = null, $exclude_archived = true, string $contentType = self::contentTypes['listConversations'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listConversationsRequest($types, $cursor, $data_source_id, $exclude_archived, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->listConversationsWithHttpInfo(
+                        $types,
+                        $cursor,
+                        $data_source_id,
+                        $exclude_archived,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('object' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listConversationsAsync
+     *
+     * Slack List Conversations
+     *
+     * @param  string $types (optional, default to 'public_channel')
+     * @param  string $cursor (optional)
+     * @param  int $data_source_id (optional)
+     * @param  bool $exclude_archived (optional, default to true)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConversations'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listConversationsAsync(
+        $types = 'public_channel',
+        $cursor = SENTINEL_VALUE,
+        $data_source_id = SENTINEL_VALUE,
+        $exclude_archived = true,
+
+        string $contentType = self::contentTypes['listConversations'][0]
+    )
+    {
+
+        return $this->listConversationsAsyncWithHttpInfo($types, $cursor, $data_source_id, $exclude_archived, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listConversationsAsyncWithHttpInfo
+     *
+     * Slack List Conversations
+     *
+     * @param  string $types (optional, default to 'public_channel')
+     * @param  string $cursor (optional)
+     * @param  int $data_source_id (optional)
+     * @param  bool $exclude_archived (optional, default to true)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConversations'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listConversationsAsyncWithHttpInfo($types = 'public_channel', $cursor = null, $data_source_id = null, $exclude_archived = true, string $contentType = self::contentTypes['listConversations'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = 'object';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listConversationsRequest($types, $cursor, $data_source_id, $exclude_archived, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listConversations'
+     *
+     * @param  string $types (optional, default to 'public_channel')
+     * @param  string $cursor (optional)
+     * @param  int $data_source_id (optional)
+     * @param  bool $exclude_archived (optional, default to true)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConversations'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listConversationsRequest($types = 'public_channel', $cursor = SENTINEL_VALUE, $data_source_id = SENTINEL_VALUE, $exclude_archived = true, string $contentType = self::contentTypes['listConversations'][0])
+    {
+
+        // Check if $types is a string
+        if ($types !== SENTINEL_VALUE && !is_string($types)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($types, true), gettype($types)));
+        }
+        // Check if $cursor is a string
+        if ($cursor !== SENTINEL_VALUE && !is_string($cursor)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($cursor, true), gettype($cursor)));
+        }
+
+
+        $resourcePath = '/integrations/slack/conversations';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($types !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $types,
+                'types', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($cursor !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $cursor,
+                'cursor', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($data_source_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $data_source_id,
+                'data_source_id', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($exclude_archived !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $exclude_archived,
+                'exclude_archived', // param base name
+                'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
         $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
@@ -5201,7 +5624,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '7233a302-6276-4747-af1f-9b1d1e1ed6f8',
+        $request_id = 'bb4d49b0-3837-444a-9b71-f529df5968cb',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -5394,7 +5817,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '7233a302-6276-4747-af1f-9b1d1e1ed6f8',
+        $request_id = 'bb4d49b0-3837-444a-9b71-f529df5968cb',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -5997,7 +6420,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '7233a302-6276-4747-af1f-9b1d1e1ed6f8',
+        $request_id = 'bb4d49b0-3837-444a-9b71-f529df5968cb',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -6190,7 +6613,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '7233a302-6276-4747-af1f-9b1d1e1ed6f8',
+        $request_id = 'bb4d49b0-3837-444a-9b71-f529df5968cb',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -9144,6 +9567,410 @@ class IntegrationsApi extends \Carbon\CustomApi
                 $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($s3_file_sync_input));
             } else {
                 $httpBody = $s3_file_sync_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation syncSlack
+     *
+     * Slack Sync
+     *
+     * @param  \Carbon\Model\SlackSyncRequest $slack_sync_request slack_sync_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncSlack'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return object|\Carbon\Model\HTTPValidationError
+     */
+    public function syncSlack(
+
+        $filters,
+        $tags = SENTINEL_VALUE,
+        $chunk_size = 1500,
+        $chunk_overlap = 20,
+        $skip_embedding_generation = false,
+        $embedding_model = SENTINEL_VALUE,
+        $generate_sparse_vectors = false,
+        $prepend_filename_to_chunks = false,
+        $data_source_id = SENTINEL_VALUE,
+        $request_id = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['syncSlack'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "tags", $tags);
+        $this->setRequestBodyProperty($_body, "filters", $filters);
+        $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
+        $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
+        $this->setRequestBodyProperty($_body, "skip_embedding_generation", $skip_embedding_generation);
+        $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
+        $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $slack_sync_request = $_body;
+
+        list($response) = $this->syncSlackWithHttpInfo($slack_sync_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation syncSlackWithHttpInfo
+     *
+     * Slack Sync
+     *
+     * @param  \Carbon\Model\SlackSyncRequest $slack_sync_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncSlack'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function syncSlackWithHttpInfo($slack_sync_request, string $contentType = self::contentTypes['syncSlack'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->syncSlackRequest($slack_sync_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->syncSlackWithHttpInfo(
+                        $slack_sync_request,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('object' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation syncSlackAsync
+     *
+     * Slack Sync
+     *
+     * @param  \Carbon\Model\SlackSyncRequest $slack_sync_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncSlack'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function syncSlackAsync(
+
+        $filters,
+        $tags = SENTINEL_VALUE,
+        $chunk_size = 1500,
+        $chunk_overlap = 20,
+        $skip_embedding_generation = false,
+        $embedding_model = SENTINEL_VALUE,
+        $generate_sparse_vectors = false,
+        $prepend_filename_to_chunks = false,
+        $data_source_id = SENTINEL_VALUE,
+        $request_id = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['syncSlack'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "tags", $tags);
+        $this->setRequestBodyProperty($_body, "filters", $filters);
+        $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
+        $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
+        $this->setRequestBodyProperty($_body, "skip_embedding_generation", $skip_embedding_generation);
+        $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
+        $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $slack_sync_request = $_body;
+
+        return $this->syncSlackAsyncWithHttpInfo($slack_sync_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation syncSlackAsyncWithHttpInfo
+     *
+     * Slack Sync
+     *
+     * @param  \Carbon\Model\SlackSyncRequest $slack_sync_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncSlack'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function syncSlackAsyncWithHttpInfo($slack_sync_request, string $contentType = self::contentTypes['syncSlack'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = 'object';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->syncSlackRequest($slack_sync_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'syncSlack'
+     *
+     * @param  \Carbon\Model\SlackSyncRequest $slack_sync_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncSlack'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function syncSlackRequest($slack_sync_request, string $contentType = self::contentTypes['syncSlack'][0])
+    {
+
+        if ($slack_sync_request !== SENTINEL_VALUE) {
+            if (!($slack_sync_request instanceof \Carbon\Model\SlackSyncRequest)) {
+                if (!is_array($slack_sync_request))
+                    throw new \InvalidArgumentException('"slack_sync_request" must be associative array or an instance of \Carbon\Model\SlackSyncRequest IntegrationsApi.syncSlack.');
+                else
+                    $slack_sync_request = new \Carbon\Model\SlackSyncRequest($slack_sync_request);
+            }
+        }
+        // verify the required parameter 'slack_sync_request' is set
+        if ($slack_sync_request === SENTINEL_VALUE || (is_array($slack_sync_request) && count($slack_sync_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter slack_sync_request when calling syncSlack'
+            );
+        }
+
+
+        $resourcePath = '/integrations/slack/sync';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($slack_sync_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($slack_sync_request));
+            } else {
+                $httpBody = $slack_sync_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

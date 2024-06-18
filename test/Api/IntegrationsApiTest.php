@@ -142,6 +142,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for listConversations
+     *
+     * Slack List Conversations.
+     *
+     */
+    public function testListConversations()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listDataSourceItems
      *
      * List Data Source Items.
@@ -328,6 +340,18 @@ class IntegrationsApiTest extends TestCase
      *
      */
     public function testSyncS3Files()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for syncSlack
+     *
+     * Slack Sync.
+     *
+     */
+    public function testSyncSlack()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

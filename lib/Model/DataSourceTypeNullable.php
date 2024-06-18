@@ -98,6 +98,8 @@ class DataSourceTypeNullable
 
     public const GITHUB = 'GITHUB';
 
+    public const SLACK = 'SLACK';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -179,6 +181,7 @@ class DataSourceTypeNullable
             self::GITBOOK,
             self::SALESFORCE,
             self::GITHUB,
+            self::SLACK,
             self::JPG,
             self::PNG,
             self::JPEG,

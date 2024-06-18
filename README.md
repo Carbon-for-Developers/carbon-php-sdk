@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.2.6-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.7-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -48,6 +48,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.integrations.createAwsIamUser`](#carbonintegrationscreateawsiamuser)
   * [`carbon.integrations.getOauthUrl`](#carbonintegrationsgetoauthurl)
   * [`carbon.integrations.listConfluencePages`](#carbonintegrationslistconfluencepages)
+  * [`carbon.integrations.listConversations`](#carbonintegrationslistconversations)
   * [`carbon.integrations.listDataSourceItems`](#carbonintegrationslistdatasourceitems)
   * [`carbon.integrations.listFolders`](#carbonintegrationslistfolders)
   * [`carbon.integrations.listGitbookSpaces`](#carbonintegrationslistgitbookspaces)
@@ -64,6 +65,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.integrations.syncRepos`](#carbonintegrationssyncrepos)
   * [`carbon.integrations.syncRssFeed`](#carbonintegrationssyncrssfeed)
   * [`carbon.integrations.syncS3Files`](#carbonintegrationssyncs3files)
+  * [`carbon.integrations.syncSlack`](#carbonintegrationssyncslack)
   * [`carbon.organizations.get`](#carbonorganizationsget)
   * [`carbon.organizations.update`](#carbonorganizationsupdate)
   * [`carbon.organizations.updateStats`](#carbonorganizationsupdatestats)
@@ -102,7 +104,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.2.6"
+    "konfig/carbon-php-sdk": "0.2.7"
   }
 }
 ```
@@ -1377,7 +1379,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "701c68d4-27fe-4bd5-8f73-100577f7eaa5",
+        "request_id" => "2b33f04a-b2ca-473b-b6e2-c89df5e01f94",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1628,7 +1630,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "f8e2cd13-d01d-4ebe-a42c-2a03626c37c0", 
+    request_id: "229bd6e7-4931-4900-8f58-0e4071e45b25", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1703,7 +1705,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, ONEDRIVE, GOOGLE_DRIVE, DROPBOX, BOX
+Enable integration's file picker for sources that support it. Supported sources: DROPBOX, ONEDRIVE, SHAREPOINT, GOOGLE_DRIVE, BOX
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -1763,6 +1765,52 @@ $result = $carbon->integrations->listConfluencePages(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/integrations/confluence/list` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.integrations.listConversations`<a id="carbonintegrationslistconversations"></a>
+
+List all of your public and private channels, DMs, and Group DMs. The ID from response 
+can be used as a filter to sync messages to Carbon   
+types: Comma separated list of types. Available types are im (DMs), mpim (group DMs), public_channel, and private_channel.
+Defaults to public_channel.    
+cursor: Used for pagination. If next_cursor is returned in response, you need to pass it as the cursor in the next request    
+data_source_id: Data source needs to be specified if you have linked multiple slack accounts  
+exclude_archived: Should archived conversations be excluded, defaults to true
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->listConversations(
+    types: "public_channel", 
+    cursor: "string_example", 
+    data_source_id: 1, 
+    exclude_archived: True
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### types: `string`<a id="types-string"></a>
+
+##### cursor: `string`<a id="cursor-string"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### exclude_archived: `bool`<a id="exclude_archived-bool"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/slack/conversations` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2009,7 +2057,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "7233a302-6276-4747-af1f-9b1d1e1ed6f8", 
+    request_id: "bb4d49b0-3837-444a-9b71-f529df5968cb", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2130,7 +2178,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "7233a302-6276-4747-af1f-9b1d1e1ed6f8", 
+    request_id: "bb4d49b0-3837-444a-9b71-f529df5968cb", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2724,6 +2772,67 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/integrations/s3/files` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.integrations.syncSlack`<a id="carbonintegrationssyncslack"></a>
+
+You can list all conversations using the endpoint /integrations/slack/conversations. The ID of 
+conversation will be used as an input for this endpoint with timestamps as optional filters.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->syncSlack(
+    filters: [
+        "conversation_id" => "conversation_id_example",
+    ], 
+    tags: [], 
+    chunk_size: 1500, 
+    chunk_overlap: 20, 
+    skip_embedding_generation: False, 
+    embedding_model: "OPENAI", 
+    generate_sparse_vectors: False, 
+    prepend_filename_to_chunks: False, 
+    data_source_id: 1, 
+    request_id: "string_example"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### filters: [`SlackFilters`](./lib/Model/SlackFilters.php)<a id="filters-slackfilterslibmodelslackfiltersphp"></a>
+
+##### tags: `object`<a id="tags-object"></a>
+
+##### chunk_size: `int`<a id="chunk_size-int"></a>
+
+##### chunk_overlap: `int`<a id="chunk_overlap-int"></a>
+
+##### skip_embedding_generation: `bool`<a id="skip_embedding_generation-bool"></a>
+
+##### embedding_model:<a id="embedding_model"></a>
+
+##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
+
+##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/slack/sync` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

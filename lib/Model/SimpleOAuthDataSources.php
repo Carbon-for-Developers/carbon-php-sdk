@@ -48,6 +48,8 @@ class SimpleOAuthDataSources
 
     public const OUTLOOK = 'OUTLOOK';
 
+    public const SLACK = 'SLACK';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -61,7 +63,8 @@ class SimpleOAuthDataSources
             self::ONEDRIVE,
             self::BOX,
             self::GMAIL,
-            self::OUTLOOK
+            self::OUTLOOK,
+            self::SLACK
         ];
     }
 }

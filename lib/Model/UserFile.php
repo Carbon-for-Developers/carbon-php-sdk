@@ -79,6 +79,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'bool',
         'request_id' => 'string',
         'sync_properties' => 'object',
+        'messages_metadata' => 'object',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -121,6 +122,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => null,
         'request_id' => null,
         'sync_properties' => null,
+        'messages_metadata' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -161,6 +163,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
 		'generate_sparse_vectors' => true,
 		'request_id' => true,
 		'sync_properties' => false,
+		'messages_metadata' => false,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -281,6 +284,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'request_id' => 'request_id',
         'sync_properties' => 'sync_properties',
+        'messages_metadata' => 'messages_metadata',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -321,6 +325,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'request_id' => 'setRequestId',
         'sync_properties' => 'setSyncProperties',
+        'messages_metadata' => 'setMessagesMetadata',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -361,6 +366,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'request_id' => 'getRequestId',
         'sync_properties' => 'getSyncProperties',
+        'messages_metadata' => 'getMessagesMetadata',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -452,6 +458,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('generate_sparse_vectors', $data ?? [], null);
         $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('sync_properties', $data ?? [], null);
+        $this->setIfExists('messages_metadata', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -572,6 +579,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['sync_properties'] === null) {
             $invalidProperties[] = "'sync_properties' can't be null";
+        }
+        if ($this->container['messages_metadata'] === null) {
+            $invalidProperties[] = "'messages_metadata' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -1607,6 +1617,35 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['sync_properties'] = $sync_properties;
+
+        return $this;
+    }
+
+    /**
+     * Gets messages_metadata
+     *
+     * @return object
+     */
+    public function getMessagesMetadata()
+    {
+        return $this->container['messages_metadata'];
+    }
+
+    /**
+     * Sets messages_metadata
+     *
+     * @param object $messages_metadata messages_metadata
+     *
+     * @return self
+     */
+    public function setMessagesMetadata($messages_metadata)
+    {
+
+        if (is_null($messages_metadata)) {
+            throw new \InvalidArgumentException('non-nullable messages_metadata cannot be null');
+        }
+
+        $this->container['messages_metadata'] = $messages_metadata;
 
         return $this;
     }

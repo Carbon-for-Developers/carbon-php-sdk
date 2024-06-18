@@ -342,6 +342,15 @@ class UserFileTest extends TestCase
     }
 
     /**
+     * Test attribute "messages_metadata"
+     */
+    public function testPropertyMessagesMetadata()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

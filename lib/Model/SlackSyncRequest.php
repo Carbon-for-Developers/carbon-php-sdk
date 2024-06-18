@@ -1,6 +1,6 @@
 <?php
 /**
- * SyncOptions
+ * SlackSyncRequest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * SyncOptions Class Doc Comment
+ * SlackSyncRequest Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
+class SlackSyncRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SyncOptions';
+    protected static $openAPIModelName = 'SlackSyncRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,21 +49,16 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'tags' => 'mixed',
+        'tags' => 'object',
+        'filters' => '\Carbon\Model\SlackFilters',
         'chunk_size' => 'int',
         'chunk_overlap' => 'int',
         'skip_embedding_generation' => 'bool',
-        'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
+        'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
-        'max_items_per_chunk' => 'int',
-        'sync_files_on_connection' => 'bool',
-        'set_page_as_boundary' => 'bool',
-        'request_id' => 'string',
-        'enable_file_picker' => 'bool',
-        'sync_source_items' => 'bool',
-        'incremental_sync' => 'bool',
-        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable'
+        'data_source_id' => 'int',
+        'request_id' => 'string'
     ];
 
     /**
@@ -75,20 +70,15 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'tags' => null,
+        'filters' => null,
         'chunk_size' => null,
         'chunk_overlap' => null,
         'skip_embedding_generation' => null,
         'embedding_model' => null,
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
-        'max_items_per_chunk' => null,
-        'sync_files_on_connection' => null,
-        'set_page_as_boundary' => null,
-        'request_id' => null,
-        'enable_file_picker' => null,
-        'sync_source_items' => null,
-        'incremental_sync' => null,
-        'file_sync_config' => null
+        'data_source_id' => null,
+        'request_id' => null
     ];
 
     /**
@@ -98,20 +88,15 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'tags' => true,
+		'filters' => false,
 		'chunk_size' => true,
 		'chunk_overlap' => true,
 		'skip_embedding_generation' => true,
-		'embedding_model' => true,
+		'embedding_model' => false,
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
-		'max_items_per_chunk' => true,
-		'sync_files_on_connection' => true,
-		'set_page_as_boundary' => false,
-		'request_id' => false,
-		'enable_file_picker' => false,
-		'sync_source_items' => false,
-		'incremental_sync' => false,
-		'file_sync_config' => true
+		'data_source_id' => true,
+		'request_id' => true
     ];
 
     /**
@@ -201,20 +186,15 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'tags' => 'tags',
+        'filters' => 'filters',
         'chunk_size' => 'chunk_size',
         'chunk_overlap' => 'chunk_overlap',
         'skip_embedding_generation' => 'skip_embedding_generation',
         'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
-        'max_items_per_chunk' => 'max_items_per_chunk',
-        'sync_files_on_connection' => 'sync_files_on_connection',
-        'set_page_as_boundary' => 'set_page_as_boundary',
-        'request_id' => 'request_id',
-        'enable_file_picker' => 'enable_file_picker',
-        'sync_source_items' => 'sync_source_items',
-        'incremental_sync' => 'incremental_sync',
-        'file_sync_config' => 'file_sync_config'
+        'data_source_id' => 'data_source_id',
+        'request_id' => 'request_id'
     ];
 
     /**
@@ -224,20 +204,15 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'tags' => 'setTags',
+        'filters' => 'setFilters',
         'chunk_size' => 'setChunkSize',
         'chunk_overlap' => 'setChunkOverlap',
         'skip_embedding_generation' => 'setSkipEmbeddingGeneration',
         'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
-        'max_items_per_chunk' => 'setMaxItemsPerChunk',
-        'sync_files_on_connection' => 'setSyncFilesOnConnection',
-        'set_page_as_boundary' => 'setSetPageAsBoundary',
-        'request_id' => 'setRequestId',
-        'enable_file_picker' => 'setEnableFilePicker',
-        'sync_source_items' => 'setSyncSourceItems',
-        'incremental_sync' => 'setIncrementalSync',
-        'file_sync_config' => 'setFileSyncConfig'
+        'data_source_id' => 'setDataSourceId',
+        'request_id' => 'setRequestId'
     ];
 
     /**
@@ -247,20 +222,15 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'tags' => 'getTags',
+        'filters' => 'getFilters',
         'chunk_size' => 'getChunkSize',
         'chunk_overlap' => 'getChunkOverlap',
         'skip_embedding_generation' => 'getSkipEmbeddingGeneration',
         'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
-        'max_items_per_chunk' => 'getMaxItemsPerChunk',
-        'sync_files_on_connection' => 'getSyncFilesOnConnection',
-        'set_page_as_boundary' => 'getSetPageAsBoundary',
-        'request_id' => 'getRequestId',
-        'enable_file_picker' => 'getEnableFilePicker',
-        'sync_source_items' => 'getSyncSourceItems',
-        'incremental_sync' => 'getIncrementalSync',
-        'file_sync_config' => 'getFileSyncConfig'
+        'data_source_id' => 'getDataSourceId',
+        'request_id' => 'getRequestId'
     ];
 
     /**
@@ -321,20 +291,15 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('tags', $data ?? [], null);
+        $this->setIfExists('filters', $data ?? [], null);
         $this->setIfExists('chunk_size', $data ?? [], 1500);
         $this->setIfExists('chunk_overlap', $data ?? [], 20);
         $this->setIfExists('skip_embedding_generation', $data ?? [], false);
         $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
-        $this->setIfExists('max_items_per_chunk', $data ?? [], null);
-        $this->setIfExists('sync_files_on_connection', $data ?? [], true);
-        $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], '2b33f04a-b2ca-473b-b6e2-c89df5e01f94');
-        $this->setIfExists('enable_file_picker', $data ?? [], true);
-        $this->setIfExists('sync_source_items', $data ?? [], true);
-        $this->setIfExists('incremental_sync', $data ?? [], false);
-        $this->setIfExists('file_sync_config', $data ?? [], null);
+        $this->setIfExists('data_source_id', $data ?? [], null);
+        $this->setIfExists('request_id', $data ?? [], null);
     }
 
     /**
@@ -364,6 +329,9 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['filters'] === null) {
+            $invalidProperties[] = "'filters' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -382,7 +350,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets tags
      *
-     * @return mixed|null
+     * @return object|null
      */
     public function getTags()
     {
@@ -392,7 +360,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tags
      *
-     * @param mixed|null $tags tags
+     * @param object|null $tags tags
      *
      * @return self
      */
@@ -411,6 +379,35 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['tags'] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Gets filters
+     *
+     * @return \Carbon\Model\SlackFilters
+     */
+    public function getFilters()
+    {
+        return $this->container['filters'];
+    }
+
+    /**
+     * Sets filters
+     *
+     * @param \Carbon\Model\SlackFilters $filters filters
+     *
+     * @return self
+     */
+    public function setFilters($filters)
+    {
+
+        if (is_null($filters)) {
+            throw new \InvalidArgumentException('non-nullable filters cannot be null');
+        }
+
+        $this->container['filters'] = $filters;
 
         return $this;
     }
@@ -526,7 +523,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets embedding_model
      *
-     * @return \Carbon\Model\EmbeddingGeneratorsNullable|null
+     * @return \Carbon\Model\EmbeddingGenerators|null
      */
     public function getEmbeddingModel()
     {
@@ -536,7 +533,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets embedding_model
      *
-     * @param \Carbon\Model\EmbeddingGeneratorsNullable|null $embedding_model embedding_model
+     * @param \Carbon\Model\EmbeddingGenerators|null $embedding_model embedding_model
      *
      * @return self
      */
@@ -544,14 +541,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($embedding_model)) {
-            array_push($this->openAPINullablesSetToNull, 'embedding_model');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('embedding_model', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable embedding_model cannot be null');
         }
 
         $this->container['embedding_model'] = $embedding_model;
@@ -632,102 +622,37 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets max_items_per_chunk
+     * Gets data_source_id
      *
      * @return int|null
      */
-    public function getMaxItemsPerChunk()
+    public function getDataSourceId()
     {
-        return $this->container['max_items_per_chunk'];
+        return $this->container['data_source_id'];
     }
 
     /**
-     * Sets max_items_per_chunk
+     * Sets data_source_id
      *
-     * @param int|null $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only.
+     * @param int|null $data_source_id data_source_id
      *
      * @return self
      */
-    public function setMaxItemsPerChunk($max_items_per_chunk)
+    public function setDataSourceId($data_source_id)
     {
 
-        if (is_null($max_items_per_chunk)) {
-            array_push($this->openAPINullablesSetToNull, 'max_items_per_chunk');
+        if (is_null($data_source_id)) {
+            array_push($this->openAPINullablesSetToNull, 'data_source_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('max_items_per_chunk', $nullablesSetToNull);
+            $index = array_search('data_source_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['max_items_per_chunk'] = $max_items_per_chunk;
-
-        return $this;
-    }
-
-    /**
-     * Gets sync_files_on_connection
-     *
-     * @return bool|null
-     */
-    public function getSyncFilesOnConnection()
-    {
-        return $this->container['sync_files_on_connection'];
-    }
-
-    /**
-     * Sets sync_files_on_connection
-     *
-     * @param bool|null $sync_files_on_connection Used to specify whether Carbon should attempt to sync all your files automatically when authorization         is complete. This is only supported for a subset of connectors and will be ignored for the rest. Supported         connectors: Intercom, Zendesk, Gitbook, Confluence, Salesforce, Freshdesk
-     *
-     * @return self
-     */
-    public function setSyncFilesOnConnection($sync_files_on_connection)
-    {
-
-        if (is_null($sync_files_on_connection)) {
-            array_push($this->openAPINullablesSetToNull, 'sync_files_on_connection');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('sync_files_on_connection', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['sync_files_on_connection'] = $sync_files_on_connection;
-
-        return $this;
-    }
-
-    /**
-     * Gets set_page_as_boundary
-     *
-     * @return bool|null
-     */
-    public function getSetPageAsBoundary()
-    {
-        return $this->container['set_page_as_boundary'];
-    }
-
-    /**
-     * Sets set_page_as_boundary
-     *
-     * @param bool|null $set_page_as_boundary set_page_as_boundary
-     *
-     * @return self
-     */
-    public function setSetPageAsBoundary($set_page_as_boundary)
-    {
-
-        if (is_null($set_page_as_boundary)) {
-            throw new \InvalidArgumentException('non-nullable set_page_as_boundary cannot be null');
-        }
-
-        $this->container['set_page_as_boundary'] = $set_page_as_boundary;
+        $this->container['data_source_id'] = $data_source_id;
 
         return $this;
     }
@@ -753,133 +678,17 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($request_id)) {
-            throw new \InvalidArgumentException('non-nullable request_id cannot be null');
-        }
-
-        $this->container['request_id'] = $request_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets enable_file_picker
-     *
-     * @return bool|null
-     */
-    public function getEnableFilePicker()
-    {
-        return $this->container['enable_file_picker'];
-    }
-
-    /**
-     * Sets enable_file_picker
-     *
-     * @param bool|null $enable_file_picker enable_file_picker
-     *
-     * @return self
-     */
-    public function setEnableFilePicker($enable_file_picker)
-    {
-
-        if (is_null($enable_file_picker)) {
-            throw new \InvalidArgumentException('non-nullable enable_file_picker cannot be null');
-        }
-
-        $this->container['enable_file_picker'] = $enable_file_picker;
-
-        return $this;
-    }
-
-    /**
-     * Gets sync_source_items
-     *
-     * @return bool|null
-     */
-    public function getSyncSourceItems()
-    {
-        return $this->container['sync_source_items'];
-    }
-
-    /**
-     * Sets sync_source_items
-     *
-     * @param bool|null $sync_source_items Enabling this flag will fetch all available content from the source to be listed via list items endpoint
-     *
-     * @return self
-     */
-    public function setSyncSourceItems($sync_source_items)
-    {
-
-        if (is_null($sync_source_items)) {
-            throw new \InvalidArgumentException('non-nullable sync_source_items cannot be null');
-        }
-
-        $this->container['sync_source_items'] = $sync_source_items;
-
-        return $this;
-    }
-
-    /**
-     * Gets incremental_sync
-     *
-     * @return bool|null
-     */
-    public function getIncrementalSync()
-    {
-        return $this->container['incremental_sync'];
-    }
-
-    /**
-     * Sets incremental_sync
-     *
-     * @param bool|null $incremental_sync Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX. It will be ignored for other data sources.
-     *
-     * @return self
-     */
-    public function setIncrementalSync($incremental_sync)
-    {
-
-        if (is_null($incremental_sync)) {
-            throw new \InvalidArgumentException('non-nullable incremental_sync cannot be null');
-        }
-
-        $this->container['incremental_sync'] = $incremental_sync;
-
-        return $this;
-    }
-
-    /**
-     * Gets file_sync_config
-     *
-     * @return \Carbon\Model\FileSyncConfigNullable|null
-     */
-    public function getFileSyncConfig()
-    {
-        return $this->container['file_sync_config'];
-    }
-
-    /**
-     * Sets file_sync_config
-     *
-     * @param \Carbon\Model\FileSyncConfigNullable|null $file_sync_config file_sync_config
-     *
-     * @return self
-     */
-    public function setFileSyncConfig($file_sync_config)
-    {
-
-        if (is_null($file_sync_config)) {
-            array_push($this->openAPINullablesSetToNull, 'file_sync_config');
+            array_push($this->openAPINullablesSetToNull, 'request_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('file_sync_config', $nullablesSetToNull);
+            $index = array_search('request_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['file_sync_config'] = $file_sync_config;
+        $this->container['request_id'] = $request_id;
 
         return $this;
     }
