@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.2.7-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.8-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -40,7 +40,6 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.files.upload`](#carbonfilesupload)
   * [`carbon.files.uploadFromUrl`](#carbonfilesuploadfromurl)
   * [`carbon.files.uploadText`](#carbonfilesuploadtext)
-  * [`carbon.health.check`](#carbonhealthcheck)
   * [`carbon.integrations.cancel`](#carbonintegrationscancel)
   * [`carbon.integrations.connectDataSource`](#carbonintegrationsconnectdatasource)
   * [`carbon.integrations.connectFreshdesk`](#carbonintegrationsconnectfreshdesk)
@@ -74,11 +73,13 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.users.toggleUserFeatures`](#carbonuserstoggleuserfeatures)
   * [`carbon.users.updateUsers`](#carbonusersupdateusers)
   * [`carbon.utilities.fetchUrls`](#carbonutilitiesfetchurls)
+  * [`carbon.utilities.fetchWebpage`](#carbonutilitiesfetchwebpage)
   * [`carbon.utilities.fetchYoutubeTranscripts`](#carbonutilitiesfetchyoutubetranscripts)
   * [`carbon.utilities.processSitemap`](#carbonutilitiesprocesssitemap)
   * [`carbon.utilities.scrapeSitemap`](#carbonutilitiesscrapesitemap)
   * [`carbon.utilities.scrapeWeb`](#carbonutilitiesscrapeweb)
   * [`carbon.utilities.searchUrls`](#carbonutilitiessearchurls)
+  * [`carbon.utilities.userWebpages`](#carbonutilitiesuserwebpages)
   * [`carbon.webhooks.addUrl`](#carbonwebhooksaddurl)
   * [`carbon.webhooks.deleteUrl`](#carbonwebhooksdeleteurl)
   * [`carbon.webhooks.urls`](#carbonwebhooksurls)
@@ -104,7 +105,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.2.7"
+    "konfig/carbon-php-sdk": "0.2.8"
   }
 }
 ```
@@ -1301,31 +1302,6 @@ $result = $carbon->files->uploadText(
 ---
 
 
-### `carbon.health.check`<a id="carbonhealthcheck"></a>
-
-Health
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $carbon->health->check();
-```
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-**object**
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/health` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `carbon.integrations.cancel`<a id="carbonintegrationscancel"></a>
 
 Cancel Data Source Items Sync
@@ -1379,7 +1355,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "2b33f04a-b2ca-473b-b6e2-c89df5e01f94",
+        "request_id" => "9e41dd01-0592-477a-97b3-df618acf082b",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1630,7 +1606,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "229bd6e7-4931-4900-8f58-0e4071e45b25", 
+    request_id: "1855375f-faa1-4965-99a1-03d1cab8000b", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1705,7 +1681,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: DROPBOX, ONEDRIVE, SHAREPOINT, GOOGLE_DRIVE, BOX
+Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, GOOGLE_DRIVE, ONEDRIVE, BOX, DROPBOX
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -2057,7 +2033,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "bb4d49b0-3837-444a-9b71-f529df5968cb", 
+    request_id: "9e2d7dc0-7a78-49fa-9f68-a411cfa13267", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2178,7 +2154,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "bb4d49b0-3837-444a-9b71-f529df5968cb", 
+    request_id: "9e2d7dc0-7a78-49fa-9f68-a411cfa13267", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -3074,6 +3050,7 @@ Custom file upload limit for the user across a single upload.         If set, th
 
 
 ### `carbon.utilities.fetchUrls`<a id="carbonutilitiesfetchurls"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Extracts all URLs from a webpage. 
 
@@ -3104,6 +3081,37 @@ $result = $carbon->utilities->fetchUrls(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/fetch_urls` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.utilities.fetchWebpage`<a id="carbonutilitiesfetchwebpage"></a>
+
+Fetch Urls V2
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->utilities->fetchWebpage(
+    url: "string_example"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### url: `string`<a id="url-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/fetch_webpage` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -3371,6 +3379,50 @@ $result = $carbon->utilities->searchUrls(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/search_urls` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.utilities.userWebpages`<a id="carbonutilitiesuserwebpages"></a>
+
+User Web Pages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->utilities->userWebpages(
+    filters: [
+    ], 
+    pagination: [
+        "limit" => 10,
+        "offset" => 0,
+    ], 
+    order_by: "created_at", 
+    order_dir: "asc"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### filters: [`UserWebPagesFilters`](./lib/Model/UserWebPagesFilters.php)<a id="filters-userwebpagesfilterslibmodeluserwebpagesfiltersphp"></a>
+
+##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/user_webpages` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

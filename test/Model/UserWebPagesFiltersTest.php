@@ -1,6 +1,7 @@
 <?php
 /**
- * HealthApiTest
+ * UserWebPagesFiltersTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -19,18 +20,22 @@
  */
 
 
-namespace Carbon\Test\Api;
+namespace Carbon\Test\Model;
 
-use \Carbon\Configuration;
-use \Carbon\ApiException;
-use \Carbon\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class HealthApiTest extends TestCase
+/**
+ * UserWebPagesFiltersTest Class Doc Comment
+ *
+ * @category    Class
+ * @description UserWebPagesFilters
+ * @package     Carbon
+ */
+class UserWebPagesFiltersTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -58,12 +63,18 @@ class HealthApiTest extends TestCase
     }
 
     /**
-     * Test case for check
-     *
-     * Health.
-     *
+     * Test "UserWebPagesFilters"
      */
-    public function testCheck()
+    public function testUserWebPagesFilters()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "ids"
+     */
+    public function testPropertyIds()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

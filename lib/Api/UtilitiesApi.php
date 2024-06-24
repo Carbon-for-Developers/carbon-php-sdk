@@ -64,6 +64,9 @@ class UtilitiesApi extends \Carbon\CustomApi
         'fetchUrls' => [
             'application/json',
         ],
+        'fetchWebpage' => [
+            'application/json',
+        ],
         'fetchYoutubeTranscripts' => [
             'application/json',
         ],
@@ -77,6 +80,9 @@ class UtilitiesApi extends \Carbon\CustomApi
             'application/json',
         ],
         'searchUrls' => [
+            'application/json',
+        ],
+        'userWebpages' => [
             'application/json',
         ],
     ];
@@ -160,6 +166,7 @@ class UtilitiesApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Carbon\Model\FetchURLsResponse|\Carbon\Model\HTTPValidationError
+     * @deprecated
      */
     public function fetchUrls(
         $url,
@@ -183,6 +190,7 @@ class UtilitiesApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carbon\Model\FetchURLsResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function fetchUrlsWithHttpInfo($url, string $contentType = self::contentTypes['fetchUrls'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -320,6 +328,7 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function fetchUrlsAsync(
         $url,
@@ -346,6 +355,7 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function fetchUrlsAsyncWithHttpInfo($url, string $contentType = self::contentTypes['fetchUrls'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -399,6 +409,7 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function fetchUrlsRequest($url, string $contentType = self::contentTypes['fetchUrls'][0])
     {
@@ -496,6 +507,374 @@ class UtilitiesApi extends \Carbon\CustomApi
         );
 
         $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation fetchWebpage
+     *
+     * Fetch Urls V2
+     *
+     * @param  \Carbon\Model\FetchURLsRequest $fetch_urls_request fetch_urls_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchWebpage'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return object|\Carbon\Model\HTTPValidationError
+     */
+    public function fetchWebpage(
+
+        $url,
+        string $contentType = self::contentTypes['fetchWebpage'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "url", $url);
+        $fetch_urls_request = $_body;
+
+        list($response) = $this->fetchWebpageWithHttpInfo($fetch_urls_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation fetchWebpageWithHttpInfo
+     *
+     * Fetch Urls V2
+     *
+     * @param  \Carbon\Model\FetchURLsRequest $fetch_urls_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchWebpage'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function fetchWebpageWithHttpInfo($fetch_urls_request, string $contentType = self::contentTypes['fetchWebpage'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->fetchWebpageRequest($fetch_urls_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->fetchWebpageWithHttpInfo(
+                        $fetch_urls_request,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('object' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation fetchWebpageAsync
+     *
+     * Fetch Urls V2
+     *
+     * @param  \Carbon\Model\FetchURLsRequest $fetch_urls_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchWebpage'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function fetchWebpageAsync(
+
+        $url,
+        string $contentType = self::contentTypes['fetchWebpage'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "url", $url);
+        $fetch_urls_request = $_body;
+
+        return $this->fetchWebpageAsyncWithHttpInfo($fetch_urls_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation fetchWebpageAsyncWithHttpInfo
+     *
+     * Fetch Urls V2
+     *
+     * @param  \Carbon\Model\FetchURLsRequest $fetch_urls_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchWebpage'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function fetchWebpageAsyncWithHttpInfo($fetch_urls_request, string $contentType = self::contentTypes['fetchWebpage'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = 'object';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->fetchWebpageRequest($fetch_urls_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'fetchWebpage'
+     *
+     * @param  \Carbon\Model\FetchURLsRequest $fetch_urls_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchWebpage'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function fetchWebpageRequest($fetch_urls_request, string $contentType = self::contentTypes['fetchWebpage'][0])
+    {
+
+        if ($fetch_urls_request !== SENTINEL_VALUE) {
+            if (!($fetch_urls_request instanceof \Carbon\Model\FetchURLsRequest)) {
+                if (!is_array($fetch_urls_request))
+                    throw new \InvalidArgumentException('"fetch_urls_request" must be associative array or an instance of \Carbon\Model\FetchURLsRequest UtilitiesApi.fetchWebpage.');
+                else
+                    $fetch_urls_request = new \Carbon\Model\FetchURLsRequest($fetch_urls_request);
+            }
+        }
+        // verify the required parameter 'fetch_urls_request' is set
+        if ($fetch_urls_request === SENTINEL_VALUE || (is_array($fetch_urls_request) && count($fetch_urls_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter fetch_urls_request when calling fetchWebpage'
+            );
+        }
+
+
+        $resourcePath = '/fetch_webpage';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($fetch_urls_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($fetch_urls_request));
+            } else {
+                $httpBody = $fetch_urls_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
         $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();
@@ -2383,6 +2762,386 @@ class UtilitiesApi extends \Carbon\CustomApi
         );
 
         $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation userWebpages
+     *
+     * User Web Pages
+     *
+     * @param  \Carbon\Model\UserWebPagesRequest $user_web_pages_request user_web_pages_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['userWebpages'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return object|\Carbon\Model\HTTPValidationError
+     */
+    public function userWebpages(
+
+        $filters = SENTINEL_VALUE,
+        $pagination = SENTINEL_VALUE,
+        $order_by = SENTINEL_VALUE,
+        $order_dir = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['userWebpages'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "filters", $filters);
+        $this->setRequestBodyProperty($_body, "pagination", $pagination);
+        $this->setRequestBodyProperty($_body, "order_by", $order_by);
+        $this->setRequestBodyProperty($_body, "order_dir", $order_dir);
+        $user_web_pages_request = $_body;
+
+        list($response) = $this->userWebpagesWithHttpInfo($user_web_pages_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation userWebpagesWithHttpInfo
+     *
+     * User Web Pages
+     *
+     * @param  \Carbon\Model\UserWebPagesRequest $user_web_pages_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['userWebpages'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of object|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function userWebpagesWithHttpInfo($user_web_pages_request, string $contentType = self::contentTypes['userWebpages'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->userWebpagesRequest($user_web_pages_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->userWebpagesWithHttpInfo(
+                        $user_web_pages_request,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('object' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation userWebpagesAsync
+     *
+     * User Web Pages
+     *
+     * @param  \Carbon\Model\UserWebPagesRequest $user_web_pages_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['userWebpages'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function userWebpagesAsync(
+
+        $filters = SENTINEL_VALUE,
+        $pagination = SENTINEL_VALUE,
+        $order_by = SENTINEL_VALUE,
+        $order_dir = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['userWebpages'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "filters", $filters);
+        $this->setRequestBodyProperty($_body, "pagination", $pagination);
+        $this->setRequestBodyProperty($_body, "order_by", $order_by);
+        $this->setRequestBodyProperty($_body, "order_dir", $order_dir);
+        $user_web_pages_request = $_body;
+
+        return $this->userWebpagesAsyncWithHttpInfo($user_web_pages_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation userWebpagesAsyncWithHttpInfo
+     *
+     * User Web Pages
+     *
+     * @param  \Carbon\Model\UserWebPagesRequest $user_web_pages_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['userWebpages'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function userWebpagesAsyncWithHttpInfo($user_web_pages_request, string $contentType = self::contentTypes['userWebpages'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = 'object';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->userWebpagesRequest($user_web_pages_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'userWebpages'
+     *
+     * @param  \Carbon\Model\UserWebPagesRequest $user_web_pages_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['userWebpages'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function userWebpagesRequest($user_web_pages_request, string $contentType = self::contentTypes['userWebpages'][0])
+    {
+
+        if ($user_web_pages_request !== SENTINEL_VALUE) {
+            if (!($user_web_pages_request instanceof \Carbon\Model\UserWebPagesRequest)) {
+                if (!is_array($user_web_pages_request))
+                    throw new \InvalidArgumentException('"user_web_pages_request" must be associative array or an instance of \Carbon\Model\UserWebPagesRequest UtilitiesApi.userWebpages.');
+                else
+                    $user_web_pages_request = new \Carbon\Model\UserWebPagesRequest($user_web_pages_request);
+            }
+        }
+        // verify the required parameter 'user_web_pages_request' is set
+        if ($user_web_pages_request === SENTINEL_VALUE || (is_array($user_web_pages_request) && count($user_web_pages_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_web_pages_request when calling userWebpages'
+            );
+        }
+
+
+        $resourcePath = '/user_webpages';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($user_web_pages_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($user_web_pages_request));
+            } else {
+                $httpBody = $user_web_pages_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
         $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();

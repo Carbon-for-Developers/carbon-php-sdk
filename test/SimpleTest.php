@@ -128,8 +128,6 @@ class SimpleTest extends TestCase
         );
         $this->assertNotEmpty($result);
 
-        $carbon->health->check();
-
         $result = $carbon->utilities->scrapeWeb(
             body: [
                 [

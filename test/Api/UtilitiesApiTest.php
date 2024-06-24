@@ -70,6 +70,18 @@ class UtilitiesApiTest extends TestCase
     }
 
     /**
+     * Test case for fetchWebpage
+     *
+     * Fetch Urls V2.
+     *
+     */
+    public function testFetchWebpage()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for fetchYoutubeTranscripts
      *
      * Fetch Youtube Transcripts.
@@ -124,6 +136,18 @@ class UtilitiesApiTest extends TestCase
      *
      */
     public function testSearchUrls()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for userWebpages
+     *
+     * User Web Pages.
+     *
+     */
+    public function testUserWebpages()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
