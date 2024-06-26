@@ -1,6 +1,7 @@
 <?php
 /**
- * EmbeddingsApiTest
+ * EmbeddingsAndChunksQueryInputV2Test
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -19,18 +20,22 @@
  */
 
 
-namespace Carbon\Test\Api;
+namespace Carbon\Test\Model;
 
-use \Carbon\Configuration;
-use \Carbon\ApiException;
-use \Carbon\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class EmbeddingsApiTest extends TestCase
+/**
+ * EmbeddingsAndChunksQueryInputV2Test Class Doc Comment
+ *
+ * @category    Class
+ * @description EmbeddingsAndChunksQueryInputV2
+ * @package     Carbon
+ */
+class EmbeddingsAndChunksQueryInputV2Test extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -58,48 +63,54 @@ class EmbeddingsApiTest extends TestCase
     }
 
     /**
-     * Test case for all
-     *
-     * Retrieve Embeddings And Content V2.
-     *
+     * Test "EmbeddingsAndChunksQueryInputV2"
      */
-    public function testAll()
+    public function testEmbeddingsAndChunksQueryInputV2()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getDocuments
-     *
-     * Embeddings.
-     *
+     * Test attribute "pagination"
      */
-    public function testGetDocuments()
+    public function testPropertyPagination()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getEmbeddingsAndChunks
-     *
-     * Retrieve Embeddings And Content.
-     *
+     * Test attribute "order_by"
      */
-    public function testGetEmbeddingsAndChunks()
+    public function testPropertyOrderBy()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for uploadChunksAndEmbeddings
-     *
-     * Upload Chunks And Embeddings.
-     *
+     * Test attribute "order_dir"
      */
-    public function testUploadChunksAndEmbeddings()
+    public function testPropertyOrderDir()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "filters"
+     */
+    public function testPropertyFilters()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "include_vectors"
+     */
+    public function testPropertyIncludeVectors()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

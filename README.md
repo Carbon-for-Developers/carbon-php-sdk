@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.2.8-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.9-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -24,6 +24,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.auth.getWhiteLabeling`](#carbonauthgetwhitelabeling)
   * [`carbon.dataSources.queryUserDataSources`](#carbondatasourcesqueryuserdatasources)
   * [`carbon.dataSources.revokeAccessToken`](#carbondatasourcesrevokeaccesstoken)
+  * [`carbon.embeddings.all`](#carbonembeddingsall)
   * [`carbon.embeddings.getDocuments`](#carbonembeddingsgetdocuments)
   * [`carbon.embeddings.getEmbeddingsAndChunks`](#carbonembeddingsgetembeddingsandchunks)
   * [`carbon.embeddings.uploadChunksAndEmbeddings`](#carbonembeddingsuploadchunksandembeddings)
@@ -105,7 +106,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.2.8"
+    "konfig/carbon-php-sdk": "0.2.9"
   }
 }
 ```
@@ -271,6 +272,55 @@ $result = $carbon->dataSources->revokeAccessToken(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/revoke_access_token` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.embeddings.all`<a id="carbonembeddingsall"></a>
+
+Retrieve Embeddings And Content V2
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->embeddings->all(
+    filters: [
+        "include_all_children" => False,
+        "non_synced_only" => False,
+    ], 
+    pagination: [
+        "limit" => 10,
+        "offset" => 0,
+    ], 
+    order_by: "created_at", 
+    order_dir: "desc", 
+    include_vectors: False
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### filters: [`OrganizationUserFilesToSyncFilters`](./lib/Model/OrganizationUserFilesToSyncFilters.php)<a id="filters-organizationuserfilestosyncfilterslibmodelorganizationuserfilestosyncfiltersphp"></a>
+
+##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+##### include_vectors: `bool`<a id="include_vectors-bool"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**EmbeddingsAndChunksResponse**](./lib/Model/EmbeddingsAndChunksResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/list_chunks_and_embeddings` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1355,7 +1405,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "9e41dd01-0592-477a-97b3-df618acf082b",
+        "request_id" => "ae8cd936-69c9-42cd-affb-87f3bea6d8eb",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1606,7 +1656,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "1855375f-faa1-4965-99a1-03d1cab8000b", 
+    request_id: "6c38b4bb-1536-46c9-ade7-72fabf05b3bb", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1681,7 +1731,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: SHAREPOINT, GOOGLE_DRIVE, ONEDRIVE, BOX, DROPBOX
+Enable integration's file picker for sources that support it. Supported sources: ONEDRIVE, GOOGLE_DRIVE, DROPBOX, BOX, SHAREPOINT
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -2033,7 +2083,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "9e2d7dc0-7a78-49fa-9f68-a411cfa13267", 
+    request_id: "bcd3ae91-8bae-4d50-9046-94dc62b2078f", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2154,7 +2204,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "9e2d7dc0-7a78-49fa-9f68-a411cfa13267", 
+    request_id: "bcd3ae91-8bae-4d50-9046-94dc62b2078f", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
