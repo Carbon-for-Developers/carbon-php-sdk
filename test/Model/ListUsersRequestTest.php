@@ -1,6 +1,7 @@
 <?php
 /**
- * UsersApiTest
+ * ListUsersRequestTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -19,18 +20,22 @@
  */
 
 
-namespace Carbon\Test\Api;
+namespace Carbon\Test\Model;
 
-use \Carbon\Configuration;
-use \Carbon\ApiException;
-use \Carbon\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class UsersApiTest extends TestCase
+/**
+ * ListUsersRequestTest Class Doc Comment
+ *
+ * @category    Class
+ * @description ListUsersRequest
+ * @package     Carbon
+ */
+class ListUsersRequestTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -58,60 +63,54 @@ class UsersApiTest extends TestCase
     }
 
     /**
-     * Test case for all
-     *
-     * List Users Endpoint.
-     *
+     * Test "ListUsersRequest"
      */
-    public function testAll()
+    public function testListUsersRequest()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for delete
-     *
-     * Delete Users.
-     *
+     * Test attribute "pagination"
      */
-    public function testDelete()
+    public function testPropertyPagination()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for get
-     *
-     * User Endpoint.
-     *
+     * Test attribute "filters"
      */
-    public function testGet()
+    public function testPropertyFilters()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for toggleUserFeatures
-     *
-     * Toggle User Features.
-     *
+     * Test attribute "order_by"
      */
-    public function testToggleUserFeatures()
+    public function testPropertyOrderBy()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for updateUsers
-     *
-     * Update Users.
-     *
+     * Test attribute "order_dir"
      */
-    public function testUpdateUsers()
+    public function testPropertyOrderDir()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "include_count"
+     */
+    public function testPropertyIncludeCount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

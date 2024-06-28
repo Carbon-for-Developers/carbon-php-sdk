@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.2.9-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.10-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -69,6 +69,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.organizations.get`](#carbonorganizationsget)
   * [`carbon.organizations.update`](#carbonorganizationsupdate)
   * [`carbon.organizations.updateStats`](#carbonorganizationsupdatestats)
+  * [`carbon.users.all`](#carbonusersall)
   * [`carbon.users.delete`](#carbonusersdelete)
   * [`carbon.users.get`](#carbonusersget)
   * [`carbon.users.toggleUserFeatures`](#carbonuserstoggleuserfeatures)
@@ -106,7 +107,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.2.9"
+    "konfig/carbon-php-sdk": "0.2.10"
   }
 }
 ```
@@ -455,7 +456,8 @@ $result = $carbon->embeddings->getDocuments(
         "weight_b" => 0.5,
     ], 
     media_type: "TEXT", 
-    embedding_model: "OPENAI"
+    embedding_model: "OPENAI", 
+    include_file_level_metadata: False
 );
 ```
 
@@ -514,6 +516,10 @@ Flag to control whether or not to perform hybrid search.
 ##### media_type:<a id="media_type"></a>
 
 ##### embedding_model:<a id="embedding_model"></a>
+
+##### include_file_level_metadata: `bool`<a id="include_file_level_metadata-bool"></a>
+
+Flag to control whether or not to include file-level metadata in the response. This metadata         will be included in the `content_metadata` field of each document along with chunk/embedding level metadata.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1405,7 +1411,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "ae8cd936-69c9-42cd-affb-87f3bea6d8eb",
+        "request_id" => "7b23cde6-ec28-417a-9bff-b10e9042394c",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1656,7 +1662,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "6c38b4bb-1536-46c9-ade7-72fabf05b3bb", 
+    request_id: "dbc54493-ce4f-4a1d-a78b-862f21f1e3d7", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1731,7 +1737,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: ONEDRIVE, GOOGLE_DRIVE, DROPBOX, BOX, SHAREPOINT
+Enable integration's file picker for sources that support it. Supported sources: GOOGLE_DRIVE, SHAREPOINT, ONEDRIVE, BOX, DROPBOX
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -2083,7 +2089,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "bcd3ae91-8bae-4d50-9046-94dc62b2078f", 
+    request_id: "6e21ecc1-8385-46ac-abea-01ca0b2b268d", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2204,7 +2210,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "bcd3ae91-8bae-4d50-9046-94dc62b2078f", 
+    request_id: "6e21ecc1-8385-46ac-abea-01ca0b2b268d", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2944,6 +2950,53 @@ $result = $carbon->organizations->updateStats();
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/organization/statistics` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.users.all`<a id="carbonusersall"></a>
+
+List users within an organization
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->users->all(
+    pagination: [
+        "limit" => 10,
+        "offset" => 0,
+    ], 
+    filters: [
+    ], 
+    order_by: "created_at", 
+    order_dir: "asc", 
+    include_count: False
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
+
+##### filters: [`ListUsersFilters`](./lib/Model/ListUsersFilters.php)<a id="filters-listusersfilterslibmodellistusersfiltersphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+##### include_count: `bool`<a id="include_count-bool"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**UserListResponse**](./lib/Model/UserListResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/list_users` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

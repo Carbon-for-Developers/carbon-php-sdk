@@ -1,6 +1,7 @@
 <?php
 /**
- * UsersApiTest
+ * UserListResponseTest
+ *
  * PHP version 7.4
  *
  * @category Class
@@ -19,18 +20,22 @@
  */
 
 
-namespace Carbon\Test\Api;
+namespace Carbon\Test\Model;
 
-use \Carbon\Configuration;
-use \Carbon\ApiException;
-use \Carbon\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
-class UsersApiTest extends TestCase
+/**
+ * UserListResponseTest Class Doc Comment
+ *
+ * @category    Class
+ * @description UserListResponse
+ * @package     Carbon
+ */
+class UserListResponseTest extends TestCase
 {
 
     /**
-     * Setup before running any test cases
+     * Setup before running any test case
      */
     public static function setUpBeforeClass(): void
     {
@@ -58,60 +63,27 @@ class UsersApiTest extends TestCase
     }
 
     /**
-     * Test case for all
-     *
-     * List Users Endpoint.
-     *
+     * Test "UserListResponse"
      */
-    public function testAll()
+    public function testUserListResponse()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for delete
-     *
-     * Delete Users.
-     *
+     * Test attribute "users"
      */
-    public function testDelete()
+    public function testPropertyUsers()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for get
-     *
-     * User Endpoint.
-     *
+     * Test attribute "count"
      */
-    public function testGet()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for toggleUserFeatures
-     *
-     * Toggle User Features.
-     *
-     */
-    public function testToggleUserFeatures()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for updateUsers
-     *
-     * Update Users.
-     *
-     */
-    public function testUpdateUsers()
+    public function testPropertyCount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

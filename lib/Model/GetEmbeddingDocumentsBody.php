@@ -63,7 +63,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'hybrid_search' => 'bool',
         'hybrid_search_tuning_parameters' => '\Carbon\Model\HybridSearchTuningParamsNullable',
         'media_type' => '\Carbon\Model\FileContentTypesNullable',
-        'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable'
+        'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
+        'include_file_level_metadata' => 'bool'
     ];
 
     /**
@@ -88,7 +89,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'hybrid_search' => null,
         'hybrid_search_tuning_parameters' => null,
         'media_type' => null,
-        'embedding_model' => null
+        'embedding_model' => null,
+        'include_file_level_metadata' => null
     ];
 
     /**
@@ -111,7 +113,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
 		'hybrid_search' => true,
 		'hybrid_search_tuning_parameters' => true,
 		'media_type' => true,
-		'embedding_model' => true
+		'embedding_model' => true,
+		'include_file_level_metadata' => true
     ];
 
     /**
@@ -214,7 +217,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'hybrid_search' => 'hybrid_search',
         'hybrid_search_tuning_parameters' => 'hybrid_search_tuning_parameters',
         'media_type' => 'media_type',
-        'embedding_model' => 'embedding_model'
+        'embedding_model' => 'embedding_model',
+        'include_file_level_metadata' => 'include_file_level_metadata'
     ];
 
     /**
@@ -237,7 +241,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'hybrid_search' => 'setHybridSearch',
         'hybrid_search_tuning_parameters' => 'setHybridSearchTuningParameters',
         'media_type' => 'setMediaType',
-        'embedding_model' => 'setEmbeddingModel'
+        'embedding_model' => 'setEmbeddingModel',
+        'include_file_level_metadata' => 'setIncludeFileLevelMetadata'
     ];
 
     /**
@@ -260,7 +265,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'hybrid_search' => 'getHybridSearch',
         'hybrid_search_tuning_parameters' => 'getHybridSearchTuningParameters',
         'media_type' => 'getMediaType',
-        'embedding_model' => 'getEmbeddingModel'
+        'embedding_model' => 'getEmbeddingModel',
+        'include_file_level_metadata' => 'getIncludeFileLevelMetadata'
     ];
 
     /**
@@ -335,6 +341,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('hybrid_search_tuning_parameters', $data ?? [], null);
         $this->setIfExists('media_type', $data ?? [], null);
         $this->setIfExists('embedding_model', $data ?? [], null);
+        $this->setIfExists('include_file_level_metadata', $data ?? [], false);
     }
 
     /**
@@ -920,6 +927,42 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         }
 
         $this->container['embedding_model'] = $embedding_model;
+
+        return $this;
+    }
+
+    /**
+     * Gets include_file_level_metadata
+     *
+     * @return bool|null
+     */
+    public function getIncludeFileLevelMetadata()
+    {
+        return $this->container['include_file_level_metadata'];
+    }
+
+    /**
+     * Sets include_file_level_metadata
+     *
+     * @param bool|null $include_file_level_metadata Flag to control whether or not to include file-level metadata in the response. This metadata         will be included in the `content_metadata` field of each document along with chunk/embedding level metadata.
+     *
+     * @return self
+     */
+    public function setIncludeFileLevelMetadata($include_file_level_metadata)
+    {
+
+        if (is_null($include_file_level_metadata)) {
+            array_push($this->openAPINullablesSetToNull, 'include_file_level_metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('include_file_level_metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['include_file_level_metadata'] = $include_file_level_metadata;
 
         return $this;
     }

@@ -205,4 +205,13 @@ class GetEmbeddingDocumentsBodyTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "include_file_level_metadata"
+     */
+    public function testPropertyIncludeFileLevelMetadata()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

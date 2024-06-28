@@ -556,6 +556,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $hybrid_search_tuning_parameters = SENTINEL_VALUE,
         $media_type = SENTINEL_VALUE,
         $embedding_model = SENTINEL_VALUE,
+        $include_file_level_metadata = false,
         string $contentType = self::contentTypes['getDocuments'][0]
     )
     {
@@ -575,6 +576,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "hybrid_search_tuning_parameters", $hybrid_search_tuning_parameters);
         $this->setRequestBodyProperty($_body, "media_type", $media_type);
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "include_file_level_metadata", $include_file_level_metadata);
         $get_embedding_documents_body = $_body;
 
         list($response) = $this->getDocumentsWithHttpInfo($get_embedding_documents_body, $contentType);
@@ -747,6 +749,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $hybrid_search_tuning_parameters = SENTINEL_VALUE,
         $media_type = SENTINEL_VALUE,
         $embedding_model = SENTINEL_VALUE,
+        $include_file_level_metadata = false,
         string $contentType = self::contentTypes['getDocuments'][0]
     )
     {
@@ -766,6 +769,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "hybrid_search_tuning_parameters", $hybrid_search_tuning_parameters);
         $this->setRequestBodyProperty($_body, "media_type", $media_type);
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "include_file_level_metadata", $include_file_level_metadata);
         $get_embedding_documents_body = $_body;
 
         return $this->getDocumentsAsyncWithHttpInfo($get_embedding_documents_body, $contentType)
