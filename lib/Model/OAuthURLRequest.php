@@ -405,7 +405,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('connecting_new_account', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], 'dbc54493-ce4f-4a1d-a78b-862f21f1e3d7');
+        $this->setIfExists('request_id', $data ?? [], '8d34bb4e-31ad-411c-bb01-f19a466f9644');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('enable_file_picker', $data ?? [], true);
@@ -1243,7 +1243,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets enable_file_picker
      *
-     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: GOOGLE_DRIVE, SHAREPOINT, ONEDRIVE, BOX, DROPBOX
+     * @param bool|null $enable_file_picker Enable integration's file picker for sources that support it. Supported sources: BOX, ONEDRIVE, DROPBOX, SHAREPOINT, GOOGLE_DRIVE
      *
      * @return self
      */
@@ -1301,7 +1301,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets incremental_sync
      *
-     * @param bool|null $incremental_sync Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX. It will be ignored for other data sources.
+     * @param bool|null $incremental_sync Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX, INTERCOM, GMAIL, OUTLOOK. It will be ignored for other data sources.
      *
      * @return self
      */

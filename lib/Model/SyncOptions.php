@@ -330,7 +330,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], '7b23cde6-ec28-417a-9bff-b10e9042394c');
+        $this->setIfExists('request_id', $data ?? [], '8131a584-e13b-487a-bc3c-b381ae26de5f');
         $this->setIfExists('enable_file_picker', $data ?? [], true);
         $this->setIfExists('sync_source_items', $data ?? [], true);
         $this->setIfExists('incremental_sync', $data ?? [], false);
@@ -832,7 +832,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets incremental_sync
      *
-     * @param bool|null $incremental_sync Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX. It will be ignored for other data sources.
+     * @param bool|null $incremental_sync Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX, INTERCOM, GMAIL, OUTLOOK. It will be ignored for other data sources.
      *
      * @return self
      */
