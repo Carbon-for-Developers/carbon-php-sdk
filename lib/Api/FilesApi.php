@@ -1679,12 +1679,14 @@ class FilesApi extends \Carbon\CustomApi
 
         $filters = SENTINEL_VALUE,
         $send_webhook = false,
+        $preserve_file_record = false,
         string $contentType = self::contentTypes['deleteV2'][0]
     )
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "filters", $filters);
         $this->setRequestBodyProperty($_body, "send_webhook", $send_webhook);
+        $this->setRequestBodyProperty($_body, "preserve_file_record", $preserve_file_record);
         $delete_files_v2_query_input = $_body;
 
         list($response) = $this->deleteV2WithHttpInfo($delete_files_v2_query_input, $contentType);
@@ -1844,12 +1846,14 @@ class FilesApi extends \Carbon\CustomApi
 
         $filters = SENTINEL_VALUE,
         $send_webhook = false,
+        $preserve_file_record = false,
         string $contentType = self::contentTypes['deleteV2'][0]
     )
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "filters", $filters);
         $this->setRequestBodyProperty($_body, "send_webhook", $send_webhook);
+        $this->setRequestBodyProperty($_body, "preserve_file_record", $preserve_file_record);
         $delete_files_v2_query_input = $_body;
 
         return $this->deleteV2AsyncWithHttpInfo($delete_files_v2_query_input, $contentType)

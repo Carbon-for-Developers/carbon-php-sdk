@@ -50,7 +50,8 @@ class DeleteFilesV2QueryInput implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPITypes = [
         'filters' => '\Carbon\Model\OrganizationUserFilesToSyncFilters',
-        'send_webhook' => 'bool'
+        'send_webhook' => 'bool',
+        'preserve_file_record' => 'bool'
     ];
 
     /**
@@ -62,7 +63,8 @@ class DeleteFilesV2QueryInput implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPIFormats = [
         'filters' => null,
-        'send_webhook' => null
+        'send_webhook' => null,
+        'preserve_file_record' => null
     ];
 
     /**
@@ -72,7 +74,8 @@ class DeleteFilesV2QueryInput implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static array $openAPINullables = [
         'filters' => false,
-		'send_webhook' => false
+		'send_webhook' => false,
+		'preserve_file_record' => false
     ];
 
     /**
@@ -162,7 +165,8 @@ class DeleteFilesV2QueryInput implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $attributeMap = [
         'filters' => 'filters',
-        'send_webhook' => 'send_webhook'
+        'send_webhook' => 'send_webhook',
+        'preserve_file_record' => 'preserve_file_record'
     ];
 
     /**
@@ -172,7 +176,8 @@ class DeleteFilesV2QueryInput implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $setters = [
         'filters' => 'setFilters',
-        'send_webhook' => 'setSendWebhook'
+        'send_webhook' => 'setSendWebhook',
+        'preserve_file_record' => 'setPreserveFileRecord'
     ];
 
     /**
@@ -182,7 +187,8 @@ class DeleteFilesV2QueryInput implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $getters = [
         'filters' => 'getFilters',
-        'send_webhook' => 'getSendWebhook'
+        'send_webhook' => 'getSendWebhook',
+        'preserve_file_record' => 'getPreserveFileRecord'
     ];
 
     /**
@@ -244,6 +250,7 @@ class DeleteFilesV2QueryInput implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $this->setIfExists('filters', $data ?? [], null);
         $this->setIfExists('send_webhook', $data ?? [], false);
+        $this->setIfExists('preserve_file_record', $data ?? [], false);
     }
 
     /**
@@ -342,6 +349,35 @@ class DeleteFilesV2QueryInput implements ModelInterface, ArrayAccess, \JsonSeria
         }
 
         $this->container['send_webhook'] = $send_webhook;
+
+        return $this;
+    }
+
+    /**
+     * Gets preserve_file_record
+     *
+     * @return bool|null
+     */
+    public function getPreserveFileRecord()
+    {
+        return $this->container['preserve_file_record'];
+    }
+
+    /**
+     * Sets preserve_file_record
+     *
+     * @param bool|null $preserve_file_record Whether or not to delete all data related to the file from the database, BUT to preserve the file metadata, allowing for         resyncs. By default `preserve_file_record` is false, which means that all data related to the file *as well as* its metadata will be deleted. Note that         even if `preserve_file_record` is true, raw files uploaded via the `uploadfile` endpoint still cannot be resynced.
+     *
+     * @return self
+     */
+    public function setPreserveFileRecord($preserve_file_record)
+    {
+
+        if (is_null($preserve_file_record)) {
+            throw new \InvalidArgumentException('non-nullable preserve_file_record cannot be null');
+        }
+
+        $this->container['preserve_file_record'] = $preserve_file_record;
 
         return $this;
     }

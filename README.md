@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.2.11-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.12-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -107,7 +107,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.2.11"
+    "konfig/carbon-php-sdk": "0.2.12"
   }
 }
 ```
@@ -457,7 +457,8 @@ $result = $carbon->embeddings->getDocuments(
     ], 
     media_type: "TEXT", 
     embedding_model: "OPENAI", 
-    include_file_level_metadata: False
+    include_file_level_metadata: False, 
+    high_accuracy: False
 );
 ```
 
@@ -520,6 +521,10 @@ Flag to control whether or not to perform hybrid search.
 ##### include_file_level_metadata: `bool`<a id="include_file_level_metadata-bool"></a>
 
 Flag to control whether or not to include file-level metadata in the response. This metadata         will be included in the `content_metadata` field of each document along with chunk/embedding level metadata.
+
+##### high_accuracy: `bool`<a id="high_accuracy-bool"></a>
+
+Flag to control whether or not to perform a high accuracy embedding search. By default, this is set to false.         If true, the search may return more accurate results, but may take longer to complete.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -814,7 +819,8 @@ $result = $carbon->files->deleteV2(
         "include_all_children" => False,
         "non_synced_only" => False,
     ], 
-    send_webhook: False
+    send_webhook: False, 
+    preserve_file_record: False
 );
 ```
 
@@ -823,6 +829,10 @@ $result = $carbon->files->deleteV2(
 ##### filters: [`OrganizationUserFilesToSyncFilters`](./lib/Model/OrganizationUserFilesToSyncFilters.php)<a id="filters-organizationuserfilestosyncfilterslibmodelorganizationuserfilestosyncfiltersphp"></a>
 
 ##### send_webhook: `bool`<a id="send_webhook-bool"></a>
+
+##### preserve_file_record: `bool`<a id="preserve_file_record-bool"></a>
+
+Whether or not to delete all data related to the file from the database, BUT to preserve the file metadata, allowing for         resyncs. By default `preserve_file_record` is false, which means that all data related to the file *as well as* its metadata will be deleted. Note that         even if `preserve_file_record` is true, raw files uploaded via the `uploadfile` endpoint still cannot be resynced.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1411,7 +1421,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "8131a584-e13b-487a-bc3c-b381ae26de5f",
+        "request_id" => "0210abaa-8c19-4ac6-9c4b-fb856acce902",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1662,7 +1672,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "8d34bb4e-31ad-411c-bb01-f19a466f9644", 
+    request_id: "1c47fc7c-4c6e-466f-9bf9-979ad9dc87a7", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1737,7 +1747,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: BOX, ONEDRIVE, DROPBOX, SHAREPOINT, GOOGLE_DRIVE
+Enable integration's file picker for sources that support it. Supported sources: GOOGLE_DRIVE, DROPBOX, BOX, ONEDRIVE, SHAREPOINT
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -2089,7 +2099,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "10dcc8bc-d3a9-477f-84c5-8ee86866c083", 
+    request_id: "791318ee-229d-4c64-bb0a-2563b8014484", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2210,7 +2220,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "10dcc8bc-d3a9-477f-84c5-8ee86866c083", 
+    request_id: "791318ee-229d-4c64-bb0a-2563b8014484", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 

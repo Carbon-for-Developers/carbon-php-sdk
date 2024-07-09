@@ -351,6 +351,15 @@ class UserFileTest extends TestCase
     }
 
     /**
+     * Test attribute "file_contents_deleted"
+     */
+    public function testPropertyFileContentsDeleted()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

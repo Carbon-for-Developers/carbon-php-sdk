@@ -214,4 +214,13 @@ class GetEmbeddingDocumentsBodyTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "high_accuracy"
+     */
+    public function testPropertyHighAccuracy()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

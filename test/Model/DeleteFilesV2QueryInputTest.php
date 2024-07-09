@@ -88,4 +88,13 @@ class DeleteFilesV2QueryInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "preserve_file_record"
+     */
+    public function testPropertyPreserveFileRecord()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

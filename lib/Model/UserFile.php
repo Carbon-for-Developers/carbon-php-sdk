@@ -80,6 +80,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'string',
         'sync_properties' => 'object',
         'messages_metadata' => 'object',
+        'file_contents_deleted' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -123,6 +124,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => null,
         'sync_properties' => null,
         'messages_metadata' => null,
+        'file_contents_deleted' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -164,6 +166,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
 		'request_id' => true,
 		'sync_properties' => false,
 		'messages_metadata' => false,
+		'file_contents_deleted' => false,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -285,6 +288,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'request_id',
         'sync_properties' => 'sync_properties',
         'messages_metadata' => 'messages_metadata',
+        'file_contents_deleted' => 'file_contents_deleted',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -326,6 +330,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'setRequestId',
         'sync_properties' => 'setSyncProperties',
         'messages_metadata' => 'setMessagesMetadata',
+        'file_contents_deleted' => 'setFileContentsDeleted',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -367,6 +372,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'request_id' => 'getRequestId',
         'sync_properties' => 'getSyncProperties',
         'messages_metadata' => 'getMessagesMetadata',
+        'file_contents_deleted' => 'getFileContentsDeleted',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -459,6 +465,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('sync_properties', $data ?? [], null);
         $this->setIfExists('messages_metadata', $data ?? [], null);
+        $this->setIfExists('file_contents_deleted', $data ?? [], false);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -582,6 +589,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['messages_metadata'] === null) {
             $invalidProperties[] = "'messages_metadata' can't be null";
+        }
+        if ($this->container['file_contents_deleted'] === null) {
+            $invalidProperties[] = "'file_contents_deleted' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -1646,6 +1656,35 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['messages_metadata'] = $messages_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_contents_deleted
+     *
+     * @return bool
+     */
+    public function getFileContentsDeleted()
+    {
+        return $this->container['file_contents_deleted'];
+    }
+
+    /**
+     * Sets file_contents_deleted
+     *
+     * @param bool $file_contents_deleted file_contents_deleted
+     *
+     * @return self
+     */
+    public function setFileContentsDeleted($file_contents_deleted)
+    {
+
+        if (is_null($file_contents_deleted)) {
+            throw new \InvalidArgumentException('non-nullable file_contents_deleted cannot be null');
+        }
+
+        $this->container['file_contents_deleted'] = $file_contents_deleted;
 
         return $this;
     }

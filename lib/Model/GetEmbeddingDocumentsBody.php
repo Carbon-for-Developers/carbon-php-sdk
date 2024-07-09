@@ -64,7 +64,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'hybrid_search_tuning_parameters' => '\Carbon\Model\HybridSearchTuningParamsNullable',
         'media_type' => '\Carbon\Model\FileContentTypesNullable',
         'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
-        'include_file_level_metadata' => 'bool'
+        'include_file_level_metadata' => 'bool',
+        'high_accuracy' => 'bool'
     ];
 
     /**
@@ -90,7 +91,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'hybrid_search_tuning_parameters' => null,
         'media_type' => null,
         'embedding_model' => null,
-        'include_file_level_metadata' => null
+        'include_file_level_metadata' => null,
+        'high_accuracy' => null
     ];
 
     /**
@@ -114,7 +116,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
 		'hybrid_search_tuning_parameters' => true,
 		'media_type' => true,
 		'embedding_model' => true,
-		'include_file_level_metadata' => true
+		'include_file_level_metadata' => true,
+		'high_accuracy' => true
     ];
 
     /**
@@ -218,7 +221,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'hybrid_search_tuning_parameters' => 'hybrid_search_tuning_parameters',
         'media_type' => 'media_type',
         'embedding_model' => 'embedding_model',
-        'include_file_level_metadata' => 'include_file_level_metadata'
+        'include_file_level_metadata' => 'include_file_level_metadata',
+        'high_accuracy' => 'high_accuracy'
     ];
 
     /**
@@ -242,7 +246,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'hybrid_search_tuning_parameters' => 'setHybridSearchTuningParameters',
         'media_type' => 'setMediaType',
         'embedding_model' => 'setEmbeddingModel',
-        'include_file_level_metadata' => 'setIncludeFileLevelMetadata'
+        'include_file_level_metadata' => 'setIncludeFileLevelMetadata',
+        'high_accuracy' => 'setHighAccuracy'
     ];
 
     /**
@@ -266,7 +271,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'hybrid_search_tuning_parameters' => 'getHybridSearchTuningParameters',
         'media_type' => 'getMediaType',
         'embedding_model' => 'getEmbeddingModel',
-        'include_file_level_metadata' => 'getIncludeFileLevelMetadata'
+        'include_file_level_metadata' => 'getIncludeFileLevelMetadata',
+        'high_accuracy' => 'getHighAccuracy'
     ];
 
     /**
@@ -342,6 +348,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('media_type', $data ?? [], null);
         $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('include_file_level_metadata', $data ?? [], false);
+        $this->setIfExists('high_accuracy', $data ?? [], false);
     }
 
     /**
@@ -963,6 +970,42 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         }
 
         $this->container['include_file_level_metadata'] = $include_file_level_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets high_accuracy
+     *
+     * @return bool|null
+     */
+    public function getHighAccuracy()
+    {
+        return $this->container['high_accuracy'];
+    }
+
+    /**
+     * Sets high_accuracy
+     *
+     * @param bool|null $high_accuracy Flag to control whether or not to perform a high accuracy embedding search. By default, this is set to false.         If true, the search may return more accurate results, but may take longer to complete.
+     *
+     * @return self
+     */
+    public function setHighAccuracy($high_accuracy)
+    {
+
+        if (is_null($high_accuracy)) {
+            array_push($this->openAPINullablesSetToNull, 'high_accuracy');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('high_accuracy', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['high_accuracy'] = $high_accuracy;
 
         return $this;
     }
