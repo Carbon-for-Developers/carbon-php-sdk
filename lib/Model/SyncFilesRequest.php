@@ -337,7 +337,7 @@ class SyncFilesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], '791318ee-229d-4c64-bb0a-2563b8014484');
+        $this->setIfExists('request_id', $data ?? [], '3d5122a0-73e5-4674-b4b4-26ff5ad078fa');
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('incremental_sync', $data ?? [], false);

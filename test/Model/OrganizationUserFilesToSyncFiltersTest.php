@@ -214,4 +214,13 @@ class OrganizationUserFilesToSyncFiltersTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "external_urls"
+     */
+    public function testPropertyExternalUrls()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

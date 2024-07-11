@@ -64,7 +64,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'non_synced_only' => 'bool',
         'request_ids' => 'string[]',
         'sync_error_message' => 'string',
-        'include_containers' => 'bool'
+        'include_containers' => 'bool',
+        'external_urls' => 'string[]'
     ];
 
     /**
@@ -90,7 +91,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'non_synced_only' => null,
         'request_ids' => null,
         'sync_error_message' => null,
-        'include_containers' => null
+        'include_containers' => null,
+        'external_urls' => null
     ];
 
     /**
@@ -114,7 +116,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
 		'non_synced_only' => false,
 		'request_ids' => true,
 		'sync_error_message' => true,
-		'include_containers' => true
+		'include_containers' => true,
+		'external_urls' => true
     ];
 
     /**
@@ -218,7 +221,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'non_synced_only' => 'non_synced_only',
         'request_ids' => 'request_ids',
         'sync_error_message' => 'sync_error_message',
-        'include_containers' => 'include_containers'
+        'include_containers' => 'include_containers',
+        'external_urls' => 'external_urls'
     ];
 
     /**
@@ -242,7 +246,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'non_synced_only' => 'setNonSyncedOnly',
         'request_ids' => 'setRequestIds',
         'sync_error_message' => 'setSyncErrorMessage',
-        'include_containers' => 'setIncludeContainers'
+        'include_containers' => 'setIncludeContainers',
+        'external_urls' => 'setExternalUrls'
     ];
 
     /**
@@ -266,7 +271,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'non_synced_only' => 'getNonSyncedOnly',
         'request_ids' => 'getRequestIds',
         'sync_error_message' => 'getSyncErrorMessage',
-        'include_containers' => 'getIncludeContainers'
+        'include_containers' => 'getIncludeContainers',
+        'external_urls' => 'getExternalUrls'
     ];
 
     /**
@@ -342,6 +348,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         $this->setIfExists('request_ids', $data ?? [], null);
         $this->setIfExists('sync_error_message', $data ?? [], null);
         $this->setIfExists('include_containers', $data ?? [], null);
+        $this->setIfExists('external_urls', $data ?? [], null);
     }
 
     /**
@@ -956,6 +963,42 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         }
 
         $this->container['include_containers'] = $include_containers;
+
+        return $this;
+    }
+
+    /**
+     * Gets external_urls
+     *
+     * @return string[]|null
+     */
+    public function getExternalUrls()
+    {
+        return $this->container['external_urls'];
+    }
+
+    /**
+     * Sets external_urls
+     *
+     * @param string[]|null $external_urls The external URLs of the files. The query will return files with these external URLs.
+     *
+     * @return self
+     */
+    public function setExternalUrls($external_urls)
+    {
+
+        if (is_null($external_urls)) {
+            array_push($this->openAPINullablesSetToNull, 'external_urls');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('external_urls', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['external_urls'] = $external_urls;
 
         return $this;
     }
