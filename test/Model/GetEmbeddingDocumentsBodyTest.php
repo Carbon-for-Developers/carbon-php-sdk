@@ -223,4 +223,13 @@ class GetEmbeddingDocumentsBodyTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "rerank"
+     */
+    public function testPropertyRerank()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

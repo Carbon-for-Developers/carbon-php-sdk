@@ -65,7 +65,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'media_type' => '\Carbon\Model\FileContentTypesNullable',
         'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
         'include_file_level_metadata' => 'bool',
-        'high_accuracy' => 'bool'
+        'high_accuracy' => 'bool',
+        'rerank' => '\Carbon\Model\RerankParamsNullable'
     ];
 
     /**
@@ -92,7 +93,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'media_type' => null,
         'embedding_model' => null,
         'include_file_level_metadata' => null,
-        'high_accuracy' => null
+        'high_accuracy' => null,
+        'rerank' => null
     ];
 
     /**
@@ -117,7 +119,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
 		'media_type' => true,
 		'embedding_model' => true,
 		'include_file_level_metadata' => true,
-		'high_accuracy' => true
+		'high_accuracy' => true,
+		'rerank' => true
     ];
 
     /**
@@ -222,7 +225,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'media_type' => 'media_type',
         'embedding_model' => 'embedding_model',
         'include_file_level_metadata' => 'include_file_level_metadata',
-        'high_accuracy' => 'high_accuracy'
+        'high_accuracy' => 'high_accuracy',
+        'rerank' => 'rerank'
     ];
 
     /**
@@ -247,7 +251,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'media_type' => 'setMediaType',
         'embedding_model' => 'setEmbeddingModel',
         'include_file_level_metadata' => 'setIncludeFileLevelMetadata',
-        'high_accuracy' => 'setHighAccuracy'
+        'high_accuracy' => 'setHighAccuracy',
+        'rerank' => 'setRerank'
     ];
 
     /**
@@ -272,7 +277,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'media_type' => 'getMediaType',
         'embedding_model' => 'getEmbeddingModel',
         'include_file_level_metadata' => 'getIncludeFileLevelMetadata',
-        'high_accuracy' => 'getHighAccuracy'
+        'high_accuracy' => 'getHighAccuracy',
+        'rerank' => 'getRerank'
     ];
 
     /**
@@ -349,6 +355,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('include_file_level_metadata', $data ?? [], false);
         $this->setIfExists('high_accuracy', $data ?? [], false);
+        $this->setIfExists('rerank', $data ?? [], null);
     }
 
     /**
@@ -1006,6 +1013,42 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         }
 
         $this->container['high_accuracy'] = $high_accuracy;
+
+        return $this;
+    }
+
+    /**
+     * Gets rerank
+     *
+     * @return \Carbon\Model\RerankParamsNullable|null
+     */
+    public function getRerank()
+    {
+        return $this->container['rerank'];
+    }
+
+    /**
+     * Sets rerank
+     *
+     * @param \Carbon\Model\RerankParamsNullable|null $rerank rerank
+     *
+     * @return self
+     */
+    public function setRerank($rerank)
+    {
+
+        if (is_null($rerank)) {
+            array_push($this->openAPINullablesSetToNull, 'rerank');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('rerank', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['rerank'] = $rerank;
 
         return $this;
     }
