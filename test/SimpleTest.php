@@ -107,13 +107,16 @@ class SimpleTest extends TestCase
         );
         $this->assertNotEmpty($result);
 
-        $result = $carbon->files->deleteFileTags(
-            tags: [
-                "string_example"
-            ],
-            organization_user_file_id: 1
-        );
-        $this->assertNotEmpty($result);
+        // Causing issues with mock server:
+        // post /delete_user_file_tags ✖  error     Request terminated with error: Error: Invalid reference token: __bundled__
+        // 
+        // $result = $carbon->files->deleteFileTags(
+        //     tags: [
+        //         "string_example"
+        //     ],
+        //     organization_user_file_id: 1
+        // );
+        // $this->assertNotEmpty($result);
 
         $result = $carbon->dataSources->queryUserDataSources(
             pagination: [

@@ -205,4 +205,13 @@ class SitemapScrapeRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "urls_to_scrape"
+     */
+    public function testPropertyUrlsToScrape()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

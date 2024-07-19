@@ -63,7 +63,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'css_selectors_to_skip' => 'string[]',
         'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'url_paths_to_include' => 'string[]',
-        'url_paths_to_exclude' => 'string[]'
+        'url_paths_to_exclude' => 'string[]',
+        'urls_to_scrape' => 'string[]'
     ];
 
     /**
@@ -88,7 +89,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'css_selectors_to_skip' => null,
         'embedding_model' => null,
         'url_paths_to_include' => null,
-        'url_paths_to_exclude' => null
+        'url_paths_to_exclude' => null,
+        'urls_to_scrape' => null
     ];
 
     /**
@@ -111,7 +113,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 		'css_selectors_to_skip' => true,
 		'embedding_model' => false,
 		'url_paths_to_include' => true,
-		'url_paths_to_exclude' => true
+		'url_paths_to_exclude' => true,
+		'urls_to_scrape' => true
     ];
 
     /**
@@ -214,7 +217,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'css_selectors_to_skip' => 'css_selectors_to_skip',
         'embedding_model' => 'embedding_model',
         'url_paths_to_include' => 'url_paths_to_include',
-        'url_paths_to_exclude' => 'url_paths_to_exclude'
+        'url_paths_to_exclude' => 'url_paths_to_exclude',
+        'urls_to_scrape' => 'urls_to_scrape'
     ];
 
     /**
@@ -237,7 +241,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'css_selectors_to_skip' => 'setCssSelectorsToSkip',
         'embedding_model' => 'setEmbeddingModel',
         'url_paths_to_include' => 'setUrlPathsToInclude',
-        'url_paths_to_exclude' => 'setUrlPathsToExclude'
+        'url_paths_to_exclude' => 'setUrlPathsToExclude',
+        'urls_to_scrape' => 'setUrlsToScrape'
     ];
 
     /**
@@ -260,7 +265,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'css_selectors_to_skip' => 'getCssSelectorsToSkip',
         'embedding_model' => 'getEmbeddingModel',
         'url_paths_to_include' => 'getUrlPathsToInclude',
-        'url_paths_to_exclude' => 'getUrlPathsToExclude'
+        'url_paths_to_exclude' => 'getUrlPathsToExclude',
+        'urls_to_scrape' => 'getUrlsToScrape'
     ];
 
     /**
@@ -335,6 +341,7 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('url_paths_to_include', $data ?? [], null);
         $this->setIfExists('url_paths_to_exclude', $data ?? [], null);
+        $this->setIfExists('urls_to_scrape', $data ?? [], null);
     }
 
     /**
@@ -929,6 +936,42 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['url_paths_to_exclude'] = $url_paths_to_exclude;
+
+        return $this;
+    }
+
+    /**
+     * Gets urls_to_scrape
+     *
+     * @return string[]|null
+     */
+    public function getUrlsToScrape()
+    {
+        return $this->container['urls_to_scrape'];
+    }
+
+    /**
+     * Sets urls_to_scrape
+     *
+     * @param string[]|null $urls_to_scrape You can submit a subset of URLs from the sitemap that should be scraped. To get the list of URLs,           you can check out /process_sitemap endpoint. If left empty, all URLs from the sitemap will be scraped.
+     *
+     * @return self
+     */
+    public function setUrlsToScrape($urls_to_scrape)
+    {
+
+        if (is_null($urls_to_scrape)) {
+            array_push($this->openAPINullablesSetToNull, 'urls_to_scrape');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('urls_to_scrape', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['urls_to_scrape'] = $urls_to_scrape;
 
         return $this;
     }

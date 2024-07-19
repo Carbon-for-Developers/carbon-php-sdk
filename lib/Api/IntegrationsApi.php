@@ -2183,7 +2183,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = 'b2935b7f-ee64-4d76-8864-8b6731211938',
+        $request_id = 'd29ec177-bbc6-43c7-9b16-0ee340804c99',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -2396,7 +2396,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $set_page_as_boundary = false,
         $data_source_id = SENTINEL_VALUE,
         $connecting_new_account = false,
-        $request_id = 'b2935b7f-ee64-4d76-8864-8b6731211938',
+        $request_id = 'd29ec177-bbc6-43c7-9b16-0ee340804c99',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $enable_file_picker = true,
@@ -2629,6 +2629,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Carbon\Model\ListResponse|\Carbon\Model\HTTPValidationError
+     * @deprecated
      */
     public function listConfluencePages(
 
@@ -2657,6 +2658,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carbon\Model\ListResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function listConfluencePagesWithHttpInfo($list_request, string $contentType = self::contentTypes['listConfluencePages'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -2794,6 +2796,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function listConfluencePagesAsync(
 
@@ -2825,6 +2828,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function listConfluencePagesAsyncWithHttpInfo($list_request, string $contentType = self::contentTypes['listConfluencePages'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -2878,6 +2882,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function listConfluencePagesRequest($list_request, string $contentType = self::contentTypes['listConfluencePages'][0])
     {
@@ -5610,6 +5615,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError
+     * @deprecated
      */
     public function syncConfluence(
 
@@ -5624,7 +5630,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '50140a8f-c06f-40df-9b91-d10d074bcb67',
+        $request_id = 'ca60b474-8b43-4b44-9deb-adb701e40610',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -5666,6 +5672,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function syncConfluenceWithHttpInfo($sync_files_request, string $contentType = self::contentTypes['syncConfluence'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -5803,6 +5810,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function syncConfluenceAsync(
 
@@ -5817,7 +5825,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '50140a8f-c06f-40df-9b91-d10d074bcb67',
+        $request_id = 'ca60b474-8b43-4b44-9deb-adb701e40610',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -5862,6 +5870,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function syncConfluenceAsyncWithHttpInfo($sync_files_request, string $contentType = self::contentTypes['syncConfluence'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
@@ -5915,6 +5924,7 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function syncConfluenceRequest($sync_files_request, string $contentType = self::contentTypes['syncConfluence'][0])
     {
@@ -6420,7 +6430,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '50140a8f-c06f-40df-9b91-d10d074bcb67',
+        $request_id = 'ca60b474-8b43-4b44-9deb-adb701e40610',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,
@@ -6613,7 +6623,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $prepend_filename_to_chunks = false,
         $max_items_per_chunk = SENTINEL_VALUE,
         $set_page_as_boundary = false,
-        $request_id = '50140a8f-c06f-40df-9b91-d10d074bcb67',
+        $request_id = 'ca60b474-8b43-4b44-9deb-adb701e40610',
         $use_ocr = false,
         $parse_pdf_tables_with_ocr = false,
         $incremental_sync = false,

@@ -1662,6 +1662,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $url_paths_to_include = SENTINEL_VALUE,
         $url_paths_to_exclude = SENTINEL_VALUE,
+        $urls_to_scrape = SENTINEL_VALUE,
         string $contentType = self::contentTypes['scrapeSitemap'][0]
     )
     {
@@ -1681,6 +1682,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "url_paths_to_include", $url_paths_to_include);
         $this->setRequestBodyProperty($_body, "url_paths_to_exclude", $url_paths_to_exclude);
+        $this->setRequestBodyProperty($_body, "urls_to_scrape", $urls_to_scrape);
         $sitemap_scrape_request = $_body;
 
         list($response) = $this->scrapeSitemapWithHttpInfo($sitemap_scrape_request, $contentType);
@@ -1853,6 +1855,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $embedding_model = SENTINEL_VALUE,
         $url_paths_to_include = SENTINEL_VALUE,
         $url_paths_to_exclude = SENTINEL_VALUE,
+        $urls_to_scrape = SENTINEL_VALUE,
         string $contentType = self::contentTypes['scrapeSitemap'][0]
     )
     {
@@ -1872,6 +1875,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "url_paths_to_include", $url_paths_to_include);
         $this->setRequestBodyProperty($_body, "url_paths_to_exclude", $url_paths_to_exclude);
+        $this->setRequestBodyProperty($_body, "urls_to_scrape", $urls_to_scrape);
         $sitemap_scrape_request = $_body;
 
         return $this->scrapeSitemapAsyncWithHttpInfo($sitemap_scrape_request, $contentType)
