@@ -128,6 +128,8 @@ class FileFormats
 
     public const WEBM = 'WEBM';
 
+    public const EML = 'EML';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -181,7 +183,8 @@ class FileFormats
             self::MOV,
             self::MKV,
             self::FLV,
-            self::WEBM
+            self::WEBM,
+            self::EML
         ];
     }
 }

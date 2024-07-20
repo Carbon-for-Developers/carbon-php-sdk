@@ -142,6 +142,8 @@ class DataSourceTypeNullable
 
     public const WEBM = 'WEBM';
 
+    public const EML = 'EML';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -202,7 +204,8 @@ class DataSourceTypeNullable
             self::MOV,
             self::MKV,
             self::FLV,
-            self::WEBM
+            self::WEBM,
+            self::EML
         ];
     }
 }

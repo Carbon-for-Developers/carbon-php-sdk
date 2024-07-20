@@ -457,11 +457,13 @@ class OrganizationsApi extends \Carbon\CustomApi
     public function update(
 
         $global_user_config = SENTINEL_VALUE,
+        $data_source_configs = SENTINEL_VALUE,
         string $contentType = self::contentTypes['update'][0]
     )
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "global_user_config", $global_user_config);
+        $this->setRequestBodyProperty($_body, "data_source_configs", $data_source_configs);
         $update_organization_input = $_body;
 
         list($response) = $this->updateWithHttpInfo($update_organization_input, $contentType);
@@ -620,11 +622,13 @@ class OrganizationsApi extends \Carbon\CustomApi
     public function updateAsync(
 
         $global_user_config = SENTINEL_VALUE,
+        $data_source_configs = SENTINEL_VALUE,
         string $contentType = self::contentTypes['update'][0]
     )
     {
         $_body = [];
         $this->setRequestBodyProperty($_body, "global_user_config", $global_user_config);
+        $this->setRequestBodyProperty($_body, "data_source_configs", $data_source_configs);
         $update_organization_input = $_body;
 
         return $this->updateAsyncWithHttpInfo($update_organization_input, $contentType)

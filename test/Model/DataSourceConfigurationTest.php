@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateOrganizationInputTest
+ * DataSourceConfigurationTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UpdateOrganizationInputTest Class Doc Comment
+ * DataSourceConfigurationTest Class Doc Comment
  *
  * @category    Class
- * @description UpdateOrganizationInput
+ * @description DataSourceConfiguration
  * @package     Carbon
  */
-class UpdateOrganizationInputTest extends TestCase
+class DataSourceConfigurationTest extends TestCase
 {
 
     /**
@@ -63,27 +63,27 @@ class UpdateOrganizationInputTest extends TestCase
     }
 
     /**
-     * Test "UpdateOrganizationInput"
+     * Test "DataSourceConfiguration"
      */
-    public function testUpdateOrganizationInput()
+    public function testDataSourceConfiguration()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "global_user_config"
+     * Test attribute "allowed_file_formats"
      */
-    public function testPropertyGlobalUserConfig()
+    public function testPropertyAllowedFileFormats()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "data_source_configs"
+     * Test attribute "google_workspace_docs_save_as"
      */
-    public function testPropertyDataSourceConfigs()
+    public function testPropertyGoogleWorkspaceDocsSaveAs()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

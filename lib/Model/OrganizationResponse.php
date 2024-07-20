@@ -64,6 +64,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_statistics_aggregated_at' => '\DateTime',
         'period_ends_at' => '\DateTime',
         'cancel_at_period_end' => 'bool',
+        'connector_settings' => 'object',
         'global_user_config' => 'object',
         'file_sync_usage' => 'object',
         'created_at' => '\DateTime',
@@ -93,6 +94,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_statistics_aggregated_at' => 'date-time',
         'period_ends_at' => 'date-time',
         'cancel_at_period_end' => null,
+        'connector_settings' => null,
         'global_user_config' => null,
         'file_sync_usage' => null,
         'created_at' => 'date-time',
@@ -120,6 +122,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
 		'file_statistics_aggregated_at' => true,
 		'period_ends_at' => true,
 		'cancel_at_period_end' => true,
+		'connector_settings' => false,
 		'global_user_config' => false,
 		'file_sync_usage' => false,
 		'created_at' => false,
@@ -227,6 +230,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_statistics_aggregated_at' => 'file_statistics_aggregated_at',
         'period_ends_at' => 'period_ends_at',
         'cancel_at_period_end' => 'cancel_at_period_end',
+        'connector_settings' => 'connector_settings',
         'global_user_config' => 'global_user_config',
         'file_sync_usage' => 'file_sync_usage',
         'created_at' => 'created_at',
@@ -254,6 +258,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_statistics_aggregated_at' => 'setFileStatisticsAggregatedAt',
         'period_ends_at' => 'setPeriodEndsAt',
         'cancel_at_period_end' => 'setCancelAtPeriodEnd',
+        'connector_settings' => 'setConnectorSettings',
         'global_user_config' => 'setGlobalUserConfig',
         'file_sync_usage' => 'setFileSyncUsage',
         'created_at' => 'setCreatedAt',
@@ -281,6 +286,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_statistics_aggregated_at' => 'getFileStatisticsAggregatedAt',
         'period_ends_at' => 'getPeriodEndsAt',
         'cancel_at_period_end' => 'getCancelAtPeriodEnd',
+        'connector_settings' => 'getConnectorSettings',
         'global_user_config' => 'getGlobalUserConfig',
         'file_sync_usage' => 'getFileSyncUsage',
         'created_at' => 'getCreatedAt',
@@ -359,6 +365,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('file_statistics_aggregated_at', $data ?? [], null);
         $this->setIfExists('period_ends_at', $data ?? [], null);
         $this->setIfExists('cancel_at_period_end', $data ?? [], null);
+        $this->setIfExists('connector_settings', $data ?? [], null);
         $this->setIfExists('global_user_config', $data ?? [], null);
         $this->setIfExists('file_sync_usage', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -436,6 +443,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
         if ($this->container['cancel_at_period_end'] === null) {
             $invalidProperties[] = "'cancel_at_period_end' can't be null";
+        }
+        if ($this->container['connector_settings'] === null) {
+            $invalidProperties[] = "'connector_settings' can't be null";
         }
         if ($this->container['global_user_config'] === null) {
             $invalidProperties[] = "'global_user_config' can't be null";
@@ -937,6 +947,35 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['cancel_at_period_end'] = $cancel_at_period_end;
+
+        return $this;
+    }
+
+    /**
+     * Gets connector_settings
+     *
+     * @return object
+     */
+    public function getConnectorSettings()
+    {
+        return $this->container['connector_settings'];
+    }
+
+    /**
+     * Sets connector_settings
+     *
+     * @param object $connector_settings connector_settings
+     *
+     * @return self
+     */
+    public function setConnectorSettings($connector_settings)
+    {
+
+        if (is_null($connector_settings)) {
+            throw new \InvalidArgumentException('non-nullable connector_settings cannot be null');
+        }
+
+        $this->container['connector_settings'] = $connector_settings;
 
         return $this;
     }

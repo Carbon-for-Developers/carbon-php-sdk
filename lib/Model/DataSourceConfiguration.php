@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateOrganizationInput
+ * DataSourceConfiguration
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * UpdateOrganizationInput Class Doc Comment
+ * DataSourceConfiguration Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class DataSourceConfiguration implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSeria
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UpdateOrganizationInput';
+    protected static $openAPIModelName = 'DataSourceConfiguration';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,8 +49,8 @@ class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'global_user_config' => '\Carbon\Model\UserConfigurationNullable',
-        'data_source_configs' => 'array<string,\Carbon\Model\DataSourceConfiguration>'
+        'allowed_file_formats' => 'string[]',
+        'google_workspace_docs_save_as' => 'string'
     ];
 
     /**
@@ -61,8 +61,8 @@ class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'global_user_config' => null,
-        'data_source_configs' => null
+        'allowed_file_formats' => null,
+        'google_workspace_docs_save_as' => null
     ];
 
     /**
@@ -71,8 +71,8 @@ class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'global_user_config' => true,
-		'data_source_configs' => true
+        'allowed_file_formats' => false,
+		'google_workspace_docs_save_as' => true
     ];
 
     /**
@@ -161,8 +161,8 @@ class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'global_user_config' => 'global_user_config',
-        'data_source_configs' => 'data_source_configs'
+        'allowed_file_formats' => 'allowed_file_formats',
+        'google_workspace_docs_save_as' => 'google_workspace_docs_save_as'
     ];
 
     /**
@@ -171,8 +171,8 @@ class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'global_user_config' => 'setGlobalUserConfig',
-        'data_source_configs' => 'setDataSourceConfigs'
+        'allowed_file_formats' => 'setAllowedFileFormats',
+        'google_workspace_docs_save_as' => 'setGoogleWorkspaceDocsSaveAs'
     ];
 
     /**
@@ -181,8 +181,8 @@ class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'global_user_config' => 'getGlobalUserConfig',
-        'data_source_configs' => 'getDataSourceConfigs'
+        'allowed_file_formats' => 'getAllowedFileFormats',
+        'google_workspace_docs_save_as' => 'getGoogleWorkspaceDocsSaveAs'
     ];
 
     /**
@@ -242,8 +242,8 @@ class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('global_user_config', $data ?? [], null);
-        $this->setIfExists('data_source_configs', $data ?? [], null);
+        $this->setIfExists('allowed_file_formats', $data ?? [], null);
+        $this->setIfExists('google_workspace_docs_save_as', $data ?? [], null);
     }
 
     /**
@@ -289,73 +289,66 @@ class UpdateOrganizationInput implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets global_user_config
+     * Gets allowed_file_formats
      *
-     * @return \Carbon\Model\UserConfigurationNullable|null
+     * @return string[]|null
      */
-    public function getGlobalUserConfig()
+    public function getAllowedFileFormats()
     {
-        return $this->container['global_user_config'];
+        return $this->container['allowed_file_formats'];
     }
 
     /**
-     * Sets global_user_config
+     * Sets allowed_file_formats
      *
-     * @param \Carbon\Model\UserConfigurationNullable|null $global_user_config global_user_config
+     * @param string[]|null $allowed_file_formats List of allowed file formats for the organization. An empty list means all file formats are allowed.
      *
      * @return self
      */
-    public function setGlobalUserConfig($global_user_config)
+    public function setAllowedFileFormats($allowed_file_formats)
     {
 
-        if (is_null($global_user_config)) {
-            array_push($this->openAPINullablesSetToNull, 'global_user_config');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('global_user_config', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($allowed_file_formats)) {
+            throw new \InvalidArgumentException('non-nullable allowed_file_formats cannot be null');
         }
 
-        $this->container['global_user_config'] = $global_user_config;
+        $this->container['allowed_file_formats'] = $allowed_file_formats;
 
         return $this;
     }
 
     /**
-     * Gets data_source_configs
+     * Gets google_workspace_docs_save_as
      *
-     * @return array<string,\Carbon\Model\DataSourceConfiguration>|null
+     * @return string|null
      */
-    public function getDataSourceConfigs()
+    public function getGoogleWorkspaceDocsSaveAs()
     {
-        return $this->container['data_source_configs'];
+        return $this->container['google_workspace_docs_save_as'];
     }
 
     /**
-     * Sets data_source_configs
+     * Sets google_workspace_docs_save_as
      *
-     * @param array<string,\Carbon\Model\DataSourceConfiguration>|null $data_source_configs Used to set organization level defaults for configuration related to data sources.
+     * @param string|null $google_workspace_docs_save_as Used to set the format Google Workspace documents (Docs, Sheets, Slides) are stored as for raw files uploads in S3. The default format is TXT
      *
      * @return self
      */
-    public function setDataSourceConfigs($data_source_configs)
+    public function setGoogleWorkspaceDocsSaveAs($google_workspace_docs_save_as)
     {
 
-        if (is_null($data_source_configs)) {
-            array_push($this->openAPINullablesSetToNull, 'data_source_configs');
+        if (is_null($google_workspace_docs_save_as)) {
+            array_push($this->openAPINullablesSetToNull, 'google_workspace_docs_save_as');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('data_source_configs', $nullablesSetToNull);
+            $index = array_search('google_workspace_docs_save_as', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['data_source_configs'] = $data_source_configs;
+        $this->container['google_workspace_docs_save_as'] = $google_workspace_docs_save_as;
 
         return $this;
     }

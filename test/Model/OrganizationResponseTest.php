@@ -207,6 +207,15 @@ class OrganizationResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "connector_settings"
+     */
+    public function testPropertyConnectorSettings()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "global_user_config"
      */
     public function testPropertyGlobalUserConfig()
