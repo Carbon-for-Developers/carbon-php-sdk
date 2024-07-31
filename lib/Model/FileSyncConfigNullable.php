@@ -53,6 +53,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'auto_synced_source_types' => '\Carbon\Model\HelpdeskFileTypes[]',
         'sync_attachments' => 'bool',
         'detect_audio_language' => 'bool',
+        'transcription_service' => '\Carbon\Model\TranscriptionServiceNullable',
         'split_rows' => 'bool'
     ];
 
@@ -67,6 +68,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'auto_synced_source_types' => null,
         'sync_attachments' => null,
         'detect_audio_language' => null,
+        'transcription_service' => null,
         'split_rows' => null
     ];
 
@@ -79,6 +81,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'auto_synced_source_types' => false,
 		'sync_attachments' => false,
 		'detect_audio_language' => false,
+		'transcription_service' => true,
 		'split_rows' => false
     ];
 
@@ -171,6 +174,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'auto_synced_source_types' => 'auto_synced_source_types',
         'sync_attachments' => 'sync_attachments',
         'detect_audio_language' => 'detect_audio_language',
+        'transcription_service' => 'transcription_service',
         'split_rows' => 'split_rows'
     ];
 
@@ -183,6 +187,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'auto_synced_source_types' => 'setAutoSyncedSourceTypes',
         'sync_attachments' => 'setSyncAttachments',
         'detect_audio_language' => 'setDetectAudioLanguage',
+        'transcription_service' => 'setTranscriptionService',
         'split_rows' => 'setSplitRows'
     ];
 
@@ -195,6 +200,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'auto_synced_source_types' => 'getAutoSyncedSourceTypes',
         'sync_attachments' => 'getSyncAttachments',
         'detect_audio_language' => 'getDetectAudioLanguage',
+        'transcription_service' => 'getTranscriptionService',
         'split_rows' => 'getSplitRows'
     ];
 
@@ -258,6 +264,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('auto_synced_source_types', $data ?? [], null);
         $this->setIfExists('sync_attachments', $data ?? [], false);
         $this->setIfExists('detect_audio_language', $data ?? [], false);
+        $this->setIfExists('transcription_service', $data ?? [], null);
         $this->setIfExists('split_rows', $data ?? [], false);
     }
 
@@ -386,6 +393,42 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['detect_audio_language'] = $detect_audio_language;
+
+        return $this;
+    }
+
+    /**
+     * Gets transcription_service
+     *
+     * @return \Carbon\Model\TranscriptionServiceNullable|null
+     */
+    public function getTranscriptionService()
+    {
+        return $this->container['transcription_service'];
+    }
+
+    /**
+     * Sets transcription_service
+     *
+     * @param \Carbon\Model\TranscriptionServiceNullable|null $transcription_service transcription_service
+     *
+     * @return self
+     */
+    public function setTranscriptionService($transcription_service)
+    {
+
+        if (is_null($transcription_service)) {
+            array_push($this->openAPINullablesSetToNull, 'transcription_service');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('transcription_service', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['transcription_service'] = $transcription_service;
 
         return $this;
     }
