@@ -62,6 +62,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'max_items_per_chunk' => 'int',
         'parse_pdf_tables_with_ocr' => 'bool',
         'detect_audio_language' => 'bool',
+        'transcription_service' => '\Carbon\Model\TranscriptionServiceNullable',
         'media_type' => '\Carbon\Model\FileContentTypesNullable',
         'split_rows' => 'bool'
     ];
@@ -87,6 +88,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'max_items_per_chunk' => null,
         'parse_pdf_tables_with_ocr' => null,
         'detect_audio_language' => null,
+        'transcription_service' => null,
         'media_type' => null,
         'split_rows' => null
     ];
@@ -110,6 +112,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
 		'max_items_per_chunk' => true,
 		'parse_pdf_tables_with_ocr' => false,
 		'detect_audio_language' => false,
+		'transcription_service' => true,
 		'media_type' => true,
 		'split_rows' => false
     ];
@@ -213,6 +216,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'max_items_per_chunk' => 'max_items_per_chunk',
         'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
         'detect_audio_language' => 'detect_audio_language',
+        'transcription_service' => 'transcription_service',
         'media_type' => 'media_type',
         'split_rows' => 'split_rows'
     ];
@@ -236,6 +240,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'max_items_per_chunk' => 'setMaxItemsPerChunk',
         'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
         'detect_audio_language' => 'setDetectAudioLanguage',
+        'transcription_service' => 'setTranscriptionService',
         'media_type' => 'setMediaType',
         'split_rows' => 'setSplitRows'
     ];
@@ -259,6 +264,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'max_items_per_chunk' => 'getMaxItemsPerChunk',
         'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
         'detect_audio_language' => 'getDetectAudioLanguage',
+        'transcription_service' => 'getTranscriptionService',
         'media_type' => 'getMediaType',
         'split_rows' => 'getSplitRows'
     ];
@@ -333,6 +339,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('detect_audio_language', $data ?? [], false);
+        $this->setIfExists('transcription_service', $data ?? [], null);
         $this->setIfExists('media_type', $data ?? [], null);
         $this->setIfExists('split_rows', $data ?? [], false);
     }
@@ -783,6 +790,42 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['detect_audio_language'] = $detect_audio_language;
+
+        return $this;
+    }
+
+    /**
+     * Gets transcription_service
+     *
+     * @return \Carbon\Model\TranscriptionServiceNullable|null
+     */
+    public function getTranscriptionService()
+    {
+        return $this->container['transcription_service'];
+    }
+
+    /**
+     * Sets transcription_service
+     *
+     * @param \Carbon\Model\TranscriptionServiceNullable|null $transcription_service transcription_service
+     *
+     * @return self
+     */
+    public function setTranscriptionService($transcription_service)
+    {
+
+        if (is_null($transcription_service)) {
+            array_push($this->openAPINullablesSetToNull, 'transcription_service');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('transcription_service', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['transcription_service'] = $transcription_service;
 
         return $this;
     }

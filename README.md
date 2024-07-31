@@ -1162,6 +1162,7 @@ $result = $carbon->files->upload(
     max_items_per_chunk: 1, 
     parse_pdf_tables_with_ocr: False, 
     detect_audio_language: False, 
+    transcription_service: "assemblyai", 
     media_type: "TEXT", 
     split_rows: False
 );
@@ -1215,6 +1216,10 @@ Whether to use rich table parsing when `use_ocr` is enabled.
 
 Whether to automatically detect the language of the uploaded audio file.
 
+##### transcription_service:<a id="transcription_service"></a>
+
+The transcription service to use for audio files. If no service is specified, 'deepgram' will be used.
+
 ##### media_type:<a id="media_type"></a>
 
 The media type of the file. If not provided, it will be inferred from the file extension.
@@ -1259,6 +1264,7 @@ $result = $carbon->files->uploadFromUrl(
     max_items_per_chunk: 1, 
     parse_pdf_tables_with_ocr: False, 
     detect_audio_language: False, 
+    transcription_service: "assemblyai", 
     media_type: "TEXT", 
     split_rows: False
 );
@@ -1293,6 +1299,8 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 ##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
 
 ##### detect_audio_language: `bool`<a id="detect_audio_language-bool"></a>
+
+##### transcription_service:<a id="transcription_service"></a>
 
 ##### media_type:<a id="media_type"></a>
 
@@ -1426,7 +1434,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "e38a7eee-02b7-4f73-be14-ea9bb1f09e85",
+        "request_id" => "eea02e43-54b1-4bee-ab9e-091040d2134c",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1483,6 +1491,7 @@ $result = $carbon->integrations->connectFreshdesk(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
         "split_rows" => False,
     ]
 );
@@ -1677,7 +1686,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "e5fd53f8-ed96-474a-ba66-1fc1948facdf", 
+    request_id: "859ca4fb-b289-475e-9509-35a98a8fe40d", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -1687,6 +1696,7 @@ $result = $carbon->integrations->getOauthUrl(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
         "split_rows" => False,
     ]
 );
@@ -1752,7 +1762,7 @@ Enable OCR for files that support it. Supported formats: pdf
 
 ##### enable_file_picker: `bool`<a id="enable_file_picker-bool"></a>
 
-Enable integration's file picker for sources that support it. Supported sources: BOX, ONEDRIVE, DROPBOX, SHAREPOINT, GOOGLE_DRIVE
+Enable integration's file picker for sources that support it. Supported sources: BOX, DROPBOX, GOOGLE_DRIVE, ONEDRIVE, SHAREPOINT
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
@@ -2110,7 +2120,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "77b56048-a895-4377-b0d3-e190d1b7de32", 
+    request_id: "fc57cd47-6aac-4e8f-9a00-ceae0b396f11", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2118,6 +2128,7 @@ $result = $carbon->integrations->syncConfluence(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
         "split_rows" => False,
     ]
 );
@@ -2231,7 +2242,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "77b56048-a895-4377-b0d3-e190d1b7de32", 
+    request_id: "fc57cd47-6aac-4e8f-9a00-ceae0b396f11", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2239,6 +2250,7 @@ $result = $carbon->integrations->syncFiles(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
         "split_rows" => False,
     ]
 );
@@ -2473,6 +2485,7 @@ $result = $carbon->integrations->syncGmail(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
         "split_rows" => False,
     ], 
     incremental_sync: False
@@ -2606,6 +2619,7 @@ $result = $carbon->integrations->syncOutlook(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
         "split_rows" => False,
     ], 
     incremental_sync: False
@@ -2781,6 +2795,7 @@ $result = $carbon->integrations->syncS3Files(
         "auto_synced_source_types" => ["ARTICLE"],
         "sync_attachments" => False,
         "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
         "split_rows" => False,
     ]
 );
