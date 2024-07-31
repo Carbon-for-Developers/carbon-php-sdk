@@ -189,6 +189,15 @@ class UploadFileFromUrlInputTest extends TestCase
     }
 
     /**
+     * Test attribute "transcription_service"
+     */
+    public function testPropertyTranscriptionService()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "media_type"
      */
     public function testPropertyMediaType()

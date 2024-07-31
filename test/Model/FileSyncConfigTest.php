@@ -99,6 +99,15 @@ class FileSyncConfigTest extends TestCase
     }
 
     /**
+     * Test attribute "transcription_service"
+     */
+    public function testPropertyTranscriptionService()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "split_rows"
      */
     public function testPropertySplitRows()
