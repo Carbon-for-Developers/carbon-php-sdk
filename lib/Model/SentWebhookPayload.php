@@ -1,6 +1,6 @@
 <?php
 /**
- * FileSyncConfigNullable
+ * SentWebhookPayload
  *
  * PHP version 7.4
  *
@@ -26,14 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * FileSyncConfigNullable Class Doc Comment
+ * SentWebhookPayload Class Doc Comment
  *
  * @category Class
- * @description Used to configure file syncing for certain connectors when sync_files_on_connection is set to true
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerializable
+class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +41,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FileSyncConfigNullable';
+    protected static $openAPIModelName = 'SentWebhookPayload';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,11 +49,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_synced_source_types' => '\Carbon\Model\HelpdeskFileTypes[]',
-        'sync_attachments' => 'bool',
-        'detect_audio_language' => 'bool',
-        'transcription_service' => '\Carbon\Model\TranscriptionServiceNullable',
-        'split_rows' => 'bool'
+        'webhook_type' => 'string',
+        'customer_id' => 'string',
+        'timestamp' => 'string',
+        'object' => '\Carbon\Model\SentWebhookPayloadObject'
     ];
 
     /**
@@ -65,11 +63,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'auto_synced_source_types' => null,
-        'sync_attachments' => null,
-        'detect_audio_language' => null,
-        'transcription_service' => null,
-        'split_rows' => null
+        'webhook_type' => null,
+        'customer_id' => null,
+        'timestamp' => null,
+        'object' => null
     ];
 
     /**
@@ -78,11 +75,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'auto_synced_source_types' => false,
-		'sync_attachments' => false,
-		'detect_audio_language' => false,
-		'transcription_service' => true,
-		'split_rows' => false
+        'webhook_type' => false,
+		'customer_id' => false,
+		'timestamp' => false,
+		'object' => false
     ];
 
     /**
@@ -171,11 +167,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_synced_source_types' => 'auto_synced_source_types',
-        'sync_attachments' => 'sync_attachments',
-        'detect_audio_language' => 'detect_audio_language',
-        'transcription_service' => 'transcription_service',
-        'split_rows' => 'split_rows'
+        'webhook_type' => 'webhook_type',
+        'customer_id' => 'customer_id',
+        'timestamp' => 'timestamp',
+        'object' => 'object'
     ];
 
     /**
@@ -184,11 +179,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'auto_synced_source_types' => 'setAutoSyncedSourceTypes',
-        'sync_attachments' => 'setSyncAttachments',
-        'detect_audio_language' => 'setDetectAudioLanguage',
-        'transcription_service' => 'setTranscriptionService',
-        'split_rows' => 'setSplitRows'
+        'webhook_type' => 'setWebhookType',
+        'customer_id' => 'setCustomerId',
+        'timestamp' => 'setTimestamp',
+        'object' => 'setObject'
     ];
 
     /**
@@ -197,11 +191,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'auto_synced_source_types' => 'getAutoSyncedSourceTypes',
-        'sync_attachments' => 'getSyncAttachments',
-        'detect_audio_language' => 'getDetectAudioLanguage',
-        'transcription_service' => 'getTranscriptionService',
-        'split_rows' => 'getSplitRows'
+        'webhook_type' => 'getWebhookType',
+        'customer_id' => 'getCustomerId',
+        'timestamp' => 'getTimestamp',
+        'object' => 'getObject'
     ];
 
     /**
@@ -245,6 +238,49 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
+    public const WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED = 'ALL_UPLOADED_FILES_QUEUED';
+    public const WEBHOOK_TYPE_CHECKUP = 'CHECKUP';
+    public const WEBHOOK_TYPE_DATA_SOURCE_READY = 'DATA_SOURCE_READY';
+    public const WEBHOOK_TYPE_FILES_CREATED = 'FILES_CREATED';
+    public const WEBHOOK_TYPE_FILES_SKIPPED = 'FILES_SKIPPED';
+    public const WEBHOOK_TYPE_FILE_DELETED = 'FILE_DELETED';
+    public const WEBHOOK_TYPE_FILE_ERROR = 'FILE_ERROR';
+    public const WEBHOOK_TYPE_FILE_READY = 'FILE_READY';
+    public const WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED = 'FILE_STATISTICS_AGGREGATED';
+    public const WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED = 'FILE_SYNC_LIMIT_REACHED';
+    public const WEBHOOK_TYPE_ORGANIZATION_USER_DELETED = 'ORGANIZATION_USER_DELETED';
+    public const WEBHOOK_TYPE_RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR';
+    public const WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS = 'SPARSE_VECTOR_QUEUE_STATUS';
+    public const WEBHOOK_TYPE_WEBPAGE_ERROR = 'WEBPAGE_ERROR';
+    public const WEBHOOK_TYPE_WEBPAGE_READY = 'WEBPAGE_READY';
+    public const WEBHOOK_TYPE_WEBSCRAPE_URLS_READY = 'WEBSCRAPE_URLS_READY';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getWebhookTypeAllowableValues()
+    {
+        return [
+            self::WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED,
+            self::WEBHOOK_TYPE_CHECKUP,
+            self::WEBHOOK_TYPE_DATA_SOURCE_READY,
+            self::WEBHOOK_TYPE_FILES_CREATED,
+            self::WEBHOOK_TYPE_FILES_SKIPPED,
+            self::WEBHOOK_TYPE_FILE_DELETED,
+            self::WEBHOOK_TYPE_FILE_ERROR,
+            self::WEBHOOK_TYPE_FILE_READY,
+            self::WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED,
+            self::WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED,
+            self::WEBHOOK_TYPE_ORGANIZATION_USER_DELETED,
+            self::WEBHOOK_TYPE_RATE_LIMIT_ERROR,
+            self::WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS,
+            self::WEBHOOK_TYPE_WEBPAGE_ERROR,
+            self::WEBHOOK_TYPE_WEBPAGE_READY,
+            self::WEBHOOK_TYPE_WEBSCRAPE_URLS_READY,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -261,11 +297,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('auto_synced_source_types', $data ?? [], null);
-        $this->setIfExists('sync_attachments', $data ?? [], false);
-        $this->setIfExists('detect_audio_language', $data ?? [], false);
-        $this->setIfExists('transcription_service', $data ?? [], null);
-        $this->setIfExists('split_rows', $data ?? [], false);
+        $this->setIfExists('webhook_type', $data ?? [], null);
+        $this->setIfExists('customer_id', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('object', $data ?? [], null);
     }
 
     /**
@@ -295,6 +330,15 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getWebhookTypeAllowableValues();
+        if (!is_null($this->container['webhook_type']) && !in_array($this->container['webhook_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'webhook_type', must be one of '%s'",
+                $this->container['webhook_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -311,153 +355,127 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets auto_synced_source_types
+     * Gets webhook_type
      *
-     * @return \Carbon\Model\HelpdeskFileTypes[]|null
+     * @return string|null
      */
-    public function getAutoSyncedSourceTypes()
+    public function getWebhookType()
     {
-        return $this->container['auto_synced_source_types'];
+        return $this->container['webhook_type'];
     }
 
     /**
-     * Sets auto_synced_source_types
+     * Sets webhook_type
      *
-     * @param \Carbon\Model\HelpdeskFileTypes[]|null $auto_synced_source_types File types to automatically sync when the data source connects. Only a subset of file types can be          controlled. If not supported, then they will always be synced
+     * @param string|null $webhook_type webhook_type
      *
      * @return self
      */
-    public function setAutoSyncedSourceTypes($auto_synced_source_types)
+    public function setWebhookType($webhook_type)
     {
-
-        if (is_null($auto_synced_source_types)) {
-            throw new \InvalidArgumentException('non-nullable auto_synced_source_types cannot be null');
+        $allowedValues = $this->getWebhookTypeAllowableValues();
+        if (!is_null($webhook_type) && !in_array($webhook_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'webhook_type', must be one of '%s'",
+                    $webhook_type,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
 
-        $this->container['auto_synced_source_types'] = $auto_synced_source_types;
+        if (is_null($webhook_type)) {
+            throw new \InvalidArgumentException('non-nullable webhook_type cannot be null');
+        }
+
+        $this->container['webhook_type'] = $webhook_type;
 
         return $this;
     }
 
     /**
-     * Gets sync_attachments
+     * Gets customer_id
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getSyncAttachments()
+    public function getCustomerId()
     {
-        return $this->container['sync_attachments'];
+        return $this->container['customer_id'];
     }
 
     /**
-     * Sets sync_attachments
+     * Sets customer_id
      *
-     * @param bool|null $sync_attachments Automatically sync attachments from files where supported. Currently applies to Helpdesk Tickets
+     * @param string|null $customer_id customer_id
      *
      * @return self
      */
-    public function setSyncAttachments($sync_attachments)
+    public function setCustomerId($customer_id)
     {
 
-        if (is_null($sync_attachments)) {
-            throw new \InvalidArgumentException('non-nullable sync_attachments cannot be null');
+        if (is_null($customer_id)) {
+            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
         }
 
-        $this->container['sync_attachments'] = $sync_attachments;
+        $this->container['customer_id'] = $customer_id;
 
         return $this;
     }
 
     /**
-     * Gets detect_audio_language
+     * Gets timestamp
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getDetectAudioLanguage()
+    public function getTimestamp()
     {
-        return $this->container['detect_audio_language'];
+        return $this->container['timestamp'];
     }
 
     /**
-     * Sets detect_audio_language
+     * Sets timestamp
      *
-     * @param bool|null $detect_audio_language Detect audio language before transcription for audio files
+     * @param string|null $timestamp timestamp
      *
      * @return self
      */
-    public function setDetectAudioLanguage($detect_audio_language)
+    public function setTimestamp($timestamp)
     {
 
-        if (is_null($detect_audio_language)) {
-            throw new \InvalidArgumentException('non-nullable detect_audio_language cannot be null');
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
         }
 
-        $this->container['detect_audio_language'] = $detect_audio_language;
+        $this->container['timestamp'] = $timestamp;
 
         return $this;
     }
 
     /**
-     * Gets transcription_service
+     * Gets object
      *
-     * @return \Carbon\Model\TranscriptionServiceNullable|null
+     * @return \Carbon\Model\SentWebhookPayloadObject|null
      */
-    public function getTranscriptionService()
+    public function getObject()
     {
-        return $this->container['transcription_service'];
+        return $this->container['object'];
     }
 
     /**
-     * Sets transcription_service
+     * Sets object
      *
-     * @param \Carbon\Model\TranscriptionServiceNullable|null $transcription_service transcription_service
+     * @param \Carbon\Model\SentWebhookPayloadObject|null $object object
      *
      * @return self
      */
-    public function setTranscriptionService($transcription_service)
+    public function setObject($object)
     {
 
-        if (is_null($transcription_service)) {
-            array_push($this->openAPINullablesSetToNull, 'transcription_service');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('transcription_service', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($object)) {
+            throw new \InvalidArgumentException('non-nullable object cannot be null');
         }
 
-        $this->container['transcription_service'] = $transcription_service;
-
-        return $this;
-    }
-
-    /**
-     * Gets split_rows
-     *
-     * @return bool|null
-     */
-    public function getSplitRows()
-    {
-        return $this->container['split_rows'];
-    }
-
-    /**
-     * Sets split_rows
-     *
-     * @param bool|null $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files.
-     *
-     * @return self
-     */
-    public function setSplitRows($split_rows)
-    {
-
-        if (is_null($split_rows)) {
-            throw new \InvalidArgumentException('non-nullable split_rows cannot be null');
-        }
-
-        $this->container['split_rows'] = $split_rows;
+        $this->container['object'] = $object;
 
         return $this;
     }
