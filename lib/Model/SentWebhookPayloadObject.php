@@ -74,8 +74,8 @@ class SentWebhookPayloadObject implements ModelInterface, ArrayAccess, \JsonSeri
       */
     protected static array $openAPINullables = [
         'object_type' => false,
-		'object_id' => false,
-		'additional_information' => false
+		'object_id' => true,
+		'additional_information' => true
     ];
 
     /**
@@ -391,7 +391,14 @@ class SentWebhookPayloadObject implements ModelInterface, ArrayAccess, \JsonSeri
     {
 
         if (is_null($object_id)) {
-            throw new \InvalidArgumentException('non-nullable object_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'object_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('object_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['object_id'] = $object_id;
@@ -420,7 +427,14 @@ class SentWebhookPayloadObject implements ModelInterface, ArrayAccess, \JsonSeri
     {
 
         if (is_null($additional_information)) {
-            throw new \InvalidArgumentException('non-nullable additional_information cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'additional_information');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('additional_information', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['additional_information'] = $additional_information;
