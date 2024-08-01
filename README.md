@@ -6,7 +6,7 @@
 
 Connect external data to LLMs, no matter the source.
 
-[![Packagist](https://img.shields.io/badge/Packagist-v0.2.17-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v0.2.18-blue)](https://packagist.org/packages/konfig/carbon-php-sdk)
 
 </div>
 
@@ -107,7 +107,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/carbon-php-sdk": "0.2.17"
+    "konfig/carbon-php-sdk": "0.2.18"
   }
 }
 ```
@@ -461,6 +461,9 @@ $result = $carbon->embeddings->getDocuments(
     high_accuracy: False, 
     rerank: [
         "model" => "model_example",
+    ], 
+    file_types_at_source: [
+        "string_example"
     ]
 );
 ```
@@ -530,6 +533,10 @@ Flag to control whether or not to include file-level metadata in the response. T
 Flag to control whether or not to perform a high accuracy embedding search. By default, this is set to false.         If true, the search may return more accurate results, but may take longer to complete.
 
 ##### rerank: [`RerankParamsNullable`](./lib/Model/RerankParamsNullable.php)<a id="rerank-rerankparamsnullablelibmodelrerankparamsnullablephp"></a>
+
+##### file_types_at_source: []<a id="file_types_at_source-"></a>
+
+Filter files based on their type at the source (for example help center tickets and articles)
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1434,7 +1441,7 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "bdd2d0b8-c211-49bd-b70a-4889ae5fab99",
+        "request_id" => "f5e8c193-f7e1-4e45-9be5-6aa157dfe3c3",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1686,7 +1693,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "77c4d6f4-3ef2-43d4-8481-476a74fd5178", 
+    request_id: "c4055754-ba2d-4f57-a990-6e990abbbd90", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -2120,7 +2127,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "0a2f743b-fe89-4193-86c3-87ca6d2ffc43", 
+    request_id: "991e89b6-1e71-41e1-bdc4-4dd475f21696", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2242,7 +2249,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "0a2f743b-fe89-4193-86c3-87ca6d2ffc43", 
+    request_id: "991e89b6-1e71-41e1-bdc4-4dd475f21696", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 

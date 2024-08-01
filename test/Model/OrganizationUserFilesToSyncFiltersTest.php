@@ -223,4 +223,13 @@ class OrganizationUserFilesToSyncFiltersTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "file_types_at_source"
+     */
+    public function testPropertyFileTypesAtSource()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

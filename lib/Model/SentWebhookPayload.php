@@ -238,7 +238,9 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
         return self::$openAPIModelName;
     }
 
+    public const WEBHOOK_TYPE_ADD = 'ADD';
     public const WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED = 'ALL_UPLOADED_FILES_QUEUED';
+    public const WEBHOOK_TYPE_CANCEL = 'CANCEL';
     public const WEBHOOK_TYPE_CHECKUP = 'CHECKUP';
     public const WEBHOOK_TYPE_DATA_SOURCE_READY = 'DATA_SOURCE_READY';
     public const WEBHOOK_TYPE_FILES_CREATED = 'FILES_CREATED';
@@ -250,7 +252,9 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
     public const WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED = 'FILE_SYNC_LIMIT_REACHED';
     public const WEBHOOK_TYPE_ORGANIZATION_USER_DELETED = 'ORGANIZATION_USER_DELETED';
     public const WEBHOOK_TYPE_RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR';
+    public const WEBHOOK_TYPE_REVOKE = 'REVOKE';
     public const WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS = 'SPARSE_VECTOR_QUEUE_STATUS';
+    public const WEBHOOK_TYPE_UPDATE = 'UPDATE';
     public const WEBHOOK_TYPE_WEBPAGE_ERROR = 'WEBPAGE_ERROR';
     public const WEBHOOK_TYPE_WEBPAGE_READY = 'WEBPAGE_READY';
     public const WEBHOOK_TYPE_WEBSCRAPE_URLS_READY = 'WEBSCRAPE_URLS_READY';
@@ -263,7 +267,9 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
     public function getWebhookTypeAllowableValues()
     {
         return [
+            self::WEBHOOK_TYPE_ADD,
             self::WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED,
+            self::WEBHOOK_TYPE_CANCEL,
             self::WEBHOOK_TYPE_CHECKUP,
             self::WEBHOOK_TYPE_DATA_SOURCE_READY,
             self::WEBHOOK_TYPE_FILES_CREATED,
@@ -275,7 +281,9 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
             self::WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED,
             self::WEBHOOK_TYPE_ORGANIZATION_USER_DELETED,
             self::WEBHOOK_TYPE_RATE_LIMIT_ERROR,
+            self::WEBHOOK_TYPE_REVOKE,
             self::WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS,
+            self::WEBHOOK_TYPE_UPDATE,
             self::WEBHOOK_TYPE_WEBPAGE_ERROR,
             self::WEBHOOK_TYPE_WEBPAGE_READY,
             self::WEBHOOK_TYPE_WEBSCRAPE_URLS_READY,

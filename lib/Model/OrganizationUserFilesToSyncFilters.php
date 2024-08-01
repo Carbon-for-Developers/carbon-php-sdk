@@ -65,7 +65,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'request_ids' => 'string[]',
         'sync_error_message' => 'string',
         'include_containers' => 'bool',
-        'external_urls' => 'string[]'
+        'external_urls' => 'string[]',
+        'file_types_at_source' => '\Carbon\Model\HelpdeskFileTypes[]'
     ];
 
     /**
@@ -92,7 +93,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'request_ids' => null,
         'sync_error_message' => null,
         'include_containers' => null,
-        'external_urls' => null
+        'external_urls' => null,
+        'file_types_at_source' => null
     ];
 
     /**
@@ -117,7 +119,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
 		'request_ids' => true,
 		'sync_error_message' => true,
 		'include_containers' => true,
-		'external_urls' => true
+		'external_urls' => true,
+		'file_types_at_source' => true
     ];
 
     /**
@@ -222,7 +225,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'request_ids' => 'request_ids',
         'sync_error_message' => 'sync_error_message',
         'include_containers' => 'include_containers',
-        'external_urls' => 'external_urls'
+        'external_urls' => 'external_urls',
+        'file_types_at_source' => 'file_types_at_source'
     ];
 
     /**
@@ -247,7 +251,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'request_ids' => 'setRequestIds',
         'sync_error_message' => 'setSyncErrorMessage',
         'include_containers' => 'setIncludeContainers',
-        'external_urls' => 'setExternalUrls'
+        'external_urls' => 'setExternalUrls',
+        'file_types_at_source' => 'setFileTypesAtSource'
     ];
 
     /**
@@ -272,7 +277,8 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'request_ids' => 'getRequestIds',
         'sync_error_message' => 'getSyncErrorMessage',
         'include_containers' => 'getIncludeContainers',
-        'external_urls' => 'getExternalUrls'
+        'external_urls' => 'getExternalUrls',
+        'file_types_at_source' => 'getFileTypesAtSource'
     ];
 
     /**
@@ -349,6 +355,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         $this->setIfExists('sync_error_message', $data ?? [], null);
         $this->setIfExists('include_containers', $data ?? [], null);
         $this->setIfExists('external_urls', $data ?? [], null);
+        $this->setIfExists('file_types_at_source', $data ?? [], null);
     }
 
     /**
@@ -999,6 +1006,42 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         }
 
         $this->container['external_urls'] = $external_urls;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_types_at_source
+     *
+     * @return \Carbon\Model\HelpdeskFileTypes[]|null
+     */
+    public function getFileTypesAtSource()
+    {
+        return $this->container['file_types_at_source'];
+    }
+
+    /**
+     * Sets file_types_at_source
+     *
+     * @param \Carbon\Model\HelpdeskFileTypes[]|null $file_types_at_source Filter files based on their type at the source (for example help center tickets and articles)
+     *
+     * @return self
+     */
+    public function setFileTypesAtSource($file_types_at_source)
+    {
+
+        if (is_null($file_types_at_source)) {
+            array_push($this->openAPINullablesSetToNull, 'file_types_at_source');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_types_at_source', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_types_at_source'] = $file_types_at_source;
 
         return $this;
     }

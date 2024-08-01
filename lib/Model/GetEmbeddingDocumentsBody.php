@@ -66,7 +66,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
         'include_file_level_metadata' => 'bool',
         'high_accuracy' => 'bool',
-        'rerank' => '\Carbon\Model\RerankParamsNullable'
+        'rerank' => '\Carbon\Model\RerankParamsNullable',
+        'file_types_at_source' => '\Carbon\Model\HelpdeskFileTypes[]'
     ];
 
     /**
@@ -94,7 +95,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'embedding_model' => null,
         'include_file_level_metadata' => null,
         'high_accuracy' => null,
-        'rerank' => null
+        'rerank' => null,
+        'file_types_at_source' => null
     ];
 
     /**
@@ -120,7 +122,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
 		'embedding_model' => true,
 		'include_file_level_metadata' => true,
 		'high_accuracy' => true,
-		'rerank' => true
+		'rerank' => true,
+		'file_types_at_source' => true
     ];
 
     /**
@@ -226,7 +229,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'embedding_model' => 'embedding_model',
         'include_file_level_metadata' => 'include_file_level_metadata',
         'high_accuracy' => 'high_accuracy',
-        'rerank' => 'rerank'
+        'rerank' => 'rerank',
+        'file_types_at_source' => 'file_types_at_source'
     ];
 
     /**
@@ -252,7 +256,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'embedding_model' => 'setEmbeddingModel',
         'include_file_level_metadata' => 'setIncludeFileLevelMetadata',
         'high_accuracy' => 'setHighAccuracy',
-        'rerank' => 'setRerank'
+        'rerank' => 'setRerank',
+        'file_types_at_source' => 'setFileTypesAtSource'
     ];
 
     /**
@@ -278,7 +283,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'embedding_model' => 'getEmbeddingModel',
         'include_file_level_metadata' => 'getIncludeFileLevelMetadata',
         'high_accuracy' => 'getHighAccuracy',
-        'rerank' => 'getRerank'
+        'rerank' => 'getRerank',
+        'file_types_at_source' => 'getFileTypesAtSource'
     ];
 
     /**
@@ -356,6 +362,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('include_file_level_metadata', $data ?? [], false);
         $this->setIfExists('high_accuracy', $data ?? [], false);
         $this->setIfExists('rerank', $data ?? [], null);
+        $this->setIfExists('file_types_at_source', $data ?? [], null);
     }
 
     /**
@@ -1049,6 +1056,42 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         }
 
         $this->container['rerank'] = $rerank;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_types_at_source
+     *
+     * @return \Carbon\Model\HelpdeskFileTypes[]|null
+     */
+    public function getFileTypesAtSource()
+    {
+        return $this->container['file_types_at_source'];
+    }
+
+    /**
+     * Sets file_types_at_source
+     *
+     * @param \Carbon\Model\HelpdeskFileTypes[]|null $file_types_at_source Filter files based on their type at the source (for example help center tickets and articles)
+     *
+     * @return self
+     */
+    public function setFileTypesAtSource($file_types_at_source)
+    {
+
+        if (is_null($file_types_at_source)) {
+            array_push($this->openAPINullablesSetToNull, 'file_types_at_source');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_types_at_source', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_types_at_source'] = $file_types_at_source;
 
         return $this;
     }

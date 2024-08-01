@@ -559,6 +559,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $include_file_level_metadata = false,
         $high_accuracy = false,
         $rerank = SENTINEL_VALUE,
+        $file_types_at_source = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getDocuments'][0]
     )
     {
@@ -581,6 +582,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "include_file_level_metadata", $include_file_level_metadata);
         $this->setRequestBodyProperty($_body, "high_accuracy", $high_accuracy);
         $this->setRequestBodyProperty($_body, "rerank", $rerank);
+        $this->setRequestBodyProperty($_body, "file_types_at_source", $file_types_at_source);
         $get_embedding_documents_body = $_body;
 
         list($response) = $this->getDocumentsWithHttpInfo($get_embedding_documents_body, $contentType);
@@ -756,6 +758,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $include_file_level_metadata = false,
         $high_accuracy = false,
         $rerank = SENTINEL_VALUE,
+        $file_types_at_source = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getDocuments'][0]
     )
     {
@@ -778,6 +781,7 @@ class EmbeddingsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "include_file_level_metadata", $include_file_level_metadata);
         $this->setRequestBodyProperty($_body, "high_accuracy", $high_accuracy);
         $this->setRequestBodyProperty($_body, "rerank", $rerank);
+        $this->setRequestBodyProperty($_body, "file_types_at_source", $file_types_at_source);
         $get_embedding_documents_body = $_body;
 
         return $this->getDocumentsAsyncWithHttpInfo($get_embedding_documents_body, $contentType)
