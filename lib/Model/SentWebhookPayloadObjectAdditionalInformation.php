@@ -1,6 +1,6 @@
 <?php
 /**
- * FileSyncConfigNullable
+ * SentWebhookPayloadObjectAdditionalInformation
  *
  * PHP version 7.4
  *
@@ -26,14 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * FileSyncConfigNullable Class Doc Comment
+ * SentWebhookPayloadObjectAdditionalInformation Class Doc Comment
  *
  * @category Class
- * @description Used to configure file syncing for certain connectors when sync_files_on_connection is set to true
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerializable
+class SentWebhookPayloadObjectAdditionalInformation implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +41,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FileSyncConfigNullable';
+    protected static $openAPIModelName = 'SentWebhookPayload_object_additional_information';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,11 +49,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_synced_source_types' => '\Carbon\Model\HelpdeskFileTypes[]',
-        'sync_attachments' => 'bool',
-        'detect_audio_language' => 'bool',
-        'transcription_service' => '\Carbon\Model\TranscriptionServiceNullable',
-        'split_rows' => 'bool'
+        
     ];
 
     /**
@@ -65,11 +60,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'auto_synced_source_types' => null,
-        'sync_attachments' => null,
-        'detect_audio_language' => null,
-        'transcription_service' => null,
-        'split_rows' => null
+        
     ];
 
     /**
@@ -78,11 +69,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'auto_synced_source_types' => false,
-		'sync_attachments' => false,
-		'detect_audio_language' => false,
-		'transcription_service' => true,
-		'split_rows' => false
+        
     ];
 
     /**
@@ -171,11 +158,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_synced_source_types' => 'auto_synced_source_types',
-        'sync_attachments' => 'sync_attachments',
-        'detect_audio_language' => 'detect_audio_language',
-        'transcription_service' => 'transcription_service',
-        'split_rows' => 'split_rows'
+        
     ];
 
     /**
@@ -184,11 +167,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'auto_synced_source_types' => 'setAutoSyncedSourceTypes',
-        'sync_attachments' => 'setSyncAttachments',
-        'detect_audio_language' => 'setDetectAudioLanguage',
-        'transcription_service' => 'setTranscriptionService',
-        'split_rows' => 'setSplitRows'
+        
     ];
 
     /**
@@ -197,11 +176,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'auto_synced_source_types' => 'getAutoSyncedSourceTypes',
-        'sync_attachments' => 'getSyncAttachments',
-        'detect_audio_language' => 'getDetectAudioLanguage',
-        'transcription_service' => 'getTranscriptionService',
-        'split_rows' => 'getSplitRows'
+        
     ];
 
     /**
@@ -261,11 +236,6 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('auto_synced_source_types', $data ?? [], null);
-        $this->setIfExists('sync_attachments', $data ?? [], false);
-        $this->setIfExists('detect_audio_language', $data ?? [], false);
-        $this->setIfExists('transcription_service', $data ?? [], null);
-        $this->setIfExists('split_rows', $data ?? [], false);
     }
 
     /**
@@ -309,158 +279,6 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets auto_synced_source_types
-     *
-     * @return \Carbon\Model\HelpdeskFileTypes[]|null
-     */
-    public function getAutoSyncedSourceTypes()
-    {
-        return $this->container['auto_synced_source_types'];
-    }
-
-    /**
-     * Sets auto_synced_source_types
-     *
-     * @param \Carbon\Model\HelpdeskFileTypes[]|null $auto_synced_source_types File types to automatically sync when the data source connects. Only a subset of file types can be          controlled. If not supported, then they will always be synced
-     *
-     * @return self
-     */
-    public function setAutoSyncedSourceTypes($auto_synced_source_types)
-    {
-
-        if (is_null($auto_synced_source_types)) {
-            throw new \InvalidArgumentException('non-nullable auto_synced_source_types cannot be null');
-        }
-
-        $this->container['auto_synced_source_types'] = $auto_synced_source_types;
-
-        return $this;
-    }
-
-    /**
-     * Gets sync_attachments
-     *
-     * @return bool|null
-     */
-    public function getSyncAttachments()
-    {
-        return $this->container['sync_attachments'];
-    }
-
-    /**
-     * Sets sync_attachments
-     *
-     * @param bool|null $sync_attachments Automatically sync attachments from files where supported. Currently applies to Helpdesk Tickets
-     *
-     * @return self
-     */
-    public function setSyncAttachments($sync_attachments)
-    {
-
-        if (is_null($sync_attachments)) {
-            throw new \InvalidArgumentException('non-nullable sync_attachments cannot be null');
-        }
-
-        $this->container['sync_attachments'] = $sync_attachments;
-
-        return $this;
-    }
-
-    /**
-     * Gets detect_audio_language
-     *
-     * @return bool|null
-     */
-    public function getDetectAudioLanguage()
-    {
-        return $this->container['detect_audio_language'];
-    }
-
-    /**
-     * Sets detect_audio_language
-     *
-     * @param bool|null $detect_audio_language Detect audio language before transcription for audio files
-     *
-     * @return self
-     */
-    public function setDetectAudioLanguage($detect_audio_language)
-    {
-
-        if (is_null($detect_audio_language)) {
-            throw new \InvalidArgumentException('non-nullable detect_audio_language cannot be null');
-        }
-
-        $this->container['detect_audio_language'] = $detect_audio_language;
-
-        return $this;
-    }
-
-    /**
-     * Gets transcription_service
-     *
-     * @return \Carbon\Model\TranscriptionServiceNullable|null
-     */
-    public function getTranscriptionService()
-    {
-        return $this->container['transcription_service'];
-    }
-
-    /**
-     * Sets transcription_service
-     *
-     * @param \Carbon\Model\TranscriptionServiceNullable|null $transcription_service transcription_service
-     *
-     * @return self
-     */
-    public function setTranscriptionService($transcription_service)
-    {
-
-        if (is_null($transcription_service)) {
-            array_push($this->openAPINullablesSetToNull, 'transcription_service');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('transcription_service', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['transcription_service'] = $transcription_service;
-
-        return $this;
-    }
-
-    /**
-     * Gets split_rows
-     *
-     * @return bool|null
-     */
-    public function getSplitRows()
-    {
-        return $this->container['split_rows'];
-    }
-
-    /**
-     * Sets split_rows
-     *
-     * @param bool|null $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files.
-     *
-     * @return self
-     */
-    public function setSplitRows($split_rows)
-    {
-
-        if (is_null($split_rows)) {
-            throw new \InvalidArgumentException('non-nullable split_rows cannot be null');
-        }
-
-        $this->container['split_rows'] = $split_rows;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

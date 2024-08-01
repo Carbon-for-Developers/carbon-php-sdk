@@ -1,6 +1,6 @@
 <?php
 /**
- * FileSyncConfigTest
+ * SentWebhookPayloadTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * FileSyncConfigTest Class Doc Comment
+ * SentWebhookPayloadTest Class Doc Comment
  *
  * @category    Class
- * @description FileSyncConfig
+ * @description SentWebhookPayload
  * @package     Carbon
  */
-class FileSyncConfigTest extends TestCase
+class SentWebhookPayloadTest extends TestCase
 {
 
     /**
@@ -63,54 +63,45 @@ class FileSyncConfigTest extends TestCase
     }
 
     /**
-     * Test "FileSyncConfig"
+     * Test "SentWebhookPayload"
      */
-    public function testFileSyncConfig()
+    public function testSentWebhookPayload()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "auto_synced_source_types"
+     * Test attribute "webhook_type"
      */
-    public function testPropertyAutoSyncedSourceTypes()
+    public function testPropertyWebhookType()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sync_attachments"
+     * Test attribute "customer_id"
      */
-    public function testPropertySyncAttachments()
+    public function testPropertyCustomerId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "detect_audio_language"
+     * Test attribute "timestamp"
      */
-    public function testPropertyDetectAudioLanguage()
+    public function testPropertyTimestamp()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "transcription_service"
+     * Test attribute "object"
      */
-    public function testPropertyTranscriptionService()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "split_rows"
-     */
-    public function testPropertySplitRows()
+    public function testPropertyObject()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
