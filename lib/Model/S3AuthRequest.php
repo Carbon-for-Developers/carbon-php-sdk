@@ -51,7 +51,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'access_key' => 'string',
         'access_key_secret' => 'string',
-        'sync_source_items' => 'bool'
+        'sync_source_items' => 'bool',
+        'endpoint_url' => 'string'
     ];
 
     /**
@@ -64,7 +65,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'access_key' => null,
         'access_key_secret' => null,
-        'sync_source_items' => null
+        'sync_source_items' => null,
+        'endpoint_url' => null
     ];
 
     /**
@@ -75,7 +77,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'access_key' => false,
 		'access_key_secret' => false,
-		'sync_source_items' => false
+		'sync_source_items' => false,
+		'endpoint_url' => true
     ];
 
     /**
@@ -166,7 +169,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'access_key' => 'access_key',
         'access_key_secret' => 'access_key_secret',
-        'sync_source_items' => 'sync_source_items'
+        'sync_source_items' => 'sync_source_items',
+        'endpoint_url' => 'endpoint_url'
     ];
 
     /**
@@ -177,7 +181,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'access_key' => 'setAccessKey',
         'access_key_secret' => 'setAccessKeySecret',
-        'sync_source_items' => 'setSyncSourceItems'
+        'sync_source_items' => 'setSyncSourceItems',
+        'endpoint_url' => 'setEndpointUrl'
     ];
 
     /**
@@ -188,7 +193,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'access_key' => 'getAccessKey',
         'access_key_secret' => 'getAccessKeySecret',
-        'sync_source_items' => 'getSyncSourceItems'
+        'sync_source_items' => 'getSyncSourceItems',
+        'endpoint_url' => 'getEndpointUrl'
     ];
 
     /**
@@ -251,6 +257,7 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('access_key', $data ?? [], null);
         $this->setIfExists('access_key_secret', $data ?? [], null);
         $this->setIfExists('sync_source_items', $data ?? [], true);
+        $this->setIfExists('endpoint_url', $data ?? [], null);
     }
 
     /**
@@ -384,6 +391,42 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['sync_source_items'] = $sync_source_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets endpoint_url
+     *
+     * @return string|null
+     */
+    public function getEndpointUrl()
+    {
+        return $this->container['endpoint_url'];
+    }
+
+    /**
+     * Sets endpoint_url
+     *
+     * @param string|null $endpoint_url You can specify a Digital Ocean endpoint URL to connect a Digital Ocean Space through this endpoint.         The URL should be of format <region>.digitaloceanspaces.com. It's not required for S3 buckets.
+     *
+     * @return self
+     */
+    public function setEndpointUrl($endpoint_url)
+    {
+
+        if (is_null($endpoint_url)) {
+            array_push($this->openAPINullablesSetToNull, 'endpoint_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('endpoint_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['endpoint_url'] = $endpoint_url;
 
         return $this;
     }

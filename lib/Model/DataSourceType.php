@@ -34,6 +34,8 @@ class DataSourceType
     /**
      * Possible values of this enum
      */
+    public const GOOGLE_CLOUD_STORAGE = 'GOOGLE_CLOUD_STORAGE';
+
     public const GOOGLE_DRIVE = 'GOOGLE_DRIVE';
 
     public const NOTION = 'NOTION';
@@ -151,6 +153,7 @@ class DataSourceType
     public static function getAllowableEnumValues()
     {
         return [
+            self::GOOGLE_CLOUD_STORAGE,
             self::GOOGLE_DRIVE,
             self::NOTION,
             self::NOTION_DATABASE,
