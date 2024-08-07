@@ -107,7 +107,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
 		'max_items_per_chunk' => true,
 		'sync_files_on_connection' => true,
 		'set_page_as_boundary' => false,
-		'request_id' => false,
+		'request_id' => true,
 		'enable_file_picker' => false,
 		'sync_source_items' => false,
 		'incremental_sync' => false,
@@ -330,7 +330,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_items_per_chunk', $data ?? [], null);
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], 'f5e8c193-f7e1-4e45-9be5-6aa157dfe3c3');
+        $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('enable_file_picker', $data ?? [], true);
         $this->setIfExists('sync_source_items', $data ?? [], true);
         $this->setIfExists('incremental_sync', $data ?? [], false);
@@ -753,7 +753,14 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($request_id)) {
-            throw new \InvalidArgumentException('non-nullable request_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'request_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['request_id'] = $request_id;

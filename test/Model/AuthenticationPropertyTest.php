@@ -205,4 +205,13 @@ class AuthenticationPropertyTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "endpoint_url"
+     */
+    public function testPropertyEndpointUrl()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

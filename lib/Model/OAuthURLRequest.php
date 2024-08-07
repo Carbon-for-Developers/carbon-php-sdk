@@ -138,7 +138,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'set_page_as_boundary' => false,
 		'data_source_id' => true,
 		'connecting_new_account' => true,
-		'request_id' => false,
+		'request_id' => true,
 		'use_ocr' => true,
 		'parse_pdf_tables_with_ocr' => true,
 		'enable_file_picker' => false,
@@ -405,7 +405,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('set_page_as_boundary', $data ?? [], false);
         $this->setIfExists('data_source_id', $data ?? [], null);
         $this->setIfExists('connecting_new_account', $data ?? [], false);
-        $this->setIfExists('request_id', $data ?? [], 'c4055754-ba2d-4f57-a990-6e990abbbd90');
+        $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('use_ocr', $data ?? [], false);
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('enable_file_picker', $data ?? [], true);
@@ -1150,7 +1150,14 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($request_id)) {
-            throw new \InvalidArgumentException('non-nullable request_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'request_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['request_id'] = $request_id;

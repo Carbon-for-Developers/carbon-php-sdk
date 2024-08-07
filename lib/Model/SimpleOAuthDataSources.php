@@ -50,6 +50,8 @@ class SimpleOAuthDataSources
 
     public const SLACK = 'SLACK';
 
+    public const GOOGLE_CLOUD_STORAGE = 'GOOGLE_CLOUD_STORAGE';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -64,7 +66,8 @@ class SimpleOAuthDataSources
             self::BOX,
             self::GMAIL,
             self::OUTLOOK,
-            self::SLACK
+            self::SLACK,
+            self::GOOGLE_CLOUD_STORAGE
         ];
     }
 }

@@ -219,7 +219,7 @@ $result = $carbon->dataSources->queryUserDataSources(
     order_by: "created_at", 
     order_dir: "desc", 
     filters: [
-        "source" => "GOOGLE_DRIVE",
+        "source" => "GOOGLE_CLOUD_STORAGE",
     ]
 );
 ```
@@ -1441,7 +1441,6 @@ $result = $carbon->integrations->connectDataSource(
         "prepend_filename_to_chunks" => False,
         "sync_files_on_connection" => True,
         "set_page_as_boundary" => False,
-        "request_id" => "f5e8c193-f7e1-4e45-9be5-6aa157dfe3c3",
         "enable_file_picker" => True,
         "sync_source_items" => True,
         "incremental_sync" => False,
@@ -1619,13 +1618,16 @@ Enabling this flag will fetch all available content from the source to be listed
 
 ### `carbon.integrations.createAwsIamUser`<a id="carbonintegrationscreateawsiamuser"></a>
 
-Create a new IAM user with permissions to:
+This endpoint can be used to connect S3 as well as Digital Ocean Spaces (S3 compatible)  
+For S3, create a new IAM user with permissions to:
 <ol>
 <li>List all buckets.</li>
 <li>Read from the specific buckets and objects to sync with Carbon. Ensure any future buckets or objects carry 
 the same permissions.</li>
 </ol>
-Once created, generate an access key for this user and share the credentials with us. We recommend testing this key beforehand.
+Once created, generate an access key for this user and share the credentials with us. We recommend testing this key beforehand.  
+For Digital Ocean Spaces, generate the above credentials in your Applications and API page here https://cloud.digitalocean.com/account/api/spaces.
+Endpoint URL is required to connect Digital Ocean Spaces.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1634,7 +1636,8 @@ Once created, generate an access key for this user and share the credentials wit
 $result = $carbon->integrations->createAwsIamUser(
     access_key: "string_example", 
     access_key_secret: "string_example", 
-    sync_source_items: True
+    sync_source_items: True, 
+    endpoint_url: "string_example"
 );
 ```
 
@@ -1647,6 +1650,10 @@ $result = $carbon->integrations->createAwsIamUser(
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
 Enabling this flag will fetch all available content from the source to be listed via list items endpoint
+
+##### endpoint_url: `string`<a id="endpoint_url-string"></a>
+
+You can specify a Digital Ocean endpoint URL to connect a Digital Ocean Space through this endpoint.         The URL should be of format <region>.digitaloceanspaces.com. It's not required for S3 buckets.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1674,7 +1681,7 @@ success state.
 
 ```php
 $result = $carbon->integrations->getOauthUrl(
-    service: "GOOGLE_DRIVE", 
+    service: "GOOGLE_CLOUD_STORAGE", 
     tags: None, 
     scope: "string_example", 
     chunk_size: 1500, 
@@ -1693,7 +1700,7 @@ $result = $carbon->integrations->getOauthUrl(
     set_page_as_boundary: False, 
     data_source_id: 1, 
     connecting_new_account: False, 
-    request_id: "c4055754-ba2d-4f57-a990-6e990abbbd90", 
+    request_id: "string_example", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     enable_file_picker: True, 
@@ -2127,7 +2134,7 @@ $result = $carbon->integrations->syncConfluence(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "991e89b6-1e71-41e1-bdc4-4dd475f21696", 
+    request_id: "string_example", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 
@@ -2249,7 +2256,7 @@ $result = $carbon->integrations->syncFiles(
     prepend_filename_to_chunks: False, 
     max_items_per_chunk: 1, 
     set_page_as_boundary: False, 
-    request_id: "991e89b6-1e71-41e1-bdc4-4dd475f21696", 
+    request_id: "string_example", 
     use_ocr: False, 
     parse_pdf_tables_with_ocr: False, 
     incremental_sync: False, 

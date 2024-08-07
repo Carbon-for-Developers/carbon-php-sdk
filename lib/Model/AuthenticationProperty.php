@@ -63,7 +63,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'domain' => 'string',
         'api_key' => 'string',
         'access_key' => 'string',
-        'access_key_secret' => 'string'
+        'access_key_secret' => 'string',
+        'endpoint_url' => 'string'
     ];
 
     /**
@@ -88,7 +89,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'domain' => null,
         'api_key' => null,
         'access_key' => null,
-        'access_key_secret' => null
+        'access_key_secret' => null,
+        'endpoint_url' => null
     ];
 
     /**
@@ -111,7 +113,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
 		'domain' => false,
 		'api_key' => false,
 		'access_key' => false,
-		'access_key_secret' => false
+		'access_key_secret' => false,
+		'endpoint_url' => true
     ];
 
     /**
@@ -214,7 +217,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'domain' => 'domain',
         'api_key' => 'api_key',
         'access_key' => 'access_key',
-        'access_key_secret' => 'access_key_secret'
+        'access_key_secret' => 'access_key_secret',
+        'endpoint_url' => 'endpoint_url'
     ];
 
     /**
@@ -237,7 +241,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'domain' => 'setDomain',
         'api_key' => 'setApiKey',
         'access_key' => 'setAccessKey',
-        'access_key_secret' => 'setAccessKeySecret'
+        'access_key_secret' => 'setAccessKeySecret',
+        'endpoint_url' => 'setEndpointUrl'
     ];
 
     /**
@@ -260,7 +265,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'domain' => 'getDomain',
         'api_key' => 'getApiKey',
         'access_key' => 'getAccessKey',
-        'access_key_secret' => 'getAccessKeySecret'
+        'access_key_secret' => 'getAccessKeySecret',
+        'endpoint_url' => 'getEndpointUrl'
     ];
 
     /**
@@ -335,6 +341,7 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('api_key', $data ?? [], null);
         $this->setIfExists('access_key', $data ?? [], null);
         $this->setIfExists('access_key_secret', $data ?? [], null);
+        $this->setIfExists('endpoint_url', $data ?? [], null);
     }
 
     /**
@@ -866,6 +873,42 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['access_key_secret'] = $access_key_secret;
+
+        return $this;
+    }
+
+    /**
+     * Gets endpoint_url
+     *
+     * @return string|null
+     */
+    public function getEndpointUrl()
+    {
+        return $this->container['endpoint_url'];
+    }
+
+    /**
+     * Sets endpoint_url
+     *
+     * @param string|null $endpoint_url You can specify a Digital Ocean endpoint URL to connect a Digital Ocean Space through this endpoint.         The URL should be of format <region>.digitaloceanspaces.com. It's not required for S3 buckets.
+     *
+     * @return self
+     */
+    public function setEndpointUrl($endpoint_url)
+    {
+
+        if (is_null($endpoint_url)) {
+            array_push($this->openAPINullablesSetToNull, 'endpoint_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('endpoint_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['endpoint_url'] = $endpoint_url;
 
         return $this;
     }
