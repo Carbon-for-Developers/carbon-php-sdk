@@ -74,7 +74,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'enable_file_picker' => 'bool',
         'sync_source_items' => 'bool',
         'incremental_sync' => 'bool',
-        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable'
+        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable',
+        'automatically_open_file_picker' => 'bool'
     ];
 
     /**
@@ -110,7 +111,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'enable_file_picker' => null,
         'sync_source_items' => null,
         'incremental_sync' => null,
-        'file_sync_config' => null
+        'file_sync_config' => null,
+        'automatically_open_file_picker' => null
     ];
 
     /**
@@ -144,7 +146,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'enable_file_picker' => false,
 		'sync_source_items' => false,
 		'incremental_sync' => false,
-		'file_sync_config' => true
+		'file_sync_config' => true,
+		'automatically_open_file_picker' => true
     ];
 
     /**
@@ -258,7 +261,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'enable_file_picker' => 'enable_file_picker',
         'sync_source_items' => 'sync_source_items',
         'incremental_sync' => 'incremental_sync',
-        'file_sync_config' => 'file_sync_config'
+        'file_sync_config' => 'file_sync_config',
+        'automatically_open_file_picker' => 'automatically_open_file_picker'
     ];
 
     /**
@@ -292,7 +296,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'enable_file_picker' => 'setEnableFilePicker',
         'sync_source_items' => 'setSyncSourceItems',
         'incremental_sync' => 'setIncrementalSync',
-        'file_sync_config' => 'setFileSyncConfig'
+        'file_sync_config' => 'setFileSyncConfig',
+        'automatically_open_file_picker' => 'setAutomaticallyOpenFilePicker'
     ];
 
     /**
@@ -326,7 +331,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'enable_file_picker' => 'getEnableFilePicker',
         'sync_source_items' => 'getSyncSourceItems',
         'incremental_sync' => 'getIncrementalSync',
-        'file_sync_config' => 'getFileSyncConfig'
+        'file_sync_config' => 'getFileSyncConfig',
+        'automatically_open_file_picker' => 'getAutomaticallyOpenFilePicker'
     ];
 
     /**
@@ -412,6 +418,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('sync_source_items', $data ?? [], true);
         $this->setIfExists('incremental_sync', $data ?? [], false);
         $this->setIfExists('file_sync_config', $data ?? [], null);
+        $this->setIfExists('automatically_open_file_picker', $data ?? [], null);
     }
 
     /**
@@ -1356,6 +1363,42 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['file_sync_config'] = $file_sync_config;
+
+        return $this;
+    }
+
+    /**
+     * Gets automatically_open_file_picker
+     *
+     * @return bool|null
+     */
+    public function getAutomaticallyOpenFilePicker()
+    {
+        return $this->container['automatically_open_file_picker'];
+    }
+
+    /**
+     * Sets automatically_open_file_picker
+     *
+     * @param bool|null $automatically_open_file_picker Automatically open source file picker after the OAuth flow is complete. This flag is currently supported by         BOX, DROPBOX, GOOGLE_DRIVE, ONEDRIVE, SHAREPOINT. It will be ignored for other data sources.
+     *
+     * @return self
+     */
+    public function setAutomaticallyOpenFilePicker($automatically_open_file_picker)
+    {
+
+        if (is_null($automatically_open_file_picker)) {
+            array_push($this->openAPINullablesSetToNull, 'automatically_open_file_picker');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('automatically_open_file_picker', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['automatically_open_file_picker'] = $automatically_open_file_picker;
 
         return $this;
     }

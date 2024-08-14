@@ -1,6 +1,6 @@
 <?php
 /**
- * FileSyncConfig
+ * ModifyColdStorageParametersQueryInput
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * FileSyncConfig Class Doc Comment
+ * ModifyColdStorageParametersQueryInput Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
+class ModifyColdStorageParametersQueryInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FileSyncConfig';
+    protected static $openAPIModelName = 'ModifyColdStorageParametersQueryInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,12 +49,9 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_synced_source_types' => '\Carbon\Model\HelpdeskFileTypes[]',
-        'sync_attachments' => 'bool',
-        'detect_audio_language' => 'bool',
-        'transcription_service' => '\Carbon\Model\TranscriptionServiceNullable',
-        'include_speaker_labels' => 'bool',
-        'split_rows' => 'bool'
+        'filters' => '\Carbon\Model\OrganizationUserFilesToSyncFilters',
+        'enable_cold_storage' => 'bool',
+        'hot_storage_time_to_live' => 'int'
     ];
 
     /**
@@ -65,12 +62,9 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'auto_synced_source_types' => null,
-        'sync_attachments' => null,
-        'detect_audio_language' => null,
-        'transcription_service' => null,
-        'include_speaker_labels' => null,
-        'split_rows' => null
+        'filters' => null,
+        'enable_cold_storage' => null,
+        'hot_storage_time_to_live' => null
     ];
 
     /**
@@ -79,12 +73,9 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'auto_synced_source_types' => false,
-		'sync_attachments' => false,
-		'detect_audio_language' => false,
-		'transcription_service' => true,
-		'include_speaker_labels' => false,
-		'split_rows' => false
+        'filters' => false,
+		'enable_cold_storage' => true,
+		'hot_storage_time_to_live' => true
     ];
 
     /**
@@ -173,12 +164,9 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_synced_source_types' => 'auto_synced_source_types',
-        'sync_attachments' => 'sync_attachments',
-        'detect_audio_language' => 'detect_audio_language',
-        'transcription_service' => 'transcription_service',
-        'include_speaker_labels' => 'include_speaker_labels',
-        'split_rows' => 'split_rows'
+        'filters' => 'filters',
+        'enable_cold_storage' => 'enable_cold_storage',
+        'hot_storage_time_to_live' => 'hot_storage_time_to_live'
     ];
 
     /**
@@ -187,12 +175,9 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'auto_synced_source_types' => 'setAutoSyncedSourceTypes',
-        'sync_attachments' => 'setSyncAttachments',
-        'detect_audio_language' => 'setDetectAudioLanguage',
-        'transcription_service' => 'setTranscriptionService',
-        'include_speaker_labels' => 'setIncludeSpeakerLabels',
-        'split_rows' => 'setSplitRows'
+        'filters' => 'setFilters',
+        'enable_cold_storage' => 'setEnableColdStorage',
+        'hot_storage_time_to_live' => 'setHotStorageTimeToLive'
     ];
 
     /**
@@ -201,12 +186,9 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'auto_synced_source_types' => 'getAutoSyncedSourceTypes',
-        'sync_attachments' => 'getSyncAttachments',
-        'detect_audio_language' => 'getDetectAudioLanguage',
-        'transcription_service' => 'getTranscriptionService',
-        'include_speaker_labels' => 'getIncludeSpeakerLabels',
-        'split_rows' => 'getSplitRows'
+        'filters' => 'getFilters',
+        'enable_cold_storage' => 'getEnableColdStorage',
+        'hot_storage_time_to_live' => 'getHotStorageTimeToLive'
     ];
 
     /**
@@ -266,12 +248,9 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('auto_synced_source_types', $data ?? [], null);
-        $this->setIfExists('sync_attachments', $data ?? [], false);
-        $this->setIfExists('detect_audio_language', $data ?? [], false);
-        $this->setIfExists('transcription_service', $data ?? [], null);
-        $this->setIfExists('include_speaker_labels', $data ?? [], false);
-        $this->setIfExists('split_rows', $data ?? [], false);
+        $this->setIfExists('filters', $data ?? [], null);
+        $this->setIfExists('enable_cold_storage', $data ?? [], null);
+        $this->setIfExists('hot_storage_time_to_live', $data ?? [], null);
     }
 
     /**
@@ -317,182 +296,102 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets auto_synced_source_types
+     * Gets filters
      *
-     * @return \Carbon\Model\HelpdeskFileTypes[]|null
+     * @return \Carbon\Model\OrganizationUserFilesToSyncFilters|null
      */
-    public function getAutoSyncedSourceTypes()
+    public function getFilters()
     {
-        return $this->container['auto_synced_source_types'];
+        return $this->container['filters'];
     }
 
     /**
-     * Sets auto_synced_source_types
+     * Sets filters
      *
-     * @param \Carbon\Model\HelpdeskFileTypes[]|null $auto_synced_source_types File types to automatically sync when the data source connects. Only a subset of file types can be          controlled. If not supported, then they will always be synced
+     * @param \Carbon\Model\OrganizationUserFilesToSyncFilters|null $filters filters
      *
      * @return self
      */
-    public function setAutoSyncedSourceTypes($auto_synced_source_types)
+    public function setFilters($filters)
     {
 
-        if (is_null($auto_synced_source_types)) {
-            throw new \InvalidArgumentException('non-nullable auto_synced_source_types cannot be null');
+        if (is_null($filters)) {
+            throw new \InvalidArgumentException('non-nullable filters cannot be null');
         }
 
-        $this->container['auto_synced_source_types'] = $auto_synced_source_types;
+        $this->container['filters'] = $filters;
 
         return $this;
     }
 
     /**
-     * Gets sync_attachments
+     * Gets enable_cold_storage
      *
      * @return bool|null
      */
-    public function getSyncAttachments()
+    public function getEnableColdStorage()
     {
-        return $this->container['sync_attachments'];
+        return $this->container['enable_cold_storage'];
     }
 
     /**
-     * Sets sync_attachments
+     * Sets enable_cold_storage
      *
-     * @param bool|null $sync_attachments Automatically sync attachments from files where supported. Currently applies to Helpdesk Tickets
+     * @param bool|null $enable_cold_storage enable_cold_storage
      *
      * @return self
      */
-    public function setSyncAttachments($sync_attachments)
+    public function setEnableColdStorage($enable_cold_storage)
     {
 
-        if (is_null($sync_attachments)) {
-            throw new \InvalidArgumentException('non-nullable sync_attachments cannot be null');
-        }
-
-        $this->container['sync_attachments'] = $sync_attachments;
-
-        return $this;
-    }
-
-    /**
-     * Gets detect_audio_language
-     *
-     * @return bool|null
-     */
-    public function getDetectAudioLanguage()
-    {
-        return $this->container['detect_audio_language'];
-    }
-
-    /**
-     * Sets detect_audio_language
-     *
-     * @param bool|null $detect_audio_language Detect audio language before transcription for audio files
-     *
-     * @return self
-     */
-    public function setDetectAudioLanguage($detect_audio_language)
-    {
-
-        if (is_null($detect_audio_language)) {
-            throw new \InvalidArgumentException('non-nullable detect_audio_language cannot be null');
-        }
-
-        $this->container['detect_audio_language'] = $detect_audio_language;
-
-        return $this;
-    }
-
-    /**
-     * Gets transcription_service
-     *
-     * @return \Carbon\Model\TranscriptionServiceNullable|null
-     */
-    public function getTranscriptionService()
-    {
-        return $this->container['transcription_service'];
-    }
-
-    /**
-     * Sets transcription_service
-     *
-     * @param \Carbon\Model\TranscriptionServiceNullable|null $transcription_service transcription_service
-     *
-     * @return self
-     */
-    public function setTranscriptionService($transcription_service)
-    {
-
-        if (is_null($transcription_service)) {
-            array_push($this->openAPINullablesSetToNull, 'transcription_service');
+        if (is_null($enable_cold_storage)) {
+            array_push($this->openAPINullablesSetToNull, 'enable_cold_storage');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('transcription_service', $nullablesSetToNull);
+            $index = array_search('enable_cold_storage', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['transcription_service'] = $transcription_service;
+        $this->container['enable_cold_storage'] = $enable_cold_storage;
 
         return $this;
     }
 
     /**
-     * Gets include_speaker_labels
+     * Gets hot_storage_time_to_live
      *
-     * @return bool|null
+     * @return int|null
      */
-    public function getIncludeSpeakerLabels()
+    public function getHotStorageTimeToLive()
     {
-        return $this->container['include_speaker_labels'];
+        return $this->container['hot_storage_time_to_live'];
     }
 
     /**
-     * Sets include_speaker_labels
+     * Sets hot_storage_time_to_live
      *
-     * @param bool|null $include_speaker_labels Detect multiple speakers and label segments of speech by speaker for audio files.
+     * @param int|null $hot_storage_time_to_live hot_storage_time_to_live
      *
      * @return self
      */
-    public function setIncludeSpeakerLabels($include_speaker_labels)
+    public function setHotStorageTimeToLive($hot_storage_time_to_live)
     {
 
-        if (is_null($include_speaker_labels)) {
-            throw new \InvalidArgumentException('non-nullable include_speaker_labels cannot be null');
+        if (is_null($hot_storage_time_to_live)) {
+            array_push($this->openAPINullablesSetToNull, 'hot_storage_time_to_live');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hot_storage_time_to_live', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['include_speaker_labels'] = $include_speaker_labels;
-
-        return $this;
-    }
-
-    /**
-     * Gets split_rows
-     *
-     * @return bool|null
-     */
-    public function getSplitRows()
-    {
-        return $this->container['split_rows'];
-    }
-
-    /**
-     * Sets split_rows
-     *
-     * @param bool|null $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files.
-     *
-     * @return self
-     */
-    public function setSplitRows($split_rows)
-    {
-
-        if (is_null($split_rows)) {
-            throw new \InvalidArgumentException('non-nullable split_rows cannot be null');
-        }
-
-        $this->container['split_rows'] = $split_rows;
+        $this->container['hot_storage_time_to_live'] = $hot_storage_time_to_live;
 
         return $this;
     }

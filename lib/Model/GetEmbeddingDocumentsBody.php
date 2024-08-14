@@ -67,7 +67,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'include_file_level_metadata' => 'bool',
         'high_accuracy' => 'bool',
         'rerank' => '\Carbon\Model\RerankParamsNullable',
-        'file_types_at_source' => '\Carbon\Model\HelpdeskFileTypes[]'
+        'file_types_at_source' => '\Carbon\Model\HelpdeskFileTypes[]',
+        'exclude_cold_storage_files' => 'bool'
     ];
 
     /**
@@ -96,7 +97,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'include_file_level_metadata' => null,
         'high_accuracy' => null,
         'rerank' => null,
-        'file_types_at_source' => null
+        'file_types_at_source' => null,
+        'exclude_cold_storage_files' => null
     ];
 
     /**
@@ -123,7 +125,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
 		'include_file_level_metadata' => true,
 		'high_accuracy' => true,
 		'rerank' => true,
-		'file_types_at_source' => true
+		'file_types_at_source' => true,
+		'exclude_cold_storage_files' => false
     ];
 
     /**
@@ -230,7 +233,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'include_file_level_metadata' => 'include_file_level_metadata',
         'high_accuracy' => 'high_accuracy',
         'rerank' => 'rerank',
-        'file_types_at_source' => 'file_types_at_source'
+        'file_types_at_source' => 'file_types_at_source',
+        'exclude_cold_storage_files' => 'exclude_cold_storage_files'
     ];
 
     /**
@@ -257,7 +261,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'include_file_level_metadata' => 'setIncludeFileLevelMetadata',
         'high_accuracy' => 'setHighAccuracy',
         'rerank' => 'setRerank',
-        'file_types_at_source' => 'setFileTypesAtSource'
+        'file_types_at_source' => 'setFileTypesAtSource',
+        'exclude_cold_storage_files' => 'setExcludeColdStorageFiles'
     ];
 
     /**
@@ -284,7 +289,8 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'include_file_level_metadata' => 'getIncludeFileLevelMetadata',
         'high_accuracy' => 'getHighAccuracy',
         'rerank' => 'getRerank',
-        'file_types_at_source' => 'getFileTypesAtSource'
+        'file_types_at_source' => 'getFileTypesAtSource',
+        'exclude_cold_storage_files' => 'getExcludeColdStorageFiles'
     ];
 
     /**
@@ -363,6 +369,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('high_accuracy', $data ?? [], false);
         $this->setIfExists('rerank', $data ?? [], null);
         $this->setIfExists('file_types_at_source', $data ?? [], null);
+        $this->setIfExists('exclude_cold_storage_files', $data ?? [], false);
     }
 
     /**
@@ -1092,6 +1099,35 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         }
 
         $this->container['file_types_at_source'] = $file_types_at_source;
+
+        return $this;
+    }
+
+    /**
+     * Gets exclude_cold_storage_files
+     *
+     * @return bool|null
+     */
+    public function getExcludeColdStorageFiles()
+    {
+        return $this->container['exclude_cold_storage_files'];
+    }
+
+    /**
+     * Sets exclude_cold_storage_files
+     *
+     * @param bool|null $exclude_cold_storage_files Flag to control whether or not to exclude files that are not in hot storage. If set to False, then an error will be returned if any filtered         files are in cold storage.
+     *
+     * @return self
+     */
+    public function setExcludeColdStorageFiles($exclude_cold_storage_files)
+    {
+
+        if (is_null($exclude_cold_storage_files)) {
+            throw new \InvalidArgumentException('non-nullable exclude_cold_storage_files cannot be null');
+        }
+
+        $this->container['exclude_cold_storage_files'] = $exclude_cold_storage_files;
 
         return $this;
     }

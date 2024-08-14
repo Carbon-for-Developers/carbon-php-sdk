@@ -108,6 +108,15 @@ class FileSyncConfigNullableTest extends TestCase
     }
 
     /**
+     * Test attribute "include_speaker_labels"
+     */
+    public function testPropertyIncludeSpeakerLabels()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "split_rows"
      */
     public function testPropertySplitRows()

@@ -241,4 +241,13 @@ class GetEmbeddingDocumentsBodyTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "exclude_cold_storage_files"
+     */
+    public function testPropertyExcludeColdStorageFiles()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

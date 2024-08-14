@@ -1,6 +1,6 @@
 <?php
 /**
- * FileSyncConfigTest
+ * ColdStoragePropsTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * FileSyncConfigTest Class Doc Comment
+ * ColdStoragePropsTest Class Doc Comment
  *
  * @category    Class
- * @description FileSyncConfig
+ * @description ColdStorageProps
  * @package     Carbon
  */
-class FileSyncConfigTest extends TestCase
+class ColdStoragePropsTest extends TestCase
 {
 
     /**
@@ -63,63 +63,27 @@ class FileSyncConfigTest extends TestCase
     }
 
     /**
-     * Test "FileSyncConfig"
+     * Test "ColdStorageProps"
      */
-    public function testFileSyncConfig()
+    public function testColdStorageProps()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "auto_synced_source_types"
+     * Test attribute "enable_cold_storage"
      */
-    public function testPropertyAutoSyncedSourceTypes()
+    public function testPropertyEnableColdStorage()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sync_attachments"
+     * Test attribute "hot_storage_time_to_live"
      */
-    public function testPropertySyncAttachments()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "detect_audio_language"
-     */
-    public function testPropertyDetectAudioLanguage()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "transcription_service"
-     */
-    public function testPropertyTranscriptionService()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "include_speaker_labels"
-     */
-    public function testPropertyIncludeSpeakerLabels()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "split_rows"
-     */
-    public function testPropertySplitRows()
+    public function testPropertyHotStorageTimeToLive()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

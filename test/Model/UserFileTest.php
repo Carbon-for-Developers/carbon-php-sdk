@@ -360,6 +360,33 @@ class UserFileTest extends TestCase
     }
 
     /**
+     * Test attribute "supports_cold_storage"
+     */
+    public function testPropertySupportsColdStorage()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "hot_storage_time_to_live"
+     */
+    public function testPropertyHotStorageTimeToLive()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "embedding_storage_status"
+     */
+    public function testPropertyEmbeddingStorageStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()
