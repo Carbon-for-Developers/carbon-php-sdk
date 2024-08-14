@@ -56,7 +56,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'bool',
         'overwrite_file_id' => 'int',
         'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
-        'generate_sparse_vectors' => 'bool'
+        'generate_sparse_vectors' => 'bool',
+        'cold_storage_params' => '\Carbon\Model\ColdStorageProps'
     ];
 
     /**
@@ -74,7 +75,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => null,
         'overwrite_file_id' => null,
         'embedding_model' => null,
-        'generate_sparse_vectors' => null
+        'generate_sparse_vectors' => null,
+        'cold_storage_params' => null
     ];
 
     /**
@@ -90,7 +92,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'skip_embedding_generation' => false,
 		'overwrite_file_id' => true,
 		'embedding_model' => true,
-		'generate_sparse_vectors' => true
+		'generate_sparse_vectors' => true,
+		'cold_storage_params' => false
     ];
 
     /**
@@ -186,7 +189,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'skip_embedding_generation',
         'overwrite_file_id' => 'overwrite_file_id',
         'embedding_model' => 'embedding_model',
-        'generate_sparse_vectors' => 'generate_sparse_vectors'
+        'generate_sparse_vectors' => 'generate_sparse_vectors',
+        'cold_storage_params' => 'cold_storage_params'
     ];
 
     /**
@@ -202,7 +206,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'setSkipEmbeddingGeneration',
         'overwrite_file_id' => 'setOverwriteFileId',
         'embedding_model' => 'setEmbeddingModel',
-        'generate_sparse_vectors' => 'setGenerateSparseVectors'
+        'generate_sparse_vectors' => 'setGenerateSparseVectors',
+        'cold_storage_params' => 'setColdStorageParams'
     ];
 
     /**
@@ -218,7 +223,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_embedding_generation' => 'getSkipEmbeddingGeneration',
         'overwrite_file_id' => 'getOverwriteFileId',
         'embedding_model' => 'getEmbeddingModel',
-        'generate_sparse_vectors' => 'getGenerateSparseVectors'
+        'generate_sparse_vectors' => 'getGenerateSparseVectors',
+        'cold_storage_params' => 'getColdStorageParams'
     ];
 
     /**
@@ -286,6 +292,7 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('overwrite_file_id', $data ?? [], null);
         $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
+        $this->setIfExists('cold_storage_params', $data ?? [], null);
     }
 
     /**
@@ -612,6 +619,35 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['generate_sparse_vectors'] = $generate_sparse_vectors;
+
+        return $this;
+    }
+
+    /**
+     * Gets cold_storage_params
+     *
+     * @return \Carbon\Model\ColdStorageProps|null
+     */
+    public function getColdStorageParams()
+    {
+        return $this->container['cold_storage_params'];
+    }
+
+    /**
+     * Sets cold_storage_params
+     *
+     * @param \Carbon\Model\ColdStorageProps|null $cold_storage_params cold_storage_params
+     *
+     * @return self
+     */
+    public function setColdStorageParams($cold_storage_params)
+    {
+
+        if (is_null($cold_storage_params)) {
+            throw new \InvalidArgumentException('non-nullable cold_storage_params cannot be null');
+        }
+
+        $this->container['cold_storage_params'] = $cold_storage_params;
 
         return $this;
     }

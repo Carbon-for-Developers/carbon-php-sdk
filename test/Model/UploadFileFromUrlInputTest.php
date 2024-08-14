@@ -198,6 +198,15 @@ class UploadFileFromUrlInputTest extends TestCase
     }
 
     /**
+     * Test attribute "include_speaker_labels"
+     */
+    public function testPropertyIncludeSpeakerLabels()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "media_type"
      */
     public function testPropertyMediaType()
@@ -210,6 +219,15 @@ class UploadFileFromUrlInputTest extends TestCase
      * Test attribute "split_rows"
      */
     public function testPropertySplitRows()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "cold_storage_params"
+     */
+    public function testPropertyColdStorageParams()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

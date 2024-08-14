@@ -35,6 +35,8 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.files.deleteV2`](#carbonfilesdeletev2)
   * [`carbon.files.getParsedFile`](#carbonfilesgetparsedfile)
   * [`carbon.files.getRawFile`](#carbonfilesgetrawfile)
+  * [`carbon.files.modifyColdStorageParameters`](#carbonfilesmodifycoldstorageparameters)
+  * [`carbon.files.moveToHotStorage`](#carbonfilesmovetohotstorage)
   * [`carbon.files.queryUserFiles`](#carbonfilesqueryuserfiles)
   * [`carbon.files.queryUserFilesDeprecated`](#carbonfilesqueryuserfilesdeprecated)
   * [`carbon.files.resync`](#carbonfilesresync)
@@ -464,7 +466,8 @@ $result = $carbon->embeddings->getDocuments(
     ], 
     file_types_at_source: [
         "string_example"
-    ]
+    ], 
+    exclude_cold_storage_files: False
 );
 ```
 
@@ -537,6 +540,10 @@ Flag to control whether or not to perform a high accuracy embedding search. By d
 ##### file_types_at_source: []<a id="file_types_at_source-"></a>
 
 Filter files based on their type at the source (for example help center tickets and articles)
+
+##### exclude_cold_storage_files: `bool`<a id="exclude_cold_storage_files-bool"></a>
+
+Flag to control whether or not to exclude files that are not in hot storage. If set to False, then an error will be returned if any filtered         files are in cold storage.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -924,6 +931,80 @@ $result = $carbon->files->getRawFile(
 ---
 
 
+### `carbon.files.modifyColdStorageParameters`<a id="carbonfilesmodifycoldstorageparameters"></a>
+
+Modify Cold Storage Parameters
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->files->modifyColdStorageParameters(
+    filters: [
+        "include_all_children" => False,
+        "non_synced_only" => False,
+    ], 
+    enable_cold_storage: True, 
+    hot_storage_time_to_live: 1
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### filters: [`OrganizationUserFilesToSyncFilters`](./lib/Model/OrganizationUserFilesToSyncFilters.php)<a id="filters-organizationuserfilestosyncfilterslibmodelorganizationuserfilestosyncfiltersphp"></a>
+
+##### enable_cold_storage: `bool`<a id="enable_cold_storage-bool"></a>
+
+##### hot_storage_time_to_live: `int`<a id="hot_storage_time_to_live-int"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**bool**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/modify_cold_storage_parameters` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.files.moveToHotStorage`<a id="carbonfilesmovetohotstorage"></a>
+
+Move To Hot Storage
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->files->moveToHotStorage(
+    filters: [
+        "include_all_children" => False,
+        "non_synced_only" => False,
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### filters: [`OrganizationUserFilesToSyncFilters`](./lib/Model/OrganizationUserFilesToSyncFilters.php)<a id="filters-organizationuserfilestosyncfilterslibmodelorganizationuserfilestosyncfiltersphp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**bool**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/move_to_hot_storage` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `carbon.files.queryUserFiles`<a id="carbonfilesqueryuserfiles"></a>
 
 For pre-filtering documents, using `tags_v2` is preferred to using `tags` (which is now deprecated). If both `tags_v2`
@@ -1170,8 +1251,11 @@ $result = $carbon->files->upload(
     parse_pdf_tables_with_ocr: False, 
     detect_audio_language: False, 
     transcription_service: "assemblyai", 
+    include_speaker_labels: False, 
     media_type: "TEXT", 
-    split_rows: False
+    split_rows: False, 
+    enable_cold_storage: False, 
+    hot_storage_time_to_live: 1
 );
 ```
 
@@ -1227,6 +1311,10 @@ Whether to automatically detect the language of the uploaded audio file.
 
 The transcription service to use for audio files. If no service is specified, 'deepgram' will be used.
 
+##### include_speaker_labels: `bool`<a id="include_speaker_labels-bool"></a>
+
+Detect multiple speakers and label segments of speech by speaker for audio files.
+
 ##### media_type:<a id="media_type"></a>
 
 The media type of the file. If not provided, it will be inferred from the file extension.
@@ -1234,6 +1322,14 @@ The media type of the file. If not provided, it will be inferred from the file e
 ##### split_rows: `bool`<a id="split_rows-bool"></a>
 
 Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files.
+
+##### enable_cold_storage: `bool`<a id="enable_cold_storage-bool"></a>
+
+Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false.
+
+##### hot_storage_time_to_live: `int`<a id="hot_storage_time_to_live-int"></a>
+
+Time in seconds after which the file will be moved to cold storage.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1272,8 +1368,12 @@ $result = $carbon->files->uploadFromUrl(
     parse_pdf_tables_with_ocr: False, 
     detect_audio_language: False, 
     transcription_service: "assemblyai", 
+    include_speaker_labels: False, 
     media_type: "TEXT", 
-    split_rows: False
+    split_rows: False, 
+    cold_storage_params: [
+        "enable_cold_storage" => False,
+    ]
 );
 ```
 
@@ -1309,9 +1409,13 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 ##### transcription_service:<a id="transcription_service"></a>
 
+##### include_speaker_labels: `bool`<a id="include_speaker_labels-bool"></a>
+
 ##### media_type:<a id="media_type"></a>
 
 ##### split_rows: `bool`<a id="split_rows-bool"></a>
+
+##### cold_storage_params: [`ColdStorageProps`](./lib/Model/ColdStorageProps.php)<a id="cold_storage_params-coldstoragepropslibmodelcoldstoragepropsphp"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1352,7 +1456,10 @@ $result = $carbon->files->uploadText(
     skip_embedding_generation: False, 
     overwrite_file_id: 1, 
     embedding_model: "OPENAI", 
-    generate_sparse_vectors: False
+    generate_sparse_vectors: False, 
+    cold_storage_params: [
+        "enable_cold_storage" => False,
+    ]
 );
 ```
 
@@ -1373,6 +1480,8 @@ $result = $carbon->files->uploadText(
 ##### embedding_model:<a id="embedding_model"></a>
 
 ##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
+
+##### cold_storage_params: [`ColdStorageProps`](./lib/Model/ColdStorageProps.php)<a id="cold_storage_params-coldstoragepropslibmodelcoldstoragepropsphp"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1498,6 +1607,7 @@ $result = $carbon->integrations->connectFreshdesk(
         "sync_attachments" => False,
         "detect_audio_language" => False,
         "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
         "split_rows" => False,
     ]
 );
@@ -1711,8 +1821,10 @@ $result = $carbon->integrations->getOauthUrl(
         "sync_attachments" => False,
         "detect_audio_language" => False,
         "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
         "split_rows" => False,
-    ]
+    ], 
+    automatically_open_file_picker: True
 );
 ```
 
@@ -1787,6 +1899,10 @@ Enabling this flag will fetch all available content from the source to be listed
 Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX, INTERCOM, GMAIL, OUTLOOK, ZENDESK, CONFLUENCE, NOTION, SHAREPOINT. It will be ignored for other data sources.
 
 ##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
+
+##### automatically_open_file_picker: `bool`<a id="automatically_open_file_picker-bool"></a>
+
+Automatically open source file picker after the OAuth flow is complete. This flag is currently supported by         BOX, DROPBOX, GOOGLE_DRIVE, ONEDRIVE, SHAREPOINT. It will be ignored for other data sources.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2143,6 +2259,7 @@ $result = $carbon->integrations->syncConfluence(
         "sync_attachments" => False,
         "detect_audio_language" => False,
         "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
         "split_rows" => False,
     ]
 );
@@ -2265,6 +2382,7 @@ $result = $carbon->integrations->syncFiles(
         "sync_attachments" => False,
         "detect_audio_language" => False,
         "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
         "split_rows" => False,
     ]
 );
@@ -2500,6 +2618,7 @@ $result = $carbon->integrations->syncGmail(
         "sync_attachments" => False,
         "detect_audio_language" => False,
         "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
         "split_rows" => False,
     ], 
     incremental_sync: False
@@ -2634,6 +2753,7 @@ $result = $carbon->integrations->syncOutlook(
         "sync_attachments" => False,
         "detect_audio_language" => False,
         "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
         "split_rows" => False,
     ], 
     incremental_sync: False
@@ -2810,6 +2930,7 @@ $result = $carbon->integrations->syncS3Files(
         "sync_attachments" => False,
         "detect_audio_language" => False,
         "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
         "split_rows" => False,
     ]
 );

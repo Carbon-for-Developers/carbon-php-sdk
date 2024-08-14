@@ -81,6 +81,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_properties' => 'object',
         'messages_metadata' => 'object',
         'file_contents_deleted' => 'bool',
+        'supports_cold_storage' => 'bool',
+        'hot_storage_time_to_live' => 'int',
+        'embedding_storage_status' => '\Carbon\Model\EmbeddingStorageStatus',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -125,6 +128,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_properties' => null,
         'messages_metadata' => null,
         'file_contents_deleted' => null,
+        'supports_cold_storage' => null,
+        'hot_storage_time_to_live' => null,
+        'embedding_storage_status' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -167,6 +173,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
 		'sync_properties' => false,
 		'messages_metadata' => false,
 		'file_contents_deleted' => false,
+		'supports_cold_storage' => false,
+		'hot_storage_time_to_live' => true,
+		'embedding_storage_status' => false,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -289,6 +298,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_properties' => 'sync_properties',
         'messages_metadata' => 'messages_metadata',
         'file_contents_deleted' => 'file_contents_deleted',
+        'supports_cold_storage' => 'supports_cold_storage',
+        'hot_storage_time_to_live' => 'hot_storage_time_to_live',
+        'embedding_storage_status' => 'embedding_storage_status',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -331,6 +343,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_properties' => 'setSyncProperties',
         'messages_metadata' => 'setMessagesMetadata',
         'file_contents_deleted' => 'setFileContentsDeleted',
+        'supports_cold_storage' => 'setSupportsColdStorage',
+        'hot_storage_time_to_live' => 'setHotStorageTimeToLive',
+        'embedding_storage_status' => 'setEmbeddingStorageStatus',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -373,6 +388,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_properties' => 'getSyncProperties',
         'messages_metadata' => 'getMessagesMetadata',
         'file_contents_deleted' => 'getFileContentsDeleted',
+        'supports_cold_storage' => 'getSupportsColdStorage',
+        'hot_storage_time_to_live' => 'getHotStorageTimeToLive',
+        'embedding_storage_status' => 'getEmbeddingStorageStatus',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -466,6 +484,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('sync_properties', $data ?? [], null);
         $this->setIfExists('messages_metadata', $data ?? [], null);
         $this->setIfExists('file_contents_deleted', $data ?? [], false);
+        $this->setIfExists('supports_cold_storage', $data ?? [], null);
+        $this->setIfExists('hot_storage_time_to_live', $data ?? [], null);
+        $this->setIfExists('embedding_storage_status', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -592,6 +613,15 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['file_contents_deleted'] === null) {
             $invalidProperties[] = "'file_contents_deleted' can't be null";
+        }
+        if ($this->container['supports_cold_storage'] === null) {
+            $invalidProperties[] = "'supports_cold_storage' can't be null";
+        }
+        if ($this->container['hot_storage_time_to_live'] === null) {
+            $invalidProperties[] = "'hot_storage_time_to_live' can't be null";
+        }
+        if ($this->container['embedding_storage_status'] === null) {
+            $invalidProperties[] = "'embedding_storage_status' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -1685,6 +1715,100 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['file_contents_deleted'] = $file_contents_deleted;
+
+        return $this;
+    }
+
+    /**
+     * Gets supports_cold_storage
+     *
+     * @return bool
+     */
+    public function getSupportsColdStorage()
+    {
+        return $this->container['supports_cold_storage'];
+    }
+
+    /**
+     * Sets supports_cold_storage
+     *
+     * @param bool $supports_cold_storage supports_cold_storage
+     *
+     * @return self
+     */
+    public function setSupportsColdStorage($supports_cold_storage)
+    {
+
+        if (is_null($supports_cold_storage)) {
+            throw new \InvalidArgumentException('non-nullable supports_cold_storage cannot be null');
+        }
+
+        $this->container['supports_cold_storage'] = $supports_cold_storage;
+
+        return $this;
+    }
+
+    /**
+     * Gets hot_storage_time_to_live
+     *
+     * @return int
+     */
+    public function getHotStorageTimeToLive()
+    {
+        return $this->container['hot_storage_time_to_live'];
+    }
+
+    /**
+     * Sets hot_storage_time_to_live
+     *
+     * @param int $hot_storage_time_to_live hot_storage_time_to_live
+     *
+     * @return self
+     */
+    public function setHotStorageTimeToLive($hot_storage_time_to_live)
+    {
+
+        if (is_null($hot_storage_time_to_live)) {
+            array_push($this->openAPINullablesSetToNull, 'hot_storage_time_to_live');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hot_storage_time_to_live', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['hot_storage_time_to_live'] = $hot_storage_time_to_live;
+
+        return $this;
+    }
+
+    /**
+     * Gets embedding_storage_status
+     *
+     * @return \Carbon\Model\EmbeddingStorageStatus
+     */
+    public function getEmbeddingStorageStatus()
+    {
+        return $this->container['embedding_storage_status'];
+    }
+
+    /**
+     * Sets embedding_storage_status
+     *
+     * @param \Carbon\Model\EmbeddingStorageStatus $embedding_storage_status embedding_storage_status
+     *
+     * @return self
+     */
+    public function setEmbeddingStorageStatus($embedding_storage_status)
+    {
+
+        if (is_null($embedding_storage_status)) {
+            throw new \InvalidArgumentException('non-nullable embedding_storage_status cannot be null');
+        }
+
+        $this->container['embedding_storage_status'] = $embedding_storage_status;
 
         return $this;
     }

@@ -243,6 +243,7 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
     public const WEBHOOK_TYPE_CANCEL = 'CANCEL';
     public const WEBHOOK_TYPE_CHECKUP = 'CHECKUP';
     public const WEBHOOK_TYPE_DATA_SOURCE_READY = 'DATA_SOURCE_READY';
+    public const WEBHOOK_TYPE_EMBEDDING_STORAGE_MODIFIED = 'EMBEDDING_STORAGE_MODIFIED';
     public const WEBHOOK_TYPE_FILES_CREATED = 'FILES_CREATED';
     public const WEBHOOK_TYPE_FILES_SKIPPED = 'FILES_SKIPPED';
     public const WEBHOOK_TYPE_FILE_DELETED = 'FILE_DELETED';
@@ -250,6 +251,8 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
     public const WEBHOOK_TYPE_FILE_READY = 'FILE_READY';
     public const WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED = 'FILE_STATISTICS_AGGREGATED';
     public const WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED = 'FILE_SYNC_LIMIT_REACHED';
+    public const WEBHOOK_TYPE_MOVED_TO_COLD_STORAGE = 'MOVED_TO_COLD_STORAGE';
+    public const WEBHOOK_TYPE_MOVED_TO_HOT_STORAGE = 'MOVED_TO_HOT_STORAGE';
     public const WEBHOOK_TYPE_ORGANIZATION_USER_DELETED = 'ORGANIZATION_USER_DELETED';
     public const WEBHOOK_TYPE_RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR';
     public const WEBHOOK_TYPE_REVOKE = 'REVOKE';
@@ -272,6 +275,7 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
             self::WEBHOOK_TYPE_CANCEL,
             self::WEBHOOK_TYPE_CHECKUP,
             self::WEBHOOK_TYPE_DATA_SOURCE_READY,
+            self::WEBHOOK_TYPE_EMBEDDING_STORAGE_MODIFIED,
             self::WEBHOOK_TYPE_FILES_CREATED,
             self::WEBHOOK_TYPE_FILES_SKIPPED,
             self::WEBHOOK_TYPE_FILE_DELETED,
@@ -279,6 +283,8 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
             self::WEBHOOK_TYPE_FILE_READY,
             self::WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED,
             self::WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED,
+            self::WEBHOOK_TYPE_MOVED_TO_COLD_STORAGE,
+            self::WEBHOOK_TYPE_MOVED_TO_HOT_STORAGE,
             self::WEBHOOK_TYPE_ORGANIZATION_USER_DELETED,
             self::WEBHOOK_TYPE_RATE_LIMIT_ERROR,
             self::WEBHOOK_TYPE_REVOKE,

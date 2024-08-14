@@ -142,6 +142,30 @@ class FilesApiTest extends TestCase
     }
 
     /**
+     * Test case for modifyColdStorageParameters
+     *
+     * Modify Cold Storage Parameters.
+     *
+     */
+    public function testModifyColdStorageParameters()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for moveToHotStorage
+     *
+     * Move To Hot Storage.
+     *
+     */
+    public function testMoveToHotStorage()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for queryUserFiles
      *
      * User Files V2.

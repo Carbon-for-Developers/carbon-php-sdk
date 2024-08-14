@@ -142,4 +142,13 @@ class RawTextInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "cold_storage_params"
+     */
+    public function testPropertyColdStorageParams()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

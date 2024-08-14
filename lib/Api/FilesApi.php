@@ -82,6 +82,12 @@ class FilesApi extends \Carbon\CustomApi
         'getRawFile' => [
             'application/json',
         ],
+        'modifyColdStorageParameters' => [
+            'application/json',
+        ],
+        'moveToHotStorage' => [
+            'application/json',
+        ],
         'queryUserFiles' => [
             'application/json',
         ],
@@ -2760,6 +2766,750 @@ class FilesApi extends \Carbon\CustomApi
     }
 
     /**
+     * Operation modifyColdStorageParameters
+     *
+     * Modify Cold Storage Parameters
+     *
+     * @param  \Carbon\Model\ModifyColdStorageParametersQueryInput $modify_cold_storage_parameters_query_input modify_cold_storage_parameters_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyColdStorageParameters'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return bool|\Carbon\Model\HTTPValidationError
+     */
+    public function modifyColdStorageParameters(
+
+        $filters = SENTINEL_VALUE,
+        $enable_cold_storage = SENTINEL_VALUE,
+        $hot_storage_time_to_live = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['modifyColdStorageParameters'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "filters", $filters);
+        $this->setRequestBodyProperty($_body, "enable_cold_storage", $enable_cold_storage);
+        $this->setRequestBodyProperty($_body, "hot_storage_time_to_live", $hot_storage_time_to_live);
+        $modify_cold_storage_parameters_query_input = $_body;
+
+        list($response) = $this->modifyColdStorageParametersWithHttpInfo($modify_cold_storage_parameters_query_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation modifyColdStorageParametersWithHttpInfo
+     *
+     * Modify Cold Storage Parameters
+     *
+     * @param  \Carbon\Model\ModifyColdStorageParametersQueryInput $modify_cold_storage_parameters_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyColdStorageParameters'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of bool|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function modifyColdStorageParametersWithHttpInfo($modify_cold_storage_parameters_query_input, string $contentType = self::contentTypes['modifyColdStorageParameters'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->modifyColdStorageParametersRequest($modify_cold_storage_parameters_query_input, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->modifyColdStorageParametersWithHttpInfo(
+                        $modify_cold_storage_parameters_query_input,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('bool' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('bool' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'bool', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'bool';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'bool',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation modifyColdStorageParametersAsync
+     *
+     * Modify Cold Storage Parameters
+     *
+     * @param  \Carbon\Model\ModifyColdStorageParametersQueryInput $modify_cold_storage_parameters_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyColdStorageParameters'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function modifyColdStorageParametersAsync(
+
+        $filters = SENTINEL_VALUE,
+        $enable_cold_storage = SENTINEL_VALUE,
+        $hot_storage_time_to_live = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['modifyColdStorageParameters'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "filters", $filters);
+        $this->setRequestBodyProperty($_body, "enable_cold_storage", $enable_cold_storage);
+        $this->setRequestBodyProperty($_body, "hot_storage_time_to_live", $hot_storage_time_to_live);
+        $modify_cold_storage_parameters_query_input = $_body;
+
+        return $this->modifyColdStorageParametersAsyncWithHttpInfo($modify_cold_storage_parameters_query_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation modifyColdStorageParametersAsyncWithHttpInfo
+     *
+     * Modify Cold Storage Parameters
+     *
+     * @param  \Carbon\Model\ModifyColdStorageParametersQueryInput $modify_cold_storage_parameters_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyColdStorageParameters'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function modifyColdStorageParametersAsyncWithHttpInfo($modify_cold_storage_parameters_query_input, string $contentType = self::contentTypes['modifyColdStorageParameters'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = 'bool';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->modifyColdStorageParametersRequest($modify_cold_storage_parameters_query_input, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'modifyColdStorageParameters'
+     *
+     * @param  \Carbon\Model\ModifyColdStorageParametersQueryInput $modify_cold_storage_parameters_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['modifyColdStorageParameters'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function modifyColdStorageParametersRequest($modify_cold_storage_parameters_query_input, string $contentType = self::contentTypes['modifyColdStorageParameters'][0])
+    {
+
+        if ($modify_cold_storage_parameters_query_input !== SENTINEL_VALUE) {
+            if (!($modify_cold_storage_parameters_query_input instanceof \Carbon\Model\ModifyColdStorageParametersQueryInput)) {
+                if (!is_array($modify_cold_storage_parameters_query_input))
+                    throw new \InvalidArgumentException('"modify_cold_storage_parameters_query_input" must be associative array or an instance of \Carbon\Model\ModifyColdStorageParametersQueryInput FilesApi.modifyColdStorageParameters.');
+                else
+                    $modify_cold_storage_parameters_query_input = new \Carbon\Model\ModifyColdStorageParametersQueryInput($modify_cold_storage_parameters_query_input);
+            }
+        }
+        // verify the required parameter 'modify_cold_storage_parameters_query_input' is set
+        if ($modify_cold_storage_parameters_query_input === SENTINEL_VALUE || (is_array($modify_cold_storage_parameters_query_input) && count($modify_cold_storage_parameters_query_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter modify_cold_storage_parameters_query_input when calling modifyColdStorageParameters'
+            );
+        }
+
+
+        $resourcePath = '/modify_cold_storage_parameters';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($modify_cold_storage_parameters_query_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($modify_cold_storage_parameters_query_input));
+            } else {
+                $httpBody = $modify_cold_storage_parameters_query_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation moveToHotStorage
+     *
+     * Move To Hot Storage
+     *
+     * @param  \Carbon\Model\MoveToHotStorageQueryInput $move_to_hot_storage_query_input move_to_hot_storage_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveToHotStorage'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return bool|\Carbon\Model\HTTPValidationError
+     */
+    public function moveToHotStorage(
+
+        $filters = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['moveToHotStorage'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "filters", $filters);
+        $move_to_hot_storage_query_input = $_body;
+
+        list($response) = $this->moveToHotStorageWithHttpInfo($move_to_hot_storage_query_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation moveToHotStorageWithHttpInfo
+     *
+     * Move To Hot Storage
+     *
+     * @param  \Carbon\Model\MoveToHotStorageQueryInput $move_to_hot_storage_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveToHotStorage'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of bool|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function moveToHotStorageWithHttpInfo($move_to_hot_storage_query_input, string $contentType = self::contentTypes['moveToHotStorage'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->moveToHotStorageRequest($move_to_hot_storage_query_input, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->moveToHotStorageWithHttpInfo(
+                        $move_to_hot_storage_query_input,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('bool' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('bool' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'bool', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'bool';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'bool',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation moveToHotStorageAsync
+     *
+     * Move To Hot Storage
+     *
+     * @param  \Carbon\Model\MoveToHotStorageQueryInput $move_to_hot_storage_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveToHotStorage'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function moveToHotStorageAsync(
+
+        $filters = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['moveToHotStorage'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "filters", $filters);
+        $move_to_hot_storage_query_input = $_body;
+
+        return $this->moveToHotStorageAsyncWithHttpInfo($move_to_hot_storage_query_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation moveToHotStorageAsyncWithHttpInfo
+     *
+     * Move To Hot Storage
+     *
+     * @param  \Carbon\Model\MoveToHotStorageQueryInput $move_to_hot_storage_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveToHotStorage'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function moveToHotStorageAsyncWithHttpInfo($move_to_hot_storage_query_input, string $contentType = self::contentTypes['moveToHotStorage'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = 'bool';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->moveToHotStorageRequest($move_to_hot_storage_query_input, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'moveToHotStorage'
+     *
+     * @param  \Carbon\Model\MoveToHotStorageQueryInput $move_to_hot_storage_query_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveToHotStorage'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function moveToHotStorageRequest($move_to_hot_storage_query_input, string $contentType = self::contentTypes['moveToHotStorage'][0])
+    {
+
+        if ($move_to_hot_storage_query_input !== SENTINEL_VALUE) {
+            if (!($move_to_hot_storage_query_input instanceof \Carbon\Model\MoveToHotStorageQueryInput)) {
+                if (!is_array($move_to_hot_storage_query_input))
+                    throw new \InvalidArgumentException('"move_to_hot_storage_query_input" must be associative array or an instance of \Carbon\Model\MoveToHotStorageQueryInput FilesApi.moveToHotStorage.');
+                else
+                    $move_to_hot_storage_query_input = new \Carbon\Model\MoveToHotStorageQueryInput($move_to_hot_storage_query_input);
+            }
+        }
+        // verify the required parameter 'move_to_hot_storage_query_input' is set
+        if ($move_to_hot_storage_query_input === SENTINEL_VALUE || (is_array($move_to_hot_storage_query_input) && count($move_to_hot_storage_query_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter move_to_hot_storage_query_input when calling moveToHotStorage'
+            );
+        }
+
+
+        $resourcePath = '/move_to_hot_storage';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($move_to_hot_storage_query_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($move_to_hot_storage_query_input));
+            } else {
+                $httpBody = $move_to_hot_storage_query_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
      * Operation queryUserFiles
      *
      * User Files V2
@@ -3947,8 +4697,11 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  bool $detect_audio_language Whether to automatically detect the language of the uploaded audio file. (optional, default to false)
      * @param  TranscriptionServiceNullable $transcription_service The transcription service to use for audio files. If no service is specified, &#39;deepgram&#39; will be used. (optional)
+     * @param  bool $include_speaker_labels Detect multiple speakers and label segments of speech by speaker for audio files. (optional, default to false)
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
      * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
+     * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
+     * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
@@ -3970,8 +4723,11 @@ class FilesApi extends \Carbon\CustomApi
         $parse_pdf_tables_with_ocr = false,
         $detect_audio_language = false,
         $transcription_service = SENTINEL_VALUE,
+        $include_speaker_labels = false,
         $media_type = SENTINEL_VALUE,
         $split_rows = false,
+        $enable_cold_storage = false,
+        $hot_storage_time_to_live = SENTINEL_VALUE,
         string $contentType = self::contentTypes['upload'][0]
     )
     {
@@ -3979,7 +4735,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "file", $file);
         $body_create_upload_file_uploadfile_post = $_body;
 
-        list($response) = $this->uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $media_type, $split_rows, $contentType);
+        list($response) = $this->uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $contentType);
         return $response;
     }
 
@@ -4002,17 +4758,20 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  bool $detect_audio_language Whether to automatically detect the language of the uploaded audio file. (optional, default to false)
      * @param  TranscriptionServiceNullable $transcription_service The transcription service to use for audio files. If no service is specified, &#39;deepgram&#39; will be used. (optional)
+     * @param  bool $include_speaker_labels Detect multiple speakers and label segments of speech by speaker for audio files. (optional, default to false)
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
      * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
+     * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
+     * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carbon\Model\UserFile|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = null, $media_type = null, $split_rows = false, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = null, $include_speaker_labels = false, $media_type = null, $split_rows = false, $enable_cold_storage = false, $hot_storage_time_to_live = null, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $media_type, $split_rows, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -4042,8 +4801,11 @@ class FilesApi extends \Carbon\CustomApi
                         $parse_pdf_tables_with_ocr,
                         $detect_audio_language,
                         $transcription_service,
+                        $include_speaker_labels,
                         $media_type,
                         $split_rows,
+                        $enable_cold_storage,
+                        $hot_storage_time_to_live,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -4170,8 +4932,11 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  bool $detect_audio_language Whether to automatically detect the language of the uploaded audio file. (optional, default to false)
      * @param  TranscriptionServiceNullable $transcription_service The transcription service to use for audio files. If no service is specified, &#39;deepgram&#39; will be used. (optional)
+     * @param  bool $include_speaker_labels Detect multiple speakers and label segments of speech by speaker for audio files. (optional, default to false)
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
      * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
+     * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
+     * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4192,8 +4957,11 @@ class FilesApi extends \Carbon\CustomApi
         $parse_pdf_tables_with_ocr = false,
         $detect_audio_language = false,
         $transcription_service = SENTINEL_VALUE,
+        $include_speaker_labels = false,
         $media_type = SENTINEL_VALUE,
         $split_rows = false,
+        $enable_cold_storage = false,
+        $hot_storage_time_to_live = SENTINEL_VALUE,
         string $contentType = self::contentTypes['upload'][0]
     )
     {
@@ -4201,7 +4969,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "file", $file);
         $body_create_upload_file_uploadfile_post = $_body;
 
-        return $this->uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $media_type, $split_rows, $contentType)
+        return $this->uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4228,17 +4996,20 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  bool $detect_audio_language Whether to automatically detect the language of the uploaded audio file. (optional, default to false)
      * @param  TranscriptionServiceNullable $transcription_service The transcription service to use for audio files. If no service is specified, &#39;deepgram&#39; will be used. (optional)
+     * @param  bool $include_speaker_labels Detect multiple speakers and label segments of speech by speaker for audio files. (optional, default to false)
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
      * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
+     * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
+     * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = null, $media_type = null, $split_rows = false, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = null, $include_speaker_labels = false, $media_type = null, $split_rows = false, $enable_cold_storage = false, $hot_storage_time_to_live = null, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
         $returnType = '\Carbon\Model\UserFile';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $media_type, $split_rows, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -4296,14 +5067,17 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $parse_pdf_tables_with_ocr Whether to use rich table parsing when &#x60;use_ocr&#x60; is enabled. (optional, default to false)
      * @param  bool $detect_audio_language Whether to automatically detect the language of the uploaded audio file. (optional, default to false)
      * @param  TranscriptionServiceNullable $transcription_service The transcription service to use for audio files. If no service is specified, &#39;deepgram&#39; will be used. (optional)
+     * @param  bool $include_speaker_labels Detect multiple speakers and label segments of speech by speaker for audio files. (optional, default to false)
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
      * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
+     * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
+     * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size = SENTINEL_VALUE, $chunk_overlap = SENTINEL_VALUE, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = SENTINEL_VALUE, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = SENTINEL_VALUE, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = SENTINEL_VALUE, $media_type = SENTINEL_VALUE, $split_rows = false, string $contentType = self::contentTypes['upload'][0])
+    public function uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size = SENTINEL_VALUE, $chunk_overlap = SENTINEL_VALUE, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = SENTINEL_VALUE, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = SENTINEL_VALUE, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = SENTINEL_VALUE, $include_speaker_labels = false, $media_type = SENTINEL_VALUE, $split_rows = false, $enable_cold_storage = false, $hot_storage_time_to_live = SENTINEL_VALUE, string $contentType = self::contentTypes['upload'][0])
     {
 
         // verify the required parameter 'file' is set
@@ -4475,6 +5249,17 @@ class FilesApi extends \Carbon\CustomApi
                 false // required
             ) ?? []);
         }
+        if ($include_speaker_labels !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $include_speaker_labels,
+                'include_speaker_labels', // param base name
+                'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
         if ($media_type !== SENTINEL_VALUE) {
             // query params
             $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
@@ -4492,6 +5277,28 @@ class FilesApi extends \Carbon\CustomApi
                 $split_rows,
                 'split_rows', // param base name
                 'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($enable_cold_storage !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $enable_cold_storage,
+                'enable_cold_storage', // param base name
+                'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($hot_storage_time_to_live !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $hot_storage_time_to_live,
+                'hot_storage_time_to_live', // param base name
+                'integer', // openApiType
                 'form', // style
                 true, // explode
                 false // required
@@ -4622,8 +5429,10 @@ class FilesApi extends \Carbon\CustomApi
         $parse_pdf_tables_with_ocr = false,
         $detect_audio_language = false,
         $transcription_service = SENTINEL_VALUE,
+        $include_speaker_labels = false,
         $media_type = SENTINEL_VALUE,
         $split_rows = false,
+        $cold_storage_params = SENTINEL_VALUE,
         string $contentType = self::contentTypes['uploadFromUrl'][0]
     )
     {
@@ -4642,8 +5451,10 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $this->setRequestBodyProperty($_body, "detect_audio_language", $detect_audio_language);
         $this->setRequestBodyProperty($_body, "transcription_service", $transcription_service);
+        $this->setRequestBodyProperty($_body, "include_speaker_labels", $include_speaker_labels);
         $this->setRequestBodyProperty($_body, "media_type", $media_type);
         $this->setRequestBodyProperty($_body, "split_rows", $split_rows);
+        $this->setRequestBodyProperty($_body, "cold_storage_params", $cold_storage_params);
         $upload_file_from_url_input = $_body;
 
         list($response) = $this->uploadFromUrlWithHttpInfo($upload_file_from_url_input, $contentType);
@@ -4815,8 +5626,10 @@ class FilesApi extends \Carbon\CustomApi
         $parse_pdf_tables_with_ocr = false,
         $detect_audio_language = false,
         $transcription_service = SENTINEL_VALUE,
+        $include_speaker_labels = false,
         $media_type = SENTINEL_VALUE,
         $split_rows = false,
+        $cold_storage_params = SENTINEL_VALUE,
         string $contentType = self::contentTypes['uploadFromUrl'][0]
     )
     {
@@ -4835,8 +5648,10 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "parse_pdf_tables_with_ocr", $parse_pdf_tables_with_ocr);
         $this->setRequestBodyProperty($_body, "detect_audio_language", $detect_audio_language);
         $this->setRequestBodyProperty($_body, "transcription_service", $transcription_service);
+        $this->setRequestBodyProperty($_body, "include_speaker_labels", $include_speaker_labels);
         $this->setRequestBodyProperty($_body, "media_type", $media_type);
         $this->setRequestBodyProperty($_body, "split_rows", $split_rows);
+        $this->setRequestBodyProperty($_body, "cold_storage_params", $cold_storage_params);
         $upload_file_from_url_input = $_body;
 
         return $this->uploadFromUrlAsyncWithHttpInfo($upload_file_from_url_input, $contentType)
@@ -5044,6 +5859,7 @@ class FilesApi extends \Carbon\CustomApi
         $overwrite_file_id = SENTINEL_VALUE,
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
+        $cold_storage_params = SENTINEL_VALUE,
         string $contentType = self::contentTypes['uploadText'][0]
     )
     {
@@ -5056,6 +5872,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "overwrite_file_id", $overwrite_file_id);
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
+        $this->setRequestBodyProperty($_body, "cold_storage_params", $cold_storage_params);
         $raw_text_input = $_body;
 
         list($response) = $this->uploadTextWithHttpInfo($raw_text_input, $contentType);
@@ -5221,6 +6038,7 @@ class FilesApi extends \Carbon\CustomApi
         $overwrite_file_id = SENTINEL_VALUE,
         $embedding_model = SENTINEL_VALUE,
         $generate_sparse_vectors = false,
+        $cold_storage_params = SENTINEL_VALUE,
         string $contentType = self::contentTypes['uploadText'][0]
     )
     {
@@ -5233,6 +6051,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "overwrite_file_id", $overwrite_file_id);
         $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
+        $this->setRequestBodyProperty($_body, "cold_storage_params", $cold_storage_params);
         $raw_text_input = $_body;
 
         return $this->uploadTextAsyncWithHttpInfo($raw_text_input, $contentType)

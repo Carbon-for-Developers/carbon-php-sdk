@@ -2194,6 +2194,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $sync_source_items = true,
         $incremental_sync = false,
         $file_sync_config = SENTINEL_VALUE,
+        $automatically_open_file_picker = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -2224,6 +2225,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
         $this->setRequestBodyProperty($_body, "incremental_sync", $incremental_sync);
         $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
+        $this->setRequestBodyProperty($_body, "automatically_open_file_picker", $automatically_open_file_picker);
         $o_auth_url_request = $_body;
 
         list($response) = $this->getOauthUrlWithHttpInfo($o_auth_url_request, $contentType);
@@ -2407,6 +2409,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $sync_source_items = true,
         $incremental_sync = false,
         $file_sync_config = SENTINEL_VALUE,
+        $automatically_open_file_picker = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -2437,6 +2440,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
         $this->setRequestBodyProperty($_body, "incremental_sync", $incremental_sync);
         $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
+        $this->setRequestBodyProperty($_body, "automatically_open_file_picker", $automatically_open_file_picker);
         $o_auth_url_request = $_body;
 
         return $this->getOauthUrlAsyncWithHttpInfo($o_auth_url_request, $contentType)

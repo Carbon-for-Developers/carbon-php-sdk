@@ -54,6 +54,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'sync_attachments' => 'bool',
         'detect_audio_language' => 'bool',
         'transcription_service' => '\Carbon\Model\TranscriptionServiceNullable',
+        'include_speaker_labels' => 'bool',
         'split_rows' => 'bool'
     ];
 
@@ -69,6 +70,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'sync_attachments' => null,
         'detect_audio_language' => null,
         'transcription_service' => null,
+        'include_speaker_labels' => null,
         'split_rows' => null
     ];
 
@@ -82,6 +84,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
 		'sync_attachments' => false,
 		'detect_audio_language' => false,
 		'transcription_service' => true,
+		'include_speaker_labels' => false,
 		'split_rows' => false
     ];
 
@@ -175,6 +178,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'sync_attachments' => 'sync_attachments',
         'detect_audio_language' => 'detect_audio_language',
         'transcription_service' => 'transcription_service',
+        'include_speaker_labels' => 'include_speaker_labels',
         'split_rows' => 'split_rows'
     ];
 
@@ -188,6 +192,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'sync_attachments' => 'setSyncAttachments',
         'detect_audio_language' => 'setDetectAudioLanguage',
         'transcription_service' => 'setTranscriptionService',
+        'include_speaker_labels' => 'setIncludeSpeakerLabels',
         'split_rows' => 'setSplitRows'
     ];
 
@@ -201,6 +206,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'sync_attachments' => 'getSyncAttachments',
         'detect_audio_language' => 'getDetectAudioLanguage',
         'transcription_service' => 'getTranscriptionService',
+        'include_speaker_labels' => 'getIncludeSpeakerLabels',
         'split_rows' => 'getSplitRows'
     ];
 
@@ -265,6 +271,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('sync_attachments', $data ?? [], false);
         $this->setIfExists('detect_audio_language', $data ?? [], false);
         $this->setIfExists('transcription_service', $data ?? [], null);
+        $this->setIfExists('include_speaker_labels', $data ?? [], false);
         $this->setIfExists('split_rows', $data ?? [], false);
     }
 
@@ -429,6 +436,35 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['transcription_service'] = $transcription_service;
+
+        return $this;
+    }
+
+    /**
+     * Gets include_speaker_labels
+     *
+     * @return bool|null
+     */
+    public function getIncludeSpeakerLabels()
+    {
+        return $this->container['include_speaker_labels'];
+    }
+
+    /**
+     * Sets include_speaker_labels
+     *
+     * @param bool|null $include_speaker_labels Detect multiple speakers and label segments of speech by speaker for audio files.
+     *
+     * @return self
+     */
+    public function setIncludeSpeakerLabels($include_speaker_labels)
+    {
+
+        if (is_null($include_speaker_labels)) {
+            throw new \InvalidArgumentException('non-nullable include_speaker_labels cannot be null');
+        }
+
+        $this->container['include_speaker_labels'] = $include_speaker_labels;
 
         return $this;
     }

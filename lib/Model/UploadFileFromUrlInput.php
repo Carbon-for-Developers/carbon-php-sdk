@@ -63,8 +63,10 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'parse_pdf_tables_with_ocr' => 'bool',
         'detect_audio_language' => 'bool',
         'transcription_service' => '\Carbon\Model\TranscriptionServiceNullable',
+        'include_speaker_labels' => 'bool',
         'media_type' => '\Carbon\Model\FileContentTypesNullable',
-        'split_rows' => 'bool'
+        'split_rows' => 'bool',
+        'cold_storage_params' => '\Carbon\Model\ColdStorageProps'
     ];
 
     /**
@@ -89,8 +91,10 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'parse_pdf_tables_with_ocr' => null,
         'detect_audio_language' => null,
         'transcription_service' => null,
+        'include_speaker_labels' => null,
         'media_type' => null,
-        'split_rows' => null
+        'split_rows' => null,
+        'cold_storage_params' => null
     ];
 
     /**
@@ -113,8 +117,10 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
 		'parse_pdf_tables_with_ocr' => false,
 		'detect_audio_language' => false,
 		'transcription_service' => true,
+		'include_speaker_labels' => false,
 		'media_type' => true,
-		'split_rows' => false
+		'split_rows' => false,
+		'cold_storage_params' => false
     ];
 
     /**
@@ -217,8 +223,10 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'parse_pdf_tables_with_ocr' => 'parse_pdf_tables_with_ocr',
         'detect_audio_language' => 'detect_audio_language',
         'transcription_service' => 'transcription_service',
+        'include_speaker_labels' => 'include_speaker_labels',
         'media_type' => 'media_type',
-        'split_rows' => 'split_rows'
+        'split_rows' => 'split_rows',
+        'cold_storage_params' => 'cold_storage_params'
     ];
 
     /**
@@ -241,8 +249,10 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'parse_pdf_tables_with_ocr' => 'setParsePdfTablesWithOcr',
         'detect_audio_language' => 'setDetectAudioLanguage',
         'transcription_service' => 'setTranscriptionService',
+        'include_speaker_labels' => 'setIncludeSpeakerLabels',
         'media_type' => 'setMediaType',
-        'split_rows' => 'setSplitRows'
+        'split_rows' => 'setSplitRows',
+        'cold_storage_params' => 'setColdStorageParams'
     ];
 
     /**
@@ -265,8 +275,10 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'parse_pdf_tables_with_ocr' => 'getParsePdfTablesWithOcr',
         'detect_audio_language' => 'getDetectAudioLanguage',
         'transcription_service' => 'getTranscriptionService',
+        'include_speaker_labels' => 'getIncludeSpeakerLabels',
         'media_type' => 'getMediaType',
-        'split_rows' => 'getSplitRows'
+        'split_rows' => 'getSplitRows',
+        'cold_storage_params' => 'getColdStorageParams'
     ];
 
     /**
@@ -340,8 +352,10 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('parse_pdf_tables_with_ocr', $data ?? [], false);
         $this->setIfExists('detect_audio_language', $data ?? [], false);
         $this->setIfExists('transcription_service', $data ?? [], null);
+        $this->setIfExists('include_speaker_labels', $data ?? [], false);
         $this->setIfExists('media_type', $data ?? [], null);
         $this->setIfExists('split_rows', $data ?? [], false);
+        $this->setIfExists('cold_storage_params', $data ?? [], null);
     }
 
     /**
@@ -831,6 +845,35 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
     }
 
     /**
+     * Gets include_speaker_labels
+     *
+     * @return bool|null
+     */
+    public function getIncludeSpeakerLabels()
+    {
+        return $this->container['include_speaker_labels'];
+    }
+
+    /**
+     * Sets include_speaker_labels
+     *
+     * @param bool|null $include_speaker_labels include_speaker_labels
+     *
+     * @return self
+     */
+    public function setIncludeSpeakerLabels($include_speaker_labels)
+    {
+
+        if (is_null($include_speaker_labels)) {
+            throw new \InvalidArgumentException('non-nullable include_speaker_labels cannot be null');
+        }
+
+        $this->container['include_speaker_labels'] = $include_speaker_labels;
+
+        return $this;
+    }
+
+    /**
      * Gets media_type
      *
      * @return \Carbon\Model\FileContentTypesNullable|null
@@ -891,6 +934,35 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['split_rows'] = $split_rows;
+
+        return $this;
+    }
+
+    /**
+     * Gets cold_storage_params
+     *
+     * @return \Carbon\Model\ColdStorageProps|null
+     */
+    public function getColdStorageParams()
+    {
+        return $this->container['cold_storage_params'];
+    }
+
+    /**
+     * Sets cold_storage_params
+     *
+     * @param \Carbon\Model\ColdStorageProps|null $cold_storage_params cold_storage_params
+     *
+     * @return self
+     */
+    public function setColdStorageParams($cold_storage_params)
+    {
+
+        if (is_null($cold_storage_params)) {
+            throw new \InvalidArgumentException('non-nullable cold_storage_params cannot be null');
+        }
+
+        $this->container['cold_storage_params'] = $cold_storage_params;
 
         return $this;
     }
