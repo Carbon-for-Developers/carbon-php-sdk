@@ -1882,7 +1882,7 @@ This request id will be added to all files that get synced using the generated O
 
 ##### use_ocr: `bool`<a id="use_ocr-bool"></a>
 
-Enable OCR for files that support it. Supported formats: pdf
+Enable OCR for files that support it. Supported formats: jpg, png, pdf
 
 ##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
 
