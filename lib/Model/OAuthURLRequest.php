@@ -1185,7 +1185,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets use_ocr
      *
-     * @param bool|null $use_ocr Enable OCR for files that support it. Supported formats: jpg, png, pdf
+     * @param bool|null $use_ocr Enable OCR for files that support it. Supported formats: png, pdf, jpg
      *
      * @return self
      */
