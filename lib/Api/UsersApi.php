@@ -151,6 +151,8 @@ class UsersApi extends \Carbon\CustomApi
      *
      * List Users Endpoint
      *
+     * List users within an organization
+     *
      * @param  \Carbon\Model\ListUsersRequest $list_users_request list_users_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['all'] to see the possible values for this operation
      *
@@ -184,6 +186,8 @@ class UsersApi extends \Carbon\CustomApi
      * Operation allWithHttpInfo
      *
      * List Users Endpoint
+     *
+     * List users within an organization
      *
      * @param  \Carbon\Model\ListUsersRequest $list_users_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['all'] to see the possible values for this operation
@@ -323,6 +327,8 @@ class UsersApi extends \Carbon\CustomApi
      *
      * List Users Endpoint
      *
+     * List users within an organization
+     *
      * @param  \Carbon\Model\ListUsersRequest $list_users_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['all'] to see the possible values for this operation
      *
@@ -359,6 +365,8 @@ class UsersApi extends \Carbon\CustomApi
      * Operation allAsyncWithHttpInfo
      *
      * List Users Endpoint
+     *
+     * List users within an organization
      *
      * @param  \Carbon\Model\ListUsersRequest $list_users_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['all'] to see the possible values for this operation

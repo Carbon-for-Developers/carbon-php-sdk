@@ -951,6 +951,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Freshdesk Connect
      *
+     * Refer this article to obtain an API key https://support.freshdesk.com/en/support/solutions/articles/215517. Make sure that your API key has the permission to read solutions from your account and you are on a &lt;b&gt;paid&lt;/b&gt; plan. Once you have an API key, you can make a request to this endpoint along with your freshdesk domain. This will  trigger an automatic sync of the articles in your \&quot;solutions\&quot; tab. Additional parameters below can be used to associate  data with the synced articles or modify the sync behavior.
+     *
      * @param  \Carbon\Model\FreshDeskConnectRequest $fresh_desk_connect_request fresh_desk_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectFreshdesk'] to see the possible values for this operation
      *
@@ -1000,6 +1002,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation connectFreshdeskWithHttpInfo
      *
      * Freshdesk Connect
+     *
+     * Refer this article to obtain an API key https://support.freshdesk.com/en/support/solutions/articles/215517. Make sure that your API key has the permission to read solutions from your account and you are on a &lt;b&gt;paid&lt;/b&gt; plan. Once you have an API key, you can make a request to this endpoint along with your freshdesk domain. This will  trigger an automatic sync of the articles in your \&quot;solutions\&quot; tab. Additional parameters below can be used to associate  data with the synced articles or modify the sync behavior.
      *
      * @param  \Carbon\Model\FreshDeskConnectRequest $fresh_desk_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectFreshdesk'] to see the possible values for this operation
@@ -1139,6 +1143,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Freshdesk Connect
      *
+     * Refer this article to obtain an API key https://support.freshdesk.com/en/support/solutions/articles/215517. Make sure that your API key has the permission to read solutions from your account and you are on a &lt;b&gt;paid&lt;/b&gt; plan. Once you have an API key, you can make a request to this endpoint along with your freshdesk domain. This will  trigger an automatic sync of the articles in your \&quot;solutions\&quot; tab. Additional parameters below can be used to associate  data with the synced articles or modify the sync behavior.
+     *
      * @param  \Carbon\Model\FreshDeskConnectRequest $fresh_desk_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectFreshdesk'] to see the possible values for this operation
      *
@@ -1191,6 +1197,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation connectFreshdeskAsyncWithHttpInfo
      *
      * Freshdesk Connect
+     *
+     * Refer this article to obtain an API key https://support.freshdesk.com/en/support/solutions/articles/215517. Make sure that your API key has the permission to read solutions from your account and you are on a &lt;b&gt;paid&lt;/b&gt; plan. Once you have an API key, you can make a request to this endpoint along with your freshdesk domain. This will  trigger an automatic sync of the articles in your \&quot;solutions\&quot; tab. Additional parameters below can be used to associate  data with the synced articles or modify the sync behavior.
      *
      * @param  \Carbon\Model\FreshDeskConnectRequest $fresh_desk_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectFreshdesk'] to see the possible values for this operation
@@ -1367,6 +1375,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gitbook Connect
      *
+     * You will need an access token to connect your Gitbook account. Note that the permissions will be defined by the user  generating access token so make sure you have the permission to access spaces you will be syncing.  Refer this article for more details https://developer.gitbook.com/gitbook-api/authentication. Additionally, you need to specify the name of organization you will be syncing data from.
+     *
      * @param  \Carbon\Model\GitbookConnectRequest $gitbook_connect_request gitbook_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectGitbook'] to see the possible values for this operation
      *
@@ -1414,6 +1424,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation connectGitbookWithHttpInfo
      *
      * Gitbook Connect
+     *
+     * You will need an access token to connect your Gitbook account. Note that the permissions will be defined by the user  generating access token so make sure you have the permission to access spaces you will be syncing.  Refer this article for more details https://developer.gitbook.com/gitbook-api/authentication. Additionally, you need to specify the name of organization you will be syncing data from.
      *
      * @param  \Carbon\Model\GitbookConnectRequest $gitbook_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectGitbook'] to see the possible values for this operation
@@ -1553,6 +1565,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gitbook Connect
      *
+     * You will need an access token to connect your Gitbook account. Note that the permissions will be defined by the user  generating access token so make sure you have the permission to access spaces you will be syncing.  Refer this article for more details https://developer.gitbook.com/gitbook-api/authentication. Additionally, you need to specify the name of organization you will be syncing data from.
+     *
      * @param  \Carbon\Model\GitbookConnectRequest $gitbook_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectGitbook'] to see the possible values for this operation
      *
@@ -1603,6 +1617,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation connectGitbookAsyncWithHttpInfo
      *
      * Gitbook Connect
+     *
+     * You will need an access token to connect your Gitbook account. Note that the permissions will be defined by the user  generating access token so make sure you have the permission to access spaces you will be syncing.  Refer this article for more details https://developer.gitbook.com/gitbook-api/authentication. Additionally, you need to specify the name of organization you will be syncing data from.
      *
      * @param  \Carbon\Model\GitbookConnectRequest $gitbook_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectGitbook'] to see the possible values for this operation
@@ -1779,6 +1795,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * S3 Auth
      *
+     * This endpoint can be used to connect S3 as well as Digital Ocean Spaces (S3 compatible)   For S3, create a new IAM user with permissions to: &lt;ol&gt; &lt;li&gt;List all buckets.&lt;/li&gt; &lt;li&gt;Read from the specific buckets and objects to sync with Carbon. Ensure any future buckets or objects carry  the same permissions.&lt;/li&gt; &lt;/ol&gt; Once created, generate an access key for this user and share the credentials with us. We recommend testing this key beforehand.   For Digital Ocean Spaces, generate the above credentials in your Applications and API page here https://cloud.digitalocean.com/account/api/spaces. Endpoint URL is required to connect Digital Ocean Spaces.
+     *
      * @param  \Carbon\Model\S3AuthRequest $s3_auth_request s3_auth_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAwsIamUser'] to see the possible values for this operation
      *
@@ -1810,6 +1828,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation createAwsIamUserWithHttpInfo
      *
      * S3 Auth
+     *
+     * This endpoint can be used to connect S3 as well as Digital Ocean Spaces (S3 compatible)   For S3, create a new IAM user with permissions to: &lt;ol&gt; &lt;li&gt;List all buckets.&lt;/li&gt; &lt;li&gt;Read from the specific buckets and objects to sync with Carbon. Ensure any future buckets or objects carry  the same permissions.&lt;/li&gt; &lt;/ol&gt; Once created, generate an access key for this user and share the credentials with us. We recommend testing this key beforehand.   For Digital Ocean Spaces, generate the above credentials in your Applications and API page here https://cloud.digitalocean.com/account/api/spaces. Endpoint URL is required to connect Digital Ocean Spaces.
      *
      * @param  \Carbon\Model\S3AuthRequest $s3_auth_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAwsIamUser'] to see the possible values for this operation
@@ -1949,6 +1969,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * S3 Auth
      *
+     * This endpoint can be used to connect S3 as well as Digital Ocean Spaces (S3 compatible)   For S3, create a new IAM user with permissions to: &lt;ol&gt; &lt;li&gt;List all buckets.&lt;/li&gt; &lt;li&gt;Read from the specific buckets and objects to sync with Carbon. Ensure any future buckets or objects carry  the same permissions.&lt;/li&gt; &lt;/ol&gt; Once created, generate an access key for this user and share the credentials with us. We recommend testing this key beforehand.   For Digital Ocean Spaces, generate the above credentials in your Applications and API page here https://cloud.digitalocean.com/account/api/spaces. Endpoint URL is required to connect Digital Ocean Spaces.
+     *
      * @param  \Carbon\Model\S3AuthRequest $s3_auth_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAwsIamUser'] to see the possible values for this operation
      *
@@ -1983,6 +2005,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation createAwsIamUserAsyncWithHttpInfo
      *
      * S3 Auth
+     *
+     * This endpoint can be used to connect S3 as well as Digital Ocean Spaces (S3 compatible)   For S3, create a new IAM user with permissions to: &lt;ol&gt; &lt;li&gt;List all buckets.&lt;/li&gt; &lt;li&gt;Read from the specific buckets and objects to sync with Carbon. Ensure any future buckets or objects carry  the same permissions.&lt;/li&gt; &lt;/ol&gt; Once created, generate an access key for this user and share the credentials with us. We recommend testing this key beforehand.   For Digital Ocean Spaces, generate the above credentials in your Applications and API page here https://cloud.digitalocean.com/account/api/spaces. Endpoint URL is required to connect Digital Ocean Spaces.
      *
      * @param  \Carbon\Model\S3AuthRequest $s3_auth_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAwsIamUser'] to see the possible values for this operation
@@ -2159,6 +2183,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Get Oauth Url
      *
+     * This endpoint can be used to generate the following URLs - An OAuth URL for OAuth based connectors - A file syncing URL which skips the OAuth flow if the user already has a valid access token and takes them to the success state.
+     *
      * @param  \Carbon\Model\OAuthURLRequest $o_auth_url_request o_auth_url_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOauthUrl'] to see the possible values for this operation
      *
@@ -2236,6 +2262,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation getOauthUrlWithHttpInfo
      *
      * Get Oauth Url
+     *
+     * This endpoint can be used to generate the following URLs - An OAuth URL for OAuth based connectors - A file syncing URL which skips the OAuth flow if the user already has a valid access token and takes them to the success state.
      *
      * @param  \Carbon\Model\OAuthURLRequest $o_auth_url_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOauthUrl'] to see the possible values for this operation
@@ -2375,6 +2403,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Get Oauth Url
      *
+     * This endpoint can be used to generate the following URLs - An OAuth URL for OAuth based connectors - A file syncing URL which skips the OAuth flow if the user already has a valid access token and takes them to the success state.
+     *
      * @param  \Carbon\Model\OAuthURLRequest $o_auth_url_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOauthUrl'] to see the possible values for this operation
      *
@@ -2455,6 +2485,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation getOauthUrlAsyncWithHttpInfo
      *
      * Get Oauth Url
+     *
+     * This endpoint can be used to generate the following URLs - An OAuth URL for OAuth based connectors - A file syncing URL which skips the OAuth flow if the user already has a valid access token and takes them to the success state.
      *
      * @param  \Carbon\Model\OAuthURLRequest $o_auth_url_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOauthUrl'] to see the possible values for this operation
@@ -2631,6 +2663,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Confluence List
      *
+     * This endpoint has been deprecated. Use /integrations/items/list instead.  To begin listing a user&#39;s Confluence pages, at least a &#x60;data_source_id&#x60; of a connected Confluence account must be specified. This base request returns a list of root pages for every space the user has access to in a Confluence instance. To traverse further down the user&#39;s page directory, additional requests to this endpoint can be made with the same &#x60;data_source_id&#x60; and with &#x60;parent_id&#x60; set to the id of page from a previous request. For convenience, the &#x60;has_children&#x60; property in each directory item in the response list will flag which pages will return non-empty lists of pages when set as the &#x60;parent_id&#x60;.
+     *
      * @param  \Carbon\Model\ListRequest $list_request list_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConfluencePages'] to see the possible values for this operation
      *
@@ -2659,6 +2693,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listConfluencePagesWithHttpInfo
      *
      * Confluence List
+     *
+     * This endpoint has been deprecated. Use /integrations/items/list instead.  To begin listing a user&#39;s Confluence pages, at least a &#x60;data_source_id&#x60; of a connected Confluence account must be specified. This base request returns a list of root pages for every space the user has access to in a Confluence instance. To traverse further down the user&#39;s page directory, additional requests to this endpoint can be made with the same &#x60;data_source_id&#x60; and with &#x60;parent_id&#x60; set to the id of page from a previous request. For convenience, the &#x60;has_children&#x60; property in each directory item in the response list will flag which pages will return non-empty lists of pages when set as the &#x60;parent_id&#x60;.
      *
      * @param  \Carbon\Model\ListRequest $list_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConfluencePages'] to see the possible values for this operation
@@ -2799,6 +2835,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Confluence List
      *
+     * This endpoint has been deprecated. Use /integrations/items/list instead.  To begin listing a user&#39;s Confluence pages, at least a &#x60;data_source_id&#x60; of a connected Confluence account must be specified. This base request returns a list of root pages for every space the user has access to in a Confluence instance. To traverse further down the user&#39;s page directory, additional requests to this endpoint can be made with the same &#x60;data_source_id&#x60; and with &#x60;parent_id&#x60; set to the id of page from a previous request. For convenience, the &#x60;has_children&#x60; property in each directory item in the response list will flag which pages will return non-empty lists of pages when set as the &#x60;parent_id&#x60;.
+     *
      * @param  \Carbon\Model\ListRequest $list_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConfluencePages'] to see the possible values for this operation
      *
@@ -2830,6 +2868,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listConfluencePagesAsyncWithHttpInfo
      *
      * Confluence List
+     *
+     * This endpoint has been deprecated. Use /integrations/items/list instead.  To begin listing a user&#39;s Confluence pages, at least a &#x60;data_source_id&#x60; of a connected Confluence account must be specified. This base request returns a list of root pages for every space the user has access to in a Confluence instance. To traverse further down the user&#39;s page directory, additional requests to this endpoint can be made with the same &#x60;data_source_id&#x60; and with &#x60;parent_id&#x60; set to the id of page from a previous request. For convenience, the &#x60;has_children&#x60; property in each directory item in the response list will flag which pages will return non-empty lists of pages when set as the &#x60;parent_id&#x60;.
      *
      * @param  \Carbon\Model\ListRequest $list_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConfluencePages'] to see the possible values for this operation
@@ -3008,6 +3048,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Slack List Conversations
      *
+     * List all of your public and private channels, DMs, and Group DMs. The ID from response  can be used as a filter to sync messages to Carbon    types: Comma separated list of types. Available types are im (DMs), mpim (group DMs), public_channel, and private_channel. Defaults to public_channel.     cursor: Used for pagination. If next_cursor is returned in response, you need to pass it as the cursor in the next request     data_source_id: Data source needs to be specified if you have linked multiple slack accounts   exclude_archived: Should archived conversations be excluded, defaults to true
+     *
      * @param  string $types types (optional, default to 'public_channel')
      * @param  string $cursor cursor (optional)
      * @param  int $data_source_id data_source_id (optional)
@@ -3036,6 +3078,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listConversationsWithHttpInfo
      *
      * Slack List Conversations
+     *
+     * List all of your public and private channels, DMs, and Group DMs. The ID from response  can be used as a filter to sync messages to Carbon    types: Comma separated list of types. Available types are im (DMs), mpim (group DMs), public_channel, and private_channel. Defaults to public_channel.     cursor: Used for pagination. If next_cursor is returned in response, you need to pass it as the cursor in the next request     data_source_id: Data source needs to be specified if you have linked multiple slack accounts   exclude_archived: Should archived conversations be excluded, defaults to true
      *
      * @param  string $types (optional, default to 'public_channel')
      * @param  string $cursor (optional)
@@ -3181,6 +3225,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Slack List Conversations
      *
+     * List all of your public and private channels, DMs, and Group DMs. The ID from response  can be used as a filter to sync messages to Carbon    types: Comma separated list of types. Available types are im (DMs), mpim (group DMs), public_channel, and private_channel. Defaults to public_channel.     cursor: Used for pagination. If next_cursor is returned in response, you need to pass it as the cursor in the next request     data_source_id: Data source needs to be specified if you have linked multiple slack accounts   exclude_archived: Should archived conversations be excluded, defaults to true
+     *
      * @param  string $types (optional, default to 'public_channel')
      * @param  string $cursor (optional)
      * @param  int $data_source_id (optional)
@@ -3212,6 +3258,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listConversationsAsyncWithHttpInfo
      *
      * Slack List Conversations
+     *
+     * List all of your public and private channels, DMs, and Group DMs. The ID from response  can be used as a filter to sync messages to Carbon    types: Comma separated list of types. Available types are im (DMs), mpim (group DMs), public_channel, and private_channel. Defaults to public_channel.     cursor: Used for pagination. If next_cursor is returned in response, you need to pass it as the cursor in the next request     data_source_id: Data source needs to be specified if you have linked multiple slack accounts   exclude_archived: Should archived conversations be excluded, defaults to true
      *
      * @param  string $types (optional, default to 'public_channel')
      * @param  string $cursor (optional)
@@ -3813,6 +3861,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Folders
      *
+     * After connecting your Outlook account, you can use this endpoint to list all of your folders on outlook. This includes  both system folders like \&quot;inbox\&quot; and user created folders.
+     *
      * @param  int $data_source_id data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFolders'] to see the possible values for this operation
      *
@@ -3835,6 +3885,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listFoldersWithHttpInfo
      *
      * Outlook Folders
+     *
+     * After connecting your Outlook account, you can use this endpoint to list all of your folders on outlook. This includes  both system folders like \&quot;inbox\&quot; and user created folders.
      *
      * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFolders'] to see the possible values for this operation
@@ -3974,6 +4026,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Folders
      *
+     * After connecting your Outlook account, you can use this endpoint to list all of your folders on outlook. This includes  both system folders like \&quot;inbox\&quot; and user created folders.
+     *
      * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFolders'] to see the possible values for this operation
      *
@@ -3999,6 +4053,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listFoldersAsyncWithHttpInfo
      *
      * Outlook Folders
+     *
+     * After connecting your Outlook account, you can use this endpoint to list all of your folders on outlook. This includes  both system folders like \&quot;inbox\&quot; and user created folders.
      *
      * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFolders'] to see the possible values for this operation
@@ -4165,6 +4221,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gitbook Spaces
      *
+     * After connecting your Gitbook account, you can use this endpoint to list all of your spaces under current organization.
+     *
      * @param  int $data_source_id data_source_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGitbookSpaces'] to see the possible values for this operation
      *
@@ -4187,6 +4245,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listGitbookSpacesWithHttpInfo
      *
      * Gitbook Spaces
+     *
+     * After connecting your Gitbook account, you can use this endpoint to list all of your spaces under current organization.
      *
      * @param  int $data_source_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGitbookSpaces'] to see the possible values for this operation
@@ -4326,6 +4386,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gitbook Spaces
      *
+     * After connecting your Gitbook account, you can use this endpoint to list all of your spaces under current organization.
+     *
      * @param  int $data_source_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGitbookSpaces'] to see the possible values for this operation
      *
@@ -4351,6 +4413,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listGitbookSpacesAsyncWithHttpInfo
      *
      * Gitbook Spaces
+     *
+     * After connecting your Gitbook account, you can use this endpoint to list all of your spaces under current organization.
      *
      * @param  int $data_source_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGitbookSpaces'] to see the possible values for this operation
@@ -4523,6 +4587,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gmail Labels
      *
+     * After connecting your Gmail account, you can use this endpoint to list all of your labels. User created labels will have the type \&quot;user\&quot; and Gmail&#39;s default labels will have the type \&quot;system\&quot;
+     *
      * @param  int $data_source_id data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLabels'] to see the possible values for this operation
      *
@@ -4545,6 +4611,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listLabelsWithHttpInfo
      *
      * Gmail Labels
+     *
+     * After connecting your Gmail account, you can use this endpoint to list all of your labels. User created labels will have the type \&quot;user\&quot; and Gmail&#39;s default labels will have the type \&quot;system\&quot;
      *
      * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLabels'] to see the possible values for this operation
@@ -4684,6 +4752,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gmail Labels
      *
+     * After connecting your Gmail account, you can use this endpoint to list all of your labels. User created labels will have the type \&quot;user\&quot; and Gmail&#39;s default labels will have the type \&quot;system\&quot;
+     *
      * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLabels'] to see the possible values for this operation
      *
@@ -4709,6 +4779,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listLabelsAsyncWithHttpInfo
      *
      * Gmail Labels
+     *
+     * After connecting your Gmail account, you can use this endpoint to list all of your labels. User created labels will have the type \&quot;user\&quot; and Gmail&#39;s default labels will have the type \&quot;system\&quot;
      *
      * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLabels'] to see the possible values for this operation
@@ -4875,6 +4947,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Categories
      *
+     * After connecting your Outlook account, you can use this endpoint to list all of your categories on outlook. We currently support listing up to 250 categories.
+     *
      * @param  int $data_source_id data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
      *
@@ -4897,6 +4971,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listOutlookCategoriesWithHttpInfo
      *
      * Outlook Categories
+     *
+     * After connecting your Outlook account, you can use this endpoint to list all of your categories on outlook. We currently support listing up to 250 categories.
      *
      * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
@@ -5036,6 +5112,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Categories
      *
+     * After connecting your Outlook account, you can use this endpoint to list all of your categories on outlook. We currently support listing up to 250 categories.
+     *
      * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
      *
@@ -5061,6 +5139,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listOutlookCategoriesAsyncWithHttpInfo
      *
      * Outlook Categories
+     *
+     * After connecting your Outlook account, you can use this endpoint to list all of your categories on outlook. We currently support listing up to 250 categories.
      *
      * @param  int $data_source_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listOutlookCategories'] to see the possible values for this operation
@@ -5227,6 +5307,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Github List Repos
      *
+     * Once you have connected your GitHub account, you can use this endpoint to list the      repositories your account has access to. You can use a data source ID or username to fetch from a specific account.
+     *
      * @param  int $per_page per_page (optional, default to 30)
      * @param  int $page page (optional, default to 1)
      * @param  int $data_source_id data_source_id (optional)
@@ -5253,6 +5335,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listReposWithHttpInfo
      *
      * Github List Repos
+     *
+     * Once you have connected your GitHub account, you can use this endpoint to list the      repositories your account has access to. You can use a data source ID or username to fetch from a specific account.
      *
      * @param  int $per_page (optional, default to 30)
      * @param  int $page (optional, default to 1)
@@ -5396,6 +5480,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Github List Repos
      *
+     * Once you have connected your GitHub account, you can use this endpoint to list the      repositories your account has access to. You can use a data source ID or username to fetch from a specific account.
+     *
      * @param  int $per_page (optional, default to 30)
      * @param  int $page (optional, default to 1)
      * @param  int $data_source_id (optional)
@@ -5425,6 +5511,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation listReposAsyncWithHttpInfo
      *
      * Github List Repos
+     *
+     * Once you have connected your GitHub account, you can use this endpoint to list the      repositories your account has access to. You can use a data source ID or username to fetch from a specific account.
      *
      * @param  int $per_page (optional, default to 30)
      * @param  int $page (optional, default to 1)
@@ -5617,6 +5705,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Confluence Sync
      *
+     * This endpoint has been deprecated. Use /integrations/files/sync instead.  After listing pages in a user&#39;s Confluence account, the set of selected page &#x60;ids&#x60; and the connected account&#39;s &#x60;data_source_id&#x60; can be passed into this endpoint to sync them into Carbon. Additional parameters listed below can be used to associate data to the selected pages or alter the behavior of the sync.
+     *
      * @param  \Carbon\Model\SyncFilesRequest $sync_files_request sync_files_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncConfluence'] to see the possible values for this operation
      *
@@ -5673,6 +5763,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncConfluenceWithHttpInfo
      *
      * Confluence Sync
+     *
+     * This endpoint has been deprecated. Use /integrations/files/sync instead.  After listing pages in a user&#39;s Confluence account, the set of selected page &#x60;ids&#x60; and the connected account&#39;s &#x60;data_source_id&#x60; can be passed into this endpoint to sync them into Carbon. Additional parameters listed below can be used to associate data to the selected pages or alter the behavior of the sync.
      *
      * @param  \Carbon\Model\SyncFilesRequest $sync_files_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncConfluence'] to see the possible values for this operation
@@ -5813,6 +5905,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Confluence Sync
      *
+     * This endpoint has been deprecated. Use /integrations/files/sync instead.  After listing pages in a user&#39;s Confluence account, the set of selected page &#x60;ids&#x60; and the connected account&#39;s &#x60;data_source_id&#x60; can be passed into this endpoint to sync them into Carbon. Additional parameters listed below can be used to associate data to the selected pages or alter the behavior of the sync.
+     *
      * @param  \Carbon\Model\SyncFilesRequest $sync_files_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncConfluence'] to see the possible values for this operation
      *
@@ -5872,6 +5966,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncConfluenceAsyncWithHttpInfo
      *
      * Confluence Sync
+     *
+     * This endpoint has been deprecated. Use /integrations/files/sync instead.  After listing pages in a user&#39;s Confluence account, the set of selected page &#x60;ids&#x60; and the connected account&#39;s &#x60;data_source_id&#x60; can be passed into this endpoint to sync them into Carbon. Additional parameters listed below can be used to associate data to the selected pages or alter the behavior of the sync.
      *
      * @param  \Carbon\Model\SyncFilesRequest $sync_files_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncConfluence'] to see the possible values for this operation
@@ -6418,6 +6514,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Sync Files
      *
+     * After listing files and folders via /integrations/items/sync and integrations/items/list, use the selected items&#39; external ids  as the ids in this endpoint to sync them into Carbon. Sharepoint items take an additional parameter root_id, which identifies the drive the file or folder is in and is stored in root_external_id. That additional paramter is optional and excluding it will tell the sync to assume the item is stored in the default Documents drive.
+     *
      * @param  \Carbon\Model\SyncFilesRequest $sync_files_request sync_files_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncFiles'] to see the possible values for this operation
      *
@@ -6473,6 +6571,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncFilesWithHttpInfo
      *
      * Sync Files
+     *
+     * After listing files and folders via /integrations/items/sync and integrations/items/list, use the selected items&#39; external ids  as the ids in this endpoint to sync them into Carbon. Sharepoint items take an additional parameter root_id, which identifies the drive the file or folder is in and is stored in root_external_id. That additional paramter is optional and excluding it will tell the sync to assume the item is stored in the default Documents drive.
      *
      * @param  \Carbon\Model\SyncFilesRequest $sync_files_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncFiles'] to see the possible values for this operation
@@ -6612,6 +6712,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Sync Files
      *
+     * After listing files and folders via /integrations/items/sync and integrations/items/list, use the selected items&#39; external ids  as the ids in this endpoint to sync them into Carbon. Sharepoint items take an additional parameter root_id, which identifies the drive the file or folder is in and is stored in root_external_id. That additional paramter is optional and excluding it will tell the sync to assume the item is stored in the default Documents drive.
+     *
      * @param  \Carbon\Model\SyncFilesRequest $sync_files_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncFiles'] to see the possible values for this operation
      *
@@ -6670,6 +6772,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncFilesAsyncWithHttpInfo
      *
      * Sync Files
+     *
+     * After listing files and folders via /integrations/items/sync and integrations/items/list, use the selected items&#39; external ids  as the ids in this endpoint to sync them into Carbon. Sharepoint items take an additional parameter root_id, which identifies the drive the file or folder is in and is stored in root_external_id. That additional paramter is optional and excluding it will tell the sync to assume the item is stored in the default Documents drive.
      *
      * @param  \Carbon\Model\SyncFilesRequest $sync_files_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncFiles'] to see the possible values for this operation
@@ -6846,6 +6950,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Github Connect
      *
+     * Refer this article to obtain an access token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens. Make sure that your access token has the permission to read content from your desired repos. Note that if your access token expires you will need to manually update it through this endpoint.
+     *
      * @param  \Carbon\Model\GithubConnectRequest $github_connect_request github_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitHub'] to see the possible values for this operation
      *
@@ -6875,6 +6981,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncGitHubWithHttpInfo
      *
      * Github Connect
+     *
+     * Refer this article to obtain an access token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens. Make sure that your access token has the permission to read content from your desired repos. Note that if your access token expires you will need to manually update it through this endpoint.
      *
      * @param  \Carbon\Model\GithubConnectRequest $github_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitHub'] to see the possible values for this operation
@@ -7014,6 +7122,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Github Connect
      *
+     * Refer this article to obtain an access token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens. Make sure that your access token has the permission to read content from your desired repos. Note that if your access token expires you will need to manually update it through this endpoint.
+     *
      * @param  \Carbon\Model\GithubConnectRequest $github_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitHub'] to see the possible values for this operation
      *
@@ -7046,6 +7156,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncGitHubAsyncWithHttpInfo
      *
      * Github Connect
+     *
+     * Refer this article to obtain an access token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens. Make sure that your access token has the permission to read content from your desired repos. Note that if your access token expires you will need to manually update it through this endpoint.
      *
      * @param  \Carbon\Model\GithubConnectRequest $github_connect_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitHub'] to see the possible values for this operation
@@ -7222,6 +7334,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gitbook Sync
      *
+     * You can sync upto 20 Gitbook spaces at a time using this endpoint. Additional parameters below can be used to associate  data with the synced pages or modify the sync behavior.
+     *
      * @param  \Carbon\Model\GitbookSyncRequest $gitbook_sync_request gitbook_sync_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitbook'] to see the possible values for this operation
      *
@@ -7265,6 +7379,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncGitbookWithHttpInfo
      *
      * Gitbook Sync
+     *
+     * You can sync upto 20 Gitbook spaces at a time using this endpoint. Additional parameters below can be used to associate  data with the synced pages or modify the sync behavior.
      *
      * @param  \Carbon\Model\GitbookSyncRequest $gitbook_sync_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitbook'] to see the possible values for this operation
@@ -7404,6 +7520,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gitbook Sync
      *
+     * You can sync upto 20 Gitbook spaces at a time using this endpoint. Additional parameters below can be used to associate  data with the synced pages or modify the sync behavior.
+     *
      * @param  \Carbon\Model\GitbookSyncRequest $gitbook_sync_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitbook'] to see the possible values for this operation
      *
@@ -7450,6 +7568,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncGitbookAsyncWithHttpInfo
      *
      * Gitbook Sync
+     *
+     * You can sync upto 20 Gitbook spaces at a time using this endpoint. Additional parameters below can be used to associate  data with the synced pages or modify the sync behavior.
      *
      * @param  \Carbon\Model\GitbookSyncRequest $gitbook_sync_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGitbook'] to see the possible values for this operation
@@ -7626,6 +7746,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gmail Sync
      *
+     * Once you have successfully connected your gmail account, you can choose which emails to sync with us using the filters parameter. Filters is a JSON object with key value pairs. It also supports AND and OR operations. For now, we support a limited set of keys listed below.  &lt;b&gt;label&lt;/b&gt;: Inbuilt Gmail labels, for example \&quot;Important\&quot; or a custom label you created.   &lt;b&gt;after&lt;/b&gt; or &lt;b&gt;before&lt;/b&gt;: A date in YYYY/mm/dd format (example 2023/12/31). Gets emails after/before a certain date. You can also use them in combination to get emails from a certain period.   &lt;b&gt;is&lt;/b&gt;: Can have the following values - starred, important, snoozed, and unread   &lt;b&gt;from&lt;/b&gt;: Email address of the sender   &lt;b&gt;to&lt;/b&gt;: Email address of the recipient    Using keys or values outside of the specified values can lead to unexpected behaviour.  An example of a basic query with filters can be &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;label\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60; Which will list all emails that have the label \&quot;Test\&quot;.  You can use AND and OR operation in the following way: &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {         \&quot;AND\&quot;: [             {                 \&quot;key\&quot;: \&quot;after\&quot;,                 \&quot;value\&quot;: \&quot;2024/01/07\&quot;             },             {                 \&quot;OR\&quot;: [                     {                         \&quot;key\&quot;: \&quot;label\&quot;,                         \&quot;value\&quot;: \&quot;Personal\&quot;                     },                     {                         \&quot;key\&quot;: \&quot;is\&quot;,                         \&quot;value\&quot;: \&quot;starred\&quot;                     }                 ]             }         ]     } } &#x60;&#x60;&#x60; This will return emails after 7th of Jan that are either starred or have the label \&quot;Personal\&quot;.  Note that this is the highest level of nesting we support, i.e. you can&#39;t add more AND/OR filters within the OR filter in the above example.
+     *
      * @param  \Carbon\Model\GmailSyncInput $gmail_sync_input gmail_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGmail'] to see the possible values for this operation
      *
@@ -7675,6 +7797,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncGmailWithHttpInfo
      *
      * Gmail Sync
+     *
+     * Once you have successfully connected your gmail account, you can choose which emails to sync with us using the filters parameter. Filters is a JSON object with key value pairs. It also supports AND and OR operations. For now, we support a limited set of keys listed below.  &lt;b&gt;label&lt;/b&gt;: Inbuilt Gmail labels, for example \&quot;Important\&quot; or a custom label you created.   &lt;b&gt;after&lt;/b&gt; or &lt;b&gt;before&lt;/b&gt;: A date in YYYY/mm/dd format (example 2023/12/31). Gets emails after/before a certain date. You can also use them in combination to get emails from a certain period.   &lt;b&gt;is&lt;/b&gt;: Can have the following values - starred, important, snoozed, and unread   &lt;b&gt;from&lt;/b&gt;: Email address of the sender   &lt;b&gt;to&lt;/b&gt;: Email address of the recipient    Using keys or values outside of the specified values can lead to unexpected behaviour.  An example of a basic query with filters can be &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;label\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60; Which will list all emails that have the label \&quot;Test\&quot;.  You can use AND and OR operation in the following way: &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {         \&quot;AND\&quot;: [             {                 \&quot;key\&quot;: \&quot;after\&quot;,                 \&quot;value\&quot;: \&quot;2024/01/07\&quot;             },             {                 \&quot;OR\&quot;: [                     {                         \&quot;key\&quot;: \&quot;label\&quot;,                         \&quot;value\&quot;: \&quot;Personal\&quot;                     },                     {                         \&quot;key\&quot;: \&quot;is\&quot;,                         \&quot;value\&quot;: \&quot;starred\&quot;                     }                 ]             }         ]     } } &#x60;&#x60;&#x60; This will return emails after 7th of Jan that are either starred or have the label \&quot;Personal\&quot;.  Note that this is the highest level of nesting we support, i.e. you can&#39;t add more AND/OR filters within the OR filter in the above example.
      *
      * @param  \Carbon\Model\GmailSyncInput $gmail_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGmail'] to see the possible values for this operation
@@ -7814,6 +7938,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Gmail Sync
      *
+     * Once you have successfully connected your gmail account, you can choose which emails to sync with us using the filters parameter. Filters is a JSON object with key value pairs. It also supports AND and OR operations. For now, we support a limited set of keys listed below.  &lt;b&gt;label&lt;/b&gt;: Inbuilt Gmail labels, for example \&quot;Important\&quot; or a custom label you created.   &lt;b&gt;after&lt;/b&gt; or &lt;b&gt;before&lt;/b&gt;: A date in YYYY/mm/dd format (example 2023/12/31). Gets emails after/before a certain date. You can also use them in combination to get emails from a certain period.   &lt;b&gt;is&lt;/b&gt;: Can have the following values - starred, important, snoozed, and unread   &lt;b&gt;from&lt;/b&gt;: Email address of the sender   &lt;b&gt;to&lt;/b&gt;: Email address of the recipient    Using keys or values outside of the specified values can lead to unexpected behaviour.  An example of a basic query with filters can be &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;label\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60; Which will list all emails that have the label \&quot;Test\&quot;.  You can use AND and OR operation in the following way: &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {         \&quot;AND\&quot;: [             {                 \&quot;key\&quot;: \&quot;after\&quot;,                 \&quot;value\&quot;: \&quot;2024/01/07\&quot;             },             {                 \&quot;OR\&quot;: [                     {                         \&quot;key\&quot;: \&quot;label\&quot;,                         \&quot;value\&quot;: \&quot;Personal\&quot;                     },                     {                         \&quot;key\&quot;: \&quot;is\&quot;,                         \&quot;value\&quot;: \&quot;starred\&quot;                     }                 ]             }         ]     } } &#x60;&#x60;&#x60; This will return emails after 7th of Jan that are either starred or have the label \&quot;Personal\&quot;.  Note that this is the highest level of nesting we support, i.e. you can&#39;t add more AND/OR filters within the OR filter in the above example.
+     *
      * @param  \Carbon\Model\GmailSyncInput $gmail_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGmail'] to see the possible values for this operation
      *
@@ -7866,6 +7992,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncGmailAsyncWithHttpInfo
      *
      * Gmail Sync
+     *
+     * Once you have successfully connected your gmail account, you can choose which emails to sync with us using the filters parameter. Filters is a JSON object with key value pairs. It also supports AND and OR operations. For now, we support a limited set of keys listed below.  &lt;b&gt;label&lt;/b&gt;: Inbuilt Gmail labels, for example \&quot;Important\&quot; or a custom label you created.   &lt;b&gt;after&lt;/b&gt; or &lt;b&gt;before&lt;/b&gt;: A date in YYYY/mm/dd format (example 2023/12/31). Gets emails after/before a certain date. You can also use them in combination to get emails from a certain period.   &lt;b&gt;is&lt;/b&gt;: Can have the following values - starred, important, snoozed, and unread   &lt;b&gt;from&lt;/b&gt;: Email address of the sender   &lt;b&gt;to&lt;/b&gt;: Email address of the recipient    Using keys or values outside of the specified values can lead to unexpected behaviour.  An example of a basic query with filters can be &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;label\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60; Which will list all emails that have the label \&quot;Test\&quot;.  You can use AND and OR operation in the following way: &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {         \&quot;AND\&quot;: [             {                 \&quot;key\&quot;: \&quot;after\&quot;,                 \&quot;value\&quot;: \&quot;2024/01/07\&quot;             },             {                 \&quot;OR\&quot;: [                     {                         \&quot;key\&quot;: \&quot;label\&quot;,                         \&quot;value\&quot;: \&quot;Personal\&quot;                     },                     {                         \&quot;key\&quot;: \&quot;is\&quot;,                         \&quot;value\&quot;: \&quot;starred\&quot;                     }                 ]             }         ]     } } &#x60;&#x60;&#x60; This will return emails after 7th of Jan that are either starred or have the label \&quot;Personal\&quot;.  Note that this is the highest level of nesting we support, i.e. you can&#39;t add more AND/OR filters within the OR filter in the above example.
      *
      * @param  \Carbon\Model\GmailSyncInput $gmail_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncGmail'] to see the possible values for this operation
@@ -8042,6 +8170,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Sync
      *
+     * Once you have successfully connected your Outlook account, you can choose which emails to sync with us using the filters and folder parameter. \&quot;folder\&quot; should be the folder you want to sync from Outlook. By default we get messages from your inbox folder.   Filters is a JSON object with key value pairs. It also supports AND and OR operations. For now, we support a limited set of keys listed below.  &lt;b&gt;category&lt;/b&gt;: Custom categories that you created in Outlook.   &lt;b&gt;after&lt;/b&gt; or &lt;b&gt;before&lt;/b&gt;: A date in YYYY/mm/dd format (example 2023/12/31). Gets emails after/before a certain date. You can also use them in combination to get emails from a certain period.     &lt;b&gt;is&lt;/b&gt;: Can have the following values: flagged   &lt;b&gt;from&lt;/b&gt;: Email address of the sender     An example of a basic query with filters can be &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;category\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60; Which will list all emails that have the category \&quot;Test\&quot;.    Specifying a custom folder in the same query &#x60;&#x60;&#x60;json {     \&quot;folder\&quot;: \&quot;Folder Name\&quot;,     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;category\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60;  You can use AND and OR operation in the following way: &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {         \&quot;AND\&quot;: [             {                 \&quot;key\&quot;: \&quot;after\&quot;,                 \&quot;value\&quot;: \&quot;2024/01/07\&quot;             },             {                 \&quot;OR\&quot;: [                     {                         \&quot;key\&quot;: \&quot;category\&quot;,                         \&quot;value\&quot;: \&quot;Personal\&quot;                     },                     {                         \&quot;key\&quot;: \&quot;category\&quot;,                         \&quot;value\&quot;: \&quot;Test\&quot;                     },                 ]             }         ]     } } &#x60;&#x60;&#x60; This will return emails after 7th of Jan that have either Personal or Test as category.  Note that this is the highest level of nesting we support, i.e. you can&#39;t add more AND/OR filters within the OR filter in the above example.
+     *
      * @param  \Carbon\Model\OutlookSyncInput $outlook_sync_input outlook_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncOutlook'] to see the possible values for this operation
      *
@@ -8093,6 +8223,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncOutlookWithHttpInfo
      *
      * Outlook Sync
+     *
+     * Once you have successfully connected your Outlook account, you can choose which emails to sync with us using the filters and folder parameter. \&quot;folder\&quot; should be the folder you want to sync from Outlook. By default we get messages from your inbox folder.   Filters is a JSON object with key value pairs. It also supports AND and OR operations. For now, we support a limited set of keys listed below.  &lt;b&gt;category&lt;/b&gt;: Custom categories that you created in Outlook.   &lt;b&gt;after&lt;/b&gt; or &lt;b&gt;before&lt;/b&gt;: A date in YYYY/mm/dd format (example 2023/12/31). Gets emails after/before a certain date. You can also use them in combination to get emails from a certain period.     &lt;b&gt;is&lt;/b&gt;: Can have the following values: flagged   &lt;b&gt;from&lt;/b&gt;: Email address of the sender     An example of a basic query with filters can be &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;category\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60; Which will list all emails that have the category \&quot;Test\&quot;.    Specifying a custom folder in the same query &#x60;&#x60;&#x60;json {     \&quot;folder\&quot;: \&quot;Folder Name\&quot;,     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;category\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60;  You can use AND and OR operation in the following way: &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {         \&quot;AND\&quot;: [             {                 \&quot;key\&quot;: \&quot;after\&quot;,                 \&quot;value\&quot;: \&quot;2024/01/07\&quot;             },             {                 \&quot;OR\&quot;: [                     {                         \&quot;key\&quot;: \&quot;category\&quot;,                         \&quot;value\&quot;: \&quot;Personal\&quot;                     },                     {                         \&quot;key\&quot;: \&quot;category\&quot;,                         \&quot;value\&quot;: \&quot;Test\&quot;                     },                 ]             }         ]     } } &#x60;&#x60;&#x60; This will return emails after 7th of Jan that have either Personal or Test as category.  Note that this is the highest level of nesting we support, i.e. you can&#39;t add more AND/OR filters within the OR filter in the above example.
      *
      * @param  \Carbon\Model\OutlookSyncInput $outlook_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncOutlook'] to see the possible values for this operation
@@ -8232,6 +8364,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Outlook Sync
      *
+     * Once you have successfully connected your Outlook account, you can choose which emails to sync with us using the filters and folder parameter. \&quot;folder\&quot; should be the folder you want to sync from Outlook. By default we get messages from your inbox folder.   Filters is a JSON object with key value pairs. It also supports AND and OR operations. For now, we support a limited set of keys listed below.  &lt;b&gt;category&lt;/b&gt;: Custom categories that you created in Outlook.   &lt;b&gt;after&lt;/b&gt; or &lt;b&gt;before&lt;/b&gt;: A date in YYYY/mm/dd format (example 2023/12/31). Gets emails after/before a certain date. You can also use them in combination to get emails from a certain period.     &lt;b&gt;is&lt;/b&gt;: Can have the following values: flagged   &lt;b&gt;from&lt;/b&gt;: Email address of the sender     An example of a basic query with filters can be &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;category\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60; Which will list all emails that have the category \&quot;Test\&quot;.    Specifying a custom folder in the same query &#x60;&#x60;&#x60;json {     \&quot;folder\&quot;: \&quot;Folder Name\&quot;,     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;category\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60;  You can use AND and OR operation in the following way: &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {         \&quot;AND\&quot;: [             {                 \&quot;key\&quot;: \&quot;after\&quot;,                 \&quot;value\&quot;: \&quot;2024/01/07\&quot;             },             {                 \&quot;OR\&quot;: [                     {                         \&quot;key\&quot;: \&quot;category\&quot;,                         \&quot;value\&quot;: \&quot;Personal\&quot;                     },                     {                         \&quot;key\&quot;: \&quot;category\&quot;,                         \&quot;value\&quot;: \&quot;Test\&quot;                     },                 ]             }         ]     } } &#x60;&#x60;&#x60; This will return emails after 7th of Jan that have either Personal or Test as category.  Note that this is the highest level of nesting we support, i.e. you can&#39;t add more AND/OR filters within the OR filter in the above example.
+     *
      * @param  \Carbon\Model\OutlookSyncInput $outlook_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncOutlook'] to see the possible values for this operation
      *
@@ -8286,6 +8420,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncOutlookAsyncWithHttpInfo
      *
      * Outlook Sync
+     *
+     * Once you have successfully connected your Outlook account, you can choose which emails to sync with us using the filters and folder parameter. \&quot;folder\&quot; should be the folder you want to sync from Outlook. By default we get messages from your inbox folder.   Filters is a JSON object with key value pairs. It also supports AND and OR operations. For now, we support a limited set of keys listed below.  &lt;b&gt;category&lt;/b&gt;: Custom categories that you created in Outlook.   &lt;b&gt;after&lt;/b&gt; or &lt;b&gt;before&lt;/b&gt;: A date in YYYY/mm/dd format (example 2023/12/31). Gets emails after/before a certain date. You can also use them in combination to get emails from a certain period.     &lt;b&gt;is&lt;/b&gt;: Can have the following values: flagged   &lt;b&gt;from&lt;/b&gt;: Email address of the sender     An example of a basic query with filters can be &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;category\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60; Which will list all emails that have the category \&quot;Test\&quot;.    Specifying a custom folder in the same query &#x60;&#x60;&#x60;json {     \&quot;folder\&quot;: \&quot;Folder Name\&quot;,     \&quot;filters\&quot;: {             \&quot;key\&quot;: \&quot;category\&quot;,             \&quot;value\&quot;: \&quot;Test\&quot;         } } &#x60;&#x60;&#x60;  You can use AND and OR operation in the following way: &#x60;&#x60;&#x60;json {     \&quot;filters\&quot;: {         \&quot;AND\&quot;: [             {                 \&quot;key\&quot;: \&quot;after\&quot;,                 \&quot;value\&quot;: \&quot;2024/01/07\&quot;             },             {                 \&quot;OR\&quot;: [                     {                         \&quot;key\&quot;: \&quot;category\&quot;,                         \&quot;value\&quot;: \&quot;Personal\&quot;                     },                     {                         \&quot;key\&quot;: \&quot;category\&quot;,                         \&quot;value\&quot;: \&quot;Test\&quot;                     },                 ]             }         ]     } } &#x60;&#x60;&#x60; This will return emails after 7th of Jan that have either Personal or Test as category.  Note that this is the highest level of nesting we support, i.e. you can&#39;t add more AND/OR filters within the OR filter in the above example.
      *
      * @param  \Carbon\Model\OutlookSyncInput $outlook_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncOutlook'] to see the possible values for this operation
@@ -8462,6 +8598,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Github Sync Repos
      *
+     * You can retreive repos your token has access to using /integrations/github/repos and sync their content.  You can also pass full name of any public repository (username/repo-name). This will store the repo content with  carbon which can be accessed through /integrations/items/list endpoint. Maximum of 25 repositories are accepted per request.
+     *
      * @param  \Carbon\Model\GithubFetchReposRequest $github_fetch_repos_request github_fetch_repos_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncRepos'] to see the possible values for this operation
      *
@@ -8489,6 +8627,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncReposWithHttpInfo
      *
      * Github Sync Repos
+     *
+     * You can retreive repos your token has access to using /integrations/github/repos and sync their content.  You can also pass full name of any public repository (username/repo-name). This will store the repo content with  carbon which can be accessed through /integrations/items/list endpoint. Maximum of 25 repositories are accepted per request.
      *
      * @param  \Carbon\Model\GithubFetchReposRequest $github_fetch_repos_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncRepos'] to see the possible values for this operation
@@ -8628,6 +8768,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Github Sync Repos
      *
+     * You can retreive repos your token has access to using /integrations/github/repos and sync their content.  You can also pass full name of any public repository (username/repo-name). This will store the repo content with  carbon which can be accessed through /integrations/items/list endpoint. Maximum of 25 repositories are accepted per request.
+     *
      * @param  \Carbon\Model\GithubFetchReposRequest $github_fetch_repos_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncRepos'] to see the possible values for this operation
      *
@@ -8658,6 +8800,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncReposAsyncWithHttpInfo
      *
      * Github Sync Repos
+     *
+     * You can retreive repos your token has access to using /integrations/github/repos and sync their content.  You can also pass full name of any public repository (username/repo-name). This will store the repo content with  carbon which can be accessed through /integrations/items/list endpoint. Maximum of 25 repositories are accepted per request.
      *
      * @param  \Carbon\Model\GithubFetchReposRequest $github_fetch_repos_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncRepos'] to see the possible values for this operation
@@ -9234,6 +9378,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * S3 Files
      *
+     * After optionally loading the items via /integrations/items/sync and integrations/items/list, use the bucket name  and object key as the ID in this endpoint to sync them into Carbon. Additional parameters below can associate  data with the selected items or modify the sync behavior
+     *
      * @param  \Carbon\Model\S3FileSyncInput $s3_file_sync_input s3_file_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncS3Files'] to see the possible values for this operation
      *
@@ -9287,6 +9433,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncS3FilesWithHttpInfo
      *
      * S3 Files
+     *
+     * After optionally loading the items via /integrations/items/sync and integrations/items/list, use the bucket name  and object key as the ID in this endpoint to sync them into Carbon. Additional parameters below can associate  data with the selected items or modify the sync behavior
      *
      * @param  \Carbon\Model\S3FileSyncInput $s3_file_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncS3Files'] to see the possible values for this operation
@@ -9426,6 +9574,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * S3 Files
      *
+     * After optionally loading the items via /integrations/items/sync and integrations/items/list, use the bucket name  and object key as the ID in this endpoint to sync them into Carbon. Additional parameters below can associate  data with the selected items or modify the sync behavior
+     *
      * @param  \Carbon\Model\S3FileSyncInput $s3_file_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncS3Files'] to see the possible values for this operation
      *
@@ -9482,6 +9632,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncS3FilesAsyncWithHttpInfo
      *
      * S3 Files
+     *
+     * After optionally loading the items via /integrations/items/sync and integrations/items/list, use the bucket name  and object key as the ID in this endpoint to sync them into Carbon. Additional parameters below can associate  data with the selected items or modify the sync behavior
      *
      * @param  \Carbon\Model\S3FileSyncInput $s3_file_sync_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncS3Files'] to see the possible values for this operation
@@ -9658,6 +9810,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Slack Sync
      *
+     * You can list all conversations using the endpoint /integrations/slack/conversations. The ID of  conversation will be used as an input for this endpoint with timestamps as optional filters.
+     *
      * @param  \Carbon\Model\SlackSyncRequest $slack_sync_request slack_sync_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncSlack'] to see the possible values for this operation
      *
@@ -9701,6 +9855,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncSlackWithHttpInfo
      *
      * Slack Sync
+     *
+     * You can list all conversations using the endpoint /integrations/slack/conversations. The ID of  conversation will be used as an input for this endpoint with timestamps as optional filters.
      *
      * @param  \Carbon\Model\SlackSyncRequest $slack_sync_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncSlack'] to see the possible values for this operation
@@ -9840,6 +9996,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      *
      * Slack Sync
      *
+     * You can list all conversations using the endpoint /integrations/slack/conversations. The ID of  conversation will be used as an input for this endpoint with timestamps as optional filters.
+     *
      * @param  \Carbon\Model\SlackSyncRequest $slack_sync_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncSlack'] to see the possible values for this operation
      *
@@ -9886,6 +10044,8 @@ class IntegrationsApi extends \Carbon\CustomApi
      * Operation syncSlackAsyncWithHttpInfo
      *
      * Slack Sync
+     *
+     * You can list all conversations using the endpoint /integrations/slack/conversations. The ID of  conversation will be used as an input for this endpoint with timestamps as optional filters.
      *
      * @param  \Carbon\Model\SlackSyncRequest $slack_sync_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncSlack'] to see the possible values for this operation

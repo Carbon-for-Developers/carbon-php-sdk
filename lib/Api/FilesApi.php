@@ -181,6 +181,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Create File Tags
      *
+     * A tag is a key-value pair that can be added to a file. This pair can then be used for searches (e.g. embedding searches) in order to narrow down the scope of the search. A file can have any number of tags. The following are reserved keys that cannot be used: - db_embedding_id - organization_id - user_id - organization_user_file_id  Carbon currently supports two data types for tag values - &#x60;string&#x60; and &#x60;list&lt;string&gt;&#x60;. Keys can only be &#x60;string&#x60;. If values other than &#x60;string&#x60; and &#x60;list&lt;string&gt;&#x60; are used, they&#39;re automatically converted to strings (e.g. 4 will become \&quot;4\&quot;).
+     *
      * @param  \Carbon\Model\OrganizationUserFileTagCreate $organization_user_file_tag_create organization_user_file_tag_create (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createUserFileTags'] to see the possible values for this operation
      *
@@ -208,6 +210,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation createUserFileTagsWithHttpInfo
      *
      * Create File Tags
+     *
+     * A tag is a key-value pair that can be added to a file. This pair can then be used for searches (e.g. embedding searches) in order to narrow down the scope of the search. A file can have any number of tags. The following are reserved keys that cannot be used: - db_embedding_id - organization_id - user_id - organization_user_file_id  Carbon currently supports two data types for tag values - &#x60;string&#x60; and &#x60;list&lt;string&gt;&#x60;. Keys can only be &#x60;string&#x60;. If values other than &#x60;string&#x60; and &#x60;list&lt;string&gt;&#x60; are used, they&#39;re automatically converted to strings (e.g. 4 will become \&quot;4\&quot;).
      *
      * @param  \Carbon\Model\OrganizationUserFileTagCreate $organization_user_file_tag_create (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createUserFileTags'] to see the possible values for this operation
@@ -347,6 +351,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Create File Tags
      *
+     * A tag is a key-value pair that can be added to a file. This pair can then be used for searches (e.g. embedding searches) in order to narrow down the scope of the search. A file can have any number of tags. The following are reserved keys that cannot be used: - db_embedding_id - organization_id - user_id - organization_user_file_id  Carbon currently supports two data types for tag values - &#x60;string&#x60; and &#x60;list&lt;string&gt;&#x60;. Keys can only be &#x60;string&#x60;. If values other than &#x60;string&#x60; and &#x60;list&lt;string&gt;&#x60; are used, they&#39;re automatically converted to strings (e.g. 4 will become \&quot;4\&quot;).
+     *
      * @param  \Carbon\Model\OrganizationUserFileTagCreate $organization_user_file_tag_create (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createUserFileTags'] to see the possible values for this operation
      *
@@ -377,6 +383,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation createUserFileTagsAsyncWithHttpInfo
      *
      * Create File Tags
+     *
+     * A tag is a key-value pair that can be added to a file. This pair can then be used for searches (e.g. embedding searches) in order to narrow down the scope of the search. A file can have any number of tags. The following are reserved keys that cannot be used: - db_embedding_id - organization_id - user_id - organization_user_file_id  Carbon currently supports two data types for tag values - &#x60;string&#x60; and &#x60;list&lt;string&gt;&#x60;. Keys can only be &#x60;string&#x60;. If values other than &#x60;string&#x60; and &#x60;list&lt;string&gt;&#x60; are used, they&#39;re automatically converted to strings (e.g. 4 will become \&quot;4\&quot;).
      *
      * @param  \Carbon\Model\OrganizationUserFileTagCreate $organization_user_file_tag_create (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createUserFileTags'] to see the possible values for this operation
@@ -2050,6 +2058,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Parsed File
      *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
+     *
      * @param  int $file_id file_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getParsedFile'] to see the possible values for this operation
      *
@@ -2073,6 +2083,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation getParsedFileWithHttpInfo
      *
      * Parsed File
+     *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
      *
      * @param  int $file_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getParsedFile'] to see the possible values for this operation
@@ -2213,6 +2225,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Parsed File
      *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
+     *
      * @param  int $file_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getParsedFile'] to see the possible values for this operation
      *
@@ -2239,6 +2253,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation getParsedFileAsyncWithHttpInfo
      *
      * Parsed File
+     *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
      *
      * @param  int $file_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getParsedFile'] to see the possible values for this operation
@@ -2410,6 +2426,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Raw File
      *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
+     *
      * @param  int $file_id file_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRawFile'] to see the possible values for this operation
      *
@@ -2433,6 +2451,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation getRawFileWithHttpInfo
      *
      * Raw File
+     *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
      *
      * @param  int $file_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRawFile'] to see the possible values for this operation
@@ -2573,6 +2593,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Raw File
      *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
+     *
      * @param  int $file_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRawFile'] to see the possible values for this operation
      *
@@ -2599,6 +2621,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation getRawFileAsyncWithHttpInfo
      *
      * Raw File
+     *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
      *
      * @param  int $file_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRawFile'] to see the possible values for this operation
@@ -3514,6 +3538,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * User Files V2
      *
+     * For pre-filtering documents, using &#x60;tags_v2&#x60; is preferred to using &#x60;tags&#x60; (which is now deprecated). If both &#x60;tags_v2&#x60; and &#x60;tags&#x60; are specified, &#x60;tags&#x60; is ignored. &#x60;tags_v2&#x60; enables building complex filters through the use of \&quot;AND\&quot;, \&quot;OR\&quot;, and negation logic. Take the below input as an example: &#x60;&#x60;&#x60;json {     \&quot;OR\&quot;: [         {             \&quot;key\&quot;: \&quot;subject\&quot;,             \&quot;value\&quot;: \&quot;holy-bible\&quot;,             \&quot;negate\&quot;: false         },         {             \&quot;key\&quot;: \&quot;person-of-interest\&quot;,             \&quot;value\&quot;: \&quot;jesus christ\&quot;,             \&quot;negate\&quot;: false         },         {             \&quot;key\&quot;: \&quot;genre\&quot;,             \&quot;value\&quot;: \&quot;religion\&quot;,             \&quot;negate\&quot;: true         }         {             \&quot;AND\&quot;: [                 {                     \&quot;key\&quot;: \&quot;subject\&quot;,                     \&quot;value\&quot;: \&quot;tao-te-ching\&quot;,                     \&quot;negate\&quot;: false                 },                 {                     \&quot;key\&quot;: \&quot;author\&quot;,                     \&quot;value\&quot;: \&quot;lao-tzu\&quot;,                     \&quot;negate\&quot;: false                 }             ]         }     ] } &#x60;&#x60;&#x60; In this case, files will be filtered such that: 1. \&quot;subject\&quot; &#x3D; \&quot;holy-bible\&quot; OR 2. \&quot;person-of-interest\&quot; &#x3D; \&quot;jesus christ\&quot; OR 3. \&quot;genre\&quot; !&#x3D; \&quot;religion\&quot; OR 4. \&quot;subject\&quot; &#x3D; \&quot;tao-te-ching\&quot; AND \&quot;author\&quot; &#x3D; \&quot;lao-tzu\&quot;  Note that the top level of the query must be either an \&quot;OR\&quot; or \&quot;AND\&quot; array. Currently, nesting is limited to 3. For tag blocks (those with \&quot;key\&quot;, \&quot;value\&quot;, and \&quot;negate\&quot; keys), the following typing rules apply: 1. \&quot;key\&quot; isn&#39;t optional and must be a &#x60;string&#x60; 2. \&quot;value\&quot; isn&#39;t optional and can be &#x60;any&#x60; or list[&#x60;any&#x60;] 3. \&quot;negate\&quot; is optional and must be &#x60;true&#x60; or &#x60;false&#x60;. If present and &#x60;true&#x60;, then the filter block is negated in the resulting query. It is &#x60;false&#x60; by default.
+     *
      * @param  \Carbon\Model\OrganizationUserFilesToSyncQueryInput $organization_user_files_to_sync_query_input organization_user_files_to_sync_query_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['queryUserFiles'] to see the possible values for this operation
      *
@@ -3551,6 +3577,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation queryUserFilesWithHttpInfo
      *
      * User Files V2
+     *
+     * For pre-filtering documents, using &#x60;tags_v2&#x60; is preferred to using &#x60;tags&#x60; (which is now deprecated). If both &#x60;tags_v2&#x60; and &#x60;tags&#x60; are specified, &#x60;tags&#x60; is ignored. &#x60;tags_v2&#x60; enables building complex filters through the use of \&quot;AND\&quot;, \&quot;OR\&quot;, and negation logic. Take the below input as an example: &#x60;&#x60;&#x60;json {     \&quot;OR\&quot;: [         {             \&quot;key\&quot;: \&quot;subject\&quot;,             \&quot;value\&quot;: \&quot;holy-bible\&quot;,             \&quot;negate\&quot;: false         },         {             \&quot;key\&quot;: \&quot;person-of-interest\&quot;,             \&quot;value\&quot;: \&quot;jesus christ\&quot;,             \&quot;negate\&quot;: false         },         {             \&quot;key\&quot;: \&quot;genre\&quot;,             \&quot;value\&quot;: \&quot;religion\&quot;,             \&quot;negate\&quot;: true         }         {             \&quot;AND\&quot;: [                 {                     \&quot;key\&quot;: \&quot;subject\&quot;,                     \&quot;value\&quot;: \&quot;tao-te-ching\&quot;,                     \&quot;negate\&quot;: false                 },                 {                     \&quot;key\&quot;: \&quot;author\&quot;,                     \&quot;value\&quot;: \&quot;lao-tzu\&quot;,                     \&quot;negate\&quot;: false                 }             ]         }     ] } &#x60;&#x60;&#x60; In this case, files will be filtered such that: 1. \&quot;subject\&quot; &#x3D; \&quot;holy-bible\&quot; OR 2. \&quot;person-of-interest\&quot; &#x3D; \&quot;jesus christ\&quot; OR 3. \&quot;genre\&quot; !&#x3D; \&quot;religion\&quot; OR 4. \&quot;subject\&quot; &#x3D; \&quot;tao-te-ching\&quot; AND \&quot;author\&quot; &#x3D; \&quot;lao-tzu\&quot;  Note that the top level of the query must be either an \&quot;OR\&quot; or \&quot;AND\&quot; array. Currently, nesting is limited to 3. For tag blocks (those with \&quot;key\&quot;, \&quot;value\&quot;, and \&quot;negate\&quot; keys), the following typing rules apply: 1. \&quot;key\&quot; isn&#39;t optional and must be a &#x60;string&#x60; 2. \&quot;value\&quot; isn&#39;t optional and can be &#x60;any&#x60; or list[&#x60;any&#x60;] 3. \&quot;negate\&quot; is optional and must be &#x60;true&#x60; or &#x60;false&#x60;. If present and &#x60;true&#x60;, then the filter block is negated in the resulting query. It is &#x60;false&#x60; by default.
      *
      * @param  \Carbon\Model\OrganizationUserFilesToSyncQueryInput $organization_user_files_to_sync_query_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['queryUserFiles'] to see the possible values for this operation
@@ -3690,6 +3718,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * User Files V2
      *
+     * For pre-filtering documents, using &#x60;tags_v2&#x60; is preferred to using &#x60;tags&#x60; (which is now deprecated). If both &#x60;tags_v2&#x60; and &#x60;tags&#x60; are specified, &#x60;tags&#x60; is ignored. &#x60;tags_v2&#x60; enables building complex filters through the use of \&quot;AND\&quot;, \&quot;OR\&quot;, and negation logic. Take the below input as an example: &#x60;&#x60;&#x60;json {     \&quot;OR\&quot;: [         {             \&quot;key\&quot;: \&quot;subject\&quot;,             \&quot;value\&quot;: \&quot;holy-bible\&quot;,             \&quot;negate\&quot;: false         },         {             \&quot;key\&quot;: \&quot;person-of-interest\&quot;,             \&quot;value\&quot;: \&quot;jesus christ\&quot;,             \&quot;negate\&quot;: false         },         {             \&quot;key\&quot;: \&quot;genre\&quot;,             \&quot;value\&quot;: \&quot;religion\&quot;,             \&quot;negate\&quot;: true         }         {             \&quot;AND\&quot;: [                 {                     \&quot;key\&quot;: \&quot;subject\&quot;,                     \&quot;value\&quot;: \&quot;tao-te-ching\&quot;,                     \&quot;negate\&quot;: false                 },                 {                     \&quot;key\&quot;: \&quot;author\&quot;,                     \&quot;value\&quot;: \&quot;lao-tzu\&quot;,                     \&quot;negate\&quot;: false                 }             ]         }     ] } &#x60;&#x60;&#x60; In this case, files will be filtered such that: 1. \&quot;subject\&quot; &#x3D; \&quot;holy-bible\&quot; OR 2. \&quot;person-of-interest\&quot; &#x3D; \&quot;jesus christ\&quot; OR 3. \&quot;genre\&quot; !&#x3D; \&quot;religion\&quot; OR 4. \&quot;subject\&quot; &#x3D; \&quot;tao-te-ching\&quot; AND \&quot;author\&quot; &#x3D; \&quot;lao-tzu\&quot;  Note that the top level of the query must be either an \&quot;OR\&quot; or \&quot;AND\&quot; array. Currently, nesting is limited to 3. For tag blocks (those with \&quot;key\&quot;, \&quot;value\&quot;, and \&quot;negate\&quot; keys), the following typing rules apply: 1. \&quot;key\&quot; isn&#39;t optional and must be a &#x60;string&#x60; 2. \&quot;value\&quot; isn&#39;t optional and can be &#x60;any&#x60; or list[&#x60;any&#x60;] 3. \&quot;negate\&quot; is optional and must be &#x60;true&#x60; or &#x60;false&#x60;. If present and &#x60;true&#x60;, then the filter block is negated in the resulting query. It is &#x60;false&#x60; by default.
+     *
      * @param  \Carbon\Model\OrganizationUserFilesToSyncQueryInput $organization_user_files_to_sync_query_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['queryUserFiles'] to see the possible values for this operation
      *
@@ -3730,6 +3760,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation queryUserFilesAsyncWithHttpInfo
      *
      * User Files V2
+     *
+     * For pre-filtering documents, using &#x60;tags_v2&#x60; is preferred to using &#x60;tags&#x60; (which is now deprecated). If both &#x60;tags_v2&#x60; and &#x60;tags&#x60; are specified, &#x60;tags&#x60; is ignored. &#x60;tags_v2&#x60; enables building complex filters through the use of \&quot;AND\&quot;, \&quot;OR\&quot;, and negation logic. Take the below input as an example: &#x60;&#x60;&#x60;json {     \&quot;OR\&quot;: [         {             \&quot;key\&quot;: \&quot;subject\&quot;,             \&quot;value\&quot;: \&quot;holy-bible\&quot;,             \&quot;negate\&quot;: false         },         {             \&quot;key\&quot;: \&quot;person-of-interest\&quot;,             \&quot;value\&quot;: \&quot;jesus christ\&quot;,             \&quot;negate\&quot;: false         },         {             \&quot;key\&quot;: \&quot;genre\&quot;,             \&quot;value\&quot;: \&quot;religion\&quot;,             \&quot;negate\&quot;: true         }         {             \&quot;AND\&quot;: [                 {                     \&quot;key\&quot;: \&quot;subject\&quot;,                     \&quot;value\&quot;: \&quot;tao-te-ching\&quot;,                     \&quot;negate\&quot;: false                 },                 {                     \&quot;key\&quot;: \&quot;author\&quot;,                     \&quot;value\&quot;: \&quot;lao-tzu\&quot;,                     \&quot;negate\&quot;: false                 }             ]         }     ] } &#x60;&#x60;&#x60; In this case, files will be filtered such that: 1. \&quot;subject\&quot; &#x3D; \&quot;holy-bible\&quot; OR 2. \&quot;person-of-interest\&quot; &#x3D; \&quot;jesus christ\&quot; OR 3. \&quot;genre\&quot; !&#x3D; \&quot;religion\&quot; OR 4. \&quot;subject\&quot; &#x3D; \&quot;tao-te-ching\&quot; AND \&quot;author\&quot; &#x3D; \&quot;lao-tzu\&quot;  Note that the top level of the query must be either an \&quot;OR\&quot; or \&quot;AND\&quot; array. Currently, nesting is limited to 3. For tag blocks (those with \&quot;key\&quot;, \&quot;value\&quot;, and \&quot;negate\&quot; keys), the following typing rules apply: 1. \&quot;key\&quot; isn&#39;t optional and must be a &#x60;string&#x60; 2. \&quot;value\&quot; isn&#39;t optional and can be &#x60;any&#x60; or list[&#x60;any&#x60;] 3. \&quot;negate\&quot; is optional and must be &#x60;true&#x60; or &#x60;false&#x60;. If present and &#x60;true&#x60;, then the filter block is negated in the resulting query. It is &#x60;false&#x60; by default.
      *
      * @param  \Carbon\Model\OrganizationUserFilesToSyncQueryInput $organization_user_files_to_sync_query_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['queryUserFiles'] to see the possible values for this operation
@@ -3906,6 +3938,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * User Files
      *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
+     *
      * @param  \Carbon\Model\OrganizationUserFilesToSyncQueryInput $organization_user_files_to_sync_query_input organization_user_files_to_sync_query_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['queryUserFilesDeprecated'] to see the possible values for this operation
      *
@@ -3944,6 +3978,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation queryUserFilesDeprecatedWithHttpInfo
      *
      * User Files
+     *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
      *
      * @param  \Carbon\Model\OrganizationUserFilesToSyncQueryInput $organization_user_files_to_sync_query_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['queryUserFilesDeprecated'] to see the possible values for this operation
@@ -4084,6 +4120,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * User Files
      *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
+     *
      * @param  \Carbon\Model\OrganizationUserFilesToSyncQueryInput $organization_user_files_to_sync_query_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['queryUserFilesDeprecated'] to see the possible values for this operation
      *
@@ -4125,6 +4163,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation queryUserFilesDeprecatedAsyncWithHttpInfo
      *
      * User Files
+     *
+     * This route is deprecated. Use &#x60;/user_files_v2&#x60; instead.
      *
      * @param  \Carbon\Model\OrganizationUserFilesToSyncQueryInput $organization_user_files_to_sync_query_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['queryUserFilesDeprecated'] to see the possible values for this operation
@@ -4683,6 +4723,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Create Upload File
      *
+     * This endpoint is used to directly upload local files to Carbon. The &#x60;POST&#x60; request should be a multipart form request. Note that the &#x60;set_page_as_boundary&#x60; query parameter is applicable only to PDFs for now. When this value is set, PDF chunks are at most one page long. Additional information can be retrieved for each chunk, however, namely the coordinates of the bounding box around the chunk (this can be used for things like text highlighting). Following is a description of all possible query parameters: - &#x60;chunk_size&#x60;: the chunk size (in tokens) applied when splitting the document - &#x60;chunk_overlap&#x60;: the chunk overlap (in tokens) applied when splitting the document - &#x60;skip_embedding_generation&#x60;: whether or not to skip the generation of chunks and embeddings - &#x60;set_page_as_boundary&#x60;: described above - &#x60;embedding_model&#x60;: the model used to generate embeddings for the document chunks - &#x60;use_ocr&#x60;: whether or not to use OCR as a preprocessing step prior to generating chunks. Valid for PDFs, JPEGs, and PNGs - &#x60;generate_sparse_vectors&#x60;: whether or not to generate sparse vectors for the file. Required for hybrid search. - &#x60;prepend_filename_to_chunks&#x60;: whether or not to prepend the filename to the chunk text   Carbon supports multiple models for use in generating embeddings for files. For images, we support Vertex AI&#39;s multimodal model; for text, we support OpenAI&#39;s &#x60;text-embedding-ada-002&#x60; and Cohere&#39;s embed-multilingual-v3.0. The model can be specified via the &#x60;embedding_model&#x60; parameter (in the POST body for &#x60;/embeddings&#x60;, and a query  parameter in &#x60;/uploadfile&#x60;). If no model is supplied, the &#x60;text-embedding-ada-002&#x60; is used by default. When performing embedding queries, embeddings from files that used the specified model will be considered in the query. For example, if files A and B have embeddings generated with &#x60;OPENAI&#x60;, and files C and D have embeddings generated with &#x60;COHERE_MULTILINGUAL_V3&#x60;, then by default, queries will only consider files A and B. If &#x60;COHERE_MULTILINGUAL_V3&#x60; is specified as the &#x60;embedding_model&#x60; in &#x60;/embeddings&#x60;, then only files C and D will be considered. Make sure that the set of all files you want considered for a query have embeddings generated via the same model. For now, **do not** set &#x60;VERTEX_MULTIMODAL&#x60; as an &#x60;embedding_model&#x60;. This model is used automatically by Carbon when it detects an image file.
+     *
      * @param  \SplFileObject $file file (required)
      * @param  \Carbon\Model\BodyCreateUploadFileUploadfilePost $body_create_upload_file_uploadfile_post body_create_upload_file_uploadfile_post (required)
      * @param  int $chunk_size Chunk size in tiktoken tokens to be used when processing file. (optional)
@@ -4690,7 +4732,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $skip_embedding_generation Flag to control whether or not embeddings should be generated and stored             when processing file. (optional, default to false)
      * @param  bool $set_page_as_boundary Flag to control whether or not to set the a page&#39;s worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information. (optional, default to false)
      * @param  EmbeddingModel $embedding_model Embedding model that will be used to embed file chunks. (optional)
-     * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
+     * @param  bool $use_ocr Whether or not to use OCR when processing files. Valid for PDFs, JPEGs, and PNGs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
      * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
@@ -4744,6 +4786,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Create Upload File
      *
+     * This endpoint is used to directly upload local files to Carbon. The &#x60;POST&#x60; request should be a multipart form request. Note that the &#x60;set_page_as_boundary&#x60; query parameter is applicable only to PDFs for now. When this value is set, PDF chunks are at most one page long. Additional information can be retrieved for each chunk, however, namely the coordinates of the bounding box around the chunk (this can be used for things like text highlighting). Following is a description of all possible query parameters: - &#x60;chunk_size&#x60;: the chunk size (in tokens) applied when splitting the document - &#x60;chunk_overlap&#x60;: the chunk overlap (in tokens) applied when splitting the document - &#x60;skip_embedding_generation&#x60;: whether or not to skip the generation of chunks and embeddings - &#x60;set_page_as_boundary&#x60;: described above - &#x60;embedding_model&#x60;: the model used to generate embeddings for the document chunks - &#x60;use_ocr&#x60;: whether or not to use OCR as a preprocessing step prior to generating chunks. Valid for PDFs, JPEGs, and PNGs - &#x60;generate_sparse_vectors&#x60;: whether or not to generate sparse vectors for the file. Required for hybrid search. - &#x60;prepend_filename_to_chunks&#x60;: whether or not to prepend the filename to the chunk text   Carbon supports multiple models for use in generating embeddings for files. For images, we support Vertex AI&#39;s multimodal model; for text, we support OpenAI&#39;s &#x60;text-embedding-ada-002&#x60; and Cohere&#39;s embed-multilingual-v3.0. The model can be specified via the &#x60;embedding_model&#x60; parameter (in the POST body for &#x60;/embeddings&#x60;, and a query  parameter in &#x60;/uploadfile&#x60;). If no model is supplied, the &#x60;text-embedding-ada-002&#x60; is used by default. When performing embedding queries, embeddings from files that used the specified model will be considered in the query. For example, if files A and B have embeddings generated with &#x60;OPENAI&#x60;, and files C and D have embeddings generated with &#x60;COHERE_MULTILINGUAL_V3&#x60;, then by default, queries will only consider files A and B. If &#x60;COHERE_MULTILINGUAL_V3&#x60; is specified as the &#x60;embedding_model&#x60; in &#x60;/embeddings&#x60;, then only files C and D will be considered. Make sure that the set of all files you want considered for a query have embeddings generated via the same model. For now, **do not** set &#x60;VERTEX_MULTIMODAL&#x60; as an &#x60;embedding_model&#x60;. This model is used automatically by Carbon when it detects an image file.
+     *
      * @param  \SplFileObject $file (required)
      * @param  \Carbon\Model\BodyCreateUploadFileUploadfilePost $body_create_upload_file_uploadfile_post (required)
      * @param  int $chunk_size Chunk size in tiktoken tokens to be used when processing file. (optional)
@@ -4751,7 +4795,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $skip_embedding_generation Flag to control whether or not embeddings should be generated and stored             when processing file. (optional, default to false)
      * @param  bool $set_page_as_boundary Flag to control whether or not to set the a page&#39;s worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information. (optional, default to false)
      * @param  EmbeddingModel $embedding_model Embedding model that will be used to embed file chunks. (optional)
-     * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
+     * @param  bool $use_ocr Whether or not to use OCR when processing files. Valid for PDFs, JPEGs, and PNGs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
      * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
@@ -4918,6 +4962,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Create Upload File
      *
+     * This endpoint is used to directly upload local files to Carbon. The &#x60;POST&#x60; request should be a multipart form request. Note that the &#x60;set_page_as_boundary&#x60; query parameter is applicable only to PDFs for now. When this value is set, PDF chunks are at most one page long. Additional information can be retrieved for each chunk, however, namely the coordinates of the bounding box around the chunk (this can be used for things like text highlighting). Following is a description of all possible query parameters: - &#x60;chunk_size&#x60;: the chunk size (in tokens) applied when splitting the document - &#x60;chunk_overlap&#x60;: the chunk overlap (in tokens) applied when splitting the document - &#x60;skip_embedding_generation&#x60;: whether or not to skip the generation of chunks and embeddings - &#x60;set_page_as_boundary&#x60;: described above - &#x60;embedding_model&#x60;: the model used to generate embeddings for the document chunks - &#x60;use_ocr&#x60;: whether or not to use OCR as a preprocessing step prior to generating chunks. Valid for PDFs, JPEGs, and PNGs - &#x60;generate_sparse_vectors&#x60;: whether or not to generate sparse vectors for the file. Required for hybrid search. - &#x60;prepend_filename_to_chunks&#x60;: whether or not to prepend the filename to the chunk text   Carbon supports multiple models for use in generating embeddings for files. For images, we support Vertex AI&#39;s multimodal model; for text, we support OpenAI&#39;s &#x60;text-embedding-ada-002&#x60; and Cohere&#39;s embed-multilingual-v3.0. The model can be specified via the &#x60;embedding_model&#x60; parameter (in the POST body for &#x60;/embeddings&#x60;, and a query  parameter in &#x60;/uploadfile&#x60;). If no model is supplied, the &#x60;text-embedding-ada-002&#x60; is used by default. When performing embedding queries, embeddings from files that used the specified model will be considered in the query. For example, if files A and B have embeddings generated with &#x60;OPENAI&#x60;, and files C and D have embeddings generated with &#x60;COHERE_MULTILINGUAL_V3&#x60;, then by default, queries will only consider files A and B. If &#x60;COHERE_MULTILINGUAL_V3&#x60; is specified as the &#x60;embedding_model&#x60; in &#x60;/embeddings&#x60;, then only files C and D will be considered. Make sure that the set of all files you want considered for a query have embeddings generated via the same model. For now, **do not** set &#x60;VERTEX_MULTIMODAL&#x60; as an &#x60;embedding_model&#x60;. This model is used automatically by Carbon when it detects an image file.
+     *
      * @param  \SplFileObject $file (required)
      * @param  \Carbon\Model\BodyCreateUploadFileUploadfilePost $body_create_upload_file_uploadfile_post (required)
      * @param  int $chunk_size Chunk size in tiktoken tokens to be used when processing file. (optional)
@@ -4925,7 +4971,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $skip_embedding_generation Flag to control whether or not embeddings should be generated and stored             when processing file. (optional, default to false)
      * @param  bool $set_page_as_boundary Flag to control whether or not to set the a page&#39;s worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information. (optional, default to false)
      * @param  EmbeddingModel $embedding_model Embedding model that will be used to embed file chunks. (optional)
-     * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
+     * @param  bool $use_ocr Whether or not to use OCR when processing files. Valid for PDFs, JPEGs, and PNGs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
      * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
@@ -4982,6 +5028,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Create Upload File
      *
+     * This endpoint is used to directly upload local files to Carbon. The &#x60;POST&#x60; request should be a multipart form request. Note that the &#x60;set_page_as_boundary&#x60; query parameter is applicable only to PDFs for now. When this value is set, PDF chunks are at most one page long. Additional information can be retrieved for each chunk, however, namely the coordinates of the bounding box around the chunk (this can be used for things like text highlighting). Following is a description of all possible query parameters: - &#x60;chunk_size&#x60;: the chunk size (in tokens) applied when splitting the document - &#x60;chunk_overlap&#x60;: the chunk overlap (in tokens) applied when splitting the document - &#x60;skip_embedding_generation&#x60;: whether or not to skip the generation of chunks and embeddings - &#x60;set_page_as_boundary&#x60;: described above - &#x60;embedding_model&#x60;: the model used to generate embeddings for the document chunks - &#x60;use_ocr&#x60;: whether or not to use OCR as a preprocessing step prior to generating chunks. Valid for PDFs, JPEGs, and PNGs - &#x60;generate_sparse_vectors&#x60;: whether or not to generate sparse vectors for the file. Required for hybrid search. - &#x60;prepend_filename_to_chunks&#x60;: whether or not to prepend the filename to the chunk text   Carbon supports multiple models for use in generating embeddings for files. For images, we support Vertex AI&#39;s multimodal model; for text, we support OpenAI&#39;s &#x60;text-embedding-ada-002&#x60; and Cohere&#39;s embed-multilingual-v3.0. The model can be specified via the &#x60;embedding_model&#x60; parameter (in the POST body for &#x60;/embeddings&#x60;, and a query  parameter in &#x60;/uploadfile&#x60;). If no model is supplied, the &#x60;text-embedding-ada-002&#x60; is used by default. When performing embedding queries, embeddings from files that used the specified model will be considered in the query. For example, if files A and B have embeddings generated with &#x60;OPENAI&#x60;, and files C and D have embeddings generated with &#x60;COHERE_MULTILINGUAL_V3&#x60;, then by default, queries will only consider files A and B. If &#x60;COHERE_MULTILINGUAL_V3&#x60; is specified as the &#x60;embedding_model&#x60; in &#x60;/embeddings&#x60;, then only files C and D will be considered. Make sure that the set of all files you want considered for a query have embeddings generated via the same model. For now, **do not** set &#x60;VERTEX_MULTIMODAL&#x60; as an &#x60;embedding_model&#x60;. This model is used automatically by Carbon when it detects an image file.
+     *
      * @param  \SplFileObject $file (required)
      * @param  \Carbon\Model\BodyCreateUploadFileUploadfilePost $body_create_upload_file_uploadfile_post (required)
      * @param  int $chunk_size Chunk size in tiktoken tokens to be used when processing file. (optional)
@@ -4989,7 +5037,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $skip_embedding_generation Flag to control whether or not embeddings should be generated and stored             when processing file. (optional, default to false)
      * @param  bool $set_page_as_boundary Flag to control whether or not to set the a page&#39;s worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information. (optional, default to false)
      * @param  EmbeddingModel $embedding_model Embedding model that will be used to embed file chunks. (optional)
-     * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
+     * @param  bool $use_ocr Whether or not to use OCR when processing files. Valid for PDFs, JPEGs, and PNGs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
      * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
@@ -5060,7 +5108,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $skip_embedding_generation Flag to control whether or not embeddings should be generated and stored             when processing file. (optional, default to false)
      * @param  bool $set_page_as_boundary Flag to control whether or not to set the a page&#39;s worth of content as the maximum             amount of content that can appear in a chunk. Only valid for PDFs. See description route description for             more information. (optional, default to false)
      * @param  EmbeddingModel $embedding_model Embedding model that will be used to embed file chunks. (optional)
-     * @param  bool $use_ocr Whether or not to use OCR when processing files. Only valid for PDFs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
+     * @param  bool $use_ocr Whether or not to use OCR when processing files. Valid for PDFs, JPEGs, and PNGs. Useful for documents with             tables, images, and/or scanned text. (optional, default to false)
      * @param  bool $generate_sparse_vectors Whether or not to generate sparse vectors for the file. This is *required* for the file to be a             candidate for hybrid search. (optional, default to false)
      * @param  bool $prepend_filename_to_chunks Whether or not to prepend the file&#39;s name to chunks. (optional, default to false)
      * @param  int $max_items_per_chunk Number of objects per chunk. For csv, tsv, xlsx, and json files only. (optional)
@@ -5842,6 +5890,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Create Raw Text
      *
+     * Carbon supports multiple models for use in generating embeddings for files. For images, we support Vertex AI&#39;s multimodal model; for text, we support OpenAI&#39;s &#x60;text-embedding-ada-002&#x60; and Cohere&#39;s embed-multilingual-v3.0. The model can be specified via the &#x60;embedding_model&#x60; parameter (in the POST body for &#x60;/embeddings&#x60;, and a query  parameter in &#x60;/uploadfile&#x60;). If no model is supplied, the &#x60;text-embedding-ada-002&#x60; is used by default. When performing embedding queries, embeddings from files that used the specified model will be considered in the query. For example, if files A and B have embeddings generated with &#x60;OPENAI&#x60;, and files C and D have embeddings generated with &#x60;COHERE_MULTILINGUAL_V3&#x60;, then by default, queries will only consider files A and B. If &#x60;COHERE_MULTILINGUAL_V3&#x60; is specified as the &#x60;embedding_model&#x60; in &#x60;/embeddings&#x60;, then only files C and D will be considered. Make sure that the set of all files you want considered for a query have embeddings generated via the same model. For now, **do not** set &#x60;VERTEX_MULTIMODAL&#x60; as an &#x60;embedding_model&#x60;. This model is used automatically by Carbon when it detects an image file.
+     *
      * @param  \Carbon\Model\RawTextInput $raw_text_input raw_text_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadText'] to see the possible values for this operation
      *
@@ -5883,6 +5933,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation uploadTextWithHttpInfo
      *
      * Create Raw Text
+     *
+     * Carbon supports multiple models for use in generating embeddings for files. For images, we support Vertex AI&#39;s multimodal model; for text, we support OpenAI&#39;s &#x60;text-embedding-ada-002&#x60; and Cohere&#39;s embed-multilingual-v3.0. The model can be specified via the &#x60;embedding_model&#x60; parameter (in the POST body for &#x60;/embeddings&#x60;, and a query  parameter in &#x60;/uploadfile&#x60;). If no model is supplied, the &#x60;text-embedding-ada-002&#x60; is used by default. When performing embedding queries, embeddings from files that used the specified model will be considered in the query. For example, if files A and B have embeddings generated with &#x60;OPENAI&#x60;, and files C and D have embeddings generated with &#x60;COHERE_MULTILINGUAL_V3&#x60;, then by default, queries will only consider files A and B. If &#x60;COHERE_MULTILINGUAL_V3&#x60; is specified as the &#x60;embedding_model&#x60; in &#x60;/embeddings&#x60;, then only files C and D will be considered. Make sure that the set of all files you want considered for a query have embeddings generated via the same model. For now, **do not** set &#x60;VERTEX_MULTIMODAL&#x60; as an &#x60;embedding_model&#x60;. This model is used automatically by Carbon when it detects an image file.
      *
      * @param  \Carbon\Model\RawTextInput $raw_text_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadText'] to see the possible values for this operation
@@ -6022,6 +6074,8 @@ class FilesApi extends \Carbon\CustomApi
      *
      * Create Raw Text
      *
+     * Carbon supports multiple models for use in generating embeddings for files. For images, we support Vertex AI&#39;s multimodal model; for text, we support OpenAI&#39;s &#x60;text-embedding-ada-002&#x60; and Cohere&#39;s embed-multilingual-v3.0. The model can be specified via the &#x60;embedding_model&#x60; parameter (in the POST body for &#x60;/embeddings&#x60;, and a query  parameter in &#x60;/uploadfile&#x60;). If no model is supplied, the &#x60;text-embedding-ada-002&#x60; is used by default. When performing embedding queries, embeddings from files that used the specified model will be considered in the query. For example, if files A and B have embeddings generated with &#x60;OPENAI&#x60;, and files C and D have embeddings generated with &#x60;COHERE_MULTILINGUAL_V3&#x60;, then by default, queries will only consider files A and B. If &#x60;COHERE_MULTILINGUAL_V3&#x60; is specified as the &#x60;embedding_model&#x60; in &#x60;/embeddings&#x60;, then only files C and D will be considered. Make sure that the set of all files you want considered for a query have embeddings generated via the same model. For now, **do not** set &#x60;VERTEX_MULTIMODAL&#x60; as an &#x60;embedding_model&#x60;. This model is used automatically by Carbon when it detects an image file.
+     *
      * @param  \Carbon\Model\RawTextInput $raw_text_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadText'] to see the possible values for this operation
      *
@@ -6066,6 +6120,8 @@ class FilesApi extends \Carbon\CustomApi
      * Operation uploadTextAsyncWithHttpInfo
      *
      * Create Raw Text
+     *
+     * Carbon supports multiple models for use in generating embeddings for files. For images, we support Vertex AI&#39;s multimodal model; for text, we support OpenAI&#39;s &#x60;text-embedding-ada-002&#x60; and Cohere&#39;s embed-multilingual-v3.0. The model can be specified via the &#x60;embedding_model&#x60; parameter (in the POST body for &#x60;/embeddings&#x60;, and a query  parameter in &#x60;/uploadfile&#x60;). If no model is supplied, the &#x60;text-embedding-ada-002&#x60; is used by default. When performing embedding queries, embeddings from files that used the specified model will be considered in the query. For example, if files A and B have embeddings generated with &#x60;OPENAI&#x60;, and files C and D have embeddings generated with &#x60;COHERE_MULTILINGUAL_V3&#x60;, then by default, queries will only consider files A and B. If &#x60;COHERE_MULTILINGUAL_V3&#x60; is specified as the &#x60;embedding_model&#x60; in &#x60;/embeddings&#x60;, then only files C and D will be considered. Make sure that the set of all files you want considered for a query have embeddings generated via the same model. For now, **do not** set &#x60;VERTEX_MULTIMODAL&#x60; as an &#x60;embedding_model&#x60;. This model is used automatically by Carbon when it detects an image file.
      *
      * @param  \Carbon\Model\RawTextInput $raw_text_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadText'] to see the possible values for this operation
