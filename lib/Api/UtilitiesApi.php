@@ -160,6 +160,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Fetch Urls
      *
+     * Extracts all URLs from a webpage.   Args:     url (str): URL of the webpage  Returns:     FetchURLsResponse: A response object with a list of URLs extracted from the webpage and the webpage content.
+     *
      * @param  string $url url (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchUrls'] to see the possible values for this operation
      *
@@ -183,6 +185,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation fetchUrlsWithHttpInfo
      *
      * Fetch Urls
+     *
+     * Extracts all URLs from a webpage.   Args:     url (str): URL of the webpage  Returns:     FetchURLsResponse: A response object with a list of URLs extracted from the webpage and the webpage content.
      *
      * @param  string $url (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchUrls'] to see the possible values for this operation
@@ -323,6 +327,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Fetch Urls
      *
+     * Extracts all URLs from a webpage.   Args:     url (str): URL of the webpage  Returns:     FetchURLsResponse: A response object with a list of URLs extracted from the webpage and the webpage content.
+     *
      * @param  string $url (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchUrls'] to see the possible values for this operation
      *
@@ -349,6 +355,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation fetchUrlsAsyncWithHttpInfo
      *
      * Fetch Urls
+     *
+     * Extracts all URLs from a webpage.   Args:     url (str): URL of the webpage  Returns:     FetchURLsResponse: A response object with a list of URLs extracted from the webpage and the webpage content.
      *
      * @param  string $url (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchUrls'] to see the possible values for this operation
@@ -895,6 +903,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Fetch Youtube Transcripts
      *
+     * Fetches english transcripts from YouTube videos.  Args:     id (str): The ID of the YouTube video.      raw (bool): Whether to return the raw transcript or not. Defaults to False.  Returns:     dict: A dictionary with the transcript of the YouTube video.
+     *
      * @param  string $id id (required)
      * @param  bool $raw raw (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchYoutubeTranscripts'] to see the possible values for this operation
@@ -919,6 +929,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation fetchYoutubeTranscriptsWithHttpInfo
      *
      * Fetch Youtube Transcripts
+     *
+     * Fetches english transcripts from YouTube videos.  Args:     id (str): The ID of the YouTube video.      raw (bool): Whether to return the raw transcript or not. Defaults to False.  Returns:     dict: A dictionary with the transcript of the YouTube video.
      *
      * @param  string $id (required)
      * @param  bool $raw (optional, default to false)
@@ -1060,6 +1072,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Fetch Youtube Transcripts
      *
+     * Fetches english transcripts from YouTube videos.  Args:     id (str): The ID of the YouTube video.      raw (bool): Whether to return the raw transcript or not. Defaults to False.  Returns:     dict: A dictionary with the transcript of the YouTube video.
+     *
      * @param  string $id (required)
      * @param  bool $raw (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['fetchYoutubeTranscripts'] to see the possible values for this operation
@@ -1087,6 +1101,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation fetchYoutubeTranscriptsAsyncWithHttpInfo
      *
      * Fetch Youtube Transcripts
+     *
+     * Fetches english transcripts from YouTube videos.  Args:     id (str): The ID of the YouTube video.      raw (bool): Whether to return the raw transcript or not. Defaults to False.  Returns:     dict: A dictionary with the transcript of the YouTube video.
      *
      * @param  string $id (required)
      * @param  bool $raw (optional, default to false)
@@ -1276,6 +1292,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Sitemap
      *
+     * Retrieves all URLs from a sitemap, which can subsequently be utilized with our &#x60;web_scrape&#x60; endpoint.  &lt;!--Args:     url (str): URL of the sitemap  Returns:     dict: A dictionary with a list of URLs extracted from the sitemap.--&gt;
+     *
      * @param  string $url url (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['processSitemap'] to see the possible values for this operation
      *
@@ -1298,6 +1316,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation processSitemapWithHttpInfo
      *
      * Sitemap
+     *
+     * Retrieves all URLs from a sitemap, which can subsequently be utilized with our &#x60;web_scrape&#x60; endpoint.  &lt;!--Args:     url (str): URL of the sitemap  Returns:     dict: A dictionary with a list of URLs extracted from the sitemap.--&gt;
      *
      * @param  string $url (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['processSitemap'] to see the possible values for this operation
@@ -1437,6 +1457,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Sitemap
      *
+     * Retrieves all URLs from a sitemap, which can subsequently be utilized with our &#x60;web_scrape&#x60; endpoint.  &lt;!--Args:     url (str): URL of the sitemap  Returns:     dict: A dictionary with a list of URLs extracted from the sitemap.--&gt;
+     *
      * @param  string $url (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['processSitemap'] to see the possible values for this operation
      *
@@ -1462,6 +1484,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation processSitemapAsyncWithHttpInfo
      *
      * Sitemap
+     *
+     * Retrieves all URLs from a sitemap, which can subsequently be utilized with our &#x60;web_scrape&#x60; endpoint.  &lt;!--Args:     url (str): URL of the sitemap  Returns:     dict: A dictionary with a list of URLs extracted from the sitemap.--&gt;
      *
      * @param  string $url (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['processSitemap'] to see the possible values for this operation
@@ -1638,6 +1662,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Scrape Sitemap
      *
+     * Extracts all URLs from a sitemap and performs a web scrape on each of them.  Args:     sitemap_url (str): URL of the sitemap  Returns:     dict: A response object with the status of the scraping job message.--&gt;
+     *
      * @param  \Carbon\Model\SitemapScrapeRequest $sitemap_scrape_request sitemap_scrape_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scrapeSitemap'] to see the possible values for this operation
      *
@@ -1693,6 +1719,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation scrapeSitemapWithHttpInfo
      *
      * Scrape Sitemap
+     *
+     * Extracts all URLs from a sitemap and performs a web scrape on each of them.  Args:     sitemap_url (str): URL of the sitemap  Returns:     dict: A response object with the status of the scraping job message.--&gt;
      *
      * @param  \Carbon\Model\SitemapScrapeRequest $sitemap_scrape_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scrapeSitemap'] to see the possible values for this operation
@@ -1832,6 +1860,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Scrape Sitemap
      *
+     * Extracts all URLs from a sitemap and performs a web scrape on each of them.  Args:     sitemap_url (str): URL of the sitemap  Returns:     dict: A response object with the status of the scraping job message.--&gt;
+     *
      * @param  \Carbon\Model\SitemapScrapeRequest $sitemap_scrape_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scrapeSitemap'] to see the possible values for this operation
      *
@@ -1890,6 +1920,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation scrapeSitemapAsyncWithHttpInfo
      *
      * Scrape Sitemap
+     *
+     * Extracts all URLs from a sitemap and performs a web scrape on each of them.  Args:     sitemap_url (str): URL of the sitemap  Returns:     dict: A response object with the status of the scraping job message.--&gt;
      *
      * @param  \Carbon\Model\SitemapScrapeRequest $sitemap_scrape_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scrapeSitemap'] to see the possible values for this operation
@@ -2066,6 +2098,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Web Scrape
      *
+     * Conduct a web scrape on a given webpage URL. Our web scraper is fully compatible with JavaScript and supports recursion depth, enabling you to efficiently extract all content from the target website.  &lt;!--Args:     scraping_requests (List[WebscrapeRequest]): A list of WebscrapeRequest objects.       Returns:     dict: A response object with the status of the scraping job message.--&gt;
+     *
      * @param  \Carbon\Model\WebscrapeRequest[] $webscrape_request webscrape_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scrapeWeb'] to see the possible values for this operation
      *
@@ -2090,6 +2124,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation scrapeWebWithHttpInfo
      *
      * Web Scrape
+     *
+     * Conduct a web scrape on a given webpage URL. Our web scraper is fully compatible with JavaScript and supports recursion depth, enabling you to efficiently extract all content from the target website.  &lt;!--Args:     scraping_requests (List[WebscrapeRequest]): A list of WebscrapeRequest objects.       Returns:     dict: A response object with the status of the scraping job message.--&gt;
      *
      * @param  \Carbon\Model\WebscrapeRequest[] $webscrape_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scrapeWeb'] to see the possible values for this operation
@@ -2229,6 +2265,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Web Scrape
      *
+     * Conduct a web scrape on a given webpage URL. Our web scraper is fully compatible with JavaScript and supports recursion depth, enabling you to efficiently extract all content from the target website.  &lt;!--Args:     scraping_requests (List[WebscrapeRequest]): A list of WebscrapeRequest objects.       Returns:     dict: A response object with the status of the scraping job message.--&gt;
+     *
      * @param  \Carbon\Model\WebscrapeRequest[] $webscrape_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scrapeWeb'] to see the possible values for this operation
      *
@@ -2256,6 +2294,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation scrapeWebAsyncWithHttpInfo
      *
      * Web Scrape
+     *
+     * Conduct a web scrape on a given webpage URL. Our web scraper is fully compatible with JavaScript and supports recursion depth, enabling you to efficiently extract all content from the target website.  &lt;!--Args:     scraping_requests (List[WebscrapeRequest]): A list of WebscrapeRequest objects.       Returns:     dict: A response object with the status of the scraping job message.--&gt;
      *
      * @param  \Carbon\Model\WebscrapeRequest[] $webscrape_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['scrapeWeb'] to see the possible values for this operation
@@ -2424,6 +2464,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Search Urls
      *
+     * Perform a web search and obtain a list of relevant URLs.  As an illustration, when you perform a search for “content related to MRNA,” you will receive a list of links such as the following:      - https://tomrenz.substack.com/p/mrna-and-why-it-matters      - https://www.statnews.com/2020/11/10/the-story-of-mrna-how-a-once-dismissed-idea-became-a-leading-technology-in-the-covid-vaccine-race/      - https://www.statnews.com/2022/11/16/covid-19-vaccines-were-a-success-but-mrna-still-has-a-delivery-problem/          - https://joomi.substack.com/p/were-still-being-misled-about-how  Subsequently, you can submit these links to the web_scrape endpoint in order to retrieve the content of the respective web pages.  Args:     query (str): Query to search for  Returns:     FetchURLsResponse: A response object with a list of URLs for a given search query.
+     *
      * @param  string $query query (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUrls'] to see the possible values for this operation
      *
@@ -2446,6 +2488,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation searchUrlsWithHttpInfo
      *
      * Search Urls
+     *
+     * Perform a web search and obtain a list of relevant URLs.  As an illustration, when you perform a search for “content related to MRNA,” you will receive a list of links such as the following:      - https://tomrenz.substack.com/p/mrna-and-why-it-matters      - https://www.statnews.com/2020/11/10/the-story-of-mrna-how-a-once-dismissed-idea-became-a-leading-technology-in-the-covid-vaccine-race/      - https://www.statnews.com/2022/11/16/covid-19-vaccines-were-a-success-but-mrna-still-has-a-delivery-problem/          - https://joomi.substack.com/p/were-still-being-misled-about-how  Subsequently, you can submit these links to the web_scrape endpoint in order to retrieve the content of the respective web pages.  Args:     query (str): Query to search for  Returns:     FetchURLsResponse: A response object with a list of URLs for a given search query.
      *
      * @param  string $query (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUrls'] to see the possible values for this operation
@@ -2585,6 +2629,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      *
      * Search Urls
      *
+     * Perform a web search and obtain a list of relevant URLs.  As an illustration, when you perform a search for “content related to MRNA,” you will receive a list of links such as the following:      - https://tomrenz.substack.com/p/mrna-and-why-it-matters      - https://www.statnews.com/2020/11/10/the-story-of-mrna-how-a-once-dismissed-idea-became-a-leading-technology-in-the-covid-vaccine-race/      - https://www.statnews.com/2022/11/16/covid-19-vaccines-were-a-success-but-mrna-still-has-a-delivery-problem/          - https://joomi.substack.com/p/were-still-being-misled-about-how  Subsequently, you can submit these links to the web_scrape endpoint in order to retrieve the content of the respective web pages.  Args:     query (str): Query to search for  Returns:     FetchURLsResponse: A response object with a list of URLs for a given search query.
+     *
      * @param  string $query (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUrls'] to see the possible values for this operation
      *
@@ -2610,6 +2656,8 @@ class UtilitiesApi extends \Carbon\CustomApi
      * Operation searchUrlsAsyncWithHttpInfo
      *
      * Search Urls
+     *
+     * Perform a web search and obtain a list of relevant URLs.  As an illustration, when you perform a search for “content related to MRNA,” you will receive a list of links such as the following:      - https://tomrenz.substack.com/p/mrna-and-why-it-matters      - https://www.statnews.com/2020/11/10/the-story-of-mrna-how-a-once-dismissed-idea-became-a-leading-technology-in-the-covid-vaccine-race/      - https://www.statnews.com/2022/11/16/covid-19-vaccines-were-a-success-but-mrna-still-has-a-delivery-problem/          - https://joomi.substack.com/p/were-still-being-misled-about-how  Subsequently, you can submit these links to the web_scrape endpoint in order to retrieve the content of the respective web pages.  Args:     query (str): Query to search for  Returns:     FetchURLsResponse: A response object with a list of URLs for a given search query.
      *
      * @param  string $query (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUrls'] to see the possible values for this operation

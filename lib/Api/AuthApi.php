@@ -477,6 +477,8 @@ class AuthApi extends \Carbon\CustomApi
      *
      * Get White Labeling
      *
+     * Returns whether or not the organization is white labeled and which integrations are white labeled  :param current_user: the current user :param db: the database session :return: a WhiteLabelingResponse
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhiteLabeling'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
@@ -498,6 +500,8 @@ class AuthApi extends \Carbon\CustomApi
      * Operation getWhiteLabelingWithHttpInfo
      *
      * Get White Labeling
+     *
+     * Returns whether or not the organization is white labeled and which integrations are white labeled  :param current_user: the current user :param db: the database session :return: a WhiteLabelingResponse
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhiteLabeling'] to see the possible values for this operation
      *
@@ -612,6 +616,8 @@ class AuthApi extends \Carbon\CustomApi
      *
      * Get White Labeling
      *
+     * Returns whether or not the organization is white labeled and which integrations are white labeled  :param current_user: the current user :param db: the database session :return: a WhiteLabelingResponse
+     *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhiteLabeling'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -636,6 +642,8 @@ class AuthApi extends \Carbon\CustomApi
      * Operation getWhiteLabelingAsyncWithHttpInfo
      *
      * Get White Labeling
+     *
+     * Returns whether or not the organization is white labeled and which integrations are white labeled  :param current_user: the current user :param db: the database session :return: a WhiteLabelingResponse
      *
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getWhiteLabeling'] to see the possible values for this operation
      *
