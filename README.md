@@ -1791,7 +1791,7 @@ success state.
 
 ```php
 $result = $carbon->integrations->getOauthUrl(
-    service: "GOOGLE_CLOUD_STORAGE", 
+    service: "BOX", 
     tags: None, 
     scope: "string_example", 
     chunk_size: 1500, 
@@ -1882,7 +1882,7 @@ This request id will be added to all files that get synced using the generated O
 
 ##### use_ocr: `bool`<a id="use_ocr-bool"></a>
 
-Enable OCR for files that support it. Supported formats: pdf, jpg, png
+Enable OCR for files that support it. Supported formats: pdf, png, jpg
 
 ##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
 

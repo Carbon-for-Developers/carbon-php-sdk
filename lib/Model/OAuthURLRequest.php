@@ -51,7 +51,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'tags' => 'mixed',
         'scope' => 'string',
-        'service' => '\Carbon\Model\DataSourceType',
+        'service' => '\Carbon\Model\ExternalDataSourceType',
         'chunk_size' => 'int',
         'chunk_overlap' => 'int',
         'skip_embedding_generation' => 'bool',
@@ -541,7 +541,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets service
      *
-     * @return \Carbon\Model\DataSourceType
+     * @return \Carbon\Model\ExternalDataSourceType
      */
     public function getService()
     {
@@ -551,7 +551,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets service
      *
-     * @param \Carbon\Model\DataSourceType $service service
+     * @param \Carbon\Model\ExternalDataSourceType $service service
      *
      * @return self
      */
@@ -1185,7 +1185,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets use_ocr
      *
-     * @param bool|null $use_ocr Enable OCR for files that support it. Supported formats: pdf, jpg, png
+     * @param bool|null $use_ocr Enable OCR for files that support it. Supported formats: pdf, png, jpg
      *
      * @return self
      */
