@@ -3514,7 +3514,8 @@ $result = $carbon->utilities->scrapeSitemap(
     embedding_model: "OPENAI", 
     url_paths_to_include: [], 
     url_paths_to_exclude: [], 
-    urls_to_scrape: []
+    urls_to_scrape: [], 
+    download_css_and_media: False
 );
 ```
 
@@ -3557,6 +3558,10 @@ URL subpaths or directories that you want to exclude. For example if you want to
 ##### urls_to_scrape: `string`[]<a id="urls_to_scrape-string"></a>
 
 You can submit a subset of URLs from the sitemap that should be scraped. To get the list of URLs,           you can check out /process_sitemap endpoint. If left empty, all URLs from the sitemap will be scraped.
+
+##### download_css_and_media: `bool`<a id="download_css_and_media-bool"></a>
+
+Whether the scraper should download css and media from the page (images, fonts, etc). Scrapes          might take longer to finish with this flag enabled, but the success rate is improved.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -3604,6 +3609,7 @@ $result = $carbon->utilities->scrapeWeb(
             "css_selectors_to_skip" => [],
             "embedding_model" => "OPENAI",
             "url_paths_to_include" => [],
+            "download_css_and_media" => False,
         ]
     ],
 );
