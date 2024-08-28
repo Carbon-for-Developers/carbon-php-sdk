@@ -214,4 +214,13 @@ class SitemapScrapeRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "download_css_and_media"
+     */
+    public function testPropertyDownloadCssAndMedia()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

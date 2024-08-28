@@ -64,7 +64,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'url_paths_to_include' => 'string[]',
         'url_paths_to_exclude' => 'string[]',
-        'urls_to_scrape' => 'string[]'
+        'urls_to_scrape' => 'string[]',
+        'download_css_and_media' => 'bool'
     ];
 
     /**
@@ -90,7 +91,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'embedding_model' => null,
         'url_paths_to_include' => null,
         'url_paths_to_exclude' => null,
-        'urls_to_scrape' => null
+        'urls_to_scrape' => null,
+        'download_css_and_media' => null
     ];
 
     /**
@@ -114,7 +116,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 		'embedding_model' => false,
 		'url_paths_to_include' => true,
 		'url_paths_to_exclude' => true,
-		'urls_to_scrape' => true
+		'urls_to_scrape' => true,
+		'download_css_and_media' => true
     ];
 
     /**
@@ -218,7 +221,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'embedding_model' => 'embedding_model',
         'url_paths_to_include' => 'url_paths_to_include',
         'url_paths_to_exclude' => 'url_paths_to_exclude',
-        'urls_to_scrape' => 'urls_to_scrape'
+        'urls_to_scrape' => 'urls_to_scrape',
+        'download_css_and_media' => 'download_css_and_media'
     ];
 
     /**
@@ -242,7 +246,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'embedding_model' => 'setEmbeddingModel',
         'url_paths_to_include' => 'setUrlPathsToInclude',
         'url_paths_to_exclude' => 'setUrlPathsToExclude',
-        'urls_to_scrape' => 'setUrlsToScrape'
+        'urls_to_scrape' => 'setUrlsToScrape',
+        'download_css_and_media' => 'setDownloadCssAndMedia'
     ];
 
     /**
@@ -266,7 +271,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'embedding_model' => 'getEmbeddingModel',
         'url_paths_to_include' => 'getUrlPathsToInclude',
         'url_paths_to_exclude' => 'getUrlPathsToExclude',
-        'urls_to_scrape' => 'getUrlsToScrape'
+        'urls_to_scrape' => 'getUrlsToScrape',
+        'download_css_and_media' => 'getDownloadCssAndMedia'
     ];
 
     /**
@@ -342,6 +348,7 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('url_paths_to_include', $data ?? [], null);
         $this->setIfExists('url_paths_to_exclude', $data ?? [], null);
         $this->setIfExists('urls_to_scrape', $data ?? [], null);
+        $this->setIfExists('download_css_and_media', $data ?? [], false);
     }
 
     /**
@@ -972,6 +979,42 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['urls_to_scrape'] = $urls_to_scrape;
+
+        return $this;
+    }
+
+    /**
+     * Gets download_css_and_media
+     *
+     * @return bool|null
+     */
+    public function getDownloadCssAndMedia()
+    {
+        return $this->container['download_css_and_media'];
+    }
+
+    /**
+     * Sets download_css_and_media
+     *
+     * @param bool|null $download_css_and_media Whether the scraper should download css and media from the page (images, fonts, etc). Scrapes          might take longer to finish with this flag enabled, but the success rate is improved.
+     *
+     * @return self
+     */
+    public function setDownloadCssAndMedia($download_css_and_media)
+    {
+
+        if (is_null($download_css_and_media)) {
+            array_push($this->openAPINullablesSetToNull, 'download_css_and_media');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('download_css_and_media', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['download_css_and_media'] = $download_css_and_media;
 
         return $this;
     }

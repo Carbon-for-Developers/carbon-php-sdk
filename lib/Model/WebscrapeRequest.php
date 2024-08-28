@@ -63,7 +63,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'css_classes_to_skip' => 'string[]',
         'css_selectors_to_skip' => 'string[]',
         'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
-        'url_paths_to_include' => 'string[]'
+        'url_paths_to_include' => 'string[]',
+        'download_css_and_media' => 'bool'
     ];
 
     /**
@@ -88,7 +89,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'css_classes_to_skip' => null,
         'css_selectors_to_skip' => null,
         'embedding_model' => null,
-        'url_paths_to_include' => null
+        'url_paths_to_include' => null,
+        'download_css_and_media' => null
     ];
 
     /**
@@ -111,7 +113,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'css_classes_to_skip' => true,
 		'css_selectors_to_skip' => true,
 		'embedding_model' => false,
-		'url_paths_to_include' => true
+		'url_paths_to_include' => true,
+		'download_css_and_media' => true
     ];
 
     /**
@@ -214,7 +217,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'css_classes_to_skip' => 'css_classes_to_skip',
         'css_selectors_to_skip' => 'css_selectors_to_skip',
         'embedding_model' => 'embedding_model',
-        'url_paths_to_include' => 'url_paths_to_include'
+        'url_paths_to_include' => 'url_paths_to_include',
+        'download_css_and_media' => 'download_css_and_media'
     ];
 
     /**
@@ -237,7 +241,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'css_classes_to_skip' => 'setCssClassesToSkip',
         'css_selectors_to_skip' => 'setCssSelectorsToSkip',
         'embedding_model' => 'setEmbeddingModel',
-        'url_paths_to_include' => 'setUrlPathsToInclude'
+        'url_paths_to_include' => 'setUrlPathsToInclude',
+        'download_css_and_media' => 'setDownloadCssAndMedia'
     ];
 
     /**
@@ -260,7 +265,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'css_classes_to_skip' => 'getCssClassesToSkip',
         'css_selectors_to_skip' => 'getCssSelectorsToSkip',
         'embedding_model' => 'getEmbeddingModel',
-        'url_paths_to_include' => 'getUrlPathsToInclude'
+        'url_paths_to_include' => 'getUrlPathsToInclude',
+        'download_css_and_media' => 'getDownloadCssAndMedia'
     ];
 
     /**
@@ -335,6 +341,7 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('css_selectors_to_skip', $data ?? [], null);
         $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('url_paths_to_include', $data ?? [], null);
+        $this->setIfExists('download_css_and_media', $data ?? [], false);
     }
 
     /**
@@ -930,6 +937,42 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['url_paths_to_include'] = $url_paths_to_include;
+
+        return $this;
+    }
+
+    /**
+     * Gets download_css_and_media
+     *
+     * @return bool|null
+     */
+    public function getDownloadCssAndMedia()
+    {
+        return $this->container['download_css_and_media'];
+    }
+
+    /**
+     * Sets download_css_and_media
+     *
+     * @param bool|null $download_css_and_media Whether the scraper should download css and media from the page (images, fonts, etc). Scrapes          might take longer to finish with this flag enabled, but the success rate is improved.
+     *
+     * @return self
+     */
+    public function setDownloadCssAndMedia($download_css_and_media)
+    {
+
+        if (is_null($download_css_and_media)) {
+            array_push($this->openAPINullablesSetToNull, 'download_css_and_media');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('download_css_and_media', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['download_css_and_media'] = $download_css_and_media;
 
         return $this;
     }
