@@ -102,6 +102,8 @@ class DataSourceTypeNullable
 
     public const SLACK = 'SLACK';
 
+    public const GURU = 'GURU';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -187,6 +189,7 @@ class DataSourceTypeNullable
             self::SALESFORCE,
             self::GITHUB,
             self::SLACK,
+            self::GURU,
             self::JPG,
             self::PNG,
             self::JPEG,

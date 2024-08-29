@@ -88,6 +88,8 @@ class FileFormatsNullable
 
     public const SLACK = 'SLACK';
 
+    public const GURU = 'GURU';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -164,6 +166,7 @@ class FileFormatsNullable
             self::SALESFORCE,
             self::GITHUB,
             self::SLACK,
+            self::GURU,
             self::JPG,
             self::PNG,
             self::MP3,
