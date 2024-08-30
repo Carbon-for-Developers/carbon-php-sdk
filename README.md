@@ -47,6 +47,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.integrations.connectDataSource`](#carbonintegrationsconnectdatasource)
   * [`carbon.integrations.connectFreshdesk`](#carbonintegrationsconnectfreshdesk)
   * [`carbon.integrations.connectGitbook`](#carbonintegrationsconnectgitbook)
+  * [`carbon.integrations.connectGuru`](#carbonintegrationsconnectguru)
   * [`carbon.integrations.createAwsIamUser`](#carbonintegrationscreateawsiamuser)
   * [`carbon.integrations.getOauthUrl`](#carbonintegrationsgetoauthurl)
   * [`carbon.integrations.listConfluencePages`](#carbonintegrationslistconfluencepages)
@@ -1726,6 +1727,83 @@ Enabling this flag will fetch all available content from the source to be listed
 ---
 
 
+### `carbon.integrations.connectGuru`<a id="carbonintegrationsconnectguru"></a>
+
+You will need an access token to connect your Guru account. To obtain an access token, follow the steps highlighted here
+https://help.getguru.com/docs/gurus-api#obtaining-a-user-token. The username should be your Guru username.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->connectGuru(
+    username: "string_example", 
+    access_token: "string_example", 
+    tags: [], 
+    chunk_size: 1500, 
+    chunk_overlap: 20, 
+    skip_embedding_generation: False, 
+    embedding_model: "OPENAI", 
+    generate_sparse_vectors: False, 
+    prepend_filename_to_chunks: False, 
+    sync_files_on_connection: True, 
+    request_id: "string_example", 
+    sync_source_items: True, 
+    file_sync_config: [
+        "auto_synced_source_types" => ["ARTICLE"],
+        "sync_attachments" => False,
+        "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
+        "split_rows" => False,
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### username: `string`<a id="username-string"></a>
+
+##### access_token: `string`<a id="access_token-string"></a>
+
+##### tags: `object`<a id="tags-object"></a>
+
+##### chunk_size: `int`<a id="chunk_size-int"></a>
+
+##### chunk_overlap: `int`<a id="chunk_overlap-int"></a>
+
+##### skip_embedding_generation: `bool`<a id="skip_embedding_generation-bool"></a>
+
+##### embedding_model:<a id="embedding_model"></a>
+
+##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
+
+##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
+
+##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
+
+Enabling this flag will fetch all available content from the source to be listed via list items endpoint
+
+##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**GenericSuccessResponse**](./lib/Model/GenericSuccessResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/guru` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `carbon.integrations.createAwsIamUser`<a id="carbonintegrationscreateawsiamuser"></a>
 
 This endpoint can be used to connect S3 as well as Digital Ocean Spaces (S3 compatible)  
@@ -2554,6 +2632,8 @@ You can also use them in combination to get emails from a certain period.
 <b>is</b>: Can have the following values - starred, important, snoozed, and unread  
 <b>from</b>: Email address of the sender  
 <b>to</b>: Email address of the recipient  
+<b>in</b>: Can have the following values - sent (sync emails sent by the user)  
+<b>has</b>: Can have the following values - attachment (sync emails that have attachments)  
 
 Using keys or values outside of the specified values can lead to unexpected behaviour.
 

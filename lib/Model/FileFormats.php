@@ -88,6 +88,8 @@ class FileFormats
 
     public const SLACK = 'SLACK';
 
+    public const GURU = 'GURU';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -130,6 +132,8 @@ class FileFormats
 
     public const EML = 'EML';
 
+    public const MSG = 'MSG';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -164,6 +168,7 @@ class FileFormats
             self::SALESFORCE,
             self::GITHUB,
             self::SLACK,
+            self::GURU,
             self::JPG,
             self::PNG,
             self::MP3,
@@ -184,7 +189,8 @@ class FileFormats
             self::MKV,
             self::FLV,
             self::WEBM,
-            self::EML
+            self::EML,
+            self::MSG
         ];
     }
 }
