@@ -106,6 +106,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for connectGuru
+     *
+     * Guru Connect.
+     *
+     */
+    public function testConnectGuru()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createAwsIamUser
      *
      * S3 Auth.
