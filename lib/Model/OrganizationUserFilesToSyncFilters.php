@@ -66,7 +66,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'sync_error_message' => 'string',
         'include_containers' => 'bool',
         'external_urls' => 'string[]',
-        'file_types_at_source' => '\Carbon\Model\HelpdeskFileTypes[]'
+        'file_types_at_source' => '\Carbon\Model\AutoSyncedSourceTypesPropertyInner[]'
     ];
 
     /**
@@ -1013,7 +1013,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     /**
      * Gets file_types_at_source
      *
-     * @return \Carbon\Model\HelpdeskFileTypes[]|null
+     * @return \Carbon\Model\AutoSyncedSourceTypesPropertyInner[]|null
      */
     public function getFileTypesAtSource()
     {
@@ -1023,7 +1023,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
     /**
      * Sets file_types_at_source
      *
-     * @param \Carbon\Model\HelpdeskFileTypes[]|null $file_types_at_source Filter files based on their type at the source (for example help center tickets and articles)
+     * @param \Carbon\Model\AutoSyncedSourceTypesPropertyInner[]|null $file_types_at_source Filter files based on their type at the source (for example help center tickets and articles)
      *
      * @return self
      */

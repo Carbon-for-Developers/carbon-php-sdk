@@ -64,6 +64,8 @@ class DataSourceType
 
     public const OUTLOOK = 'OUTLOOK';
 
+    public const SERVICENOW = 'SERVICENOW';
+
     public const TEXT = 'TEXT';
 
     public const CSV = 'CSV';
@@ -172,6 +174,7 @@ class DataSourceType
             self::S3,
             self::GMAIL,
             self::OUTLOOK,
+            self::SERVICENOW,
             self::TEXT,
             self::CSV,
             self::TSV,

@@ -214,4 +214,13 @@ class WebscrapeRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "generate_chunks_only"
+     */
+    public function testPropertyGenerateChunksOnly()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

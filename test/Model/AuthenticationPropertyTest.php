@@ -214,4 +214,40 @@ class AuthenticationPropertyTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "instance_subdomain"
+     */
+    public function testPropertyInstanceSubdomain()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "client_id"
+     */
+    public function testPropertyClientId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "client_secret"
+     */
+    public function testPropertyClientSecret()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "redirect_uri"
+     */
+    public function testPropertyRedirectUri()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

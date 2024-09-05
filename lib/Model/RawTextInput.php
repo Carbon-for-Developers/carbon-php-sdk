@@ -57,7 +57,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'overwrite_file_id' => 'int',
         'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
         'generate_sparse_vectors' => 'bool',
-        'cold_storage_params' => '\Carbon\Model\ColdStorageProps'
+        'cold_storage_params' => '\Carbon\Model\ColdStorageProps',
+        'generate_chunks_only' => 'bool'
     ];
 
     /**
@@ -76,7 +77,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'overwrite_file_id' => null,
         'embedding_model' => null,
         'generate_sparse_vectors' => null,
-        'cold_storage_params' => null
+        'cold_storage_params' => null,
+        'generate_chunks_only' => null
     ];
 
     /**
@@ -93,7 +95,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'overwrite_file_id' => true,
 		'embedding_model' => true,
 		'generate_sparse_vectors' => true,
-		'cold_storage_params' => false
+		'cold_storage_params' => false,
+		'generate_chunks_only' => false
     ];
 
     /**
@@ -190,7 +193,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'overwrite_file_id' => 'overwrite_file_id',
         'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
-        'cold_storage_params' => 'cold_storage_params'
+        'cold_storage_params' => 'cold_storage_params',
+        'generate_chunks_only' => 'generate_chunks_only'
     ];
 
     /**
@@ -207,7 +211,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'overwrite_file_id' => 'setOverwriteFileId',
         'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
-        'cold_storage_params' => 'setColdStorageParams'
+        'cold_storage_params' => 'setColdStorageParams',
+        'generate_chunks_only' => 'setGenerateChunksOnly'
     ];
 
     /**
@@ -224,7 +229,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'overwrite_file_id' => 'getOverwriteFileId',
         'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
-        'cold_storage_params' => 'getColdStorageParams'
+        'cold_storage_params' => 'getColdStorageParams',
+        'generate_chunks_only' => 'getGenerateChunksOnly'
     ];
 
     /**
@@ -293,6 +299,7 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('cold_storage_params', $data ?? [], null);
+        $this->setIfExists('generate_chunks_only', $data ?? [], false);
     }
 
     /**
@@ -648,6 +655,35 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['cold_storage_params'] = $cold_storage_params;
+
+        return $this;
+    }
+
+    /**
+     * Gets generate_chunks_only
+     *
+     * @return bool|null
+     */
+    public function getGenerateChunksOnly()
+    {
+        return $this->container['generate_chunks_only'];
+    }
+
+    /**
+     * Sets generate_chunks_only
+     *
+     * @param bool|null $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,         but no embeddings will be generated. This overrides the skip_embedding_generation flag.
+     *
+     * @return self
+     */
+    public function setGenerateChunksOnly($generate_chunks_only)
+    {
+
+        if (is_null($generate_chunks_only)) {
+            throw new \InvalidArgumentException('non-nullable generate_chunks_only cannot be null');
+        }
+
+        $this->container['generate_chunks_only'] = $generate_chunks_only;
 
         return $this;
     }

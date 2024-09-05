@@ -1,6 +1,6 @@
 <?php
 /**
- * RawTextInputTest
+ * ServiceNowAuthenticationTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * RawTextInputTest Class Doc Comment
+ * ServiceNowAuthenticationTest Class Doc Comment
  *
  * @category    Class
- * @description RawTextInput
+ * @description ServiceNowAuthentication
  * @package     Carbon
  */
-class RawTextInputTest extends TestCase
+class ServiceNowAuthenticationTest extends TestCase
 {
 
     /**
@@ -63,99 +63,72 @@ class RawTextInputTest extends TestCase
     }
 
     /**
-     * Test "RawTextInput"
+     * Test "ServiceNowAuthentication"
      */
-    public function testRawTextInput()
+    public function testServiceNowAuthentication()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "contents"
+     * Test attribute "source"
      */
-    public function testPropertyContents()
+    public function testPropertySource()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "access_token"
      */
-    public function testPropertyName()
+    public function testPropertyAccessToken()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "chunk_size"
+     * Test attribute "refresh_token"
      */
-    public function testPropertyChunkSize()
+    public function testPropertyRefreshToken()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "chunk_overlap"
+     * Test attribute "instance_subdomain"
      */
-    public function testPropertyChunkOverlap()
+    public function testPropertyInstanceSubdomain()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "skip_embedding_generation"
+     * Test attribute "client_id"
      */
-    public function testPropertySkipEmbeddingGeneration()
+    public function testPropertyClientId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "overwrite_file_id"
+     * Test attribute "client_secret"
      */
-    public function testPropertyOverwriteFileId()
+    public function testPropertyClientSecret()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "embedding_model"
+     * Test attribute "redirect_uri"
      */
-    public function testPropertyEmbeddingModel()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "generate_sparse_vectors"
-     */
-    public function testPropertyGenerateSparseVectors()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "cold_storage_params"
-     */
-    public function testPropertyColdStorageParams()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "generate_chunks_only"
-     */
-    public function testPropertyGenerateChunksOnly()
+    public function testPropertyRedirectUri()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

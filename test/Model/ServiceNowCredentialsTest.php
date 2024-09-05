@@ -1,6 +1,6 @@
 <?php
 /**
- * FileSyncConfigTest
+ * ServiceNowCredentialsTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * FileSyncConfigTest Class Doc Comment
+ * ServiceNowCredentialsTest Class Doc Comment
  *
  * @category    Class
- * @description FileSyncConfig
+ * @description ServiceNowCredentials
  * @package     Carbon
  */
-class FileSyncConfigTest extends TestCase
+class ServiceNowCredentialsTest extends TestCase
 {
 
     /**
@@ -63,72 +63,45 @@ class FileSyncConfigTest extends TestCase
     }
 
     /**
-     * Test "FileSyncConfig"
+     * Test "ServiceNowCredentials"
      */
-    public function testFileSyncConfig()
+    public function testServiceNowCredentials()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "auto_synced_source_types"
+     * Test attribute "instance_subdomain"
      */
-    public function testPropertyAutoSyncedSourceTypes()
+    public function testPropertyInstanceSubdomain()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sync_attachments"
+     * Test attribute "client_id"
      */
-    public function testPropertySyncAttachments()
+    public function testPropertyClientId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "detect_audio_language"
+     * Test attribute "client_secret"
      */
-    public function testPropertyDetectAudioLanguage()
+    public function testPropertyClientSecret()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "transcription_service"
+     * Test attribute "redirect_uri"
      */
-    public function testPropertyTranscriptionService()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "include_speaker_labels"
-     */
-    public function testPropertyIncludeSpeakerLabels()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "split_rows"
-     */
-    public function testPropertySplitRows()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "generate_chunks_only"
-     */
-    public function testPropertyGenerateChunksOnly()
+    public function testPropertyRedirectUri()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

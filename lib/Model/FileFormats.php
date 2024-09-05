@@ -90,6 +90,8 @@ class FileFormats
 
     public const GURU = 'GURU';
 
+    public const SERVICENOW = 'SERVICENOW';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -169,6 +171,7 @@ class FileFormats
             self::GITHUB,
             self::SLACK,
             self::GURU,
+            self::SERVICENOW,
             self::JPG,
             self::PNG,
             self::MP3,

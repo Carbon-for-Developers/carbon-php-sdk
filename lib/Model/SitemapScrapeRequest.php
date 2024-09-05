@@ -65,7 +65,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'url_paths_to_include' => 'string[]',
         'url_paths_to_exclude' => 'string[]',
         'urls_to_scrape' => 'string[]',
-        'download_css_and_media' => 'bool'
+        'download_css_and_media' => 'bool',
+        'generate_chunks_only' => 'bool'
     ];
 
     /**
@@ -92,7 +93,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'url_paths_to_include' => null,
         'url_paths_to_exclude' => null,
         'urls_to_scrape' => null,
-        'download_css_and_media' => null
+        'download_css_and_media' => null,
+        'generate_chunks_only' => null
     ];
 
     /**
@@ -117,7 +119,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 		'url_paths_to_include' => true,
 		'url_paths_to_exclude' => true,
 		'urls_to_scrape' => true,
-		'download_css_and_media' => true
+		'download_css_and_media' => true,
+		'generate_chunks_only' => false
     ];
 
     /**
@@ -222,7 +225,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'url_paths_to_include' => 'url_paths_to_include',
         'url_paths_to_exclude' => 'url_paths_to_exclude',
         'urls_to_scrape' => 'urls_to_scrape',
-        'download_css_and_media' => 'download_css_and_media'
+        'download_css_and_media' => 'download_css_and_media',
+        'generate_chunks_only' => 'generate_chunks_only'
     ];
 
     /**
@@ -247,7 +251,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'url_paths_to_include' => 'setUrlPathsToInclude',
         'url_paths_to_exclude' => 'setUrlPathsToExclude',
         'urls_to_scrape' => 'setUrlsToScrape',
-        'download_css_and_media' => 'setDownloadCssAndMedia'
+        'download_css_and_media' => 'setDownloadCssAndMedia',
+        'generate_chunks_only' => 'setGenerateChunksOnly'
     ];
 
     /**
@@ -272,7 +277,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'url_paths_to_include' => 'getUrlPathsToInclude',
         'url_paths_to_exclude' => 'getUrlPathsToExclude',
         'urls_to_scrape' => 'getUrlsToScrape',
-        'download_css_and_media' => 'getDownloadCssAndMedia'
+        'download_css_and_media' => 'getDownloadCssAndMedia',
+        'generate_chunks_only' => 'getGenerateChunksOnly'
     ];
 
     /**
@@ -349,6 +355,7 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('url_paths_to_exclude', $data ?? [], null);
         $this->setIfExists('urls_to_scrape', $data ?? [], null);
         $this->setIfExists('download_css_and_media', $data ?? [], false);
+        $this->setIfExists('generate_chunks_only', $data ?? [], false);
     }
 
     /**
@@ -1015,6 +1022,35 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['download_css_and_media'] = $download_css_and_media;
+
+        return $this;
+    }
+
+    /**
+     * Gets generate_chunks_only
+     *
+     * @return bool|null
+     */
+    public function getGenerateChunksOnly()
+    {
+        return $this->container['generate_chunks_only'];
+    }
+
+    /**
+     * Sets generate_chunks_only
+     *
+     * @param bool|null $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,           but no embeddings will be generated. This overrides the skip_embedding_generation flag.
+     *
+     * @return self
+     */
+    public function setGenerateChunksOnly($generate_chunks_only)
+    {
+
+        if (is_null($generate_chunks_only)) {
+            throw new \InvalidArgumentException('non-nullable generate_chunks_only cannot be null');
+        }
+
+        $this->container['generate_chunks_only'] = $generate_chunks_only;
 
         return $this;
     }
