@@ -64,7 +64,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'css_selectors_to_skip' => 'string[]',
         'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'url_paths_to_include' => 'string[]',
-        'download_css_and_media' => 'bool'
+        'download_css_and_media' => 'bool',
+        'generate_chunks_only' => 'bool'
     ];
 
     /**
@@ -90,7 +91,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'css_selectors_to_skip' => null,
         'embedding_model' => null,
         'url_paths_to_include' => null,
-        'download_css_and_media' => null
+        'download_css_and_media' => null,
+        'generate_chunks_only' => null
     ];
 
     /**
@@ -114,7 +116,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'css_selectors_to_skip' => true,
 		'embedding_model' => false,
 		'url_paths_to_include' => true,
-		'download_css_and_media' => true
+		'download_css_and_media' => true,
+		'generate_chunks_only' => false
     ];
 
     /**
@@ -218,7 +221,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'css_selectors_to_skip' => 'css_selectors_to_skip',
         'embedding_model' => 'embedding_model',
         'url_paths_to_include' => 'url_paths_to_include',
-        'download_css_and_media' => 'download_css_and_media'
+        'download_css_and_media' => 'download_css_and_media',
+        'generate_chunks_only' => 'generate_chunks_only'
     ];
 
     /**
@@ -242,7 +246,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'css_selectors_to_skip' => 'setCssSelectorsToSkip',
         'embedding_model' => 'setEmbeddingModel',
         'url_paths_to_include' => 'setUrlPathsToInclude',
-        'download_css_and_media' => 'setDownloadCssAndMedia'
+        'download_css_and_media' => 'setDownloadCssAndMedia',
+        'generate_chunks_only' => 'setGenerateChunksOnly'
     ];
 
     /**
@@ -266,7 +271,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'css_selectors_to_skip' => 'getCssSelectorsToSkip',
         'embedding_model' => 'getEmbeddingModel',
         'url_paths_to_include' => 'getUrlPathsToInclude',
-        'download_css_and_media' => 'getDownloadCssAndMedia'
+        'download_css_and_media' => 'getDownloadCssAndMedia',
+        'generate_chunks_only' => 'getGenerateChunksOnly'
     ];
 
     /**
@@ -342,6 +348,7 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('embedding_model', $data ?? [], null);
         $this->setIfExists('url_paths_to_include', $data ?? [], null);
         $this->setIfExists('download_css_and_media', $data ?? [], false);
+        $this->setIfExists('generate_chunks_only', $data ?? [], false);
     }
 
     /**
@@ -973,6 +980,35 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['download_css_and_media'] = $download_css_and_media;
+
+        return $this;
+    }
+
+    /**
+     * Gets generate_chunks_only
+     *
+     * @return bool|null
+     */
+    public function getGenerateChunksOnly()
+    {
+        return $this->container['generate_chunks_only'];
+    }
+
+    /**
+     * Sets generate_chunks_only
+     *
+     * @param bool|null $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,           but no embeddings will be generated. This overrides the skip_embedding_generation flag.
+     *
+     * @return self
+     */
+    public function setGenerateChunksOnly($generate_chunks_only)
+    {
+
+        if (is_null($generate_chunks_only)) {
+            throw new \InvalidArgumentException('non-nullable generate_chunks_only cannot be null');
+        }
+
+        $this->container['generate_chunks_only'] = $generate_chunks_only;
 
         return $this;
     }

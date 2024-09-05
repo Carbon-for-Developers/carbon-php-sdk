@@ -1690,6 +1690,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $url_paths_to_exclude = SENTINEL_VALUE,
         $urls_to_scrape = SENTINEL_VALUE,
         $download_css_and_media = false,
+        $generate_chunks_only = false,
         string $contentType = self::contentTypes['scrapeSitemap'][0]
     )
     {
@@ -1711,6 +1712,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "url_paths_to_exclude", $url_paths_to_exclude);
         $this->setRequestBodyProperty($_body, "urls_to_scrape", $urls_to_scrape);
         $this->setRequestBodyProperty($_body, "download_css_and_media", $download_css_and_media);
+        $this->setRequestBodyProperty($_body, "generate_chunks_only", $generate_chunks_only);
         $sitemap_scrape_request = $_body;
 
         list($response) = $this->scrapeSitemapWithHttpInfo($sitemap_scrape_request, $contentType);
@@ -1889,6 +1891,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $url_paths_to_exclude = SENTINEL_VALUE,
         $urls_to_scrape = SENTINEL_VALUE,
         $download_css_and_media = false,
+        $generate_chunks_only = false,
         string $contentType = self::contentTypes['scrapeSitemap'][0]
     )
     {
@@ -1910,6 +1913,7 @@ class UtilitiesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "url_paths_to_exclude", $url_paths_to_exclude);
         $this->setRequestBodyProperty($_body, "urls_to_scrape", $urls_to_scrape);
         $this->setRequestBodyProperty($_body, "download_css_and_media", $download_css_and_media);
+        $this->setRequestBodyProperty($_body, "generate_chunks_only", $generate_chunks_only);
         $sitemap_scrape_request = $_body;
 
         return $this->scrapeSitemapAsyncWithHttpInfo($sitemap_scrape_request, $contentType)

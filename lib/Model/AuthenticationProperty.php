@@ -64,7 +64,11 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'api_key' => 'string',
         'access_key' => 'string',
         'access_key_secret' => 'string',
-        'endpoint_url' => 'string'
+        'endpoint_url' => 'string',
+        'instance_subdomain' => 'string',
+        'client_id' => 'string',
+        'client_secret' => 'string',
+        'redirect_uri' => 'string'
     ];
 
     /**
@@ -90,7 +94,11 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'api_key' => null,
         'access_key' => null,
         'access_key_secret' => null,
-        'endpoint_url' => null
+        'endpoint_url' => null,
+        'instance_subdomain' => null,
+        'client_id' => null,
+        'client_secret' => null,
+        'redirect_uri' => null
     ];
 
     /**
@@ -114,7 +122,11 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
 		'api_key' => false,
 		'access_key' => false,
 		'access_key_secret' => false,
-		'endpoint_url' => true
+		'endpoint_url' => true,
+		'instance_subdomain' => false,
+		'client_id' => false,
+		'client_secret' => false,
+		'redirect_uri' => false
     ];
 
     /**
@@ -218,7 +230,11 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'api_key' => 'api_key',
         'access_key' => 'access_key',
         'access_key_secret' => 'access_key_secret',
-        'endpoint_url' => 'endpoint_url'
+        'endpoint_url' => 'endpoint_url',
+        'instance_subdomain' => 'instance_subdomain',
+        'client_id' => 'client_id',
+        'client_secret' => 'client_secret',
+        'redirect_uri' => 'redirect_uri'
     ];
 
     /**
@@ -242,7 +258,11 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'api_key' => 'setApiKey',
         'access_key' => 'setAccessKey',
         'access_key_secret' => 'setAccessKeySecret',
-        'endpoint_url' => 'setEndpointUrl'
+        'endpoint_url' => 'setEndpointUrl',
+        'instance_subdomain' => 'setInstanceSubdomain',
+        'client_id' => 'setClientId',
+        'client_secret' => 'setClientSecret',
+        'redirect_uri' => 'setRedirectUri'
     ];
 
     /**
@@ -266,7 +286,11 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'api_key' => 'getApiKey',
         'access_key' => 'getAccessKey',
         'access_key_secret' => 'getAccessKeySecret',
-        'endpoint_url' => 'getEndpointUrl'
+        'endpoint_url' => 'getEndpointUrl',
+        'instance_subdomain' => 'getInstanceSubdomain',
+        'client_id' => 'getClientId',
+        'client_secret' => 'getClientSecret',
+        'redirect_uri' => 'getRedirectUri'
     ];
 
     /**
@@ -342,6 +366,10 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('access_key', $data ?? [], null);
         $this->setIfExists('access_key_secret', $data ?? [], null);
         $this->setIfExists('endpoint_url', $data ?? [], null);
+        $this->setIfExists('instance_subdomain', $data ?? [], null);
+        $this->setIfExists('client_id', $data ?? [], null);
+        $this->setIfExists('client_secret', $data ?? [], null);
+        $this->setIfExists('redirect_uri', $data ?? [], null);
     }
 
     /**
@@ -412,6 +440,18 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         }
         if ($this->container['access_key_secret'] === null) {
             $invalidProperties[] = "'access_key_secret' can't be null";
+        }
+        if ($this->container['instance_subdomain'] === null) {
+            $invalidProperties[] = "'instance_subdomain' can't be null";
+        }
+        if ($this->container['client_id'] === null) {
+            $invalidProperties[] = "'client_id' can't be null";
+        }
+        if ($this->container['client_secret'] === null) {
+            $invalidProperties[] = "'client_secret' can't be null";
+        }
+        if ($this->container['redirect_uri'] === null) {
+            $invalidProperties[] = "'redirect_uri' can't be null";
         }
         return $invalidProperties;
     }
@@ -909,6 +949,122 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['endpoint_url'] = $endpoint_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets instance_subdomain
+     *
+     * @return string
+     */
+    public function getInstanceSubdomain()
+    {
+        return $this->container['instance_subdomain'];
+    }
+
+    /**
+     * Sets instance_subdomain
+     *
+     * @param string $instance_subdomain instance_subdomain
+     *
+     * @return self
+     */
+    public function setInstanceSubdomain($instance_subdomain)
+    {
+
+        if (is_null($instance_subdomain)) {
+            throw new \InvalidArgumentException('non-nullable instance_subdomain cannot be null');
+        }
+
+        $this->container['instance_subdomain'] = $instance_subdomain;
+
+        return $this;
+    }
+
+    /**
+     * Gets client_id
+     *
+     * @return string
+     */
+    public function getClientId()
+    {
+        return $this->container['client_id'];
+    }
+
+    /**
+     * Sets client_id
+     *
+     * @param string $client_id client_id
+     *
+     * @return self
+     */
+    public function setClientId($client_id)
+    {
+
+        if (is_null($client_id)) {
+            throw new \InvalidArgumentException('non-nullable client_id cannot be null');
+        }
+
+        $this->container['client_id'] = $client_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets client_secret
+     *
+     * @return string
+     */
+    public function getClientSecret()
+    {
+        return $this->container['client_secret'];
+    }
+
+    /**
+     * Sets client_secret
+     *
+     * @param string $client_secret client_secret
+     *
+     * @return self
+     */
+    public function setClientSecret($client_secret)
+    {
+
+        if (is_null($client_secret)) {
+            throw new \InvalidArgumentException('non-nullable client_secret cannot be null');
+        }
+
+        $this->container['client_secret'] = $client_secret;
+
+        return $this;
+    }
+
+    /**
+     * Gets redirect_uri
+     *
+     * @return string
+     */
+    public function getRedirectUri()
+    {
+        return $this->container['redirect_uri'];
+    }
+
+    /**
+     * Sets redirect_uri
+     *
+     * @param string $redirect_uri redirect_uri
+     *
+     * @return self
+     */
+    public function setRedirectUri($redirect_uri)
+    {
+
+        if (is_null($redirect_uri)) {
+            throw new \InvalidArgumentException('non-nullable redirect_uri cannot be null');
+        }
+
+        $this->container['redirect_uri'] = $redirect_uri;
 
         return $this;
     }

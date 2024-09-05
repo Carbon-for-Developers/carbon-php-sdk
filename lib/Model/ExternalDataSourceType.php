@@ -64,6 +64,8 @@ class ExternalDataSourceType
 
     public const ZOTERO = 'ZOTERO';
 
+    public const SERVICENOW = 'SERVICENOW';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -85,7 +87,8 @@ class ExternalDataSourceType
             self::SHAREPOINT,
             self::SLACK,
             self::ZENDESK,
-            self::ZOTERO
+            self::ZOTERO,
+            self::SERVICENOW
         ];
     }
 }

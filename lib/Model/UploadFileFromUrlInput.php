@@ -66,7 +66,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'include_speaker_labels' => 'bool',
         'media_type' => '\Carbon\Model\FileContentTypesNullable',
         'split_rows' => 'bool',
-        'cold_storage_params' => '\Carbon\Model\ColdStorageProps'
+        'cold_storage_params' => '\Carbon\Model\ColdStorageProps',
+        'generate_chunks_only' => 'bool'
     ];
 
     /**
@@ -94,7 +95,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'include_speaker_labels' => null,
         'media_type' => null,
         'split_rows' => null,
-        'cold_storage_params' => null
+        'cold_storage_params' => null,
+        'generate_chunks_only' => null
     ];
 
     /**
@@ -120,7 +122,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
 		'include_speaker_labels' => false,
 		'media_type' => true,
 		'split_rows' => false,
-		'cold_storage_params' => false
+		'cold_storage_params' => false,
+		'generate_chunks_only' => false
     ];
 
     /**
@@ -226,7 +229,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'include_speaker_labels' => 'include_speaker_labels',
         'media_type' => 'media_type',
         'split_rows' => 'split_rows',
-        'cold_storage_params' => 'cold_storage_params'
+        'cold_storage_params' => 'cold_storage_params',
+        'generate_chunks_only' => 'generate_chunks_only'
     ];
 
     /**
@@ -252,7 +256,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'include_speaker_labels' => 'setIncludeSpeakerLabels',
         'media_type' => 'setMediaType',
         'split_rows' => 'setSplitRows',
-        'cold_storage_params' => 'setColdStorageParams'
+        'cold_storage_params' => 'setColdStorageParams',
+        'generate_chunks_only' => 'setGenerateChunksOnly'
     ];
 
     /**
@@ -278,7 +283,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'include_speaker_labels' => 'getIncludeSpeakerLabels',
         'media_type' => 'getMediaType',
         'split_rows' => 'getSplitRows',
-        'cold_storage_params' => 'getColdStorageParams'
+        'cold_storage_params' => 'getColdStorageParams',
+        'generate_chunks_only' => 'getGenerateChunksOnly'
     ];
 
     /**
@@ -356,6 +362,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('media_type', $data ?? [], null);
         $this->setIfExists('split_rows', $data ?? [], false);
         $this->setIfExists('cold_storage_params', $data ?? [], null);
+        $this->setIfExists('generate_chunks_only', $data ?? [], false);
     }
 
     /**
@@ -963,6 +970,35 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['cold_storage_params'] = $cold_storage_params;
+
+        return $this;
+    }
+
+    /**
+     * Gets generate_chunks_only
+     *
+     * @return bool|null
+     */
+    public function getGenerateChunksOnly()
+    {
+        return $this->container['generate_chunks_only'];
+    }
+
+    /**
+     * Sets generate_chunks_only
+     *
+     * @param bool|null $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,         but no embeddings will be generated. This overrides the skip_embedding_generation flag.
+     *
+     * @return self
+     */
+    public function setGenerateChunksOnly($generate_chunks_only)
+    {
+
+        if (is_null($generate_chunks_only)) {
+            throw new \InvalidArgumentException('non-nullable generate_chunks_only cannot be null');
+        }
+
+        $this->container['generate_chunks_only'] = $generate_chunks_only;
 
         return $this;
     }

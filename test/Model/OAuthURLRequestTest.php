@@ -313,4 +313,13 @@ class OAuthURLRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "servicenow_credentials"
+     */
+    public function testPropertyServicenowCredentials()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

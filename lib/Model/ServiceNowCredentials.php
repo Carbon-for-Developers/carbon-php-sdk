@@ -1,6 +1,6 @@
 <?php
 /**
- * FileSyncConfigNullable
+ * ServiceNowCredentials
  *
  * PHP version 7.4
  *
@@ -26,14 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * FileSyncConfigNullable Class Doc Comment
+ * ServiceNowCredentials Class Doc Comment
  *
  * @category Class
- * @description Used to configure file syncing for certain connectors when sync_files_on_connection is set to true
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerializable
+class ServiceNowCredentials implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -42,7 +41,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FileSyncConfigNullable';
+    protected static $openAPIModelName = 'ServiceNowCredentials';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,13 +49,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_synced_source_types' => '\Carbon\Model\AutoSyncedSourceTypesPropertyInner[]',
-        'sync_attachments' => 'bool',
-        'detect_audio_language' => 'bool',
-        'transcription_service' => '\Carbon\Model\TranscriptionServiceNullable',
-        'include_speaker_labels' => 'bool',
-        'split_rows' => 'bool',
-        'generate_chunks_only' => 'bool'
+        'instance_subdomain' => 'string',
+        'client_id' => 'string',
+        'client_secret' => 'string',
+        'redirect_uri' => 'string'
     ];
 
     /**
@@ -67,13 +63,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'auto_synced_source_types' => null,
-        'sync_attachments' => null,
-        'detect_audio_language' => null,
-        'transcription_service' => null,
-        'include_speaker_labels' => null,
-        'split_rows' => null,
-        'generate_chunks_only' => null
+        'instance_subdomain' => null,
+        'client_id' => null,
+        'client_secret' => null,
+        'redirect_uri' => null
     ];
 
     /**
@@ -82,13 +75,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'auto_synced_source_types' => false,
-		'sync_attachments' => false,
-		'detect_audio_language' => false,
-		'transcription_service' => true,
-		'include_speaker_labels' => false,
-		'split_rows' => false,
-		'generate_chunks_only' => false
+        'instance_subdomain' => false,
+		'client_id' => false,
+		'client_secret' => false,
+		'redirect_uri' => false
     ];
 
     /**
@@ -177,13 +167,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_synced_source_types' => 'auto_synced_source_types',
-        'sync_attachments' => 'sync_attachments',
-        'detect_audio_language' => 'detect_audio_language',
-        'transcription_service' => 'transcription_service',
-        'include_speaker_labels' => 'include_speaker_labels',
-        'split_rows' => 'split_rows',
-        'generate_chunks_only' => 'generate_chunks_only'
+        'instance_subdomain' => 'instance_subdomain',
+        'client_id' => 'client_id',
+        'client_secret' => 'client_secret',
+        'redirect_uri' => 'redirect_uri'
     ];
 
     /**
@@ -192,13 +179,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'auto_synced_source_types' => 'setAutoSyncedSourceTypes',
-        'sync_attachments' => 'setSyncAttachments',
-        'detect_audio_language' => 'setDetectAudioLanguage',
-        'transcription_service' => 'setTranscriptionService',
-        'include_speaker_labels' => 'setIncludeSpeakerLabels',
-        'split_rows' => 'setSplitRows',
-        'generate_chunks_only' => 'setGenerateChunksOnly'
+        'instance_subdomain' => 'setInstanceSubdomain',
+        'client_id' => 'setClientId',
+        'client_secret' => 'setClientSecret',
+        'redirect_uri' => 'setRedirectUri'
     ];
 
     /**
@@ -207,13 +191,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'auto_synced_source_types' => 'getAutoSyncedSourceTypes',
-        'sync_attachments' => 'getSyncAttachments',
-        'detect_audio_language' => 'getDetectAudioLanguage',
-        'transcription_service' => 'getTranscriptionService',
-        'include_speaker_labels' => 'getIncludeSpeakerLabels',
-        'split_rows' => 'getSplitRows',
-        'generate_chunks_only' => 'getGenerateChunksOnly'
+        'instance_subdomain' => 'getInstanceSubdomain',
+        'client_id' => 'getClientId',
+        'client_secret' => 'getClientSecret',
+        'redirect_uri' => 'getRedirectUri'
     ];
 
     /**
@@ -273,13 +254,10 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('auto_synced_source_types', $data ?? [], null);
-        $this->setIfExists('sync_attachments', $data ?? [], false);
-        $this->setIfExists('detect_audio_language', $data ?? [], false);
-        $this->setIfExists('transcription_service', $data ?? [], null);
-        $this->setIfExists('include_speaker_labels', $data ?? [], false);
-        $this->setIfExists('split_rows', $data ?? [], false);
-        $this->setIfExists('generate_chunks_only', $data ?? [], false);
+        $this->setIfExists('instance_subdomain', $data ?? [], null);
+        $this->setIfExists('client_id', $data ?? [], null);
+        $this->setIfExists('client_secret', $data ?? [], null);
+        $this->setIfExists('redirect_uri', $data ?? [], null);
     }
 
     /**
@@ -309,6 +287,18 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
+        if ($this->container['instance_subdomain'] === null) {
+            $invalidProperties[] = "'instance_subdomain' can't be null";
+        }
+        if ($this->container['client_id'] === null) {
+            $invalidProperties[] = "'client_id' can't be null";
+        }
+        if ($this->container['client_secret'] === null) {
+            $invalidProperties[] = "'client_secret' can't be null";
+        }
+        if ($this->container['redirect_uri'] === null) {
+            $invalidProperties[] = "'redirect_uri' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -325,211 +315,117 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets auto_synced_source_types
+     * Gets instance_subdomain
      *
-     * @return \Carbon\Model\AutoSyncedSourceTypesPropertyInner[]|null
+     * @return string
      */
-    public function getAutoSyncedSourceTypes()
+    public function getInstanceSubdomain()
     {
-        return $this->container['auto_synced_source_types'];
+        return $this->container['instance_subdomain'];
     }
 
     /**
-     * Sets auto_synced_source_types
+     * Sets instance_subdomain
      *
-     * @param \Carbon\Model\AutoSyncedSourceTypesPropertyInner[]|null $auto_synced_source_types File types to automatically sync when the data source connects. Only a subset of file types can be          controlled. If not supported, then they will always be synced
+     * @param string $instance_subdomain instance_subdomain
      *
      * @return self
      */
-    public function setAutoSyncedSourceTypes($auto_synced_source_types)
+    public function setInstanceSubdomain($instance_subdomain)
     {
 
-        if (is_null($auto_synced_source_types)) {
-            throw new \InvalidArgumentException('non-nullable auto_synced_source_types cannot be null');
+        if (is_null($instance_subdomain)) {
+            throw new \InvalidArgumentException('non-nullable instance_subdomain cannot be null');
         }
 
-        $this->container['auto_synced_source_types'] = $auto_synced_source_types;
+        $this->container['instance_subdomain'] = $instance_subdomain;
 
         return $this;
     }
 
     /**
-     * Gets sync_attachments
+     * Gets client_id
      *
-     * @return bool|null
+     * @return string
      */
-    public function getSyncAttachments()
+    public function getClientId()
     {
-        return $this->container['sync_attachments'];
+        return $this->container['client_id'];
     }
 
     /**
-     * Sets sync_attachments
+     * Sets client_id
      *
-     * @param bool|null $sync_attachments Automatically sync attachments from files where supported. Currently applies to Helpdesk Tickets
+     * @param string $client_id client_id
      *
      * @return self
      */
-    public function setSyncAttachments($sync_attachments)
+    public function setClientId($client_id)
     {
 
-        if (is_null($sync_attachments)) {
-            throw new \InvalidArgumentException('non-nullable sync_attachments cannot be null');
+        if (is_null($client_id)) {
+            throw new \InvalidArgumentException('non-nullable client_id cannot be null');
         }
 
-        $this->container['sync_attachments'] = $sync_attachments;
+        $this->container['client_id'] = $client_id;
 
         return $this;
     }
 
     /**
-     * Gets detect_audio_language
+     * Gets client_secret
      *
-     * @return bool|null
+     * @return string
      */
-    public function getDetectAudioLanguage()
+    public function getClientSecret()
     {
-        return $this->container['detect_audio_language'];
+        return $this->container['client_secret'];
     }
 
     /**
-     * Sets detect_audio_language
+     * Sets client_secret
      *
-     * @param bool|null $detect_audio_language Detect audio language before transcription for audio files
+     * @param string $client_secret client_secret
      *
      * @return self
      */
-    public function setDetectAudioLanguage($detect_audio_language)
+    public function setClientSecret($client_secret)
     {
 
-        if (is_null($detect_audio_language)) {
-            throw new \InvalidArgumentException('non-nullable detect_audio_language cannot be null');
+        if (is_null($client_secret)) {
+            throw new \InvalidArgumentException('non-nullable client_secret cannot be null');
         }
 
-        $this->container['detect_audio_language'] = $detect_audio_language;
+        $this->container['client_secret'] = $client_secret;
 
         return $this;
     }
 
     /**
-     * Gets transcription_service
+     * Gets redirect_uri
      *
-     * @return \Carbon\Model\TranscriptionServiceNullable|null
+     * @return string
      */
-    public function getTranscriptionService()
+    public function getRedirectUri()
     {
-        return $this->container['transcription_service'];
+        return $this->container['redirect_uri'];
     }
 
     /**
-     * Sets transcription_service
+     * Sets redirect_uri
      *
-     * @param \Carbon\Model\TranscriptionServiceNullable|null $transcription_service transcription_service
+     * @param string $redirect_uri redirect_uri
      *
      * @return self
      */
-    public function setTranscriptionService($transcription_service)
+    public function setRedirectUri($redirect_uri)
     {
 
-        if (is_null($transcription_service)) {
-            array_push($this->openAPINullablesSetToNull, 'transcription_service');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('transcription_service', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($redirect_uri)) {
+            throw new \InvalidArgumentException('non-nullable redirect_uri cannot be null');
         }
 
-        $this->container['transcription_service'] = $transcription_service;
-
-        return $this;
-    }
-
-    /**
-     * Gets include_speaker_labels
-     *
-     * @return bool|null
-     */
-    public function getIncludeSpeakerLabels()
-    {
-        return $this->container['include_speaker_labels'];
-    }
-
-    /**
-     * Sets include_speaker_labels
-     *
-     * @param bool|null $include_speaker_labels Detect multiple speakers and label segments of speech by speaker for audio files.
-     *
-     * @return self
-     */
-    public function setIncludeSpeakerLabels($include_speaker_labels)
-    {
-
-        if (is_null($include_speaker_labels)) {
-            throw new \InvalidArgumentException('non-nullable include_speaker_labels cannot be null');
-        }
-
-        $this->container['include_speaker_labels'] = $include_speaker_labels;
-
-        return $this;
-    }
-
-    /**
-     * Gets split_rows
-     *
-     * @return bool|null
-     */
-    public function getSplitRows()
-    {
-        return $this->container['split_rows'];
-    }
-
-    /**
-     * Sets split_rows
-     *
-     * @param bool|null $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files.
-     *
-     * @return self
-     */
-    public function setSplitRows($split_rows)
-    {
-
-        if (is_null($split_rows)) {
-            throw new \InvalidArgumentException('non-nullable split_rows cannot be null');
-        }
-
-        $this->container['split_rows'] = $split_rows;
-
-        return $this;
-    }
-
-    /**
-     * Gets generate_chunks_only
-     *
-     * @return bool|null
-     */
-    public function getGenerateChunksOnly()
-    {
-        return $this->container['generate_chunks_only'];
-    }
-
-    /**
-     * Sets generate_chunks_only
-     *
-     * @param bool|null $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,           but no embeddings will be generated. This overrides the skip_embedding_generation flag.
-     *
-     * @return self
-     */
-    public function setGenerateChunksOnly($generate_chunks_only)
-    {
-
-        if (is_null($generate_chunks_only)) {
-            throw new \InvalidArgumentException('non-nullable generate_chunks_only cannot be null');
-        }
-
-        $this->container['generate_chunks_only'] = $generate_chunks_only;
+        $this->container['redirect_uri'] = $redirect_uri;
 
         return $this;
     }

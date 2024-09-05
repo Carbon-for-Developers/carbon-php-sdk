@@ -49,12 +49,13 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_synced_source_types' => '\Carbon\Model\HelpdeskFileTypes[]',
+        'auto_synced_source_types' => '\Carbon\Model\AutoSyncedSourceTypesPropertyInner[]',
         'sync_attachments' => 'bool',
         'detect_audio_language' => 'bool',
         'transcription_service' => '\Carbon\Model\TranscriptionServiceNullable',
         'include_speaker_labels' => 'bool',
-        'split_rows' => 'bool'
+        'split_rows' => 'bool',
+        'generate_chunks_only' => 'bool'
     ];
 
     /**
@@ -70,7 +71,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'detect_audio_language' => null,
         'transcription_service' => null,
         'include_speaker_labels' => null,
-        'split_rows' => null
+        'split_rows' => null,
+        'generate_chunks_only' => null
     ];
 
     /**
@@ -84,7 +86,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
 		'detect_audio_language' => false,
 		'transcription_service' => true,
 		'include_speaker_labels' => false,
-		'split_rows' => false
+		'split_rows' => false,
+		'generate_chunks_only' => false
     ];
 
     /**
@@ -178,7 +181,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'detect_audio_language' => 'detect_audio_language',
         'transcription_service' => 'transcription_service',
         'include_speaker_labels' => 'include_speaker_labels',
-        'split_rows' => 'split_rows'
+        'split_rows' => 'split_rows',
+        'generate_chunks_only' => 'generate_chunks_only'
     ];
 
     /**
@@ -192,7 +196,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'detect_audio_language' => 'setDetectAudioLanguage',
         'transcription_service' => 'setTranscriptionService',
         'include_speaker_labels' => 'setIncludeSpeakerLabels',
-        'split_rows' => 'setSplitRows'
+        'split_rows' => 'setSplitRows',
+        'generate_chunks_only' => 'setGenerateChunksOnly'
     ];
 
     /**
@@ -206,7 +211,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'detect_audio_language' => 'getDetectAudioLanguage',
         'transcription_service' => 'getTranscriptionService',
         'include_speaker_labels' => 'getIncludeSpeakerLabels',
-        'split_rows' => 'getSplitRows'
+        'split_rows' => 'getSplitRows',
+        'generate_chunks_only' => 'getGenerateChunksOnly'
     ];
 
     /**
@@ -272,6 +278,7 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('transcription_service', $data ?? [], null);
         $this->setIfExists('include_speaker_labels', $data ?? [], false);
         $this->setIfExists('split_rows', $data ?? [], false);
+        $this->setIfExists('generate_chunks_only', $data ?? [], false);
     }
 
     /**
@@ -319,7 +326,7 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets auto_synced_source_types
      *
-     * @return \Carbon\Model\HelpdeskFileTypes[]|null
+     * @return \Carbon\Model\AutoSyncedSourceTypesPropertyInner[]|null
      */
     public function getAutoSyncedSourceTypes()
     {
@@ -329,7 +336,7 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets auto_synced_source_types
      *
-     * @param \Carbon\Model\HelpdeskFileTypes[]|null $auto_synced_source_types File types to automatically sync when the data source connects. Only a subset of file types can be          controlled. If not supported, then they will always be synced
+     * @param \Carbon\Model\AutoSyncedSourceTypesPropertyInner[]|null $auto_synced_source_types File types to automatically sync when the data source connects. Only a subset of file types can be          controlled. If not supported, then they will always be synced
      *
      * @return self
      */
@@ -493,6 +500,35 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['split_rows'] = $split_rows;
+
+        return $this;
+    }
+
+    /**
+     * Gets generate_chunks_only
+     *
+     * @return bool|null
+     */
+    public function getGenerateChunksOnly()
+    {
+        return $this->container['generate_chunks_only'];
+    }
+
+    /**
+     * Sets generate_chunks_only
+     *
+     * @param bool|null $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,           but no embeddings will be generated. This overrides the skip_embedding_generation flag.
+     *
+     * @return self
+     */
+    public function setGenerateChunksOnly($generate_chunks_only)
+    {
+
+        if (is_null($generate_chunks_only)) {
+            throw new \InvalidArgumentException('non-nullable generate_chunks_only cannot be null');
+        }
+
+        $this->container['generate_chunks_only'] = $generate_chunks_only;
 
         return $this;
     }

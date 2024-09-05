@@ -67,7 +67,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
         'include_file_level_metadata' => 'bool',
         'high_accuracy' => 'bool',
         'rerank' => '\Carbon\Model\RerankParamsNullable',
-        'file_types_at_source' => '\Carbon\Model\HelpdeskFileTypes[]',
+        'file_types_at_source' => '\Carbon\Model\AutoSyncedSourceTypesPropertyInner[]',
         'exclude_cold_storage_files' => 'bool'
     ];
 
@@ -1070,7 +1070,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets file_types_at_source
      *
-     * @return \Carbon\Model\HelpdeskFileTypes[]|null
+     * @return \Carbon\Model\AutoSyncedSourceTypesPropertyInner[]|null
      */
     public function getFileTypesAtSource()
     {
@@ -1080,7 +1080,7 @@ class GetEmbeddingDocumentsBody implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets file_types_at_source
      *
-     * @param \Carbon\Model\HelpdeskFileTypes[]|null $file_types_at_source Filter files based on their type at the source (for example help center tickets and articles)
+     * @param \Carbon\Model\AutoSyncedSourceTypesPropertyInner[]|null $file_types_at_source Filter files based on their type at the source (for example help center tickets and articles)
      *
      * @return self
      */

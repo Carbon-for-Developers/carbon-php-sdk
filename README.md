@@ -538,7 +538,7 @@ Flag to control whether or not to perform a high accuracy embedding search. By d
 
 ##### rerank: [`RerankParamsNullable`](./lib/Model/RerankParamsNullable.php)<a id="rerank-rerankparamsnullablelibmodelrerankparamsnullablephp"></a>
 
-##### file_types_at_source: []<a id="file_types_at_source-"></a>
+##### file_types_at_source: [`AutoSyncedSourceTypesPropertyInner`](./lib/Model/AutoSyncedSourceTypesPropertyInner.php)[]<a id="file_types_at_source-autosyncedsourcetypespropertyinnerlibmodelautosyncedsourcetypespropertyinnerphp"></a>
 
 Filter files based on their type at the source (for example help center tickets and articles)
 
@@ -1256,7 +1256,8 @@ $result = $carbon->files->upload(
     media_type: "TEXT", 
     split_rows: False, 
     enable_cold_storage: False, 
-    hot_storage_time_to_live: 1
+    hot_storage_time_to_live: 1, 
+    generate_chunks_only: False
 );
 ```
 
@@ -1332,6 +1333,10 @@ Enable cold storage for the file. If set to true, the file will be moved to cold
 
 Time in seconds after which the file will be moved to cold storage.
 
+##### generate_chunks_only: `bool`<a id="generate_chunks_only-bool"></a>
+
+If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1374,7 +1379,8 @@ $result = $carbon->files->uploadFromUrl(
     split_rows: False, 
     cold_storage_params: [
         "enable_cold_storage" => False,
-    ]
+    ], 
+    generate_chunks_only: False
 );
 ```
 
@@ -1418,6 +1424,10 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 ##### cold_storage_params: [`ColdStorageProps`](./lib/Model/ColdStorageProps.php)<a id="cold_storage_params-coldstoragepropslibmodelcoldstoragepropsphp"></a>
 
+##### generate_chunks_only: `bool`<a id="generate_chunks_only-bool"></a>
+
+If this flag is enabled, the file will be chunked and stored with Carbon,         but no embeddings will be generated. This overrides the skip_embedding_generation flag.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1460,7 +1470,8 @@ $result = $carbon->files->uploadText(
     generate_sparse_vectors: False, 
     cold_storage_params: [
         "enable_cold_storage" => False,
-    ]
+    ], 
+    generate_chunks_only: False
 );
 ```
 
@@ -1483,6 +1494,10 @@ $result = $carbon->files->uploadText(
 ##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
 
 ##### cold_storage_params: [`ColdStorageProps`](./lib/Model/ColdStorageProps.php)<a id="cold_storage_params-coldstoragepropslibmodelcoldstoragepropsphp"></a>
+
+##### generate_chunks_only: `bool`<a id="generate_chunks_only-bool"></a>
+
+If this flag is enabled, the file will be chunked and stored with Carbon,         but no embeddings will be generated. This overrides the skip_embedding_generation flag.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1610,6 +1625,7 @@ $result = $carbon->integrations->connectFreshdesk(
         "transcription_service" => "assemblyai",
         "include_speaker_labels" => False,
         "split_rows" => False,
+        "generate_chunks_only" => False,
     ]
 );
 ```
@@ -1756,6 +1772,7 @@ $result = $carbon->integrations->connectGuru(
         "transcription_service" => "assemblyai",
         "include_speaker_labels" => False,
         "split_rows" => False,
+        "generate_chunks_only" => False,
     ]
 );
 ```
@@ -1901,8 +1918,15 @@ $result = $carbon->integrations->getOauthUrl(
         "transcription_service" => "assemblyai",
         "include_speaker_labels" => False,
         "split_rows" => False,
+        "generate_chunks_only" => False,
     ], 
-    automatically_open_file_picker: True
+    automatically_open_file_picker: True, 
+    servicenow_credentials: [
+        "instance_subdomain" => "instance_subdomain_example",
+        "client_id" => "client_id_example",
+        "client_secret" => "client_secret_example",
+        "redirect_uri" => "redirect_uri_example",
+    ]
 );
 ```
 
@@ -1974,13 +1998,15 @@ Enabling this flag will fetch all available content from the source to be listed
 
 ##### incremental_sync: `bool`<a id="incremental_sync-bool"></a>
 
-Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX, INTERCOM, GMAIL, OUTLOOK, ZENDESK, CONFLUENCE, NOTION, SHAREPOINT. It will be ignored for other data sources.
+Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX, INTERCOM, GMAIL, OUTLOOK, ZENDESK, CONFLUENCE, NOTION, SHAREPOINT, SERVICENOW. It will be ignored for other data sources.
 
 ##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
 
 ##### automatically_open_file_picker: `bool`<a id="automatically_open_file_picker-bool"></a>
 
 Automatically open source file picker after the OAuth flow is complete. This flag is currently supported by         BOX, DROPBOX, GOOGLE_DRIVE, ONEDRIVE, SHAREPOINT. It will be ignored for other data sources.
+
+##### servicenow_credentials: [`ServiceNowCredentialsNullable`](./lib/Model/ServiceNowCredentialsNullable.php)<a id="servicenow_credentials-servicenowcredentialsnullablelibmodelservicenowcredentialsnullablephp"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2339,6 +2365,7 @@ $result = $carbon->integrations->syncConfluence(
         "transcription_service" => "assemblyai",
         "include_speaker_labels" => False,
         "split_rows" => False,
+        "generate_chunks_only" => False,
     ]
 );
 ```
@@ -2377,7 +2404,7 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 ##### incremental_sync: `bool`<a id="incremental_sync-bool"></a>
 
-Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX, INTERCOM, GMAIL, OUTLOOK, ZENDESK, CONFLUENCE, NOTION, SHAREPOINT. It will be ignored for other data sources.
+Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX, INTERCOM, GMAIL, OUTLOOK, ZENDESK, CONFLUENCE, NOTION, SHAREPOINT, SERVICENOW. It will be ignored for other data sources.
 
 ##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
 
@@ -2462,6 +2489,7 @@ $result = $carbon->integrations->syncFiles(
         "transcription_service" => "assemblyai",
         "include_speaker_labels" => False,
         "split_rows" => False,
+        "generate_chunks_only" => False,
     ]
 );
 ```
@@ -2500,7 +2528,7 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 ##### incremental_sync: `bool`<a id="incremental_sync-bool"></a>
 
-Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX, INTERCOM, GMAIL, OUTLOOK, ZENDESK, CONFLUENCE, NOTION, SHAREPOINT. It will be ignored for other data sources.
+Only sync files if they have not already been synced or if the embedding properties have changed.         This flag is currently supported by ONEDRIVE, GOOGLE_DRIVE, BOX, DROPBOX, INTERCOM, GMAIL, OUTLOOK, ZENDESK, CONFLUENCE, NOTION, SHAREPOINT, SERVICENOW. It will be ignored for other data sources.
 
 ##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
 
@@ -2700,6 +2728,7 @@ $result = $carbon->integrations->syncGmail(
         "transcription_service" => "assemblyai",
         "include_speaker_labels" => False,
         "split_rows" => False,
+        "generate_chunks_only" => False,
     ], 
     incremental_sync: False
 );
@@ -2835,6 +2864,7 @@ $result = $carbon->integrations->syncOutlook(
         "transcription_service" => "assemblyai",
         "include_speaker_labels" => False,
         "split_rows" => False,
+        "generate_chunks_only" => False,
     ], 
     incremental_sync: False
 );
@@ -3012,6 +3042,7 @@ $result = $carbon->integrations->syncS3Files(
         "transcription_service" => "assemblyai",
         "include_speaker_labels" => False,
         "split_rows" => False,
+        "generate_chunks_only" => False,
     ]
 );
 ```
@@ -3595,7 +3626,8 @@ $result = $carbon->utilities->scrapeSitemap(
     url_paths_to_include: [], 
     url_paths_to_exclude: [], 
     urls_to_scrape: [], 
-    download_css_and_media: False
+    download_css_and_media: False, 
+    generate_chunks_only: False
 );
 ```
 
@@ -3642,6 +3674,10 @@ You can submit a subset of URLs from the sitemap that should be scraped. To get 
 ##### download_css_and_media: `bool`<a id="download_css_and_media-bool"></a>
 
 Whether the scraper should download css and media from the page (images, fonts, etc). Scrapes          might take longer to finish with this flag enabled, but the success rate is improved.
+
+##### generate_chunks_only: `bool`<a id="generate_chunks_only-bool"></a>
+
+If this flag is enabled, the file will be chunked and stored with Carbon,           but no embeddings will be generated. This overrides the skip_embedding_generation flag.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -3690,6 +3726,7 @@ $result = $carbon->utilities->scrapeWeb(
             "embedding_model" => "OPENAI",
             "url_paths_to_include" => [],
             "download_css_and_media" => False,
+            "generate_chunks_only" => False,
         ]
     ],
 );
