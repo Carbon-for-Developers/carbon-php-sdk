@@ -1921,6 +1921,7 @@ $result = $carbon->integrations->getOauthUrl(
         "generate_chunks_only" => False,
     ], 
     automatically_open_file_picker: True, 
+    gong_account_email: "string_example", 
     servicenow_credentials: [
         "instance_subdomain" => "instance_subdomain_example",
         "client_id" => "client_id_example",
@@ -2005,6 +2006,10 @@ Only sync files if they have not already been synced or if the embedding propert
 ##### automatically_open_file_picker: `bool`<a id="automatically_open_file_picker-bool"></a>
 
 Automatically open source file picker after the OAuth flow is complete. This flag is currently supported by         BOX, DROPBOX, GOOGLE_DRIVE, ONEDRIVE, SHAREPOINT. It will be ignored for other data sources.
+
+##### gong_account_email: `string`<a id="gong_account_email-string"></a>
+
+If you are connecting a Gong account, you need to input the email of the account you         wish to connect. This email will be used to identify your carbon data source.
 
 ##### servicenow_credentials: [`ServiceNowCredentialsNullable`](./lib/Model/ServiceNowCredentialsNullable.php)<a id="servicenow_credentials-servicenowcredentialsnullablelibmodelservicenowcredentialsnullablephp"></a>
 

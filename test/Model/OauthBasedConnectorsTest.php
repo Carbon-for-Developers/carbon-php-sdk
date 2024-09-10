@@ -1,6 +1,6 @@
 <?php
 /**
- * ExternalDataSourceTypeTest
+ * OauthBasedConnectorsTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ExternalDataSourceTypeTest Class Doc Comment
+ * OauthBasedConnectorsTest Class Doc Comment
  *
  * @category    Class
- * @description ExternalDataSourceType
+ * @description OauthBasedConnectors
  * @package     Carbon
  */
-class ExternalDataSourceTypeTest extends TestCase
+class OauthBasedConnectorsTest extends TestCase
 {
 
     /**
@@ -63,9 +63,9 @@ class ExternalDataSourceTypeTest extends TestCase
     }
 
     /**
-     * Test "ExternalDataSourceType"
+     * Test "OauthBasedConnectors"
      */
-    public function testExternalDataSourceType()
+    public function testOauthBasedConnectors()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

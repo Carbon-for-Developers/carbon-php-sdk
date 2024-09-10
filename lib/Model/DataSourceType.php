@@ -106,6 +106,8 @@ class DataSourceType
 
     public const GURU = 'GURU';
 
+    public const GONG = 'GONG';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -195,6 +197,7 @@ class DataSourceType
             self::GITHUB,
             self::SLACK,
             self::GURU,
+            self::GONG,
             self::JPG,
             self::PNG,
             self::JPEG,

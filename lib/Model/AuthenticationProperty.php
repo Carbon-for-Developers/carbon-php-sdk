@@ -68,7 +68,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'instance_subdomain' => 'string',
         'client_id' => 'string',
         'client_secret' => 'string',
-        'redirect_uri' => 'string'
+        'redirect_uri' => 'string',
+        'gong_account_email' => 'string'
     ];
 
     /**
@@ -98,7 +99,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'instance_subdomain' => null,
         'client_id' => null,
         'client_secret' => null,
-        'redirect_uri' => null
+        'redirect_uri' => null,
+        'gong_account_email' => null
     ];
 
     /**
@@ -126,7 +128,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
 		'instance_subdomain' => false,
 		'client_id' => false,
 		'client_secret' => false,
-		'redirect_uri' => false
+		'redirect_uri' => false,
+		'gong_account_email' => false
     ];
 
     /**
@@ -234,7 +237,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'instance_subdomain' => 'instance_subdomain',
         'client_id' => 'client_id',
         'client_secret' => 'client_secret',
-        'redirect_uri' => 'redirect_uri'
+        'redirect_uri' => 'redirect_uri',
+        'gong_account_email' => 'gong_account_email'
     ];
 
     /**
@@ -262,7 +266,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'instance_subdomain' => 'setInstanceSubdomain',
         'client_id' => 'setClientId',
         'client_secret' => 'setClientSecret',
-        'redirect_uri' => 'setRedirectUri'
+        'redirect_uri' => 'setRedirectUri',
+        'gong_account_email' => 'setGongAccountEmail'
     ];
 
     /**
@@ -290,7 +295,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'instance_subdomain' => 'getInstanceSubdomain',
         'client_id' => 'getClientId',
         'client_secret' => 'getClientSecret',
-        'redirect_uri' => 'getRedirectUri'
+        'redirect_uri' => 'getRedirectUri',
+        'gong_account_email' => 'getGongAccountEmail'
     ];
 
     /**
@@ -370,6 +376,7 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('client_id', $data ?? [], null);
         $this->setIfExists('client_secret', $data ?? [], null);
         $this->setIfExists('redirect_uri', $data ?? [], null);
+        $this->setIfExists('gong_account_email', $data ?? [], null);
     }
 
     /**
@@ -452,6 +459,9 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         }
         if ($this->container['redirect_uri'] === null) {
             $invalidProperties[] = "'redirect_uri' can't be null";
+        }
+        if ($this->container['gong_account_email'] === null) {
+            $invalidProperties[] = "'gong_account_email' can't be null";
         }
         return $invalidProperties;
     }
@@ -1065,6 +1075,35 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['redirect_uri'] = $redirect_uri;
+
+        return $this;
+    }
+
+    /**
+     * Gets gong_account_email
+     *
+     * @return string
+     */
+    public function getGongAccountEmail()
+    {
+        return $this->container['gong_account_email'];
+    }
+
+    /**
+     * Sets gong_account_email
+     *
+     * @param string $gong_account_email gong_account_email
+     *
+     * @return self
+     */
+    public function setGongAccountEmail($gong_account_email)
+    {
+
+        if (is_null($gong_account_email)) {
+            throw new \InvalidArgumentException('non-nullable gong_account_email cannot be null');
+        }
+
+        $this->container['gong_account_email'] = $gong_account_email;
 
         return $this;
     }
