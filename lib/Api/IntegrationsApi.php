@@ -2648,6 +2648,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $incremental_sync = false,
         $file_sync_config = SENTINEL_VALUE,
         $automatically_open_file_picker = SENTINEL_VALUE,
+        $gong_account_email = SENTINEL_VALUE,
         $servicenow_credentials = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
@@ -2680,6 +2681,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "incremental_sync", $incremental_sync);
         $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
         $this->setRequestBodyProperty($_body, "automatically_open_file_picker", $automatically_open_file_picker);
+        $this->setRequestBodyProperty($_body, "gong_account_email", $gong_account_email);
         $this->setRequestBodyProperty($_body, "servicenow_credentials", $servicenow_credentials);
         $o_auth_url_request = $_body;
 
@@ -2869,6 +2871,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $incremental_sync = false,
         $file_sync_config = SENTINEL_VALUE,
         $automatically_open_file_picker = SENTINEL_VALUE,
+        $gong_account_email = SENTINEL_VALUE,
         $servicenow_credentials = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
@@ -2901,6 +2904,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "incremental_sync", $incremental_sync);
         $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
         $this->setRequestBodyProperty($_body, "automatically_open_file_picker", $automatically_open_file_picker);
+        $this->setRequestBodyProperty($_body, "gong_account_email", $gong_account_email);
         $this->setRequestBodyProperty($_body, "servicenow_credentials", $servicenow_credentials);
         $o_auth_url_request = $_body;
 

@@ -92,6 +92,8 @@ class FileFormatsNullable
 
     public const SERVICENOW = 'SERVICENOW';
 
+    public const GONG = 'GONG';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -172,6 +174,7 @@ class FileFormatsNullable
             self::SLACK,
             self::GURU,
             self::SERVICENOW,
+            self::GONG,
             self::JPG,
             self::PNG,
             self::MP3,

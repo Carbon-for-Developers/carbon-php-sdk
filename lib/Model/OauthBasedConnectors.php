@@ -1,6 +1,6 @@
 <?php
 /**
- * ExternalDataSourceType
+ * OauthBasedConnectors
  *
  * PHP version 7.4
  *
@@ -24,12 +24,12 @@ namespace Carbon\Model;
 use \Carbon\ObjectSerializer;
 
 /**
- * ExternalDataSourceType Class Doc Comment
+ * OauthBasedConnectors Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  */
-class ExternalDataSourceType
+class OauthBasedConnectors
 {
     /**
      * Possible values of this enum
@@ -64,6 +64,8 @@ class ExternalDataSourceType
 
     public const ZOTERO = 'ZOTERO';
 
+    public const GONG = 'GONG';
+
     public const SERVICENOW = 'SERVICENOW';
 
     /**
@@ -88,6 +90,7 @@ class ExternalDataSourceType
             self::SLACK,
             self::ZENDESK,
             self::ZOTERO,
+            self::GONG,
             self::SERVICENOW
         ];
     }

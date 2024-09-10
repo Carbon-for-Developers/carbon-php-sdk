@@ -315,6 +315,15 @@ class OAuthURLRequestTest extends TestCase
     }
 
     /**
+     * Test attribute "gong_account_email"
+     */
+    public function testPropertyGongAccountEmail()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "servicenow_credentials"
      */
     public function testPropertyServicenowCredentials()

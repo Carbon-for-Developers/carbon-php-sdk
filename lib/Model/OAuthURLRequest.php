@@ -51,7 +51,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'tags' => 'mixed',
         'scope' => 'string',
-        'service' => '\Carbon\Model\ExternalDataSourceType',
+        'service' => '\Carbon\Model\OauthBasedConnectors',
         'chunk_size' => 'int',
         'chunk_overlap' => 'int',
         'skip_embedding_generation' => 'bool',
@@ -76,6 +76,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'incremental_sync' => 'bool',
         'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable',
         'automatically_open_file_picker' => 'bool',
+        'gong_account_email' => 'string',
         'servicenow_credentials' => '\Carbon\Model\ServiceNowCredentialsNullable'
     ];
 
@@ -114,6 +115,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'incremental_sync' => null,
         'file_sync_config' => null,
         'automatically_open_file_picker' => null,
+        'gong_account_email' => null,
         'servicenow_credentials' => null
     ];
 
@@ -150,6 +152,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'incremental_sync' => false,
 		'file_sync_config' => true,
 		'automatically_open_file_picker' => true,
+		'gong_account_email' => true,
 		'servicenow_credentials' => true
     ];
 
@@ -266,6 +269,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'incremental_sync' => 'incremental_sync',
         'file_sync_config' => 'file_sync_config',
         'automatically_open_file_picker' => 'automatically_open_file_picker',
+        'gong_account_email' => 'gong_account_email',
         'servicenow_credentials' => 'servicenow_credentials'
     ];
 
@@ -302,6 +306,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'incremental_sync' => 'setIncrementalSync',
         'file_sync_config' => 'setFileSyncConfig',
         'automatically_open_file_picker' => 'setAutomaticallyOpenFilePicker',
+        'gong_account_email' => 'setGongAccountEmail',
         'servicenow_credentials' => 'setServicenowCredentials'
     ];
 
@@ -338,6 +343,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'incremental_sync' => 'getIncrementalSync',
         'file_sync_config' => 'getFileSyncConfig',
         'automatically_open_file_picker' => 'getAutomaticallyOpenFilePicker',
+        'gong_account_email' => 'getGongAccountEmail',
         'servicenow_credentials' => 'getServicenowCredentials'
     ];
 
@@ -425,6 +431,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('incremental_sync', $data ?? [], false);
         $this->setIfExists('file_sync_config', $data ?? [], null);
         $this->setIfExists('automatically_open_file_picker', $data ?? [], null);
+        $this->setIfExists('gong_account_email', $data ?? [], null);
         $this->setIfExists('servicenow_credentials', $data ?? [], null);
     }
 
@@ -548,7 +555,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets service
      *
-     * @return \Carbon\Model\ExternalDataSourceType
+     * @return \Carbon\Model\OauthBasedConnectors
      */
     public function getService()
     {
@@ -558,7 +565,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets service
      *
-     * @param \Carbon\Model\ExternalDataSourceType $service service
+     * @param \Carbon\Model\OauthBasedConnectors $service service
      *
      * @return self
      */
@@ -1406,6 +1413,42 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['automatically_open_file_picker'] = $automatically_open_file_picker;
+
+        return $this;
+    }
+
+    /**
+     * Gets gong_account_email
+     *
+     * @return string|null
+     */
+    public function getGongAccountEmail()
+    {
+        return $this->container['gong_account_email'];
+    }
+
+    /**
+     * Sets gong_account_email
+     *
+     * @param string|null $gong_account_email If you are connecting a Gong account, you need to input the email of the account you         wish to connect. This email will be used to identify your carbon data source.
+     *
+     * @return self
+     */
+    public function setGongAccountEmail($gong_account_email)
+    {
+
+        if (is_null($gong_account_email)) {
+            array_push($this->openAPINullablesSetToNull, 'gong_account_email');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('gong_account_email', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['gong_account_email'] = $gong_account_email;
 
         return $this;
     }
