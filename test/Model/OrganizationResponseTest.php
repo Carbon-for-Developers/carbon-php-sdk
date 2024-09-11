@@ -234,6 +234,15 @@ class OrganizationResponseTest extends TestCase
     }
 
     /**
+     * Test attribute "logging_settings"
+     */
+    public function testPropertyLoggingSettings()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

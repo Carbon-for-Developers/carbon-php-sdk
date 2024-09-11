@@ -67,6 +67,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'connector_settings' => 'object',
         'global_user_config' => 'object',
         'file_sync_usage' => 'object',
+        'logging_settings' => 'object',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -97,6 +98,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'connector_settings' => null,
         'global_user_config' => null,
         'file_sync_usage' => null,
+        'logging_settings' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -125,6 +127,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
 		'connector_settings' => false,
 		'global_user_config' => false,
 		'file_sync_usage' => false,
+		'logging_settings' => false,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -233,6 +236,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'connector_settings' => 'connector_settings',
         'global_user_config' => 'global_user_config',
         'file_sync_usage' => 'file_sync_usage',
+        'logging_settings' => 'logging_settings',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -261,6 +265,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'connector_settings' => 'setConnectorSettings',
         'global_user_config' => 'setGlobalUserConfig',
         'file_sync_usage' => 'setFileSyncUsage',
+        'logging_settings' => 'setLoggingSettings',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -289,6 +294,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         'connector_settings' => 'getConnectorSettings',
         'global_user_config' => 'getGlobalUserConfig',
         'file_sync_usage' => 'getFileSyncUsage',
+        'logging_settings' => 'getLoggingSettings',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -368,6 +374,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('connector_settings', $data ?? [], null);
         $this->setIfExists('global_user_config', $data ?? [], null);
         $this->setIfExists('file_sync_usage', $data ?? [], null);
+        $this->setIfExists('logging_settings', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -452,6 +459,9 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
         if ($this->container['file_sync_usage'] === null) {
             $invalidProperties[] = "'file_sync_usage' can't be null";
+        }
+        if ($this->container['logging_settings'] === null) {
+            $invalidProperties[] = "'logging_settings' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -1034,6 +1044,35 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['file_sync_usage'] = $file_sync_usage;
+
+        return $this;
+    }
+
+    /**
+     * Gets logging_settings
+     *
+     * @return object
+     */
+    public function getLoggingSettings()
+    {
+        return $this->container['logging_settings'];
+    }
+
+    /**
+     * Sets logging_settings
+     *
+     * @param object $logging_settings logging_settings
+     *
+     * @return self
+     */
+    public function setLoggingSettings($logging_settings)
+    {
+
+        if (is_null($logging_settings)) {
+            throw new \InvalidArgumentException('non-nullable logging_settings cannot be null');
+        }
+
+        $this->container['logging_settings'] = $logging_settings;
 
         return $this;
     }
