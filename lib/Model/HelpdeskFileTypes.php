@@ -38,6 +38,8 @@ class HelpdeskFileTypes
 
     public const ARTICLE = 'ARTICLE';
 
+    public const CONVERSATION = 'CONVERSATION';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -46,7 +48,8 @@ class HelpdeskFileTypes
     {
         return [
             self::TICKET,
-            self::ARTICLE
+            self::ARTICLE,
+            self::CONVERSATION
         ];
     }
 }
