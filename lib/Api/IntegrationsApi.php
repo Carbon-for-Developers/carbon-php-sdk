@@ -1401,6 +1401,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $sync_files_on_connection = true,
         $request_id = SENTINEL_VALUE,
         $sync_source_items = true,
+        $file_sync_config = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectGitbook'][0]
     )
     {
@@ -1417,6 +1418,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
+        $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
         $gitbook_connect_request = $_body;
 
         list($response) = $this->connectGitbookWithHttpInfo($gitbook_connect_request, $contentType);
@@ -1590,6 +1592,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $sync_files_on_connection = true,
         $request_id = SENTINEL_VALUE,
         $sync_source_items = true,
+        $file_sync_config = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectGitbook'][0]
     )
     {
@@ -1606,6 +1609,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
+        $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
         $gitbook_connect_request = $_body;
 
         return $this->connectGitbookAsyncWithHttpInfo($gitbook_connect_request, $contentType)
@@ -7790,6 +7794,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $request_id = SENTINEL_VALUE,
+        $file_sync_config = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncGitbook'][0]
     )
     {
@@ -7804,6 +7809,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
         $gitbook_sync_request = $_body;
 
         list($response) = $this->syncGitbookWithHttpInfo($gitbook_sync_request, $contentType);
@@ -7975,6 +7981,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $request_id = SENTINEL_VALUE,
+        $file_sync_config = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncGitbook'][0]
     )
     {
@@ -7989,6 +7996,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
         $gitbook_sync_request = $_body;
 
         return $this->syncGitbookAsyncWithHttpInfo($gitbook_sync_request, $contentType)

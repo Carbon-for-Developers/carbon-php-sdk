@@ -52,7 +52,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_id' => 'int',
         'chunk_size' => 'int',
         'chunk_overlap' => 'int',
-        'force_embedding_generation' => 'bool'
+        'force_embedding_generation' => 'bool',
+        'skip_file_processing' => 'bool'
     ];
 
     /**
@@ -66,7 +67,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_id' => null,
         'chunk_size' => null,
         'chunk_overlap' => null,
-        'force_embedding_generation' => null
+        'force_embedding_generation' => null,
+        'skip_file_processing' => null
     ];
 
     /**
@@ -78,7 +80,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_id' => false,
 		'chunk_size' => true,
 		'chunk_overlap' => true,
-		'force_embedding_generation' => false
+		'force_embedding_generation' => false,
+		'skip_file_processing' => true
     ];
 
     /**
@@ -170,7 +173,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_id' => 'file_id',
         'chunk_size' => 'chunk_size',
         'chunk_overlap' => 'chunk_overlap',
-        'force_embedding_generation' => 'force_embedding_generation'
+        'force_embedding_generation' => 'force_embedding_generation',
+        'skip_file_processing' => 'skip_file_processing'
     ];
 
     /**
@@ -182,7 +186,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_id' => 'setFileId',
         'chunk_size' => 'setChunkSize',
         'chunk_overlap' => 'setChunkOverlap',
-        'force_embedding_generation' => 'setForceEmbeddingGeneration'
+        'force_embedding_generation' => 'setForceEmbeddingGeneration',
+        'skip_file_processing' => 'setSkipFileProcessing'
     ];
 
     /**
@@ -194,7 +199,8 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'file_id' => 'getFileId',
         'chunk_size' => 'getChunkSize',
         'chunk_overlap' => 'getChunkOverlap',
-        'force_embedding_generation' => 'getForceEmbeddingGeneration'
+        'force_embedding_generation' => 'getForceEmbeddingGeneration',
+        'skip_file_processing' => 'getSkipFileProcessing'
     ];
 
     /**
@@ -258,6 +264,7 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('chunk_size', $data ?? [], null);
         $this->setIfExists('chunk_overlap', $data ?? [], null);
         $this->setIfExists('force_embedding_generation', $data ?? [], false);
+        $this->setIfExists('skip_file_processing', $data ?? [], false);
     }
 
     /**
@@ -431,6 +438,42 @@ class ResyncFileQueryInput implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['force_embedding_generation'] = $force_embedding_generation;
+
+        return $this;
+    }
+
+    /**
+     * Gets skip_file_processing
+     *
+     * @return bool|null
+     */
+    public function getSkipFileProcessing()
+    {
+        return $this->container['skip_file_processing'];
+    }
+
+    /**
+     * Sets skip_file_processing
+     *
+     * @param bool|null $skip_file_processing skip_file_processing
+     *
+     * @return self
+     */
+    public function setSkipFileProcessing($skip_file_processing)
+    {
+
+        if (is_null($skip_file_processing)) {
+            array_push($this->openAPINullablesSetToNull, 'skip_file_processing');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('skip_file_processing', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['skip_file_processing'] = $skip_file_processing;
 
         return $this;
     }

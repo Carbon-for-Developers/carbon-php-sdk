@@ -1178,7 +1178,8 @@ $result = $carbon->files->resync(
     file_id: 1, 
     chunk_size: 1, 
     chunk_overlap: 1, 
-    force_embedding_generation: False
+    force_embedding_generation: False, 
+    skip_file_processing: False
 );
 ```
 
@@ -1191,6 +1192,8 @@ $result = $carbon->files->resync(
 ##### chunk_overlap: `int`<a id="chunk_overlap-int"></a>
 
 ##### force_embedding_generation: `bool`<a id="force_embedding_generation-bool"></a>
+
+##### skip_file_processing: `bool`<a id="skip_file_processing-bool"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1626,6 +1629,7 @@ $result = $carbon->integrations->connectFreshdesk(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "skip_file_processing" => False,
     ]
 );
 ```
@@ -1697,7 +1701,17 @@ $result = $carbon->integrations->connectGitbook(
     prepend_filename_to_chunks: False, 
     sync_files_on_connection: True, 
     request_id: "string_example", 
-    sync_source_items: True
+    sync_source_items: True, 
+    file_sync_config: [
+        "auto_synced_source_types" => ["ARTICLE"],
+        "sync_attachments" => False,
+        "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
+        "split_rows" => False,
+        "generate_chunks_only" => False,
+        "skip_file_processing" => False,
+    ]
 );
 ```
 
@@ -1728,6 +1742,8 @@ $result = $carbon->integrations->connectGitbook(
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
 Enabling this flag will fetch all available content from the source to be listed via list items endpoint
+
+##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1773,6 +1789,7 @@ $result = $carbon->integrations->connectGuru(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "skip_file_processing" => False,
     ]
 );
 ```
@@ -1919,6 +1936,7 @@ $result = $carbon->integrations->getOauthUrl(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "skip_file_processing" => False,
     ], 
     automatically_open_file_picker: True, 
     gong_account_email: "string_example", 
@@ -2371,6 +2389,7 @@ $result = $carbon->integrations->syncConfluence(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "skip_file_processing" => False,
     ]
 );
 ```
@@ -2495,6 +2514,7 @@ $result = $carbon->integrations->syncFiles(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "skip_file_processing" => False,
     ]
 );
 ```
@@ -2613,7 +2633,17 @@ $result = $carbon->integrations->syncGitbook(
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    request_id: "string_example"
+    request_id: "string_example", 
+    file_sync_config: [
+        "auto_synced_source_types" => ["ARTICLE"],
+        "sync_attachments" => False,
+        "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
+        "split_rows" => False,
+        "generate_chunks_only" => False,
+        "skip_file_processing" => False,
+    ]
 );
 ```
 
@@ -2638,6 +2668,8 @@ $result = $carbon->integrations->syncGitbook(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### request_id: `string`<a id="request_id-string"></a>
+
+##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2734,6 +2766,7 @@ $result = $carbon->integrations->syncGmail(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "skip_file_processing" => False,
     ], 
     incremental_sync: False
 );
@@ -2870,6 +2903,7 @@ $result = $carbon->integrations->syncOutlook(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "skip_file_processing" => False,
     ], 
     incremental_sync: False
 );
@@ -3048,6 +3082,7 @@ $result = $carbon->integrations->syncS3Files(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "skip_file_processing" => False,
     ]
 );
 ```

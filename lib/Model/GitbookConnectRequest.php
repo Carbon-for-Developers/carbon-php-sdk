@@ -60,7 +60,8 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'prepend_filename_to_chunks' => 'bool',
         'sync_files_on_connection' => 'bool',
         'request_id' => 'string',
-        'sync_source_items' => 'bool'
+        'sync_source_items' => 'bool',
+        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable'
     ];
 
     /**
@@ -82,7 +83,8 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'prepend_filename_to_chunks' => null,
         'sync_files_on_connection' => null,
         'request_id' => null,
-        'sync_source_items' => null
+        'sync_source_items' => null,
+        'file_sync_config' => null
     ];
 
     /**
@@ -102,7 +104,8 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
 		'prepend_filename_to_chunks' => true,
 		'sync_files_on_connection' => true,
 		'request_id' => true,
-		'sync_source_items' => false
+		'sync_source_items' => false,
+		'file_sync_config' => true
     ];
 
     /**
@@ -202,7 +205,8 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
         'sync_files_on_connection' => 'sync_files_on_connection',
         'request_id' => 'request_id',
-        'sync_source_items' => 'sync_source_items'
+        'sync_source_items' => 'sync_source_items',
+        'file_sync_config' => 'file_sync_config'
     ];
 
     /**
@@ -222,7 +226,8 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
         'sync_files_on_connection' => 'setSyncFilesOnConnection',
         'request_id' => 'setRequestId',
-        'sync_source_items' => 'setSyncSourceItems'
+        'sync_source_items' => 'setSyncSourceItems',
+        'file_sync_config' => 'setFileSyncConfig'
     ];
 
     /**
@@ -242,7 +247,8 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
         'sync_files_on_connection' => 'getSyncFilesOnConnection',
         'request_id' => 'getRequestId',
-        'sync_source_items' => 'getSyncSourceItems'
+        'sync_source_items' => 'getSyncSourceItems',
+        'file_sync_config' => 'getFileSyncConfig'
     ];
 
     /**
@@ -314,6 +320,7 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('sync_files_on_connection', $data ?? [], true);
         $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('sync_source_items', $data ?? [], true);
+        $this->setIfExists('file_sync_config', $data ?? [], null);
     }
 
     /**
@@ -764,6 +771,42 @@ class GitbookConnectRequest implements ModelInterface, ArrayAccess, \JsonSeriali
         }
 
         $this->container['sync_source_items'] = $sync_source_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_sync_config
+     *
+     * @return \Carbon\Model\FileSyncConfigNullable|null
+     */
+    public function getFileSyncConfig()
+    {
+        return $this->container['file_sync_config'];
+    }
+
+    /**
+     * Sets file_sync_config
+     *
+     * @param \Carbon\Model\FileSyncConfigNullable|null $file_sync_config file_sync_config
+     *
+     * @return self
+     */
+    public function setFileSyncConfig($file_sync_config)
+    {
+
+        if (is_null($file_sync_config)) {
+            array_push($this->openAPINullablesSetToNull, 'file_sync_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_sync_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_sync_config'] = $file_sync_config;
 
         return $this;
     }
