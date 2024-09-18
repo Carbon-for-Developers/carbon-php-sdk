@@ -52,6 +52,8 @@ class ExternalFileSyncStatuses
 
     public const QUEUED_FOR_OCR = 'QUEUED_FOR_OCR';
 
+    public const READY_TO_SYNC = 'READY_TO_SYNC';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -67,7 +69,8 @@ class ExternalFileSyncStatuses
             self::EVALUATING_RESYNC,
             self::RATE_LIMITED,
             self::SYNC_ABORTED,
-            self::QUEUED_FOR_OCR
+            self::QUEUED_FOR_OCR,
+            self::READY_TO_SYNC
         ];
     }
 }

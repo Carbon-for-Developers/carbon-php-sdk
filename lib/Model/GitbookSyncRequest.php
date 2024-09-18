@@ -58,7 +58,8 @@ class GitbookSyncRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
-        'request_id' => 'string'
+        'request_id' => 'string',
+        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable'
     ];
 
     /**
@@ -78,7 +79,8 @@ class GitbookSyncRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'embedding_model' => null,
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
-        'request_id' => null
+        'request_id' => null,
+        'file_sync_config' => null
     ];
 
     /**
@@ -96,7 +98,8 @@ class GitbookSyncRequest implements ModelInterface, ArrayAccess, \JsonSerializab
 		'embedding_model' => false,
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
-		'request_id' => true
+		'request_id' => true,
+		'file_sync_config' => true
     ];
 
     /**
@@ -194,7 +197,8 @@ class GitbookSyncRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
-        'request_id' => 'request_id'
+        'request_id' => 'request_id',
+        'file_sync_config' => 'file_sync_config'
     ];
 
     /**
@@ -212,7 +216,8 @@ class GitbookSyncRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
-        'request_id' => 'setRequestId'
+        'request_id' => 'setRequestId',
+        'file_sync_config' => 'setFileSyncConfig'
     ];
 
     /**
@@ -230,7 +235,8 @@ class GitbookSyncRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
-        'request_id' => 'getRequestId'
+        'request_id' => 'getRequestId',
+        'file_sync_config' => 'getFileSyncConfig'
     ];
 
     /**
@@ -300,6 +306,7 @@ class GitbookSyncRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('request_id', $data ?? [], null);
+        $this->setIfExists('file_sync_config', $data ?? [], null);
     }
 
     /**
@@ -693,6 +700,42 @@ class GitbookSyncRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['request_id'] = $request_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_sync_config
+     *
+     * @return \Carbon\Model\FileSyncConfigNullable|null
+     */
+    public function getFileSyncConfig()
+    {
+        return $this->container['file_sync_config'];
+    }
+
+    /**
+     * Sets file_sync_config
+     *
+     * @param \Carbon\Model\FileSyncConfigNullable|null $file_sync_config file_sync_config
+     *
+     * @return self
+     */
+    public function setFileSyncConfig($file_sync_config)
+    {
+
+        if (is_null($file_sync_config)) {
+            array_push($this->openAPINullablesSetToNull, 'file_sync_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_sync_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_sync_config'] = $file_sync_config;
 
         return $this;
     }

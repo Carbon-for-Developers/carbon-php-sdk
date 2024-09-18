@@ -133,4 +133,13 @@ class FileSyncConfigNullableTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "skip_file_processing"
+     */
+    public function testPropertySkipFileProcessing()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

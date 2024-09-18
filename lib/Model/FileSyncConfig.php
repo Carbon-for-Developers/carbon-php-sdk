@@ -55,7 +55,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'transcription_service' => '\Carbon\Model\TranscriptionServiceNullable',
         'include_speaker_labels' => 'bool',
         'split_rows' => 'bool',
-        'generate_chunks_only' => 'bool'
+        'generate_chunks_only' => 'bool',
+        'skip_file_processing' => 'bool'
     ];
 
     /**
@@ -72,7 +73,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'transcription_service' => null,
         'include_speaker_labels' => null,
         'split_rows' => null,
-        'generate_chunks_only' => null
+        'generate_chunks_only' => null,
+        'skip_file_processing' => null
     ];
 
     /**
@@ -87,7 +89,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
 		'transcription_service' => true,
 		'include_speaker_labels' => false,
 		'split_rows' => false,
-		'generate_chunks_only' => false
+		'generate_chunks_only' => false,
+		'skip_file_processing' => false
     ];
 
     /**
@@ -182,7 +185,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'transcription_service' => 'transcription_service',
         'include_speaker_labels' => 'include_speaker_labels',
         'split_rows' => 'split_rows',
-        'generate_chunks_only' => 'generate_chunks_only'
+        'generate_chunks_only' => 'generate_chunks_only',
+        'skip_file_processing' => 'skip_file_processing'
     ];
 
     /**
@@ -197,7 +201,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'transcription_service' => 'setTranscriptionService',
         'include_speaker_labels' => 'setIncludeSpeakerLabels',
         'split_rows' => 'setSplitRows',
-        'generate_chunks_only' => 'setGenerateChunksOnly'
+        'generate_chunks_only' => 'setGenerateChunksOnly',
+        'skip_file_processing' => 'setSkipFileProcessing'
     ];
 
     /**
@@ -212,7 +217,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'transcription_service' => 'getTranscriptionService',
         'include_speaker_labels' => 'getIncludeSpeakerLabels',
         'split_rows' => 'getSplitRows',
-        'generate_chunks_only' => 'getGenerateChunksOnly'
+        'generate_chunks_only' => 'getGenerateChunksOnly',
+        'skip_file_processing' => 'getSkipFileProcessing'
     ];
 
     /**
@@ -279,6 +285,7 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('include_speaker_labels', $data ?? [], false);
         $this->setIfExists('split_rows', $data ?? [], false);
         $this->setIfExists('generate_chunks_only', $data ?? [], false);
+        $this->setIfExists('skip_file_processing', $data ?? [], false);
     }
 
     /**
@@ -529,6 +536,35 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['generate_chunks_only'] = $generate_chunks_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets skip_file_processing
+     *
+     * @return bool|null
+     */
+    public function getSkipFileProcessing()
+    {
+        return $this->container['skip_file_processing'];
+    }
+
+    /**
+     * Sets skip_file_processing
+     *
+     * @param bool|null $skip_file_processing Setting this flag will create a new file record with Carbon but skip any and all processing.          This means that we do not download the remote file content or generate any chunks or embeddings. We will store         some metadata like name, external id, and external URL depending on the source you are syncing from. Note that this          flag overrides both skip_embedding_generation and generate_chunks_only flags. The file will be moved to          READY_TO_SYNC status.
+     *
+     * @return self
+     */
+    public function setSkipFileProcessing($skip_file_processing)
+    {
+
+        if (is_null($skip_file_processing)) {
+            throw new \InvalidArgumentException('non-nullable skip_file_processing cannot be null');
+        }
+
+        $this->container['skip_file_processing'] = $skip_file_processing;
 
         return $this;
     }
