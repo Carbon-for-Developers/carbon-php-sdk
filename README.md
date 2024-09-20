@@ -58,6 +58,8 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.integrations.listLabels`](#carbonintegrationslistlabels)
   * [`carbon.integrations.listOutlookCategories`](#carbonintegrationslistoutlookcategories)
   * [`carbon.integrations.listRepos`](#carbonintegrationslistrepos)
+  * [`carbon.integrations.syncAzureBlobFiles`](#carbonintegrationssyncazureblobfiles)
+  * [`carbon.integrations.syncAzureBlobStorage`](#carbonintegrationssyncazureblobstorage)
   * [`carbon.integrations.syncConfluence`](#carbonintegrationssyncconfluence)
   * [`carbon.integrations.syncDataSourceItems`](#carbonintegrationssyncdatasourceitems)
   * [`carbon.integrations.syncFiles`](#carbonintegrationssyncfiles)
@@ -2343,6 +2345,149 @@ $result = $carbon->integrations->listRepos(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/integrations/github/repos` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.integrations.syncAzureBlobFiles`<a id="carbonintegrationssyncazureblobfiles"></a>
+
+After optionally loading the items via /integrations/items/sync and integrations/items/list, use the container name 
+and file name as the ID in this endpoint to sync them into Carbon. Additional parameters below can associate 
+data with the selected items or modify the sync behavior
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->syncAzureBlobFiles(
+    ids: [
+        [
+        ]
+    ], 
+    tags: [], 
+    chunk_size: 1500, 
+    chunk_overlap: 20, 
+    skip_embedding_generation: False, 
+    embedding_model: "OPENAI", 
+    generate_sparse_vectors: False, 
+    prepend_filename_to_chunks: False, 
+    max_items_per_chunk: 1, 
+    set_page_as_boundary: False, 
+    data_source_id: 1, 
+    request_id: "string_example", 
+    use_ocr: False, 
+    parse_pdf_tables_with_ocr: False, 
+    file_sync_config: [
+        "auto_synced_source_types" => ["ARTICLE"],
+        "sync_attachments" => False,
+        "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
+        "split_rows" => False,
+        "generate_chunks_only" => False,
+        "skip_file_processing" => False,
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### ids: [`AzureBlobGetFileInput`](./lib/Model/AzureBlobGetFileInput.php)[]<a id="ids-azureblobgetfileinputlibmodelazureblobgetfileinputphp"></a>
+
+##### tags: `object`<a id="tags-object"></a>
+
+##### chunk_size: `int`<a id="chunk_size-int"></a>
+
+##### chunk_overlap: `int`<a id="chunk_overlap-int"></a>
+
+##### skip_embedding_generation: `bool`<a id="skip_embedding_generation-bool"></a>
+
+##### embedding_model:<a id="embedding_model"></a>
+
+##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
+
+##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+##### max_items_per_chunk: `int`<a id="max_items_per_chunk-int"></a>
+
+Number of objects per chunk. For csv, tsv, xlsx, and json files only.
+
+##### set_page_as_boundary: `bool`<a id="set_page_as_boundary-bool"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
+
+##### use_ocr: `bool`<a id="use_ocr-bool"></a>
+
+##### parse_pdf_tables_with_ocr: `bool`<a id="parse_pdf_tables_with_ocr-bool"></a>
+
+##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**GenericSuccessResponse**](./lib/Model/GenericSuccessResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/azure_blob_storage/files` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.integrations.syncAzureBlobStorage`<a id="carbonintegrationssyncazureblobstorage"></a>
+
+This endpoint can be used to connect Azure Blob Storage.
+
+For Azure Blob Storage, follow these steps:
+<ol>
+  <li>Create a new Azure Storage account and grant the following permissions:
+    <ul>
+      <li>List containers.</li>
+      <li>Read from specific containers and blobs to sync with Carbon. Ensure any future containers or blobs carry the same permissions.</li>
+    </ul>
+  </li>
+  <li>Generate a shared access signature (SAS) token or an access key for the storage account.</li>
+</ol>
+
+Once created, provide us with the following details to generate the connection URL:
+<ol>
+  <li>Storage Account KeyName.</li>
+  <li>Storage Account Name.</li>
+</ol>
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->syncAzureBlobStorage(
+    account_name: "string_example", 
+    account_key: "string_example", 
+    sync_source_items: True
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_name: `string`<a id="account_name-string"></a>
+
+##### account_key: `string`<a id="account_key-string"></a>
+
+##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**OrganizationUserDataSourceAPI**](./lib/Model/OrganizationUserDataSourceAPI.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/azure_blob_storage` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

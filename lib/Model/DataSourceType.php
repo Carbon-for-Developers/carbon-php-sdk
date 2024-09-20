@@ -60,6 +60,8 @@ class DataSourceType
 
     public const S3 = 'S3';
 
+    public const AZURE_BLOB_STORAGE = 'AZURE_BLOB_STORAGE';
+
     public const GMAIL = 'GMAIL';
 
     public const OUTLOOK = 'OUTLOOK';
@@ -174,6 +176,7 @@ class DataSourceType
             self::ZENDESK,
             self::ZOTERO,
             self::S3,
+            self::AZURE_BLOB_STORAGE,
             self::GMAIL,
             self::OUTLOOK,
             self::SERVICENOW,

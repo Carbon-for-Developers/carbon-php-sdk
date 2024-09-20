@@ -216,6 +216,24 @@ class AuthenticationPropertyTest extends TestCase
     }
 
     /**
+     * Test attribute "account_name"
+     */
+    public function testPropertyAccountName()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "account_key"
+     */
+    public function testPropertyAccountKey()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "instance_subdomain"
      */
     public function testPropertyInstanceSubdomain()
