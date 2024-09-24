@@ -1,6 +1,6 @@
 <?php
 /**
- * SharepointAuthentication
+ * AzureBlobAuthRequest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * SharepointAuthentication Class Doc Comment
+ * AzureBlobAuthRequest Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSerializable
+class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SharepointAuthentication';
+    protected static $openAPIModelName = 'AzureBlobAuthRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,11 +49,9 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'source' => 'mixed',
-        'access_token' => 'string',
-        'refresh_token' => 'string',
-        'tenant_name' => 'string',
-        'site_name' => 'string'
+        'account_name' => 'string',
+        'account_key' => 'string',
+        'sync_source_items' => 'bool'
     ];
 
     /**
@@ -64,11 +62,9 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'source' => null,
-        'access_token' => null,
-        'refresh_token' => null,
-        'tenant_name' => null,
-        'site_name' => null
+        'account_name' => null,
+        'account_key' => null,
+        'sync_source_items' => null
     ];
 
     /**
@@ -77,11 +73,9 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'source' => true,
-		'access_token' => false,
-		'refresh_token' => true,
-		'tenant_name' => true,
-		'site_name' => false
+        'account_name' => false,
+		'account_key' => false,
+		'sync_source_items' => false
     ];
 
     /**
@@ -170,11 +164,9 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
-        'source' => 'source',
-        'access_token' => 'access_token',
-        'refresh_token' => 'refresh_token',
-        'tenant_name' => 'tenant_name',
-        'site_name' => 'site_name'
+        'account_name' => 'account_name',
+        'account_key' => 'account_key',
+        'sync_source_items' => 'sync_source_items'
     ];
 
     /**
@@ -183,11 +175,9 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
-        'source' => 'setSource',
-        'access_token' => 'setAccessToken',
-        'refresh_token' => 'setRefreshToken',
-        'tenant_name' => 'setTenantName',
-        'site_name' => 'setSiteName'
+        'account_name' => 'setAccountName',
+        'account_key' => 'setAccountKey',
+        'sync_source_items' => 'setSyncSourceItems'
     ];
 
     /**
@@ -196,11 +186,9 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
-        'source' => 'getSource',
-        'access_token' => 'getAccessToken',
-        'refresh_token' => 'getRefreshToken',
-        'tenant_name' => 'getTenantName',
-        'site_name' => 'getSiteName'
+        'account_name' => 'getAccountName',
+        'account_key' => 'getAccountKey',
+        'sync_source_items' => 'getSyncSourceItems'
     ];
 
     /**
@@ -260,11 +248,9 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('source', $data ?? [], null);
-        $this->setIfExists('access_token', $data ?? [], null);
-        $this->setIfExists('refresh_token', $data ?? [], null);
-        $this->setIfExists('tenant_name', $data ?? [], null);
-        $this->setIfExists('site_name', $data ?? [], null);
+        $this->setIfExists('account_name', $data ?? [], null);
+        $this->setIfExists('account_key', $data ?? [], null);
+        $this->setIfExists('sync_source_items', $data ?? [], true);
     }
 
     /**
@@ -294,14 +280,11 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
     {
         $invalidProperties = [];
 
-        if ($this->container['source'] === null) {
-            $invalidProperties[] = "'source' can't be null";
+        if ($this->container['account_name'] === null) {
+            $invalidProperties[] = "'account_name' can't be null";
         }
-        if ($this->container['access_token'] === null) {
-            $invalidProperties[] = "'access_token' can't be null";
-        }
-        if ($this->container['site_name'] === null) {
-            $invalidProperties[] = "'site_name' can't be null";
+        if ($this->container['account_key'] === null) {
+            $invalidProperties[] = "'account_key' can't be null";
         }
         return $invalidProperties;
     }
@@ -319,167 +302,88 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
 
 
     /**
-     * Gets source
-     *
-     * @return mixed
-     */
-    public function getSource()
-    {
-        return $this->container['source'];
-    }
-
-    /**
-     * Sets source
-     *
-     * @param mixed $source source
-     *
-     * @return self
-     */
-    public function setSource($source)
-    {
-
-        if (is_null($source)) {
-            array_push($this->openAPINullablesSetToNull, 'source');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('source', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['source'] = $source;
-
-        return $this;
-    }
-
-    /**
-     * Gets access_token
+     * Gets account_name
      *
      * @return string
      */
-    public function getAccessToken()
+    public function getAccountName()
     {
-        return $this->container['access_token'];
+        return $this->container['account_name'];
     }
 
     /**
-     * Sets access_token
+     * Sets account_name
      *
-     * @param string $access_token access_token
+     * @param string $account_name account_name
      *
      * @return self
      */
-    public function setAccessToken($access_token)
+    public function setAccountName($account_name)
     {
 
-        if (is_null($access_token)) {
-            throw new \InvalidArgumentException('non-nullable access_token cannot be null');
+        if (is_null($account_name)) {
+            throw new \InvalidArgumentException('non-nullable account_name cannot be null');
         }
 
-        $this->container['access_token'] = $access_token;
+        $this->container['account_name'] = $account_name;
 
         return $this;
     }
 
     /**
-     * Gets refresh_token
-     *
-     * @return string|null
-     */
-    public function getRefreshToken()
-    {
-        return $this->container['refresh_token'];
-    }
-
-    /**
-     * Sets refresh_token
-     *
-     * @param string|null $refresh_token refresh_token
-     *
-     * @return self
-     */
-    public function setRefreshToken($refresh_token)
-    {
-
-        if (is_null($refresh_token)) {
-            array_push($this->openAPINullablesSetToNull, 'refresh_token');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('refresh_token', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['refresh_token'] = $refresh_token;
-
-        return $this;
-    }
-
-    /**
-     * Gets tenant_name
-     *
-     * @return string|null
-     */
-    public function getTenantName()
-    {
-        return $this->container['tenant_name'];
-    }
-
-    /**
-     * Sets tenant_name
-     *
-     * @param string|null $tenant_name tenant_name
-     *
-     * @return self
-     */
-    public function setTenantName($tenant_name)
-    {
-
-        if (is_null($tenant_name)) {
-            array_push($this->openAPINullablesSetToNull, 'tenant_name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('tenant_name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['tenant_name'] = $tenant_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets site_name
+     * Gets account_key
      *
      * @return string
      */
-    public function getSiteName()
+    public function getAccountKey()
     {
-        return $this->container['site_name'];
+        return $this->container['account_key'];
     }
 
     /**
-     * Sets site_name
+     * Sets account_key
      *
-     * @param string $site_name site_name
+     * @param string $account_key account_key
      *
      * @return self
      */
-    public function setSiteName($site_name)
+    public function setAccountKey($account_key)
     {
 
-        if (is_null($site_name)) {
-            throw new \InvalidArgumentException('non-nullable site_name cannot be null');
+        if (is_null($account_key)) {
+            throw new \InvalidArgumentException('non-nullable account_key cannot be null');
         }
 
-        $this->container['site_name'] = $site_name;
+        $this->container['account_key'] = $account_key;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_source_items
+     *
+     * @return bool|null
+     */
+    public function getSyncSourceItems()
+    {
+        return $this->container['sync_source_items'];
+    }
+
+    /**
+     * Sets sync_source_items
+     *
+     * @param bool|null $sync_source_items sync_source_items
+     *
+     * @return self
+     */
+    public function setSyncSourceItems($sync_source_items)
+    {
+
+        if (is_null($sync_source_items)) {
+            throw new \InvalidArgumentException('non-nullable sync_source_items cannot be null');
+        }
+
+        $this->container['sync_source_items'] = $sync_source_items;
 
         return $this;
     }
