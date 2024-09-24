@@ -1,6 +1,6 @@
 <?php
 /**
- * SharepointAuthentication
+ * AzureBlobGetFileInput
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * SharepointAuthentication Class Doc Comment
+ * AzureBlobGetFileInput Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSerializable
+class AzureBlobGetFileInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SharepointAuthentication';
+    protected static $openAPIModelName = 'AzureBlobGetFileInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,11 +49,8 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'source' => 'mixed',
-        'access_token' => 'string',
-        'refresh_token' => 'string',
-        'tenant_name' => 'string',
-        'site_name' => 'string'
+        'id' => 'string',
+        'container' => 'string'
     ];
 
     /**
@@ -64,11 +61,8 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'source' => null,
-        'access_token' => null,
-        'refresh_token' => null,
-        'tenant_name' => null,
-        'site_name' => null
+        'id' => null,
+        'container' => null
     ];
 
     /**
@@ -77,11 +71,8 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'source' => true,
-		'access_token' => false,
-		'refresh_token' => true,
-		'tenant_name' => true,
-		'site_name' => false
+        'id' => true,
+		'container' => true
     ];
 
     /**
@@ -170,11 +161,8 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
-        'source' => 'source',
-        'access_token' => 'access_token',
-        'refresh_token' => 'refresh_token',
-        'tenant_name' => 'tenant_name',
-        'site_name' => 'site_name'
+        'id' => 'id',
+        'container' => 'container'
     ];
 
     /**
@@ -183,11 +171,8 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
-        'source' => 'setSource',
-        'access_token' => 'setAccessToken',
-        'refresh_token' => 'setRefreshToken',
-        'tenant_name' => 'setTenantName',
-        'site_name' => 'setSiteName'
+        'id' => 'setId',
+        'container' => 'setContainer'
     ];
 
     /**
@@ -196,11 +181,8 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
-        'source' => 'getSource',
-        'access_token' => 'getAccessToken',
-        'refresh_token' => 'getRefreshToken',
-        'tenant_name' => 'getTenantName',
-        'site_name' => 'getSiteName'
+        'id' => 'getId',
+        'container' => 'getContainer'
     ];
 
     /**
@@ -260,11 +242,8 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('source', $data ?? [], null);
-        $this->setIfExists('access_token', $data ?? [], null);
-        $this->setIfExists('refresh_token', $data ?? [], null);
-        $this->setIfExists('tenant_name', $data ?? [], null);
-        $this->setIfExists('site_name', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('container', $data ?? [], null);
     }
 
     /**
@@ -294,15 +273,6 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
     {
         $invalidProperties = [];
 
-        if ($this->container['source'] === null) {
-            $invalidProperties[] = "'source' can't be null";
-        }
-        if ($this->container['access_token'] === null) {
-            $invalidProperties[] = "'access_token' can't be null";
-        }
-        if ($this->container['site_name'] === null) {
-            $invalidProperties[] = "'site_name' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -319,167 +289,73 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
 
 
     /**
-     * Gets source
-     *
-     * @return mixed
-     */
-    public function getSource()
-    {
-        return $this->container['source'];
-    }
-
-    /**
-     * Sets source
-     *
-     * @param mixed $source source
-     *
-     * @return self
-     */
-    public function setSource($source)
-    {
-
-        if (is_null($source)) {
-            array_push($this->openAPINullablesSetToNull, 'source');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('source', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['source'] = $source;
-
-        return $this;
-    }
-
-    /**
-     * Gets access_token
-     *
-     * @return string
-     */
-    public function getAccessToken()
-    {
-        return $this->container['access_token'];
-    }
-
-    /**
-     * Sets access_token
-     *
-     * @param string $access_token access_token
-     *
-     * @return self
-     */
-    public function setAccessToken($access_token)
-    {
-
-        if (is_null($access_token)) {
-            throw new \InvalidArgumentException('non-nullable access_token cannot be null');
-        }
-
-        $this->container['access_token'] = $access_token;
-
-        return $this;
-    }
-
-    /**
-     * Gets refresh_token
+     * Gets id
      *
      * @return string|null
      */
-    public function getRefreshToken()
+    public function getId()
     {
-        return $this->container['refresh_token'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets refresh_token
+     * Sets id
      *
-     * @param string|null $refresh_token refresh_token
+     * @param string|null $id id
      *
      * @return self
      */
-    public function setRefreshToken($refresh_token)
+    public function setId($id)
     {
 
-        if (is_null($refresh_token)) {
-            array_push($this->openAPINullablesSetToNull, 'refresh_token');
+        if (is_null($id)) {
+            array_push($this->openAPINullablesSetToNull, 'id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('refresh_token', $nullablesSetToNull);
+            $index = array_search('id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['refresh_token'] = $refresh_token;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets tenant_name
+     * Gets container
      *
      * @return string|null
      */
-    public function getTenantName()
+    public function getContainer()
     {
-        return $this->container['tenant_name'];
+        return $this->container['container'];
     }
 
     /**
-     * Sets tenant_name
+     * Sets container
      *
-     * @param string|null $tenant_name tenant_name
+     * @param string|null $container container
      *
      * @return self
      */
-    public function setTenantName($tenant_name)
+    public function setContainer($container)
     {
 
-        if (is_null($tenant_name)) {
-            array_push($this->openAPINullablesSetToNull, 'tenant_name');
+        if (is_null($container)) {
+            array_push($this->openAPINullablesSetToNull, 'container');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('tenant_name', $nullablesSetToNull);
+            $index = array_search('container', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['tenant_name'] = $tenant_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets site_name
-     *
-     * @return string
-     */
-    public function getSiteName()
-    {
-        return $this->container['site_name'];
-    }
-
-    /**
-     * Sets site_name
-     *
-     * @param string $site_name site_name
-     *
-     * @return self
-     */
-    public function setSiteName($site_name)
-    {
-
-        if (is_null($site_name)) {
-            throw new \InvalidArgumentException('non-nullable site_name cannot be null');
-        }
-
-        $this->container['site_name'] = $site_name;
+        $this->container['container'] = $container;
 
         return $this;
     }

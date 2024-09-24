@@ -1,6 +1,6 @@
 <?php
 /**
- * SharepointAuthentication
+ * OneDriveAuthentication
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * SharepointAuthentication Class Doc Comment
+ * OneDriveAuthentication Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSerializable
+class OneDriveAuthentication implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SharepointAuthentication';
+    protected static $openAPIModelName = 'OneDriveAuthentication';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -52,8 +52,7 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
         'source' => 'mixed',
         'access_token' => 'string',
         'refresh_token' => 'string',
-        'tenant_name' => 'string',
-        'site_name' => 'string'
+        'tenant_name' => 'string'
     ];
 
     /**
@@ -67,8 +66,7 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
         'source' => null,
         'access_token' => null,
         'refresh_token' => null,
-        'tenant_name' => null,
-        'site_name' => null
+        'tenant_name' => null
     ];
 
     /**
@@ -80,8 +78,7 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
         'source' => true,
 		'access_token' => false,
 		'refresh_token' => true,
-		'tenant_name' => true,
-		'site_name' => false
+		'tenant_name' => true
     ];
 
     /**
@@ -173,8 +170,7 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
         'source' => 'source',
         'access_token' => 'access_token',
         'refresh_token' => 'refresh_token',
-        'tenant_name' => 'tenant_name',
-        'site_name' => 'site_name'
+        'tenant_name' => 'tenant_name'
     ];
 
     /**
@@ -186,8 +182,7 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
         'source' => 'setSource',
         'access_token' => 'setAccessToken',
         'refresh_token' => 'setRefreshToken',
-        'tenant_name' => 'setTenantName',
-        'site_name' => 'setSiteName'
+        'tenant_name' => 'setTenantName'
     ];
 
     /**
@@ -199,8 +194,7 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
         'source' => 'getSource',
         'access_token' => 'getAccessToken',
         'refresh_token' => 'getRefreshToken',
-        'tenant_name' => 'getTenantName',
-        'site_name' => 'getSiteName'
+        'tenant_name' => 'getTenantName'
     ];
 
     /**
@@ -264,7 +258,6 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
         $this->setIfExists('access_token', $data ?? [], null);
         $this->setIfExists('refresh_token', $data ?? [], null);
         $this->setIfExists('tenant_name', $data ?? [], null);
-        $this->setIfExists('site_name', $data ?? [], null);
     }
 
     /**
@@ -299,9 +292,6 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
         }
         if ($this->container['access_token'] === null) {
             $invalidProperties[] = "'access_token' can't be null";
-        }
-        if ($this->container['site_name'] === null) {
-            $invalidProperties[] = "'site_name' can't be null";
         }
         return $invalidProperties;
     }
@@ -451,35 +441,6 @@ class SharepointAuthentication implements ModelInterface, ArrayAccess, \JsonSeri
         }
 
         $this->container['tenant_name'] = $tenant_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets site_name
-     *
-     * @return string
-     */
-    public function getSiteName()
-    {
-        return $this->container['site_name'];
-    }
-
-    /**
-     * Sets site_name
-     *
-     * @param string $site_name site_name
-     *
-     * @return self
-     */
-    public function setSiteName($site_name)
-    {
-
-        if (is_null($site_name)) {
-            throw new \InvalidArgumentException('non-nullable site_name cannot be null');
-        }
-
-        $this->container['site_name'] = $site_name;
 
         return $this;
     }

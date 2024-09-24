@@ -238,6 +238,30 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for syncAzureBlobFiles
+     *
+     * Azure Blob Files.
+     *
+     */
+    public function testSyncAzureBlobFiles()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for syncAzureBlobStorage
+     *
+     * Azure Blob Storage Auth.
+     *
+     */
+    public function testSyncAzureBlobStorage()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for syncConfluence
      *
      * Confluence Sync.

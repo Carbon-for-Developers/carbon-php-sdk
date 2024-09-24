@@ -65,6 +65,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'access_key' => 'string',
         'access_key_secret' => 'string',
         'endpoint_url' => 'string',
+        'account_name' => 'string',
+        'account_key' => 'string',
         'instance_subdomain' => 'string',
         'client_id' => 'string',
         'client_secret' => 'string',
@@ -96,6 +98,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'access_key' => null,
         'access_key_secret' => null,
         'endpoint_url' => null,
+        'account_name' => null,
+        'account_key' => null,
         'instance_subdomain' => null,
         'client_id' => null,
         'client_secret' => null,
@@ -113,7 +117,7 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
 		'access_token' => false,
 		'refresh_token' => true,
 		'workspace_id' => false,
-		'tenant_name' => false,
+		'tenant_name' => true,
 		'site_name' => false,
 		'subdomain' => false,
 		'access_token_secret' => false,
@@ -125,6 +129,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
 		'access_key' => false,
 		'access_key_secret' => false,
 		'endpoint_url' => true,
+		'account_name' => false,
+		'account_key' => false,
 		'instance_subdomain' => false,
 		'client_id' => false,
 		'client_secret' => false,
@@ -234,6 +240,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'access_key' => 'access_key',
         'access_key_secret' => 'access_key_secret',
         'endpoint_url' => 'endpoint_url',
+        'account_name' => 'account_name',
+        'account_key' => 'account_key',
         'instance_subdomain' => 'instance_subdomain',
         'client_id' => 'client_id',
         'client_secret' => 'client_secret',
@@ -263,6 +271,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'access_key' => 'setAccessKey',
         'access_key_secret' => 'setAccessKeySecret',
         'endpoint_url' => 'setEndpointUrl',
+        'account_name' => 'setAccountName',
+        'account_key' => 'setAccountKey',
         'instance_subdomain' => 'setInstanceSubdomain',
         'client_id' => 'setClientId',
         'client_secret' => 'setClientSecret',
@@ -292,6 +302,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         'access_key' => 'getAccessKey',
         'access_key_secret' => 'getAccessKeySecret',
         'endpoint_url' => 'getEndpointUrl',
+        'account_name' => 'getAccountName',
+        'account_key' => 'getAccountKey',
         'instance_subdomain' => 'getInstanceSubdomain',
         'client_id' => 'getClientId',
         'client_secret' => 'getClientSecret',
@@ -372,6 +384,8 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('access_key', $data ?? [], null);
         $this->setIfExists('access_key_secret', $data ?? [], null);
         $this->setIfExists('endpoint_url', $data ?? [], null);
+        $this->setIfExists('account_name', $data ?? [], null);
+        $this->setIfExists('account_key', $data ?? [], null);
         $this->setIfExists('instance_subdomain', $data ?? [], null);
         $this->setIfExists('client_id', $data ?? [], null);
         $this->setIfExists('client_secret', $data ?? [], null);
@@ -415,9 +429,6 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         if ($this->container['workspace_id'] === null) {
             $invalidProperties[] = "'workspace_id' can't be null";
         }
-        if ($this->container['tenant_name'] === null) {
-            $invalidProperties[] = "'tenant_name' can't be null";
-        }
         if ($this->container['site_name'] === null) {
             $invalidProperties[] = "'site_name' can't be null";
         }
@@ -447,6 +458,12 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         }
         if ($this->container['access_key_secret'] === null) {
             $invalidProperties[] = "'access_key_secret' can't be null";
+        }
+        if ($this->container['account_name'] === null) {
+            $invalidProperties[] = "'account_name' can't be null";
+        }
+        if ($this->container['account_key'] === null) {
+            $invalidProperties[] = "'account_key' can't be null";
         }
         if ($this->container['instance_subdomain'] === null) {
             $invalidProperties[] = "'instance_subdomain' can't be null";
@@ -611,7 +628,7 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets tenant_name
      *
-     * @return string
+     * @return string|null
      */
     public function getTenantName()
     {
@@ -621,7 +638,7 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets tenant_name
      *
-     * @param string $tenant_name tenant_name
+     * @param string|null $tenant_name tenant_name
      *
      * @return self
      */
@@ -629,7 +646,14 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
     {
 
         if (is_null($tenant_name)) {
-            throw new \InvalidArgumentException('non-nullable tenant_name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'tenant_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tenant_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['tenant_name'] = $tenant_name;
@@ -959,6 +983,64 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['endpoint_url'] = $endpoint_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_name
+     *
+     * @return string
+     */
+    public function getAccountName()
+    {
+        return $this->container['account_name'];
+    }
+
+    /**
+     * Sets account_name
+     *
+     * @param string $account_name account_name
+     *
+     * @return self
+     */
+    public function setAccountName($account_name)
+    {
+
+        if (is_null($account_name)) {
+            throw new \InvalidArgumentException('non-nullable account_name cannot be null');
+        }
+
+        $this->container['account_name'] = $account_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_key
+     *
+     * @return string
+     */
+    public function getAccountKey()
+    {
+        return $this->container['account_key'];
+    }
+
+    /**
+     * Sets account_key
+     *
+     * @param string $account_key account_key
+     *
+     * @return self
+     */
+    public function setAccountKey($account_key)
+    {
+
+        if (is_null($account_key)) {
+            throw new \InvalidArgumentException('non-nullable account_key cannot be null');
+        }
+
+        $this->container['account_key'] = $account_key;
 
         return $this;
     }
