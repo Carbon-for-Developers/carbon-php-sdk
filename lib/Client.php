@@ -7,6 +7,8 @@ class Client
     
     public readonly \Carbon\Api\AuthApi $auth;
     
+    public readonly \Carbon\Api\CRMApi $cRM;
+    
     public readonly \Carbon\Api\DataSourcesApi $dataSources;
     
     public readonly \Carbon\Api\EmbeddingsApi $embeddings;
@@ -45,6 +47,7 @@ class Client
             if ($verifySsl !== null) $config->setVerifySsl($verifySsl);
         }
         $this->auth = new \Carbon\Api\AuthApi($config);
+        $this->cRM = new \Carbon\Api\CRMApi($config);
         $this->dataSources = new \Carbon\Api\DataSourcesApi($config);
         $this->embeddings = new \Carbon\Api\EmbeddingsApi($config);
         $this->files = new \Carbon\Api\FilesApi($config);

@@ -1,6 +1,6 @@
 <?php
 /**
- * SentWebhookPayload
+ * Address
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * SentWebhookPayload Class Doc Comment
+ * Address Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializable
+class Address implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SentWebhookPayload';
+    protected static $openAPIModelName = 'Address';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,13 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'webhook_type' => 'string',
-        'customer_id' => 'string',
-        'timestamp' => 'string',
-        'object' => '\Carbon\Model\SentWebhookPayloadObject'
+        'street_1' => 'string',
+        'street_2' => 'string',
+        'city' => 'string',
+        'state' => 'string',
+        'postal_code' => 'string',
+        'country' => 'string',
+        'address_type' => 'string'
     ];
 
     /**
@@ -63,10 +66,13 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'webhook_type' => null,
-        'customer_id' => null,
-        'timestamp' => null,
-        'object' => null
+        'street_1' => null,
+        'street_2' => null,
+        'city' => null,
+        'state' => null,
+        'postal_code' => null,
+        'country' => null,
+        'address_type' => null
     ];
 
     /**
@@ -75,10 +81,13 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'webhook_type' => false,
-		'customer_id' => false,
-		'timestamp' => false,
-		'object' => false
+        'street_1' => true,
+		'street_2' => true,
+		'city' => true,
+		'state' => true,
+		'postal_code' => true,
+		'country' => true,
+		'address_type' => true
     ];
 
     /**
@@ -167,10 +176,13 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'webhook_type' => 'webhook_type',
-        'customer_id' => 'customer_id',
-        'timestamp' => 'timestamp',
-        'object' => 'object'
+        'street_1' => 'street_1',
+        'street_2' => 'street_2',
+        'city' => 'city',
+        'state' => 'state',
+        'postal_code' => 'postal_code',
+        'country' => 'country',
+        'address_type' => 'address_type'
     ];
 
     /**
@@ -179,10 +191,13 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'webhook_type' => 'setWebhookType',
-        'customer_id' => 'setCustomerId',
-        'timestamp' => 'setTimestamp',
-        'object' => 'setObject'
+        'street_1' => 'setStreet1',
+        'street_2' => 'setStreet2',
+        'city' => 'setCity',
+        'state' => 'setState',
+        'postal_code' => 'setPostalCode',
+        'country' => 'setCountry',
+        'address_type' => 'setAddressType'
     ];
 
     /**
@@ -191,10 +206,13 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'webhook_type' => 'getWebhookType',
-        'customer_id' => 'getCustomerId',
-        'timestamp' => 'getTimestamp',
-        'object' => 'getObject'
+        'street_1' => 'getStreet1',
+        'street_2' => 'getStreet2',
+        'city' => 'getCity',
+        'state' => 'getState',
+        'postal_code' => 'getPostalCode',
+        'country' => 'getCountry',
+        'address_type' => 'getAddressType'
     ];
 
     /**
@@ -238,65 +256,6 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
         return self::$openAPIModelName;
     }
 
-    public const WEBHOOK_TYPE_ADD = 'ADD';
-    public const WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED = 'ALL_UPLOADED_FILES_QUEUED';
-    public const WEBHOOK_TYPE_CANCEL = 'CANCEL';
-    public const WEBHOOK_TYPE_CHECKUP = 'CHECKUP';
-    public const WEBHOOK_TYPE_DATA_SOURCE_READY = 'DATA_SOURCE_READY';
-    public const WEBHOOK_TYPE_EMBEDDING_STORAGE_MODIFIED = 'EMBEDDING_STORAGE_MODIFIED';
-    public const WEBHOOK_TYPE_FILES_CREATED = 'FILES_CREATED';
-    public const WEBHOOK_TYPE_FILES_SKIPPED = 'FILES_SKIPPED';
-    public const WEBHOOK_TYPE_FILE_DELETED = 'FILE_DELETED';
-    public const WEBHOOK_TYPE_FILE_ERROR = 'FILE_ERROR';
-    public const WEBHOOK_TYPE_FILE_READY = 'FILE_READY';
-    public const WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED = 'FILE_STATISTICS_AGGREGATED';
-    public const WEBHOOK_TYPE_FILE_SYNCING = 'FILE_SYNCING';
-    public const WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED = 'FILE_SYNC_LIMIT_REACHED';
-    public const WEBHOOK_TYPE_MOVED_TO_COLD_STORAGE = 'MOVED_TO_COLD_STORAGE';
-    public const WEBHOOK_TYPE_MOVED_TO_HOT_STORAGE = 'MOVED_TO_HOT_STORAGE';
-    public const WEBHOOK_TYPE_ORGANIZATION_USER_DELETED = 'ORGANIZATION_USER_DELETED';
-    public const WEBHOOK_TYPE_RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR';
-    public const WEBHOOK_TYPE_REVOKE = 'REVOKE';
-    public const WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS = 'SPARSE_VECTOR_QUEUE_STATUS';
-    public const WEBHOOK_TYPE_UPDATE = 'UPDATE';
-    public const WEBHOOK_TYPE_WEBPAGE_ERROR = 'WEBPAGE_ERROR';
-    public const WEBHOOK_TYPE_WEBPAGE_READY = 'WEBPAGE_READY';
-    public const WEBHOOK_TYPE_WEBSCRAPE_URLS_READY = 'WEBSCRAPE_URLS_READY';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getWebhookTypeAllowableValues()
-    {
-        return [
-            self::WEBHOOK_TYPE_ADD,
-            self::WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED,
-            self::WEBHOOK_TYPE_CANCEL,
-            self::WEBHOOK_TYPE_CHECKUP,
-            self::WEBHOOK_TYPE_DATA_SOURCE_READY,
-            self::WEBHOOK_TYPE_EMBEDDING_STORAGE_MODIFIED,
-            self::WEBHOOK_TYPE_FILES_CREATED,
-            self::WEBHOOK_TYPE_FILES_SKIPPED,
-            self::WEBHOOK_TYPE_FILE_DELETED,
-            self::WEBHOOK_TYPE_FILE_ERROR,
-            self::WEBHOOK_TYPE_FILE_READY,
-            self::WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED,
-            self::WEBHOOK_TYPE_FILE_SYNCING,
-            self::WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED,
-            self::WEBHOOK_TYPE_MOVED_TO_COLD_STORAGE,
-            self::WEBHOOK_TYPE_MOVED_TO_HOT_STORAGE,
-            self::WEBHOOK_TYPE_ORGANIZATION_USER_DELETED,
-            self::WEBHOOK_TYPE_RATE_LIMIT_ERROR,
-            self::WEBHOOK_TYPE_REVOKE,
-            self::WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS,
-            self::WEBHOOK_TYPE_UPDATE,
-            self::WEBHOOK_TYPE_WEBPAGE_ERROR,
-            self::WEBHOOK_TYPE_WEBPAGE_READY,
-            self::WEBHOOK_TYPE_WEBSCRAPE_URLS_READY,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -313,10 +272,13 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('webhook_type', $data ?? [], null);
-        $this->setIfExists('customer_id', $data ?? [], null);
-        $this->setIfExists('timestamp', $data ?? [], null);
-        $this->setIfExists('object', $data ?? [], null);
+        $this->setIfExists('street_1', $data ?? [], null);
+        $this->setIfExists('street_2', $data ?? [], null);
+        $this->setIfExists('city', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('postal_code', $data ?? [], null);
+        $this->setIfExists('country', $data ?? [], null);
+        $this->setIfExists('address_type', $data ?? [], null);
     }
 
     /**
@@ -346,15 +308,27 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getWebhookTypeAllowableValues();
-        if (!is_null($this->container['webhook_type']) && !in_array($this->container['webhook_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'webhook_type', must be one of '%s'",
-                $this->container['webhook_type'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['street_1'] === null) {
+            $invalidProperties[] = "'street_1' can't be null";
         }
-
+        if ($this->container['street_2'] === null) {
+            $invalidProperties[] = "'street_2' can't be null";
+        }
+        if ($this->container['city'] === null) {
+            $invalidProperties[] = "'city' can't be null";
+        }
+        if ($this->container['state'] === null) {
+            $invalidProperties[] = "'state' can't be null";
+        }
+        if ($this->container['postal_code'] === null) {
+            $invalidProperties[] = "'postal_code' can't be null";
+        }
+        if ($this->container['country'] === null) {
+            $invalidProperties[] = "'country' can't be null";
+        }
+        if ($this->container['address_type'] === null) {
+            $invalidProperties[] = "'address_type' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -371,127 +345,253 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets webhook_type
+     * Gets street_1
      *
-     * @return string|null
+     * @return string
      */
-    public function getWebhookType()
+    public function getStreet1()
     {
-        return $this->container['webhook_type'];
+        return $this->container['street_1'];
     }
 
     /**
-     * Sets webhook_type
+     * Sets street_1
      *
-     * @param string|null $webhook_type webhook_type
+     * @param string $street_1 street_1
      *
      * @return self
      */
-    public function setWebhookType($webhook_type)
+    public function setStreet1($street_1)
     {
-        $allowedValues = $this->getWebhookTypeAllowableValues();
-        if (!is_null($webhook_type) && !in_array($webhook_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'webhook_type', must be one of '%s'",
-                    $webhook_type,
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if (is_null($street_1)) {
+            array_push($this->openAPINullablesSetToNull, 'street_1');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('street_1', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        if (is_null($webhook_type)) {
-            throw new \InvalidArgumentException('non-nullable webhook_type cannot be null');
-        }
-
-        $this->container['webhook_type'] = $webhook_type;
+        $this->container['street_1'] = $street_1;
 
         return $this;
     }
 
     /**
-     * Gets customer_id
+     * Gets street_2
      *
-     * @return string|null
+     * @return string
      */
-    public function getCustomerId()
+    public function getStreet2()
     {
-        return $this->container['customer_id'];
+        return $this->container['street_2'];
     }
 
     /**
-     * Sets customer_id
+     * Sets street_2
      *
-     * @param string|null $customer_id customer_id
+     * @param string $street_2 street_2
      *
      * @return self
      */
-    public function setCustomerId($customer_id)
+    public function setStreet2($street_2)
     {
 
-        if (is_null($customer_id)) {
-            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+        if (is_null($street_2)) {
+            array_push($this->openAPINullablesSetToNull, 'street_2');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('street_2', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['customer_id'] = $customer_id;
+        $this->container['street_2'] = $street_2;
 
         return $this;
     }
 
     /**
-     * Gets timestamp
+     * Gets city
      *
-     * @return string|null
+     * @return string
      */
-    public function getTimestamp()
+    public function getCity()
     {
-        return $this->container['timestamp'];
+        return $this->container['city'];
     }
 
     /**
-     * Sets timestamp
+     * Sets city
      *
-     * @param string|null $timestamp timestamp
+     * @param string $city city
      *
      * @return self
      */
-    public function setTimestamp($timestamp)
+    public function setCity($city)
     {
 
-        if (is_null($timestamp)) {
-            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        if (is_null($city)) {
+            array_push($this->openAPINullablesSetToNull, 'city');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('city', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['timestamp'] = $timestamp;
+        $this->container['city'] = $city;
 
         return $this;
     }
 
     /**
-     * Gets object
+     * Gets state
      *
-     * @return \Carbon\Model\SentWebhookPayloadObject|null
+     * @return string
      */
-    public function getObject()
+    public function getState()
     {
-        return $this->container['object'];
+        return $this->container['state'];
     }
 
     /**
-     * Sets object
+     * Sets state
      *
-     * @param \Carbon\Model\SentWebhookPayloadObject|null $object object
+     * @param string $state state
      *
      * @return self
      */
-    public function setObject($object)
+    public function setState($state)
     {
 
-        if (is_null($object)) {
-            throw new \InvalidArgumentException('non-nullable object cannot be null');
+        if (is_null($state)) {
+            array_push($this->openAPINullablesSetToNull, 'state');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('state', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['object'] = $object;
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets postal_code
+     *
+     * @return string
+     */
+    public function getPostalCode()
+    {
+        return $this->container['postal_code'];
+    }
+
+    /**
+     * Sets postal_code
+     *
+     * @param string $postal_code postal_code
+     *
+     * @return self
+     */
+    public function setPostalCode($postal_code)
+    {
+
+        if (is_null($postal_code)) {
+            array_push($this->openAPINullablesSetToNull, 'postal_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('postal_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['postal_code'] = $postal_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->container['country'];
+    }
+
+    /**
+     * Sets country
+     *
+     * @param string $country country
+     *
+     * @return self
+     */
+    public function setCountry($country)
+    {
+
+        if (is_null($country)) {
+            array_push($this->openAPINullablesSetToNull, 'country');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('country', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['country'] = $country;
+
+        return $this;
+    }
+
+    /**
+     * Gets address_type
+     *
+     * @return string
+     */
+    public function getAddressType()
+    {
+        return $this->container['address_type'];
+    }
+
+    /**
+     * Sets address_type
+     *
+     * @param string $address_type address_type
+     *
+     * @return self
+     */
+    public function setAddressType($address_type)
+    {
+
+        if (is_null($address_type)) {
+            array_push($this->openAPINullablesSetToNull, 'address_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('address_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['address_type'] = $address_type;
 
         return $this;
     }
