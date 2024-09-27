@@ -1,6 +1,6 @@
 <?php
 /**
- * SentWebhookPayload
+ * Email
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * SentWebhookPayload Class Doc Comment
+ * Email Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializable
+class Email implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SentWebhookPayload';
+    protected static $openAPIModelName = 'Email';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,8 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'webhook_type' => 'string',
-        'customer_id' => 'string',
-        'timestamp' => 'string',
-        'object' => '\Carbon\Model\SentWebhookPayloadObject'
+        'email' => 'string',
+        'email_type' => 'string'
     ];
 
     /**
@@ -63,10 +61,8 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'webhook_type' => null,
-        'customer_id' => null,
-        'timestamp' => null,
-        'object' => null
+        'email' => null,
+        'email_type' => null
     ];
 
     /**
@@ -75,10 +71,8 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'webhook_type' => false,
-		'customer_id' => false,
-		'timestamp' => false,
-		'object' => false
+        'email' => false,
+		'email_type' => true
     ];
 
     /**
@@ -167,10 +161,8 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'webhook_type' => 'webhook_type',
-        'customer_id' => 'customer_id',
-        'timestamp' => 'timestamp',
-        'object' => 'object'
+        'email' => 'email',
+        'email_type' => 'email_type'
     ];
 
     /**
@@ -179,10 +171,8 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'webhook_type' => 'setWebhookType',
-        'customer_id' => 'setCustomerId',
-        'timestamp' => 'setTimestamp',
-        'object' => 'setObject'
+        'email' => 'setEmail',
+        'email_type' => 'setEmailType'
     ];
 
     /**
@@ -191,10 +181,8 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'webhook_type' => 'getWebhookType',
-        'customer_id' => 'getCustomerId',
-        'timestamp' => 'getTimestamp',
-        'object' => 'getObject'
+        'email' => 'getEmail',
+        'email_type' => 'getEmailType'
     ];
 
     /**
@@ -238,65 +226,6 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
         return self::$openAPIModelName;
     }
 
-    public const WEBHOOK_TYPE_ADD = 'ADD';
-    public const WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED = 'ALL_UPLOADED_FILES_QUEUED';
-    public const WEBHOOK_TYPE_CANCEL = 'CANCEL';
-    public const WEBHOOK_TYPE_CHECKUP = 'CHECKUP';
-    public const WEBHOOK_TYPE_DATA_SOURCE_READY = 'DATA_SOURCE_READY';
-    public const WEBHOOK_TYPE_EMBEDDING_STORAGE_MODIFIED = 'EMBEDDING_STORAGE_MODIFIED';
-    public const WEBHOOK_TYPE_FILES_CREATED = 'FILES_CREATED';
-    public const WEBHOOK_TYPE_FILES_SKIPPED = 'FILES_SKIPPED';
-    public const WEBHOOK_TYPE_FILE_DELETED = 'FILE_DELETED';
-    public const WEBHOOK_TYPE_FILE_ERROR = 'FILE_ERROR';
-    public const WEBHOOK_TYPE_FILE_READY = 'FILE_READY';
-    public const WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED = 'FILE_STATISTICS_AGGREGATED';
-    public const WEBHOOK_TYPE_FILE_SYNCING = 'FILE_SYNCING';
-    public const WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED = 'FILE_SYNC_LIMIT_REACHED';
-    public const WEBHOOK_TYPE_MOVED_TO_COLD_STORAGE = 'MOVED_TO_COLD_STORAGE';
-    public const WEBHOOK_TYPE_MOVED_TO_HOT_STORAGE = 'MOVED_TO_HOT_STORAGE';
-    public const WEBHOOK_TYPE_ORGANIZATION_USER_DELETED = 'ORGANIZATION_USER_DELETED';
-    public const WEBHOOK_TYPE_RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR';
-    public const WEBHOOK_TYPE_REVOKE = 'REVOKE';
-    public const WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS = 'SPARSE_VECTOR_QUEUE_STATUS';
-    public const WEBHOOK_TYPE_UPDATE = 'UPDATE';
-    public const WEBHOOK_TYPE_WEBPAGE_ERROR = 'WEBPAGE_ERROR';
-    public const WEBHOOK_TYPE_WEBPAGE_READY = 'WEBPAGE_READY';
-    public const WEBHOOK_TYPE_WEBSCRAPE_URLS_READY = 'WEBSCRAPE_URLS_READY';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getWebhookTypeAllowableValues()
-    {
-        return [
-            self::WEBHOOK_TYPE_ADD,
-            self::WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED,
-            self::WEBHOOK_TYPE_CANCEL,
-            self::WEBHOOK_TYPE_CHECKUP,
-            self::WEBHOOK_TYPE_DATA_SOURCE_READY,
-            self::WEBHOOK_TYPE_EMBEDDING_STORAGE_MODIFIED,
-            self::WEBHOOK_TYPE_FILES_CREATED,
-            self::WEBHOOK_TYPE_FILES_SKIPPED,
-            self::WEBHOOK_TYPE_FILE_DELETED,
-            self::WEBHOOK_TYPE_FILE_ERROR,
-            self::WEBHOOK_TYPE_FILE_READY,
-            self::WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED,
-            self::WEBHOOK_TYPE_FILE_SYNCING,
-            self::WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED,
-            self::WEBHOOK_TYPE_MOVED_TO_COLD_STORAGE,
-            self::WEBHOOK_TYPE_MOVED_TO_HOT_STORAGE,
-            self::WEBHOOK_TYPE_ORGANIZATION_USER_DELETED,
-            self::WEBHOOK_TYPE_RATE_LIMIT_ERROR,
-            self::WEBHOOK_TYPE_REVOKE,
-            self::WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS,
-            self::WEBHOOK_TYPE_UPDATE,
-            self::WEBHOOK_TYPE_WEBPAGE_ERROR,
-            self::WEBHOOK_TYPE_WEBPAGE_READY,
-            self::WEBHOOK_TYPE_WEBSCRAPE_URLS_READY,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -313,10 +242,8 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('webhook_type', $data ?? [], null);
-        $this->setIfExists('customer_id', $data ?? [], null);
-        $this->setIfExists('timestamp', $data ?? [], null);
-        $this->setIfExists('object', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('email_type', $data ?? [], null);
     }
 
     /**
@@ -346,15 +273,12 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getWebhookTypeAllowableValues();
-        if (!is_null($this->container['webhook_type']) && !in_array($this->container['webhook_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'webhook_type', must be one of '%s'",
-                $this->container['webhook_type'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['email'] === null) {
+            $invalidProperties[] = "'email' can't be null";
         }
-
+        if ($this->container['email_type'] === null) {
+            $invalidProperties[] = "'email_type' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -371,127 +295,66 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets webhook_type
+     * Gets email
      *
-     * @return string|null
+     * @return string
      */
-    public function getWebhookType()
+    public function getEmail()
     {
-        return $this->container['webhook_type'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets webhook_type
+     * Sets email
      *
-     * @param string|null $webhook_type webhook_type
+     * @param string $email email
      *
      * @return self
      */
-    public function setWebhookType($webhook_type)
+    public function setEmail($email)
     {
-        $allowedValues = $this->getWebhookTypeAllowableValues();
-        if (!is_null($webhook_type) && !in_array($webhook_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'webhook_type', must be one of '%s'",
-                    $webhook_type,
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if (is_null($email)) {
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
 
-        if (is_null($webhook_type)) {
-            throw new \InvalidArgumentException('non-nullable webhook_type cannot be null');
-        }
-
-        $this->container['webhook_type'] = $webhook_type;
+        $this->container['email'] = $email;
 
         return $this;
     }
 
     /**
-     * Gets customer_id
+     * Gets email_type
      *
-     * @return string|null
+     * @return string
      */
-    public function getCustomerId()
+    public function getEmailType()
     {
-        return $this->container['customer_id'];
+        return $this->container['email_type'];
     }
 
     /**
-     * Sets customer_id
+     * Sets email_type
      *
-     * @param string|null $customer_id customer_id
+     * @param string $email_type email_type
      *
      * @return self
      */
-    public function setCustomerId($customer_id)
+    public function setEmailType($email_type)
     {
 
-        if (is_null($customer_id)) {
-            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+        if (is_null($email_type)) {
+            array_push($this->openAPINullablesSetToNull, 'email_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('email_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['customer_id'] = $customer_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets timestamp
-     *
-     * @return string|null
-     */
-    public function getTimestamp()
-    {
-        return $this->container['timestamp'];
-    }
-
-    /**
-     * Sets timestamp
-     *
-     * @param string|null $timestamp timestamp
-     *
-     * @return self
-     */
-    public function setTimestamp($timestamp)
-    {
-
-        if (is_null($timestamp)) {
-            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
-        }
-
-        $this->container['timestamp'] = $timestamp;
-
-        return $this;
-    }
-
-    /**
-     * Gets object
-     *
-     * @return \Carbon\Model\SentWebhookPayloadObject|null
-     */
-    public function getObject()
-    {
-        return $this->container['object'];
-    }
-
-    /**
-     * Sets object
-     *
-     * @param \Carbon\Model\SentWebhookPayloadObject|null $object object
-     *
-     * @return self
-     */
-    public function setObject($object)
-    {
-
-        if (is_null($object)) {
-            throw new \InvalidArgumentException('non-nullable object cannot be null');
-        }
-
-        $this->container['object'] = $object;
+        $this->container['email_type'] = $email_type;
 
         return $this;
     }

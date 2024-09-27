@@ -1,6 +1,6 @@
 <?php
 /**
- * SentWebhookPayload
+ * OpportunitiesRequest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * SentWebhookPayload Class Doc Comment
+ * OpportunitiesRequest Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializable
+class OpportunitiesRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SentWebhookPayload';
+    protected static $openAPIModelName = 'OpportunitiesRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,14 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'webhook_type' => 'string',
-        'customer_id' => 'string',
-        'timestamp' => 'string',
-        'object' => '\Carbon\Model\SentWebhookPayloadObject'
+        'data_source_id' => 'int',
+        'include_remote_data' => 'bool',
+        'next_cursor' => 'string',
+        'page_size' => 'int',
+        'order_dir' => '\Carbon\Model\OrderDirV2Nullable',
+        'includes' => '\Carbon\Model\BaseIncludes[]',
+        'filters' => '\Carbon\Model\OpportunityFilters',
+        'order_by' => '\Carbon\Model\OpportunitiesOrderByNullable'
     ];
 
     /**
@@ -63,10 +67,14 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'webhook_type' => null,
-        'customer_id' => null,
-        'timestamp' => null,
-        'object' => null
+        'data_source_id' => null,
+        'include_remote_data' => null,
+        'next_cursor' => null,
+        'page_size' => null,
+        'order_dir' => null,
+        'includes' => null,
+        'filters' => null,
+        'order_by' => null
     ];
 
     /**
@@ -75,10 +83,14 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'webhook_type' => false,
-		'customer_id' => false,
-		'timestamp' => false,
-		'object' => false
+        'data_source_id' => false,
+		'include_remote_data' => false,
+		'next_cursor' => true,
+		'page_size' => true,
+		'order_dir' => true,
+		'includes' => false,
+		'filters' => false,
+		'order_by' => true
     ];
 
     /**
@@ -167,10 +179,14 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'webhook_type' => 'webhook_type',
-        'customer_id' => 'customer_id',
-        'timestamp' => 'timestamp',
-        'object' => 'object'
+        'data_source_id' => 'data_source_id',
+        'include_remote_data' => 'include_remote_data',
+        'next_cursor' => 'next_cursor',
+        'page_size' => 'page_size',
+        'order_dir' => 'order_dir',
+        'includes' => 'includes',
+        'filters' => 'filters',
+        'order_by' => 'order_by'
     ];
 
     /**
@@ -179,10 +195,14 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'webhook_type' => 'setWebhookType',
-        'customer_id' => 'setCustomerId',
-        'timestamp' => 'setTimestamp',
-        'object' => 'setObject'
+        'data_source_id' => 'setDataSourceId',
+        'include_remote_data' => 'setIncludeRemoteData',
+        'next_cursor' => 'setNextCursor',
+        'page_size' => 'setPageSize',
+        'order_dir' => 'setOrderDir',
+        'includes' => 'setIncludes',
+        'filters' => 'setFilters',
+        'order_by' => 'setOrderBy'
     ];
 
     /**
@@ -191,10 +211,14 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'webhook_type' => 'getWebhookType',
-        'customer_id' => 'getCustomerId',
-        'timestamp' => 'getTimestamp',
-        'object' => 'getObject'
+        'data_source_id' => 'getDataSourceId',
+        'include_remote_data' => 'getIncludeRemoteData',
+        'next_cursor' => 'getNextCursor',
+        'page_size' => 'getPageSize',
+        'order_dir' => 'getOrderDir',
+        'includes' => 'getIncludes',
+        'filters' => 'getFilters',
+        'order_by' => 'getOrderBy'
     ];
 
     /**
@@ -238,65 +262,6 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
         return self::$openAPIModelName;
     }
 
-    public const WEBHOOK_TYPE_ADD = 'ADD';
-    public const WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED = 'ALL_UPLOADED_FILES_QUEUED';
-    public const WEBHOOK_TYPE_CANCEL = 'CANCEL';
-    public const WEBHOOK_TYPE_CHECKUP = 'CHECKUP';
-    public const WEBHOOK_TYPE_DATA_SOURCE_READY = 'DATA_SOURCE_READY';
-    public const WEBHOOK_TYPE_EMBEDDING_STORAGE_MODIFIED = 'EMBEDDING_STORAGE_MODIFIED';
-    public const WEBHOOK_TYPE_FILES_CREATED = 'FILES_CREATED';
-    public const WEBHOOK_TYPE_FILES_SKIPPED = 'FILES_SKIPPED';
-    public const WEBHOOK_TYPE_FILE_DELETED = 'FILE_DELETED';
-    public const WEBHOOK_TYPE_FILE_ERROR = 'FILE_ERROR';
-    public const WEBHOOK_TYPE_FILE_READY = 'FILE_READY';
-    public const WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED = 'FILE_STATISTICS_AGGREGATED';
-    public const WEBHOOK_TYPE_FILE_SYNCING = 'FILE_SYNCING';
-    public const WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED = 'FILE_SYNC_LIMIT_REACHED';
-    public const WEBHOOK_TYPE_MOVED_TO_COLD_STORAGE = 'MOVED_TO_COLD_STORAGE';
-    public const WEBHOOK_TYPE_MOVED_TO_HOT_STORAGE = 'MOVED_TO_HOT_STORAGE';
-    public const WEBHOOK_TYPE_ORGANIZATION_USER_DELETED = 'ORGANIZATION_USER_DELETED';
-    public const WEBHOOK_TYPE_RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR';
-    public const WEBHOOK_TYPE_REVOKE = 'REVOKE';
-    public const WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS = 'SPARSE_VECTOR_QUEUE_STATUS';
-    public const WEBHOOK_TYPE_UPDATE = 'UPDATE';
-    public const WEBHOOK_TYPE_WEBPAGE_ERROR = 'WEBPAGE_ERROR';
-    public const WEBHOOK_TYPE_WEBPAGE_READY = 'WEBPAGE_READY';
-    public const WEBHOOK_TYPE_WEBSCRAPE_URLS_READY = 'WEBSCRAPE_URLS_READY';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getWebhookTypeAllowableValues()
-    {
-        return [
-            self::WEBHOOK_TYPE_ADD,
-            self::WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED,
-            self::WEBHOOK_TYPE_CANCEL,
-            self::WEBHOOK_TYPE_CHECKUP,
-            self::WEBHOOK_TYPE_DATA_SOURCE_READY,
-            self::WEBHOOK_TYPE_EMBEDDING_STORAGE_MODIFIED,
-            self::WEBHOOK_TYPE_FILES_CREATED,
-            self::WEBHOOK_TYPE_FILES_SKIPPED,
-            self::WEBHOOK_TYPE_FILE_DELETED,
-            self::WEBHOOK_TYPE_FILE_ERROR,
-            self::WEBHOOK_TYPE_FILE_READY,
-            self::WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED,
-            self::WEBHOOK_TYPE_FILE_SYNCING,
-            self::WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED,
-            self::WEBHOOK_TYPE_MOVED_TO_COLD_STORAGE,
-            self::WEBHOOK_TYPE_MOVED_TO_HOT_STORAGE,
-            self::WEBHOOK_TYPE_ORGANIZATION_USER_DELETED,
-            self::WEBHOOK_TYPE_RATE_LIMIT_ERROR,
-            self::WEBHOOK_TYPE_REVOKE,
-            self::WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS,
-            self::WEBHOOK_TYPE_UPDATE,
-            self::WEBHOOK_TYPE_WEBPAGE_ERROR,
-            self::WEBHOOK_TYPE_WEBPAGE_READY,
-            self::WEBHOOK_TYPE_WEBSCRAPE_URLS_READY,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -313,10 +278,14 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('webhook_type', $data ?? [], null);
-        $this->setIfExists('customer_id', $data ?? [], null);
-        $this->setIfExists('timestamp', $data ?? [], null);
-        $this->setIfExists('object', $data ?? [], null);
+        $this->setIfExists('data_source_id', $data ?? [], null);
+        $this->setIfExists('include_remote_data', $data ?? [], false);
+        $this->setIfExists('next_cursor', $data ?? [], null);
+        $this->setIfExists('page_size', $data ?? [], null);
+        $this->setIfExists('order_dir', $data ?? [], null);
+        $this->setIfExists('includes', $data ?? [], null);
+        $this->setIfExists('filters', $data ?? [], null);
+        $this->setIfExists('order_by', $data ?? [], null);
     }
 
     /**
@@ -346,15 +315,9 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getWebhookTypeAllowableValues();
-        if (!is_null($this->container['webhook_type']) && !in_array($this->container['webhook_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'webhook_type', must be one of '%s'",
-                $this->container['webhook_type'],
-                implode("', '", $allowedValues)
-            );
+        if ($this->container['data_source_id'] === null) {
+            $invalidProperties[] = "'data_source_id' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -371,127 +334,261 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets webhook_type
+     * Gets data_source_id
      *
-     * @return string|null
+     * @return int
      */
-    public function getWebhookType()
+    public function getDataSourceId()
     {
-        return $this->container['webhook_type'];
+        return $this->container['data_source_id'];
     }
 
     /**
-     * Sets webhook_type
+     * Sets data_source_id
      *
-     * @param string|null $webhook_type webhook_type
+     * @param int $data_source_id data_source_id
      *
      * @return self
      */
-    public function setWebhookType($webhook_type)
+    public function setDataSourceId($data_source_id)
     {
-        $allowedValues = $this->getWebhookTypeAllowableValues();
-        if (!is_null($webhook_type) && !in_array($webhook_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'webhook_type', must be one of '%s'",
-                    $webhook_type,
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if (is_null($data_source_id)) {
+            throw new \InvalidArgumentException('non-nullable data_source_id cannot be null');
         }
 
-        if (is_null($webhook_type)) {
-            throw new \InvalidArgumentException('non-nullable webhook_type cannot be null');
-        }
-
-        $this->container['webhook_type'] = $webhook_type;
+        $this->container['data_source_id'] = $data_source_id;
 
         return $this;
     }
 
     /**
-     * Gets customer_id
+     * Gets include_remote_data
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getCustomerId()
+    public function getIncludeRemoteData()
     {
-        return $this->container['customer_id'];
+        return $this->container['include_remote_data'];
     }
 
     /**
-     * Sets customer_id
+     * Sets include_remote_data
      *
-     * @param string|null $customer_id customer_id
+     * @param bool|null $include_remote_data include_remote_data
      *
      * @return self
      */
-    public function setCustomerId($customer_id)
+    public function setIncludeRemoteData($include_remote_data)
     {
 
-        if (is_null($customer_id)) {
-            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+        if (is_null($include_remote_data)) {
+            throw new \InvalidArgumentException('non-nullable include_remote_data cannot be null');
         }
 
-        $this->container['customer_id'] = $customer_id;
+        $this->container['include_remote_data'] = $include_remote_data;
 
         return $this;
     }
 
     /**
-     * Gets timestamp
+     * Gets next_cursor
      *
      * @return string|null
      */
-    public function getTimestamp()
+    public function getNextCursor()
     {
-        return $this->container['timestamp'];
+        return $this->container['next_cursor'];
     }
 
     /**
-     * Sets timestamp
+     * Sets next_cursor
      *
-     * @param string|null $timestamp timestamp
+     * @param string|null $next_cursor next_cursor
      *
      * @return self
      */
-    public function setTimestamp($timestamp)
+    public function setNextCursor($next_cursor)
     {
 
-        if (is_null($timestamp)) {
-            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        if (is_null($next_cursor)) {
+            array_push($this->openAPINullablesSetToNull, 'next_cursor');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('next_cursor', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['timestamp'] = $timestamp;
+        $this->container['next_cursor'] = $next_cursor;
 
         return $this;
     }
 
     /**
-     * Gets object
+     * Gets page_size
      *
-     * @return \Carbon\Model\SentWebhookPayloadObject|null
+     * @return int|null
      */
-    public function getObject()
+    public function getPageSize()
     {
-        return $this->container['object'];
+        return $this->container['page_size'];
     }
 
     /**
-     * Sets object
+     * Sets page_size
      *
-     * @param \Carbon\Model\SentWebhookPayloadObject|null $object object
+     * @param int|null $page_size page_size
      *
      * @return self
      */
-    public function setObject($object)
+    public function setPageSize($page_size)
     {
 
-        if (is_null($object)) {
-            throw new \InvalidArgumentException('non-nullable object cannot be null');
+        if (is_null($page_size)) {
+            array_push($this->openAPINullablesSetToNull, 'page_size');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('page_size', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['object'] = $object;
+        $this->container['page_size'] = $page_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets order_dir
+     *
+     * @return \Carbon\Model\OrderDirV2Nullable|null
+     */
+    public function getOrderDir()
+    {
+        return $this->container['order_dir'];
+    }
+
+    /**
+     * Sets order_dir
+     *
+     * @param \Carbon\Model\OrderDirV2Nullable|null $order_dir order_dir
+     *
+     * @return self
+     */
+    public function setOrderDir($order_dir)
+    {
+
+        if (is_null($order_dir)) {
+            array_push($this->openAPINullablesSetToNull, 'order_dir');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('order_dir', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['order_dir'] = $order_dir;
+
+        return $this;
+    }
+
+    /**
+     * Gets includes
+     *
+     * @return \Carbon\Model\BaseIncludes[]|null
+     */
+    public function getIncludes()
+    {
+        return $this->container['includes'];
+    }
+
+    /**
+     * Sets includes
+     *
+     * @param \Carbon\Model\BaseIncludes[]|null $includes includes
+     *
+     * @return self
+     */
+    public function setIncludes($includes)
+    {
+
+        if (is_null($includes)) {
+            throw new \InvalidArgumentException('non-nullable includes cannot be null');
+        }
+
+        $this->container['includes'] = $includes;
+
+        return $this;
+    }
+
+    /**
+     * Gets filters
+     *
+     * @return \Carbon\Model\OpportunityFilters|null
+     */
+    public function getFilters()
+    {
+        return $this->container['filters'];
+    }
+
+    /**
+     * Sets filters
+     *
+     * @param \Carbon\Model\OpportunityFilters|null $filters filters
+     *
+     * @return self
+     */
+    public function setFilters($filters)
+    {
+
+        if (is_null($filters)) {
+            throw new \InvalidArgumentException('non-nullable filters cannot be null');
+        }
+
+        $this->container['filters'] = $filters;
+
+        return $this;
+    }
+
+    /**
+     * Gets order_by
+     *
+     * @return \Carbon\Model\OpportunitiesOrderByNullable|null
+     */
+    public function getOrderBy()
+    {
+        return $this->container['order_by'];
+    }
+
+    /**
+     * Sets order_by
+     *
+     * @param \Carbon\Model\OpportunitiesOrderByNullable|null $order_by order_by
+     *
+     * @return self
+     */
+    public function setOrderBy($order_by)
+    {
+
+        if (is_null($order_by)) {
+            array_push($this->openAPINullablesSetToNull, 'order_by');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('order_by', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['order_by'] = $order_by;
 
         return $this;
     }

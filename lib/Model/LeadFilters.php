@@ -1,6 +1,6 @@
 <?php
 /**
- * SentWebhookPayload
+ * LeadFilters
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * SentWebhookPayload Class Doc Comment
+ * LeadFilters Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializable
+class LeadFilters implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SentWebhookPayload';
+    protected static $openAPIModelName = 'LeadFilters';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,10 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'webhook_type' => 'string',
-        'customer_id' => 'string',
-        'timestamp' => 'string',
-        'object' => '\Carbon\Model\SentWebhookPayloadObject'
+        'owner_id' => 'string',
+        'name' => 'string',
+        'converted_account_id' => 'string',
+        'converted_contact_id' => 'string'
     ];
 
     /**
@@ -63,10 +63,10 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'webhook_type' => null,
-        'customer_id' => null,
-        'timestamp' => null,
-        'object' => null
+        'owner_id' => null,
+        'name' => null,
+        'converted_account_id' => null,
+        'converted_contact_id' => null
     ];
 
     /**
@@ -75,10 +75,10 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'webhook_type' => false,
-		'customer_id' => false,
-		'timestamp' => false,
-		'object' => false
+        'owner_id' => true,
+		'name' => true,
+		'converted_account_id' => true,
+		'converted_contact_id' => true
     ];
 
     /**
@@ -167,10 +167,10 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'webhook_type' => 'webhook_type',
-        'customer_id' => 'customer_id',
-        'timestamp' => 'timestamp',
-        'object' => 'object'
+        'owner_id' => 'owner_id',
+        'name' => 'name',
+        'converted_account_id' => 'converted_account_id',
+        'converted_contact_id' => 'converted_contact_id'
     ];
 
     /**
@@ -179,10 +179,10 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'webhook_type' => 'setWebhookType',
-        'customer_id' => 'setCustomerId',
-        'timestamp' => 'setTimestamp',
-        'object' => 'setObject'
+        'owner_id' => 'setOwnerId',
+        'name' => 'setName',
+        'converted_account_id' => 'setConvertedAccountId',
+        'converted_contact_id' => 'setConvertedContactId'
     ];
 
     /**
@@ -191,10 +191,10 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'webhook_type' => 'getWebhookType',
-        'customer_id' => 'getCustomerId',
-        'timestamp' => 'getTimestamp',
-        'object' => 'getObject'
+        'owner_id' => 'getOwnerId',
+        'name' => 'getName',
+        'converted_account_id' => 'getConvertedAccountId',
+        'converted_contact_id' => 'getConvertedContactId'
     ];
 
     /**
@@ -238,65 +238,6 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
         return self::$openAPIModelName;
     }
 
-    public const WEBHOOK_TYPE_ADD = 'ADD';
-    public const WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED = 'ALL_UPLOADED_FILES_QUEUED';
-    public const WEBHOOK_TYPE_CANCEL = 'CANCEL';
-    public const WEBHOOK_TYPE_CHECKUP = 'CHECKUP';
-    public const WEBHOOK_TYPE_DATA_SOURCE_READY = 'DATA_SOURCE_READY';
-    public const WEBHOOK_TYPE_EMBEDDING_STORAGE_MODIFIED = 'EMBEDDING_STORAGE_MODIFIED';
-    public const WEBHOOK_TYPE_FILES_CREATED = 'FILES_CREATED';
-    public const WEBHOOK_TYPE_FILES_SKIPPED = 'FILES_SKIPPED';
-    public const WEBHOOK_TYPE_FILE_DELETED = 'FILE_DELETED';
-    public const WEBHOOK_TYPE_FILE_ERROR = 'FILE_ERROR';
-    public const WEBHOOK_TYPE_FILE_READY = 'FILE_READY';
-    public const WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED = 'FILE_STATISTICS_AGGREGATED';
-    public const WEBHOOK_TYPE_FILE_SYNCING = 'FILE_SYNCING';
-    public const WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED = 'FILE_SYNC_LIMIT_REACHED';
-    public const WEBHOOK_TYPE_MOVED_TO_COLD_STORAGE = 'MOVED_TO_COLD_STORAGE';
-    public const WEBHOOK_TYPE_MOVED_TO_HOT_STORAGE = 'MOVED_TO_HOT_STORAGE';
-    public const WEBHOOK_TYPE_ORGANIZATION_USER_DELETED = 'ORGANIZATION_USER_DELETED';
-    public const WEBHOOK_TYPE_RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR';
-    public const WEBHOOK_TYPE_REVOKE = 'REVOKE';
-    public const WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS = 'SPARSE_VECTOR_QUEUE_STATUS';
-    public const WEBHOOK_TYPE_UPDATE = 'UPDATE';
-    public const WEBHOOK_TYPE_WEBPAGE_ERROR = 'WEBPAGE_ERROR';
-    public const WEBHOOK_TYPE_WEBPAGE_READY = 'WEBPAGE_READY';
-    public const WEBHOOK_TYPE_WEBSCRAPE_URLS_READY = 'WEBSCRAPE_URLS_READY';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getWebhookTypeAllowableValues()
-    {
-        return [
-            self::WEBHOOK_TYPE_ADD,
-            self::WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED,
-            self::WEBHOOK_TYPE_CANCEL,
-            self::WEBHOOK_TYPE_CHECKUP,
-            self::WEBHOOK_TYPE_DATA_SOURCE_READY,
-            self::WEBHOOK_TYPE_EMBEDDING_STORAGE_MODIFIED,
-            self::WEBHOOK_TYPE_FILES_CREATED,
-            self::WEBHOOK_TYPE_FILES_SKIPPED,
-            self::WEBHOOK_TYPE_FILE_DELETED,
-            self::WEBHOOK_TYPE_FILE_ERROR,
-            self::WEBHOOK_TYPE_FILE_READY,
-            self::WEBHOOK_TYPE_FILE_STATISTICS_AGGREGATED,
-            self::WEBHOOK_TYPE_FILE_SYNCING,
-            self::WEBHOOK_TYPE_FILE_SYNC_LIMIT_REACHED,
-            self::WEBHOOK_TYPE_MOVED_TO_COLD_STORAGE,
-            self::WEBHOOK_TYPE_MOVED_TO_HOT_STORAGE,
-            self::WEBHOOK_TYPE_ORGANIZATION_USER_DELETED,
-            self::WEBHOOK_TYPE_RATE_LIMIT_ERROR,
-            self::WEBHOOK_TYPE_REVOKE,
-            self::WEBHOOK_TYPE_SPARSE_VECTOR_QUEUE_STATUS,
-            self::WEBHOOK_TYPE_UPDATE,
-            self::WEBHOOK_TYPE_WEBPAGE_ERROR,
-            self::WEBHOOK_TYPE_WEBPAGE_READY,
-            self::WEBHOOK_TYPE_WEBSCRAPE_URLS_READY,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -313,10 +254,10 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('webhook_type', $data ?? [], null);
-        $this->setIfExists('customer_id', $data ?? [], null);
-        $this->setIfExists('timestamp', $data ?? [], null);
-        $this->setIfExists('object', $data ?? [], null);
+        $this->setIfExists('owner_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('converted_account_id', $data ?? [], null);
+        $this->setIfExists('converted_contact_id', $data ?? [], null);
     }
 
     /**
@@ -346,15 +287,6 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getWebhookTypeAllowableValues();
-        if (!is_null($this->container['webhook_type']) && !in_array($this->container['webhook_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'webhook_type', must be one of '%s'",
-                $this->container['webhook_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -371,127 +303,145 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets webhook_type
+     * Gets owner_id
      *
      * @return string|null
      */
-    public function getWebhookType()
+    public function getOwnerId()
     {
-        return $this->container['webhook_type'];
+        return $this->container['owner_id'];
     }
 
     /**
-     * Sets webhook_type
+     * Sets owner_id
      *
-     * @param string|null $webhook_type webhook_type
+     * @param string|null $owner_id owner_id
      *
      * @return self
      */
-    public function setWebhookType($webhook_type)
+    public function setOwnerId($owner_id)
     {
-        $allowedValues = $this->getWebhookTypeAllowableValues();
-        if (!is_null($webhook_type) && !in_array($webhook_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'webhook_type', must be one of '%s'",
-                    $webhook_type,
-                    implode("', '", $allowedValues)
-                )
-            );
+
+        if (is_null($owner_id)) {
+            array_push($this->openAPINullablesSetToNull, 'owner_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('owner_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        if (is_null($webhook_type)) {
-            throw new \InvalidArgumentException('non-nullable webhook_type cannot be null');
-        }
-
-        $this->container['webhook_type'] = $webhook_type;
+        $this->container['owner_id'] = $owner_id;
 
         return $this;
     }
 
     /**
-     * Gets customer_id
+     * Gets name
      *
      * @return string|null
      */
-    public function getCustomerId()
+    public function getName()
     {
-        return $this->container['customer_id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets customer_id
+     * Sets name
      *
-     * @param string|null $customer_id customer_id
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setCustomerId($customer_id)
+    public function setName($name)
     {
 
-        if (is_null($customer_id)) {
-            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+        if (is_null($name)) {
+            array_push($this->openAPINullablesSetToNull, 'name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['customer_id'] = $customer_id;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets timestamp
+     * Gets converted_account_id
      *
      * @return string|null
      */
-    public function getTimestamp()
+    public function getConvertedAccountId()
     {
-        return $this->container['timestamp'];
+        return $this->container['converted_account_id'];
     }
 
     /**
-     * Sets timestamp
+     * Sets converted_account_id
      *
-     * @param string|null $timestamp timestamp
+     * @param string|null $converted_account_id converted_account_id
      *
      * @return self
      */
-    public function setTimestamp($timestamp)
+    public function setConvertedAccountId($converted_account_id)
     {
 
-        if (is_null($timestamp)) {
-            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
+        if (is_null($converted_account_id)) {
+            array_push($this->openAPINullablesSetToNull, 'converted_account_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('converted_account_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['timestamp'] = $timestamp;
+        $this->container['converted_account_id'] = $converted_account_id;
 
         return $this;
     }
 
     /**
-     * Gets object
+     * Gets converted_contact_id
      *
-     * @return \Carbon\Model\SentWebhookPayloadObject|null
+     * @return string|null
      */
-    public function getObject()
+    public function getConvertedContactId()
     {
-        return $this->container['object'];
+        return $this->container['converted_contact_id'];
     }
 
     /**
-     * Sets object
+     * Sets converted_contact_id
      *
-     * @param \Carbon\Model\SentWebhookPayloadObject|null $object object
+     * @param string|null $converted_contact_id converted_contact_id
      *
      * @return self
      */
-    public function setObject($object)
+    public function setConvertedContactId($converted_contact_id)
     {
 
-        if (is_null($object)) {
-            throw new \InvalidArgumentException('non-nullable object cannot be null');
+        if (is_null($converted_contact_id)) {
+            array_push($this->openAPINullablesSetToNull, 'converted_contact_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('converted_contact_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
-        $this->container['object'] = $object;
+        $this->container['converted_contact_id'] = $converted_contact_id;
 
         return $this;
     }

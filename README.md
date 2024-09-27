@@ -22,6 +22,14 @@ Connect external data to LLMs, no matter the source.
 - [Reference](#reference)
   * [`carbon.auth.getAccessToken`](#carbonauthgetaccesstoken)
   * [`carbon.auth.getWhiteLabeling`](#carbonauthgetwhitelabeling)
+  * [`carbon.cRM.getAccount`](#carboncrmgetaccount)
+  * [`carbon.cRM.getAccounts`](#carboncrmgetaccounts)
+  * [`carbon.cRM.getContact`](#carboncrmgetcontact)
+  * [`carbon.cRM.getContacts`](#carboncrmgetcontacts)
+  * [`carbon.cRM.getLead`](#carboncrmgetlead)
+  * [`carbon.cRM.getLeads`](#carboncrmgetleads)
+  * [`carbon.cRM.getOpportunities`](#carboncrmgetopportunities)
+  * [`carbon.cRM.getOpportunity`](#carboncrmgetopportunity)
   * [`carbon.dataSources.queryUserDataSources`](#carbondatasourcesqueryuserdatasources)
   * [`carbon.dataSources.revokeAccessToken`](#carbondatasourcesrevokeaccesstoken)
   * [`carbon.embeddings.all`](#carbonembeddingsall)
@@ -202,6 +210,387 @@ $result = $carbon->auth->getWhiteLabeling();
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/auth/v1/white_labeling` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.cRM.getAccount`<a id="carboncrmgetaccount"></a>
+
+Get Account
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->cRM->getAccount(
+    id: "id_example", 
+    data_source_id: 1, 
+    include_remote_data: False, 
+    includes: [
+        "string_example"
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### id: `string`<a id="id-string"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### includes: []<a id="includes-"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**Account**](./lib/Model/Account.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/crm/accounts/{id}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.cRM.getAccounts`<a id="carboncrmgetaccounts"></a>
+
+Get Accounts
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->cRM->getAccounts(
+    data_source_id: 1, 
+    include_remote_data: False, 
+    next_cursor: "string_example", 
+    page_size: 1, 
+    order_dir: "asc", 
+    includes: [], 
+    filters: [
+    ], 
+    order_by: "created_at"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### next_cursor: `string`<a id="next_cursor-string"></a>
+
+##### page_size: `int`<a id="page_size-int"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+##### includes: []<a id="includes-"></a>
+
+##### filters: [`AccountFilters`](./lib/Model/AccountFilters.php)<a id="filters-accountfilterslibmodelaccountfiltersphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**AccountResponse**](./lib/Model/AccountResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/crm/accounts` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.cRM.getContact`<a id="carboncrmgetcontact"></a>
+
+Get Contact
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->cRM->getContact(
+    id: "id_example", 
+    data_source_id: 1, 
+    include_remote_data: False, 
+    includes: [
+        "string_example"
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### id: `string`<a id="id-string"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### includes: []<a id="includes-"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**Contact**](./lib/Model/Contact.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/crm/contacts/{id}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.cRM.getContacts`<a id="carboncrmgetcontacts"></a>
+
+Get Contacts
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->cRM->getContacts(
+    data_source_id: 1, 
+    include_remote_data: False, 
+    next_cursor: "string_example", 
+    page_size: 1, 
+    order_dir: "asc", 
+    includes: [], 
+    filters: [
+    ], 
+    order_by: "created_at"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### next_cursor: `string`<a id="next_cursor-string"></a>
+
+##### page_size: `int`<a id="page_size-int"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+##### includes: []<a id="includes-"></a>
+
+##### filters: [`ContactFilters`](./lib/Model/ContactFilters.php)<a id="filters-contactfilterslibmodelcontactfiltersphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**ContactsResponse**](./lib/Model/ContactsResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/crm/contacts` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.cRM.getLead`<a id="carboncrmgetlead"></a>
+
+Get Lead
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->cRM->getLead(
+    id: "id_example", 
+    data_source_id: 1, 
+    include_remote_data: False, 
+    includes: [
+        "string_example"
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### id: `string`<a id="id-string"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### includes: []<a id="includes-"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**Lead**](./lib/Model/Lead.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/crm/leads/{id}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.cRM.getLeads`<a id="carboncrmgetleads"></a>
+
+Get Leads
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->cRM->getLeads(
+    data_source_id: 1, 
+    include_remote_data: False, 
+    next_cursor: "string_example", 
+    page_size: 1, 
+    order_dir: "asc", 
+    includes: [], 
+    filters: [
+    ], 
+    order_by: "created_at"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### next_cursor: `string`<a id="next_cursor-string"></a>
+
+##### page_size: `int`<a id="page_size-int"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+##### includes: []<a id="includes-"></a>
+
+##### filters: [`LeadFilters`](./lib/Model/LeadFilters.php)<a id="filters-leadfilterslibmodelleadfiltersphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**LeadsResponse**](./lib/Model/LeadsResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/crm/leads` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.cRM.getOpportunities`<a id="carboncrmgetopportunities"></a>
+
+Get Opportunities
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->cRM->getOpportunities(
+    data_source_id: 1, 
+    include_remote_data: False, 
+    next_cursor: "string_example", 
+    page_size: 1, 
+    order_dir: "asc", 
+    includes: [], 
+    filters: [
+        "status" => "WON",
+    ], 
+    order_by: "created_at"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### next_cursor: `string`<a id="next_cursor-string"></a>
+
+##### page_size: `int`<a id="page_size-int"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+##### includes: []<a id="includes-"></a>
+
+##### filters: [`OpportunityFilters`](./lib/Model/OpportunityFilters.php)<a id="filters-opportunityfilterslibmodelopportunityfiltersphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**OpportunitiesResponse**](./lib/Model/OpportunitiesResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/crm/opportunities` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.cRM.getOpportunity`<a id="carboncrmgetopportunity"></a>
+
+Get Opportunity
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->cRM->getOpportunity(
+    id: "id_example", 
+    data_source_id: 1, 
+    include_remote_data: False, 
+    includes: [
+        "string_example"
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### id: `string`<a id="id-string"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### includes: []<a id="includes-"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**Opportunity**](./lib/Model/Opportunity.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/crm/opportunities/{id}` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
