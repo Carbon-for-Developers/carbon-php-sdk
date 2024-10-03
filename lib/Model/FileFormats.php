@@ -48,6 +48,8 @@ class FileFormats
 
     public const XLSX = 'XLSX';
 
+    public const XLSM = 'XLSM';
+
     public const MD = 'MD';
 
     public const RTF = 'RTF';
@@ -152,6 +154,7 @@ class FileFormats
             self::DOCX,
             self::PPTX,
             self::XLSX,
+            self::XLSM,
             self::MD,
             self::RTF,
             self::JSON,
