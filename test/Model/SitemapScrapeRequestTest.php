@@ -232,4 +232,13 @@ class SitemapScrapeRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "store_file_only"
+     */
+    public function testPropertyStoreFileOnly()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

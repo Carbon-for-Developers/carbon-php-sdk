@@ -66,7 +66,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'url_paths_to_exclude' => 'string[]',
         'urls_to_scrape' => 'string[]',
         'download_css_and_media' => 'bool',
-        'generate_chunks_only' => 'bool'
+        'generate_chunks_only' => 'bool',
+        'store_file_only' => 'bool'
     ];
 
     /**
@@ -94,7 +95,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'url_paths_to_exclude' => null,
         'urls_to_scrape' => null,
         'download_css_and_media' => null,
-        'generate_chunks_only' => null
+        'generate_chunks_only' => null,
+        'store_file_only' => null
     ];
 
     /**
@@ -120,7 +122,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 		'url_paths_to_exclude' => true,
 		'urls_to_scrape' => true,
 		'download_css_and_media' => true,
-		'generate_chunks_only' => false
+		'generate_chunks_only' => false,
+		'store_file_only' => false
     ];
 
     /**
@@ -226,7 +229,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'url_paths_to_exclude' => 'url_paths_to_exclude',
         'urls_to_scrape' => 'urls_to_scrape',
         'download_css_and_media' => 'download_css_and_media',
-        'generate_chunks_only' => 'generate_chunks_only'
+        'generate_chunks_only' => 'generate_chunks_only',
+        'store_file_only' => 'store_file_only'
     ];
 
     /**
@@ -252,7 +256,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'url_paths_to_exclude' => 'setUrlPathsToExclude',
         'urls_to_scrape' => 'setUrlsToScrape',
         'download_css_and_media' => 'setDownloadCssAndMedia',
-        'generate_chunks_only' => 'setGenerateChunksOnly'
+        'generate_chunks_only' => 'setGenerateChunksOnly',
+        'store_file_only' => 'setStoreFileOnly'
     ];
 
     /**
@@ -278,7 +283,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'url_paths_to_exclude' => 'getUrlPathsToExclude',
         'urls_to_scrape' => 'getUrlsToScrape',
         'download_css_and_media' => 'getDownloadCssAndMedia',
-        'generate_chunks_only' => 'getGenerateChunksOnly'
+        'generate_chunks_only' => 'getGenerateChunksOnly',
+        'store_file_only' => 'getStoreFileOnly'
     ];
 
     /**
@@ -356,6 +362,7 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('urls_to_scrape', $data ?? [], null);
         $this->setIfExists('download_css_and_media', $data ?? [], false);
         $this->setIfExists('generate_chunks_only', $data ?? [], false);
+        $this->setIfExists('store_file_only', $data ?? [], false);
     }
 
     /**
@@ -1051,6 +1058,35 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['generate_chunks_only'] = $generate_chunks_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets store_file_only
+     *
+     * @return bool|null
+     */
+    public function getStoreFileOnly()
+    {
+        return $this->container['store_file_only'];
+    }
+
+    /**
+     * Sets store_file_only
+     *
+     * @param bool|null $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done.
+     *
+     * @return self
+     */
+    public function setStoreFileOnly($store_file_only)
+    {
+
+        if (is_null($store_file_only)) {
+            throw new \InvalidArgumentException('non-nullable store_file_only cannot be null');
+        }
+
+        $this->container['store_file_only'] = $store_file_only;
 
         return $this;
     }

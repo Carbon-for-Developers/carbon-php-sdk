@@ -65,7 +65,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'url_paths_to_include' => 'string[]',
         'download_css_and_media' => 'bool',
-        'generate_chunks_only' => 'bool'
+        'generate_chunks_only' => 'bool',
+        'store_file_only' => 'bool'
     ];
 
     /**
@@ -92,7 +93,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => null,
         'url_paths_to_include' => null,
         'download_css_and_media' => null,
-        'generate_chunks_only' => null
+        'generate_chunks_only' => null,
+        'store_file_only' => null
     ];
 
     /**
@@ -117,7 +119,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'embedding_model' => false,
 		'url_paths_to_include' => true,
 		'download_css_and_media' => true,
-		'generate_chunks_only' => false
+		'generate_chunks_only' => false,
+		'store_file_only' => false
     ];
 
     /**
@@ -222,7 +225,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'embedding_model',
         'url_paths_to_include' => 'url_paths_to_include',
         'download_css_and_media' => 'download_css_and_media',
-        'generate_chunks_only' => 'generate_chunks_only'
+        'generate_chunks_only' => 'generate_chunks_only',
+        'store_file_only' => 'store_file_only'
     ];
 
     /**
@@ -247,7 +251,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'setEmbeddingModel',
         'url_paths_to_include' => 'setUrlPathsToInclude',
         'download_css_and_media' => 'setDownloadCssAndMedia',
-        'generate_chunks_only' => 'setGenerateChunksOnly'
+        'generate_chunks_only' => 'setGenerateChunksOnly',
+        'store_file_only' => 'setStoreFileOnly'
     ];
 
     /**
@@ -272,7 +277,8 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'getEmbeddingModel',
         'url_paths_to_include' => 'getUrlPathsToInclude',
         'download_css_and_media' => 'getDownloadCssAndMedia',
-        'generate_chunks_only' => 'getGenerateChunksOnly'
+        'generate_chunks_only' => 'getGenerateChunksOnly',
+        'store_file_only' => 'getStoreFileOnly'
     ];
 
     /**
@@ -349,6 +355,7 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('url_paths_to_include', $data ?? [], null);
         $this->setIfExists('download_css_and_media', $data ?? [], false);
         $this->setIfExists('generate_chunks_only', $data ?? [], false);
+        $this->setIfExists('store_file_only', $data ?? [], false);
     }
 
     /**
@@ -1009,6 +1016,35 @@ class WebscrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['generate_chunks_only'] = $generate_chunks_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets store_file_only
+     *
+     * @return bool|null
+     */
+    public function getStoreFileOnly()
+    {
+        return $this->container['store_file_only'];
+    }
+
+    /**
+     * Sets store_file_only
+     *
+     * @param bool|null $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done.
+     *
+     * @return self
+     */
+    public function setStoreFileOnly($store_file_only)
+    {
+
+        if (is_null($store_file_only)) {
+            throw new \InvalidArgumentException('non-nullable store_file_only cannot be null');
+        }
+
+        $this->container['store_file_only'] = $store_file_only;
 
         return $this;
     }

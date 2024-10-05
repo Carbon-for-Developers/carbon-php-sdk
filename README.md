@@ -1651,7 +1651,8 @@ $result = $carbon->files->upload(
     split_rows: False, 
     enable_cold_storage: False, 
     hot_storage_time_to_live: 1, 
-    generate_chunks_only: False
+    generate_chunks_only: False, 
+    store_file_only: False
 );
 ```
 
@@ -1731,6 +1732,10 @@ Time in seconds after which the file will be moved to cold storage.
 
 If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag.
 
+##### store_file_only: `bool`<a id="store_file_only-bool"></a>
+
+If this flag is enabled, the file will be stored with Carbon, but no processing will be done.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1774,7 +1779,8 @@ $result = $carbon->files->uploadFromUrl(
     cold_storage_params: [
         "enable_cold_storage" => False,
     ], 
-    generate_chunks_only: False
+    generate_chunks_only: False, 
+    store_file_only: False
 );
 ```
 
@@ -1822,6 +1828,10 @@ Number of objects per chunk. For csv, tsv, xlsx, and json files only.
 
 If this flag is enabled, the file will be chunked and stored with Carbon,         but no embeddings will be generated. This overrides the skip_embedding_generation flag.
 
+##### store_file_only: `bool`<a id="store_file_only-bool"></a>
+
+If this flag is enabled, the file will be stored with Carbon, but no processing will be done.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1865,7 +1875,8 @@ $result = $carbon->files->uploadText(
     cold_storage_params: [
         "enable_cold_storage" => False,
     ], 
-    generate_chunks_only: False
+    generate_chunks_only: False, 
+    store_file_only: False
 );
 ```
 
@@ -1892,6 +1903,10 @@ $result = $carbon->files->uploadText(
 ##### generate_chunks_only: `bool`<a id="generate_chunks_only-bool"></a>
 
 If this flag is enabled, the file will be chunked and stored with Carbon,         but no embeddings will be generated. This overrides the skip_embedding_generation flag.
+
+##### store_file_only: `bool`<a id="store_file_only-bool"></a>
+
+If this flag is enabled, the file will be stored with Carbon, but no processing will be done.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2020,6 +2035,7 @@ $result = $carbon->integrations->connectFreshdesk(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ]
 );
@@ -2101,6 +2117,7 @@ $result = $carbon->integrations->connectGitbook(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ]
 );
@@ -2180,6 +2197,7 @@ $result = $carbon->integrations->connectGuru(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ]
 );
@@ -2327,6 +2345,7 @@ $result = $carbon->integrations->getOauthUrl(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ], 
     automatically_open_file_picker: True, 
@@ -2776,6 +2795,7 @@ $result = $carbon->integrations->syncAzureBlobFiles(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ]
 );
@@ -2923,6 +2943,7 @@ $result = $carbon->integrations->syncConfluence(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ]
 );
@@ -3048,6 +3069,7 @@ $result = $carbon->integrations->syncFiles(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ]
 );
@@ -3176,6 +3198,7 @@ $result = $carbon->integrations->syncGitbook(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ]
 );
@@ -3300,6 +3323,7 @@ $result = $carbon->integrations->syncGmail(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ], 
     incremental_sync: False
@@ -3437,6 +3461,7 @@ $result = $carbon->integrations->syncOutlook(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ], 
     incremental_sync: False
@@ -3616,6 +3641,7 @@ $result = $carbon->integrations->syncS3Files(
         "include_speaker_labels" => False,
         "split_rows" => False,
         "generate_chunks_only" => False,
+        "store_file_only" => False,
         "skip_file_processing" => False,
     ]
 );
@@ -4201,7 +4227,8 @@ $result = $carbon->utilities->scrapeSitemap(
     url_paths_to_exclude: [], 
     urls_to_scrape: [], 
     download_css_and_media: False, 
-    generate_chunks_only: False
+    generate_chunks_only: False, 
+    store_file_only: False
 );
 ```
 
@@ -4253,6 +4280,10 @@ Whether the scraper should download css and media from the page (images, fonts, 
 
 If this flag is enabled, the file will be chunked and stored with Carbon,           but no embeddings will be generated. This overrides the skip_embedding_generation flag.
 
+##### store_file_only: `bool`<a id="store_file_only-bool"></a>
+
+If this flag is enabled, the file will be stored with Carbon, but no processing will be done.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -4301,6 +4332,7 @@ $result = $carbon->utilities->scrapeWeb(
             "url_paths_to_include" => [],
             "download_css_and_media" => False,
             "generate_chunks_only" => False,
+            "store_file_only" => False,
         ]
     ],
 );

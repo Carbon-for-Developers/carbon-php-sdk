@@ -58,7 +58,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => '\Carbon\Model\EmbeddingGeneratorsNullable',
         'generate_sparse_vectors' => 'bool',
         'cold_storage_params' => '\Carbon\Model\ColdStorageProps',
-        'generate_chunks_only' => 'bool'
+        'generate_chunks_only' => 'bool',
+        'store_file_only' => 'bool'
     ];
 
     /**
@@ -78,7 +79,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => null,
         'generate_sparse_vectors' => null,
         'cold_storage_params' => null,
-        'generate_chunks_only' => null
+        'generate_chunks_only' => null,
+        'store_file_only' => null
     ];
 
     /**
@@ -96,7 +98,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'embedding_model' => true,
 		'generate_sparse_vectors' => true,
 		'cold_storage_params' => false,
-		'generate_chunks_only' => false
+		'generate_chunks_only' => false,
+		'store_file_only' => false
     ];
 
     /**
@@ -194,7 +197,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'cold_storage_params' => 'cold_storage_params',
-        'generate_chunks_only' => 'generate_chunks_only'
+        'generate_chunks_only' => 'generate_chunks_only',
+        'store_file_only' => 'store_file_only'
     ];
 
     /**
@@ -212,7 +216,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'cold_storage_params' => 'setColdStorageParams',
-        'generate_chunks_only' => 'setGenerateChunksOnly'
+        'generate_chunks_only' => 'setGenerateChunksOnly',
+        'store_file_only' => 'setStoreFileOnly'
     ];
 
     /**
@@ -230,7 +235,8 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'cold_storage_params' => 'getColdStorageParams',
-        'generate_chunks_only' => 'getGenerateChunksOnly'
+        'generate_chunks_only' => 'getGenerateChunksOnly',
+        'store_file_only' => 'getStoreFileOnly'
     ];
 
     /**
@@ -300,6 +306,7 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('cold_storage_params', $data ?? [], null);
         $this->setIfExists('generate_chunks_only', $data ?? [], false);
+        $this->setIfExists('store_file_only', $data ?? [], false);
     }
 
     /**
@@ -684,6 +691,35 @@ class RawTextInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['generate_chunks_only'] = $generate_chunks_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets store_file_only
+     *
+     * @return bool|null
+     */
+    public function getStoreFileOnly()
+    {
+        return $this->container['store_file_only'];
+    }
+
+    /**
+     * Sets store_file_only
+     *
+     * @param bool|null $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done.
+     *
+     * @return self
+     */
+    public function setStoreFileOnly($store_file_only)
+    {
+
+        if (is_null($store_file_only)) {
+            throw new \InvalidArgumentException('non-nullable store_file_only cannot be null');
+        }
+
+        $this->container['store_file_only'] = $store_file_only;
 
         return $this;
     }
