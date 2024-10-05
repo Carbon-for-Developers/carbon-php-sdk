@@ -57,6 +57,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'include_speaker_labels' => 'bool',
         'split_rows' => 'bool',
         'generate_chunks_only' => 'bool',
+        'store_file_only' => 'bool',
         'skip_file_processing' => 'bool'
     ];
 
@@ -75,6 +76,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'include_speaker_labels' => null,
         'split_rows' => null,
         'generate_chunks_only' => null,
+        'store_file_only' => null,
         'skip_file_processing' => null
     ];
 
@@ -91,6 +93,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
 		'include_speaker_labels' => false,
 		'split_rows' => false,
 		'generate_chunks_only' => false,
+		'store_file_only' => false,
 		'skip_file_processing' => false
     ];
 
@@ -187,6 +190,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'include_speaker_labels' => 'include_speaker_labels',
         'split_rows' => 'split_rows',
         'generate_chunks_only' => 'generate_chunks_only',
+        'store_file_only' => 'store_file_only',
         'skip_file_processing' => 'skip_file_processing'
     ];
 
@@ -203,6 +207,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'include_speaker_labels' => 'setIncludeSpeakerLabels',
         'split_rows' => 'setSplitRows',
         'generate_chunks_only' => 'setGenerateChunksOnly',
+        'store_file_only' => 'setStoreFileOnly',
         'skip_file_processing' => 'setSkipFileProcessing'
     ];
 
@@ -219,6 +224,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         'include_speaker_labels' => 'getIncludeSpeakerLabels',
         'split_rows' => 'getSplitRows',
         'generate_chunks_only' => 'getGenerateChunksOnly',
+        'store_file_only' => 'getStoreFileOnly',
         'skip_file_processing' => 'getSkipFileProcessing'
     ];
 
@@ -286,6 +292,7 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('include_speaker_labels', $data ?? [], false);
         $this->setIfExists('split_rows', $data ?? [], false);
         $this->setIfExists('generate_chunks_only', $data ?? [], false);
+        $this->setIfExists('store_file_only', $data ?? [], false);
         $this->setIfExists('skip_file_processing', $data ?? [], false);
     }
 
@@ -537,6 +544,35 @@ class FileSyncConfigNullable implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['generate_chunks_only'] = $generate_chunks_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets store_file_only
+     *
+     * @return bool|null
+     */
+    public function getStoreFileOnly()
+    {
+        return $this->container['store_file_only'];
+    }
+
+    /**
+     * Sets store_file_only
+     *
+     * @param bool|null $store_file_only If this flag is enabled, the file will be stored with Carbon, but no chunks or embeddings will be generated.            This overrides the skip_embedding_generation and generate_chunks_only flags.
+     *
+     * @return self
+     */
+    public function setStoreFileOnly($store_file_only)
+    {
+
+        if (is_null($store_file_only)) {
+            throw new \InvalidArgumentException('non-nullable store_file_only cannot be null');
+        }
+
+        $this->container['store_file_only'] = $store_file_only;
 
         return $this;
     }

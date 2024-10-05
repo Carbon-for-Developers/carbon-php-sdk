@@ -4749,6 +4749,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
      * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
      * @param  bool $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag. (optional, default to false)
+     * @param  bool $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
@@ -4776,6 +4777,7 @@ class FilesApi extends \Carbon\CustomApi
         $enable_cold_storage = false,
         $hot_storage_time_to_live = SENTINEL_VALUE,
         $generate_chunks_only = false,
+        $store_file_only = false,
         string $contentType = self::contentTypes['upload'][0]
     )
     {
@@ -4783,7 +4785,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "file", $file);
         $body_create_upload_file_uploadfile_post = $_body;
 
-        list($response) = $this->uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $generate_chunks_only, $contentType);
+        list($response) = $this->uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $generate_chunks_only, $store_file_only, $contentType);
         return $response;
     }
 
@@ -4814,15 +4816,16 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
      * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
      * @param  bool $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag. (optional, default to false)
+     * @param  bool $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \Carbon\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Carbon\Model\UserFile|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = null, $include_speaker_labels = false, $media_type = null, $split_rows = false, $enable_cold_storage = false, $hot_storage_time_to_live = null, $generate_chunks_only = false, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function uploadWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = null, $include_speaker_labels = false, $media_type = null, $split_rows = false, $enable_cold_storage = false, $hot_storage_time_to_live = null, $generate_chunks_only = false, $store_file_only = false, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $generate_chunks_only, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $generate_chunks_only, $store_file_only, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -4858,6 +4861,7 @@ class FilesApi extends \Carbon\CustomApi
                         $enable_cold_storage,
                         $hot_storage_time_to_live,
                         $generate_chunks_only,
+                        $store_file_only,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
                     );
@@ -4992,6 +4996,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
      * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
      * @param  bool $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag. (optional, default to false)
+     * @param  bool $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5018,6 +5023,7 @@ class FilesApi extends \Carbon\CustomApi
         $enable_cold_storage = false,
         $hot_storage_time_to_live = SENTINEL_VALUE,
         $generate_chunks_only = false,
+        $store_file_only = false,
         string $contentType = self::contentTypes['upload'][0]
     )
     {
@@ -5025,7 +5031,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "file", $file);
         $body_create_upload_file_uploadfile_post = $_body;
 
-        return $this->uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $generate_chunks_only, $contentType)
+        return $this->uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $generate_chunks_only, $store_file_only, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -5060,15 +5066,16 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
      * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
      * @param  bool $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag. (optional, default to false)
+     * @param  bool $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = null, $include_speaker_labels = false, $media_type = null, $split_rows = false, $enable_cold_storage = false, $hot_storage_time_to_live = null, $generate_chunks_only = false, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    public function uploadAsyncWithHttpInfo($file, $body_create_upload_file_uploadfile_post, $chunk_size = null, $chunk_overlap = null, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = null, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = null, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = null, $include_speaker_labels = false, $media_type = null, $split_rows = false, $enable_cold_storage = false, $hot_storage_time_to_live = null, $generate_chunks_only = false, $store_file_only = false, string $contentType = self::contentTypes['upload'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
     {
         $returnType = '\Carbon\Model\UserFile';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $generate_chunks_only, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size, $chunk_overlap, $skip_embedding_generation, $set_page_as_boundary, $embedding_model, $use_ocr, $generate_sparse_vectors, $prepend_filename_to_chunks, $max_items_per_chunk, $parse_pdf_tables_with_ocr, $detect_audio_language, $transcription_service, $include_speaker_labels, $media_type, $split_rows, $enable_cold_storage, $hot_storage_time_to_live, $generate_chunks_only, $store_file_only, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
@@ -5132,12 +5139,13 @@ class FilesApi extends \Carbon\CustomApi
      * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
      * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
      * @param  bool $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag. (optional, default to false)
+     * @param  bool $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size = SENTINEL_VALUE, $chunk_overlap = SENTINEL_VALUE, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = SENTINEL_VALUE, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = SENTINEL_VALUE, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = SENTINEL_VALUE, $include_speaker_labels = false, $media_type = SENTINEL_VALUE, $split_rows = false, $enable_cold_storage = false, $hot_storage_time_to_live = SENTINEL_VALUE, $generate_chunks_only = false, string $contentType = self::contentTypes['upload'][0])
+    public function uploadRequest($file, $body_create_upload_file_uploadfile_post, $chunk_size = SENTINEL_VALUE, $chunk_overlap = SENTINEL_VALUE, $skip_embedding_generation = false, $set_page_as_boundary = false, $embedding_model = SENTINEL_VALUE, $use_ocr = false, $generate_sparse_vectors = false, $prepend_filename_to_chunks = false, $max_items_per_chunk = SENTINEL_VALUE, $parse_pdf_tables_with_ocr = false, $detect_audio_language = false, $transcription_service = SENTINEL_VALUE, $include_speaker_labels = false, $media_type = SENTINEL_VALUE, $split_rows = false, $enable_cold_storage = false, $hot_storage_time_to_live = SENTINEL_VALUE, $generate_chunks_only = false, $store_file_only = false, string $contentType = self::contentTypes['upload'][0])
     {
 
         // verify the required parameter 'file' is set
@@ -5375,6 +5383,17 @@ class FilesApi extends \Carbon\CustomApi
                 false // required
             ) ?? []);
         }
+        if ($store_file_only !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $store_file_only,
+                'store_file_only', // param base name
+                'boolean', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
 
 
 
@@ -5505,6 +5524,7 @@ class FilesApi extends \Carbon\CustomApi
         $split_rows = false,
         $cold_storage_params = SENTINEL_VALUE,
         $generate_chunks_only = false,
+        $store_file_only = false,
         string $contentType = self::contentTypes['uploadFromUrl'][0]
     )
     {
@@ -5528,6 +5548,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "split_rows", $split_rows);
         $this->setRequestBodyProperty($_body, "cold_storage_params", $cold_storage_params);
         $this->setRequestBodyProperty($_body, "generate_chunks_only", $generate_chunks_only);
+        $this->setRequestBodyProperty($_body, "store_file_only", $store_file_only);
         $upload_file_from_url_input = $_body;
 
         list($response) = $this->uploadFromUrlWithHttpInfo($upload_file_from_url_input, $contentType);
@@ -5704,6 +5725,7 @@ class FilesApi extends \Carbon\CustomApi
         $split_rows = false,
         $cold_storage_params = SENTINEL_VALUE,
         $generate_chunks_only = false,
+        $store_file_only = false,
         string $contentType = self::contentTypes['uploadFromUrl'][0]
     )
     {
@@ -5727,6 +5749,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "split_rows", $split_rows);
         $this->setRequestBodyProperty($_body, "cold_storage_params", $cold_storage_params);
         $this->setRequestBodyProperty($_body, "generate_chunks_only", $generate_chunks_only);
+        $this->setRequestBodyProperty($_body, "store_file_only", $store_file_only);
         $upload_file_from_url_input = $_body;
 
         return $this->uploadFromUrlAsyncWithHttpInfo($upload_file_from_url_input, $contentType)
@@ -5938,6 +5961,7 @@ class FilesApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $cold_storage_params = SENTINEL_VALUE,
         $generate_chunks_only = false,
+        $store_file_only = false,
         string $contentType = self::contentTypes['uploadText'][0]
     )
     {
@@ -5952,6 +5976,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "cold_storage_params", $cold_storage_params);
         $this->setRequestBodyProperty($_body, "generate_chunks_only", $generate_chunks_only);
+        $this->setRequestBodyProperty($_body, "store_file_only", $store_file_only);
         $raw_text_input = $_body;
 
         list($response) = $this->uploadTextWithHttpInfo($raw_text_input, $contentType);
@@ -6123,6 +6148,7 @@ class FilesApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $cold_storage_params = SENTINEL_VALUE,
         $generate_chunks_only = false,
+        $store_file_only = false,
         string $contentType = self::contentTypes['uploadText'][0]
     )
     {
@@ -6137,6 +6163,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "cold_storage_params", $cold_storage_params);
         $this->setRequestBodyProperty($_body, "generate_chunks_only", $generate_chunks_only);
+        $this->setRequestBodyProperty($_body, "store_file_only", $store_file_only);
         $raw_text_input = $_body;
 
         return $this->uploadTextAsyncWithHttpInfo($raw_text_input, $contentType)

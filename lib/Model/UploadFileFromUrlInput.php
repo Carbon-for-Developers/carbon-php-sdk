@@ -67,7 +67,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'media_type' => '\Carbon\Model\FileContentTypesNullable',
         'split_rows' => 'bool',
         'cold_storage_params' => '\Carbon\Model\ColdStorageProps',
-        'generate_chunks_only' => 'bool'
+        'generate_chunks_only' => 'bool',
+        'store_file_only' => 'bool'
     ];
 
     /**
@@ -96,7 +97,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'media_type' => null,
         'split_rows' => null,
         'cold_storage_params' => null,
-        'generate_chunks_only' => null
+        'generate_chunks_only' => null,
+        'store_file_only' => null
     ];
 
     /**
@@ -123,7 +125,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
 		'media_type' => true,
 		'split_rows' => false,
 		'cold_storage_params' => false,
-		'generate_chunks_only' => false
+		'generate_chunks_only' => false,
+		'store_file_only' => false
     ];
 
     /**
@@ -230,7 +233,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'media_type' => 'media_type',
         'split_rows' => 'split_rows',
         'cold_storage_params' => 'cold_storage_params',
-        'generate_chunks_only' => 'generate_chunks_only'
+        'generate_chunks_only' => 'generate_chunks_only',
+        'store_file_only' => 'store_file_only'
     ];
 
     /**
@@ -257,7 +261,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'media_type' => 'setMediaType',
         'split_rows' => 'setSplitRows',
         'cold_storage_params' => 'setColdStorageParams',
-        'generate_chunks_only' => 'setGenerateChunksOnly'
+        'generate_chunks_only' => 'setGenerateChunksOnly',
+        'store_file_only' => 'setStoreFileOnly'
     ];
 
     /**
@@ -284,7 +289,8 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         'media_type' => 'getMediaType',
         'split_rows' => 'getSplitRows',
         'cold_storage_params' => 'getColdStorageParams',
-        'generate_chunks_only' => 'getGenerateChunksOnly'
+        'generate_chunks_only' => 'getGenerateChunksOnly',
+        'store_file_only' => 'getStoreFileOnly'
     ];
 
     /**
@@ -363,6 +369,7 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('split_rows', $data ?? [], false);
         $this->setIfExists('cold_storage_params', $data ?? [], null);
         $this->setIfExists('generate_chunks_only', $data ?? [], false);
+        $this->setIfExists('store_file_only', $data ?? [], false);
     }
 
     /**
@@ -999,6 +1006,35 @@ class UploadFileFromUrlInput implements ModelInterface, ArrayAccess, \JsonSerial
         }
 
         $this->container['generate_chunks_only'] = $generate_chunks_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets store_file_only
+     *
+     * @return bool|null
+     */
+    public function getStoreFileOnly()
+    {
+        return $this->container['store_file_only'];
+    }
+
+    /**
+     * Sets store_file_only
+     *
+     * @param bool|null $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done.
+     *
+     * @return self
+     */
+    public function setStoreFileOnly($store_file_only)
+    {
+
+        if (is_null($store_file_only)) {
+            throw new \InvalidArgumentException('non-nullable store_file_only cannot be null');
+        }
+
+        $this->container['store_file_only'] = $store_file_only;
 
         return $this;
     }
