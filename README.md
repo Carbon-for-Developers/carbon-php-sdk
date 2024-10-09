@@ -51,6 +51,13 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.files.upload`](#carbonfilesupload)
   * [`carbon.files.uploadFromUrl`](#carbonfilesuploadfromurl)
   * [`carbon.files.uploadText`](#carbonfilesuploadtext)
+  * [`carbon.github.getIssue`](#carbongithubgetissue)
+  * [`carbon.github.getIssues`](#carbongithubgetissues)
+  * [`carbon.github.getPr`](#carbongithubgetpr)
+  * [`carbon.github.getPrComments`](#carbongithubgetprcomments)
+  * [`carbon.github.getPrCommits`](#carbongithubgetprcommits)
+  * [`carbon.github.getPrFiles`](#carbongithubgetprfiles)
+  * [`carbon.github.getPullRequests`](#carbongithubgetpullrequests)
   * [`carbon.integrations.cancel`](#carbonintegrationscancel)
   * [`carbon.integrations.connectDataSource`](#carbonintegrationsconnectdatasource)
   * [`carbon.integrations.connectFreshdesk`](#carbonintegrationsconnectfreshdesk)
@@ -1916,6 +1923,363 @@ If this flag is enabled, the file will be stored with Carbon, but no processing 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/upload_text` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.github.getIssue`<a id="carbongithubgetissue"></a>
+
+Issue
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->github->getIssue(
+    issue_number: 1, 
+    include_remote_data: False, 
+    data_source_id: 1, 
+    repository: "string_example"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### issue_number: `int`<a id="issue_number-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### repository: `string`<a id="repository-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**Issue**](./lib/Model/Issue.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/github/issues/{issue_number}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.github.getIssues`<a id="carbongithubgetissues"></a>
+
+Issues
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->github->getIssues(
+    data_source_id: 1, 
+    repository: "string_example", 
+    include_remote_data: False, 
+    page: 1, 
+    page_size: 30, 
+    next_cursor: "string_example", 
+    filters: [
+        "state" => "closed",
+    ], 
+    order_by: "created", 
+    order_dir: "asc"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### repository: `string`<a id="repository-string"></a>
+
+Full name of the repository, denoted as {owner}/{repo}
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### page: `int`<a id="page-int"></a>
+
+##### page_size: `int`<a id="page_size-int"></a>
+
+##### next_cursor: `string`<a id="next_cursor-string"></a>
+
+##### filters: [`IssuesFilter`](./lib/Model/IssuesFilter.php)<a id="filters-issuesfilterlibmodelissuesfilterphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**IssuesResponse**](./lib/Model/IssuesResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/github/issues` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.github.getPr`<a id="carbongithubgetpr"></a>
+
+Get Pr
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->github->getPr(
+    pull_number: 1, 
+    include_remote_data: False, 
+    data_source_id: 1, 
+    repository: "string_example"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### pull_number: `int`<a id="pull_number-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### repository: `string`<a id="repository-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**PullRequestExtended**](./lib/Model/PullRequestExtended.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/github/pull_requests/{pull_number}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.github.getPrComments`<a id="carbongithubgetprcomments"></a>
+
+Pr Comments
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->github->getPrComments(
+    data_source_id: 1, 
+    repository: "string_example", 
+    pull_number: 1, 
+    include_remote_data: False, 
+    page: 1, 
+    page_size: 30, 
+    next_cursor: "string_example", 
+    order_by: "created", 
+    order_dir: "asc"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### repository: `string`<a id="repository-string"></a>
+
+Full name of the repository, denoted as {owner}/{repo}
+
+##### pull_number: `int`<a id="pull_number-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### page: `int`<a id="page-int"></a>
+
+##### page_size: `int`<a id="page_size-int"></a>
+
+##### next_cursor: `string`<a id="next_cursor-string"></a>
+
+##### order_by:<a id="order_by"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**CommentsResponse**](./lib/Model/CommentsResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/github/pull_requests/comments` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.github.getPrCommits`<a id="carbongithubgetprcommits"></a>
+
+Pr Commits
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->github->getPrCommits(
+    data_source_id: 1, 
+    repository: "string_example", 
+    pull_number: 1, 
+    include_remote_data: False, 
+    page: 1, 
+    page_size: 30, 
+    next_cursor: "string_example"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### repository: `string`<a id="repository-string"></a>
+
+Full name of the repository, denoted as {owner}/{repo}
+
+##### pull_number: `int`<a id="pull_number-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### page: `int`<a id="page-int"></a>
+
+##### page_size: `int`<a id="page_size-int"></a>
+
+##### next_cursor: `string`<a id="next_cursor-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**CommitsResponse**](./lib/Model/CommitsResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/github/pull_requests/commits` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.github.getPrFiles`<a id="carbongithubgetprfiles"></a>
+
+Pr Files
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->github->getPrFiles(
+    data_source_id: 1, 
+    repository: "string_example", 
+    pull_number: 1, 
+    include_remote_data: False, 
+    page: 1, 
+    page_size: 30, 
+    next_cursor: "string_example"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### repository: `string`<a id="repository-string"></a>
+
+Full name of the repository, denoted as {owner}/{repo}
+
+##### pull_number: `int`<a id="pull_number-int"></a>
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### page: `int`<a id="page-int"></a>
+
+##### page_size: `int`<a id="page_size-int"></a>
+
+##### next_cursor: `string`<a id="next_cursor-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**FilesResponse**](./lib/Model/FilesResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/github/pull_requests/files` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.github.getPullRequests`<a id="carbongithubgetpullrequests"></a>
+
+Get Prs
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->github->getPullRequests(
+    data_source_id: 1, 
+    repository: "string_example", 
+    include_remote_data: False, 
+    page: 1, 
+    page_size: 30, 
+    next_cursor: "string_example", 
+    filters: [
+        "state" => "closed",
+    ], 
+    order_by: "created", 
+    order_dir: "asc"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### repository: `string`<a id="repository-string"></a>
+
+Full name of the repository, denoted as {owner}/{repo}
+
+##### include_remote_data: `bool`<a id="include_remote_data-bool"></a>
+
+##### page: `int`<a id="page-int"></a>
+
+##### page_size: `int`<a id="page_size-int"></a>
+
+##### next_cursor: `string`<a id="next_cursor-string"></a>
+
+##### filters: [`PullRequestFilters`](./lib/Model/PullRequestFilters.php)<a id="filters-pullrequestfilterslibmodelpullrequestfiltersphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**PullRequestResponse**](./lib/Model/PullRequestResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/data/github/pull_requests` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

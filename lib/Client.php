@@ -15,6 +15,8 @@ class Client
     
     public readonly \Carbon\Api\FilesApi $files;
     
+    public readonly \Carbon\Api\GithubApi $github;
+    
     public readonly \Carbon\Api\IntegrationsApi $integrations;
     
     public readonly \Carbon\Api\OrganizationsApi $organizations;
@@ -51,6 +53,7 @@ class Client
         $this->dataSources = new \Carbon\Api\DataSourcesApi($config);
         $this->embeddings = new \Carbon\Api\EmbeddingsApi($config);
         $this->files = new \Carbon\Api\FilesApi($config);
+        $this->github = new \Carbon\Api\GithubApi($config);
         $this->integrations = new \Carbon\Api\IntegrationsApi($config);
         $this->organizations = new \Carbon\Api\OrganizationsApi($config);
         $this->users = new \Carbon\Api\UsersApi($config);
