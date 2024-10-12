@@ -239,6 +239,7 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     public const WEBHOOK_TYPE_ADD = 'ADD';
+    public const WEBHOOK_TYPE_ALL_FILES_PROCESSED = 'ALL_FILES_PROCESSED';
     public const WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED = 'ALL_UPLOADED_FILES_QUEUED';
     public const WEBHOOK_TYPE_CANCEL = 'CANCEL';
     public const WEBHOOK_TYPE_CHECKUP = 'CHECKUP';
@@ -272,6 +273,7 @@ class SentWebhookPayload implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         return [
             self::WEBHOOK_TYPE_ADD,
+            self::WEBHOOK_TYPE_ALL_FILES_PROCESSED,
             self::WEBHOOK_TYPE_ALL_UPLOADED_FILES_QUEUED,
             self::WEBHOOK_TYPE_CANCEL,
             self::WEBHOOK_TYPE_CHECKUP,
