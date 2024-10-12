@@ -63,6 +63,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'include_all_children' => 'bool',
         'non_synced_only' => 'bool',
         'request_ids' => 'string[]',
+        'upload_ids' => 'string[]',
         'sync_error_message' => 'string',
         'include_containers' => 'bool',
         'external_urls' => 'string[]',
@@ -91,6 +92,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'include_all_children' => null,
         'non_synced_only' => null,
         'request_ids' => null,
+        'upload_ids' => null,
         'sync_error_message' => null,
         'include_containers' => null,
         'external_urls' => null,
@@ -117,6 +119,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
 		'include_all_children' => false,
 		'non_synced_only' => false,
 		'request_ids' => true,
+		'upload_ids' => true,
 		'sync_error_message' => true,
 		'include_containers' => true,
 		'external_urls' => true,
@@ -223,6 +226,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'include_all_children' => 'include_all_children',
         'non_synced_only' => 'non_synced_only',
         'request_ids' => 'request_ids',
+        'upload_ids' => 'upload_ids',
         'sync_error_message' => 'sync_error_message',
         'include_containers' => 'include_containers',
         'external_urls' => 'external_urls',
@@ -249,6 +253,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'include_all_children' => 'setIncludeAllChildren',
         'non_synced_only' => 'setNonSyncedOnly',
         'request_ids' => 'setRequestIds',
+        'upload_ids' => 'setUploadIds',
         'sync_error_message' => 'setSyncErrorMessage',
         'include_containers' => 'setIncludeContainers',
         'external_urls' => 'setExternalUrls',
@@ -275,6 +280,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         'include_all_children' => 'getIncludeAllChildren',
         'non_synced_only' => 'getNonSyncedOnly',
         'request_ids' => 'getRequestIds',
+        'upload_ids' => 'getUploadIds',
         'sync_error_message' => 'getSyncErrorMessage',
         'include_containers' => 'getIncludeContainers',
         'external_urls' => 'getExternalUrls',
@@ -352,6 +358,7 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         $this->setIfExists('include_all_children', $data ?? [], false);
         $this->setIfExists('non_synced_only', $data ?? [], false);
         $this->setIfExists('request_ids', $data ?? [], null);
+        $this->setIfExists('upload_ids', $data ?? [], null);
         $this->setIfExists('sync_error_message', $data ?? [], null);
         $this->setIfExists('include_containers', $data ?? [], null);
         $this->setIfExists('external_urls', $data ?? [], null);
@@ -387,6 +394,10 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
 
         if (!is_null($this->container['request_ids']) && (count($this->container['request_ids']) > 100)) {
             $invalidProperties[] = "invalid value for 'request_ids', number of items must be less than or equal to 100.";
+        }
+
+        if (!is_null($this->container['upload_ids']) && (count($this->container['upload_ids']) > 100)) {
+            $invalidProperties[] = "invalid value for 'upload_ids', number of items must be less than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -898,6 +909,46 @@ class OrganizationUserFilesToSyncFilters implements ModelInterface, ArrayAccess,
         }
 
         $this->container['request_ids'] = $request_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets upload_ids
+     *
+     * @return string[]|null
+     */
+    public function getUploadIds()
+    {
+        return $this->container['upload_ids'];
+    }
+
+    /**
+     * Sets upload_ids
+     *
+     * @param string[]|null $upload_ids Filter by upload ID(s) which were used to sync the files
+     *
+     * @return self
+     */
+    public function setUploadIds($upload_ids)
+    {
+
+        if (!is_null($upload_ids) && (count($upload_ids) > 100)) {
+            throw new \InvalidArgumentException('invalid value for $upload_ids when calling OrganizationUserFilesToSyncFilters., number of items must be less than or equal to 100.');
+        }
+
+        if (is_null($upload_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'upload_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('upload_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['upload_ids'] = $upload_ids;
 
         return $this;
     }

@@ -333,6 +333,15 @@ class UserFileTest extends TestCase
     }
 
     /**
+     * Test attribute "upload_id"
+     */
+    public function testPropertyUploadId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "sync_properties"
      */
     public function testPropertySyncProperties()

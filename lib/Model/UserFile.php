@@ -78,6 +78,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'source_created_at' => '\DateTime',
         'generate_sparse_vectors' => 'bool',
         'request_id' => 'string',
+        'upload_id' => 'string',
         'sync_properties' => 'object',
         'messages_metadata' => 'object',
         'file_contents_deleted' => 'bool',
@@ -125,6 +126,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'source_created_at' => 'date-time',
         'generate_sparse_vectors' => null,
         'request_id' => null,
+        'upload_id' => null,
         'sync_properties' => null,
         'messages_metadata' => null,
         'file_contents_deleted' => null,
@@ -170,6 +172,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
 		'source_created_at' => true,
 		'generate_sparse_vectors' => true,
 		'request_id' => true,
+		'upload_id' => true,
 		'sync_properties' => false,
 		'messages_metadata' => false,
 		'file_contents_deleted' => false,
@@ -295,6 +298,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'source_created_at' => 'source_created_at',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'request_id' => 'request_id',
+        'upload_id' => 'upload_id',
         'sync_properties' => 'sync_properties',
         'messages_metadata' => 'messages_metadata',
         'file_contents_deleted' => 'file_contents_deleted',
@@ -340,6 +344,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'source_created_at' => 'setSourceCreatedAt',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'request_id' => 'setRequestId',
+        'upload_id' => 'setUploadId',
         'sync_properties' => 'setSyncProperties',
         'messages_metadata' => 'setMessagesMetadata',
         'file_contents_deleted' => 'setFileContentsDeleted',
@@ -385,6 +390,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'source_created_at' => 'getSourceCreatedAt',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'request_id' => 'getRequestId',
+        'upload_id' => 'getUploadId',
         'sync_properties' => 'getSyncProperties',
         'messages_metadata' => 'getMessagesMetadata',
         'file_contents_deleted' => 'getFileContentsDeleted',
@@ -481,6 +487,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('source_created_at', $data ?? [], null);
         $this->setIfExists('generate_sparse_vectors', $data ?? [], null);
         $this->setIfExists('request_id', $data ?? [], null);
+        $this->setIfExists('upload_id', $data ?? [], null);
         $this->setIfExists('sync_properties', $data ?? [], null);
         $this->setIfExists('messages_metadata', $data ?? [], null);
         $this->setIfExists('file_contents_deleted', $data ?? [], false);
@@ -604,6 +611,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['request_id'] === null) {
             $invalidProperties[] = "'request_id' can't be null";
+        }
+        if ($this->container['upload_id'] === null) {
+            $invalidProperties[] = "'upload_id' can't be null";
         }
         if ($this->container['sync_properties'] === null) {
             $invalidProperties[] = "'sync_properties' can't be null";
@@ -1628,6 +1638,42 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['request_id'] = $request_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets upload_id
+     *
+     * @return string
+     */
+    public function getUploadId()
+    {
+        return $this->container['upload_id'];
+    }
+
+    /**
+     * Sets upload_id
+     *
+     * @param string $upload_id upload_id
+     *
+     * @return self
+     */
+    public function setUploadId($upload_id)
+    {
+
+        if (is_null($upload_id)) {
+            array_push($this->openAPINullablesSetToNull, 'upload_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('upload_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['upload_id'] = $upload_id;
 
         return $this;
     }
