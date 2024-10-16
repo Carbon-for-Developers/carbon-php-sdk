@@ -241,4 +241,13 @@ class SitemapScrapeRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "use_premium_proxies"
+     */
+    public function testPropertyUsePremiumProxies()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }
