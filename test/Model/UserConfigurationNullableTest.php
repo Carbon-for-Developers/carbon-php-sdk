@@ -97,4 +97,31 @@ class UserConfigurationNullableTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "max_characters"
+     */
+    public function testPropertyMaxCharacters()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "max_characters_per_file"
+     */
+    public function testPropertyMaxCharactersPerFile()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "max_characters_per_upload"
+     */
+    public function testPropertyMaxCharactersPerUpload()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

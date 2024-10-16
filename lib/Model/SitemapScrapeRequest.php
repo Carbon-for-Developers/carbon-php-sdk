@@ -67,7 +67,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'urls_to_scrape' => 'string[]',
         'download_css_and_media' => 'bool',
         'generate_chunks_only' => 'bool',
-        'store_file_only' => 'bool'
+        'store_file_only' => 'bool',
+        'use_premium_proxies' => 'bool'
     ];
 
     /**
@@ -96,7 +97,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'urls_to_scrape' => null,
         'download_css_and_media' => null,
         'generate_chunks_only' => null,
-        'store_file_only' => null
+        'store_file_only' => null,
+        'use_premium_proxies' => null
     ];
 
     /**
@@ -123,7 +125,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 		'urls_to_scrape' => true,
 		'download_css_and_media' => true,
 		'generate_chunks_only' => false,
-		'store_file_only' => false
+		'store_file_only' => false,
+		'use_premium_proxies' => false
     ];
 
     /**
@@ -230,7 +233,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'urls_to_scrape' => 'urls_to_scrape',
         'download_css_and_media' => 'download_css_and_media',
         'generate_chunks_only' => 'generate_chunks_only',
-        'store_file_only' => 'store_file_only'
+        'store_file_only' => 'store_file_only',
+        'use_premium_proxies' => 'use_premium_proxies'
     ];
 
     /**
@@ -257,7 +261,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'urls_to_scrape' => 'setUrlsToScrape',
         'download_css_and_media' => 'setDownloadCssAndMedia',
         'generate_chunks_only' => 'setGenerateChunksOnly',
-        'store_file_only' => 'setStoreFileOnly'
+        'store_file_only' => 'setStoreFileOnly',
+        'use_premium_proxies' => 'setUsePremiumProxies'
     ];
 
     /**
@@ -284,7 +289,8 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         'urls_to_scrape' => 'getUrlsToScrape',
         'download_css_and_media' => 'getDownloadCssAndMedia',
         'generate_chunks_only' => 'getGenerateChunksOnly',
-        'store_file_only' => 'getStoreFileOnly'
+        'store_file_only' => 'getStoreFileOnly',
+        'use_premium_proxies' => 'getUsePremiumProxies'
     ];
 
     /**
@@ -363,6 +369,7 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('download_css_and_media', $data ?? [], false);
         $this->setIfExists('generate_chunks_only', $data ?? [], false);
         $this->setIfExists('store_file_only', $data ?? [], false);
+        $this->setIfExists('use_premium_proxies', $data ?? [], false);
     }
 
     /**
@@ -1087,6 +1094,35 @@ class SitemapScrapeRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['store_file_only'] = $store_file_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets use_premium_proxies
+     *
+     * @return bool|null
+     */
+    public function getUsePremiumProxies()
+    {
+        return $this->container['use_premium_proxies'];
+    }
+
+    /**
+     * Sets use_premium_proxies
+     *
+     * @param bool|null $use_premium_proxies If the default proxies are blocked and not returning results, this flag can be enabled to use              alternate proxies (residential and office). Scrapes might take longer to finish with this flag enabled.
+     *
+     * @return self
+     */
+    public function setUsePremiumProxies($use_premium_proxies)
+    {
+
+        if (is_null($use_premium_proxies)) {
+            throw new \InvalidArgumentException('non-nullable use_premium_proxies cannot be null');
+        }
+
+        $this->container['use_premium_proxies'] = $use_premium_proxies;
 
         return $this;
     }

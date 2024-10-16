@@ -51,7 +51,10 @@ class UserConfiguration implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $openAPITypes = [
         'auto_sync_enabled_sources' => '\Carbon\Model\AutoSyncEnabledSourcesProperty',
         'max_files' => 'int',
-        'max_files_per_upload' => 'int'
+        'max_files_per_upload' => 'int',
+        'max_characters' => 'int',
+        'max_characters_per_file' => 'int',
+        'max_characters_per_upload' => 'int'
     ];
 
     /**
@@ -64,7 +67,10 @@ class UserConfiguration implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $openAPIFormats = [
         'auto_sync_enabled_sources' => null,
         'max_files' => null,
-        'max_files_per_upload' => null
+        'max_files_per_upload' => null,
+        'max_characters' => null,
+        'max_characters_per_file' => null,
+        'max_characters_per_upload' => null
     ];
 
     /**
@@ -75,7 +81,10 @@ class UserConfiguration implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static array $openAPINullables = [
         'auto_sync_enabled_sources' => true,
 		'max_files' => true,
-		'max_files_per_upload' => true
+		'max_files_per_upload' => true,
+		'max_characters' => true,
+		'max_characters_per_file' => true,
+		'max_characters_per_upload' => true
     ];
 
     /**
@@ -166,7 +175,10 @@ class UserConfiguration implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $attributeMap = [
         'auto_sync_enabled_sources' => 'auto_sync_enabled_sources',
         'max_files' => 'max_files',
-        'max_files_per_upload' => 'max_files_per_upload'
+        'max_files_per_upload' => 'max_files_per_upload',
+        'max_characters' => 'max_characters',
+        'max_characters_per_file' => 'max_characters_per_file',
+        'max_characters_per_upload' => 'max_characters_per_upload'
     ];
 
     /**
@@ -177,7 +189,10 @@ class UserConfiguration implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $setters = [
         'auto_sync_enabled_sources' => 'setAutoSyncEnabledSources',
         'max_files' => 'setMaxFiles',
-        'max_files_per_upload' => 'setMaxFilesPerUpload'
+        'max_files_per_upload' => 'setMaxFilesPerUpload',
+        'max_characters' => 'setMaxCharacters',
+        'max_characters_per_file' => 'setMaxCharactersPerFile',
+        'max_characters_per_upload' => 'setMaxCharactersPerUpload'
     ];
 
     /**
@@ -188,7 +203,10 @@ class UserConfiguration implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $getters = [
         'auto_sync_enabled_sources' => 'getAutoSyncEnabledSources',
         'max_files' => 'getMaxFiles',
-        'max_files_per_upload' => 'getMaxFilesPerUpload'
+        'max_files_per_upload' => 'getMaxFilesPerUpload',
+        'max_characters' => 'getMaxCharacters',
+        'max_characters_per_file' => 'getMaxCharactersPerFile',
+        'max_characters_per_upload' => 'getMaxCharactersPerUpload'
     ];
 
     /**
@@ -251,6 +269,9 @@ class UserConfiguration implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('auto_sync_enabled_sources', $data ?? [], null);
         $this->setIfExists('max_files', $data ?? [], null);
         $this->setIfExists('max_files_per_upload', $data ?? [], null);
+        $this->setIfExists('max_characters', $data ?? [], null);
+        $this->setIfExists('max_characters_per_file', $data ?? [], null);
+        $this->setIfExists('max_characters_per_upload', $data ?? [], null);
     }
 
     /**
@@ -286,6 +307,18 @@ class UserConfiguration implements ModelInterface, ArrayAccess, \JsonSerializabl
 
         if (!is_null($this->container['max_files_per_upload']) && ($this->container['max_files_per_upload'] < -1)) {
             $invalidProperties[] = "invalid value for 'max_files_per_upload', must be bigger than or equal to -1.";
+        }
+
+        if (!is_null($this->container['max_characters']) && ($this->container['max_characters'] < -1)) {
+            $invalidProperties[] = "invalid value for 'max_characters', must be bigger than or equal to -1.";
+        }
+
+        if (!is_null($this->container['max_characters_per_file']) && ($this->container['max_characters_per_file'] < -1)) {
+            $invalidProperties[] = "invalid value for 'max_characters_per_file', must be bigger than or equal to -1.";
+        }
+
+        if (!is_null($this->container['max_characters_per_upload']) && ($this->container['max_characters_per_upload'] < -1)) {
+            $invalidProperties[] = "invalid value for 'max_characters_per_upload', must be bigger than or equal to -1.";
         }
 
         return $invalidProperties;
@@ -417,6 +450,129 @@ class UserConfiguration implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['max_files_per_upload'] = $max_files_per_upload;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_characters
+     *
+     * @return int|null
+     */
+    public function getMaxCharacters()
+    {
+        return $this->container['max_characters'];
+    }
+
+    /**
+     * Sets max_characters
+     *
+     * @param int|null $max_characters Custom character upload limit for the user over *all* user's files across all uploads.          If set, then the user will not be allowed to upload more characters than this limit. If not set, or if set to -1,         then the user will have no limit.
+     *
+     * @return self
+     */
+    public function setMaxCharacters($max_characters)
+    {
+
+        if (!is_null($max_characters) && ($max_characters < -1)) {
+            throw new \InvalidArgumentException('invalid value for $max_characters when calling UserConfiguration., must be bigger than or equal to -1.');
+        }
+
+
+        if (is_null($max_characters)) {
+            array_push($this->openAPINullablesSetToNull, 'max_characters');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_characters', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['max_characters'] = $max_characters;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_characters_per_file
+     *
+     * @return int|null
+     */
+    public function getMaxCharactersPerFile()
+    {
+        return $this->container['max_characters_per_file'];
+    }
+
+    /**
+     * Sets max_characters_per_file
+     *
+     * @param int|null $max_characters_per_file A single file upload from the user can not exceed this character limit.         If set, then the file will not be synced if it exceeds this limit. If not set, or if set to -1, then the          user will have no limit.
+     *
+     * @return self
+     */
+    public function setMaxCharactersPerFile($max_characters_per_file)
+    {
+
+        if (!is_null($max_characters_per_file) && ($max_characters_per_file < -1)) {
+            throw new \InvalidArgumentException('invalid value for $max_characters_per_file when calling UserConfiguration., must be bigger than or equal to -1.');
+        }
+
+
+        if (is_null($max_characters_per_file)) {
+            array_push($this->openAPINullablesSetToNull, 'max_characters_per_file');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_characters_per_file', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['max_characters_per_file'] = $max_characters_per_file;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_characters_per_upload
+     *
+     * @return int|null
+     */
+    public function getMaxCharactersPerUpload()
+    {
+        return $this->container['max_characters_per_upload'];
+    }
+
+    /**
+     * Sets max_characters_per_upload
+     *
+     * @param int|null $max_characters_per_upload Custom character upload limit for the user across a single upload.         If set, then the user won't be able to sync more than this many characters in one upload.          If not set, or if set to -1, then the user will have no limit.
+     *
+     * @return self
+     */
+    public function setMaxCharactersPerUpload($max_characters_per_upload)
+    {
+
+        if (!is_null($max_characters_per_upload) && ($max_characters_per_upload < -1)) {
+            throw new \InvalidArgumentException('invalid value for $max_characters_per_upload when calling UserConfiguration., must be bigger than or equal to -1.');
+        }
+
+
+        if (is_null($max_characters_per_upload)) {
+            array_push($this->openAPINullablesSetToNull, 'max_characters_per_upload');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_characters_per_upload', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['max_characters_per_upload'] = $max_characters_per_upload;
 
         return $this;
     }
