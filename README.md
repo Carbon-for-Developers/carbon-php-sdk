@@ -105,6 +105,10 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.webhooks.addUrl`](#carbonwebhooksaddurl)
   * [`carbon.webhooks.deleteUrl`](#carbonwebhooksdeleteurl)
   * [`carbon.webhooks.urls`](#carbonwebhooksurls)
+  * [`carbon.whiteLabel.all`](#carbonwhitelabelall)
+  * [`carbon.whiteLabel.create`](#carbonwhitelabelcreate)
+  * [`carbon.whiteLabel.delete`](#carbonwhitelabeldelete)
+  * [`carbon.whiteLabel.update`](#carbonwhitelabelupdate)
 
 <!-- tocstop -->
 
@@ -4935,6 +4939,168 @@ $result = $carbon->webhooks->urls(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/webhooks` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.whiteLabel.all`<a id="carbonwhitelabelall"></a>
+
+List White Labels
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->whiteLabel->all(
+    pagination: [
+        "limit" => 10,
+        "offset" => 0,
+    ], 
+    order_by: "created_at", 
+    order_dir: "desc", 
+    filters: [
+        "ids" => [],
+        "data_source_type" => [],
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+##### filters: [`WhiteLabelFilters`](./lib/Model/WhiteLabelFilters.php)<a id="filters-whitelabelfilterslibmodelwhitelabelfiltersphp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/white_label/list` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.whiteLabel.create`<a id="carbonwhitelabelcreate"></a>
+
+Create White Labels
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->whiteLabel->create(
+    body: [
+        [
+            "data_source_type" => None,
+            "credentials" => [
+                "client_id" => "client_id_example",
+                "redirect_uri" => "redirect_uri_example",
+            ],
+        ]
+    ],
+);
+```
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`WhiteLabelCreateRequestInner`](./lib/Model/WhiteLabelCreateRequestInner.php)[]
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/white_label/create` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.whiteLabel.delete`<a id="carbonwhitelabeldelete"></a>
+
+Delete White Labels
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->whiteLabel->delete(
+    ids: [
+        1
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### ids: `int`[]<a id="ids-int"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/white_label/delete` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.whiteLabel.update`<a id="carbonwhitelabelupdate"></a>
+
+Update White Label
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->whiteLabel->update(
+    body: [
+        "data_source_type" => None,
+        "credentials" => [
+            "client_id" => "client_id_example",
+            "redirect_uri" => "redirect_uri_example",
+        ],
+    ],
+    data_source_type: "INTERCOM", 
+    credentials: [
+        "client_id" => "client_id_example",
+        "redirect_uri" => "redirect_uri_example",
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_type: `string`<a id="data_source_type-string"></a>
+
+##### credentials: [`Credentials`](./lib/Model/Credentials.php)<a id="credentials-credentialslibmodelcredentialsphp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+**object**
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/white_label/update` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
