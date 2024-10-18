@@ -26,6 +26,8 @@ class Client
     public readonly \Carbon\Api\UtilitiesApi $utilities;
     
     public readonly \Carbon\Api\WebhooksApi $webhooks;
+    
+    public readonly \Carbon\Api\WhiteLabelApi $whiteLabel;
 
     /**
      * Constructor
@@ -59,5 +61,6 @@ class Client
         $this->users = new \Carbon\Api\UsersApi($config);
         $this->utilities = new \Carbon\Api\UtilitiesApi($config);
         $this->webhooks = new \Carbon\Api\WebhooksApi($config);
+        $this->whiteLabel = new \Carbon\Api\WhiteLabelApi($config);
     }
 }
