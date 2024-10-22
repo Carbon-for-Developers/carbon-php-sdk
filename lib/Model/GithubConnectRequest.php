@@ -51,7 +51,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $openAPITypes = [
         'username' => 'string',
         'access_token' => 'string',
-        'sync_source_items' => 'bool'
+        'sync_source_items' => 'bool',
+        'data_source_tags' => 'object'
     ];
 
     /**
@@ -64,7 +65,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $openAPIFormats = [
         'username' => null,
         'access_token' => null,
-        'sync_source_items' => null
+        'sync_source_items' => null,
+        'data_source_tags' => null
     ];
 
     /**
@@ -75,7 +77,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static array $openAPINullables = [
         'username' => false,
 		'access_token' => false,
-		'sync_source_items' => false
+		'sync_source_items' => false,
+		'data_source_tags' => false
     ];
 
     /**
@@ -166,7 +169,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $attributeMap = [
         'username' => 'username',
         'access_token' => 'access_token',
-        'sync_source_items' => 'sync_source_items'
+        'sync_source_items' => 'sync_source_items',
+        'data_source_tags' => 'data_source_tags'
     ];
 
     /**
@@ -177,7 +181,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $setters = [
         'username' => 'setUsername',
         'access_token' => 'setAccessToken',
-        'sync_source_items' => 'setSyncSourceItems'
+        'sync_source_items' => 'setSyncSourceItems',
+        'data_source_tags' => 'setDataSourceTags'
     ];
 
     /**
@@ -188,7 +193,8 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $getters = [
         'username' => 'getUsername',
         'access_token' => 'getAccessToken',
-        'sync_source_items' => 'getSyncSourceItems'
+        'sync_source_items' => 'getSyncSourceItems',
+        'data_source_tags' => 'getDataSourceTags'
     ];
 
     /**
@@ -251,6 +257,7 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('username', $data ?? [], null);
         $this->setIfExists('access_token', $data ?? [], null);
         $this->setIfExists('sync_source_items', $data ?? [], false);
+        $this->setIfExists('data_source_tags', $data ?? [], null);
     }
 
     /**
@@ -384,6 +391,35 @@ class GithubConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializ
         }
 
         $this->container['sync_source_items'] = $sync_source_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_source_tags
+     *
+     * @return object|null
+     */
+    public function getDataSourceTags()
+    {
+        return $this->container['data_source_tags'];
+    }
+
+    /**
+     * Sets data_source_tags
+     *
+     * @param object|null $data_source_tags Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
+     *
+     * @return self
+     */
+    public function setDataSourceTags($data_source_tags)
+    {
+
+        if (is_null($data_source_tags)) {
+            throw new \InvalidArgumentException('non-nullable data_source_tags cannot be null');
+        }
+
+        $this->container['data_source_tags'] = $data_source_tags;
 
         return $this;
     }

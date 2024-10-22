@@ -64,7 +64,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_source_items' => 'bool',
         'incremental_sync' => 'bool',
         'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable',
-        'automatically_open_file_picker' => 'bool'
+        'automatically_open_file_picker' => 'bool',
+        'data_source_tags' => 'object'
     ];
 
     /**
@@ -90,7 +91,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_source_items' => null,
         'incremental_sync' => null,
         'file_sync_config' => null,
-        'automatically_open_file_picker' => null
+        'automatically_open_file_picker' => null,
+        'data_source_tags' => null
     ];
 
     /**
@@ -114,7 +116,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
 		'sync_source_items' => false,
 		'incremental_sync' => false,
 		'file_sync_config' => true,
-		'automatically_open_file_picker' => true
+		'automatically_open_file_picker' => true,
+		'data_source_tags' => false
     ];
 
     /**
@@ -218,7 +221,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_source_items' => 'sync_source_items',
         'incremental_sync' => 'incremental_sync',
         'file_sync_config' => 'file_sync_config',
-        'automatically_open_file_picker' => 'automatically_open_file_picker'
+        'automatically_open_file_picker' => 'automatically_open_file_picker',
+        'data_source_tags' => 'data_source_tags'
     ];
 
     /**
@@ -242,7 +246,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_source_items' => 'setSyncSourceItems',
         'incremental_sync' => 'setIncrementalSync',
         'file_sync_config' => 'setFileSyncConfig',
-        'automatically_open_file_picker' => 'setAutomaticallyOpenFilePicker'
+        'automatically_open_file_picker' => 'setAutomaticallyOpenFilePicker',
+        'data_source_tags' => 'setDataSourceTags'
     ];
 
     /**
@@ -266,7 +271,8 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         'sync_source_items' => 'getSyncSourceItems',
         'incremental_sync' => 'getIncrementalSync',
         'file_sync_config' => 'getFileSyncConfig',
-        'automatically_open_file_picker' => 'getAutomaticallyOpenFilePicker'
+        'automatically_open_file_picker' => 'getAutomaticallyOpenFilePicker',
+        'data_source_tags' => 'getDataSourceTags'
     ];
 
     /**
@@ -342,6 +348,7 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('incremental_sync', $data ?? [], false);
         $this->setIfExists('file_sync_config', $data ?? [], null);
         $this->setIfExists('automatically_open_file_picker', $data ?? [], null);
+        $this->setIfExists('data_source_tags', $data ?? [], null);
     }
 
     /**
@@ -930,6 +937,35 @@ class SyncOptions implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['automatically_open_file_picker'] = $automatically_open_file_picker;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_source_tags
+     *
+     * @return object|null
+     */
+    public function getDataSourceTags()
+    {
+        return $this->container['data_source_tags'];
+    }
+
+    /**
+     * Sets data_source_tags
+     *
+     * @param object|null $data_source_tags Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
+     *
+     * @return self
+     */
+    public function setDataSourceTags($data_source_tags)
+    {
+
+        if (is_null($data_source_tags)) {
+            throw new \InvalidArgumentException('non-nullable data_source_tags cannot be null');
+        }
+
+        $this->container['data_source_tags'] = $data_source_tags;
 
         return $this;
     }

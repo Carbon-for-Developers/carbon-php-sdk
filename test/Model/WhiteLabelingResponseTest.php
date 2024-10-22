@@ -97,4 +97,13 @@ class WhiteLabelingResponseTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "connector_settings"
+     */
+    public function testPropertyConnectorSettings()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

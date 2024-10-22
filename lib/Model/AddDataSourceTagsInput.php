@@ -1,6 +1,6 @@
 <?php
 /**
- * AzureBlobAuthRequest
+ * AddDataSourceTagsInput
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * AzureBlobAuthRequest Class Doc Comment
+ * AddDataSourceTagsInput Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class AddDataSourceTagsInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AzureBlobAuthRequest';
+    protected static $openAPIModelName = 'AddDataSourceTagsInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,8 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'account_name' => 'string',
-        'account_key' => 'string',
-        'sync_source_items' => 'bool',
-        'data_source_tags' => 'object'
+        'tags' => 'object',
+        'data_source_id' => 'int'
     ];
 
     /**
@@ -63,10 +61,8 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'account_name' => null,
-        'account_key' => null,
-        'sync_source_items' => null,
-        'data_source_tags' => null
+        'tags' => null,
+        'data_source_id' => null
     ];
 
     /**
@@ -75,10 +71,8 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'account_name' => false,
-		'account_key' => false,
-		'sync_source_items' => false,
-		'data_source_tags' => false
+        'tags' => false,
+		'data_source_id' => false
     ];
 
     /**
@@ -167,10 +161,8 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'account_name' => 'account_name',
-        'account_key' => 'account_key',
-        'sync_source_items' => 'sync_source_items',
-        'data_source_tags' => 'data_source_tags'
+        'tags' => 'tags',
+        'data_source_id' => 'data_source_id'
     ];
 
     /**
@@ -179,10 +171,8 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'account_name' => 'setAccountName',
-        'account_key' => 'setAccountKey',
-        'sync_source_items' => 'setSyncSourceItems',
-        'data_source_tags' => 'setDataSourceTags'
+        'tags' => 'setTags',
+        'data_source_id' => 'setDataSourceId'
     ];
 
     /**
@@ -191,10 +181,8 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'account_name' => 'getAccountName',
-        'account_key' => 'getAccountKey',
-        'sync_source_items' => 'getSyncSourceItems',
-        'data_source_tags' => 'getDataSourceTags'
+        'tags' => 'getTags',
+        'data_source_id' => 'getDataSourceId'
     ];
 
     /**
@@ -254,10 +242,8 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('account_name', $data ?? [], null);
-        $this->setIfExists('account_key', $data ?? [], null);
-        $this->setIfExists('sync_source_items', $data ?? [], true);
-        $this->setIfExists('data_source_tags', $data ?? [], null);
+        $this->setIfExists('tags', $data ?? [], null);
+        $this->setIfExists('data_source_id', $data ?? [], null);
     }
 
     /**
@@ -287,11 +273,11 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        if ($this->container['account_name'] === null) {
-            $invalidProperties[] = "'account_name' can't be null";
+        if ($this->container['tags'] === null) {
+            $invalidProperties[] = "'tags' can't be null";
         }
-        if ($this->container['account_key'] === null) {
-            $invalidProperties[] = "'account_key' can't be null";
+        if ($this->container['data_source_id'] === null) {
+            $invalidProperties[] = "'data_source_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -309,117 +295,59 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets account_name
+     * Gets tags
      *
-     * @return string
+     * @return object
      */
-    public function getAccountName()
+    public function getTags()
     {
-        return $this->container['account_name'];
+        return $this->container['tags'];
     }
 
     /**
-     * Sets account_name
+     * Sets tags
      *
-     * @param string $account_name account_name
+     * @param object $tags tags
      *
      * @return self
      */
-    public function setAccountName($account_name)
+    public function setTags($tags)
     {
 
-        if (is_null($account_name)) {
-            throw new \InvalidArgumentException('non-nullable account_name cannot be null');
+        if (is_null($tags)) {
+            throw new \InvalidArgumentException('non-nullable tags cannot be null');
         }
 
-        $this->container['account_name'] = $account_name;
+        $this->container['tags'] = $tags;
 
         return $this;
     }
 
     /**
-     * Gets account_key
+     * Gets data_source_id
      *
-     * @return string
+     * @return int
      */
-    public function getAccountKey()
+    public function getDataSourceId()
     {
-        return $this->container['account_key'];
+        return $this->container['data_source_id'];
     }
 
     /**
-     * Sets account_key
+     * Sets data_source_id
      *
-     * @param string $account_key account_key
+     * @param int $data_source_id data_source_id
      *
      * @return self
      */
-    public function setAccountKey($account_key)
+    public function setDataSourceId($data_source_id)
     {
 
-        if (is_null($account_key)) {
-            throw new \InvalidArgumentException('non-nullable account_key cannot be null');
+        if (is_null($data_source_id)) {
+            throw new \InvalidArgumentException('non-nullable data_source_id cannot be null');
         }
 
-        $this->container['account_key'] = $account_key;
-
-        return $this;
-    }
-
-    /**
-     * Gets sync_source_items
-     *
-     * @return bool|null
-     */
-    public function getSyncSourceItems()
-    {
-        return $this->container['sync_source_items'];
-    }
-
-    /**
-     * Sets sync_source_items
-     *
-     * @param bool|null $sync_source_items sync_source_items
-     *
-     * @return self
-     */
-    public function setSyncSourceItems($sync_source_items)
-    {
-
-        if (is_null($sync_source_items)) {
-            throw new \InvalidArgumentException('non-nullable sync_source_items cannot be null');
-        }
-
-        $this->container['sync_source_items'] = $sync_source_items;
-
-        return $this;
-    }
-
-    /**
-     * Gets data_source_tags
-     *
-     * @return object|null
-     */
-    public function getDataSourceTags()
-    {
-        return $this->container['data_source_tags'];
-    }
-
-    /**
-     * Sets data_source_tags
-     *
-     * @param object|null $data_source_tags Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
-     *
-     * @return self
-     */
-    public function setDataSourceTags($data_source_tags)
-    {
-
-        if (is_null($data_source_tags)) {
-            throw new \InvalidArgumentException('non-nullable data_source_tags cannot be null');
-        }
-
-        $this->container['data_source_tags'] = $data_source_tags;
+        $this->container['data_source_id'] = $data_source_id;
 
         return $this;
     }

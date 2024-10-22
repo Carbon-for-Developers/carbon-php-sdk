@@ -331,4 +331,13 @@ class OAuthURLRequestTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "data_source_tags"
+     */
+    public function testPropertyDataSourceTags()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

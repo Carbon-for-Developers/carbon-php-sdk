@@ -1,6 +1,6 @@
 <?php
 /**
- * S3AuthRequestTest
+ * RemoveDataSourceTagsInputTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * S3AuthRequestTest Class Doc Comment
+ * RemoveDataSourceTagsInputTest Class Doc Comment
  *
  * @category    Class
- * @description S3AuthRequest
+ * @description RemoveDataSourceTagsInput
  * @package     Carbon
  */
-class S3AuthRequestTest extends TestCase
+class RemoveDataSourceTagsInputTest extends TestCase
 {
 
     /**
@@ -63,54 +63,36 @@ class S3AuthRequestTest extends TestCase
     }
 
     /**
-     * Test "S3AuthRequest"
+     * Test "RemoveDataSourceTagsInput"
      */
-    public function testS3AuthRequest()
+    public function testRemoveDataSourceTagsInput()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "access_key"
+     * Test attribute "data_source_id"
      */
-    public function testPropertyAccessKey()
+    public function testPropertyDataSourceId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "access_key_secret"
+     * Test attribute "tags_to_remove"
      */
-    public function testPropertyAccessKeySecret()
+    public function testPropertyTagsToRemove()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sync_source_items"
+     * Test attribute "remove_all_tags"
      */
-    public function testPropertySyncSourceItems()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "endpoint_url"
-     */
-    public function testPropertyEndpointUrl()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "data_source_tags"
-     */
-    public function testPropertyDataSourceTags()
+    public function testPropertyRemoveAllTags()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

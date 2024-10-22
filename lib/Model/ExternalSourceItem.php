@@ -65,6 +65,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'item_type' => 'string',
         'root_external_id' => 'string',
         'external_url' => 'string',
+        'file_format' => 'string',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -93,6 +94,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'item_type' => null,
         'root_external_id' => null,
         'external_url' => null,
+        'file_format' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -119,6 +121,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
 		'item_type' => true,
 		'root_external_id' => true,
 		'external_url' => true,
+		'file_format' => true,
 		'created_at' => false,
 		'updated_at' => false
     ];
@@ -225,6 +228,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'item_type' => 'item_type',
         'root_external_id' => 'root_external_id',
         'external_url' => 'external_url',
+        'file_format' => 'file_format',
         'created_at' => 'created_at',
         'updated_at' => 'updated_at'
     ];
@@ -251,6 +255,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'item_type' => 'setItemType',
         'root_external_id' => 'setRootExternalId',
         'external_url' => 'setExternalUrl',
+        'file_format' => 'setFileFormat',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -277,6 +282,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         'item_type' => 'getItemType',
         'root_external_id' => 'getRootExternalId',
         'external_url' => 'getExternalUrl',
+        'file_format' => 'getFileFormat',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -354,6 +360,7 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('item_type', $data ?? [], null);
         $this->setIfExists('root_external_id', $data ?? [], null);
         $this->setIfExists('external_url', $data ?? [], null);
+        $this->setIfExists('file_format', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -432,6 +439,9 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         }
         if ($this->container['external_url'] === null) {
             $invalidProperties[] = "'external_url' can't be null";
+        }
+        if ($this->container['file_format'] === null) {
+            $invalidProperties[] = "'file_format' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -963,6 +973,42 @@ class ExternalSourceItem implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['external_url'] = $external_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_format
+     *
+     * @return string
+     */
+    public function getFileFormat()
+    {
+        return $this->container['file_format'];
+    }
+
+    /**
+     * Sets file_format
+     *
+     * @param string $file_format file_format
+     *
+     * @return self
+     */
+    public function setFileFormat($file_format)
+    {
+
+        if (is_null($file_format)) {
+            array_push($this->openAPINullablesSetToNull, 'file_format');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_format', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_format'] = $file_format;
 
         return $this;
     }

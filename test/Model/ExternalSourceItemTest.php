@@ -216,6 +216,15 @@ class ExternalSourceItemTest extends TestCase
     }
 
     /**
+     * Test attribute "file_format"
+     */
+    public function testPropertyFileFormat()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

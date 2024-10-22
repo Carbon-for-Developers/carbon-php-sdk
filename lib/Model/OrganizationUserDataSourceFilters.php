@@ -49,6 +49,7 @@ class OrganizationUserDataSourceFilters implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
+        'tags' => 'object',
         'source' => '\Carbon\Model\DataSourceTypeNullable',
         'ids' => 'int[]',
         'revoked_access' => 'bool'
@@ -62,6 +63,7 @@ class OrganizationUserDataSourceFilters implements ModelInterface, ArrayAccess, 
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'tags' => null,
         'source' => null,
         'ids' => null,
         'revoked_access' => null
@@ -73,7 +75,8 @@ class OrganizationUserDataSourceFilters implements ModelInterface, ArrayAccess, 
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'source' => true,
+        'tags' => true,
+		'source' => true,
 		'ids' => true,
 		'revoked_access' => true
     ];
@@ -164,6 +167,7 @@ class OrganizationUserDataSourceFilters implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $attributeMap = [
+        'tags' => 'tags',
         'source' => 'source',
         'ids' => 'ids',
         'revoked_access' => 'revoked_access'
@@ -175,6 +179,7 @@ class OrganizationUserDataSourceFilters implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $setters = [
+        'tags' => 'setTags',
         'source' => 'setSource',
         'ids' => 'setIds',
         'revoked_access' => 'setRevokedAccess'
@@ -186,6 +191,7 @@ class OrganizationUserDataSourceFilters implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $getters = [
+        'tags' => 'getTags',
         'source' => 'getSource',
         'ids' => 'getIds',
         'revoked_access' => 'getRevokedAccess'
@@ -248,6 +254,7 @@ class OrganizationUserDataSourceFilters implements ModelInterface, ArrayAccess, 
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('source', $data ?? [], null);
         $this->setIfExists('ids', $data ?? [], null);
         $this->setIfExists('revoked_access', $data ?? [], null);
@@ -294,6 +301,42 @@ class OrganizationUserDataSourceFilters implements ModelInterface, ArrayAccess, 
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets tags
+     *
+     * @return object|null
+     */
+    public function getTags()
+    {
+        return $this->container['tags'];
+    }
+
+    /**
+     * Sets tags
+     *
+     * @param object|null $tags Tags to filter by. Supports logical AND and OR operations. Input should be like below:         {             \"OR\": [                 {                 \"key\": \"subject\",                 \"value\": \"holy-bible\",                 \"negate\": false                 },                 {                     \"key\": \"person-of-interest\",                     \"value\": \"jesus christ\",                     \"negate\": false                 },                 {                     \"key\": \"genre\",                     \"value\": \"fiction\",                     \"negate\": true                 }                 {                     \"AND\": [                         {                             \"key\": \"subject\",                             \"value\": \"tao-te-ching\",                             \"negate\": true                         },                         {                             \"key\": \"author\",                             \"value\": \"lao-tzu\",                             \"negate\": false                         }                     ]                 }             ]         }         For a single filter, the filter block can be placed within either an \"AND\" or \"OR\" block.
+     *
+     * @return self
+     */
+    public function setTags($tags)
+    {
+
+        if (is_null($tags)) {
+            array_push($this->openAPINullablesSetToNull, 'tags');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tags', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['tags'] = $tags;
+
+        return $this;
+    }
 
     /**
      * Gets source

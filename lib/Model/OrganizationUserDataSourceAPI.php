@@ -49,6 +49,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
+        'tags' => 'object',
         'id' => 'int',
         'data_source_external_id' => 'string',
         'data_source_type' => '\Carbon\Model\DataSourceType',
@@ -76,6 +77,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'tags' => null,
         'id' => null,
         'data_source_external_id' => null,
         'data_source_type' => null,
@@ -101,7 +103,8 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
+        'tags' => false,
+		'id' => false,
 		'data_source_external_id' => true,
 		'data_source_type' => false,
 		'token' => true,
@@ -206,6 +209,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
+        'tags' => 'tags',
         'id' => 'id',
         'data_source_external_id' => 'data_source_external_id',
         'data_source_type' => 'data_source_type',
@@ -231,6 +235,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
+        'tags' => 'setTags',
         'id' => 'setId',
         'data_source_external_id' => 'setDataSourceExternalId',
         'data_source_type' => 'setDataSourceType',
@@ -256,6 +261,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
+        'tags' => 'getTags',
         'id' => 'getId',
         'data_source_external_id' => 'getDataSourceExternalId',
         'data_source_type' => 'getDataSourceType',
@@ -332,6 +338,7 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('data_source_external_id', $data ?? [], null);
         $this->setIfExists('data_source_type', $data ?? [], null);
@@ -378,6 +385,9 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
     {
         $invalidProperties = [];
 
+        if ($this->container['tags'] === null) {
+            $invalidProperties[] = "'tags' can't be null";
+        }
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
@@ -443,6 +453,35 @@ class OrganizationUserDataSourceAPI implements ModelInterface, ArrayAccess, \Jso
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets tags
+     *
+     * @return object
+     */
+    public function getTags()
+    {
+        return $this->container['tags'];
+    }
+
+    /**
+     * Sets tags
+     *
+     * @param object $tags tags
+     *
+     * @return self
+     */
+    public function setTags($tags)
+    {
+
+        if (is_null($tags)) {
+            throw new \InvalidArgumentException('non-nullable tags cannot be null');
+        }
+
+        $this->container['tags'] = $tags;
+
+        return $this;
+    }
 
     /**
      * Gets id

@@ -116,4 +116,16 @@ class UsersApiTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for whoAmI
+     *
+     * Me Endpoint.
+     *
+     */
+    public function testWhoAmI()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

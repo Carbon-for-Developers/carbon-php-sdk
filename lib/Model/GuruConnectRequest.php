@@ -61,7 +61,8 @@ class GuruConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'sync_files_on_connection' => 'bool',
         'request_id' => 'string',
         'sync_source_items' => 'bool',
-        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable'
+        'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable',
+        'data_source_tags' => 'object'
     ];
 
     /**
@@ -84,7 +85,8 @@ class GuruConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'sync_files_on_connection' => null,
         'request_id' => null,
         'sync_source_items' => null,
-        'file_sync_config' => null
+        'file_sync_config' => null,
+        'data_source_tags' => null
     ];
 
     /**
@@ -105,7 +107,8 @@ class GuruConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializab
 		'sync_files_on_connection' => true,
 		'request_id' => true,
 		'sync_source_items' => false,
-		'file_sync_config' => true
+		'file_sync_config' => true,
+		'data_source_tags' => false
     ];
 
     /**
@@ -206,7 +209,8 @@ class GuruConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'sync_files_on_connection' => 'sync_files_on_connection',
         'request_id' => 'request_id',
         'sync_source_items' => 'sync_source_items',
-        'file_sync_config' => 'file_sync_config'
+        'file_sync_config' => 'file_sync_config',
+        'data_source_tags' => 'data_source_tags'
     ];
 
     /**
@@ -227,7 +231,8 @@ class GuruConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'sync_files_on_connection' => 'setSyncFilesOnConnection',
         'request_id' => 'setRequestId',
         'sync_source_items' => 'setSyncSourceItems',
-        'file_sync_config' => 'setFileSyncConfig'
+        'file_sync_config' => 'setFileSyncConfig',
+        'data_source_tags' => 'setDataSourceTags'
     ];
 
     /**
@@ -248,7 +253,8 @@ class GuruConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'sync_files_on_connection' => 'getSyncFilesOnConnection',
         'request_id' => 'getRequestId',
         'sync_source_items' => 'getSyncSourceItems',
-        'file_sync_config' => 'getFileSyncConfig'
+        'file_sync_config' => 'getFileSyncConfig',
+        'data_source_tags' => 'getDataSourceTags'
     ];
 
     /**
@@ -321,6 +327,7 @@ class GuruConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('request_id', $data ?? [], null);
         $this->setIfExists('sync_source_items', $data ?? [], true);
         $this->setIfExists('file_sync_config', $data ?? [], null);
+        $this->setIfExists('data_source_tags', $data ?? [], null);
     }
 
     /**
@@ -807,6 +814,35 @@ class GuruConnectRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         }
 
         $this->container['file_sync_config'] = $file_sync_config;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_source_tags
+     *
+     * @return object|null
+     */
+    public function getDataSourceTags()
+    {
+        return $this->container['data_source_tags'];
+    }
+
+    /**
+     * Sets data_source_tags
+     *
+     * @param object|null $data_source_tags Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
+     *
+     * @return self
+     */
+    public function setDataSourceTags($data_source_tags)
+    {
+
+        if (is_null($data_source_tags)) {
+            throw new \InvalidArgumentException('non-nullable data_source_tags cannot be null');
+        }
+
+        $this->container['data_source_tags'] = $data_source_tags;
 
         return $this;
     }

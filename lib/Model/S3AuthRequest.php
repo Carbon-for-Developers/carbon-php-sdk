@@ -52,7 +52,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'access_key' => 'string',
         'access_key_secret' => 'string',
         'sync_source_items' => 'bool',
-        'endpoint_url' => 'string'
+        'endpoint_url' => 'string',
+        'data_source_tags' => 'object'
     ];
 
     /**
@@ -66,7 +67,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'access_key' => null,
         'access_key_secret' => null,
         'sync_source_items' => null,
-        'endpoint_url' => null
+        'endpoint_url' => null,
+        'data_source_tags' => null
     ];
 
     /**
@@ -78,7 +80,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'access_key' => false,
 		'access_key_secret' => false,
 		'sync_source_items' => false,
-		'endpoint_url' => true
+		'endpoint_url' => true,
+		'data_source_tags' => false
     ];
 
     /**
@@ -170,7 +173,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'access_key' => 'access_key',
         'access_key_secret' => 'access_key_secret',
         'sync_source_items' => 'sync_source_items',
-        'endpoint_url' => 'endpoint_url'
+        'endpoint_url' => 'endpoint_url',
+        'data_source_tags' => 'data_source_tags'
     ];
 
     /**
@@ -182,7 +186,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'access_key' => 'setAccessKey',
         'access_key_secret' => 'setAccessKeySecret',
         'sync_source_items' => 'setSyncSourceItems',
-        'endpoint_url' => 'setEndpointUrl'
+        'endpoint_url' => 'setEndpointUrl',
+        'data_source_tags' => 'setDataSourceTags'
     ];
 
     /**
@@ -194,7 +199,8 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'access_key' => 'getAccessKey',
         'access_key_secret' => 'getAccessKeySecret',
         'sync_source_items' => 'getSyncSourceItems',
-        'endpoint_url' => 'getEndpointUrl'
+        'endpoint_url' => 'getEndpointUrl',
+        'data_source_tags' => 'getDataSourceTags'
     ];
 
     /**
@@ -258,6 +264,7 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('access_key_secret', $data ?? [], null);
         $this->setIfExists('sync_source_items', $data ?? [], true);
         $this->setIfExists('endpoint_url', $data ?? [], null);
+        $this->setIfExists('data_source_tags', $data ?? [], null);
     }
 
     /**
@@ -427,6 +434,35 @@ class S3AuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['endpoint_url'] = $endpoint_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_source_tags
+     *
+     * @return object|null
+     */
+    public function getDataSourceTags()
+    {
+        return $this->container['data_source_tags'];
+    }
+
+    /**
+     * Sets data_source_tags
+     *
+     * @param object|null $data_source_tags Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
+     *
+     * @return self
+     */
+    public function setDataSourceTags($data_source_tags)
+    {
+
+        if (is_null($data_source_tags)) {
+            throw new \InvalidArgumentException('non-nullable data_source_tags cannot be null');
+        }
+
+        $this->container['data_source_tags'] = $data_source_tags;
 
         return $this;
     }

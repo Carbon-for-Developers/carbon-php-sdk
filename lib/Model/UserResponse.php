@@ -67,7 +67,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'unique_file_tags' => 'object[]',
         'enabled_features' => 'object',
         'custom_limits' => 'object',
-        'auto_sync_enabled_sources' => 'mixed[]'
+        'auto_sync_enabled_sources' => 'mixed[]',
+        'connector_settings' => 'object'
     ];
 
     /**
@@ -96,7 +97,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'unique_file_tags' => null,
         'enabled_features' => null,
         'custom_limits' => null,
-        'auto_sync_enabled_sources' => null
+        'auto_sync_enabled_sources' => null,
+        'connector_settings' => null
     ];
 
     /**
@@ -123,7 +125,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 		'unique_file_tags' => false,
 		'enabled_features' => true,
 		'custom_limits' => false,
-		'auto_sync_enabled_sources' => false
+		'auto_sync_enabled_sources' => false,
+		'connector_settings' => false
     ];
 
     /**
@@ -230,7 +233,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'unique_file_tags' => 'unique_file_tags',
         'enabled_features' => 'enabled_features',
         'custom_limits' => 'custom_limits',
-        'auto_sync_enabled_sources' => 'auto_sync_enabled_sources'
+        'auto_sync_enabled_sources' => 'auto_sync_enabled_sources',
+        'connector_settings' => 'connector_settings'
     ];
 
     /**
@@ -257,7 +261,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'unique_file_tags' => 'setUniqueFileTags',
         'enabled_features' => 'setEnabledFeatures',
         'custom_limits' => 'setCustomLimits',
-        'auto_sync_enabled_sources' => 'setAutoSyncEnabledSources'
+        'auto_sync_enabled_sources' => 'setAutoSyncEnabledSources',
+        'connector_settings' => 'setConnectorSettings'
     ];
 
     /**
@@ -284,7 +289,8 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'unique_file_tags' => 'getUniqueFileTags',
         'enabled_features' => 'getEnabledFeatures',
         'custom_limits' => 'getCustomLimits',
-        'auto_sync_enabled_sources' => 'getAutoSyncEnabledSources'
+        'auto_sync_enabled_sources' => 'getAutoSyncEnabledSources',
+        'connector_settings' => 'getConnectorSettings'
     ];
 
     /**
@@ -363,6 +369,7 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('enabled_features', $data ?? [], null);
         $this->setIfExists('custom_limits', $data ?? [], null);
         $this->setIfExists('auto_sync_enabled_sources', $data ?? [], null);
+        $this->setIfExists('connector_settings', $data ?? [], null);
     }
 
     /**
@@ -448,6 +455,9 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['auto_sync_enabled_sources'] === null) {
             $invalidProperties[] = "'auto_sync_enabled_sources' can't be null";
+        }
+        if ($this->container['connector_settings'] === null) {
+            $invalidProperties[] = "'connector_settings' can't be null";
         }
         return $invalidProperties;
     }
@@ -1025,6 +1035,35 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['auto_sync_enabled_sources'] = $auto_sync_enabled_sources;
+
+        return $this;
+    }
+
+    /**
+     * Gets connector_settings
+     *
+     * @return object
+     */
+    public function getConnectorSettings()
+    {
+        return $this->container['connector_settings'];
+    }
+
+    /**
+     * Sets connector_settings
+     *
+     * @param object $connector_settings connector_settings
+     *
+     * @return self
+     */
+    public function setConnectorSettings($connector_settings)
+    {
+
+        if (is_null($connector_settings)) {
+            throw new \InvalidArgumentException('non-nullable connector_settings cannot be null');
+        }
+
+        $this->container['connector_settings'] = $connector_settings;
 
         return $this;
     }
