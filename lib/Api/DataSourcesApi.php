@@ -61,7 +61,13 @@ class DataSourcesApi extends \Carbon\CustomApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
+        'addTags' => [
+            'application/json',
+        ],
         'queryUserDataSources' => [
+            'application/json',
+        ],
+        'removeTags' => [
             'application/json',
         ],
         'revokeAccessToken' => [
@@ -135,6 +141,378 @@ class DataSourcesApi extends \Carbon\CustomApi
         // user did not pass in a value for this parameter
         if ($value === SENTINEL_VALUE) return;
         $body[$property] = $value;
+    }
+
+    /**
+     * Operation addTags
+     *
+     * Add Data Source Tags
+     *
+     * @param  \Carbon\Model\AddDataSourceTagsInput $add_data_source_tags_input add_data_source_tags_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTags'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Carbon\Model\OrganizationUserDataSourceAPI|\Carbon\Model\HTTPValidationError
+     */
+    public function addTags(
+
+        $tags,
+        $data_source_id,
+        string $contentType = self::contentTypes['addTags'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "tags", $tags);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $add_data_source_tags_input = $_body;
+
+        list($response) = $this->addTagsWithHttpInfo($add_data_source_tags_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation addTagsWithHttpInfo
+     *
+     * Add Data Source Tags
+     *
+     * @param  \Carbon\Model\AddDataSourceTagsInput $add_data_source_tags_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTags'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Carbon\Model\OrganizationUserDataSourceAPI|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function addTagsWithHttpInfo($add_data_source_tags_input, string $contentType = self::contentTypes['addTags'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->addTagsRequest($add_data_source_tags_input, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->addTagsWithHttpInfo(
+                        $add_data_source_tags_input,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Carbon\Model\OrganizationUserDataSourceAPI' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\OrganizationUserDataSourceAPI' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\OrganizationUserDataSourceAPI', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Carbon\Model\OrganizationUserDataSourceAPI';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\OrganizationUserDataSourceAPI',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation addTagsAsync
+     *
+     * Add Data Source Tags
+     *
+     * @param  \Carbon\Model\AddDataSourceTagsInput $add_data_source_tags_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTags'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function addTagsAsync(
+
+        $tags,
+        $data_source_id,
+        string $contentType = self::contentTypes['addTags'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "tags", $tags);
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $add_data_source_tags_input = $_body;
+
+        return $this->addTagsAsyncWithHttpInfo($add_data_source_tags_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation addTagsAsyncWithHttpInfo
+     *
+     * Add Data Source Tags
+     *
+     * @param  \Carbon\Model\AddDataSourceTagsInput $add_data_source_tags_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTags'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function addTagsAsyncWithHttpInfo($add_data_source_tags_input, string $contentType = self::contentTypes['addTags'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = '\Carbon\Model\OrganizationUserDataSourceAPI';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->addTagsRequest($add_data_source_tags_input, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'addTags'
+     *
+     * @param  \Carbon\Model\AddDataSourceTagsInput $add_data_source_tags_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTags'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function addTagsRequest($add_data_source_tags_input, string $contentType = self::contentTypes['addTags'][0])
+    {
+
+        if ($add_data_source_tags_input !== SENTINEL_VALUE) {
+            if (!($add_data_source_tags_input instanceof \Carbon\Model\AddDataSourceTagsInput)) {
+                if (!is_array($add_data_source_tags_input))
+                    throw new \InvalidArgumentException('"add_data_source_tags_input" must be associative array or an instance of \Carbon\Model\AddDataSourceTagsInput DataSourcesApi.addTags.');
+                else
+                    $add_data_source_tags_input = new \Carbon\Model\AddDataSourceTagsInput($add_data_source_tags_input);
+            }
+        }
+        // verify the required parameter 'add_data_source_tags_input' is set
+        if ($add_data_source_tags_input === SENTINEL_VALUE || (is_array($add_data_source_tags_input) && count($add_data_source_tags_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter add_data_source_tags_input when calling addTags'
+            );
+        }
+
+
+        $resourcePath = '/data_sources/tags/add';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($add_data_source_tags_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($add_data_source_tags_input));
+            } else {
+                $httpBody = $add_data_source_tags_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
     }
 
     /**
@@ -449,6 +827,382 @@ class DataSourcesApi extends \Carbon\CustomApi
                 $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($organization_user_data_source_query_input));
             } else {
                 $httpBody = $organization_user_data_source_query_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation removeTags
+     *
+     * Remove Data Source Tags
+     *
+     * @param  \Carbon\Model\RemoveDataSourceTagsInput $remove_data_source_tags_input remove_data_source_tags_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeTags'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Carbon\Model\OrganizationUserDataSourceAPI|\Carbon\Model\HTTPValidationError
+     */
+    public function removeTags(
+
+        $data_source_id,
+        $tags_to_remove = SENTINEL_VALUE,
+        $remove_all_tags = false,
+        string $contentType = self::contentTypes['removeTags'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "tags_to_remove", $tags_to_remove);
+        $this->setRequestBodyProperty($_body, "remove_all_tags", $remove_all_tags);
+        $remove_data_source_tags_input = $_body;
+
+        list($response) = $this->removeTagsWithHttpInfo($remove_data_source_tags_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation removeTagsWithHttpInfo
+     *
+     * Remove Data Source Tags
+     *
+     * @param  \Carbon\Model\RemoveDataSourceTagsInput $remove_data_source_tags_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeTags'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Carbon\Model\OrganizationUserDataSourceAPI|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function removeTagsWithHttpInfo($remove_data_source_tags_input, string $contentType = self::contentTypes['removeTags'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->removeTagsRequest($remove_data_source_tags_input, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->removeTagsWithHttpInfo(
+                        $remove_data_source_tags_input,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Carbon\Model\OrganizationUserDataSourceAPI' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\OrganizationUserDataSourceAPI' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\OrganizationUserDataSourceAPI', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Carbon\Model\OrganizationUserDataSourceAPI';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\OrganizationUserDataSourceAPI',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation removeTagsAsync
+     *
+     * Remove Data Source Tags
+     *
+     * @param  \Carbon\Model\RemoveDataSourceTagsInput $remove_data_source_tags_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeTags'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function removeTagsAsync(
+
+        $data_source_id,
+        $tags_to_remove = SENTINEL_VALUE,
+        $remove_all_tags = false,
+        string $contentType = self::contentTypes['removeTags'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "data_source_id", $data_source_id);
+        $this->setRequestBodyProperty($_body, "tags_to_remove", $tags_to_remove);
+        $this->setRequestBodyProperty($_body, "remove_all_tags", $remove_all_tags);
+        $remove_data_source_tags_input = $_body;
+
+        return $this->removeTagsAsyncWithHttpInfo($remove_data_source_tags_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation removeTagsAsyncWithHttpInfo
+     *
+     * Remove Data Source Tags
+     *
+     * @param  \Carbon\Model\RemoveDataSourceTagsInput $remove_data_source_tags_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeTags'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function removeTagsAsyncWithHttpInfo($remove_data_source_tags_input, string $contentType = self::contentTypes['removeTags'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = '\Carbon\Model\OrganizationUserDataSourceAPI';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->removeTagsRequest($remove_data_source_tags_input, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'removeTags'
+     *
+     * @param  \Carbon\Model\RemoveDataSourceTagsInput $remove_data_source_tags_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeTags'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function removeTagsRequest($remove_data_source_tags_input, string $contentType = self::contentTypes['removeTags'][0])
+    {
+
+        if ($remove_data_source_tags_input !== SENTINEL_VALUE) {
+            if (!($remove_data_source_tags_input instanceof \Carbon\Model\RemoveDataSourceTagsInput)) {
+                if (!is_array($remove_data_source_tags_input))
+                    throw new \InvalidArgumentException('"remove_data_source_tags_input" must be associative array or an instance of \Carbon\Model\RemoveDataSourceTagsInput DataSourcesApi.removeTags.');
+                else
+                    $remove_data_source_tags_input = new \Carbon\Model\RemoveDataSourceTagsInput($remove_data_source_tags_input);
+            }
+        }
+        // verify the required parameter 'remove_data_source_tags_input' is set
+        if ($remove_data_source_tags_input === SENTINEL_VALUE || (is_array($remove_data_source_tags_input) && count($remove_data_source_tags_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter remove_data_source_tags_input when calling removeTags'
+            );
+        }
+
+
+        $resourcePath = '/data_sources/tags/remove';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($remove_data_source_tags_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($remove_data_source_tags_input));
+            } else {
+                $httpBody = $remove_data_source_tags_input;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

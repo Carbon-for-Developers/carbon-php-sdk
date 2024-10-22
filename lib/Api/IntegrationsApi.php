@@ -984,6 +984,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $request_id = SENTINEL_VALUE,
         $sync_source_items = true,
         $file_sync_config = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectFreshdesk'][0]
     )
     {
@@ -1001,6 +1002,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
         $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $fresh_desk_connect_request = $_body;
 
         list($response) = $this->connectFreshdeskWithHttpInfo($fresh_desk_connect_request, $contentType);
@@ -1175,6 +1177,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $request_id = SENTINEL_VALUE,
         $sync_source_items = true,
         $file_sync_config = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectFreshdesk'][0]
     )
     {
@@ -1192,6 +1195,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
         $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $fresh_desk_connect_request = $_body;
 
         return $this->connectFreshdeskAsyncWithHttpInfo($fresh_desk_connect_request, $contentType)
@@ -1408,6 +1412,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $request_id = SENTINEL_VALUE,
         $sync_source_items = true,
         $file_sync_config = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectGitbook'][0]
     )
     {
@@ -1425,6 +1430,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
         $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $gitbook_connect_request = $_body;
 
         list($response) = $this->connectGitbookWithHttpInfo($gitbook_connect_request, $contentType);
@@ -1599,6 +1605,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $request_id = SENTINEL_VALUE,
         $sync_source_items = true,
         $file_sync_config = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectGitbook'][0]
     )
     {
@@ -1616,6 +1623,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
         $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $gitbook_connect_request = $_body;
 
         return $this->connectGitbookAsyncWithHttpInfo($gitbook_connect_request, $contentType)
@@ -1832,6 +1840,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $request_id = SENTINEL_VALUE,
         $sync_source_items = true,
         $file_sync_config = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectGuru'][0]
     )
     {
@@ -1849,6 +1858,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
         $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $guru_connect_request = $_body;
 
         list($response) = $this->connectGuruWithHttpInfo($guru_connect_request, $contentType);
@@ -2023,6 +2033,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $request_id = SENTINEL_VALUE,
         $sync_source_items = true,
         $file_sync_config = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['connectGuru'][0]
     )
     {
@@ -2040,6 +2051,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
         $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $guru_connect_request = $_body;
 
         return $this->connectGuruAsyncWithHttpInfo($guru_connect_request, $contentType)
@@ -2247,6 +2259,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $access_key_secret,
         $sync_source_items = true,
         $endpoint_url = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['createAwsIamUser'][0]
     )
     {
@@ -2255,6 +2268,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "access_key_secret", $access_key_secret);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
         $this->setRequestBodyProperty($_body, "endpoint_url", $endpoint_url);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $s3_auth_request = $_body;
 
         list($response) = $this->createAwsIamUserWithHttpInfo($s3_auth_request, $contentType);
@@ -2420,6 +2434,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $access_key_secret,
         $sync_source_items = true,
         $endpoint_url = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['createAwsIamUser'][0]
     )
     {
@@ -2428,6 +2443,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "access_key_secret", $access_key_secret);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
         $this->setRequestBodyProperty($_body, "endpoint_url", $endpoint_url);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $s3_auth_request = $_body;
 
         return $this->createAwsIamUserAsyncWithHttpInfo($s3_auth_request, $contentType)
@@ -2660,6 +2676,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $automatically_open_file_picker = SENTINEL_VALUE,
         $gong_account_email = SENTINEL_VALUE,
         $servicenow_credentials = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -2693,6 +2710,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "automatically_open_file_picker", $automatically_open_file_picker);
         $this->setRequestBodyProperty($_body, "gong_account_email", $gong_account_email);
         $this->setRequestBodyProperty($_body, "servicenow_credentials", $servicenow_credentials);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $o_auth_url_request = $_body;
 
         list($response) = $this->getOauthUrlWithHttpInfo($o_auth_url_request, $contentType);
@@ -2883,6 +2901,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $automatically_open_file_picker = SENTINEL_VALUE,
         $gong_account_email = SENTINEL_VALUE,
         $servicenow_credentials = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['getOauthUrl'][0]
     )
     {
@@ -2916,6 +2935,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "automatically_open_file_picker", $automatically_open_file_picker);
         $this->setRequestBodyProperty($_body, "gong_account_email", $gong_account_email);
         $this->setRequestBodyProperty($_body, "servicenow_credentials", $servicenow_credentials);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $o_auth_url_request = $_body;
 
         return $this->getOauthUrlAsyncWithHttpInfo($o_auth_url_request, $contentType)
@@ -6596,6 +6616,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $account_name,
         $account_key,
         $sync_source_items = true,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncAzureBlobStorage'][0]
     )
     {
@@ -6603,6 +6624,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "account_name", $account_name);
         $this->setRequestBodyProperty($_body, "account_key", $account_key);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $azure_blob_auth_request = $_body;
 
         list($response) = $this->syncAzureBlobStorageWithHttpInfo($azure_blob_auth_request, $contentType);
@@ -6767,6 +6789,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $account_name,
         $account_key,
         $sync_source_items = true,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncAzureBlobStorage'][0]
     )
     {
@@ -6774,6 +6797,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "account_name", $account_name);
         $this->setRequestBodyProperty($_body, "account_key", $account_key);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $azure_blob_auth_request = $_body;
 
         return $this->syncAzureBlobStorageAsyncWithHttpInfo($azure_blob_auth_request, $contentType)
@@ -8225,6 +8249,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $username,
         $access_token,
         $sync_source_items = false,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncGitHub'][0]
     )
     {
@@ -8232,6 +8257,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "username", $username);
         $this->setRequestBodyProperty($_body, "access_token", $access_token);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $github_connect_request = $_body;
 
         list($response) = $this->syncGitHubWithHttpInfo($github_connect_request, $contentType);
@@ -8396,6 +8422,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $username,
         $access_token,
         $sync_source_items = false,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncGitHub'][0]
     )
     {
@@ -8403,6 +8430,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "username", $username);
         $this->setRequestBodyProperty($_body, "access_token", $access_token);
         $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $github_connect_request = $_body;
 
         return $this->syncGitHubAsyncWithHttpInfo($github_connect_request, $contentType)
@@ -10261,6 +10289,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $request_id = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncRssFeed'][0]
     )
     {
@@ -10274,6 +10303,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $rss_feed_input = $_body;
 
         list($response) = $this->syncRssFeedWithHttpInfo($rss_feed_input, $contentType);
@@ -10440,6 +10470,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $generate_sparse_vectors = false,
         $prepend_filename_to_chunks = false,
         $request_id = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
         string $contentType = self::contentTypes['syncRssFeed'][0]
     )
     {
@@ -10453,6 +10484,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
         $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
         $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
         $rss_feed_input = $_body;
 
         return $this->syncRssFeedAsyncWithHttpInfo($rss_feed_input, $contentType)

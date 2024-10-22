@@ -1,6 +1,6 @@
 <?php
 /**
- * AzureBlobAuthRequest
+ * RemoveDataSourceTagsInput
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ use \ArrayAccess;
 use \Carbon\ObjectSerializer;
 
 /**
- * AzureBlobAuthRequest Class Doc Comment
+ * RemoveDataSourceTagsInput Class Doc Comment
  *
  * @category Class
  * @package  Carbon
  * @implements \ArrayAccess<string, mixed>
  */
-class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class RemoveDataSourceTagsInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AzureBlobAuthRequest';
+    protected static $openAPIModelName = 'RemoveDataSourceTagsInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,9 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'account_name' => 'string',
-        'account_key' => 'string',
-        'sync_source_items' => 'bool',
-        'data_source_tags' => 'object'
+        'data_source_id' => 'int',
+        'tags_to_remove' => 'string[]',
+        'remove_all_tags' => 'bool'
     ];
 
     /**
@@ -63,10 +62,9 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'account_name' => null,
-        'account_key' => null,
-        'sync_source_items' => null,
-        'data_source_tags' => null
+        'data_source_id' => null,
+        'tags_to_remove' => null,
+        'remove_all_tags' => null
     ];
 
     /**
@@ -75,10 +73,9 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'account_name' => false,
-		'account_key' => false,
-		'sync_source_items' => false,
-		'data_source_tags' => false
+        'data_source_id' => false,
+		'tags_to_remove' => false,
+		'remove_all_tags' => false
     ];
 
     /**
@@ -167,10 +164,9 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'account_name' => 'account_name',
-        'account_key' => 'account_key',
-        'sync_source_items' => 'sync_source_items',
-        'data_source_tags' => 'data_source_tags'
+        'data_source_id' => 'data_source_id',
+        'tags_to_remove' => 'tags_to_remove',
+        'remove_all_tags' => 'remove_all_tags'
     ];
 
     /**
@@ -179,10 +175,9 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'account_name' => 'setAccountName',
-        'account_key' => 'setAccountKey',
-        'sync_source_items' => 'setSyncSourceItems',
-        'data_source_tags' => 'setDataSourceTags'
+        'data_source_id' => 'setDataSourceId',
+        'tags_to_remove' => 'setTagsToRemove',
+        'remove_all_tags' => 'setRemoveAllTags'
     ];
 
     /**
@@ -191,10 +186,9 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'account_name' => 'getAccountName',
-        'account_key' => 'getAccountKey',
-        'sync_source_items' => 'getSyncSourceItems',
-        'data_source_tags' => 'getDataSourceTags'
+        'data_source_id' => 'getDataSourceId',
+        'tags_to_remove' => 'getTagsToRemove',
+        'remove_all_tags' => 'getRemoveAllTags'
     ];
 
     /**
@@ -254,10 +248,9 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('account_name', $data ?? [], null);
-        $this->setIfExists('account_key', $data ?? [], null);
-        $this->setIfExists('sync_source_items', $data ?? [], true);
-        $this->setIfExists('data_source_tags', $data ?? [], null);
+        $this->setIfExists('data_source_id', $data ?? [], null);
+        $this->setIfExists('tags_to_remove', $data ?? [], null);
+        $this->setIfExists('remove_all_tags', $data ?? [], false);
     }
 
     /**
@@ -287,11 +280,8 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        if ($this->container['account_name'] === null) {
-            $invalidProperties[] = "'account_name' can't be null";
-        }
-        if ($this->container['account_key'] === null) {
-            $invalidProperties[] = "'account_key' can't be null";
+        if ($this->container['data_source_id'] === null) {
+            $invalidProperties[] = "'data_source_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -309,117 +299,88 @@ class AzureBlobAuthRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets account_name
+     * Gets data_source_id
      *
-     * @return string
+     * @return int
      */
-    public function getAccountName()
+    public function getDataSourceId()
     {
-        return $this->container['account_name'];
+        return $this->container['data_source_id'];
     }
 
     /**
-     * Sets account_name
+     * Sets data_source_id
      *
-     * @param string $account_name account_name
+     * @param int $data_source_id data_source_id
      *
      * @return self
      */
-    public function setAccountName($account_name)
+    public function setDataSourceId($data_source_id)
     {
 
-        if (is_null($account_name)) {
-            throw new \InvalidArgumentException('non-nullable account_name cannot be null');
+        if (is_null($data_source_id)) {
+            throw new \InvalidArgumentException('non-nullable data_source_id cannot be null');
         }
 
-        $this->container['account_name'] = $account_name;
+        $this->container['data_source_id'] = $data_source_id;
 
         return $this;
     }
 
     /**
-     * Gets account_key
+     * Gets tags_to_remove
      *
-     * @return string
+     * @return string[]|null
      */
-    public function getAccountKey()
+    public function getTagsToRemove()
     {
-        return $this->container['account_key'];
+        return $this->container['tags_to_remove'];
     }
 
     /**
-     * Sets account_key
+     * Sets tags_to_remove
      *
-     * @param string $account_key account_key
+     * @param string[]|null $tags_to_remove tags_to_remove
      *
      * @return self
      */
-    public function setAccountKey($account_key)
+    public function setTagsToRemove($tags_to_remove)
     {
 
-        if (is_null($account_key)) {
-            throw new \InvalidArgumentException('non-nullable account_key cannot be null');
+        if (is_null($tags_to_remove)) {
+            throw new \InvalidArgumentException('non-nullable tags_to_remove cannot be null');
         }
 
-        $this->container['account_key'] = $account_key;
+        $this->container['tags_to_remove'] = $tags_to_remove;
 
         return $this;
     }
 
     /**
-     * Gets sync_source_items
+     * Gets remove_all_tags
      *
      * @return bool|null
      */
-    public function getSyncSourceItems()
+    public function getRemoveAllTags()
     {
-        return $this->container['sync_source_items'];
+        return $this->container['remove_all_tags'];
     }
 
     /**
-     * Sets sync_source_items
+     * Sets remove_all_tags
      *
-     * @param bool|null $sync_source_items sync_source_items
+     * @param bool|null $remove_all_tags remove_all_tags
      *
      * @return self
      */
-    public function setSyncSourceItems($sync_source_items)
+    public function setRemoveAllTags($remove_all_tags)
     {
 
-        if (is_null($sync_source_items)) {
-            throw new \InvalidArgumentException('non-nullable sync_source_items cannot be null');
+        if (is_null($remove_all_tags)) {
+            throw new \InvalidArgumentException('non-nullable remove_all_tags cannot be null');
         }
 
-        $this->container['sync_source_items'] = $sync_source_items;
-
-        return $this;
-    }
-
-    /**
-     * Gets data_source_tags
-     *
-     * @return object|null
-     */
-    public function getDataSourceTags()
-    {
-        return $this->container['data_source_tags'];
-    }
-
-    /**
-     * Sets data_source_tags
-     *
-     * @param object|null $data_source_tags Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
-     *
-     * @return self
-     */
-    public function setDataSourceTags($data_source_tags)
-    {
-
-        if (is_null($data_source_tags)) {
-            throw new \InvalidArgumentException('non-nullable data_source_tags cannot be null');
-        }
-
-        $this->container['data_source_tags'] = $data_source_tags;
+        $this->container['remove_all_tags'] = $remove_all_tags;
 
         return $this;
     }

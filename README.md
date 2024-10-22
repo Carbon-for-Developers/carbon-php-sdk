@@ -30,7 +30,9 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.cRM.getLeads`](#carboncrmgetleads)
   * [`carbon.cRM.getOpportunities`](#carboncrmgetopportunities)
   * [`carbon.cRM.getOpportunity`](#carboncrmgetopportunity)
+  * [`carbon.dataSources.addTags`](#carbondatasourcesaddtags)
   * [`carbon.dataSources.queryUserDataSources`](#carbondatasourcesqueryuserdatasources)
+  * [`carbon.dataSources.removeTags`](#carbondatasourcesremovetags)
   * [`carbon.dataSources.revokeAccessToken`](#carbondatasourcesrevokeaccesstoken)
   * [`carbon.embeddings.all`](#carbonembeddingsall)
   * [`carbon.embeddings.getDocuments`](#carbonembeddingsgetdocuments)
@@ -94,6 +96,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.users.get`](#carbonusersget)
   * [`carbon.users.toggleUserFeatures`](#carbonuserstoggleuserfeatures)
   * [`carbon.users.updateUsers`](#carbonusersupdateusers)
+  * [`carbon.users.whoAmI`](#carbonuserswhoami)
   * [`carbon.utilities.fetchUrls`](#carbonutilitiesfetchurls)
   * [`carbon.utilities.fetchWebpage`](#carbonutilitiesfetchwebpage)
   * [`carbon.utilities.fetchYoutubeTranscripts`](#carbonutilitiesfetchyoutubetranscripts)
@@ -608,6 +611,40 @@ $result = $carbon->cRM->getOpportunity(
 ---
 
 
+### `carbon.dataSources.addTags`<a id="carbondatasourcesaddtags"></a>
+
+Add Data Source Tags
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->dataSources->addTags(
+    tags: [], 
+    data_source_id: 1
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### tags: `object`<a id="tags-object"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**OrganizationUserDataSourceAPI**](./lib/Model/OrganizationUserDataSourceAPI.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/data_sources/tags/add` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `carbon.dataSources.queryUserDataSources`<a id="carbondatasourcesqueryuserdatasources"></a>
 
 User Data Sources
@@ -647,6 +684,43 @@ $result = $carbon->dataSources->queryUserDataSources(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/user_data_sources` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.dataSources.removeTags`<a id="carbondatasourcesremovetags"></a>
+
+Remove Data Source Tags
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->dataSources->removeTags(
+    data_source_id: 1, 
+    tags_to_remove: [], 
+    remove_all_tags: False
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### data_source_id: `int`<a id="data_source_id-int"></a>
+
+##### tags_to_remove: `string`[]<a id="tags_to_remove-string"></a>
+
+##### remove_all_tags: `bool`<a id="remove_all_tags-bool"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**OrganizationUserDataSourceAPI**](./lib/Model/OrganizationUserDataSourceAPI.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/data_sources/tags/remove` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1737,7 +1811,7 @@ Enable cold storage for the file. If set to true, the file will be moved to cold
 
 ##### hot_storage_time_to_live: `int`<a id="hot_storage_time_to_live-int"></a>
 
-Time in seconds after which the file will be moved to cold storage.
+Time in days after which the file will be moved to cold storage. Must be one of [1, 3, 7, 14, 30].
 
 ##### generate_chunks_only: `bool`<a id="generate_chunks_only-bool"></a>
 
@@ -2405,7 +2479,8 @@ $result = $carbon->integrations->connectFreshdesk(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
-    ]
+    ], 
+    data_source_tags: []
 );
 ```
 
@@ -2438,6 +2513,10 @@ $result = $carbon->integrations->connectFreshdesk(
 Enabling this flag will fetch all available content from the source to be listed via list items endpoint
 
 ##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
+
+##### data_source_tags: `object`<a id="data_source_tags-object"></a>
+
+Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2487,7 +2566,8 @@ $result = $carbon->integrations->connectGitbook(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
-    ]
+    ], 
+    data_source_tags: []
 );
 ```
 
@@ -2520,6 +2600,10 @@ $result = $carbon->integrations->connectGitbook(
 Enabling this flag will fetch all available content from the source to be listed via list items endpoint
 
 ##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
+
+##### data_source_tags: `object`<a id="data_source_tags-object"></a>
+
+Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2567,7 +2651,8 @@ $result = $carbon->integrations->connectGuru(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
-    ]
+    ], 
+    data_source_tags: []
 );
 ```
 
@@ -2600,6 +2685,10 @@ $result = $carbon->integrations->connectGuru(
 Enabling this flag will fetch all available content from the source to be listed via list items endpoint
 
 ##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
+
+##### data_source_tags: `object`<a id="data_source_tags-object"></a>
+
+Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2636,7 +2725,8 @@ $result = $carbon->integrations->createAwsIamUser(
     access_key: "string_example", 
     access_key_secret: "string_example", 
     sync_source_items: True, 
-    endpoint_url: "string_example"
+    endpoint_url: "string_example", 
+    data_source_tags: []
 );
 ```
 
@@ -2653,6 +2743,10 @@ Enabling this flag will fetch all available content from the source to be listed
 ##### endpoint_url: `string`<a id="endpoint_url-string"></a>
 
 You can specify a Digital Ocean endpoint URL to connect a Digital Ocean Space through this endpoint.         The URL should be of format <region>.digitaloceanspaces.com. It's not required for S3 buckets.
+
+##### data_source_tags: `object`<a id="data_source_tags-object"></a>
+
+Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2723,7 +2817,8 @@ $result = $carbon->integrations->getOauthUrl(
         "client_id" => "client_id_example",
         "client_secret" => "client_secret_example",
         "redirect_uri" => "redirect_uri_example",
-    ]
+    ], 
+    data_source_tags: []
 );
 ```
 
@@ -2808,6 +2903,10 @@ Automatically open source file picker after the OAuth flow is complete. This fla
 If you are connecting a Gong account, you need to input the email of the account you         wish to connect. This email will be used to identify your carbon data source.
 
 ##### servicenow_credentials: [`ServiceNowCredentialsNullable`](./lib/Model/ServiceNowCredentialsNullable.php)<a id="servicenow_credentials-servicenowcredentialsnullablelibmodelservicenowcredentialsnullablephp"></a>
+
+##### data_source_tags: `object`<a id="data_source_tags-object"></a>
+
+Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -3245,7 +3344,8 @@ Once created, provide us with the following details to generate the connection U
 $result = $carbon->integrations->syncAzureBlobStorage(
     account_name: "string_example", 
     account_key: "string_example", 
-    sync_source_items: True
+    sync_source_items: True, 
+    data_source_tags: []
 );
 ```
 
@@ -3256,6 +3356,10 @@ $result = $carbon->integrations->syncAzureBlobStorage(
 ##### account_key: `string`<a id="account_key-string"></a>
 
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
+
+##### data_source_tags: `object`<a id="data_source_tags-object"></a>
+
+Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -3508,7 +3612,8 @@ expires you will need to manually update it through this endpoint.
 $result = $carbon->integrations->syncGitHub(
     username: "string_example", 
     access_token: "string_example", 
-    sync_source_items: False
+    sync_source_items: False, 
+    data_source_tags: []
 );
 ```
 
@@ -3521,6 +3626,10 @@ $result = $carbon->integrations->syncGitHub(
 ##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
 
 Enabling this flag will fetch all available content from the source to be listed via list items endpoint
+
+##### data_source_tags: `object`<a id="data_source_tags-object"></a>
+
+Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -3935,7 +4044,8 @@ $result = $carbon->integrations->syncRssFeed(
     embedding_model: "OPENAI", 
     generate_sparse_vectors: False, 
     prepend_filename_to_chunks: False, 
-    request_id: "string_example"
+    request_id: "string_example", 
+    data_source_tags: []
 );
 ```
 
@@ -3958,6 +4068,10 @@ $result = $carbon->integrations->syncRssFeed(
 ##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
 
 ##### request_id: `string`<a id="request_id-string"></a>
+
+##### data_source_tags: `object`<a id="data_source_tags-object"></a>
+
+Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -4423,6 +4537,31 @@ Custom character upload limit for the user across a single upload.         If se
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/update_users` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.users.whoAmI`<a id="carbonuserswhoami"></a>
+
+Me Endpoint
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->users->whoAmI();
+```
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**UserResponse**](./lib/Model/UserResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/whoami` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

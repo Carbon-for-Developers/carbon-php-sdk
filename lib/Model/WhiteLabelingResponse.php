@@ -51,7 +51,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPITypes = [
         'remove_branding' => 'bool',
         'integrations' => 'object',
-        'custom_limits' => 'object'
+        'custom_limits' => 'object',
+        'connector_settings' => 'object'
     ];
 
     /**
@@ -64,7 +65,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPIFormats = [
         'remove_branding' => null,
         'integrations' => null,
-        'custom_limits' => null
+        'custom_limits' => null,
+        'connector_settings' => null
     ];
 
     /**
@@ -75,7 +77,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static array $openAPINullables = [
         'remove_branding' => false,
 		'integrations' => false,
-		'custom_limits' => false
+		'custom_limits' => false,
+		'connector_settings' => false
     ];
 
     /**
@@ -166,7 +169,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $attributeMap = [
         'remove_branding' => 'remove_branding',
         'integrations' => 'integrations',
-        'custom_limits' => 'custom_limits'
+        'custom_limits' => 'custom_limits',
+        'connector_settings' => 'connector_settings'
     ];
 
     /**
@@ -177,7 +181,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $setters = [
         'remove_branding' => 'setRemoveBranding',
         'integrations' => 'setIntegrations',
-        'custom_limits' => 'setCustomLimits'
+        'custom_limits' => 'setCustomLimits',
+        'connector_settings' => 'setConnectorSettings'
     ];
 
     /**
@@ -188,7 +193,8 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $getters = [
         'remove_branding' => 'getRemoveBranding',
         'integrations' => 'getIntegrations',
-        'custom_limits' => 'getCustomLimits'
+        'custom_limits' => 'getCustomLimits',
+        'connector_settings' => 'getConnectorSettings'
     ];
 
     /**
@@ -251,6 +257,7 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('remove_branding', $data ?? [], null);
         $this->setIfExists('integrations', $data ?? [], null);
         $this->setIfExists('custom_limits', $data ?? [], null);
+        $this->setIfExists('connector_settings', $data ?? [], null);
     }
 
     /**
@@ -288,6 +295,9 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
         }
         if ($this->container['custom_limits'] === null) {
             $invalidProperties[] = "'custom_limits' can't be null";
+        }
+        if ($this->container['connector_settings'] === null) {
+            $invalidProperties[] = "'connector_settings' can't be null";
         }
         return $invalidProperties;
     }
@@ -387,6 +397,35 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
         }
 
         $this->container['custom_limits'] = $custom_limits;
+
+        return $this;
+    }
+
+    /**
+     * Gets connector_settings
+     *
+     * @return object
+     */
+    public function getConnectorSettings()
+    {
+        return $this->container['connector_settings'];
+    }
+
+    /**
+     * Sets connector_settings
+     *
+     * @param object $connector_settings connector_settings
+     *
+     * @return self
+     */
+    public function setConnectorSettings($connector_settings)
+    {
+
+        if (is_null($connector_settings)) {
+            throw new \InvalidArgumentException('non-nullable connector_settings cannot be null');
+        }
+
+        $this->container['connector_settings'] = $connector_settings;
 
         return $this;
     }

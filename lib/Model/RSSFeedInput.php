@@ -57,7 +57,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => '\Carbon\Model\EmbeddingGenerators',
         'generate_sparse_vectors' => 'bool',
         'prepend_filename_to_chunks' => 'bool',
-        'request_id' => 'string'
+        'request_id' => 'string',
+        'data_source_tags' => 'object'
     ];
 
     /**
@@ -76,7 +77,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => null,
         'generate_sparse_vectors' => null,
         'prepend_filename_to_chunks' => null,
-        'request_id' => null
+        'request_id' => null,
+        'data_source_tags' => null
     ];
 
     /**
@@ -93,7 +95,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'embedding_model' => false,
 		'generate_sparse_vectors' => true,
 		'prepend_filename_to_chunks' => true,
-		'request_id' => true
+		'request_id' => true,
+		'data_source_tags' => false
     ];
 
     /**
@@ -190,7 +193,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'embedding_model',
         'generate_sparse_vectors' => 'generate_sparse_vectors',
         'prepend_filename_to_chunks' => 'prepend_filename_to_chunks',
-        'request_id' => 'request_id'
+        'request_id' => 'request_id',
+        'data_source_tags' => 'data_source_tags'
     ];
 
     /**
@@ -207,7 +211,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'setEmbeddingModel',
         'generate_sparse_vectors' => 'setGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'setPrependFilenameToChunks',
-        'request_id' => 'setRequestId'
+        'request_id' => 'setRequestId',
+        'data_source_tags' => 'setDataSourceTags'
     ];
 
     /**
@@ -224,7 +229,8 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'embedding_model' => 'getEmbeddingModel',
         'generate_sparse_vectors' => 'getGenerateSparseVectors',
         'prepend_filename_to_chunks' => 'getPrependFilenameToChunks',
-        'request_id' => 'getRequestId'
+        'request_id' => 'getRequestId',
+        'data_source_tags' => 'getDataSourceTags'
     ];
 
     /**
@@ -293,6 +299,7 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('generate_sparse_vectors', $data ?? [], false);
         $this->setIfExists('prepend_filename_to_chunks', $data ?? [], false);
         $this->setIfExists('request_id', $data ?? [], null);
+        $this->setIfExists('data_source_tags', $data ?? [], null);
     }
 
     /**
@@ -646,6 +653,35 @@ class RSSFeedInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['request_id'] = $request_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_source_tags
+     *
+     * @return object|null
+     */
+    public function getDataSourceTags()
+    {
+        return $this->container['data_source_tags'];
+    }
+
+    /**
+     * Sets data_source_tags
+     *
+     * @param object|null $data_source_tags Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
+     *
+     * @return self
+     */
+    public function setDataSourceTags($data_source_tags)
+    {
+
+        if (is_null($data_source_tags)) {
+            throw new \InvalidArgumentException('non-nullable data_source_tags cannot be null');
+        }
+
+        $this->container['data_source_tags'] = $data_source_tags;
 
         return $this;
     }

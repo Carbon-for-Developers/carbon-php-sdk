@@ -1,6 +1,6 @@
 <?php
 /**
- * S3AuthRequestTest
+ * AddDataSourceTagsInputTest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@ namespace Carbon\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * S3AuthRequestTest Class Doc Comment
+ * AddDataSourceTagsInputTest Class Doc Comment
  *
  * @category    Class
- * @description S3AuthRequest
+ * @description AddDataSourceTagsInput
  * @package     Carbon
  */
-class S3AuthRequestTest extends TestCase
+class AddDataSourceTagsInputTest extends TestCase
 {
 
     /**
@@ -63,54 +63,27 @@ class S3AuthRequestTest extends TestCase
     }
 
     /**
-     * Test "S3AuthRequest"
+     * Test "AddDataSourceTagsInput"
      */
-    public function testS3AuthRequest()
+    public function testAddDataSourceTagsInput()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "access_key"
+     * Test attribute "tags"
      */
-    public function testPropertyAccessKey()
+    public function testPropertyTags()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "access_key_secret"
+     * Test attribute "data_source_id"
      */
-    public function testPropertyAccessKeySecret()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "sync_source_items"
-     */
-    public function testPropertySyncSourceItems()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "endpoint_url"
-     */
-    public function testPropertyEndpointUrl()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "data_source_tags"
-     */
-    public function testPropertyDataSourceTags()
+    public function testPropertyDataSourceId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

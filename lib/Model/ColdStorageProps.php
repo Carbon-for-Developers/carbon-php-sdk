@@ -330,7 +330,7 @@ class ColdStorageProps implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets hot_storage_time_to_live
      *
-     * @param int|null $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage.
+     * @param int|null $hot_storage_time_to_live Time in days after which the file will be moved to cold storage. Valid values are [1, 3, 7, 14, 30]
      *
      * @return self
      */

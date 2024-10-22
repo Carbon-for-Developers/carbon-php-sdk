@@ -4747,7 +4747,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
      * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
      * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
-     * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
+     * @param  int $hot_storage_time_to_live Time in days after which the file will be moved to cold storage. Must be one of [1, 3, 7, 14, 30]. (optional)
      * @param  bool $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag. (optional, default to false)
      * @param  bool $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
@@ -4814,7 +4814,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
      * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
      * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
-     * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
+     * @param  int $hot_storage_time_to_live Time in days after which the file will be moved to cold storage. Must be one of [1, 3, 7, 14, 30]. (optional)
      * @param  bool $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag. (optional, default to false)
      * @param  bool $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
@@ -4994,7 +4994,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
      * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
      * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
-     * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
+     * @param  int $hot_storage_time_to_live Time in days after which the file will be moved to cold storage. Must be one of [1, 3, 7, 14, 30]. (optional)
      * @param  bool $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag. (optional, default to false)
      * @param  bool $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
@@ -5064,7 +5064,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
      * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
      * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
-     * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
+     * @param  int $hot_storage_time_to_live Time in days after which the file will be moved to cold storage. Must be one of [1, 3, 7, 14, 30]. (optional)
      * @param  bool $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag. (optional, default to false)
      * @param  bool $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation
@@ -5137,7 +5137,7 @@ class FilesApi extends \Carbon\CustomApi
      * @param  FileContentTypesNullable $media_type The media type of the file. If not provided, it will be inferred from the file extension. (optional)
      * @param  bool $split_rows Whether to split tabular rows into chunks. Currently only valid for CSV, TSV, and XLSX files. (optional, default to false)
      * @param  bool $enable_cold_storage Enable cold storage for the file. If set to true, the file will be moved to cold storage after a certain period of inactivity. Default is false. (optional, default to false)
-     * @param  int $hot_storage_time_to_live Time in seconds after which the file will be moved to cold storage. (optional)
+     * @param  int $hot_storage_time_to_live Time in days after which the file will be moved to cold storage. Must be one of [1, 3, 7, 14, 30]. (optional)
      * @param  bool $generate_chunks_only If this flag is enabled, the file will be chunked and stored with Carbon,             but no embeddings will be generated. This overrides the skip_embedding_generation flag. (optional, default to false)
      * @param  bool $store_file_only If this flag is enabled, the file will be stored with Carbon, but no processing will be done. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['upload'] to see the possible values for this operation

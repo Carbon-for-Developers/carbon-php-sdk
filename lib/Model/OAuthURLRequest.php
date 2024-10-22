@@ -77,7 +77,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'file_sync_config' => '\Carbon\Model\FileSyncConfigNullable',
         'automatically_open_file_picker' => 'bool',
         'gong_account_email' => 'string',
-        'servicenow_credentials' => '\Carbon\Model\ServiceNowCredentialsNullable'
+        'servicenow_credentials' => '\Carbon\Model\ServiceNowCredentialsNullable',
+        'data_source_tags' => 'object'
     ];
 
     /**
@@ -116,7 +117,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'file_sync_config' => null,
         'automatically_open_file_picker' => null,
         'gong_account_email' => null,
-        'servicenow_credentials' => null
+        'servicenow_credentials' => null,
+        'data_source_tags' => null
     ];
 
     /**
@@ -153,7 +155,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 		'file_sync_config' => true,
 		'automatically_open_file_picker' => true,
 		'gong_account_email' => true,
-		'servicenow_credentials' => true
+		'servicenow_credentials' => true,
+		'data_source_tags' => false
     ];
 
     /**
@@ -270,7 +273,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'file_sync_config' => 'file_sync_config',
         'automatically_open_file_picker' => 'automatically_open_file_picker',
         'gong_account_email' => 'gong_account_email',
-        'servicenow_credentials' => 'servicenow_credentials'
+        'servicenow_credentials' => 'servicenow_credentials',
+        'data_source_tags' => 'data_source_tags'
     ];
 
     /**
@@ -307,7 +311,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'file_sync_config' => 'setFileSyncConfig',
         'automatically_open_file_picker' => 'setAutomaticallyOpenFilePicker',
         'gong_account_email' => 'setGongAccountEmail',
-        'servicenow_credentials' => 'setServicenowCredentials'
+        'servicenow_credentials' => 'setServicenowCredentials',
+        'data_source_tags' => 'setDataSourceTags'
     ];
 
     /**
@@ -344,7 +349,8 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         'file_sync_config' => 'getFileSyncConfig',
         'automatically_open_file_picker' => 'getAutomaticallyOpenFilePicker',
         'gong_account_email' => 'getGongAccountEmail',
-        'servicenow_credentials' => 'getServicenowCredentials'
+        'servicenow_credentials' => 'getServicenowCredentials',
+        'data_source_tags' => 'getDataSourceTags'
     ];
 
     /**
@@ -433,6 +439,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('automatically_open_file_picker', $data ?? [], null);
         $this->setIfExists('gong_account_email', $data ?? [], null);
         $this->setIfExists('servicenow_credentials', $data ?? [], null);
+        $this->setIfExists('data_source_tags', $data ?? [], null);
     }
 
     /**
@@ -1485,6 +1492,35 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['servicenow_credentials'] = $servicenow_credentials;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_source_tags
+     *
+     * @return object|null
+     */
+    public function getDataSourceTags()
+    {
+        return $this->container['data_source_tags'];
+    }
+
+    /**
+     * Sets data_source_tags
+     *
+     * @param object|null $data_source_tags Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
+     *
+     * @return self
+     */
+    public function setDataSourceTags($data_source_tags)
+    {
+
+        if (is_null($data_source_tags)) {
+            throw new \InvalidArgumentException('non-nullable data_source_tags cannot be null');
+        }
+
+        $this->container['data_source_tags'] = $data_source_tags;
 
         return $this;
     }

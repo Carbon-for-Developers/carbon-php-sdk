@@ -58,12 +58,36 @@ class DataSourcesApiTest extends TestCase
     }
 
     /**
+     * Test case for addTags
+     *
+     * Add Data Source Tags.
+     *
+     */
+    public function testAddTags()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for queryUserDataSources
      *
      * User Data Sources.
      *
      */
     public function testQueryUserDataSources()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for removeTags
+     *
+     * Remove Data Source Tags.
+     *
+     */
+    public function testRemoveTags()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
