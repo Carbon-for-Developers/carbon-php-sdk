@@ -88,4 +88,13 @@ class PaginationTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "starting_id"
+     */
+    public function testPropertyStartingId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

@@ -50,7 +50,8 @@ class Pagination implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'limit' => 'int',
-        'offset' => 'int'
+        'offset' => 'int',
+        'starting_id' => 'int'
     ];
 
     /**
@@ -62,7 +63,8 @@ class Pagination implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'limit' => null,
-        'offset' => null
+        'offset' => null,
+        'starting_id' => null
     ];
 
     /**
@@ -72,7 +74,8 @@ class Pagination implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'limit' => false,
-		'offset' => false
+		'offset' => false,
+		'starting_id' => false
     ];
 
     /**
@@ -162,7 +165,8 @@ class Pagination implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'limit' => 'limit',
-        'offset' => 'offset'
+        'offset' => 'offset',
+        'starting_id' => 'starting_id'
     ];
 
     /**
@@ -172,7 +176,8 @@ class Pagination implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'limit' => 'setLimit',
-        'offset' => 'setOffset'
+        'offset' => 'setOffset',
+        'starting_id' => 'setStartingId'
     ];
 
     /**
@@ -182,7 +187,8 @@ class Pagination implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'limit' => 'getLimit',
-        'offset' => 'getOffset'
+        'offset' => 'getOffset',
+        'starting_id' => 'getStartingId'
     ];
 
     /**
@@ -244,6 +250,7 @@ class Pagination implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('limit', $data ?? [], 10);
         $this->setIfExists('offset', $data ?? [], 0);
+        $this->setIfExists('starting_id', $data ?? [], 0);
     }
 
     /**
@@ -342,6 +349,35 @@ class Pagination implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['offset'] = $offset;
+
+        return $this;
+    }
+
+    /**
+     * Gets starting_id
+     *
+     * @return int|null
+     */
+    public function getStartingId()
+    {
+        return $this->container['starting_id'];
+    }
+
+    /**
+     * Sets starting_id
+     *
+     * @param int|null $starting_id starting_id
+     *
+     * @return self
+     */
+    public function setStartingId($starting_id)
+    {
+
+        if (is_null($starting_id)) {
+            throw new \InvalidArgumentException('non-nullable starting_id cannot be null');
+        }
+
+        $this->container['starting_id'] = $starting_id;
 
         return $this;
     }

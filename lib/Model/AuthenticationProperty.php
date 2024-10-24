@@ -118,7 +118,7 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
 		'refresh_token' => true,
 		'workspace_id' => false,
 		'tenant_name' => true,
-		'site_name' => false,
+		'site_name' => true,
 		'subdomain' => false,
 		'access_token_secret' => false,
 		'username' => false,
@@ -429,9 +429,6 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
         if ($this->container['workspace_id'] === null) {
             $invalidProperties[] = "'workspace_id' can't be null";
         }
-        if ($this->container['site_name'] === null) {
-            $invalidProperties[] = "'site_name' can't be null";
-        }
         if ($this->container['subdomain'] === null) {
             $invalidProperties[] = "'subdomain' can't be null";
         }
@@ -664,7 +661,7 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets site_name
      *
-     * @return string
+     * @return string|null
      */
     public function getSiteName()
     {
@@ -674,7 +671,7 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets site_name
      *
-     * @param string $site_name site_name
+     * @param string|null $site_name site_name
      *
      * @return self
      */
@@ -682,7 +679,14 @@ class AuthenticationProperty implements ModelInterface, ArrayAccess, \JsonSerial
     {
 
         if (is_null($site_name)) {
-            throw new \InvalidArgumentException('non-nullable site_name cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'site_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('site_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['site_name'] = $site_name;
