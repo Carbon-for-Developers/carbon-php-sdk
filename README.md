@@ -657,6 +657,7 @@ $result = $carbon->dataSources->queryUserDataSources(
     pagination: [
         "limit" => 10,
         "offset" => 0,
+        "starting_id" => 0,
     ], 
     order_by: "created_at", 
     order_dir: "desc", 
@@ -774,6 +775,7 @@ $result = $carbon->embeddings->all(
     pagination: [
         "limit" => 10,
         "offset" => 0,
+        "starting_id" => 0,
     ], 
     order_by: "created_at", 
     order_dir: "desc", 
@@ -1052,6 +1054,7 @@ $result = $carbon->embeddings->getEmbeddingsAndChunks(
     pagination: [
         "limit" => 10,
         "offset" => 0,
+        "starting_id" => 0,
     ], 
     order_by: "created_at", 
     order_dir: "desc", 
@@ -1543,6 +1546,7 @@ $result = $carbon->files->queryUserFiles(
     pagination: [
         "limit" => 10,
         "offset" => 0,
+        "starting_id" => 0,
     ], 
     order_by: "created_at", 
     order_dir: "desc", 
@@ -1599,6 +1603,7 @@ $result = $carbon->files->queryUserFilesDeprecated(
     pagination: [
         "limit" => 10,
         "offset" => 0,
+        "starting_id" => 0,
     ], 
     order_by: "created_at", 
     order_dir: "desc", 
@@ -3027,6 +3032,7 @@ $result = $carbon->integrations->listDataSourceItems(
     pagination: [
         "limit" => 10,
         "offset" => 0,
+        "starting_id" => 0,
     ], 
     order_by: "name", 
     order_dir: "asc"
@@ -4344,6 +4350,7 @@ $result = $carbon->users->all(
     pagination: [
         "limit" => 10,
         "offset" => 0,
+        "starting_id" => 0,
     ], 
     filters: [
     ], 
@@ -4947,6 +4954,7 @@ $result = $carbon->utilities->userWebpages(
     pagination: [
         "limit" => 10,
         "offset" => 0,
+        "starting_id" => 0,
     ], 
     order_by: "created_at", 
     order_dir: "asc"
@@ -5051,6 +5059,7 @@ $result = $carbon->webhooks->urls(
     pagination: [
         "limit" => 10,
         "offset" => 0,
+        "starting_id" => 0,
     ], 
     order_by: "created_at", 
     order_dir: "desc", 
@@ -5096,6 +5105,7 @@ $result = $carbon->whiteLabel->all(
     pagination: [
         "limit" => 10,
         "offset" => 0,
+        "starting_id" => 0,
     ], 
     order_by: "created_at", 
     order_dir: "desc", 
