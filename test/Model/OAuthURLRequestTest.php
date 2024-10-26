@@ -90,6 +90,15 @@ class OAuthURLRequestTest extends TestCase
     }
 
     /**
+     * Test attribute "scopes"
+     */
+    public function testPropertyScopes()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "service"
      */
     public function testPropertyService()

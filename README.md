@@ -1556,7 +1556,8 @@ $result = $carbon->files->queryUserFiles(
     ], 
     include_raw_file: True, 
     include_parsed_text_file: True, 
-    include_additional_files: True
+    include_additional_files: True, 
+    presigned_url_expiry_time_seconds: 3600
 );
 ```
 
@@ -1564,17 +1565,35 @@ $result = $carbon->files->queryUserFiles(
 
 ##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
 
+Pagination parameters for the query.
+
 ##### order_by:<a id="order_by"></a>
+
+The field on OrganizationUserFilesToSYnc to order the results by.
 
 ##### order_dir:<a id="order_dir"></a>
 
+The direction to order the results by.
+
 ##### filters: [`OrganizationUserFilesToSyncFilters`](./lib/Model/OrganizationUserFilesToSyncFilters.php)<a id="filters-organizationuserfilestosyncfilterslibmodelorganizationuserfilestosyncfiltersphp"></a>
+
+Filters to apply to the query.
 
 ##### include_raw_file: `bool`<a id="include_raw_file-bool"></a>
 
+If true, the query will return presigned URLs for the raw file. Only relevant for the /user_files_v2 endpoint.
+
 ##### include_parsed_text_file: `bool`<a id="include_parsed_text_file-bool"></a>
 
+If true, the query will return presigned URLs for the parsed text file. Only relevant for the /user_files_v2 endpoint.
+
 ##### include_additional_files: `bool`<a id="include_additional_files-bool"></a>
+
+If true, the query will return presigned URLs for additional files. Only relevant for the /user_files_v2 endpoint.
+
+##### presigned_url_expiry_time_seconds: `int`<a id="presigned_url_expiry_time_seconds-int"></a>
+
+The expiry time for the presigned URLs. Only relevant for the /user_files_v2 endpoint.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1613,7 +1632,8 @@ $result = $carbon->files->queryUserFilesDeprecated(
     ], 
     include_raw_file: True, 
     include_parsed_text_file: True, 
-    include_additional_files: True
+    include_additional_files: True, 
+    presigned_url_expiry_time_seconds: 3600
 );
 ```
 
@@ -1621,17 +1641,35 @@ $result = $carbon->files->queryUserFilesDeprecated(
 
 ##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
 
+Pagination parameters for the query.
+
 ##### order_by:<a id="order_by"></a>
+
+The field on OrganizationUserFilesToSYnc to order the results by.
 
 ##### order_dir:<a id="order_dir"></a>
 
+The direction to order the results by.
+
 ##### filters: [`OrganizationUserFilesToSyncFilters`](./lib/Model/OrganizationUserFilesToSyncFilters.php)<a id="filters-organizationuserfilestosyncfilterslibmodelorganizationuserfilestosyncfiltersphp"></a>
+
+Filters to apply to the query.
 
 ##### include_raw_file: `bool`<a id="include_raw_file-bool"></a>
 
+If true, the query will return presigned URLs for the raw file. Only relevant for the /user_files_v2 endpoint.
+
 ##### include_parsed_text_file: `bool`<a id="include_parsed_text_file-bool"></a>
 
+If true, the query will return presigned URLs for the parsed text file. Only relevant for the /user_files_v2 endpoint.
+
 ##### include_additional_files: `bool`<a id="include_additional_files-bool"></a>
+
+If true, the query will return presigned URLs for additional files. Only relevant for the /user_files_v2 endpoint.
+
+##### presigned_url_expiry_time_seconds: `int`<a id="presigned_url_expiry_time_seconds-int"></a>
+
+The expiry time for the presigned URLs. Only relevant for the /user_files_v2 endpoint.
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2782,6 +2820,7 @@ $result = $carbon->integrations->getOauthUrl(
     service: "BOX", 
     tags: None, 
     scope: "string_example", 
+    scopes: [], 
     chunk_size: 1500, 
     chunk_overlap: 20, 
     skip_embedding_generation: False, 
@@ -2834,6 +2873,10 @@ $result = $carbon->integrations->getOauthUrl(
 ##### tags:<a id="tags"></a>
 
 ##### scope: `string`<a id="scope-string"></a>
+
+##### scopes: `string`[]<a id="scopes-string"></a>
+
+List of scopes to request from the OAuth provider. Please that the scopes will be used as it is, not          combined with the default props that Carbon uses. One scope should be one array element.
 
 ##### chunk_size: `int`<a id="chunk_size-int"></a>
 

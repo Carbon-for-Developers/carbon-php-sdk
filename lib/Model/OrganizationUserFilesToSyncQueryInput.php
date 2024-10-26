@@ -55,7 +55,8 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
         'filters' => '\Carbon\Model\OrganizationUserFilesToSyncFilters',
         'include_raw_file' => 'bool',
         'include_parsed_text_file' => 'bool',
-        'include_additional_files' => 'bool'
+        'include_additional_files' => 'bool',
+        'presigned_url_expiry_time_seconds' => 'int'
     ];
 
     /**
@@ -72,7 +73,8 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
         'filters' => null,
         'include_raw_file' => null,
         'include_parsed_text_file' => null,
-        'include_additional_files' => null
+        'include_additional_files' => null,
+        'presigned_url_expiry_time_seconds' => null
     ];
 
     /**
@@ -87,7 +89,8 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
 		'filters' => false,
 		'include_raw_file' => true,
 		'include_parsed_text_file' => true,
-		'include_additional_files' => true
+		'include_additional_files' => true,
+		'presigned_url_expiry_time_seconds' => false
     ];
 
     /**
@@ -182,7 +185,8 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
         'filters' => 'filters',
         'include_raw_file' => 'include_raw_file',
         'include_parsed_text_file' => 'include_parsed_text_file',
-        'include_additional_files' => 'include_additional_files'
+        'include_additional_files' => 'include_additional_files',
+        'presigned_url_expiry_time_seconds' => 'presigned_url_expiry_time_seconds'
     ];
 
     /**
@@ -197,7 +201,8 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
         'filters' => 'setFilters',
         'include_raw_file' => 'setIncludeRawFile',
         'include_parsed_text_file' => 'setIncludeParsedTextFile',
-        'include_additional_files' => 'setIncludeAdditionalFiles'
+        'include_additional_files' => 'setIncludeAdditionalFiles',
+        'presigned_url_expiry_time_seconds' => 'setPresignedUrlExpiryTimeSeconds'
     ];
 
     /**
@@ -212,7 +217,8 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
         'filters' => 'getFilters',
         'include_raw_file' => 'getIncludeRawFile',
         'include_parsed_text_file' => 'getIncludeParsedTextFile',
-        'include_additional_files' => 'getIncludeAdditionalFiles'
+        'include_additional_files' => 'getIncludeAdditionalFiles',
+        'presigned_url_expiry_time_seconds' => 'getPresignedUrlExpiryTimeSeconds'
     ];
 
     /**
@@ -279,6 +285,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
         $this->setIfExists('include_raw_file', $data ?? [], null);
         $this->setIfExists('include_parsed_text_file', $data ?? [], null);
         $this->setIfExists('include_additional_files', $data ?? [], null);
+        $this->setIfExists('presigned_url_expiry_time_seconds', $data ?? [], 3600);
     }
 
     /**
@@ -336,7 +343,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets pagination
      *
-     * @param \Carbon\Model\Pagination|null $pagination pagination
+     * @param \Carbon\Model\Pagination|null $pagination Pagination parameters for the query.
      *
      * @return self
      */
@@ -365,7 +372,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets order_by
      *
-     * @param \Carbon\Model\OrganizationUserFilesToSyncOrderByTypes|null $order_by order_by
+     * @param \Carbon\Model\OrganizationUserFilesToSyncOrderByTypes|null $order_by The field on OrganizationUserFilesToSYnc to order the results by.
      *
      * @return self
      */
@@ -394,7 +401,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets order_dir
      *
-     * @param \Carbon\Model\OrderDir|null $order_dir order_dir
+     * @param \Carbon\Model\OrderDir|null $order_dir The direction to order the results by.
      *
      * @return self
      */
@@ -423,7 +430,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets filters
      *
-     * @param \Carbon\Model\OrganizationUserFilesToSyncFilters|null $filters filters
+     * @param \Carbon\Model\OrganizationUserFilesToSyncFilters|null $filters Filters to apply to the query.
      *
      * @return self
      */
@@ -452,7 +459,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets include_raw_file
      *
-     * @param bool|null $include_raw_file include_raw_file
+     * @param bool|null $include_raw_file If true, the query will return presigned URLs for the raw file. Only relevant for the /user_files_v2 endpoint.
      *
      * @return self
      */
@@ -488,7 +495,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets include_parsed_text_file
      *
-     * @param bool|null $include_parsed_text_file include_parsed_text_file
+     * @param bool|null $include_parsed_text_file If true, the query will return presigned URLs for the parsed text file. Only relevant for the /user_files_v2 endpoint.
      *
      * @return self
      */
@@ -524,7 +531,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets include_additional_files
      *
-     * @param bool|null $include_additional_files include_additional_files
+     * @param bool|null $include_additional_files If true, the query will return presigned URLs for additional files. Only relevant for the /user_files_v2 endpoint.
      *
      * @return self
      */
@@ -543,6 +550,35 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
         }
 
         $this->container['include_additional_files'] = $include_additional_files;
+
+        return $this;
+    }
+
+    /**
+     * Gets presigned_url_expiry_time_seconds
+     *
+     * @return int|null
+     */
+    public function getPresignedUrlExpiryTimeSeconds()
+    {
+        return $this->container['presigned_url_expiry_time_seconds'];
+    }
+
+    /**
+     * Sets presigned_url_expiry_time_seconds
+     *
+     * @param int|null $presigned_url_expiry_time_seconds The expiry time for the presigned URLs. Only relevant for the /user_files_v2 endpoint.
+     *
+     * @return self
+     */
+    public function setPresignedUrlExpiryTimeSeconds($presigned_url_expiry_time_seconds)
+    {
+
+        if (is_null($presigned_url_expiry_time_seconds)) {
+            throw new \InvalidArgumentException('non-nullable presigned_url_expiry_time_seconds cannot be null');
+        }
+
+        $this->container['presigned_url_expiry_time_seconds'] = $presigned_url_expiry_time_seconds;
 
         return $this;
     }

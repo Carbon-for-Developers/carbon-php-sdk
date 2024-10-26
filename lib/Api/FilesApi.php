@@ -3556,6 +3556,7 @@ class FilesApi extends \Carbon\CustomApi
         $include_raw_file = SENTINEL_VALUE,
         $include_parsed_text_file = SENTINEL_VALUE,
         $include_additional_files = SENTINEL_VALUE,
+        $presigned_url_expiry_time_seconds = 3600,
         string $contentType = self::contentTypes['queryUserFiles'][0]
     )
     {
@@ -3567,6 +3568,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "include_raw_file", $include_raw_file);
         $this->setRequestBodyProperty($_body, "include_parsed_text_file", $include_parsed_text_file);
         $this->setRequestBodyProperty($_body, "include_additional_files", $include_additional_files);
+        $this->setRequestBodyProperty($_body, "presigned_url_expiry_time_seconds", $presigned_url_expiry_time_seconds);
         $organization_user_files_to_sync_query_input = $_body;
 
         list($response) = $this->queryUserFilesWithHttpInfo($organization_user_files_to_sync_query_input, $contentType);
@@ -3735,6 +3737,7 @@ class FilesApi extends \Carbon\CustomApi
         $include_raw_file = SENTINEL_VALUE,
         $include_parsed_text_file = SENTINEL_VALUE,
         $include_additional_files = SENTINEL_VALUE,
+        $presigned_url_expiry_time_seconds = 3600,
         string $contentType = self::contentTypes['queryUserFiles'][0]
     )
     {
@@ -3746,6 +3749,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "include_raw_file", $include_raw_file);
         $this->setRequestBodyProperty($_body, "include_parsed_text_file", $include_parsed_text_file);
         $this->setRequestBodyProperty($_body, "include_additional_files", $include_additional_files);
+        $this->setRequestBodyProperty($_body, "presigned_url_expiry_time_seconds", $presigned_url_expiry_time_seconds);
         $organization_user_files_to_sync_query_input = $_body;
 
         return $this->queryUserFilesAsyncWithHttpInfo($organization_user_files_to_sync_query_input, $contentType)
@@ -3957,6 +3961,7 @@ class FilesApi extends \Carbon\CustomApi
         $include_raw_file = SENTINEL_VALUE,
         $include_parsed_text_file = SENTINEL_VALUE,
         $include_additional_files = SENTINEL_VALUE,
+        $presigned_url_expiry_time_seconds = 3600,
         string $contentType = self::contentTypes['queryUserFilesDeprecated'][0]
     )
     {
@@ -3968,6 +3973,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "include_raw_file", $include_raw_file);
         $this->setRequestBodyProperty($_body, "include_parsed_text_file", $include_parsed_text_file);
         $this->setRequestBodyProperty($_body, "include_additional_files", $include_additional_files);
+        $this->setRequestBodyProperty($_body, "presigned_url_expiry_time_seconds", $presigned_url_expiry_time_seconds);
         $organization_user_files_to_sync_query_input = $_body;
 
         list($response) = $this->queryUserFilesDeprecatedWithHttpInfo($organization_user_files_to_sync_query_input, $contentType);
@@ -4138,6 +4144,7 @@ class FilesApi extends \Carbon\CustomApi
         $include_raw_file = SENTINEL_VALUE,
         $include_parsed_text_file = SENTINEL_VALUE,
         $include_additional_files = SENTINEL_VALUE,
+        $presigned_url_expiry_time_seconds = 3600,
         string $contentType = self::contentTypes['queryUserFilesDeprecated'][0]
     )
     {
@@ -4149,6 +4156,7 @@ class FilesApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "include_raw_file", $include_raw_file);
         $this->setRequestBodyProperty($_body, "include_parsed_text_file", $include_parsed_text_file);
         $this->setRequestBodyProperty($_body, "include_additional_files", $include_additional_files);
+        $this->setRequestBodyProperty($_body, "presigned_url_expiry_time_seconds", $presigned_url_expiry_time_seconds);
         $organization_user_files_to_sync_query_input = $_body;
 
         return $this->queryUserFilesDeprecatedAsyncWithHttpInfo($organization_user_files_to_sync_query_input, $contentType)
