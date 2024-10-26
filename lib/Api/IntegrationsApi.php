@@ -2650,6 +2650,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $service,
         $tags = SENTINEL_VALUE,
         $scope = SENTINEL_VALUE,
+        $scopes = SENTINEL_VALUE,
         $chunk_size = 1500,
         $chunk_overlap = 20,
         $skip_embedding_generation = false,
@@ -2683,6 +2684,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $_body = [];
         $this->setRequestBodyProperty($_body, "tags", $tags);
         $this->setRequestBodyProperty($_body, "scope", $scope);
+        $this->setRequestBodyProperty($_body, "scopes", $scopes);
         $this->setRequestBodyProperty($_body, "service", $service);
         $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
         $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
@@ -2875,6 +2877,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $service,
         $tags = SENTINEL_VALUE,
         $scope = SENTINEL_VALUE,
+        $scopes = SENTINEL_VALUE,
         $chunk_size = 1500,
         $chunk_overlap = 20,
         $skip_embedding_generation = false,
@@ -2908,6 +2911,7 @@ class IntegrationsApi extends \Carbon\CustomApi
         $_body = [];
         $this->setRequestBodyProperty($_body, "tags", $tags);
         $this->setRequestBodyProperty($_body, "scope", $scope);
+        $this->setRequestBodyProperty($_body, "scopes", $scopes);
         $this->setRequestBodyProperty($_body, "service", $service);
         $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
         $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);

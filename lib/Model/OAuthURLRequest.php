@@ -51,6 +51,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'tags' => 'mixed',
         'scope' => 'string',
+        'scopes' => 'string[]',
         'service' => '\Carbon\Model\OauthBasedConnectors',
         'chunk_size' => 'int',
         'chunk_overlap' => 'int',
@@ -91,6 +92,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'tags' => null,
         'scope' => null,
+        'scopes' => null,
         'service' => null,
         'chunk_size' => null,
         'chunk_overlap' => null,
@@ -129,6 +131,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'tags' => true,
 		'scope' => true,
+		'scopes' => true,
 		'service' => false,
 		'chunk_size' => true,
 		'chunk_overlap' => true,
@@ -247,6 +250,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'tags' => 'tags',
         'scope' => 'scope',
+        'scopes' => 'scopes',
         'service' => 'service',
         'chunk_size' => 'chunk_size',
         'chunk_overlap' => 'chunk_overlap',
@@ -285,6 +289,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'tags' => 'setTags',
         'scope' => 'setScope',
+        'scopes' => 'setScopes',
         'service' => 'setService',
         'chunk_size' => 'setChunkSize',
         'chunk_overlap' => 'setChunkOverlap',
@@ -323,6 +328,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'tags' => 'getTags',
         'scope' => 'getScope',
+        'scopes' => 'getScopes',
         'service' => 'getService',
         'chunk_size' => 'getChunkSize',
         'chunk_overlap' => 'getChunkOverlap',
@@ -412,6 +418,7 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('scope', $data ?? [], null);
+        $this->setIfExists('scopes', $data ?? [], null);
         $this->setIfExists('service', $data ?? [], null);
         $this->setIfExists('chunk_size', $data ?? [], 1500);
         $this->setIfExists('chunk_overlap', $data ?? [], 20);
@@ -555,6 +562,42 @@ class OAuthURLRequest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['scope'] = $scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets scopes
+     *
+     * @return string[]|null
+     */
+    public function getScopes()
+    {
+        return $this->container['scopes'];
+    }
+
+    /**
+     * Sets scopes
+     *
+     * @param string[]|null $scopes List of scopes to request from the OAuth provider. Please that the scopes will be used as it is, not          combined with the default props that Carbon uses. One scope should be one array element.
+     *
+     * @return self
+     */
+    public function setScopes($scopes)
+    {
+
+        if (is_null($scopes)) {
+            array_push($this->openAPINullablesSetToNull, 'scopes');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('scopes', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['scopes'] = $scopes;
 
         return $this;
     }

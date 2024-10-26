@@ -133,4 +133,13 @@ class OrganizationUserFilesToSyncQueryInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "presigned_url_expiry_time_seconds"
+     */
+    public function testPropertyPresignedUrlExpiryTimeSeconds()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }
