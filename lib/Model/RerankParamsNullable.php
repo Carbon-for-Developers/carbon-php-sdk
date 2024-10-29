@@ -298,7 +298,7 @@ class RerankParamsNullable implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets model
      *
-     * @param string $model model
+     * @param string $model The name of the model to use for reranking. Options: ['COHERE_RERANK_MULTILINGUAL_V3', 'JINA_RERANKER_MULTILINGUAL_V2', 'PONGO_RERANKER'].
      *
      * @return self
      */
