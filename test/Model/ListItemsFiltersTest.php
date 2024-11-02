@@ -106,4 +106,22 @@ class ListItemsFiltersTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "file_formats"
+     */
+    public function testPropertyFileFormats()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "item_types"
+     */
+    public function testPropertyItemTypes()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

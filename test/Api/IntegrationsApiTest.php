@@ -238,6 +238,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for listSharepointSites
+     *
+     * List Sharepoint Sites.
+     *
+     */
+    public function testListSharepointSites()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for syncAzureBlobFiles
      *
      * Azure Blob Files.

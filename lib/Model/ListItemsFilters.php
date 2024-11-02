@@ -52,7 +52,9 @@ class ListItemsFilters implements ModelInterface, ArrayAccess, \JsonSerializable
         'external_ids' => 'string[]',
         'ids' => 'int[]',
         'name' => 'string',
-        'root_files_only' => 'bool'
+        'root_files_only' => 'bool',
+        'file_formats' => '\Carbon\Model\StorageFileFormats[]',
+        'item_types' => '\Carbon\Model\ItemTypesPropertyInner[]'
     ];
 
     /**
@@ -66,7 +68,9 @@ class ListItemsFilters implements ModelInterface, ArrayAccess, \JsonSerializable
         'external_ids' => null,
         'ids' => null,
         'name' => null,
-        'root_files_only' => null
+        'root_files_only' => null,
+        'file_formats' => null,
+        'item_types' => null
     ];
 
     /**
@@ -78,7 +82,9 @@ class ListItemsFilters implements ModelInterface, ArrayAccess, \JsonSerializable
         'external_ids' => true,
 		'ids' => true,
 		'name' => true,
-		'root_files_only' => true
+		'root_files_only' => true,
+		'file_formats' => true,
+		'item_types' => true
     ];
 
     /**
@@ -170,7 +176,9 @@ class ListItemsFilters implements ModelInterface, ArrayAccess, \JsonSerializable
         'external_ids' => 'external_ids',
         'ids' => 'ids',
         'name' => 'name',
-        'root_files_only' => 'root_files_only'
+        'root_files_only' => 'root_files_only',
+        'file_formats' => 'file_formats',
+        'item_types' => 'item_types'
     ];
 
     /**
@@ -182,7 +190,9 @@ class ListItemsFilters implements ModelInterface, ArrayAccess, \JsonSerializable
         'external_ids' => 'setExternalIds',
         'ids' => 'setIds',
         'name' => 'setName',
-        'root_files_only' => 'setRootFilesOnly'
+        'root_files_only' => 'setRootFilesOnly',
+        'file_formats' => 'setFileFormats',
+        'item_types' => 'setItemTypes'
     ];
 
     /**
@@ -194,7 +204,9 @@ class ListItemsFilters implements ModelInterface, ArrayAccess, \JsonSerializable
         'external_ids' => 'getExternalIds',
         'ids' => 'getIds',
         'name' => 'getName',
-        'root_files_only' => 'getRootFilesOnly'
+        'root_files_only' => 'getRootFilesOnly',
+        'file_formats' => 'getFileFormats',
+        'item_types' => 'getItemTypes'
     ];
 
     /**
@@ -258,6 +270,8 @@ class ListItemsFilters implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('ids', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('root_files_only', $data ?? [], null);
+        $this->setIfExists('file_formats', $data ?? [], null);
+        $this->setIfExists('item_types', $data ?? [], null);
     }
 
     /**
@@ -286,6 +300,14 @@ class ListItemsFilters implements ModelInterface, ArrayAccess, \JsonSerializable
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['file_formats']) && (count($this->container['file_formats']) > 50)) {
+            $invalidProperties[] = "invalid value for 'file_formats', number of items must be less than or equal to 50.";
+        }
+
+        if (!is_null($this->container['item_types']) && (count($this->container['item_types']) > 50)) {
+            $invalidProperties[] = "invalid value for 'item_types', number of items must be less than or equal to 50.";
+        }
 
         return $invalidProperties;
     }
@@ -442,6 +464,86 @@ class ListItemsFilters implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['root_files_only'] = $root_files_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_formats
+     *
+     * @return \Carbon\Model\StorageFileFormats[]|null
+     */
+    public function getFileFormats()
+    {
+        return $this->container['file_formats'];
+    }
+
+    /**
+     * Sets file_formats
+     *
+     * @param \Carbon\Model\StorageFileFormats[]|null $file_formats file_formats
+     *
+     * @return self
+     */
+    public function setFileFormats($file_formats)
+    {
+
+        if (!is_null($file_formats) && (count($file_formats) > 50)) {
+            throw new \InvalidArgumentException('invalid value for $file_formats when calling ListItemsFilters., number of items must be less than or equal to 50.');
+        }
+
+        if (is_null($file_formats)) {
+            array_push($this->openAPINullablesSetToNull, 'file_formats');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('file_formats', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['file_formats'] = $file_formats;
+
+        return $this;
+    }
+
+    /**
+     * Gets item_types
+     *
+     * @return \Carbon\Model\ItemTypesPropertyInner[]|null
+     */
+    public function getItemTypes()
+    {
+        return $this->container['item_types'];
+    }
+
+    /**
+     * Sets item_types
+     *
+     * @param \Carbon\Model\ItemTypesPropertyInner[]|null $item_types item_types
+     *
+     * @return self
+     */
+    public function setItemTypes($item_types)
+    {
+
+        if (!is_null($item_types) && (count($item_types) > 50)) {
+            throw new \InvalidArgumentException('invalid value for $item_types when calling ListItemsFilters., number of items must be less than or equal to 50.');
+        }
+
+        if (is_null($item_types)) {
+            array_push($this->openAPINullablesSetToNull, 'item_types');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('item_types', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['item_types'] = $item_types;
 
         return $this;
     }
