@@ -53,6 +53,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'source' => '\Carbon\Model\DataSourceType',
         'organization_id' => 'int',
+        'organization_user_id' => 'int',
         'organization_supplied_user_id' => 'string',
         'organization_user_data_source_id' => 'int',
         'external_file_id' => 'string',
@@ -101,6 +102,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'source' => null,
         'organization_id' => null,
+        'organization_user_id' => null,
         'organization_supplied_user_id' => null,
         'organization_user_data_source_id' => null,
         'external_file_id' => null,
@@ -147,6 +149,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
 		'id' => false,
 		'source' => false,
 		'organization_id' => false,
+		'organization_user_id' => true,
 		'organization_supplied_user_id' => false,
 		'organization_user_data_source_id' => true,
 		'external_file_id' => false,
@@ -273,6 +276,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'source' => 'source',
         'organization_id' => 'organization_id',
+        'organization_user_id' => 'organization_user_id',
         'organization_supplied_user_id' => 'organization_supplied_user_id',
         'organization_user_data_source_id' => 'organization_user_data_source_id',
         'external_file_id' => 'external_file_id',
@@ -319,6 +323,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'source' => 'setSource',
         'organization_id' => 'setOrganizationId',
+        'organization_user_id' => 'setOrganizationUserId',
         'organization_supplied_user_id' => 'setOrganizationSuppliedUserId',
         'organization_user_data_source_id' => 'setOrganizationUserDataSourceId',
         'external_file_id' => 'setExternalFileId',
@@ -365,6 +370,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'source' => 'getSource',
         'organization_id' => 'getOrganizationId',
+        'organization_user_id' => 'getOrganizationUserId',
         'organization_supplied_user_id' => 'getOrganizationSuppliedUserId',
         'organization_user_data_source_id' => 'getOrganizationUserDataSourceId',
         'external_file_id' => 'getExternalFileId',
@@ -462,6 +468,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('source', $data ?? [], null);
         $this->setIfExists('organization_id', $data ?? [], null);
+        $this->setIfExists('organization_user_id', $data ?? [], null);
         $this->setIfExists('organization_supplied_user_id', $data ?? [], null);
         $this->setIfExists('organization_user_data_source_id', $data ?? [], null);
         $this->setIfExists('external_file_id', $data ?? [], null);
@@ -536,6 +543,9 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['organization_id'] === null) {
             $invalidProperties[] = "'organization_id' can't be null";
+        }
+        if ($this->container['organization_user_id'] === null) {
+            $invalidProperties[] = "'organization_user_id' can't be null";
         }
         if ($this->container['organization_supplied_user_id'] === null) {
             $invalidProperties[] = "'organization_supplied_user_id' can't be null";
@@ -773,6 +783,42 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['organization_id'] = $organization_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets organization_user_id
+     *
+     * @return int
+     */
+    public function getOrganizationUserId()
+    {
+        return $this->container['organization_user_id'];
+    }
+
+    /**
+     * Sets organization_user_id
+     *
+     * @param int $organization_user_id organization_user_id
+     *
+     * @return self
+     */
+    public function setOrganizationUserId($organization_user_id)
+    {
+
+        if (is_null($organization_user_id)) {
+            array_push($this->openAPINullablesSetToNull, 'organization_user_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('organization_user_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['organization_user_id'] = $organization_user_id;
 
         return $this;
     }
