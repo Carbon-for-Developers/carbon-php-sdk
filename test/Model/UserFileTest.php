@@ -108,6 +108,15 @@ class UserFileTest extends TestCase
     }
 
     /**
+     * Test attribute "organization_user_id"
+     */
+    public function testPropertyOrganizationUserId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "organization_supplied_user_id"
      */
     public function testPropertyOrganizationSuppliedUserId()
