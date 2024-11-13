@@ -420,12 +420,6 @@ class Opportunity implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['is_deleted'] === null) {
             $invalidProperties[] = "'is_deleted' can't be null";
         }
-        if ($this->container['tasks'] === null) {
-            $invalidProperties[] = "'tasks' can't be null";
-        }
-        if ($this->container['events'] === null) {
-            $invalidProperties[] = "'events' can't be null";
-        }
         if ($this->container['remote_data'] === null) {
             $invalidProperties[] = "'remote_data' can't be null";
         }
@@ -916,7 +910,7 @@ class Opportunity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets tasks
      *
-     * @return \Carbon\Model\Task[]
+     * @return \Carbon\Model\Task[]|null
      */
     public function getTasks()
     {
@@ -926,7 +920,7 @@ class Opportunity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tasks
      *
-     * @param \Carbon\Model\Task[] $tasks tasks
+     * @param \Carbon\Model\Task[]|null $tasks tasks
      *
      * @return self
      */
@@ -952,7 +946,7 @@ class Opportunity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets events
      *
-     * @return \Carbon\Model\Event[]
+     * @return \Carbon\Model\Event[]|null
      */
     public function getEvents()
     {
@@ -962,7 +956,7 @@ class Opportunity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets events
      *
-     * @param \Carbon\Model\Event[] $events events
+     * @param \Carbon\Model\Event[]|null $events events
      *
      * @return self
      */

@@ -412,17 +412,8 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['nickname'] === null) {
-            $invalidProperties[] = "'nickname' can't be null";
-        }
         if ($this->container['remove_branding'] === null) {
             $invalidProperties[] = "'remove_branding' can't be null";
-        }
-        if ($this->container['custom_branding'] === null) {
-            $invalidProperties[] = "'custom_branding' can't be null";
-        }
-        if ($this->container['custom_limits'] === null) {
-            $invalidProperties[] = "'custom_limits' can't be null";
         }
         if ($this->container['aggregate_file_size'] === null) {
             $invalidProperties[] = "'aggregate_file_size' can't be null";
@@ -444,24 +435,6 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
         }
         if ($this->container['file_statistics_aggregated_at'] === null) {
             $invalidProperties[] = "'file_statistics_aggregated_at' can't be null";
-        }
-        if ($this->container['period_ends_at'] === null) {
-            $invalidProperties[] = "'period_ends_at' can't be null";
-        }
-        if ($this->container['cancel_at_period_end'] === null) {
-            $invalidProperties[] = "'cancel_at_period_end' can't be null";
-        }
-        if ($this->container['connector_settings'] === null) {
-            $invalidProperties[] = "'connector_settings' can't be null";
-        }
-        if ($this->container['global_user_config'] === null) {
-            $invalidProperties[] = "'global_user_config' can't be null";
-        }
-        if ($this->container['file_sync_usage'] === null) {
-            $invalidProperties[] = "'file_sync_usage' can't be null";
-        }
-        if ($this->container['logging_settings'] === null) {
-            $invalidProperties[] = "'logging_settings' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -545,7 +518,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets nickname
      *
-     * @return string
+     * @return string|null
      */
     public function getNickname()
     {
@@ -555,7 +528,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets nickname
      *
-     * @param string $nickname nickname
+     * @param string|null $nickname nickname
      *
      * @return self
      */
@@ -610,7 +583,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets custom_branding
      *
-     * @return object
+     * @return object|null
      */
     public function getCustomBranding()
     {
@@ -620,7 +593,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets custom_branding
      *
-     * @param object $custom_branding custom_branding
+     * @param object|null $custom_branding custom_branding
      *
      * @return self
      */
@@ -646,7 +619,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets custom_limits
      *
-     * @return object
+     * @return object|null
      */
     public function getCustomLimits()
     {
@@ -656,7 +629,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets custom_limits
      *
-     * @param object $custom_limits custom_limits
+     * @param object|null $custom_limits custom_limits
      *
      * @return self
      */
@@ -892,7 +865,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets period_ends_at
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPeriodEndsAt()
     {
@@ -902,7 +875,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets period_ends_at
      *
-     * @param \DateTime $period_ends_at period_ends_at
+     * @param \DateTime|null $period_ends_at period_ends_at
      *
      * @return self
      */
@@ -928,7 +901,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets cancel_at_period_end
      *
-     * @return bool
+     * @return bool|null
      */
     public function getCancelAtPeriodEnd()
     {
@@ -938,7 +911,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets cancel_at_period_end
      *
-     * @param bool $cancel_at_period_end cancel_at_period_end
+     * @param bool|null $cancel_at_period_end cancel_at_period_end
      *
      * @return self
      */
@@ -964,7 +937,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets connector_settings
      *
-     * @return object
+     * @return object|null
      */
     public function getConnectorSettings()
     {
@@ -974,7 +947,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets connector_settings
      *
-     * @param object $connector_settings connector_settings
+     * @param object|null $connector_settings connector_settings
      *
      * @return self
      */
@@ -993,7 +966,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets global_user_config
      *
-     * @return object
+     * @return object|null
      */
     public function getGlobalUserConfig()
     {
@@ -1003,7 +976,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets global_user_config
      *
-     * @param object $global_user_config global_user_config
+     * @param object|null $global_user_config global_user_config
      *
      * @return self
      */
@@ -1022,7 +995,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets file_sync_usage
      *
-     * @return object
+     * @return object|null
      */
     public function getFileSyncUsage()
     {
@@ -1032,7 +1005,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets file_sync_usage
      *
-     * @param object $file_sync_usage file_sync_usage
+     * @param object|null $file_sync_usage file_sync_usage
      *
      * @return self
      */
@@ -1051,7 +1024,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets logging_settings
      *
-     * @return object
+     * @return object|null
      */
     public function getLoggingSettings()
     {
@@ -1061,7 +1034,7 @@ class OrganizationResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets logging_settings
      *
-     * @param object $logging_settings logging_settings
+     * @param object|null $logging_settings logging_settings
      *
      * @return self
      */

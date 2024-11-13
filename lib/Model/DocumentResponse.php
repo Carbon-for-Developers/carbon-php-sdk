@@ -350,44 +350,14 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['tags'] === null) {
-            $invalidProperties[] = "'tags' can't be null";
-        }
         if ($this->container['content'] === null) {
             $invalidProperties[] = "'content' can't be null";
         }
         if ($this->container['file_id'] === null) {
             $invalidProperties[] = "'file_id' can't be null";
         }
-        if ($this->container['parent_file_id'] === null) {
-            $invalidProperties[] = "'parent_file_id' can't be null";
-        }
-        if ($this->container['source'] === null) {
-            $invalidProperties[] = "'source' can't be null";
-        }
-        if ($this->container['source_url'] === null) {
-            $invalidProperties[] = "'source_url' can't be null";
-        }
-        if ($this->container['source_type'] === null) {
-            $invalidProperties[] = "'source_type' can't be null";
-        }
-        if ($this->container['presigned_url'] === null) {
-            $invalidProperties[] = "'presigned_url' can't be null";
-        }
         if ($this->container['vector'] === null) {
             $invalidProperties[] = "'vector' can't be null";
-        }
-        if ($this->container['score'] === null) {
-            $invalidProperties[] = "'score' can't be null";
-        }
-        if ($this->container['rank'] === null) {
-            $invalidProperties[] = "'rank' can't be null";
-        }
-        if ($this->container['content_metadata'] === null) {
-            $invalidProperties[] = "'content_metadata' can't be null";
-        }
-        if ($this->container['chunk_index'] === null) {
-            $invalidProperties[] = "'chunk_index' can't be null";
         }
         return $invalidProperties;
     }
@@ -407,7 +377,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets tags
      *
-     * @return array<string,\Carbon\Model\Tags>
+     * @return array<string,\Carbon\Model\Tags>|null
      */
     public function getTags()
     {
@@ -417,7 +387,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tags
      *
-     * @param array<string,\Carbon\Model\Tags> $tags tags
+     * @param array<string,\Carbon\Model\Tags>|null $tags tags
      *
      * @return self
      */
@@ -501,7 +471,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets parent_file_id
      *
-     * @return int
+     * @return int|null
      */
     public function getParentFileId()
     {
@@ -511,7 +481,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets parent_file_id
      *
-     * @param int $parent_file_id parent_file_id
+     * @param int|null $parent_file_id parent_file_id
      *
      * @return self
      */
@@ -537,7 +507,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets source
      *
-     * @return string
+     * @return string|null
      */
     public function getSource()
     {
@@ -547,7 +517,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets source
      *
-     * @param string $source source
+     * @param string|null $source source
      *
      * @return self
      */
@@ -573,7 +543,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets source_url
      *
-     * @return string
+     * @return string|null
      */
     public function getSourceUrl()
     {
@@ -583,7 +553,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets source_url
      *
-     * @param string $source_url source_url
+     * @param string|null $source_url source_url
      *
      * @return self
      */
@@ -609,7 +579,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets source_type
      *
-     * @return \Carbon\Model\DataSourceTypeNullable
+     * @return \Carbon\Model\DataSourceTypeNullable|null
      */
     public function getSourceType()
     {
@@ -619,7 +589,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets source_type
      *
-     * @param \Carbon\Model\DataSourceTypeNullable $source_type source_type
+     * @param \Carbon\Model\DataSourceTypeNullable|null $source_type source_type
      *
      * @return self
      */
@@ -645,7 +615,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets presigned_url
      *
-     * @return string
+     * @return string|null
      */
     public function getPresignedUrl()
     {
@@ -655,7 +625,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets presigned_url
      *
-     * @param string $presigned_url presigned_url
+     * @param string|null $presigned_url presigned_url
      *
      * @return self
      */
@@ -717,7 +687,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets score
      *
-     * @return float
+     * @return float|null
      */
     public function getScore()
     {
@@ -727,7 +697,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets score
      *
-     * @param float $score score
+     * @param float|null $score score
      *
      * @return self
      */
@@ -753,7 +723,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets rank
      *
-     * @return \Carbon\Model\RankProperty
+     * @return \Carbon\Model\RankProperty|null
      */
     public function getRank()
     {
@@ -763,7 +733,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets rank
      *
-     * @param \Carbon\Model\RankProperty $rank rank
+     * @param \Carbon\Model\RankProperty|null $rank rank
      *
      * @return self
      */
@@ -789,7 +759,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets content_metadata
      *
-     * @return object
+     * @return object|null
      */
     public function getContentMetadata()
     {
@@ -799,7 +769,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets content_metadata
      *
-     * @param object $content_metadata content_metadata
+     * @param object|null $content_metadata content_metadata
      *
      * @return self
      */
@@ -825,7 +795,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets chunk_index
      *
-     * @return int
+     * @return int|null
      */
     public function getChunkIndex()
     {
@@ -835,7 +805,7 @@ class DocumentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets chunk_index
      *
-     * @param int $chunk_index chunk_index
+     * @param int|null $chunk_index chunk_index
      *
      * @return self
      */

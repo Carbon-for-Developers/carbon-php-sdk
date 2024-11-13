@@ -343,7 +343,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets pagination
      *
-     * @param \Carbon\Model\Pagination|null $pagination Pagination parameters for the query.
+     * @param \Carbon\Model\Pagination|null $pagination pagination
      *
      * @return self
      */
@@ -372,7 +372,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets order_by
      *
-     * @param \Carbon\Model\OrganizationUserFilesToSyncOrderByTypes|null $order_by The field on OrganizationUserFilesToSYnc to order the results by.
+     * @param \Carbon\Model\OrganizationUserFilesToSyncOrderByTypes|null $order_by order_by
      *
      * @return self
      */
@@ -401,7 +401,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets order_dir
      *
-     * @param \Carbon\Model\OrderDir|null $order_dir The direction to order the results by.
+     * @param \Carbon\Model\OrderDir|null $order_dir order_dir
      *
      * @return self
      */
@@ -430,7 +430,7 @@ class OrganizationUserFilesToSyncQueryInput implements ModelInterface, ArrayAcce
     /**
      * Sets filters
      *
-     * @param \Carbon\Model\OrganizationUserFilesToSyncFilters|null $filters Filters to apply to the query.
+     * @param \Carbon\Model\OrganizationUserFilesToSyncFilters|null $filters filters
      *
      * @return self
      */

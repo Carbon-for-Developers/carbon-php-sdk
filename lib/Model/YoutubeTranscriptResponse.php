@@ -290,15 +290,6 @@ class YoutubeTranscriptResponse implements ModelInterface, ArrayAccess, \JsonSer
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
-        if ($this->container['error'] === null) {
-            $invalidProperties[] = "'error' can't be null";
-        }
-        if ($this->container['data'] === null) {
-            $invalidProperties[] = "'data' can't be null";
-        }
-        if ($this->container['raw_transcript'] === null) {
-            $invalidProperties[] = "'raw_transcript' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -346,7 +337,7 @@ class YoutubeTranscriptResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets error
      *
-     * @return string
+     * @return string|null
      */
     public function getError()
     {
@@ -356,7 +347,7 @@ class YoutubeTranscriptResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets error
      *
-     * @param string $error error
+     * @param string|null $error error
      *
      * @return self
      */
@@ -382,7 +373,7 @@ class YoutubeTranscriptResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets data
      *
-     * @return string
+     * @return string|null
      */
     public function getData()
     {
@@ -392,7 +383,7 @@ class YoutubeTranscriptResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets data
      *
-     * @param string $data data
+     * @param string|null $data data
      *
      * @return self
      */
@@ -418,7 +409,7 @@ class YoutubeTranscriptResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets raw_transcript
      *
-     * @return array<string,\Carbon\Model\RawTranscriptPropertyInnerValue>[]
+     * @return array<string,\Carbon\Model\RawTranscriptPropertyInnerValue>[]|null
      */
     public function getRawTranscript()
     {
@@ -428,7 +419,7 @@ class YoutubeTranscriptResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets raw_transcript
      *
-     * @param array<string,\Carbon\Model\RawTranscriptPropertyInnerValue>[] $raw_transcript raw_transcript
+     * @param array<string,\Carbon\Model\RawTranscriptPropertyInnerValue>[]|null $raw_transcript raw_transcript
      *
      * @return self
      */

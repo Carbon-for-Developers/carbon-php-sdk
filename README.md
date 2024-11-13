@@ -31,6 +31,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.cRM.getOpportunities`](#carboncrmgetopportunities)
   * [`carbon.cRM.getOpportunity`](#carboncrmgetopportunity)
   * [`carbon.dataSources.addTags`](#carbondatasourcesaddtags)
+  * [`carbon.dataSources.query`](#carbondatasourcesquery)
   * [`carbon.dataSources.queryUserDataSources`](#carbondatasourcesqueryuserdatasources)
   * [`carbon.dataSources.removeTags`](#carbondatasourcesremovetags)
   * [`carbon.dataSources.revokeAccessToken`](#carbondatasourcesrevokeaccesstoken)
@@ -640,6 +641,52 @@ $result = $carbon->dataSources->addTags(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/data_sources/tags/add` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.dataSources.query`<a id="carbondatasourcesquery"></a>
+
+Data Sources
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->dataSources->query(
+    pagination: [
+        "limit" => 10,
+        "offset" => 0,
+        "starting_id" => 0,
+    ], 
+    order_by: "created_at", 
+    order_dir: "desc", 
+    filters: [
+        "source" => "GOOGLE_CLOUD_STORAGE",
+    ]
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
+
+##### order_by:<a id="order_by"></a>
+
+##### order_dir:<a id="order_dir"></a>
+
+##### filters: [`OrganizationUserDataSourceFilters`](./lib/Model/OrganizationUserDataSourceFilters.php)<a id="filters-organizationuserdatasourcefilterslibmodelorganizationuserdatasourcefiltersphp"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**OrganizationUserDataSourceResponse**](./lib/Model/OrganizationUserDataSourceResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/data_sources` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1566,19 +1613,11 @@ $result = $carbon->files->queryUserFiles(
 
 ##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
 
-Pagination parameters for the query.
-
 ##### order_by:<a id="order_by"></a>
-
-The field on OrganizationUserFilesToSYnc to order the results by.
 
 ##### order_dir:<a id="order_dir"></a>
 
-The direction to order the results by.
-
 ##### filters: [`OrganizationUserFilesToSyncFilters`](./lib/Model/OrganizationUserFilesToSyncFilters.php)<a id="filters-organizationuserfilestosyncfilterslibmodelorganizationuserfilestosyncfiltersphp"></a>
-
-Filters to apply to the query.
 
 ##### include_raw_file: `bool`<a id="include_raw_file-bool"></a>
 
@@ -1642,19 +1681,11 @@ $result = $carbon->files->queryUserFilesDeprecated(
 
 ##### pagination: [`Pagination`](./lib/Model/Pagination.php)<a id="pagination-paginationlibmodelpaginationphp"></a>
 
-Pagination parameters for the query.
-
 ##### order_by:<a id="order_by"></a>
-
-The field on OrganizationUserFilesToSYnc to order the results by.
 
 ##### order_dir:<a id="order_dir"></a>
 
-The direction to order the results by.
-
 ##### filters: [`OrganizationUserFilesToSyncFilters`](./lib/Model/OrganizationUserFilesToSyncFilters.php)<a id="filters-organizationuserfilestosyncfilterslibmodelorganizationuserfilestosyncfiltersphp"></a>
-
-Filters to apply to the query.
 
 ##### include_raw_file: `bool`<a id="include_raw_file-bool"></a>
 
@@ -4547,14 +4578,14 @@ Toggle User Features
 
 ```php
 $result = $carbon->users->toggleUserFeatures(
-    configuration_key_name: "string_example", 
+    configuration_key_name: "sparse_vectors", 
     value: []
 );
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### configuration_key_name: `string`<a id="configuration_key_name-string"></a>
+##### configuration_key_name:<a id="configuration_key_name"></a>
 
 ##### value: `object`<a id="value-object"></a>
 
@@ -4591,7 +4622,8 @@ $result = $carbon->users->updateUsers(
     max_files_per_upload: -1, 
     max_characters: -1, 
     max_characters_per_file: -1, 
-    max_characters_per_upload: -1
+    max_characters_per_upload: -1, 
+    auto_sync_interval: -1
 );
 ```
 
@@ -4622,6 +4654,10 @@ A single file upload from the user can not exceed this character limit.         
 ##### max_characters_per_upload: `int`<a id="max_characters_per_upload-int"></a>
 
 Custom character upload limit for the user across a single upload.         If set, then the user won't be able to sync more than this many characters in one upload.          If not set, or if set to -1, then the user will have no limit.
+
+##### auto_sync_interval: `int`<a id="auto_sync_interval-int"></a>
+
+The interval in hours at which the user's data sources should be synced. If not set or set to -1,          the user will be synced at the organization level interval or default interval if that is also not set.          Must be one of [3, 6, 12, 24]
 
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -5238,7 +5274,7 @@ Create White Labels
 $result = $carbon->whiteLabel->create(
     body: [
         [
-            "data_source_type" => None,
+            "data_source_type" => "GOOGLE_DRIVE",
             "credentials" => [
                 "client_id" => "client_id_example",
                 "redirect_uri" => "redirect_uri_example",
@@ -5309,7 +5345,7 @@ Update White Label
 ```php
 $result = $carbon->whiteLabel->update(
     body: [
-        "data_source_type" => None,
+        "data_source_type" => "GOOGLE_DRIVE",
         "credentials" => [
             "client_id" => "client_id_example",
             "redirect_uri" => "redirect_uri_example",

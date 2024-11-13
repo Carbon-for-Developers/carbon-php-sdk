@@ -276,9 +276,6 @@ class ConnectDataSourceResponse implements ModelInterface, ArrayAccess, \JsonSer
         if ($this->container['data_source'] === null) {
             $invalidProperties[] = "'data_source' can't be null";
         }
-        if ($this->container['sync_url'] === null) {
-            $invalidProperties[] = "'sync_url' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -326,7 +323,7 @@ class ConnectDataSourceResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets sync_url
      *
-     * @return string
+     * @return string|null
      */
     public function getSyncUrl()
     {
@@ -336,7 +333,7 @@ class ConnectDataSourceResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets sync_url
      *
-     * @param string $sync_url sync_url
+     * @param string|null $sync_url sync_url
      *
      * @return self
      */

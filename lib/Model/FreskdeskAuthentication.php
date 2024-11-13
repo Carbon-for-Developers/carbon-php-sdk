@@ -49,7 +49,7 @@ class FreskdeskAuthentication implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
-        'source' => 'mixed',
+        'source' => 'string',
         'domain' => 'string',
         'api_key' => 'string'
     ];
@@ -73,7 +73,7 @@ class FreskdeskAuthentication implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'source' => true,
+        'source' => false,
 		'domain' => false,
 		'api_key' => false
     ];
@@ -232,6 +232,19 @@ class FreskdeskAuthentication implements ModelInterface, ArrayAccess, \JsonSeria
         return self::$openAPIModelName;
     }
 
+    public const SOURCE_FRESHDESK = 'FRESHDESK';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSourceAllowableValues()
+    {
+        return [
+            self::SOURCE_FRESHDESK,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -283,6 +296,15 @@ class FreskdeskAuthentication implements ModelInterface, ArrayAccess, \JsonSeria
         if ($this->container['source'] === null) {
             $invalidProperties[] = "'source' can't be null";
         }
+        $allowedValues = $this->getSourceAllowableValues();
+        if (!is_null($this->container['source']) && !in_array($this->container['source'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'source', must be one of '%s'",
+                $this->container['source'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['domain'] === null) {
             $invalidProperties[] = "'domain' can't be null";
         }
@@ -307,7 +329,7 @@ class FreskdeskAuthentication implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets source
      *
-     * @return mixed
+     * @return string
      */
     public function getSource()
     {
@@ -317,22 +339,25 @@ class FreskdeskAuthentication implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets source
      *
-     * @param mixed $source source
+     * @param string $source source
      *
      * @return self
      */
     public function setSource($source)
     {
+        $allowedValues = $this->getSourceAllowableValues();
+        if (!in_array($source, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'source', must be one of '%s'",
+                    $source,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
 
         if (is_null($source)) {
-            array_push($this->openAPINullablesSetToNull, 'source');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('source', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable source cannot be null');
         }
 
         $this->container['source'] = $source;

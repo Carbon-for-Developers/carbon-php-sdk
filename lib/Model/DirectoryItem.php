@@ -293,12 +293,6 @@ class DirectoryItem implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['is_synced'] === null) {
-            $invalidProperties[] = "'is_synced' can't be null";
-        }
-        if ($this->container['has_children'] === null) {
-            $invalidProperties[] = "'has_children' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -375,7 +369,7 @@ class DirectoryItem implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets is_synced
      *
-     * @return bool
+     * @return bool|null
      */
     public function getIsSynced()
     {
@@ -385,7 +379,7 @@ class DirectoryItem implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets is_synced
      *
-     * @param bool $is_synced is_synced
+     * @param bool|null $is_synced is_synced
      *
      * @return self
      */
@@ -404,7 +398,7 @@ class DirectoryItem implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets has_children
      *
-     * @return bool
+     * @return bool|null
      */
     public function getHasChildren()
     {
@@ -414,7 +408,7 @@ class DirectoryItem implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets has_children
      *
-     * @param bool $has_children has_children
+     * @param bool|null $has_children has_children
      *
      * @return self
      */

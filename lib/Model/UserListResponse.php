@@ -276,9 +276,6 @@ class UserListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['users'] === null) {
             $invalidProperties[] = "'users' can't be null";
         }
-        if ($this->container['count'] === null) {
-            $invalidProperties[] = "'count' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -326,7 +323,7 @@ class UserListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets count
      *
-     * @return int
+     * @return int|null
      */
     public function getCount()
     {
@@ -336,7 +333,7 @@ class UserListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets count
      *
-     * @param int $count count
+     * @param int|null $count count
      *
      * @return self
      */

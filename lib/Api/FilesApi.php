@@ -5242,7 +5242,7 @@ class FilesApi extends \Carbon\CustomApi
             $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
                 $embedding_model,
                 'embedding_model', // param base name
-                'AnyOfTextEmbeddingGeneratorsString', // openApiType
+                'AnyOfTextEmbeddingGeneratorsMultiModalEmbeddingGenerators', // openApiType
                 'form', // style
                 true, // explode
                 false // required

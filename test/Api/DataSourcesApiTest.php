@@ -70,6 +70,18 @@ class DataSourcesApiTest extends TestCase
     }
 
     /**
+     * Test case for query
+     *
+     * Data Sources.
+     *
+     */
+    public function testQuery()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for queryUserDataSources
      *
      * User Data Sources.

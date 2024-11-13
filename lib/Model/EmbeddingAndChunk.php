@@ -297,17 +297,8 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
         if ($this->container['user_file_id'] === null) {
             $invalidProperties[] = "'user_file_id' can't be null";
         }
-        if ($this->container['chunk_index'] === null) {
-            $invalidProperties[] = "'chunk_index' can't be null";
-        }
         if ($this->container['source_content'] === null) {
             $invalidProperties[] = "'source_content' can't be null";
-        }
-        if ($this->container['embedding'] === null) {
-            $invalidProperties[] = "'embedding' can't be null";
-        }
-        if ($this->container['content_metadata'] === null) {
-            $invalidProperties[] = "'content_metadata' can't be null";
         }
         return $invalidProperties;
     }
@@ -356,7 +347,7 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets chunk_index
      *
-     * @return int
+     * @return int|null
      */
     public function getChunkIndex()
     {
@@ -366,7 +357,7 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets chunk_index
      *
-     * @param int $chunk_index chunk_index
+     * @param int|null $chunk_index chunk_index
      *
      * @return self
      */
@@ -421,7 +412,7 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets embedding
      *
-     * @return float[]
+     * @return float[]|null
      */
     public function getEmbedding()
     {
@@ -431,7 +422,7 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets embedding
      *
-     * @param float[] $embedding embedding
+     * @param float[]|null $embedding embedding
      *
      * @return self
      */
@@ -457,7 +448,7 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets content_metadata
      *
-     * @return object
+     * @return object|null
      */
     public function getContentMetadata()
     {
@@ -467,7 +458,7 @@ class EmbeddingAndChunk implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets content_metadata
      *
-     * @param object $content_metadata content_metadata
+     * @param object|null $content_metadata content_metadata
      *
      * @return self
      */

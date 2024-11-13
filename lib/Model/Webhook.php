@@ -330,9 +330,6 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
-        if ($this->container['status_reason'] === null) {
-            $invalidProperties[] = "'status_reason' can't be null";
-        }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
         }
@@ -502,7 +499,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets status_reason
      *
-     * @return string
+     * @return string|null
      */
     public function getStatusReason()
     {
@@ -512,7 +509,7 @@ class Webhook implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status_reason
      *
-     * @param string $status_reason status_reason
+     * @param string|null $status_reason status_reason
      *
      * @return self
      */

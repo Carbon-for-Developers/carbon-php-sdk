@@ -1645,6 +1645,7 @@ class UsersApi extends \Carbon\CustomApi
         $max_characters = SENTINEL_VALUE,
         $max_characters_per_file = SENTINEL_VALUE,
         $max_characters_per_upload = SENTINEL_VALUE,
+        $auto_sync_interval = SENTINEL_VALUE,
         string $contentType = self::contentTypes['updateUsers'][0]
     )
     {
@@ -1655,6 +1656,7 @@ class UsersApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "max_characters", $max_characters);
         $this->setRequestBodyProperty($_body, "max_characters_per_file", $max_characters_per_file);
         $this->setRequestBodyProperty($_body, "max_characters_per_upload", $max_characters_per_upload);
+        $this->setRequestBodyProperty($_body, "auto_sync_interval", $auto_sync_interval);
         $this->setRequestBodyProperty($_body, "customer_ids", $customer_ids);
         $update_users_input = $_body;
 
@@ -1820,6 +1822,7 @@ class UsersApi extends \Carbon\CustomApi
         $max_characters = SENTINEL_VALUE,
         $max_characters_per_file = SENTINEL_VALUE,
         $max_characters_per_upload = SENTINEL_VALUE,
+        $auto_sync_interval = SENTINEL_VALUE,
         string $contentType = self::contentTypes['updateUsers'][0]
     )
     {
@@ -1830,6 +1833,7 @@ class UsersApi extends \Carbon\CustomApi
         $this->setRequestBodyProperty($_body, "max_characters", $max_characters);
         $this->setRequestBodyProperty($_body, "max_characters_per_file", $max_characters_per_file);
         $this->setRequestBodyProperty($_body, "max_characters_per_upload", $max_characters_per_upload);
+        $this->setRequestBodyProperty($_body, "auto_sync_interval", $auto_sync_interval);
         $this->setRequestBodyProperty($_body, "customer_ids", $customer_ids);
         $update_users_input = $_body;
 

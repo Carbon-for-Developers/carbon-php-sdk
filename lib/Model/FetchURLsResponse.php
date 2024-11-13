@@ -286,9 +286,6 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
         if ($this->container['html_content'] === null) {
             $invalidProperties[] = "'html_content' can't be null";
         }
-        if ($this->container['error_message'] === null) {
-            $invalidProperties[] = "'error_message' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -365,7 +362,7 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets error_message
      *
-     * @return string
+     * @return string|null
      */
     public function getErrorMessage()
     {
@@ -375,7 +372,7 @@ class FetchURLsResponse implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets error_message
      *
-     * @param string $error_message error_message
+     * @param string|null $error_message error_message
      *
      * @return self
      */

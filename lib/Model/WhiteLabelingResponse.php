@@ -296,9 +296,6 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
         if ($this->container['custom_limits'] === null) {
             $invalidProperties[] = "'custom_limits' can't be null";
         }
-        if ($this->container['connector_settings'] === null) {
-            $invalidProperties[] = "'connector_settings' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -404,7 +401,7 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets connector_settings
      *
-     * @return object
+     * @return object|null
      */
     public function getConnectorSettings()
     {
@@ -414,7 +411,7 @@ class WhiteLabelingResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets connector_settings
      *
-     * @param object $connector_settings connector_settings
+     * @param object|null $connector_settings connector_settings
      *
      * @return self
      */

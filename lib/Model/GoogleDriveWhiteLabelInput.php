@@ -49,7 +49,7 @@ class GoogleDriveWhiteLabelInput implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data_source_type' => 'mixed',
+        'data_source_type' => 'string',
         'credentials' => '\Carbon\Model\GoogleDriveCredentials'
     ];
 
@@ -71,7 +71,7 @@ class GoogleDriveWhiteLabelInput implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'data_source_type' => true,
+        'data_source_type' => false,
 		'credentials' => false
     ];
 
@@ -226,6 +226,19 @@ class GoogleDriveWhiteLabelInput implements ModelInterface, ArrayAccess, \JsonSe
         return self::$openAPIModelName;
     }
 
+    public const DATA_SOURCE_TYPE_GOOGLE_DRIVE = 'GOOGLE_DRIVE';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getDataSourceTypeAllowableValues()
+    {
+        return [
+            self::DATA_SOURCE_TYPE_GOOGLE_DRIVE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -276,6 +289,15 @@ class GoogleDriveWhiteLabelInput implements ModelInterface, ArrayAccess, \JsonSe
         if ($this->container['data_source_type'] === null) {
             $invalidProperties[] = "'data_source_type' can't be null";
         }
+        $allowedValues = $this->getDataSourceTypeAllowableValues();
+        if (!is_null($this->container['data_source_type']) && !in_array($this->container['data_source_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'data_source_type', must be one of '%s'",
+                $this->container['data_source_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['credentials'] === null) {
             $invalidProperties[] = "'credentials' can't be null";
         }
@@ -297,7 +319,7 @@ class GoogleDriveWhiteLabelInput implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Gets data_source_type
      *
-     * @return mixed
+     * @return string
      */
     public function getDataSourceType()
     {
@@ -307,22 +329,25 @@ class GoogleDriveWhiteLabelInput implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets data_source_type
      *
-     * @param mixed $data_source_type data_source_type
+     * @param string $data_source_type data_source_type
      *
      * @return self
      */
     public function setDataSourceType($data_source_type)
     {
+        $allowedValues = $this->getDataSourceTypeAllowableValues();
+        if (!in_array($data_source_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'data_source_type', must be one of '%s'",
+                    $data_source_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
 
         if (is_null($data_source_type)) {
-            array_push($this->openAPINullablesSetToNull, 'data_source_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('data_source_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable data_source_type cannot be null');
         }
 
         $this->container['data_source_type'] = $data_source_type;

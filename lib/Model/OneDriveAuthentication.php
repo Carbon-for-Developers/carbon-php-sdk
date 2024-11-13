@@ -49,7 +49,7 @@ class OneDriveAuthentication implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'source' => 'mixed',
+        'source' => 'string',
         'access_token' => 'string',
         'refresh_token' => 'string',
         'tenant_name' => 'string'
@@ -75,7 +75,7 @@ class OneDriveAuthentication implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'source' => true,
+        'source' => false,
 		'access_token' => false,
 		'refresh_token' => true,
 		'tenant_name' => true
@@ -238,6 +238,19 @@ class OneDriveAuthentication implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
+    public const SOURCE_ONEDRIVE = 'ONEDRIVE';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSourceAllowableValues()
+    {
+        return [
+            self::SOURCE_ONEDRIVE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -290,6 +303,15 @@ class OneDriveAuthentication implements ModelInterface, ArrayAccess, \JsonSerial
         if ($this->container['source'] === null) {
             $invalidProperties[] = "'source' can't be null";
         }
+        $allowedValues = $this->getSourceAllowableValues();
+        if (!is_null($this->container['source']) && !in_array($this->container['source'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'source', must be one of '%s'",
+                $this->container['source'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['access_token'] === null) {
             $invalidProperties[] = "'access_token' can't be null";
         }
@@ -311,7 +333,7 @@ class OneDriveAuthentication implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets source
      *
-     * @return mixed
+     * @return string
      */
     public function getSource()
     {
@@ -321,22 +343,25 @@ class OneDriveAuthentication implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets source
      *
-     * @param mixed $source source
+     * @param string $source source
      *
      * @return self
      */
     public function setSource($source)
     {
+        $allowedValues = $this->getSourceAllowableValues();
+        if (!in_array($source, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'source', must be one of '%s'",
+                    $source,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
 
         if (is_null($source)) {
-            array_push($this->openAPINullablesSetToNull, 'source');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('source', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable source cannot be null');
         }
 
         $this->container['source'] = $source;
