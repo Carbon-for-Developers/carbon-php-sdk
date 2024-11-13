@@ -124,4 +124,13 @@ class UserConfigurationTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "auto_sync_interval"
+     */
+    public function testPropertyAutoSyncInterval()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

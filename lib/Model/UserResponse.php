@@ -450,15 +450,6 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['enabled_features'] === null) {
             $invalidProperties[] = "'enabled_features' can't be null";
         }
-        if ($this->container['custom_limits'] === null) {
-            $invalidProperties[] = "'custom_limits' can't be null";
-        }
-        if ($this->container['auto_sync_enabled_sources'] === null) {
-            $invalidProperties[] = "'auto_sync_enabled_sources' can't be null";
-        }
-        if ($this->container['connector_settings'] === null) {
-            $invalidProperties[] = "'connector_settings' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -984,7 +975,7 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets custom_limits
      *
-     * @return object
+     * @return object|null
      */
     public function getCustomLimits()
     {
@@ -994,7 +985,7 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets custom_limits
      *
-     * @param object $custom_limits custom_limits
+     * @param object|null $custom_limits custom_limits
      *
      * @return self
      */
@@ -1013,7 +1004,7 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets auto_sync_enabled_sources
      *
-     * @return mixed[]
+     * @return mixed[]|null
      */
     public function getAutoSyncEnabledSources()
     {
@@ -1023,7 +1014,7 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets auto_sync_enabled_sources
      *
-     * @param mixed[] $auto_sync_enabled_sources auto_sync_enabled_sources
+     * @param mixed[]|null $auto_sync_enabled_sources auto_sync_enabled_sources
      *
      * @return self
      */
@@ -1042,7 +1033,7 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets connector_settings
      *
-     * @return object
+     * @return object|null
      */
     public function getConnectorSettings()
     {
@@ -1052,7 +1043,7 @@ class UserResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets connector_settings
      *
-     * @param object $connector_settings connector_settings
+     * @param object|null $connector_settings connector_settings
      *
      * @return self
      */

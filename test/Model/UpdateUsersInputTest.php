@@ -126,6 +126,15 @@ class UpdateUsersInputTest extends TestCase
     }
 
     /**
+     * Test attribute "auto_sync_interval"
+     */
+    public function testPropertyAutoSyncInterval()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "customer_ids"
      */
     public function testPropertyCustomerIds()

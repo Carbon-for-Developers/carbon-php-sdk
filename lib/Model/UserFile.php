@@ -532,9 +532,6 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['tags'] === null) {
-            $invalidProperties[] = "'tags' can't be null";
-        }
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
@@ -550,95 +547,17 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['organization_supplied_user_id'] === null) {
             $invalidProperties[] = "'organization_supplied_user_id' can't be null";
         }
-        if ($this->container['organization_user_data_source_id'] === null) {
-            $invalidProperties[] = "'organization_user_data_source_id' can't be null";
-        }
         if ($this->container['external_file_id'] === null) {
             $invalidProperties[] = "'external_file_id' can't be null";
-        }
-        if ($this->container['external_url'] === null) {
-            $invalidProperties[] = "'external_url' can't be null";
         }
         if ($this->container['sync_status'] === null) {
             $invalidProperties[] = "'sync_status' can't be null";
         }
-        if ($this->container['sync_error_message'] === null) {
-            $invalidProperties[] = "'sync_error_message' can't be null";
-        }
-        if ($this->container['last_sync'] === null) {
-            $invalidProperties[] = "'last_sync' can't be null";
-        }
-        if ($this->container['file_statistics'] === null) {
-            $invalidProperties[] = "'file_statistics' can't be null";
-        }
-        if ($this->container['file_metadata'] === null) {
-            $invalidProperties[] = "'file_metadata' can't be null";
-        }
-        if ($this->container['embedding_properties'] === null) {
-            $invalidProperties[] = "'embedding_properties' can't be null";
-        }
-        if ($this->container['chunk_size'] === null) {
-            $invalidProperties[] = "'chunk_size' can't be null";
-        }
-        if ($this->container['chunk_overlap'] === null) {
-            $invalidProperties[] = "'chunk_overlap' can't be null";
-        }
-        if ($this->container['chunk_properties'] === null) {
-            $invalidProperties[] = "'chunk_properties' can't be null";
-        }
-        if ($this->container['ocr_properties'] === null) {
-            $invalidProperties[] = "'ocr_properties' can't be null";
-        }
-        if ($this->container['ocr_job_started_at'] === null) {
-            $invalidProperties[] = "'ocr_job_started_at' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['parent_id'] === null) {
-            $invalidProperties[] = "'parent_id' can't be null";
-        }
-        if ($this->container['enable_auto_sync'] === null) {
-            $invalidProperties[] = "'enable_auto_sync' can't be null";
-        }
-        if ($this->container['presigned_url'] === null) {
-            $invalidProperties[] = "'presigned_url' can't be null";
-        }
-        if ($this->container['parsed_text_url'] === null) {
-            $invalidProperties[] = "'parsed_text_url' can't be null";
-        }
-        if ($this->container['additional_presigned_urls'] === null) {
-            $invalidProperties[] = "'additional_presigned_urls' can't be null";
-        }
         if ($this->container['skip_embedding_generation'] === null) {
             $invalidProperties[] = "'skip_embedding_generation' can't be null";
         }
-        if ($this->container['source_created_at'] === null) {
-            $invalidProperties[] = "'source_created_at' can't be null";
-        }
-        if ($this->container['generate_sparse_vectors'] === null) {
-            $invalidProperties[] = "'generate_sparse_vectors' can't be null";
-        }
-        if ($this->container['request_id'] === null) {
-            $invalidProperties[] = "'request_id' can't be null";
-        }
-        if ($this->container['upload_id'] === null) {
-            $invalidProperties[] = "'upload_id' can't be null";
-        }
-        if ($this->container['sync_properties'] === null) {
-            $invalidProperties[] = "'sync_properties' can't be null";
-        }
-        if ($this->container['messages_metadata'] === null) {
-            $invalidProperties[] = "'messages_metadata' can't be null";
-        }
-        if ($this->container['file_contents_deleted'] === null) {
-            $invalidProperties[] = "'file_contents_deleted' can't be null";
-        }
         if ($this->container['supports_cold_storage'] === null) {
             $invalidProperties[] = "'supports_cold_storage' can't be null";
-        }
-        if ($this->container['hot_storage_time_to_live'] === null) {
-            $invalidProperties[] = "'hot_storage_time_to_live' can't be null";
         }
         if ($this->container['embedding_storage_status'] === null) {
             $invalidProperties[] = "'embedding_storage_status' can't be null";
@@ -667,7 +586,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets tags
      *
-     * @return object
+     * @return object|null
      */
     public function getTags()
     {
@@ -677,7 +596,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tags
      *
-     * @param object $tags tags
+     * @param object|null $tags tags
      *
      * @return self
      */
@@ -855,7 +774,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets organization_user_data_source_id
      *
-     * @return int
+     * @return int|null
      */
     public function getOrganizationUserDataSourceId()
     {
@@ -865,7 +784,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets organization_user_data_source_id
      *
-     * @param int $organization_user_data_source_id organization_user_data_source_id
+     * @param int|null $organization_user_data_source_id organization_user_data_source_id
      *
      * @return self
      */
@@ -920,7 +839,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets external_url
      *
-     * @return string
+     * @return string|null
      */
     public function getExternalUrl()
     {
@@ -930,7 +849,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets external_url
      *
-     * @param string $external_url external_url
+     * @param string|null $external_url external_url
      *
      * @return self
      */
@@ -985,7 +904,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets sync_error_message
      *
-     * @return string
+     * @return string|null
      */
     public function getSyncErrorMessage()
     {
@@ -995,7 +914,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets sync_error_message
      *
-     * @param string $sync_error_message sync_error_message
+     * @param string|null $sync_error_message sync_error_message
      *
      * @return self
      */
@@ -1021,7 +940,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets last_sync
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getLastSync()
     {
@@ -1031,7 +950,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets last_sync
      *
-     * @param \DateTime $last_sync last_sync
+     * @param \DateTime|null $last_sync last_sync
      *
      * @return self
      */
@@ -1057,7 +976,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets file_statistics
      *
-     * @return \Carbon\Model\FileStatisticsNullable
+     * @return \Carbon\Model\FileStatisticsNullable|null
      */
     public function getFileStatistics()
     {
@@ -1067,7 +986,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets file_statistics
      *
-     * @param \Carbon\Model\FileStatisticsNullable $file_statistics file_statistics
+     * @param \Carbon\Model\FileStatisticsNullable|null $file_statistics file_statistics
      *
      * @return self
      */
@@ -1093,7 +1012,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets file_metadata
      *
-     * @return object
+     * @return object|null
      */
     public function getFileMetadata()
     {
@@ -1103,7 +1022,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets file_metadata
      *
-     * @param object $file_metadata file_metadata
+     * @param object|null $file_metadata file_metadata
      *
      * @return self
      */
@@ -1129,7 +1048,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets embedding_properties
      *
-     * @return array<string,\Carbon\Model\EmbeddingProperties>
+     * @return array<string,\Carbon\Model\EmbeddingProperties>|null
      */
     public function getEmbeddingProperties()
     {
@@ -1139,7 +1058,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets embedding_properties
      *
-     * @param array<string,\Carbon\Model\EmbeddingProperties> $embedding_properties embedding_properties
+     * @param array<string,\Carbon\Model\EmbeddingProperties>|null $embedding_properties embedding_properties
      *
      * @return self
      */
@@ -1165,7 +1084,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets chunk_size
      *
-     * @return int
+     * @return int|null
      */
     public function getChunkSize()
     {
@@ -1175,7 +1094,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets chunk_size
      *
-     * @param int $chunk_size chunk_size
+     * @param int|null $chunk_size chunk_size
      *
      * @return self
      */
@@ -1201,7 +1120,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets chunk_overlap
      *
-     * @return int
+     * @return int|null
      */
     public function getChunkOverlap()
     {
@@ -1211,7 +1130,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets chunk_overlap
      *
-     * @param int $chunk_overlap chunk_overlap
+     * @param int|null $chunk_overlap chunk_overlap
      *
      * @return self
      */
@@ -1237,7 +1156,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets chunk_properties
      *
-     * @return \Carbon\Model\ChunkPropertiesNullable
+     * @return \Carbon\Model\ChunkPropertiesNullable|null
      */
     public function getChunkProperties()
     {
@@ -1247,7 +1166,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets chunk_properties
      *
-     * @param \Carbon\Model\ChunkPropertiesNullable $chunk_properties chunk_properties
+     * @param \Carbon\Model\ChunkPropertiesNullable|null $chunk_properties chunk_properties
      *
      * @return self
      */
@@ -1273,7 +1192,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets ocr_properties
      *
-     * @return object
+     * @return object|null
      */
     public function getOcrProperties()
     {
@@ -1283,7 +1202,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ocr_properties
      *
-     * @param object $ocr_properties ocr_properties
+     * @param object|null $ocr_properties ocr_properties
      *
      * @return self
      */
@@ -1302,7 +1221,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets ocr_job_started_at
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getOcrJobStartedAt()
     {
@@ -1312,7 +1231,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ocr_job_started_at
      *
-     * @param \DateTime $ocr_job_started_at ocr_job_started_at
+     * @param \DateTime|null $ocr_job_started_at ocr_job_started_at
      *
      * @return self
      */
@@ -1338,7 +1257,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets name
      *
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -1348,7 +1267,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string $name name
+     * @param string|null $name name
      *
      * @return self
      */
@@ -1374,7 +1293,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets parent_id
      *
-     * @return int
+     * @return int|null
      */
     public function getParentId()
     {
@@ -1384,7 +1303,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets parent_id
      *
-     * @param int $parent_id parent_id
+     * @param int|null $parent_id parent_id
      *
      * @return self
      */
@@ -1410,7 +1329,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets enable_auto_sync
      *
-     * @return bool
+     * @return bool|null
      */
     public function getEnableAutoSync()
     {
@@ -1420,7 +1339,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets enable_auto_sync
      *
-     * @param bool $enable_auto_sync enable_auto_sync
+     * @param bool|null $enable_auto_sync enable_auto_sync
      *
      * @return self
      */
@@ -1446,7 +1365,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets presigned_url
      *
-     * @return string
+     * @return string|null
      */
     public function getPresignedUrl()
     {
@@ -1456,7 +1375,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets presigned_url
      *
-     * @param string $presigned_url presigned_url
+     * @param string|null $presigned_url presigned_url
      *
      * @return self
      */
@@ -1482,7 +1401,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets parsed_text_url
      *
-     * @return string
+     * @return string|null
      */
     public function getParsedTextUrl()
     {
@@ -1492,7 +1411,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets parsed_text_url
      *
-     * @param string $parsed_text_url parsed_text_url
+     * @param string|null $parsed_text_url parsed_text_url
      *
      * @return self
      */
@@ -1518,7 +1437,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets additional_presigned_urls
      *
-     * @return object
+     * @return object|null
      */
     public function getAdditionalPresignedUrls()
     {
@@ -1528,7 +1447,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets additional_presigned_urls
      *
-     * @param object $additional_presigned_urls additional_presigned_urls
+     * @param object|null $additional_presigned_urls additional_presigned_urls
      *
      * @return self
      */
@@ -1583,7 +1502,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets source_created_at
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getSourceCreatedAt()
     {
@@ -1593,7 +1512,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets source_created_at
      *
-     * @param \DateTime $source_created_at source_created_at
+     * @param \DateTime|null $source_created_at source_created_at
      *
      * @return self
      */
@@ -1619,7 +1538,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets generate_sparse_vectors
      *
-     * @return bool
+     * @return bool|null
      */
     public function getGenerateSparseVectors()
     {
@@ -1629,7 +1548,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets generate_sparse_vectors
      *
-     * @param bool $generate_sparse_vectors generate_sparse_vectors
+     * @param bool|null $generate_sparse_vectors generate_sparse_vectors
      *
      * @return self
      */
@@ -1655,7 +1574,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets request_id
      *
-     * @return string
+     * @return string|null
      */
     public function getRequestId()
     {
@@ -1665,7 +1584,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets request_id
      *
-     * @param string $request_id request_id
+     * @param string|null $request_id request_id
      *
      * @return self
      */
@@ -1691,7 +1610,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets upload_id
      *
-     * @return string
+     * @return string|null
      */
     public function getUploadId()
     {
@@ -1701,7 +1620,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets upload_id
      *
-     * @param string $upload_id upload_id
+     * @param string|null $upload_id upload_id
      *
      * @return self
      */
@@ -1727,7 +1646,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets sync_properties
      *
-     * @return object
+     * @return object|null
      */
     public function getSyncProperties()
     {
@@ -1737,7 +1656,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets sync_properties
      *
-     * @param object $sync_properties sync_properties
+     * @param object|null $sync_properties sync_properties
      *
      * @return self
      */
@@ -1756,7 +1675,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets messages_metadata
      *
-     * @return object
+     * @return object|null
      */
     public function getMessagesMetadata()
     {
@@ -1766,7 +1685,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets messages_metadata
      *
-     * @param object $messages_metadata messages_metadata
+     * @param object|null $messages_metadata messages_metadata
      *
      * @return self
      */
@@ -1785,7 +1704,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets file_contents_deleted
      *
-     * @return bool
+     * @return bool|null
      */
     public function getFileContentsDeleted()
     {
@@ -1795,7 +1714,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets file_contents_deleted
      *
-     * @param bool $file_contents_deleted file_contents_deleted
+     * @param bool|null $file_contents_deleted file_contents_deleted
      *
      * @return self
      */
@@ -1843,7 +1762,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets hot_storage_time_to_live
      *
-     * @return int
+     * @return int|null
      */
     public function getHotStorageTimeToLive()
     {
@@ -1853,7 +1772,7 @@ class UserFile implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets hot_storage_time_to_live
      *
-     * @param int $hot_storage_time_to_live hot_storage_time_to_live
+     * @param int|null $hot_storage_time_to_live hot_storage_time_to_live
      *
      * @return self
      */

@@ -280,15 +280,6 @@ class ChunkPropertiesNullable implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['set_page_as_boundary'] === null) {
-            $invalidProperties[] = "'set_page_as_boundary' can't be null";
-        }
-        if ($this->container['prepend_filename_to_chunks'] === null) {
-            $invalidProperties[] = "'prepend_filename_to_chunks' can't be null";
-        }
-        if ($this->container['max_items_per_chunk'] === null) {
-            $invalidProperties[] = "'max_items_per_chunk' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -307,7 +298,7 @@ class ChunkPropertiesNullable implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets set_page_as_boundary
      *
-     * @return bool
+     * @return bool|null
      */
     public function getSetPageAsBoundary()
     {
@@ -317,7 +308,7 @@ class ChunkPropertiesNullable implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets set_page_as_boundary
      *
-     * @param bool $set_page_as_boundary set_page_as_boundary
+     * @param bool|null $set_page_as_boundary set_page_as_boundary
      *
      * @return self
      */
@@ -336,7 +327,7 @@ class ChunkPropertiesNullable implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets prepend_filename_to_chunks
      *
-     * @return bool
+     * @return bool|null
      */
     public function getPrependFilenameToChunks()
     {
@@ -346,7 +337,7 @@ class ChunkPropertiesNullable implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets prepend_filename_to_chunks
      *
-     * @param bool $prepend_filename_to_chunks prepend_filename_to_chunks
+     * @param bool|null $prepend_filename_to_chunks prepend_filename_to_chunks
      *
      * @return self
      */
@@ -365,7 +356,7 @@ class ChunkPropertiesNullable implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets max_items_per_chunk
      *
-     * @return int
+     * @return int|null
      */
     public function getMaxItemsPerChunk()
     {
@@ -375,7 +366,7 @@ class ChunkPropertiesNullable implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets max_items_per_chunk
      *
-     * @param int $max_items_per_chunk max_items_per_chunk
+     * @param int|null $max_items_per_chunk max_items_per_chunk
      *
      * @return self
      */

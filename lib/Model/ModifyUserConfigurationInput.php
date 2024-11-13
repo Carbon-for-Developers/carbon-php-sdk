@@ -49,7 +49,7 @@ class ModifyUserConfigurationInput implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'configuration_key_name' => 'string',
+        'configuration_key_name' => '\Carbon\Model\ConfigurationKeys',
         'value' => 'object'
     ];
 
@@ -297,7 +297,7 @@ class ModifyUserConfigurationInput implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets configuration_key_name
      *
-     * @return string
+     * @return \Carbon\Model\ConfigurationKeys
      */
     public function getConfigurationKeyName()
     {
@@ -307,7 +307,7 @@ class ModifyUserConfigurationInput implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets configuration_key_name
      *
-     * @param string $configuration_key_name configuration_key_name
+     * @param \Carbon\Model\ConfigurationKeys $configuration_key_name configuration_key_name
      *
      * @return self
      */

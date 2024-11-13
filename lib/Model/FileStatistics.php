@@ -301,24 +301,6 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['file_format'] === null) {
-            $invalidProperties[] = "'file_format' can't be null";
-        }
-        if ($this->container['file_size'] === null) {
-            $invalidProperties[] = "'file_size' can't be null";
-        }
-        if ($this->container['num_characters'] === null) {
-            $invalidProperties[] = "'num_characters' can't be null";
-        }
-        if ($this->container['num_tokens'] === null) {
-            $invalidProperties[] = "'num_tokens' can't be null";
-        }
-        if ($this->container['num_embeddings'] === null) {
-            $invalidProperties[] = "'num_embeddings' can't be null";
-        }
-        if ($this->container['mime_type'] === null) {
-            $invalidProperties[] = "'mime_type' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -337,7 +319,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets file_format
      *
-     * @return \Carbon\Model\FileFormatsNullable
+     * @return \Carbon\Model\FileFormatsNullable|null
      */
     public function getFileFormat()
     {
@@ -347,7 +329,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets file_format
      *
-     * @param \Carbon\Model\FileFormatsNullable $file_format file_format
+     * @param \Carbon\Model\FileFormatsNullable|null $file_format file_format
      *
      * @return self
      */
@@ -373,7 +355,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets file_size
      *
-     * @return int
+     * @return int|null
      */
     public function getFileSize()
     {
@@ -383,7 +365,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets file_size
      *
-     * @param int $file_size file_size
+     * @param int|null $file_size file_size
      *
      * @return self
      */
@@ -409,7 +391,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets num_characters
      *
-     * @return int
+     * @return int|null
      */
     public function getNumCharacters()
     {
@@ -419,7 +401,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets num_characters
      *
-     * @param int $num_characters num_characters
+     * @param int|null $num_characters num_characters
      *
      * @return self
      */
@@ -445,7 +427,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets num_tokens
      *
-     * @return int
+     * @return int|null
      */
     public function getNumTokens()
     {
@@ -455,7 +437,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets num_tokens
      *
-     * @param int $num_tokens num_tokens
+     * @param int|null $num_tokens num_tokens
      *
      * @return self
      */
@@ -481,7 +463,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets num_embeddings
      *
-     * @return int
+     * @return int|null
      */
     public function getNumEmbeddings()
     {
@@ -491,7 +473,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets num_embeddings
      *
-     * @param int $num_embeddings num_embeddings
+     * @param int|null $num_embeddings num_embeddings
      *
      * @return self
      */
@@ -517,7 +499,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets mime_type
      *
-     * @return string
+     * @return string|null
      */
     public function getMimeType()
     {
@@ -527,7 +509,7 @@ class FileStatistics implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets mime_type
      *
-     * @param string $mime_type mime_type
+     * @param string|null $mime_type mime_type
      *
      * @return self
      */

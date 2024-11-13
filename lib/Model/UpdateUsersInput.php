@@ -55,6 +55,7 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_characters' => 'int',
         'max_characters_per_file' => 'int',
         'max_characters_per_upload' => 'int',
+        'auto_sync_interval' => 'int',
         'customer_ids' => 'string[]'
     ];
 
@@ -72,6 +73,7 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_characters' => null,
         'max_characters_per_file' => null,
         'max_characters_per_upload' => null,
+        'auto_sync_interval' => null,
         'customer_ids' => null
     ];
 
@@ -87,6 +89,7 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
 		'max_characters' => true,
 		'max_characters_per_file' => true,
 		'max_characters_per_upload' => true,
+		'auto_sync_interval' => true,
 		'customer_ids' => false
     ];
 
@@ -182,6 +185,7 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_characters' => 'max_characters',
         'max_characters_per_file' => 'max_characters_per_file',
         'max_characters_per_upload' => 'max_characters_per_upload',
+        'auto_sync_interval' => 'auto_sync_interval',
         'customer_ids' => 'customer_ids'
     ];
 
@@ -197,6 +201,7 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_characters' => 'setMaxCharacters',
         'max_characters_per_file' => 'setMaxCharactersPerFile',
         'max_characters_per_upload' => 'setMaxCharactersPerUpload',
+        'auto_sync_interval' => 'setAutoSyncInterval',
         'customer_ids' => 'setCustomerIds'
     ];
 
@@ -212,6 +217,7 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_characters' => 'getMaxCharacters',
         'max_characters_per_file' => 'getMaxCharactersPerFile',
         'max_characters_per_upload' => 'getMaxCharactersPerUpload',
+        'auto_sync_interval' => 'getAutoSyncInterval',
         'customer_ids' => 'getCustomerIds'
     ];
 
@@ -278,6 +284,7 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_characters', $data ?? [], null);
         $this->setIfExists('max_characters_per_file', $data ?? [], null);
         $this->setIfExists('max_characters_per_upload', $data ?? [], null);
+        $this->setIfExists('auto_sync_interval', $data ?? [], null);
         $this->setIfExists('customer_ids', $data ?? [], null);
     }
 
@@ -326,6 +333,10 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if (!is_null($this->container['max_characters_per_upload']) && ($this->container['max_characters_per_upload'] < -1)) {
             $invalidProperties[] = "invalid value for 'max_characters_per_upload', must be bigger than or equal to -1.";
+        }
+
+        if (!is_null($this->container['auto_sync_interval']) && ($this->container['auto_sync_interval'] < -1)) {
+            $invalidProperties[] = "invalid value for 'auto_sync_interval', must be bigger than or equal to -1.";
         }
 
         if ($this->container['customer_ids'] === null) {
@@ -587,6 +598,47 @@ class UpdateUsersInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['max_characters_per_upload'] = $max_characters_per_upload;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_sync_interval
+     *
+     * @return int|null
+     */
+    public function getAutoSyncInterval()
+    {
+        return $this->container['auto_sync_interval'];
+    }
+
+    /**
+     * Sets auto_sync_interval
+     *
+     * @param int|null $auto_sync_interval The interval in hours at which the user's data sources should be synced. If not set or set to -1,          the user will be synced at the organization level interval or default interval if that is also not set.          Must be one of [3, 6, 12, 24]
+     *
+     * @return self
+     */
+    public function setAutoSyncInterval($auto_sync_interval)
+    {
+
+        if (!is_null($auto_sync_interval) && ($auto_sync_interval < -1)) {
+            throw new \InvalidArgumentException('invalid value for $auto_sync_interval when calling UpdateUsersInput., must be bigger than or equal to -1.');
+        }
+
+
+        if (is_null($auto_sync_interval)) {
+            array_push($this->openAPINullablesSetToNull, 'auto_sync_interval');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('auto_sync_interval', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['auto_sync_interval'] = $auto_sync_interval;
 
         return $this;
     }
