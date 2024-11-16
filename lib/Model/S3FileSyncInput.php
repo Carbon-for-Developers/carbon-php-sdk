@@ -431,7 +431,7 @@ class S3FileSyncInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ids
      *
-     * @param \Carbon\Model\S3GetFileInput[] $ids ids
+     * @param \Carbon\Model\S3GetFileInput[] $ids Each input should be one of the following: A bucket name, a bucket name and a prefix, or a          bucket name and an object key. A prefix is the common path for all objects you want to sync.          Paths should end with a forward slash.
      *
      * @return self
      */

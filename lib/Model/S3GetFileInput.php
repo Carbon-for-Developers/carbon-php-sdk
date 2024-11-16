@@ -50,7 +50,8 @@ class S3GetFileInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'bucket' => 'string'
+        'bucket' => 'string',
+        'prefix' => 'string'
     ];
 
     /**
@@ -62,7 +63,8 @@ class S3GetFileInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'bucket' => null
+        'bucket' => null,
+        'prefix' => null
     ];
 
     /**
@@ -72,7 +74,8 @@ class S3GetFileInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => true,
-		'bucket' => true
+		'bucket' => true,
+		'prefix' => true
     ];
 
     /**
@@ -162,7 +165,8 @@ class S3GetFileInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'bucket' => 'bucket'
+        'bucket' => 'bucket',
+        'prefix' => 'prefix'
     ];
 
     /**
@@ -172,7 +176,8 @@ class S3GetFileInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'bucket' => 'setBucket'
+        'bucket' => 'setBucket',
+        'prefix' => 'setPrefix'
     ];
 
     /**
@@ -182,7 +187,8 @@ class S3GetFileInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'bucket' => 'getBucket'
+        'bucket' => 'getBucket',
+        'prefix' => 'getPrefix'
     ];
 
     /**
@@ -244,6 +250,7 @@ class S3GetFileInput implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('bucket', $data ?? [], null);
+        $this->setIfExists('prefix', $data ?? [], null);
     }
 
     /**
@@ -356,6 +363,42 @@ class S3GetFileInput implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['bucket'] = $bucket;
+
+        return $this;
+    }
+
+    /**
+     * Gets prefix
+     *
+     * @return string|null
+     */
+    public function getPrefix()
+    {
+        return $this->container['prefix'];
+    }
+
+    /**
+     * Sets prefix
+     *
+     * @param string|null $prefix prefix
+     *
+     * @return self
+     */
+    public function setPrefix($prefix)
+    {
+
+        if (is_null($prefix)) {
+            array_push($this->openAPINullablesSetToNull, 'prefix');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('prefix', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['prefix'] = $prefix;
 
         return $this;
     }
