@@ -88,4 +88,13 @@ class S3GetFileInputTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "prefix"
+     */
+    public function testPropertyPrefix()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

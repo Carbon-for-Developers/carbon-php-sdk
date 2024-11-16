@@ -4257,6 +4257,8 @@ $result = $carbon->integrations->syncS3Files(
 
 ##### ids: [`S3GetFileInput`](./lib/Model/S3GetFileInput.php)[]<a id="ids-s3getfileinputlibmodels3getfileinputphp"></a>
 
+Each input should be one of the following: A bucket name, a bucket name and a prefix, or a          bucket name and an object key. A prefix is the common path for all objects you want to sync.          Paths should end with a forward slash.
+
 ##### tags: `object`<a id="tags-object"></a>
 
 ##### chunk_size: `int`<a id="chunk_size-int"></a>
