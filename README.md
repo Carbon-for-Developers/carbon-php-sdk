@@ -63,6 +63,7 @@ Connect external data to LLMs, no matter the source.
   * [`carbon.github.getPullRequests`](#carbongithubgetpullrequests)
   * [`carbon.integrations.cancel`](#carbonintegrationscancel)
   * [`carbon.integrations.connectDataSource`](#carbonintegrationsconnectdatasource)
+  * [`carbon.integrations.connectDocument360`](#carbonintegrationsconnectdocument360)
   * [`carbon.integrations.connectFreshdesk`](#carbonintegrationsconnectfreshdesk)
   * [`carbon.integrations.connectGitbook`](#carbonintegrationsconnectgitbook)
   * [`carbon.integrations.connectGuru`](#carbonintegrationsconnectguru)
@@ -2513,6 +2514,93 @@ $result = $carbon->integrations->connectDataSource(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/integrations/connect` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `carbon.integrations.connectDocument360`<a id="carbonintegrationsconnectdocument360"></a>
+
+You will need an access token to connect your Document360 account. To obtain an access token, follow the steps highlighted 
+here https://apidocs.document360.com/apidocs/api-token.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $carbon->integrations->connectDocument360(
+    account_email: "string_example", 
+    access_token: "string_example", 
+    tags: [], 
+    chunk_size: 1500, 
+    chunk_overlap: 20, 
+    skip_embedding_generation: False, 
+    embedding_model: "OPENAI", 
+    generate_sparse_vectors: False, 
+    prepend_filename_to_chunks: False, 
+    sync_files_on_connection: True, 
+    request_id: "string_example", 
+    sync_source_items: True, 
+    file_sync_config: [
+        "auto_synced_source_types" => ["ARTICLE"],
+        "sync_attachments" => False,
+        "detect_audio_language" => False,
+        "transcription_service" => "assemblyai",
+        "include_speaker_labels" => False,
+        "split_rows" => False,
+        "generate_chunks_only" => False,
+        "store_file_only" => False,
+        "skip_file_processing" => False,
+    ], 
+    data_source_tags: []
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_email: `string`<a id="account_email-string"></a>
+
+This email will be used to identify your carbon data source. It should have access to the          Document360 account you wish to connect.
+
+##### access_token: `string`<a id="access_token-string"></a>
+
+##### tags: `object`<a id="tags-object"></a>
+
+##### chunk_size: `int`<a id="chunk_size-int"></a>
+
+##### chunk_overlap: `int`<a id="chunk_overlap-int"></a>
+
+##### skip_embedding_generation: `bool`<a id="skip_embedding_generation-bool"></a>
+
+##### embedding_model:<a id="embedding_model"></a>
+
+##### generate_sparse_vectors: `bool`<a id="generate_sparse_vectors-bool"></a>
+
+##### prepend_filename_to_chunks: `bool`<a id="prepend_filename_to_chunks-bool"></a>
+
+##### sync_files_on_connection: `bool`<a id="sync_files_on_connection-bool"></a>
+
+##### request_id: `string`<a id="request_id-string"></a>
+
+##### sync_source_items: `bool`<a id="sync_source_items-bool"></a>
+
+Enabling this flag will fetch all available content from the source to be listed via list items endpoint
+
+##### file_sync_config: [`FileSyncConfigNullable`](./lib/Model/FileSyncConfigNullable.php)<a id="file_sync_config-filesyncconfignullablelibmodelfilesyncconfignullablephp"></a>
+
+##### data_source_tags: `object`<a id="data_source_tags-object"></a>
+
+Tags to be associated with the data source. If the data source already has tags set, then an upsert will be performed.
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**GenericSuccessResponse**](./lib/Model/GenericSuccessResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/integrations/document360` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
