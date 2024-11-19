@@ -82,6 +82,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for connectDocument360
+     *
+     * Document360 Connect.
+     *
+     */
+    public function testConnectDocument360()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for connectFreshdesk
      *
      * Freshdesk Connect.

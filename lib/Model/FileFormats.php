@@ -96,6 +96,8 @@ class FileFormats
 
     public const GONG = 'GONG';
 
+    public const DOCUMENT360 = 'DOCUMENT360';
+
     public const JPG = 'JPG';
 
     public const PNG = 'PNG';
@@ -178,6 +180,7 @@ class FileFormats
             self::GURU,
             self::SERVICENOW,
             self::GONG,
+            self::DOCUMENT360,
             self::JPG,
             self::PNG,
             self::MP3,

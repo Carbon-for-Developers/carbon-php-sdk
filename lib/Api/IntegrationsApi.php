@@ -67,6 +67,9 @@ class IntegrationsApi extends \Carbon\CustomApi
         'connectDataSource' => [
             'application/json',
         ],
+        'connectDocument360' => [
+            'application/json',
+        ],
         'connectFreshdesk' => [
             'application/json',
         ],
@@ -890,6 +893,434 @@ class IntegrationsApi extends \Carbon\CustomApi
                 $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($connect_data_source_input));
             } else {
                 $httpBody = $connect_data_source_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('accessToken');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('apiKey');
+        if ($apiKey !== null) {
+            $headers['authorization'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('customerId');
+        if ($apiKey !== null) {
+            $headers['customer-id'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation connectDocument360
+     *
+     * Document360 Connect
+     *
+     * You will need an access token to connect your Document360 account. To obtain an access token, follow the steps highlighted  here https://apidocs.document360.com/apidocs/api-token.
+     *
+     * @param  \Carbon\Model\Document360ConnectRequest $document360_connect_request document360_connect_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectDocument360'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError
+     */
+    public function connectDocument360(
+
+        $account_email,
+        $access_token,
+        $tags = SENTINEL_VALUE,
+        $chunk_size = 1500,
+        $chunk_overlap = 20,
+        $skip_embedding_generation = false,
+        $embedding_model = SENTINEL_VALUE,
+        $generate_sparse_vectors = false,
+        $prepend_filename_to_chunks = false,
+        $sync_files_on_connection = true,
+        $request_id = SENTINEL_VALUE,
+        $sync_source_items = true,
+        $file_sync_config = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['connectDocument360'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "tags", $tags);
+        $this->setRequestBodyProperty($_body, "account_email", $account_email);
+        $this->setRequestBodyProperty($_body, "access_token", $access_token);
+        $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
+        $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
+        $this->setRequestBodyProperty($_body, "skip_embedding_generation", $skip_embedding_generation);
+        $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
+        $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
+        $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
+        $document360_connect_request = $_body;
+
+        list($response) = $this->connectDocument360WithHttpInfo($document360_connect_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation connectDocument360WithHttpInfo
+     *
+     * Document360 Connect
+     *
+     * You will need an access token to connect your Document360 account. To obtain an access token, follow the steps highlighted  here https://apidocs.document360.com/apidocs/api-token.
+     *
+     * @param  \Carbon\Model\Document360ConnectRequest $document360_connect_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectDocument360'] to see the possible values for this operation
+     *
+     * @throws \Carbon\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Carbon\Model\GenericSuccessResponse|\Carbon\Model\HTTPValidationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function connectDocument360WithHttpInfo($document360_connect_request, string $contentType = self::contentTypes['connectDocument360'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->connectDocument360Request($document360_connect_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->connectDocument360WithHttpInfo(
+                        $document360_connect_request,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Carbon\Model\GenericSuccessResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\GenericSuccessResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\GenericSuccessResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Carbon\Model\HTTPValidationError' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Carbon\Model\HTTPValidationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Carbon\Model\HTTPValidationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Carbon\Model\GenericSuccessResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\GenericSuccessResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Carbon\Model\HTTPValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation connectDocument360Async
+     *
+     * Document360 Connect
+     *
+     * You will need an access token to connect your Document360 account. To obtain an access token, follow the steps highlighted  here https://apidocs.document360.com/apidocs/api-token.
+     *
+     * @param  \Carbon\Model\Document360ConnectRequest $document360_connect_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectDocument360'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectDocument360Async(
+
+        $account_email,
+        $access_token,
+        $tags = SENTINEL_VALUE,
+        $chunk_size = 1500,
+        $chunk_overlap = 20,
+        $skip_embedding_generation = false,
+        $embedding_model = SENTINEL_VALUE,
+        $generate_sparse_vectors = false,
+        $prepend_filename_to_chunks = false,
+        $sync_files_on_connection = true,
+        $request_id = SENTINEL_VALUE,
+        $sync_source_items = true,
+        $file_sync_config = SENTINEL_VALUE,
+        $data_source_tags = SENTINEL_VALUE,
+        string $contentType = self::contentTypes['connectDocument360'][0]
+    )
+    {
+        $_body = [];
+        $this->setRequestBodyProperty($_body, "tags", $tags);
+        $this->setRequestBodyProperty($_body, "account_email", $account_email);
+        $this->setRequestBodyProperty($_body, "access_token", $access_token);
+        $this->setRequestBodyProperty($_body, "chunk_size", $chunk_size);
+        $this->setRequestBodyProperty($_body, "chunk_overlap", $chunk_overlap);
+        $this->setRequestBodyProperty($_body, "skip_embedding_generation", $skip_embedding_generation);
+        $this->setRequestBodyProperty($_body, "embedding_model", $embedding_model);
+        $this->setRequestBodyProperty($_body, "generate_sparse_vectors", $generate_sparse_vectors);
+        $this->setRequestBodyProperty($_body, "prepend_filename_to_chunks", $prepend_filename_to_chunks);
+        $this->setRequestBodyProperty($_body, "sync_files_on_connection", $sync_files_on_connection);
+        $this->setRequestBodyProperty($_body, "request_id", $request_id);
+        $this->setRequestBodyProperty($_body, "sync_source_items", $sync_source_items);
+        $this->setRequestBodyProperty($_body, "file_sync_config", $file_sync_config);
+        $this->setRequestBodyProperty($_body, "data_source_tags", $data_source_tags);
+        $document360_connect_request = $_body;
+
+        return $this->connectDocument360AsyncWithHttpInfo($document360_connect_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation connectDocument360AsyncWithHttpInfo
+     *
+     * Document360 Connect
+     *
+     * You will need an access token to connect your Document360 account. To obtain an access token, follow the steps highlighted  here https://apidocs.document360.com/apidocs/api-token.
+     *
+     * @param  \Carbon\Model\Document360ConnectRequest $document360_connect_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectDocument360'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectDocument360AsyncWithHttpInfo($document360_connect_request, string $contentType = self::contentTypes['connectDocument360'][0], \Carbon\RequestOptions $requestOptions = new \Carbon\RequestOptions())
+    {
+        $returnType = '\Carbon\Model\GenericSuccessResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->connectDocument360Request($document360_connect_request, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config, $serializedBody);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'connectDocument360'
+     *
+     * @param  \Carbon\Model\Document360ConnectRequest $document360_connect_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectDocument360'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function connectDocument360Request($document360_connect_request, string $contentType = self::contentTypes['connectDocument360'][0])
+    {
+
+        if ($document360_connect_request !== SENTINEL_VALUE) {
+            if (!($document360_connect_request instanceof \Carbon\Model\Document360ConnectRequest)) {
+                if (!is_array($document360_connect_request))
+                    throw new \InvalidArgumentException('"document360_connect_request" must be associative array or an instance of \Carbon\Model\Document360ConnectRequest IntegrationsApi.connectDocument360.');
+                else
+                    $document360_connect_request = new \Carbon\Model\Document360ConnectRequest($document360_connect_request);
+            }
+        }
+        // verify the required parameter 'document360_connect_request' is set
+        if ($document360_connect_request === SENTINEL_VALUE || (is_array($document360_connect_request) && count($document360_connect_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter document360_connect_request when calling connectDocument360'
+            );
+        }
+
+
+        $resourcePath = '/integrations/document360';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($document360_connect_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($document360_connect_request));
+            } else {
+                $httpBody = $document360_connect_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
