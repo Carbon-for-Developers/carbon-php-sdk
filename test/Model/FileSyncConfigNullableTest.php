@@ -151,4 +151,13 @@ class FileSyncConfigNullableTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "parsed_text_format"
+     */
+    public function testPropertyParsedTextFormat()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }
