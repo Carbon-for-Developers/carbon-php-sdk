@@ -2552,6 +2552,7 @@ $result = $carbon->integrations->connectDocument360(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ], 
     data_source_tags: []
 );
@@ -2642,6 +2643,7 @@ $result = $carbon->integrations->connectFreshdesk(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ], 
     data_source_tags: []
 );
@@ -2729,6 +2731,7 @@ $result = $carbon->integrations->connectGitbook(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ], 
     data_source_tags: []
 );
@@ -2814,6 +2817,7 @@ $result = $carbon->integrations->connectGuru(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ], 
     data_source_tags: []
 );
@@ -2973,6 +2977,7 @@ $result = $carbon->integrations->getOauthUrl(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ], 
     automatically_open_file_picker: True, 
     gong_account_email: "string_example", 
@@ -3476,6 +3481,7 @@ $result = $carbon->integrations->syncAzureBlobFiles(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ]
 );
 ```
@@ -3629,6 +3635,7 @@ $result = $carbon->integrations->syncConfluence(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ]
 );
 ```
@@ -3755,6 +3762,7 @@ $result = $carbon->integrations->syncFiles(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ]
 );
 ```
@@ -3889,6 +3897,7 @@ $result = $carbon->integrations->syncGitbook(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ]
 );
 ```
@@ -4014,6 +4023,7 @@ $result = $carbon->integrations->syncGmail(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ], 
     incremental_sync: False
 );
@@ -4152,6 +4162,7 @@ $result = $carbon->integrations->syncOutlook(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ], 
     incremental_sync: False
 );
@@ -4337,6 +4348,7 @@ $result = $carbon->integrations->syncS3Files(
         "generate_chunks_only" => False,
         "store_file_only" => False,
         "skip_file_processing" => False,
+        "parsed_text_format" => "PLAIN_TEXT",
     ]
 );
 ```

@@ -57,7 +57,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'split_rows' => 'bool',
         'generate_chunks_only' => 'bool',
         'store_file_only' => 'bool',
-        'skip_file_processing' => 'bool'
+        'skip_file_processing' => 'bool',
+        'parsed_text_format' => '\Carbon\Model\ParsedTextFormatsNullable'
     ];
 
     /**
@@ -76,7 +77,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'split_rows' => null,
         'generate_chunks_only' => null,
         'store_file_only' => null,
-        'skip_file_processing' => null
+        'skip_file_processing' => null,
+        'parsed_text_format' => null
     ];
 
     /**
@@ -93,7 +95,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
 		'split_rows' => false,
 		'generate_chunks_only' => false,
 		'store_file_only' => false,
-		'skip_file_processing' => false
+		'skip_file_processing' => false,
+		'parsed_text_format' => true
     ];
 
     /**
@@ -190,7 +193,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'split_rows' => 'split_rows',
         'generate_chunks_only' => 'generate_chunks_only',
         'store_file_only' => 'store_file_only',
-        'skip_file_processing' => 'skip_file_processing'
+        'skip_file_processing' => 'skip_file_processing',
+        'parsed_text_format' => 'parsed_text_format'
     ];
 
     /**
@@ -207,7 +211,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'split_rows' => 'setSplitRows',
         'generate_chunks_only' => 'setGenerateChunksOnly',
         'store_file_only' => 'setStoreFileOnly',
-        'skip_file_processing' => 'setSkipFileProcessing'
+        'skip_file_processing' => 'setSkipFileProcessing',
+        'parsed_text_format' => 'setParsedTextFormat'
     ];
 
     /**
@@ -224,7 +229,8 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         'split_rows' => 'getSplitRows',
         'generate_chunks_only' => 'getGenerateChunksOnly',
         'store_file_only' => 'getStoreFileOnly',
-        'skip_file_processing' => 'getSkipFileProcessing'
+        'skip_file_processing' => 'getSkipFileProcessing',
+        'parsed_text_format' => 'getParsedTextFormat'
     ];
 
     /**
@@ -293,6 +299,7 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('generate_chunks_only', $data ?? [], false);
         $this->setIfExists('store_file_only', $data ?? [], false);
         $this->setIfExists('skip_file_processing', $data ?? [], false);
+        $this->setIfExists('parsed_text_format', $data ?? [], null);
     }
 
     /**
@@ -601,6 +608,42 @@ class FileSyncConfig implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['skip_file_processing'] = $skip_file_processing;
+
+        return $this;
+    }
+
+    /**
+     * Gets parsed_text_format
+     *
+     * @return \Carbon\Model\ParsedTextFormatsNullable|null
+     */
+    public function getParsedTextFormat()
+    {
+        return $this->container['parsed_text_format'];
+    }
+
+    /**
+     * Sets parsed_text_format
+     *
+     * @param \Carbon\Model\ParsedTextFormatsNullable|null $parsed_text_format parsed_text_format
+     *
+     * @return self
+     */
+    public function setParsedTextFormat($parsed_text_format)
+    {
+
+        if (is_null($parsed_text_format)) {
+            array_push($this->openAPINullablesSetToNull, 'parsed_text_format');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('parsed_text_format', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['parsed_text_format'] = $parsed_text_format;
 
         return $this;
     }
