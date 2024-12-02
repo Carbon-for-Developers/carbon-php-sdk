@@ -70,18 +70,6 @@ class FilesApiTest extends TestCase
     }
 
     /**
-     * Test case for delete
-     *
-     * Delete File Endpoint.
-     *
-     */
-    public function testDelete()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for deleteFileTags
      *
      * Delete File Tags.
